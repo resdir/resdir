@@ -1,0 +1,12 @@
+{
+  $name: "resdir/simple-package",
+  $version: "1.0.0",
+  $description: "Example of simple package",
+  $author: "mvila@me.com",
+  $license: "MIT",
+  $type: "../..",
+  npmName: "@resdir/simple-package",
+  dependencies: [
+    "lodash@^4.17.4"
+  ]
+}

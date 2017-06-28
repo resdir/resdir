@@ -1,0 +1,18 @@
+{
+  "name": "resdir-public-monorepo",
+  "description": "Resdir public monorepo",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/resdir/resdir"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "(cd resources/js/package && npm test)"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^3.19.0",
+    "eslint-config-xo": "^0.18.2"
+  }
+}
