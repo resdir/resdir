@@ -1,6 +1,0 @@
-{
-  $name: 'resdir/simple-esnext-package',
-  $version: '1.0.0',
-  $type: '../..',
-  npmName: '@resdir/simple-esnext-package'
-}

@@ -1,0 +1,21 @@
+{
+  $name: 'js/transpiler',
+  $aliases: ['transpiler', 'babel'],
+  $version: '0.1.0',
+  $type: 'tool',
+  $runtime: 'node@>=6.10.0',
+  $implementation: './dist',
+  source: './src',
+  destination: './dist',
+  extensions: ['.js', '.jsx', '.es6', '.es'],
+  $options: {
+    verbose: false,
+    quiet: false,
+    debug: false
+  },
+  transpile: {
+    $type: 'command',
+    $parameters: [{$name: 'files', $type: 'string'}],
+    $variadic: true
+  }
+}

@@ -1,6 +1,6 @@
 {
-  "name": "@resdir/js-esnext-package",
-  "description": "Resdir js/esnext-package resource",
+  "name": "@resdir/js-transpiler",
+  "description": "Resdir transpiler tool",
   "private": true,
   "scripts": {
     "build": "rm -rf dist && babel src --out-dir dist",
@@ -32,16 +32,18 @@
   },
   "dependencies": {
     "babel-core": "^6.25.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.5.2",
     "fs-extra": "^3.0.1",
     "is-directory": "^0.3.1",
     "lodash": "^4.17.4",
-    "run-common": "file:../../../run/common"
+    "run-common": "file:../../../../../run/common",
+    "temp-dir": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "jest": "^20.0.4"
+    "jest": "^20.0.4",
+    "run-core": "file:../../../../../run/core"
   }
 }

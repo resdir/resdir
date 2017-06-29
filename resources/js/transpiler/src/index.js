@@ -1,24 +1,26 @@
 import {join, resolve, relative, extname} from 'path';
+import {statSync, chmodSync} from 'fs';
 import {copy, readFile, outputFile, emptyDirSync} from 'fs-extra';
 import isDirectory from 'is-directory';
 import {transform} from 'babel-core';
 import {task, formatString, formatPath} from 'run-common';
 
 export default base =>
-  class Package extends base {
-    async build(...files) {
+  class Transpiler extends base {
+    async transpile(...files) {
       const {verbose, quiet, debug} = files.pop();
 
-      const packageName = this.npmName || this.$name;
+      const root = this.$getRoot();
+      const packageName = root.npmName || root.$name;
       const formattedPackageName = packageName ? formatString(packageName) + ' ' : '';
 
       await task(
         async () => {
-          this._build(files);
+          await this._transpileOrCopy(files);
         },
         {
-          intro: `Building ${formattedPackageName}package...`,
-          outro: `Package ${formattedPackageName}built`,
+          intro: `Transpiling ${formattedPackageName}package...`,
+          outro: `Package ${formattedPackageName}transpiled`,
           verbose,
           quiet,
           debug
@@ -26,11 +28,11 @@ export default base =>
       );
     }
 
-    async _build(files) {
+    async _transpileOrCopy(files) {
       const directory = this.$getDirectory();
-      const srcDirectory = resolve(directory, this.sourceDirectory);
-      const distDirectory = resolve(directory, this.distributionDirectory);
-      const extensions = this.transpilation.fileExtensions;
+      const srcDirectory = resolve(directory, this.source);
+      const destDirectory = resolve(directory, this.destination);
+      const extensions = this.extensions;
 
       if (!files.length) {
         files = [srcDirectory];
@@ -48,14 +50,14 @@ export default base =>
           );
         }
 
-        const distFile = join(distDirectory, relativeFile);
+        const destFile = join(destDirectory, relativeFile);
 
-        await copy(srcFile, distFile, {
+        await copy(srcFile, destFile, {
           preserveTimestamps: true,
           filter: file => {
             const relativeFile = relative(srcDirectory, file);
             if (isDirectory.sync(file)) {
-              const targetDir = join(distDirectory, relativeFile);
+              const targetDir = join(destDirectory, relativeFile);
               emptyDirSync(targetDir);
               return true;
             }
@@ -69,15 +71,16 @@ export default base =>
         });
       }
 
-      await this.transpile(srcDirectory, distDirectory, transpilableFiles);
+      await this._transpile(srcDirectory, destDirectory, transpilableFiles);
     }
 
-    async transpile(srcDirectory, distDirectory, files) {
+    async _transpile(srcDirectory, destDirectory, files) {
       for (const file of files) {
         const srcFile = join(srcDirectory, file);
-        const distFile = join(distDirectory, file);
+        const destFile = join(destDirectory, file);
 
         let code = await readFile(srcFile, 'utf8');
+        const {mode} = statSync(srcFile);
 
         ({code} = transform(code, {
           presets: [
@@ -86,11 +89,15 @@ export default base =>
               {targets: {node: 6}, loose: true, exclude: ['transform-regenerator']}
             ]
           ],
-          plugins: [require.resolve('babel-plugin-transform-object-rest-spread')],
+          plugins: [
+            require.resolve('babel-plugin-transform-class-properties'),
+            require.resolve('babel-plugin-transform-object-rest-spread')
+          ],
           sourceMaps: 'inline'
         }));
 
-        await outputFile(distFile, code);
+        await outputFile(destFile, code);
+        chmodSync(destFile, mode);
       }
     }
   };

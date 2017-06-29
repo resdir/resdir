@@ -1,4 +1,4 @@
-# Resdir js/esnext-package resource
+# Resdir transpiler tool
 
 ```javascript
 // TODO: documentation!
