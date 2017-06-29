@@ -2,7 +2,7 @@ import {isEqual} from 'lodash';
 import {formatString, formatCode} from 'run-common';
 import {VersionRange} from '@resdir/version-range';
 
-import {fetchNPMRegistry} from './common';
+import {fetchNPMRegistry} from '@resdir/package-manager';
 
 const DEFAULT_TYPE = 'production';
 

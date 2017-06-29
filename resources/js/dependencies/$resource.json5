@@ -1,6 +1,6 @@
 {
   $name: 'js/dependencies',
-  $alias: ['deps', 'dep'],
+  $alias: ['dependencies', 'dependency', 'deps', 'dep'],
   $version: '0.1.0',
   $type: 'tool',
   $runtime: 'node@>=6.10.0',

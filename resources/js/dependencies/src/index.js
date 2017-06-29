@@ -1,15 +1,14 @@
-import {join} from 'path';
 import {omit, isEmpty, remove, sortBy, lowerCase} from 'lodash';
-import {loadFile, saveFile, task, formatString} from 'run-common';
+import {task, formatString} from 'run-common';
 
 import Dependency from './dependency';
-import {execNPM} from './common';
+import {updatePackageFile, installPackage} from '@resdir/package-manager';
 
 export default base =>
   class Dependencies extends base {
     constructor(definition = {}, options) {
-      let dependencies = definition.packages || [];
-      definition = omit(definition, 'packages');
+      let dependencies = definition.$value || [];
+      definition = omit(definition, '$value');
       super(definition, options);
       dependencies = dependencies.map(dependency => new Dependency(dependency));
       this._dependencies = dependencies;
@@ -90,9 +89,9 @@ export default base =>
     }
 
     async _updateDependencies({debug}) {
-      this._writePackageFile();
+      this._updatePackageFile();
       const directory = this.$getDirectory({throwIfUndefined: true});
-      await execNPM(['install'], {directory, debug});
+      await installPackage(directory, {debug});
     }
 
     _sortDependencies() {
@@ -112,7 +111,7 @@ export default base =>
       this._dependencies.forEach(fn);
     }
 
-    _writePackageFile() {
+    _updatePackageFile() {
       const getDependencies = type => {
         const dependencies = {};
         this.forEach(dependency => {
@@ -126,41 +125,18 @@ export default base =>
       };
 
       const directory = this.$getDirectory({throwIfUndefined: true});
-      const file = join(directory, 'package.json');
 
-      const pkg = loadFile(file, {throwIfNotFound: false, parse: true}) || {};
-
-      let managedProperties = pkg.$managedProperties;
-      if (!managedProperties) {
-        managedProperties = {
-          warning:
-            'This file contains properties managed by a Resource. You should not modify them directly or by using a command such as `npm install <name>`.'
-        };
-      }
-
-      const managedPropertyNames = new Set(managedProperties.name);
-
-      pkg.dependencies = getDependencies('production');
-      managedPropertyNames.add('dependencies');
-
-      pkg.peerDependencies = getDependencies('peer');
-      managedPropertyNames.add('peerDependencies');
-
-      pkg.optionalDependencies = getDependencies('optional');
-      managedPropertyNames.add('optionalDependencies');
-
-      pkg.devDependencies = getDependencies('development');
-      managedPropertyNames.add('devDependencies');
-
-      managedProperties.names = Array.from(managedPropertyNames);
-      pkg.$managedProperties = managedProperties;
-
-      saveFile(file, pkg, {stringify: true});
+      updatePackageFile(directory, {
+        dependencies: getDependencies('production'),
+        peerDependencies: getDependencies('peer'),
+        optionalDependencies: getDependencies('optional'),
+        devDependencies: getDependencies('development')
+      });
     }
 
     static $normalize(definition, options) {
       if (Array.isArray(definition)) {
-        definition = {packages: definition};
+        definition = {$value: definition};
       }
       return super.$normalize(definition, options);
     }
@@ -175,14 +151,14 @@ export default base =>
       let dependencies = this._dependencies;
       if (dependencies.length) {
         dependencies = dependencies.map(dependency => dependency.toJSON());
-        definition.packages = dependencies;
+        definition.$value = dependencies;
       }
 
       const keys = Object.keys(definition);
       if (keys.length === 0) {
         definition = undefined;
-      } else if (keys.length === 1 && keys[0] === 'packages') {
-        definition = definition.packages;
+      } else if (keys.length === 1 && keys[0] === '$value') {
+        definition = definition.$value;
       }
 
       return definition;

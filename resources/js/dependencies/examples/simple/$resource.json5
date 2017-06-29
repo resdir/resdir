@@ -1,6 +1,6 @@
 {
   dependencies: {
-    $type: '../..',
+    $type: "../..",
     $value: [
       "lodash@^4.17.4"
     ]

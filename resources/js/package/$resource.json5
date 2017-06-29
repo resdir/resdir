@@ -1,50 +1,17 @@
 {
   $name: 'js/package',
+  $aliases: ['package', 'pkg'],
   $version: '0.1.0',
   $type: 'tool',
   $runtime: 'node@>=6.10.0',
   $implementation: './dist',
   npmName: {$type: 'string'},
   files: {$type: 'array'},
-  main: {$type: 'string'},
+  entries: {$type: 'object'}, // {es5: './dist', es6: './src'}
   $options: {
     verbose: false,
     quiet: false,
     debug: false
   },
-  dependencies: {
-    $alias: ['deps', 'dep'],
-    $runtime: 'node@>=6.10.0',
-    $implementation: './dist/dependencies',
-    add: {
-      $type: 'command',
-      $parameters: [{$name: 'package', $type: 'string'}],
-      $variadic: true,
-      $options: {
-        production: {
-          $alias: 'prod',
-          $value: false
-        },
-        development: {
-          $alias: 'dev',
-          $value: false
-        },
-        peer: false,
-        optional: false
-      }
-    },
-    remove: {
-      $alias: 'rm',
-      $type: 'command',
-      $parameters: [{$name: 'package', $type: 'string'}],
-      $variadic: true
-    },
-    count: {
-      $type: 'method'
-    },
-    includes: {
-      $type: 'method',
-      $parameter: [{$name: 'package', $type: 'string'}]
-    }
-  }
+  dependencies: {$type: 'js/dependencies'}
 }

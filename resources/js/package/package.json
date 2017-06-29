@@ -31,10 +31,9 @@
     "testEnvironment": "node"
   },
   "dependencies": {
-    "child-process-promise": "^2.2.1",
+    "@resdir/package-manager": "file:../../../packages/package-manager",
     "lodash": "^4.17.4",
-    "npm": "^5.0.3",
-    "run-common": "file:../../../run/common"
+    "run-common": "file:../../../../../run/common"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -43,7 +42,7 @@
     "babel-preset-env": "^1.5.2",
     "fs-extra": "^3.0.1",
     "jest": "^20.0.4",
-    "run-core": "file:../../../run/core",
+    "run-core": "file:../../../../../run/core",
     "temp-dir": "^1.0.0"
   }
 }

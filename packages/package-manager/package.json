@@ -1,10 +1,20 @@
 {
-  "name": "@resdir/js-dependencies",
-  "description": "Resdir js/dependencies resource",
-  "private": true,
+  "name": "@resdir/package-manager",
+  "version": "0.1.0",
+  "description": "Abstract node package managers (only npm for now)",
+  "author": "Manuel Vila <mvila@3base.com>",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/resdir/resdir"
+  },
   "scripts": {
     "build": "rm -rf dist && babel src --out-dir dist",
-    "test": "jest"
+    "prepublish": "npm run build"
   },
   "babel": {
     "presets": [
@@ -27,23 +37,16 @@
     ],
     "sourceMaps": "inline"
   },
-  "jest": {
-    "testEnvironment": "node"
-  },
   "dependencies": {
-    "@resdir/package-manager": "file:../../../packages/package-manager",
-    "@resdir/version-range": "file:../../../packages/version-range",
+    "child-process-promise": "^2.2.1",
     "lodash": "^4.17.4",
-    "run-common": "file:../../../../../run/common"
+    "npm": "^5.0.3",
+    "run-common": "file:../../../../run/common"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.5.2",
-    "fs-extra": "^3.0.1",
-    "jest": "^20.0.4",
-    "run-core": "file:../../../../../run/core",
-    "temp-dir": "^1.0.0"
+    "babel-preset-env": "^1.4.0"
   }
 }
