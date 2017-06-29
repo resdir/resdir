@@ -18,7 +18,7 @@ export function updatePackageFile(directory, definition) {
   if (!managed) {
     managed = {
       warning:
-        'This file contains properties managed by a Resource. You should not modify them directly or by using a command such as `npm install <name>`.'
+        'This file contains properties managed by a Resource. You should not modify them directly or use a command such as `npm install <name>`.'
     };
   }
 

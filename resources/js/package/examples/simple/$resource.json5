@@ -6,6 +6,7 @@
   $license: "MIT",
   $type: "../..",
   npmName: "@resdir/simple-package",
+  entries: './index.js',
   dependencies: [
     "lodash@^4.17.4"
   ]

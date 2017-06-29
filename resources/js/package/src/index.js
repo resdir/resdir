@@ -1,10 +1,20 @@
 import {updatePackageFile} from '@resdir/package-manager';
+import {task} from 'run-common';
 
 export default base =>
   class Package extends base {
     $save(...args) {
       super.$save(...args);
       this._updatePackageFile();
+    }
+
+    updatePackageFile() {
+      task(
+        () => {
+          this._updatePackageFile();
+        },
+        {intro: `Updating package file...`, outro: `Package file updated`}
+      );
     }
 
     _updatePackageFile() {
@@ -18,8 +28,8 @@ export default base =>
         contributors: this.$authors && this.$authors.length > 1 ? this.$authors : undefined,
         license: this.$license || 'UNLICENSED',
         repository: this.$repository,
-        files: this.files
-        // main: this.entries
+        files: this.files,
+        main: this.entries.toPackageMainProperty()
       });
     }
   };

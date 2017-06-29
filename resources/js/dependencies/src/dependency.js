@@ -1,5 +1,6 @@
+import {join, isAbsolute} from 'path';
 import {isEqual} from 'lodash';
-import {formatString, formatCode} from 'run-common';
+import {loadFile, formatString, formatPath, formatCode} from 'run-common';
 import {VersionRange} from '@resdir/version-range';
 
 import {fetchNPMRegistry} from '@resdir/package-manager';
@@ -13,11 +14,11 @@ export class Dependency {
     }
 
     if (typeof definition === 'string') {
-      const {name, version} = Dependency.parsePackageIdentifier(definition);
+      const {name, version, location} = Dependency.parsePackageIdentifier(definition);
       if (!name) {
         throw new Error(`Dependency ${formatCode('name')} is missing`);
       }
-      definition = {name, version};
+      definition = {name, version, location};
     }
 
     if (typeof definition !== 'object') {
@@ -27,6 +28,9 @@ export class Dependency {
     this.name = definition.name;
     if (definition.version) {
       this.version = definition.version;
+    }
+    if (definition.location) {
+      this.location = definition.location;
     }
     this.type = definition.type || type || DEFAULT_TYPE;
   }
@@ -43,20 +47,48 @@ export class Dependency {
   }
 
   static parsePackageIdentifier(pkg) {
+    if (pkg.startsWith('.') || isAbsolute(pkg)) {
+      let location = pkg;
+      const packageFile = join(location, 'package.json');
+      pkg = loadFile(packageFile, {throwIfNotFound: false, parse: true});
+      if (!pkg) {
+        throw new Error(`No ${formatPath('package.json')} file found at ${formatPath(location)}`);
+      }
+      const name = pkg.name;
+      if (!name) {
+        throw new Error(
+          `Invalid ${formatPath('package.json')} file at ${formatPath(location)}: ${formatCode(
+            'name'
+          )} property is undefined`
+        );
+      }
+      location = 'file:' + location;
+      return {name, location};
+    }
+
     let name = pkg;
     let version;
+    let location;
     const index = name.indexOf('@', 1);
     if (index !== -1) {
-      version = name.slice(index + 1);
+      const versionOrLocation = name.slice(index + 1);
       name = name.slice(0, index);
+      if (versionOrLocation.startsWith('file:')) {
+        location = versionOrLocation;
+      } else {
+        version = versionOrLocation;
+      }
     }
-    return {name, version};
+    return {name, version, location};
   }
 
   toJSON() {
     let json = {name: this.name};
     if (this.version) {
       json.version = this.version.toString();
+    }
+    if (this.location) {
+      json.location = this.location;
     }
     if (this.type !== DEFAULT_TYPE) {
       json.type = this.type;
@@ -67,6 +99,8 @@ export class Dependency {
       json = json.name;
     } else if (isEqual(keys, ['name', 'version'])) {
       json = json.name + '@' + json.version;
+    } else if (isEqual(keys, ['name', 'location'])) {
+      json = json.name + '@' + json.location;
     }
 
     return json;

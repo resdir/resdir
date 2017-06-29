@@ -5,10 +5,13 @@
   "author": "Manuel Vila <mvila@3base.com>",
   "license": "MIT",
   "files": [
-    "./dist"
+    "dist"
   ],
-  "main": "./dist",
-  "repository": "https://github.com/resdir/resdir.git",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/resdir/resdir"
+  },
   "scripts": {
     "build": "rm -rf dist && babel src --out-dir dist",
     "prepublish": "npm run build",
@@ -43,22 +46,11 @@
     "run-common": "file:../../../../run/common",
     "semver": "^5.3.0"
   },
-  "$managed": {
-    "warning": "This file contains properties managed by a Resource. You should not modify them directly or use a command such as `npm install <name>`.",
-    "properties": [
-      "name",
-      "version",
-      "description",
-      "author",
-      "contributors",
-      "license",
-      "repository",
-      "files",
-      "main",
-      "dependencies",
-      "peerDependencies",
-      "optionalDependencies",
-      "devDependencies"
-    ]
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.4.0",
+    "jest": "^20.0.1"
   }
 }

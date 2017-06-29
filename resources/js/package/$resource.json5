@@ -7,11 +7,16 @@
   $implementation: './dist',
   npmName: {$type: 'string'},
   files: {$type: 'array'},
-  entries: {$type: 'object'}, // {es5: './dist', es6: './src'}
+  entries: {
+    $implementation: './dist/entries',
+    es5: {$type: 'string'},
+    es6: {$type: 'string'}
+  },
+  dependencies: {$type: 'js/dependencies'},
   $options: {
     verbose: false,
     quiet: false,
     debug: false
   },
-  dependencies: {$type: 'js/dependencies'}
+  updatePackageFile: {$type: 'method'}
 }

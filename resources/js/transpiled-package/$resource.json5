@@ -1,0 +1,13 @@
+{
+  $name: 'js/transpiled-package',
+  $aliases: ['package', 'pkg'],
+  $version: '0.1.0',
+  $type: 'js/package',
+  transpiler: {
+    $type: 'js/transpiler'
+  },
+  build: {
+    $type: 'macro',
+    $expression: 'transpiler transpile'
+  }
+}

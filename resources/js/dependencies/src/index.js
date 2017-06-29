@@ -70,7 +70,7 @@ export default base =>
     }
 
     async _addDependency(dependency) {
-      if (!dependency.version) {
+      if (!(dependency.version || dependency.location)) {
         const latestVersion = await dependency.fetchLatestVersion();
         dependency.version = '^' + latestVersion;
       }
@@ -116,7 +116,7 @@ export default base =>
         const dependencies = {};
         this.forEach(dependency => {
           if (dependency.type === type) {
-            dependencies[dependency.name] = dependency.version || '*';
+            dependencies[dependency.name] = dependency.version || dependency.location || '*';
           }
         });
         if (!isEmpty(dependencies)) {

@@ -14,6 +14,15 @@ describe('js/package', () => {
     emptyDirSync(tempDirectory);
   });
 
+  test('normalization and serialization', () => {
+    expect(Package.$create().$serialize()).toBeUndefined();
+    expect(Package.$create({entries: {}}).$serialize()).toBeUndefined();
+    expect(Package.$create({entries: './index.js'}).$serialize()).toEqual({entries: './index.js'});
+    expect(Package.$create({entries: {es5: './dist', es6: './src'}}).$serialize()).toEqual({
+      entries: {es5: './dist', es6: './src'}
+    });
+  });
+
   test('package.json file synchronization', () => {
     const directory = join(tempDirectory, 'package-file-sync');
     emptyDirSync(directory);
@@ -24,7 +33,8 @@ describe('js/package', () => {
       $description: 'My awesome package',
       $author: 'mvila@me.com',
       $license: 'MIT',
-      npmName: 'my-package'
+      npmName: 'my-package',
+      entries: './index.js'
     });
 
     expect(pkg.$getFile()).toBeUndefined();
@@ -38,7 +48,8 @@ describe('js/package', () => {
       $description: 'My awesome package',
       $author: 'mvila@me.com',
       $license: 'MIT',
-      npmName: 'my-package'
+      npmName: 'my-package',
+      entries: './index.js'
     });
 
     const packageDefinition = loadFile(join(directory, 'package.json'), {parse: true});
@@ -52,7 +63,8 @@ describe('js/package', () => {
       version: '1.0.0',
       description: 'My awesome package',
       author: 'mvila@me.com',
-      license: 'MIT'
+      license: 'MIT',
+      main: './index.js'
     });
   });
 });
