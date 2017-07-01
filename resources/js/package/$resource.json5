@@ -5,10 +5,10 @@
   $type: 'tool',
   $runtime: 'node@>=6.10.0',
   $implementation: './dist',
-  npmName: {$type: 'string'},
+  name: {$type: 'string'},
   files: {$type: 'array'},
-  entries: {
-    $implementation: './dist/entries',
+  main: {
+    $implementation: './dist/main',
     es5: {$type: 'string'},
     es6: {$type: 'string'}
   },

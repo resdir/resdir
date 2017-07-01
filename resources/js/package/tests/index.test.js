@@ -16,10 +16,10 @@ describe('js/package', () => {
 
   test('normalization and serialization', () => {
     expect(Package.$create().$serialize()).toBeUndefined();
-    expect(Package.$create({entries: {}}).$serialize()).toBeUndefined();
-    expect(Package.$create({entries: './index.js'}).$serialize()).toEqual({entries: './index.js'});
-    expect(Package.$create({entries: {es5: './dist', es6: './src'}}).$serialize()).toEqual({
-      entries: {es5: './dist', es6: './src'}
+    expect(Package.$create({main: {}}).$serialize()).toBeUndefined();
+    expect(Package.$create({main: './index.js'}).$serialize()).toEqual({main: './index.js'});
+    expect(Package.$create({main: {es5: './dist', es6: './src'}}).$serialize()).toEqual({
+      main: {es5: './dist', es6: './src'}
     });
   });
 
@@ -33,8 +33,8 @@ describe('js/package', () => {
       $description: 'My awesome package',
       $author: 'mvila@me.com',
       $license: 'MIT',
-      npmName: 'my-package',
-      entries: './index.js'
+      name: 'my-package',
+      main: './index.js'
     });
 
     expect(pkg.$getFile()).toBeUndefined();
@@ -48,8 +48,8 @@ describe('js/package', () => {
       $description: 'My awesome package',
       $author: 'mvila@me.com',
       $license: 'MIT',
-      npmName: 'my-package',
-      entries: './index.js'
+      name: 'my-package',
+      main: './index.js'
     });
 
     const packageDefinition = loadFile(join(directory, 'package.json'), {parse: true});

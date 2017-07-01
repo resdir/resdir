@@ -11,7 +11,7 @@ export default base =>
       const {verbose, quiet, debug} = files.pop();
 
       const root = this.$getRoot();
-      const packageName = root.npmName || root.$name;
+      const packageName = root.name || root.$name;
       const formattedPackageName = packageName ? formatString(packageName) + ' ' : '';
 
       await task(

@@ -6,11 +6,11 @@
   $repository: "https://github.com/resdir/resdir.git",
   $license: "MIT",
   $type: "js/transpiled-package",
-  npmName: "@resdir/version-range",
+  name: "@resdir/version-range",
   files: [
     "./dist"
   ],
-  entries: "./dist",
+  main: "./dist",
   dependencies: [
     "lodash@^4.17.4",
     "run-common@file:../../../../run/common",

@@ -1,5 +1,5 @@
 export default base =>
-  class Entries extends base {
+  class Main extends base {
     toPackageMainProperty() {
       return this.es5;
     }

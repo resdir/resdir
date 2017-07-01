@@ -21,7 +21,7 @@ export default base =>
       const directory = this.$getDirectory({throwIfUndefined: true});
 
       updatePackageFile(directory, {
-        name: this.npmName || this.$name,
+        name: this.name || this.$name,
         version: this.$version,
         description: this.$description,
         author: this.$authors && this.$authors.length === 1 ? this.$authors[0] : undefined,
@@ -29,7 +29,7 @@ export default base =>
         license: this.$license || 'UNLICENSED',
         repository: this.$repository,
         files: this.files,
-        main: this.entries.toPackageMainProperty()
+        main: this.main.toPackageMainProperty()
       });
     }
   };
