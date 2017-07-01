@@ -5,10 +5,13 @@
   "author": "Manuel Vila <mvila@3base.com>",
   "license": "MIT",
   "repository": "https://github.com/resdir/resdir.git",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist",
   "dependencies": {
     "lodash": "^4.17.4",
+    "run-common": "^0.6.0",
     "semver": "^5.3.0"
   },
   "$managed": {

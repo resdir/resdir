@@ -5,6 +5,10 @@
   $type: 'tool',
   $runtime: 'node@>=6.10.0',
   $implementation: './dist',
+  $files: [
+    './dist',
+    'package.json'
+  ],
   name: {$type: 'string'},
   version: {$type: 'string'},
   description: {$type: 'string'},

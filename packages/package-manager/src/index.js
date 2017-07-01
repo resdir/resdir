@@ -4,7 +4,7 @@ import {execFile, spawn} from 'child-process-promise';
 import {loadFile, saveFile, fetchJSON, formatString, formatCode, formatPath} from 'run-common';
 
 const NPM_REGISTRY_URL = 'https://registry.npmjs.org';
-const PACKAGE_FILENAME = 'package.json';
+export const PACKAGE_FILENAME = 'package.json';
 
 export function updatePackageFile(directory, definition) {
   const file = join(directory, PACKAGE_FILENAME);
@@ -37,8 +37,15 @@ export function updatePackageFile(directory, definition) {
   saveFile(file, pkg, {stringify: true});
 }
 
-export async function installPackage(directory, {debug}) {
-  await execYarn(['install'], {directory, debug});
+export async function installPackage(directory, {production, useLockfile = true, debug} = {}) {
+  const args = ['install'];
+  if (production) {
+    args.push('--production');
+  }
+  if (!useLockfile) {
+    args.push('--no-lockfile');
+  }
+  await execYarn(args, {directory, debug});
 }
 
 export async function execYarn(args, options) {

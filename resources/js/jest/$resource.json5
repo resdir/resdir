@@ -5,6 +5,10 @@
   $type: 'tool',
   $runtime: 'node@>=6.10.0',
   $implementation: './dist',
+  $files: [
+    './dist',
+    'package.json'
+  ],
   roots: {$type: 'array'},
   testEnvironment: {$type: 'string'},
   run: {
