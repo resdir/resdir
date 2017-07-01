@@ -1,20 +1,9 @@
 {
-  "name": "@resdir/version-range",
-  "version": "0.1.0",
-  "description": "VersionRange class used by Resdir projects",
-  "author": "Manuel Vila <mvila@3base.com>",
-  "license": "MIT",
-  "files": [
-    "dist"
-  ],
-  "main": "dist/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/resdir/resdir"
-  },
+  "name": "@resdir/js-jest",
+  "description": "Resdir Jest wrapper",
+  "private": true,
   "scripts": {
     "build": "rm -rf dist && babel src --out-dir dist",
-    "prepublish": "npm run build",
     "test": "jest"
   },
   "babel": {
@@ -38,19 +27,14 @@
     ],
     "sourceMaps": "inline"
   },
-  "jest": {
-    "testEnvironment": "node"
-  },
   "dependencies": {
-    "lodash": "^4.17.4",
-    "run-common": "file:../../../../run/common",
-    "semver": "^5.3.0"
+    "jest": "^20.0.4"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.4.0",
-    "jest": "^20.0.1"
+    "babel-preset-env": "^1.5.2"
   }
 }

@@ -64,7 +64,7 @@ describe('js/package', () => {
       description: 'My awesome package',
       author: 'mvila@me.com',
       license: 'MIT',
-      main: './index.js'
+      main: 'index.js'
     });
   });
 });

@@ -39,5 +39,6 @@
   includes: {
     $type: 'command',
     $parameter: [{$name: 'package', $type: 'string'}]
-  }
+  },
+  updatePackageFile: {$type: 'method'}
 }

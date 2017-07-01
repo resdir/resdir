@@ -38,14 +38,20 @@ export function updatePackageFile(directory, definition) {
 }
 
 export async function installPackage(directory, {debug}) {
-  await execNPM(['install'], {directory, debug});
+  await execYarn(['install'], {directory, debug});
 }
 
-export async function execNPM(args, options) {
-  const command = require.resolve('npm/bin/npm-cli.js');
-  args = [...args, '--no-shrinkwrap'];
-  await exec(command, args, {...options, commandName: 'npm'});
+export async function execYarn(args, options) {
+  const command = require.resolve('yarn/bin/yarn.js');
+  args = [...args, '--no-progress', '--no-emoji', '--non-interactive'];
+  await exec(command, args, {...options, commandName: 'yarn'});
 }
+
+// export async function execNPM(args, options) {
+//   const command = require.resolve('npm/bin/npm-cli.js');
+//   args = [...args, '--no-shrinkwrap'];
+//   await exec(command, args, {...options, commandName: 'npm'});
+// }
 
 async function exec(command, args, {directory, commandName, debug} = {}) {
   try {

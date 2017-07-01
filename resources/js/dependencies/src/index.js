@@ -111,6 +111,15 @@ export default base =>
       this._dependencies.forEach(fn);
     }
 
+    updatePackageFile() {
+      task(
+        () => {
+          this._updatePackageFile();
+        },
+        {intro: `Updating package file...`, outro: `Package file updated`}
+      );
+    }
+
     _updatePackageFile() {
       const getDependencies = type => {
         const dependencies = {};

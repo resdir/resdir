@@ -8,7 +8,7 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "test": "(cd packages/version-range && npm test) && (cd resources/js/package && npm test) && (cd resources/js/dependencies && npm test) && (cd resources/js/transpiler && npm test)"
+    "test": "(cd packages/version-range && run ./tests run) && (cd resources/js/package && npm test) && (cd resources/js/dependencies && npm test) && (cd resources/js/transpiler && npm test)"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

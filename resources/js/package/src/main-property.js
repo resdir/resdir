@@ -1,7 +1,11 @@
 export default base =>
-  class Main extends base {
+  class MainProperty extends base {
     toPackageMainProperty() {
-      return this.es5;
+      let main = this.es5;
+      if (main.startsWith('./')) {
+        main = main.slice(2);
+      }
+      return main;
     }
 
     static $normalize(definition, options) {

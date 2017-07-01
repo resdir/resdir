@@ -6,9 +6,15 @@
   $runtime: 'node@>=6.10.0',
   $implementation: './dist',
   name: {$type: 'string'},
+  version: {$type: 'string'},
+  description: {$type: 'string'},
+  author: {$type: 'string'},
+  contributors: {$type: 'array'},
+  repository: {$type: 'string'},
+  license: {$type: 'string'},
   files: {$type: 'array'},
   main: {
-    $implementation: './dist/main',
+    $implementation: './dist/main-property',
     es5: {$type: 'string'},
     es6: {$type: 'string'}
   },

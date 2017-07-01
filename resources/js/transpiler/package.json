@@ -15,16 +15,11 @@
             "node": 6
           },
           "loose": true,
-          "exclude": [
-            "transform-regenerator"
-          ]
+          "exclude": ["transform-regenerator"]
         }
       ]
     ],
-    "plugins": [
-      "transform-class-properties",
-      "transform-object-rest-spread"
-    ],
+    "plugins": ["transform-class-properties", "transform-object-rest-spread"],
     "sourceMaps": "inline"
   },
   "jest": {
@@ -38,12 +33,10 @@
     "fs-extra": "^3.0.1",
     "is-directory": "^0.3.1",
     "lodash": "^4.17.4",
-    "run-common": "file:../../../../../run/common",
     "temp-dir": "^1.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "jest": "^20.0.4",
-    "run-core": "file:../../../../../run/core"
+    "jest": "^20.0.4"
   }
 }

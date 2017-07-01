@@ -1,0 +1,14 @@
+{
+  $name: 'js/jest',
+  $aliases: ['jest', 'test', 'tests'],
+  $version: '0.1.0',
+  $type: 'tool',
+  $runtime: 'node@>=6.10.0',
+  $implementation: './dist',
+  roots: {$type: 'array'},
+  testEnvironment: {$type: 'string'},
+  run: {
+    $alias: 'test',
+    $type: 'command'
+  }
+}

@@ -1,8 +1,11 @@
 {
-  $name: 'js/transpiled-package',
-  $aliases: ['package', 'pkg'],
+  $name: 'js/esnext-package',
   $version: '0.1.0',
   $type: 'js/package',
+  files: [
+    "./dist"
+  ],
+  main: "./dist",
   transpiler: {
     $type: 'js/transpiler'
   },

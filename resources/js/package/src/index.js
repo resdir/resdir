@@ -20,16 +20,27 @@ export default base =>
     _updatePackageFile() {
       const directory = this.$getDirectory({throwIfUndefined: true});
 
+      let files = this.files;
+      if (files) {
+        files = files.map(file => (file.startsWith('./') ? file.slice(2) : file));
+      }
+
+      const main = this.main.toPackageMainProperty();
+
       updatePackageFile(directory, {
         name: this.name || this.$name,
-        version: this.$version,
-        description: this.$description,
-        author: this.$authors && this.$authors.length === 1 ? this.$authors[0] : undefined,
-        contributors: this.$authors && this.$authors.length > 1 ? this.$authors : undefined,
-        license: this.$license || 'UNLICENSED',
-        repository: this.$repository,
-        files: this.files,
-        main: this.main.toPackageMainProperty()
+        version: this.version || this.$version,
+        description: this.description || this.$description,
+        author:
+          this.author ||
+          (this.$authors && this.$authors.length === 1 ? this.$authors[0] : undefined),
+        contributors:
+          this.contributors ||
+          (this.$authors && this.$authors.length > 1 ? this.$authors : undefined),
+        license: this.license || this.$license || 'UNLICENSED',
+        repository: this.repository || this.$repository,
+        files,
+        main
       });
     }
   };

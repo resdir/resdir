@@ -1,4 +1,4 @@
-# Resdir js/transpiled-package resource
+# Resdir js/esnext-package resource
 
 ```javascript
 // TODO: documentation!
