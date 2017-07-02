@@ -37,6 +37,9 @@
     $parameters: [{$name: 'package', $type: 'string'}],
     $variadic: true
   },
+  install: {
+    $type: 'command'
+  },
   count: {
     $type: 'command'
   },

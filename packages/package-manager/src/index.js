@@ -37,7 +37,7 @@ export function updatePackageFile(directory, definition) {
   saveFile(file, pkg, {stringify: true});
 }
 
-export async function installPackage(directory, {production, useLockfile = true, debug} = {}) {
+export async function installPackage(directory, {production, useLockfile, debug} = {}) {
   const args = ['install'];
   if (production) {
     args.push('--production');

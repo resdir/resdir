@@ -9,6 +9,7 @@
     './dist',
     'package.json'
   ],
+  dependencies: {$type: 'js/dependencies'},
   roots: {$type: 'array'},
   testEnvironment: {$type: 'string'},
   run: {

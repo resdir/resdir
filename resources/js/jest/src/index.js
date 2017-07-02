@@ -15,7 +15,8 @@ export default base =>
 
       const config = {
         roots,
-        testEnvironment: this.testEnvironment
+        testEnvironment: this.testEnvironment,
+        transform: {}
       };
 
       const argv = {

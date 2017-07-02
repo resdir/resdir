@@ -34,7 +34,7 @@ export default base =>
         await task(
           async () => {
             await this._addDependency(dependency);
-            await this._updateDependencies({debug});
+            await this._installDependencies({debug});
             this.$getRoot().$save();
           },
           {
@@ -55,7 +55,7 @@ export default base =>
         await task(
           async () => {
             this._removeDependency(name);
-            await this._updateDependencies({debug});
+            await this._installDependencies({debug});
             this.$getRoot().$save();
           },
           {
@@ -88,7 +88,16 @@ export default base =>
       }
     }
 
-    async _updateDependencies({debug}) {
+    async install() {
+      await task(
+        async () => {
+          await this._installDependencies();
+        },
+        {intro: `Installing dependencies...`, outro: `Dependencies installed`}
+      );
+    }
+
+    async _installDependencies({debug} = {}) {
       this._updatePackageFile();
       const directory = this.$getDirectory({throwIfUndefined: true});
       await installPackage(directory, {debug});

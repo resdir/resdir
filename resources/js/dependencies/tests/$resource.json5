@@ -1,0 +1,9 @@
+{
+  $type: "js/esnext-jest",
+  dependencies: [
+    "fs-extra@^3.0.1",
+    "run-core@0.8.2",
+    "temp-dir@^1.0.0"
+  ],
+  testEnvironment: "node"
+}

@@ -3,8 +3,7 @@
   "description": "Resdir js/package resource",
   "private": true,
   "scripts": {
-    "build": "rm -rf dist && babel src --out-dir dist",
-    "test": "jest"
+    "build": "rm -rf dist && babel src --out-dir dist"
   },
   "babel": {
     "presets": [
@@ -27,9 +26,6 @@
     ],
     "sourceMaps": "inline"
   },
-  "jest": {
-    "testEnvironment": "node"
-  },
   "dependencies": {
     "@resdir/package-manager": "^0.1.0",
     "lodash": "^4.17.4",
@@ -39,10 +35,6 @@
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.5.2",
-    "fs-extra": "^3.0.1",
-    "jest": "^20.0.4",
-    "run-core": "^0.8.1",
-    "temp-dir": "^1.0.0"
+    "babel-preset-env": "^1.5.2"
   }
 }

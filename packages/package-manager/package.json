@@ -1,6 +1,6 @@
 {
   "name": "@resdir/package-manager",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Abstract node package managers (currently using yarn)",
   "author": "Manuel Vila <mvila@3base.com>",
   "license": "MIT",

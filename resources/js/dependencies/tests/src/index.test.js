@@ -12,7 +12,7 @@ describe('js/dependencies', () => {
   let tempDirectory;
 
   beforeAll(() => {
-    Package = Resource.$create({dependencies: {$type: '../'}}, {directory: __dirname});
+    Package = Resource.$create({dependencies: {$type: '../..'}}, {directory: __dirname});
     tempDirectory = join(tempDir, 'js-dependencies-test');
     emptyDirSync(tempDirectory);
   });
