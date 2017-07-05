@@ -1,1 +1,3 @@
-console.log('Hello, World!');
+const {repeat} = require('lodash');
+
+console.log(repeat('*', 80));

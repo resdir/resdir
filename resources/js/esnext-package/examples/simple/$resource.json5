@@ -1,12 +1,11 @@
 {
-  $name: "resdir/js-package-simple-example",
+  $name: "resdir/js-esnext-package-simple-example",
   $version: "1.0.0",
   $description: "Example of simple package",
   $author: "mvila@me.com",
   $license: "MIT",
   $type: "../..",
-  name: "@resdir/js-package-simple-example",
-  main: './index.js',
+  name: "@resdir/js-esnext-package-simple-example",
   dependencies: [
     "lodash@^4.17.4"
   ]

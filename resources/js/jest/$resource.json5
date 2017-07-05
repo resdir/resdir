@@ -1,19 +1,23 @@
 {
   $name: 'js/jest',
-  $aliases: ['jest', 'test', 'tests'],
   $version: '0.1.0',
-  $type: 'tool',
-  $runtime: 'node@>=6.10.0',
-  $implementation: './dist',
+  $type: 'js/esnext-resource',
   $files: [
     './dist',
     'package.json'
   ],
-  dependencies: {$type: 'js/dependencies'},
-  roots: {$type: 'array'},
-  testEnvironment: {$type: 'string'},
-  run: {
-    $alias: 'test',
-    $type: 'command'
+  dependencies: [
+    'jest@^20.0.4'
+  ],
+  $export: {
+    $type: 'js/tool',
+    $aliases: ['jest', 'test', 'tests'],
+    $implementation: './dist',
+    roots: {$type: 'array'},
+    testEnvironment: {$type: 'string'},
+    run: {
+      $type: 'command',
+      $alias: 'test'
+    }
   }
 }

@@ -1,16 +1,11 @@
 {
   $name: 'js/esnext-package',
   $version: '0.1.0',
-  $type: 'js/package',
-  files: [
-    "./dist"
-  ],
-  main: "./dist",
-  transpiler: {
-    $type: 'js/transpiler'
-  },
-  build: {
-    $type: 'macro',
-    $expression: 'transpiler transpile'
+  $export: {
+    $types: ['js/esnext-tool', 'js/package'],
+    files: [
+      './dist'
+    ],
+    main: './dist',
   }
 }

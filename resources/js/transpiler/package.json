@@ -1,7 +1,4 @@
 {
-  "name": "@resdir/js-transpiler",
-  "description": "Resdir transpiler tool",
-  "private": true,
   "scripts": {
     "build": "rm -rf dist && babel src --out-dir dist",
     "test": "jest"
@@ -42,5 +39,14 @@
   },
   "devDependencies": {
     "babel-cli": "^6.24.1"
+  },
+  "$managed": {
+    "warning": "This file contains properties managed by a Resource. You should not modify them directly or use a command such as `npm install <name>`.",
+    "properties": [
+      "dependencies",
+      "peerDependencies",
+      "optionalDependencies",
+      "devDependencies"
+    ]
   }
 }

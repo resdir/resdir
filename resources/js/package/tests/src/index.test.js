@@ -9,7 +9,7 @@ describe('js/package', () => {
   let tempDirectory;
 
   beforeAll(() => {
-    Package = Resource.$load('../..', {directory: __dirname});
+    Package = Resource.$import('../..', {directory: __dirname});
     tempDirectory = join(tempDir, 'js-package-test');
     emptyDirSync(tempDirectory);
   });

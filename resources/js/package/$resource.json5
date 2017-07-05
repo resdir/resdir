@@ -1,32 +1,38 @@
 {
   $name: 'js/package',
-  $aliases: ['package', 'pkg'],
   $version: '0.1.0',
-  $type: 'tool',
-  $runtime: 'node@>=6.10.0',
-  $implementation: './dist',
+  $type: 'js/esnext-resource',
   $files: [
     './dist',
     'package.json'
   ],
-  name: {$type: 'string'},
-  version: {$type: 'string'},
-  description: {$type: 'string'},
-  author: {$type: 'string'},
-  contributors: {$type: 'array'},
-  repository: {$type: 'string'},
-  license: {$type: 'string'},
-  files: {$type: 'array'},
-  main: {
-    $implementation: './dist/main-property',
-    es5: {$type: 'string'},
-    es6: {$type: 'string'}
-  },
-  dependencies: {$type: 'js/dependencies'},
-  $options: {
-    verbose: false,
-    quiet: false,
-    debug: false
-  },
-  updatePackageFile: {$type: 'method'}
+  dependencies: [
+    '@resdir/package-manager@^0.1.0',
+    'lodash@^4.17.4',
+    'run-common@^0.6.0'
+  ],
+  $export: {
+    $type: 'js/tool',
+    $aliases: ['package', 'pkg'],
+    $implementation: './dist',
+    name: {$type: 'string'},
+    version: {$type: 'string'},
+    description: {$type: 'string'},
+    author: {$type: 'string'},
+    contributors: {$type: 'array'},
+    repository: {$type: 'string'},
+    license: {$type: 'string'},
+    files: {$type: 'array'},
+    main: {
+      $implementation: './dist/main-property',
+      es5: {$type: 'string'},
+      es6: {$type: 'string'}
+    },
+    updatePackageFile: {$type: 'command'},
+    $options: {
+      verbose: false,
+      quiet: false,
+      debug: false
+    }
+  }
 }

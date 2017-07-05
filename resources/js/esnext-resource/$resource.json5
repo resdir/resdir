@@ -1,0 +1,14 @@
+{
+  $name: 'js/esnext-resource',
+  $version: '0.1.0',
+  $export: {
+    $type: 'js/resource',
+    transpiler: {
+      $type: 'js/transpiler'
+    },
+    build: {
+      $type: 'macro',
+      $expression: 'transpiler transpile'
+    }
+  }
+}
