@@ -1,14 +1,12 @@
 {
   "name": "@resdir/package-manager",
   "version": "0.1.2",
-  "main": "dist",
   "description": "Abstract Node package managers (currently using yarn)",
   "author": "Manuel Vila <mvila@3base.com>",
   "license": "MIT",
   "repository": "https://github.com/resdir/resdir.git",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
+  "main": "dist",
   "dependencies": {
     "child-process-promise": "^2.2.1",
     "lodash": "^4.17.4",

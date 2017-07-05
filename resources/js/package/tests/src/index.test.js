@@ -34,7 +34,11 @@ describe('js/package', () => {
       $author: 'mvila@me.com',
       $license: 'MIT',
       name: 'my-package',
-      main: './index.js'
+      main: './index.js',
+      bin: {
+        run: 'dist/bin/index.js'
+      },
+      preferGlobal: true
     });
 
     expect(pkg.$getFile()).toBeUndefined();
@@ -49,7 +53,11 @@ describe('js/package', () => {
       $author: 'mvila@me.com',
       $license: 'MIT',
       name: 'my-package',
-      main: './index.js'
+      main: './index.js',
+      bin: {
+        run: 'dist/bin/index.js'
+      },
+      preferGlobal: true
     });
 
     const packageDefinition = loadFile(join(directory, 'package.json'), {parse: true});
@@ -64,7 +72,11 @@ describe('js/package', () => {
       description: 'My awesome package',
       author: 'mvila@me.com',
       license: 'MIT',
-      main: 'index.js'
+      main: 'index.js',
+      bin: {
+        run: 'dist/bin/index.js'
+      },
+      preferGlobal: true
     });
   });
 });

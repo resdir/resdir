@@ -27,6 +27,8 @@ export default base =>
 
       const main = this.main.toPackageMainProperty();
 
+      const bin = this.$get('bin').$serialize({omitName: true}); // TODO: simplify
+
       updatePackageFile(directory, {
         name: this.name || this.$name,
         version: this.version || this.$version,
@@ -40,7 +42,9 @@ export default base =>
         license: this.license || this.$license || 'UNLICENSED',
         repository: this.repository || this.$repository,
         files,
-        main
+        main,
+        bin,
+        preferGlobal: this.preferGlobal
       });
     }
   };

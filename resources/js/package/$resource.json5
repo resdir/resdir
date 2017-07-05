@@ -1,6 +1,6 @@
 {
   $name: 'js/package',
-  $version: '0.1.0',
+  $version: '0.1.1',
   $type: 'js/esnext-resource',
   $files: [
     './dist',
@@ -28,6 +28,8 @@
       es5: {$type: 'string'},
       es6: {$type: 'string'}
     },
+    bin: {$type: 'object'},
+    preferGlobal: {$type: 'boolean'},
     updatePackageFile: {$type: 'command'},
     $options: {
       verbose: false,
