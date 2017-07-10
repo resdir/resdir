@@ -2,10 +2,7 @@
   $name: 'js/transpiler',
   $version: '0.1.0',
   $type: 'js/resource',
-  $files: [
-    './dist',
-    'package.json'
-  ],
+  $files: ['./dist'],
   dependencies: [
     'babel-core@^6.25.0',
     'babel-plugin-transform-class-properties@^6.24.1',

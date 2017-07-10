@@ -88,12 +88,18 @@ export default base =>
       }
     }
 
-    async install() {
+    async install({verbose, quiet, debug}) {
       await task(
         async () => {
           await this._installDependencies();
         },
-        {intro: `Installing dependencies...`, outro: `Dependencies installed`}
+        {
+          intro: `Installing dependencies...`,
+          outro: `Dependencies installed`,
+          verbose,
+          quiet,
+          debug
+        }
       );
     }
 

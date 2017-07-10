@@ -2,10 +2,7 @@
   $name: 'js/jest',
   $version: '0.1.0',
   $type: 'js/esnext-resource',
-  $files: [
-    './dist',
-    'package.json'
-  ],
+  $files: ['./dist'],
   dependencies: [
     'jest@^20.0.4'
   ],

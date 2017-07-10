@@ -8,7 +8,7 @@
     },
     _installJSResource: {
       $type: 'macro',
-      $expression: 'dependencies install',
+      $expression: 'dependencies install --quiet',
       $listen: 'after:$install',
       $hidden: true
     }

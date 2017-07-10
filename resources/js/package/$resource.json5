@@ -2,10 +2,7 @@
   $name: 'js/package',
   $version: '0.1.1',
   $type: 'js/esnext-resource',
-  $files: [
-    './dist',
-    'package.json'
-  ],
+  $files: ['./dist'],
   dependencies: [
     '@resdir/package-manager@^0.1.0',
     'lodash@^4.17.4',
