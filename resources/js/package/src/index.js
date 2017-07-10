@@ -8,9 +8,9 @@ export default base =>
       this._updatePackageFile();
     }
 
-    updatePackageFile() {
-      task(
-        () => {
+    async updatePackageFile() {
+      await task(
+        async () => {
           this._updatePackageFile();
         },
         {intro: `Updating package file...`, outro: `Package file updated`}

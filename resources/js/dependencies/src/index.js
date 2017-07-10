@@ -107,11 +107,11 @@ export default base =>
       this._dependencies = sortBy(this._dependencies, dependency => lowerCase(dependency.name));
     }
 
-    count() {
+    async count() {
       return this._dependencies.length;
     }
 
-    includes(name) {
+    async includes(name) {
       const found = this._dependencies.find(dependency => dependency.name === name);
       return Boolean(found);
     }
@@ -120,9 +120,9 @@ export default base =>
       this._dependencies.forEach(fn);
     }
 
-    updatePackageFile() {
-      task(
-        () => {
+    async updatePackageFile() {
+      await task(
+        async () => {
           this._updatePackageFile();
         },
         {intro: `Updating package file...`, outro: `Package file updated`}

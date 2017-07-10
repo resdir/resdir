@@ -1,7 +1,8 @@
 [
   {
     "srcDir": "src",
+    "destDir": "dist",
     "files": "**/*.js",
-    "command": "run transpiler transpile ${srcFile} --quiet"
+    "command": "./node_modules/.bin/babel ${srcFile} --out-file ${destFile}"
   }
 ]
