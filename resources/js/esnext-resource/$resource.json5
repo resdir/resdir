@@ -6,9 +6,11 @@
     transpiler: {
       $type: 'js/transpiler'
     },
-    build: {
+    _buildJSESNextResource: {
       $type: 'macro',
-      $expression: 'transpiler transpile'
+      $expression: 'transpiler transpile --quiet',
+      $listen: 'after:$build',
+      $hidden: true
     }
   }
 }
