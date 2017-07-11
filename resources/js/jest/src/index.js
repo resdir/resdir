@@ -23,6 +23,12 @@ export default base =>
         config: JSON.stringify(config)
       };
 
-      await jest.runCLI(argv, [directory]);
+      await new Promise((resolve, reject) => {
+        jest
+          .runCLI(argv, [directory], results => {
+            resolve(results);
+          })
+          .catch(reject);
+      });
     }
   };

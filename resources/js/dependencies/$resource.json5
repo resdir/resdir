@@ -5,6 +5,11 @@
     './dist',
     'package.json'
   ],
+  test: {
+    $type: 'macro',
+    $expression: './tests run',
+    $listen: 'after:$test'
+  },
   $export: {
     $type: 'tool',
     $alias: ['dependencies', 'dependency', 'deps', 'dep'],

@@ -1,0 +1,12 @@
+{
+  test: {
+    $type: 'macro',
+    $expressions: [
+      './packages/version-range $test',
+      './resources/js/dependencies $test',
+      './resources/js/package $test',
+      './resources/js/transpiler $test'
+    ],
+    $listen: 'after:$test'
+  }
+}

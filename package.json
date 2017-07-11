@@ -7,8 +7,7 @@
     "url": "git://github.com/resdir/resdir"
   },
   "scripts": {
-    "lint": "eslint .",
-    "test": "run ./packages/version-range/tests run && run ./resources/js/package/tests run && run ./resources/js/dependencies/tests run && run ./resources/js/transpiler/tests run"
+    "lint": "eslint ."
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

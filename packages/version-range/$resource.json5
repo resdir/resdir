@@ -10,5 +10,10 @@
     "lodash@^4.17.4",
     "run-common@^0.6.0",
     "semver@^5.3.0"
-  ]
+  ],
+  test: {
+    $type: 'macro',
+    $expression: './tests run',
+    $listen: 'after:$test'
+  }
 }
