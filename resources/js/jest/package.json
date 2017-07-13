@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "jest": "^20.0.4"
+    "jest": "^20.0.4",
+    "run-common": "^0.6.1"
   },
   "$managed": {
     "warning": "This file contains properties managed by a Resource. You should not modify them directly or use a command such as `npm install <name>`.",

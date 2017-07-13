@@ -8,7 +8,7 @@
     },
     _buildJSESNextResource: {
       $type: 'macro',
-      $expression: 'transpiler transpile --quiet',
+      $expression: 'transpiler transpile',
       $listen: 'after:$build',
       $hidden: true
     }

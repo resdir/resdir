@@ -35,7 +35,7 @@ export default base =>
           async () => {
             await this._addDependency(dependency);
             await this._installDependencies({debug});
-            this.$getRoot().$save();
+            await this.$getParent().$save();
           },
           {
             intro: `Adding ${formatString(dependency.name)} dependency...`,
@@ -56,7 +56,7 @@ export default base =>
           async () => {
             this._removeDependency(name);
             await this._installDependencies({debug});
-            this.$getRoot().$save();
+            await this.$getParent().$save();
           },
           {
             intro: `Removing ${formatString(name)} dependency...`,

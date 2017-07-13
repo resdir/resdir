@@ -1,9 +1,19 @@
 import {resolve} from 'path';
 import jest from 'jest';
+import {task} from 'run-common';
 
 export default base =>
   class JestResource extends base {
     async run() {
+      await task(
+        async () => {
+          await this._run();
+        },
+        {intro: `Testing resource...`, outro: `Resource tested`, verbose: true}
+      );
+    }
+
+    async _run() {
       const directory = this.$getDirectory();
 
       let roots;

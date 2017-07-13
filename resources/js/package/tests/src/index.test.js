@@ -23,17 +23,16 @@ describe('js/package', () => {
     });
   });
 
-  test('package.json file synchronization', () => {
+  test('package.json file synchronization', async () => {
     const directory = join(tempDirectory, 'package-file-sync');
     emptyDirSync(directory);
 
     const pkg = Package.$create({
-      $name: 'resdir/my-package',
-      $version: '1.0.0',
-      $description: 'My awesome package',
-      $author: 'mvila@me.com',
-      $license: 'MIT',
       name: 'my-package',
+      version: '1.0.0',
+      description: 'My awesome package',
+      author: 'mvila@me.com',
+      license: 'MIT',
       main: './index.js',
       bin: {
         run: 'dist/bin/index.js'
@@ -42,17 +41,16 @@ describe('js/package', () => {
     });
 
     expect(pkg.$getFile()).toBeUndefined();
-    pkg.$save(directory);
+    await pkg.$save(directory);
     expect(pkg.$getFile()).toBeDefined();
 
     const resourceDefinition = loadFile(pkg.$getFile(), {parse: true});
     expect(resourceDefinition).toEqual({
-      $name: 'resdir/my-package',
-      $version: '1.0.0',
-      $description: 'My awesome package',
-      $author: 'mvila@me.com',
-      $license: 'MIT',
       name: 'my-package',
+      version: '1.0.0',
+      description: 'My awesome package',
+      author: 'mvila@me.com',
+      license: 'MIT',
       main: './index.js',
       bin: {
         run: 'dist/bin/index.js'
