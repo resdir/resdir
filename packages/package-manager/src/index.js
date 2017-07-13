@@ -48,17 +48,26 @@ export async function installPackage(directory, {production, useLockfile, debug}
   await execYarn(args, {directory, debug});
 }
 
+export async function publishPackage(directory, {access, debug} = {}) {
+  const args = ['publish'];
+  if (access) {
+    args.push('--access');
+    args.push(access);
+  }
+  await execNPM(args, {directory, debug});
+}
+
 export async function execYarn(args, options) {
   const command = require.resolve('yarn/bin/yarn.js');
   args = [...args, '--no-progress', '--no-emoji', '--non-interactive'];
   await exec(command, args, {...options, commandName: 'yarn'});
 }
 
-// export async function execNPM(args, options) {
-//   const command = require.resolve('npm/bin/npm-cli.js');
-//   args = [...args, '--no-shrinkwrap'];
-//   await exec(command, args, {...options, commandName: 'npm'});
-// }
+export async function execNPM(args, options) {
+  const command = require.resolve('npm/bin/npm-cli.js');
+  args = [...args, '--no-shrinkwrap'];
+  await exec(command, args, {...options, commandName: 'npm'});
+}
 
 async function exec(command, args, {directory, commandName, debug} = {}) {
   try {
