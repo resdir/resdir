@@ -1,0 +1,36 @@
+{
+  "name": "@resdir/version",
+  "version": "0.1.2",
+  "description": "Version class used by Resdir",
+  "author": "Manuel Vila <mvila@3base.com>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
+  "files": [
+    "dist"
+  ],
+  "main": "dist",
+  "dependencies": {
+    "run-common": "^0.6.0",
+    "semver": "^5.3.0"
+  },
+  "$managed": {
+    "warning": "This file contains properties managed by a Resource. You should not modify them directly or use a command such as `npm install <name>`.",
+    "properties": [
+      "dependencies",
+      "peerDependencies",
+      "optionalDependencies",
+      "devDependencies",
+      "name",
+      "version",
+      "description",
+      "author",
+      "contributors",
+      "license",
+      "repository",
+      "files",
+      "main",
+      "bin",
+      "preferGlobal"
+    ]
+  }
+}
