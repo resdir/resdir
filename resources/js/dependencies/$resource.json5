@@ -15,11 +15,6 @@
     $alias: ['dependencies', 'dependency', 'deps', 'dep'],
     $runtime: 'node@>=6.10.0',
     $implementation: './dist',
-    $options: {
-      verbose: false,
-      quiet: false,
-      debug: false
-    },
     add: {
       $type: 'command',
       $parameters: [{$name: 'package', $type: 'string'}],
@@ -53,6 +48,13 @@
       $type: 'command',
       $parameter: [{$name: 'package', $type: 'string'}]
     },
-    updatePackageFile: {$type: 'method'}
+    updatePackageFile: {
+      $type: 'command'
+    },
+    $options: {
+      verbose: false,
+      quiet: false,
+      debug: false
+    }
   }
 }

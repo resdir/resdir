@@ -37,13 +37,20 @@ export function updatePackageFile(directory, definition) {
   saveFile(file, pkg, {stringify: true});
 }
 
-export async function installPackage(directory, {production, useLockfile, debug} = {}) {
+export async function installPackage(
+  directory,
+  {production, useLockfile, modulesDirectory, debug} = {}
+) {
   const args = ['install'];
   if (production) {
     args.push('--production');
   }
   if (!useLockfile) {
     args.push('--no-lockfile');
+  }
+  if (modulesDirectory) {
+    args.push('--modules-folder');
+    args.push(modulesDirectory);
   }
   await execYarn(args, {directory, debug});
 }

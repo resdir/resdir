@@ -50,9 +50,6 @@ describe('js/dependencies', () => {
     expect(resourceDefinition.dependencies).toHaveLength(1);
     expect(resourceDefinition.dependencies[0]).toMatch(/^lodash@.+/);
 
-    let packageDefinition = loadFile(join(directory, 'package.json'), {parse: true});
-    expect(packageDefinition.dependencies.lodash).toBeDefined();
-
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(true);
 
     await pkg.dependencies.remove('lodash', {quiet: true});
@@ -60,9 +57,6 @@ describe('js/dependencies', () => {
 
     resourceDefinition = loadFile(pkg.$getFile(), {parse: true});
     expect(resourceDefinition.dependencies).toBeUndefined();
-
-    packageDefinition = loadFile(join(directory, 'package.json'), {parse: true});
-    expect(packageDefinition.dependencies).toBeUndefined();
 
     // expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
   });
@@ -84,9 +78,6 @@ describe('js/dependencies', () => {
       type: 'development'
     });
 
-    let packageDefinition = loadFile(join(directory, 'package.json'), {parse: true});
-    expect(packageDefinition.devDependencies.lodash).toBe('4.5.1');
-
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(true);
 
     await pkg.dependencies.remove('lodash', {quiet: true});
@@ -94,9 +85,6 @@ describe('js/dependencies', () => {
 
     resourceDefinition = loadFile(pkg.$getFile(), {parse: true});
     expect(resourceDefinition.dependencies).toBeUndefined();
-
-    packageDefinition = loadFile(join(directory, 'package.json'), {parse: true});
-    expect(packageDefinition.devDependencies).toBeUndefined();
 
     // expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
   });

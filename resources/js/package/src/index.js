@@ -7,6 +7,7 @@ export default base =>
       await task(
         async () => {
           this._updatePackageFile();
+          await this.dependencies.updatePackageFile({quiet: true});
         },
         {intro: `Updating package file...`, outro: `Package file updated`, verbose, quiet, debug}
       );
@@ -40,7 +41,6 @@ export default base =>
     }
 
     async publish({access, verbose, quiet, debug}) {
-      this._updatePackageFile();
       await this.$build();
       await this.$test();
       await task(

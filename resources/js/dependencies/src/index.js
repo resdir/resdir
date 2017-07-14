@@ -1,8 +1,11 @@
+import {join} from 'path';
 import {omit, isEmpty, remove, sortBy, lowerCase} from 'lodash';
+import {removeSync} from 'fs-extra';
+import tempy from 'tempy';
 import {task, formatString} from 'run-common';
+import {updatePackageFile, installPackage} from '@resdir/package-manager';
 
 import Dependency from './dependency';
-import {updatePackageFile, installPackage} from '@resdir/package-manager';
 
 export default base =>
   class Dependencies extends base {
@@ -104,9 +107,15 @@ export default base =>
     }
 
     async _installDependencies({debug} = {}) {
-      this._updatePackageFile();
-      const directory = this.$getDirectory({throwIfUndefined: true});
-      await installPackage(directory, {debug});
+      const packageDirectory = tempy.directory();
+      try {
+        this._updatePackageFile(packageDirectory);
+        const directory = this.$getParent().$getDirectory({throwIfUndefined: true});
+        const modulesDirectory = join(directory, 'node_modules');
+        await installPackage(packageDirectory, {modulesDirectory, debug});
+      } finally {
+        removeSync(packageDirectory);
+      }
     }
 
     _sortDependencies() {
@@ -126,16 +135,17 @@ export default base =>
       this._dependencies.forEach(fn);
     }
 
-    async updatePackageFile() {
+    async updatePackageFile({verbose, quiet, debug}) {
       await task(
         async () => {
-          this._updatePackageFile();
+          const directory = this.$getParent().$getDirectory({throwIfUndefined: true});
+          this._updatePackageFile(directory);
         },
-        {intro: `Updating package file...`, outro: `Package file updated`}
+        {intro: `Updating package file...`, outro: `Package file updated`, verbose, quiet, debug}
       );
     }
 
-    _updatePackageFile() {
+    _updatePackageFile(directory) {
       const getDependencies = type => {
         const dependencies = {};
         this.forEach(dependency => {
@@ -147,8 +157,6 @@ export default base =>
           return dependencies;
         }
       };
-
-      const directory = this.$getDirectory({throwIfUndefined: true});
 
       updatePackageFile(directory, {
         dependencies: getDependencies('production'),
