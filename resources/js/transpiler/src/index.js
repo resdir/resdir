@@ -16,7 +16,7 @@ export default base =>
 
       await task(
         async () => {
-          await this._transpileOrCopy(files);
+          await this._transpileOrCopy(files, {verbose, quiet});
         },
         {
           intro: `Transpiling ${formattedPackageName}package...`,
@@ -28,7 +28,7 @@ export default base =>
       );
     }
 
-    async _transpileOrCopy(files) {
+    async _transpileOrCopy(files, {verbose, quiet}) {
       const directory = this.$getDirectory();
       const srcDirectory = resolve(directory, this.source);
       const destDirectory = resolve(directory, this.destination);
@@ -43,11 +43,14 @@ export default base =>
       for (const srcFile of files) {
         const relativeFile = relative(srcDirectory, srcFile);
         if (relativeFile.startsWith('..')) {
-          throw new Error(
-            `Cannot build a file (${formatPath(
-              srcFile
-            )}) located outside of the source directory (${formatPath(srcDirectory)})`
-          );
+          if (!quiet) {
+            throw new Error(
+              `Cannot build a file (${formatPath(
+                srcFile
+              )}) located outside of the source directory (${formatPath(srcDirectory)})`
+            );
+          }
+          continue;
         }
 
         const destFile = join(destDirectory, relativeFile);
@@ -57,12 +60,18 @@ export default base =>
           filter: file => {
             const relativeFile = relative(srcDirectory, file);
             if (isDirectory.sync(file)) {
+              if (verbose) {
+                console.log(`Cleaning ${formatPath(file)}...`);
+              }
               const targetDir = join(destDirectory, relativeFile);
               emptyDirSync(targetDir);
               return true;
             }
             const extension = extname(file);
             if (!extensions.includes(extension)) {
+              if (verbose) {
+                console.log(`Copying ${formatPath(file)}...`);
+              }
               return true;
             }
             transpilableFiles.push(relativeFile);
@@ -71,13 +80,17 @@ export default base =>
         });
       }
 
-      await this._transpile(srcDirectory, destDirectory, transpilableFiles);
+      await this._transpile(srcDirectory, destDirectory, transpilableFiles, {verbose});
     }
 
-    async _transpile(srcDirectory, destDirectory, files) {
+    async _transpile(srcDirectory, destDirectory, files, {verbose}) {
       for (const file of files) {
         const srcFile = join(srcDirectory, file);
         const destFile = join(destDirectory, file);
+
+        if (verbose) {
+          console.log(`Transpiling ${formatPath(srcFile)}...`);
+        }
 
         let code = await readFile(srcFile, 'utf8');
         const {mode} = statSync(srcFile);

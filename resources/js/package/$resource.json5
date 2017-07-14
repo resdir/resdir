@@ -80,7 +80,7 @@
     updatePackageFile: {
       $type: "command"
     },
-    _onSaveOrBuildJSPackage: {
+    _afterSaveAndBuildJSPackage: {
       $type: 'macro',
       $expression: 'updatePackageFile --quiet',
       $listen: ['after:$save', 'after:$build'],

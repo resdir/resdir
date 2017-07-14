@@ -6,7 +6,7 @@
     dependencies: {
       $type: 'js/dependencies'
     },
-    _installJSResource: {
+    _afterInstallJSResource: {
       $type: 'macro',
       $expression: 'dependencies install --quiet',
       $listen: 'after:$install',
