@@ -1,6 +1,6 @@
 {
   "name": "@resdir/version-range",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "VersionRange class used by Resdir",
   "author": "Manuel Vila <mvila@3base.com>",
   "license": "MIT",
@@ -29,7 +29,9 @@
       "dependencies",
       "peerDependencies",
       "optionalDependencies",
-      "devDependencies"
+      "devDependencies",
+      "bin",
+      "preferGlobal"
     ]
   }
 }
