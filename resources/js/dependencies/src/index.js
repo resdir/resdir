@@ -9,10 +9,10 @@ import Dependency from './dependency';
 
 export default base =>
   class Dependencies extends base {
-    $construct(definition = {}, options) {
+    async $construct(definition = {}, options) {
       let dependencies = definition.$value || [];
       definition = omit(definition, '$value');
-      super.$construct(definition, options);
+      await super.$construct(definition, options);
       dependencies = dependencies.map(dependency => new Dependency(dependency));
       this._dependencies = dependencies;
     }

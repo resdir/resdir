@@ -27,16 +27,16 @@ export default {
     const directory = dirname(file);
 
     // Disabled until we can use Node 8 in Atom:
-    // const resource = Resource.$load(directory, {
+    // Resource.$load(directory, {
     //   searchInParentDirectories: true,
     //   throwIfNotFound: false
-    // });
-    // if (!resource) {
-    //   return;
-    // }
-    // resource.$emitEvent('after:$fileModified', file).catch(err => {
-    //   const message = `resdir: An error occurred while emitting 'after:$fileModified' event`;
-    //   atom.notifications.addError(message, {detail: err.message, dismissable: true});
+    // }).then(resource => {
+    //   if (resource) {
+    //     resource.$emitEvent('after:$fileModified', file).catch(err => {
+    //       const message = `resdir: An error occurred while emitting 'after:$fileModified' event`;
+    //       atom.notifications.addError(message, {detail: err.message, dismissable: true});
+    //     });
+    //   }
     // });
 
     const command = 'run';

@@ -38,7 +38,7 @@ describe('js/transpiler', () => {
     };
     saveFile(resourceFile, definition, {stringify: true});
 
-    const Person = Resource.$load(directory);
+    const Person = await Resource.$load(directory);
     await Person.transpiler.transpile({quiet: true});
 
     const distDirectory = join(directory, 'dist');
