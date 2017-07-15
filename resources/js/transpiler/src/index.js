@@ -99,7 +99,7 @@ export default base =>
           presets: [
             [
               require.resolve('babel-preset-env'),
-              {targets: {node: 6}, loose: true, exclude: ['transform-regenerator']}
+              {targets: {node: 8}, loose: true, exclude: ['transform-regenerator']}
             ]
           ],
           plugins: [
