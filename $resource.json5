@@ -9,5 +9,20 @@
       './resources/js/transpiler $test'
     ],
     $listen: 'after:$test'
+  },
+  publish: {
+    $type: 'macro',
+    $expressions: [
+      './resources/js/dependencies $publish',
+      './resources/js/resource $publish',
+      './resources/js/tool $publish',
+      './resources/js/transpiler $publish',
+      './resources/js/esnext-resource $publish',
+      './resources/js/esnext-tool $publish',
+      './resources/js/jest $publish',
+      './resources/js/esnext-jest $publish',
+      './resources/js/package $publish',
+      './resources/js/esnext-package $publish'
+    ]
   }
 }
