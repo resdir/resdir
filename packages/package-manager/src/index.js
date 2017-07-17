@@ -14,7 +14,7 @@ export function updatePackageFile(directory, definition) {
     pkg = {};
   }
 
-  let managed = pkg.$managed;
+  let managed = pkg['@managed'];
   if (!managed) {
     managed = {
       warning:
@@ -31,8 +31,8 @@ export function updatePackageFile(directory, definition) {
 
   managed.properties = Array.from(managedProperties);
 
-  delete pkg.$managed; // Put the $managed property at the end of the object
-  pkg.$managed = managed;
+  delete pkg['@managed']; // Put the @managed property at the end of the object
+  pkg['@managed'] = managed;
 
   saveFile(file, pkg, {stringify: true});
 }

@@ -1,8 +1,0 @@
-{
-  dependencies: {
-    $type: "../..",
-    $value: [
-      "lodash@^4.17.4"
-    ]
-  }
-}

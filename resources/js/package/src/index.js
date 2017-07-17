@@ -41,8 +41,8 @@ export default base =>
     }
 
     async publish({access, verbose, quiet, debug}) {
-      await this.$build();
-      await this.$test();
+      await this['@build']();
+      await this['@test']();
       await task(
         async () => {
           await this._publish({access, debug});

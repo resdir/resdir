@@ -1,6 +1,6 @@
 {
   "name": "@resdir/package-manager",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Abstract Node package managers (currently using yarn)",
   "author": "Manuel Vila <mvila@3base.com>",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "run-common": "^0.6.0",
     "yarn": "^0.27.5"
   },
-  "$managed": {
+  "@managed": {
     "warning": "This file contains properties managed by a Resource. You should not modify them directly or use a command such as `npm install <name>`.",
     "properties": [
       "name",

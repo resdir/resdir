@@ -10,8 +10,8 @@ import Dependency from './dependency';
 export default base =>
   class Dependencies extends base {
     async $construct(definition = {}, options) {
-      let dependencies = definition.$value || [];
-      definition = omit(definition, '$value');
+      let dependencies = definition['@value'] || [];
+      definition = omit(definition, '@value');
       await super.$construct(definition, options);
       dependencies = dependencies.map(dependency => new Dependency(dependency));
       this._dependencies = dependencies;
@@ -168,7 +168,7 @@ export default base =>
 
     static $normalize(definition, options) {
       if (Array.isArray(definition)) {
-        definition = {$value: definition};
+        definition = {'@value': definition};
       }
       return super.$normalize(definition, options);
     }
@@ -183,14 +183,14 @@ export default base =>
       let dependencies = this._dependencies;
       if (dependencies.length) {
         dependencies = dependencies.map(dependency => dependency.toJSON());
-        definition.$value = dependencies;
+        definition['@value'] = dependencies;
       }
 
       const keys = Object.keys(definition);
       if (keys.length === 0) {
         definition = undefined;
-      } else if (keys.length === 1 && keys[0] === '$value') {
-        definition = definition.$value;
+      } else if (keys.length === 1 && keys[0] === '@value') {
+        definition = definition['@value'];
       }
 
       return definition;

@@ -32,19 +32,19 @@ export default {
     //   throwIfNotFound: false
     // }).then(resource => {
     //   if (resource) {
-    //     resource.$emitEvent('after:$fileModified', file).catch(err => {
-    //       const message = `resdir: An error occurred while emitting 'after:$fileModified' event`;
+    //     resource.$emitEvent('after:@fileModified', file).catch(err => {
+    //       const message = `resdir: An error occurred while emitting 'after:@fileModified' event`;
     //       atom.notifications.addError(message, {detail: err.message, dismissable: true});
     //     });
     //   }
     // });
 
     const command = 'run';
-    const args = ['$emitEvent', 'after:$fileModified', file];
+    const args = ['@emitEvent', 'after:@fileModified', file];
     const options = {cwd: directory, timeout: 60 * 1000};
     execFile(command, args, options, (err, stdout, stderr) => {
       if (err) {
-        const message = `resdir: An error occurred while emitting 'after:$fileModified' event`;
+        const message = `resdir: An error occurred while emitting 'after:@fileModified' event`;
         atom.notifications.addError(message, {detail: stderr, dismissable: true});
       } else if (stdout) {
         console.log(stdout.trim());

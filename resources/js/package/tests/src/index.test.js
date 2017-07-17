@@ -61,11 +61,11 @@ describe('js/package', () => {
     });
 
     const packageDefinition = loadFile(join(directory, 'package.json'), {parse: true});
-    const managed = packageDefinition.$managed;
+    const managed = packageDefinition['@managed'];
     expect(managed).toBeDefined();
     expect(managed.properties).toBeInstanceOf(Array);
     expect(managed.properties).toContain('name');
-    delete packageDefinition.$managed;
+    delete packageDefinition['@managed'];
     expect(packageDefinition).toEqual({
       name: 'my-package',
       version: '1.0.0',

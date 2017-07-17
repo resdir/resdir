@@ -1,8 +1,0 @@
-{
-  $name: 'js/esnext-jest',
-  $version: '0.1.0',
-  $export: {
-    $type: ['js/jest', 'js/esnext-tool'],
-    roots: ['./dist']
-  }
-}

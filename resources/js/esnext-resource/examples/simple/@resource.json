@@ -1,0 +1,11 @@
+{
+  "@name": "resdir/js-esnext-resource-simple-example",
+  "@type": "../..",
+  "@implementation": "./dist",
+  "dependencies": [
+    "chalk@^2.0.1"
+  ],
+  "hello": {
+    "@type": "method"
+  }
+}

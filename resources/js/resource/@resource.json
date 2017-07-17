@@ -1,0 +1,16 @@
+{
+  "@name": "js/resource",
+  "@version": "0.1.0",
+  "@export": {
+    "@runtime": "node@>=6.10.0",
+    "dependencies": {
+      "@type": "js/dependencies"
+    },
+    "_afterInstallJSResource": {
+      "@type": "macro",
+      "@expression": "dependencies install --quiet",
+      "@listen": "after:@install",
+      "@hidden": true
+    }
+  }
+}

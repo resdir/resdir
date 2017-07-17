@@ -29,11 +29,11 @@ describe('js/transpiler', () => {
     const srcCodeFile = join(directory, 'src', 'index.js');
     await outputFile(srcCodeFile, CODE);
 
-    const resourceFile = join(directory, '$resource.json5');
+    const resourceFile = join(directory, '@resource.json');
     const definition = {
-      $name: 'resdir/js-transpiler-person-test',
+      '@name': 'resdir/js-transpiler-person-test',
       transpiler: {
-        $type: resolve(__dirname, '../..')
+        '@type': resolve(__dirname, '../..')
       }
     };
     saveFile(resourceFile, definition, {stringify: true});

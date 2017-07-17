@@ -1,0 +1,92 @@
+{
+  "@name": "js/package",
+  "@version": "0.1.1",
+  "@type": "js/esnext-resource",
+  "@files": ["./dist"],
+  "dependencies": [
+    "lodash@^4.17.4",
+    "@resdir/package-manager@^0.1.0",
+    "@resdir/version@^0.1.1",
+    "run-common@^0.6.0"
+  ],
+  "test": {
+    "@type": "macro",
+    "@listen": "after:@test",
+    "@expression": "./tests run"
+  },
+  "@export": {
+    "@aliases": ["package", "pkg"],
+    "@type": "js/tool",
+    "@implementation": "./dist",
+    "name": {
+      "@type": "string"
+    },
+    "version": {
+      "@type": "string",
+      "@implementation": "./dist/version-property",
+      "bump": {
+        "@type": "command",
+        "@options": {
+          "major": false,
+          "minor": false,
+          "patch": false
+        }
+      }
+    },
+    "description": {
+      "@type": "string"
+    },
+    "author": {
+      "@type": "string"
+    },
+    "contributors": {
+      "@type": "array"
+    },
+    "repository": {
+      "@type": "string"
+    },
+    "license": {
+      "@type": "string"
+    },
+    "files": {
+      "@type": "array"
+    },
+    "main": {
+      "@implementation": "./dist/main-property",
+      "es5": {
+        "@type": "string"
+      },
+      "es6": {
+        "@type": "string"
+      }
+    },
+    "bin": {
+      "@type": "object"
+    },
+    "preferGlobal": {
+      "@type": "boolean"
+    },
+    "publish": {
+      "@type": "command",
+      "@options": {
+        "access": {
+          "@type": "string"
+        }
+      }
+    },
+    "updatePackageFile": {
+      "@type": "command"
+    },
+    "_afterSaveAndBuildJSPackage": {
+      "@type": "macro",
+      "@expression": "updatePackageFile --quiet",
+      "@listen": ["after:@save", "after:@build"],
+      "@hidden": true
+    },
+    "@options": {
+      "verbose": false,
+      "quiet": false,
+      "debug": false
+    }
+  }
+}

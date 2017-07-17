@@ -1,5 +1,0 @@
-{
-  $name: 'resdir/js-jest-person-example',
-  $type: '../../..',
-  testEnvironment: 'node'
-}
