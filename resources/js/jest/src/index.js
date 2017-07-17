@@ -4,16 +4,16 @@ import {task} from 'run-common';
 
 export default base =>
   class JestResource extends base {
-    async run() {
+    async run(testPathPattern) {
       await task(
         async () => {
-          await this._run();
+          await this._run({testPathPattern});
         },
         {intro: `Testing resource...`, outro: `Resource tested`, verbose: true}
       );
     }
 
-    async _run() {
+    async _run({testPathPattern}) {
       const directory = this.$getDirectory();
 
       let roots;
@@ -30,7 +30,8 @@ export default base =>
       };
 
       const argv = {
-        config: JSON.stringify(config)
+        config: JSON.stringify(config),
+        testPathPattern
       };
 
       await new Promise((resolve, reject) => {
