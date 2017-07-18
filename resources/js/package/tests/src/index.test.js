@@ -15,12 +15,12 @@ describe('js/package', () => {
   });
 
   test('normalization and serialization', async () => {
-    expect((await Package.$create()).$serialize()).toBeUndefined();
-    expect((await Package.$create({main: {}})).$serialize()).toBeUndefined();
-    expect((await Package.$create({main: './index.js'})).$serialize()).toEqual({
+    expect((await Package.$extend()).$serialize()).toBeUndefined();
+    expect((await Package.$extend({main: {}})).$serialize()).toBeUndefined();
+    expect((await Package.$extend({main: './index.js'})).$serialize()).toEqual({
       main: './index.js'
     });
-    expect((await Package.$create({main: {es5: './dist', es6: './src'}})).$serialize()).toEqual({
+    expect((await Package.$extend({main: {es5: './dist', es6: './src'}})).$serialize()).toEqual({
       main: {es5: './dist', es6: './src'}
     });
   });
@@ -29,7 +29,7 @@ describe('js/package', () => {
     const directory = join(tempDirectory, 'package-file-sync');
     emptyDirSync(directory);
 
-    const pkg = await Package.$create({
+    const pkg = await Package.$extend({
       name: 'my-package',
       version: '1.0.0',
       description: 'My awesome package',

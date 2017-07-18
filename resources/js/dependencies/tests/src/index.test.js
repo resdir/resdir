@@ -18,11 +18,11 @@ describe('js/dependencies', () => {
   });
 
   test('creation', async () => {
-    expect(await (await Package.$create()).dependencies.count()).toBe(0);
+    expect(await (await Package.$extend()).dependencies.count()).toBe(0);
 
-    expect(await (await Package.$create({dependencies: []})).dependencies.count()).toBe(0);
+    expect(await (await Package.$extend({dependencies: []})).dependencies.count()).toBe(0);
 
-    const pkg = await Package.$create({dependencies: ['json5@^1.0.0', 'lodash']});
+    const pkg = await Package.$extend({dependencies: ['json5@^1.0.0', 'lodash']});
     expect(await pkg.dependencies.count()).toBe(2);
     expect(await pkg.dependencies.includes('json5')).toBe(true);
     expect(await pkg.dependencies.includes('lodash')).toBe(true);
@@ -30,9 +30,9 @@ describe('js/dependencies', () => {
   });
 
   test('normalization and serialization', async () => {
-    expect((await Package.$create({dependencies: []})).$serialize()).toBeUndefined();
+    expect((await Package.$extend({dependencies: []})).$serialize()).toBeUndefined();
 
-    expect((await Package.$create({dependencies: ['lodash']})).$serialize()).toEqual({
+    expect((await Package.$extend({dependencies: ['lodash']})).$serialize()).toEqual({
       dependencies: ['lodash']
     });
   });
@@ -40,7 +40,7 @@ describe('js/dependencies', () => {
   test('add production dependency', async () => {
     const directory = join(tempDirectory, 'add-production');
     emptyDirSync(directory);
-    const pkg = await Package.$create({}, {directory});
+    const pkg = await Package.$extend({}, {directory});
 
     expect(await pkg.dependencies.includes('lodash')).toBe(false);
     await pkg.dependencies.add('lodash', {quiet: true});
@@ -64,7 +64,7 @@ describe('js/dependencies', () => {
   test('add development dependency', async () => {
     const directory = join(tempDirectory, 'add-development');
     emptyDirSync(directory);
-    const pkg = await Package.$create({}, {directory});
+    const pkg = await Package.$extend({}, {directory});
 
     expect(await pkg.dependencies.includes('lodash')).toBe(false);
     await pkg.dependencies.add('lodash@4.5.1', {development: true, quiet: true});
