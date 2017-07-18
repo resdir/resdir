@@ -8,7 +8,6 @@
     "@listen": "after:@test"
   },
   "@export": {
-    "@type": "tool",
     "@alias": ["dependencies", "dependency", "deps", "dep"],
     "@runtime": "node@>=6.10.0",
     "@implementation": "./dist",

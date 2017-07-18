@@ -3,8 +3,14 @@
   "@version": "0.1.0",
   "@export": {
     "@runtime": "node@>=6.10.0",
+    "@disabledImplementation": "./src",
     "dependencies": {
       "@type": "js/dependencies"
+    },
+    "_afterCreateJSResource": {
+      "@type": "command",
+      "@listen": "after:@create",
+      "@hidden": true
     },
     "_afterInstallJSResource": {
       "@type": "macro",

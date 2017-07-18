@@ -6,7 +6,7 @@
   "dependencies": ["jest@^20.0.4", "run-common@^0.6.1"],
   "@export": {
     "@aliases": ["jest", "test", "tests"],
-    "@type": "js/tool",
+    "@type": "js/resource",
     "@implementation": "./dist",
     "roots": {
       "@type": "array"

@@ -24,8 +24,8 @@
     "@expression": "./tests run"
   },
   "@export": {
+    "@type": "js/resource",
     "@aliases": ["transpiler", "babel"],
-    "@type": "js/tool",
     "@implementation": "./dist",
     "source": "./src",
     "destination": "./dist",

@@ -1,4 +1,4 @@
-# Resdir transpiler tool
+# Resdir JS transpiler
 
 ```javascript
 // TODO: documentation!

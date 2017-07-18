@@ -16,7 +16,7 @@
   },
   "@export": {
     "@aliases": ["package", "pkg"],
-    "@type": "js/tool",
+    "@type": "js/resource",
     "@implementation": "./dist",
     "name": {
       "@type": "string"

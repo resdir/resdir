@@ -1,8 +1,8 @@
-const {green} = require('chalk');
+const chalk = require('chalk');
 
 module.exports = base =>
   class Simple extends base {
-    hello() {
-      console.log(green('Hello, World!'));
+    hello({color}) {
+      console.log(chalk[color]('Hello, World!'));
     }
   };
