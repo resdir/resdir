@@ -1,0 +1,15 @@
+{
+  "@name": "js/dependencies-mixin",
+  "@version": "0.1.0",
+  "@export": {
+    "dependencies": {
+      "@type": "js/dependencies"
+    },
+    "_afterInstallDepenciesMixin": {
+      "@type": "macro",
+      "@expression": "dependencies install --quiet",
+      "@listen": "after:@install",
+      "@hidden": true
+    }
+  }
+}

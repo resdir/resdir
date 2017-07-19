@@ -1,7 +1,7 @@
 {
+  "@type": "js/dependencies-mixin",
   "@name": "js/transpiler",
   "@version": "0.1.0",
-  "@type": "js/resource",
   "@files": ["./dist"],
   "dependencies": [
     {
@@ -24,8 +24,8 @@
     "@expression": "./tests run"
   },
   "@export": {
-    "@type": "js/resource",
     "@aliases": ["transpiler", "babel"],
+    "@runtime": "node@>=6.10.0",
     "@implementation": "./dist",
     "source": "./src",
     "destination": "./dist",

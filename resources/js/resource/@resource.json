@@ -1,21 +1,15 @@
 {
+  "@type": "js/transpiler-mixin",
   "@name": "js/resource",
   "@version": "0.1.0",
+  "@files": ["./dist"],
   "@export": {
+    "@type": "js/dependencies-mixin",
     "@runtime": "node@>=6.10.0",
-    "@disabledImplementation": "./src",
-    "dependencies": {
-      "@type": "js/dependencies"
-    },
+    "@implementation": "./dist",
     "_afterCreateJSResource": {
       "@type": "command",
       "@listen": "after:@create",
-      "@hidden": true
-    },
-    "_afterInstallJSResource": {
-      "@type": "macro",
-      "@expression": "dependencies install --quiet",
-      "@listen": "after:@install",
       "@hidden": true
     }
   }

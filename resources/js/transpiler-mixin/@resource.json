@@ -1,5 +1,5 @@
 {
-  "@name": "js/esnext-mixin",
+  "@name": "js/transpiler-mixin",
   "@version": "0.1.0",
   "@export": {
     "transpiler": {

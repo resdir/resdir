@@ -14,11 +14,12 @@
     "@type": "macro",
     "@expressions": [
       "./resources/js/dependencies @publish",
+      "./resources/js/dependencies-mixin @publish",
       "./resources/js/resource @publish",
       "./resources/js/jest @publish",
       "./resources/js/package @publish",
       "./resources/js/transpiler @publish",
-      "./resources/js/esnext-mixin @publish",
+      "./resources/js/transpiler-mixin @publish",
       "./resources/js/esnext-resource @publish",
       "./resources/js/esnext-jest @publish",
       "./resources/js/esnext-package @publish"

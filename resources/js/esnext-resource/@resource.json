@@ -1,7 +1,15 @@
 {
+  "@type": "js/transpiler-mixin",
   "@name": "js/esnext-resource",
   "@version": "0.1.0",
+  "@files": ["./dist"],
   "@export": {
-    "@types": ["js/resource", "js/esnext-mixin"]
+    "@types": ["js/resource", "js/transpiler-mixin"],
+    "@implementation": "./dist",
+    "_afterCreateJSESNextResource": {
+      "@type": "command",
+      "@listen": "after:@create",
+      "@hidden": true
+    }
   }
 }

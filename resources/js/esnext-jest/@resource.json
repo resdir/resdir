@@ -2,7 +2,7 @@
   "@name": "js/esnext-jest",
   "@version": "0.1.0",
   "@export": {
-    "@type": ["js/jest", "js/esnext-mixin"],
+    "@type": ["js/jest", "js/transpiler-mixin"],
     "roots": ["./dist"]
   }
 }
