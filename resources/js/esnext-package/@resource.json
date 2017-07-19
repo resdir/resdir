@@ -2,7 +2,8 @@
   "@name": "js/esnext-package",
   "@version": "0.1.0",
   "@export": {
-    "@types": ["js/package", "js/transpiler-mixin"],
+    "@types": ["js/package"],
+    "transpiler": {"@type": "js/transpiler"},
     "files": ["./dist"],
     "main": "./dist"
   }

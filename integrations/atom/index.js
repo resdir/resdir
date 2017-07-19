@@ -40,7 +40,7 @@ export default {
     // });
 
     const command = 'run';
-    const args = ['@emitEvent', 'after:@fileModified', file];
+    const args = ['@broadcastEvent', 'after:@fileModified', file];
     const options = {cwd: directory, timeout: 60 * 1000};
     execFile(command, args, options, (err, stdout, stderr) => {
       if (err) {

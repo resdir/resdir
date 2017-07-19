@@ -66,6 +66,12 @@
       "verbose": false,
       "quiet": false,
       "debug": false
+    },
+    "_afterInstallJSDependencies": {
+      "@type": "macro",
+      "@expression": "install --quiet",
+      "@listen": "after:@install",
+      "@hidden": true
     }
   }
 }

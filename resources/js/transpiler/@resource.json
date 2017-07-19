@@ -1,23 +1,25 @@
 {
-  "@type": "js/dependencies-mixin",
   "@name": "js/transpiler",
   "@version": "0.1.0",
   "@files": ["./dist"],
-  "dependencies": [
-    {
-      "name": "babel-cli",
-      "version": "^6.24.1",
-      "type": "development"
-    },
-    "babel-core@^6.25.0",
-    "babel-plugin-transform-class-properties@^6.24.1",
-    "babel-plugin-transform-object-rest-spread@^6.23.0",
-    "babel-preset-env@^1.5.2",
-    "fs-extra@^3.0.1",
-    "is-directory@^0.3.1",
-    "lodash@^4.17.4",
-    "run-common@^0.6.0"
-  ],
+  "dependencies": {
+    "@type": "js/dependencies",
+    "@value": [
+      {
+        "name": "babel-cli",
+        "version": "^6.24.1",
+        "type": "development"
+      },
+      "babel-core@^6.25.0",
+      "babel-plugin-transform-class-properties@^6.24.1",
+      "babel-plugin-transform-object-rest-spread@^6.23.0",
+      "babel-preset-env@^1.5.2",
+      "fs-extra@^3.0.1",
+      "is-directory@^0.3.1",
+      "lodash@^4.17.4",
+      "run-common@^0.6.0"
+    ]
+  },
   "test": {
     "@type": "macro",
     "@listen": "after:@test",
@@ -43,6 +45,22 @@
       "verbose": false,
       "quiet": false,
       "debug": false
+    },
+    "_afterBuildJSTranspiler": {
+      "@type": "macro",
+      "@expression": "transpile",
+      "@listen": "after:@build",
+      "@hidden": true
+    },
+    "_afterJSTranspilerFileModified": {
+      "@type": "macro",
+      "@parameter": {
+        "@name": "file",
+        "@type": "string"
+      },
+      "@expression": "transpile ${@arguments[0]} --quiet",
+      "@listen": "after:@fileModified",
+      "@hidden": true
     }
   }
 }
