@@ -1,0 +1,25 @@
+{
+  "@name": "js/esnext-mixin",
+  "@version": "0.1.0",
+  "@export": {
+    "transpiler": {
+      "@type": "js/transpiler"
+    },
+    "_afterBuildJSESNextResource": {
+      "@type": "macro",
+      "@expression": "transpiler transpile",
+      "@listen": "after:@build",
+      "@hidden": true
+    },
+    "_afterJSESNextResourceFileModified": {
+      "@type": "macro",
+      "@parameter": {
+        "@name": "file",
+        "@type": "string"
+      },
+      "@expression": "transpiler transpile ${@arguments[0]} --quiet",
+      "@listen": "after:@fileModified",
+      "@hidden": true
+    }
+  }
+}

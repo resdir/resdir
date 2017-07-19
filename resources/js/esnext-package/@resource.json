@@ -2,7 +2,7 @@
   "@name": "js/esnext-package",
   "@version": "0.1.0",
   "@export": {
-    "@types": ["js/esnext-resource", "js/package"],
+    "@types": ["js/package", "js/esnext-mixin"],
     "files": ["./dist"],
     "main": "./dist"
   }
