@@ -18,7 +18,7 @@ export default base =>
       await task(
         async progress => {
           this._bump(part);
-          await this.$getParent().$save();
+          await this.$getRoot().$save();
           progress.setOutro(`Version number bumped to ${formatString(this.$value)}`);
         },
         {intro: 'Bumping version number...'}

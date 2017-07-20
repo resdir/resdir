@@ -38,7 +38,7 @@ export default base =>
           async () => {
             await this._addDependency(dependency);
             await this._installDependencies({debug});
-            await this.$getParent().$save();
+            await this.$getRoot().$save();
           },
           {
             intro: `Adding ${formatString(dependency.name)} dependency...`,
@@ -59,7 +59,7 @@ export default base =>
           async () => {
             this._removeDependency(name);
             await this._installDependencies({debug});
-            await this.$getParent().$save();
+            await this.$getRoot().$save();
           },
           {
             intro: `Removing ${formatString(name)} dependency...`,
@@ -110,7 +110,7 @@ export default base =>
       const packageDirectory = tempy.directory();
       try {
         this._updatePackageFile(packageDirectory);
-        const directory = this.$getParent().$getDirectory({throwIfUndefined: true});
+        const directory = this.$getParent().$getCurrentDirectory({throwIfUndefined: true});
         const modulesDirectory = join(directory, 'node_modules');
         await installPackage(packageDirectory, {modulesDirectory, debug});
       } finally {
@@ -138,7 +138,7 @@ export default base =>
     async updatePackageFile({verbose, quiet, debug}) {
       await task(
         async () => {
-          const directory = this.$getParent().$getDirectory({throwIfUndefined: true});
+          const directory = this.$getParent().$getCurrentDirectory({throwIfUndefined: true});
           this._updatePackageFile(directory);
         },
         {intro: `Updating package file...`, outro: `Package file updated`, verbose, quiet, debug}

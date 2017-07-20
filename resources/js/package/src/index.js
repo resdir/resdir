@@ -14,7 +14,7 @@ export default base =>
     }
 
     _updatePackageFile() {
-      const directory = this.$getDirectory({throwIfUndefined: true});
+      const directory = this.$getCurrentDirectory({throwIfUndefined: true});
 
       let files = this.files;
       if (files) {
@@ -77,7 +77,7 @@ export default base =>
         );
       }
 
-      const directory = this.$getDirectory({throwIfUndefined: true});
+      const directory = this.$getCurrentDirectory({throwIfUndefined: true});
       await publishPackage(directory, {access, debug});
     }
   };

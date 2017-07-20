@@ -7,7 +7,7 @@
     "@runtime": "node@>=6.10.0",
     "@implementation": "./dist",
     "dependencies": {"@type": "js/dependencies"},
-    "_afterCreateJSResource": {
+    "_createJSResource": {
       "@type": "command",
       "@listen": "after:@create",
       "@hidden": true

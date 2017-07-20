@@ -42,11 +42,11 @@ describe('js/package', () => {
       preferGlobal: true
     });
 
-    expect(pkg.$getFile()).toBeUndefined();
-    await pkg.$save(directory);
-    expect(pkg.$getFile()).toBeDefined();
+    expect(pkg.$getResourceFile()).toBeUndefined();
+    await pkg.$save({directory});
+    expect(pkg.$getResourceFile()).toBeDefined();
 
-    const resourceDefinition = loadFile(pkg.$getFile(), {parse: true});
+    const resourceDefinition = loadFile(pkg.$getResourceFile(), {parse: true});
     expect(resourceDefinition).toEqual({
       name: 'my-package',
       version: '1.0.0',

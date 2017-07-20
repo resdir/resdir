@@ -20,10 +20,11 @@
       "run-common@^0.6.0"
     ]
   },
-  "test": {
+  "_testJSTranspiler": {
     "@type": "macro",
+    "@expression": "./tests run",
     "@listen": "after:@test",
-    "@expression": "./tests run"
+    "@hidden": true
   },
   "@export": {
     "@aliases": ["transpiler", "babel"],
@@ -39,20 +40,10 @@
         "@name": "files",
         "@type": "string"
       },
-      "@variadic": true
+      "@variadic": true,
+      "@listen": "after:@build"
     },
-    "@options": {
-      "verbose": false,
-      "quiet": false,
-      "debug": false
-    },
-    "_afterBuildJSTranspiler": {
-      "@type": "macro",
-      "@expression": "transpile",
-      "@listen": "after:@build",
-      "@hidden": true
-    },
-    "_afterJSTranspilerFileModified": {
+    "_afterFileModified": {
       "@type": "macro",
       "@parameter": {
         "@name": "file",
@@ -61,6 +52,11 @@
       "@expression": "transpile ${@arguments[0]} --quiet",
       "@listen": "after:@fileModified",
       "@hidden": true
+    },
+    "@options": {
+      "verbose": false,
+      "quiet": false,
+      "debug": false
     }
   }
 }

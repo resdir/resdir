@@ -2,10 +2,11 @@
   "@name": "js/dependencies",
   "@version": "0.1.0",
   "@files": ["./dist", "package.json"],
-  "test": {
+  "_testJSDependencies": {
     "@type": "macro",
     "@expression": "./tests run",
-    "@listen": "after:@test"
+    "@listen": "after:@test",
+    "@hidden": true
   },
   "@export": {
     "@alias": ["dependencies", "dependency", "deps", "dep"],
@@ -45,7 +46,8 @@
       "@variadic": true
     },
     "install": {
-      "@type": "command"
+      "@type": "command",
+      "@listen": "after:@install"
     },
     "count": {
       "@type": "command"
@@ -66,12 +68,6 @@
       "verbose": false,
       "quiet": false,
       "debug": false
-    },
-    "_afterInstallJSDependencies": {
-      "@type": "macro",
-      "@expression": "install --quiet",
-      "@listen": "after:@install",
-      "@hidden": true
     }
   }
 }

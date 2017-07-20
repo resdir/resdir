@@ -7,7 +7,7 @@
     "@types": ["js/resource"],
     "@implementation": "./dist",
     "transpiler": {"@type": "js/transpiler"},
-    "_afterCreateJSESNextResource": {
+    "_createJSESNextResource": {
       "@type": "command",
       "@listen": "after:@create",
       "@hidden": true

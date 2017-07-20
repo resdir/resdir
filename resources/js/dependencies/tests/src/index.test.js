@@ -46,7 +46,7 @@ describe('js/dependencies', () => {
     await pkg.dependencies.add('lodash', {quiet: true});
     expect(await pkg.dependencies.includes('lodash')).toBe(true);
 
-    let resourceDefinition = loadFile(pkg.$getFile(), {parse: true});
+    let resourceDefinition = loadFile(pkg.$getResourceFile(), {parse: true});
     expect(resourceDefinition.dependencies).toHaveLength(1);
     expect(resourceDefinition.dependencies[0]).toMatch(/^lodash@.+/);
 
@@ -55,7 +55,7 @@ describe('js/dependencies', () => {
     await pkg.dependencies.remove('lodash', {quiet: true});
     expect(await pkg.dependencies.includes('lodash')).toBe(false);
 
-    resourceDefinition = loadFile(pkg.$getFile(), {parse: true});
+    resourceDefinition = loadFile(pkg.$getResourceFile(), {parse: true});
     expect(resourceDefinition.dependencies).toBeUndefined();
 
     // expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
@@ -70,7 +70,7 @@ describe('js/dependencies', () => {
     await pkg.dependencies.add('lodash@4.5.1', {development: true, quiet: true});
     expect(await pkg.dependencies.includes('lodash')).toBe(true);
 
-    let resourceDefinition = loadFile(pkg.$getFile(), {parse: true});
+    let resourceDefinition = loadFile(pkg.$getResourceFile(), {parse: true});
     expect(resourceDefinition.dependencies).toHaveLength(1);
     expect(resourceDefinition.dependencies[0]).toEqual({
       name: 'lodash',
@@ -83,7 +83,7 @@ describe('js/dependencies', () => {
     await pkg.dependencies.remove('lodash', {quiet: true});
     expect(await pkg.dependencies.includes('lodash')).toBe(false);
 
-    resourceDefinition = loadFile(pkg.$getFile(), {parse: true});
+    resourceDefinition = loadFile(pkg.$getResourceFile(), {parse: true});
     expect(resourceDefinition.dependencies).toBeUndefined();
 
     // expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);

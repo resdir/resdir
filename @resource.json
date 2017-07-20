@@ -1,5 +1,5 @@
 {
-  "test": {
+  "_test": {
     "@type": "macro",
     "@expressions": [
       "./packages/version @test",
@@ -8,7 +8,8 @@
       "./resources/js/package @test",
       "./resources/js/transpiler @test"
     ],
-    "@listen": "after:@test"
+    "@listen": "after:@test",
+    "@hidden": "true"
   },
   "publish": {
     "@type": "macro",

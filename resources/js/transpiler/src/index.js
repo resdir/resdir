@@ -10,16 +10,18 @@ export default base =>
     async transpile(...files) {
       const {verbose, quiet, debug} = files.pop();
 
-      const root = this.$getRoot();
-      const formattedPackageName = root.name ? formatString(root.name) + ' ' : '';
+      let name = this.$getParent().$name;
+      if (name) {
+        name = formatString(name);
+      }
 
       await task(
         async () => {
           await this._transpileOrCopy(files, {verbose, quiet});
         },
         {
-          intro: `Transpiling ${formattedPackageName}package...`,
-          outro: `Package ${formattedPackageName}transpiled`,
+          intro: `Transpiling ${name ? name : 'resource'}...`,
+          outro: `${name ? name : 'Resource'} transpiled`,
           verbose,
           quiet,
           debug
@@ -28,7 +30,7 @@ export default base =>
     }
 
     async _transpileOrCopy(files, {verbose, quiet}) {
-      const directory = this.$getDirectory();
+      const directory = this.$getCurrentDirectory();
       const srcDirectory = resolve(directory, this.source);
       const destDirectory = resolve(directory, this.destination);
       const extensions = this.extensions;

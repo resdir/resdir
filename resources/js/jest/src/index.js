@@ -14,7 +14,7 @@ export default base =>
     }
 
     async _run({testPathPattern}) {
-      const directory = this.$getDirectory();
+      const directory = this.$getCurrentDirectory();
 
       let roots;
       if (this.roots) {
