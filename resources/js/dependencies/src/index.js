@@ -2,7 +2,7 @@ import {join} from 'path';
 import {omit, isEmpty, remove, sortBy, lowerCase} from 'lodash';
 import {removeSync} from 'fs-extra';
 import tempy from 'tempy';
-import {task, formatString} from 'run-common';
+import {task, formatString} from '@resdir/console';
 import {updatePackageFile, installPackage} from '@resdir/package-manager';
 
 import Dependency from './dependency';

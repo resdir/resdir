@@ -1,5 +1,5 @@
 import semver from 'semver';
-import {formatString} from 'run-common';
+import {formatString} from '@resdir/console';
 
 export class Version {
   constructor(str) {

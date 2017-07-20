@@ -1,7 +1,7 @@
 import {join} from 'path';
 import {outputFileSync} from 'fs-extra';
 import {updatePackageFile, publishPackage, fetchNPMRegistry} from '@resdir/package-manager';
-import {task, formatString, formatCode} from 'run-common';
+import {task, formatString, formatCode} from '@resdir/console';
 
 const PACKAGE_CODE = `// Package implementation
 `;
@@ -73,8 +73,8 @@ export default base =>
         throw new Error(`${formatCode('description')} property is missing`);
       }
 
-      const pkg = await fetchNPMRegistry(this.name);
-      if (this.version in pkg.versions) {
+      const pkg = await fetchNPMRegistry(this.name, {throwIfNotFound: false});
+      if (pkg && this.version in pkg.versions) {
         throw new Error(
           `Can't publish over the previously published version ${formatString(
             this.version
@@ -94,6 +94,7 @@ export default base =>
       this.$name = undefined;
       this.version = this.$version.toString();
       this.$version = undefined;
+      this.files = ['./src'];
       await this.$setChild('main', './src/index.js');
       await this.$save();
     }

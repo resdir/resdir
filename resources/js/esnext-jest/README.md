@@ -1,4 +1,4 @@
-# Resdir js/esnext-package resource
+# Resdir js/esnext-jest resource
 
 ```javascript
 // TODO: documentation!

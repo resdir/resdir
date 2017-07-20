@@ -17,46 +17,45 @@
       "fs-extra@^3.0.1",
       "is-directory@^0.3.1",
       "lodash@^4.17.4",
-      "run-common@^0.6.0"
+      "@resdir/console@^0.1.0"
     ]
   },
   "_testJSTranspiler": {
     "@type": "macro",
-    "@expression": "./tests run",
+    "@hidden": true,
     "@listen": "after:@test",
-    "@hidden": true
+    "@expression": "./tests run"
   },
   "@export": {
-    "@aliases": ["transpiler", "babel"],
     "@runtime": "node@>=6.10.0",
     "@implementation": "./dist",
+    "@options": {
+      "verbose": false,
+      "quiet": false,
+      "debug": false
+    },
     "source": "./src",
     "destination": "./dist",
     "extensions": [".js", ".jsx", ".es6", ".es"],
     "transpile": {
-      "@alias": "run",
       "@type": "command",
+      "@alias": "run",
       "@parameter": {
-        "@name": "files",
-        "@type": "string"
+        "@type": "string",
+        "@name": "files"
       },
       "@variadic": true,
       "@listen": "after:@build"
     },
     "_afterFileModified": {
       "@type": "macro",
+      "@hidden": true,
       "@parameter": {
-        "@name": "file",
-        "@type": "string"
+        "@type": "string",
+        "@name": "file"
       },
-      "@expression": "transpile ${@arguments[0]} --quiet",
       "@listen": "after:@fileModified",
-      "@hidden": true
-    },
-    "@options": {
-      "verbose": false,
-      "quiet": false,
-      "debug": false
+      "@expression": "transpile ${@arguments[0]} --quiet"
     }
   }
 }

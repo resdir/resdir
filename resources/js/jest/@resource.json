@@ -1,13 +1,14 @@
 {
+  "@type": "js/esnext-resource",
   "@name": "js/jest",
   "@version": "0.1.0",
-  "@type": "js/esnext-resource",
   "@files": ["./dist"],
-  "dependencies": ["jest@^20.0.4", "run-common@^0.6.1"],
+  "dependencies": ["jest@^20.0.4", "@resdir/console@^0.1.0"],
   "@export": {
-    "@aliases": ["jest", "test", "tests"],
     "@implementation": "./dist",
-    "dependencies": {"@type": "js/dependencies"},
+    "dependencies": {
+      "@type": "js/dependencies"
+    },
     "roots": {
       "@type": "array"
     },
@@ -17,12 +18,10 @@
     "run": {
       "@type": "command",
       "@alias": "test",
-      "@parameters": [
-        {
-          "@name": "testPathPattern",
-          "@type": "string"
-        }
-      ],
+      "@parameter": {
+        "@type": "string",
+        "@name": "testPathPattern"
+      },
       "@listen": "after:@test"
     }
   }

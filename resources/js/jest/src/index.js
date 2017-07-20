@@ -1,6 +1,6 @@
 import {resolve} from 'path';
 import jest from 'jest';
-import {task} from 'run-common';
+import {task} from '@resdir/console';
 
 export default base =>
   class JestResource extends base {

@@ -1,5 +1,5 @@
 import Version from '@resdir/version';
-import {task, formatString, formatCode} from 'run-common';
+import {task, formatString, formatCode} from '@resdir/console';
 
 export default base =>
   class VersionProperty extends base {

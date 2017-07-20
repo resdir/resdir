@@ -1,6 +1,7 @@
 import {join, isAbsolute} from 'path';
 import {isEqual} from 'lodash';
-import {loadFile, formatString, formatPath, formatCode} from 'run-common';
+import {loadFile} from 'run-common';
+import {formatString, formatPath, formatCode} from '@resdir/console';
 import {VersionRange} from '@resdir/version-range';
 
 import {fetchNPMRegistry} from '@resdir/package-manager';

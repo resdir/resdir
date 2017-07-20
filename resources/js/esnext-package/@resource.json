@@ -4,10 +4,9 @@
   "@version": "0.1.0",
   "@files": ["./dist"],
   "@export": {
-    "@types": ["js/package", "js/esnext-resource"],
+    "@types": ["js/package"],
     "@implementation": "./dist",
-    "files": ["./dist"],
-    "main": "./dist",
+    "transpiler": {"@type": "js/transpiler"},
     "_createJSESNextPackage": {
       "@type": "command",
       "@listen": "after:@create",

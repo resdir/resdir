@@ -3,7 +3,7 @@ import {statSync, chmodSync} from 'fs';
 import {copy, readFile, outputFile, emptyDirSync} from 'fs-extra';
 import isDirectory from 'is-directory';
 import {transform} from 'babel-core';
-import {task, formatString, formatPath} from 'run-common';
+import {task, formatString, formatPath} from '@resdir/console';
 
 export default base =>
   class Transpiler extends base {

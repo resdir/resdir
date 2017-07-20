@@ -1,7 +1,8 @@
 import {join} from 'path';
 import {entries} from 'lodash';
 import {execFile, spawn} from 'child-process-promise';
-import {loadFile, saveFile, fetchJSON, formatString, formatCode, formatPath} from 'run-common';
+import {loadFile, saveFile, fetchJSON} from 'run-common';
+import {formatString, formatCode, formatPath} from '@resdir/console';
 
 const NPM_REGISTRY_URL = 'https://registry.npmjs.org';
 export const PACKAGE_FILENAME = 'package.json';
@@ -94,7 +95,7 @@ async function exec(command, args, {directory, commandName, debug} = {}) {
   }
 }
 
-export async function fetchNPMRegistry(name) {
+export async function fetchNPMRegistry(name, {throwIfNotFound = true} = {}) {
   const url = NPM_REGISTRY_URL + '/' + name.replace('/', '%2F');
   try {
     return await fetchJSON(url, {
@@ -104,7 +105,10 @@ export async function fetchNPMRegistry(name) {
     });
   } catch (err) {
     if (err.httpStatus === 404) {
-      throw new Error(`Package not found in npm registry: ${formatString(name)}`);
+      if (throwIfNotFound) {
+        throw new Error(`Package not found in npm registry: ${formatString(name)}`);
+      }
+      return undefined;
     }
     throw err;
   }
