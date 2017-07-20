@@ -2,7 +2,7 @@ export default base =>
   class MainProperty extends base {
     toPackageMainProperty() {
       let main = this.es5;
-      if (main.startsWith('./')) {
+      if (main && main.startsWith('./')) {
         main = main.slice(2);
       }
       return main;

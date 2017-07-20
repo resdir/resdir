@@ -110,7 +110,7 @@ export default base =>
       const packageDirectory = tempy.directory();
       try {
         this._updatePackageFile(packageDirectory);
-        const directory = this.$getParent().$getCurrentDirectory({throwIfUndefined: true});
+        const directory = this.$getParent().$getCurrentDirectory();
         const modulesDirectory = join(directory, 'node_modules');
         await installPackage(packageDirectory, {modulesDirectory, debug});
       } finally {
@@ -138,7 +138,7 @@ export default base =>
     async updatePackageFile({verbose, quiet, debug}) {
       await task(
         async () => {
-          const directory = this.$getParent().$getCurrentDirectory({throwIfUndefined: true});
+          const directory = this.$getParent().$getCurrentDirectory();
           this._updatePackageFile(directory);
         },
         {intro: `Updating package file...`, outro: `Package file updated`, verbose, quiet, debug}

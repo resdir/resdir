@@ -2,15 +2,23 @@
   "@name": "js/resource",
   "@version": "0.1.0",
   "@files": ["./dist"],
-  "transpiler": {"@type": "js/transpiler"},
+  "transpiler": {
+    "@type": "js/transpiler"
+  },
+  "dependencies": {
+    "@type": "js/dependencies",
+    "@value": ["fs-extra@^4.0.0"]
+  },
   "@export": {
     "@runtime": "node@>=6.10.0",
     "@implementation": "./dist",
-    "dependencies": {"@type": "js/dependencies"},
+    "dependencies": {
+      "@type": "js/dependencies"
+    },
     "_createJSResource": {
       "@type": "command",
-      "@listen": "after:@create",
-      "@hidden": true
+      "@hidden": true,
+      "@listen": "after:@create"
     }
   }
 }

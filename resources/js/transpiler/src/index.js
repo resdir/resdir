@@ -30,7 +30,7 @@ export default base =>
     }
 
     async _transpileOrCopy(files, {verbose, quiet}) {
-      const directory = this.$getCurrentDirectory();
+      const directory = this.$getParent().$getCurrentDirectory();
       const srcDirectory = resolve(directory, this.source);
       const destDirectory = resolve(directory, this.destination);
       const extensions = this.extensions;

@@ -4,6 +4,7 @@
   "@version": "0.1.1",
   "@files": ["./dist"],
   "dependencies": [
+    "fs-extra@^4.0.0",
     "lodash@^4.17.4",
     "@resdir/package-manager@^0.1.0",
     "@resdir/version@^0.1.1",
@@ -12,13 +13,18 @@
   "tests": {
     "@type": "js/esnext-jest",
     "@directory": "./tests",
-    "dependencies": ["fs-extra@^3.0.1", "run-core@^0.10.0", "temp-dir@^1.0.0"],
-    "testEnvironment": "node"
+    "testEnvironment": "node",
+    "dependencies": ["fs-extra@^3.0.1", "run-core@^0.10.0", "temp-dir@^1.0.0"]
   },
   "@export": {
-    "@aliases": ["package", "pkg"],
     "@type": "js/resource",
+    "@aliases": ["package", "pkg"],
     "@implementation": "./dist",
+    "@options": {
+      "verbose": false,
+      "quiet": false,
+      "debug": false
+    },
     "name": {
       "@type": "string"
     },
@@ -69,7 +75,7 @@
     },
     "publish": {
       "@type": "command",
-      "@options": {
+      "@option": {
         "access": {
           "@type": "string"
         }
@@ -79,10 +85,10 @@
       "@type": "command",
       "@listen": ["after:@build", "after:@save"]
     },
-    "@options": {
-      "verbose": false,
-      "quiet": false,
-      "debug": false
+    "_createJSPackage": {
+      "@type": "command",
+      "@listen": "after:@create",
+      "@hidden": true
     }
   }
 }

@@ -3,6 +3,10 @@
   "@version": "0.1.0",
   "@files": ["./dist"],
   "transpiler": {"@type": "js/transpiler"},
+  "dependencies": {
+    "@type": "js/dependencies",
+    "@value": ["fs-extra@^4.0.0"]
+  },
   "@export": {
     "@types": ["js/resource"],
     "@implementation": "./dist",

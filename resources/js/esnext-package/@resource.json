@@ -1,10 +1,17 @@
 {
+  "@type": "js/esnext-resource",
   "@name": "js/esnext-package",
   "@version": "0.1.0",
+  "@files": ["./dist"],
   "@export": {
-    "@types": ["js/package"],
-    "transpiler": {"@type": "js/transpiler"},
+    "@types": ["js/package", "js/esnext-resource"],
+    "@implementation": "./dist",
     "files": ["./dist"],
-    "main": "./dist"
+    "main": "./dist",
+    "_createJSESNextPackage": {
+      "@type": "command",
+      "@listen": "after:@create",
+      "@hidden": true
+    }
   }
 }

@@ -1,5 +1,10 @@
+import {join} from 'path';
+import {outputFileSync} from 'fs-extra';
 import {updatePackageFile, publishPackage, fetchNPMRegistry} from '@resdir/package-manager';
 import {task, formatString, formatCode} from 'run-common';
+
+const PACKAGE_CODE = `// Package implementation
+`;
 
 export default base =>
   class Package extends base {
@@ -14,7 +19,7 @@ export default base =>
     }
 
     _updatePackageFile() {
-      const directory = this.$getCurrentDirectory({throwIfUndefined: true});
+      const directory = this.$getCurrentDirectory();
 
       let files = this.files;
       if (files) {
@@ -77,7 +82,19 @@ export default base =>
         );
       }
 
-      const directory = this.$getCurrentDirectory({throwIfUndefined: true});
+      const directory = this.$getCurrentDirectory();
       await publishPackage(directory, {access, debug});
+    }
+
+    async _createJSPackage() {
+      const directory = this.$getCurrentDirectory();
+      const file = join(directory, 'src', 'index.js');
+      outputFileSync(file, PACKAGE_CODE);
+      this.name = this.$name;
+      this.$name = undefined;
+      this.version = this.$version.toString();
+      this.$version = undefined;
+      await this.$setChild('main', './src/index.js');
+      await this.$save();
     }
   };
