@@ -14,12 +14,9 @@
     "@implementation": "./dist",
     "add": {
       "@type": "command",
-      "@parameters": [
-        {
-          "@name": "package",
-          "@type": "string"
-        }
-      ],
+      "@parameter": {
+        "packages": {"@type": "string"}
+      },
       "@variadic": true,
       "@options": {
         "production": {
@@ -37,12 +34,9 @@
     "remove": {
       "@alias": "rm",
       "@type": "command",
-      "@parameters": [
-        {
-          "@name": "package",
-          "@type": "string"
-        }
-      ],
+      "@parameter": {
+        "packages": {"@type": "string"}
+      },
       "@variadic": true
     },
     "install": {
@@ -54,12 +48,9 @@
     },
     "includes": {
       "@type": "command",
-      "@parameter": [
-        {
-          "@name": "package",
-          "@type": "string"
-        }
-      ]
+      "@parameter": {
+        "package": {"@type": "string"}
+      }
     },
     "updatePackageFile": {
       "@type": "command"

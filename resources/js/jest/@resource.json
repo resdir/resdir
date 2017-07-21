@@ -23,8 +23,7 @@
     "run": {
       "@type": "command",
       "@parameter": {
-        "@type": "string",
-        "@name": "testPathPattern"
+        "testPathPattern": {"@type": "string"}
       }
     }
   }

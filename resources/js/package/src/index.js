@@ -28,7 +28,7 @@ export default base =>
 
       const main = this.main.toPackageMainProperty();
 
-      const bin = this.$getChild('bin').$serialize({omitName: true}); // TODO: simplify
+      const bin = this.$getChild('bin').$serialize(); // TODO: simplify
 
       updatePackageFile(directory, {
         name: this.name,

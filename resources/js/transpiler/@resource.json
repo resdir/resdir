@@ -41,8 +41,7 @@
       "@type": "command",
       "@alias": "run",
       "@parameter": {
-        "@type": "string",
-        "@name": "files"
+        "files": {"@type": "string"}
       },
       "@variadic": true
     }
