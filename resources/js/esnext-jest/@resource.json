@@ -3,7 +3,12 @@
   "@version": "0.1.0",
   "@export": {
     "@type": ["js/jest"],
-    "transpiler": {"@type": "js/transpiler"},
+    "transpiler": {
+      "@type": "js/transpiler",
+      "run": {
+        "@listen": ["after:@build", "after:@fileModified"]
+      }
+    },
     "roots": ["./dist"]
   }
 }

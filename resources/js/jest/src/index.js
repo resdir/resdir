@@ -4,12 +4,12 @@ import {task} from '@resdir/console';
 
 export default base =>
   class JestResource extends base {
-    async run(testPathPattern) {
+    async run(testPathPattern, {verbose, quiet, debug}) {
       await task(
         async () => {
-          await this._run({testPathPattern});
+          await this._run({testPathPattern, verbose, quiet, debug});
         },
-        {intro: `Testing resource...`, outro: `Resource tested`, verbose: true}
+        {intro: `Testing resource...`, outro: `Resource tested`, verbose: true, quiet, debug}
       );
     }
 

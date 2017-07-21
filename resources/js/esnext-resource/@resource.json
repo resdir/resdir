@@ -2,7 +2,12 @@
   "@name": "js/esnext-resource",
   "@version": "0.1.0",
   "@files": ["./dist"],
-  "transpiler": {"@type": "js/transpiler"},
+  "transpiler": {
+    "@type": "js/transpiler",
+    "run": {
+      "@listen": ["after:@build", "after:@fileModified"]
+    }
+  },
   "dependencies": {
     "@type": "js/dependencies",
     "@value": ["fs-extra@^4.0.0"]
@@ -10,7 +15,12 @@
   "@export": {
     "@types": ["js/resource"],
     "@implementation": "./dist",
-    "transpiler": {"@type": "js/transpiler"},
+    "transpiler": {
+      "@type": "js/transpiler",
+      "run": {
+        "@listen": ["after:@build", "after:@fileModified"]
+      }
+    },
     "_createJSESNextResource": {
       "@type": "command",
       "@listen": "after:@create",

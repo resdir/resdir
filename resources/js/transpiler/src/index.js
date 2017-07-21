@@ -7,7 +7,7 @@ import {task, formatString, formatPath} from '@resdir/console';
 
 export default base =>
   class Transpiler extends base {
-    async transpile(...files) {
+    async run(...files) {
       const {verbose, quiet, debug} = files.pop();
 
       let name = this.$getParent().$name;
@@ -45,7 +45,7 @@ export default base =>
         const relativeFile = relative(srcDirectory, srcFile);
         if (relativeFile.startsWith('..')) {
           if (!quiet) {
-            throw new Error(
+            console.warn(
               `Cannot build a file (${formatPath(
                 srcFile
               )}) located outside of the source directory (${formatPath(srcDirectory)})`

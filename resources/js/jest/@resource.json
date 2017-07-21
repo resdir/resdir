@@ -6,6 +6,11 @@
   "dependencies": ["jest@^20.0.4", "@resdir/console@^0.1.0"],
   "@export": {
     "@implementation": "./dist",
+    "@options": {
+      "verbose": false,
+      "quiet": false,
+      "debug": false
+    },
     "dependencies": {
       "@type": "js/dependencies"
     },
@@ -17,12 +22,10 @@
     },
     "run": {
       "@type": "command",
-      "@alias": "test",
       "@parameter": {
         "@type": "string",
         "@name": "testPathPattern"
-      },
-      "@listen": "after:@test"
+      }
     }
   }
 }

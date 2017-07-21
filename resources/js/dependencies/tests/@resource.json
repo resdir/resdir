@@ -1,5 +1,8 @@
 {
   "@type": "js/esnext-jest",
   "dependencies": ["fs-extra@^3.0.1", "run-core@^0.10.0", "temp-dir@^1.0.0"],
-  "testEnvironment": "node"
+  "testEnvironment": "node",
+  "run": {
+    "@listen": "after:@test"
+  }
 }

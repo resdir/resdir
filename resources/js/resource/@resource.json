@@ -3,7 +3,10 @@
   "@version": "0.1.0",
   "@files": ["./dist"],
   "transpiler": {
-    "@type": "js/transpiler"
+    "@type": "js/transpiler",
+    "run": {
+      "@listen": ["after:@build", "after:@fileModified"]
+    }
   },
   "dependencies": {
     "@type": "js/dependencies",

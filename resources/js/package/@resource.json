@@ -14,7 +14,10 @@
     "@type": "js/esnext-jest",
     "@directory": "./tests",
     "testEnvironment": "node",
-    "dependencies": ["fs-extra@^3.0.1", "run-core@^0.10.0", "temp-dir@^1.0.0"]
+    "dependencies": ["fs-extra@^3.0.1", "run-core@^0.10.0", "temp-dir@^1.0.0"],
+    "run": {
+      "@listen": "after:@test"
+    }
   },
   "@export": {
     "@runtime": "node@>=6.10.0",

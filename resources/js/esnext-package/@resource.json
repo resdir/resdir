@@ -6,7 +6,12 @@
   "@export": {
     "@types": ["js/package"],
     "@implementation": "./dist",
-    "transpiler": {"@type": "js/transpiler"},
+    "transpiler": {
+      "@type": "js/transpiler",
+      "run": {
+        "@listen": ["after:@build", "after:@fileModified"]
+      }
+    },
     "_createJSESNextPackage": {
       "@type": "command",
       "@listen": "after:@create",

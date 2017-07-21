@@ -37,25 +37,14 @@
     "source": "./src",
     "destination": "./dist",
     "extensions": [".js", ".jsx", ".es6", ".es"],
-    "transpile": {
+    "run": {
       "@type": "command",
       "@alias": "run",
       "@parameter": {
         "@type": "string",
         "@name": "files"
       },
-      "@variadic": true,
-      "@listen": "after:@build"
-    },
-    "_afterFileModified": {
-      "@type": "macro",
-      "@hidden": true,
-      "@parameter": {
-        "@type": "string",
-        "@name": "file"
-      },
-      "@listen": "after:@fileModified",
-      "@expression": "transpile ${@arguments[0]} --quiet"
+      "@variadic": true
     }
   }
 }

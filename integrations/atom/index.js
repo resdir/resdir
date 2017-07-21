@@ -32,7 +32,7 @@ export default {
     //   throwIfNotFound: false
     // }).then(resource => {
     //   if (resource) {
-    //     resource.$emitEvent('after:@fileModified', file).catch(err => {
+    //     resource.$emitEvent('after:@fileModified', [file, {quiet: true}]).catch(err => {
     //       const message = `resdir: An error occurred while emitting 'after:@fileModified' event`;
     //       atom.notifications.addError(message, {detail: err.message, dismissable: true});
     //     });
@@ -40,7 +40,7 @@ export default {
     // });
 
     const command = 'run';
-    const args = ['@broadcastEvent', 'after:@fileModified', file];
+    const args = ['@broadcastEvent', 'after:@fileModified', file, '--quiet'];
     const options = {cwd: directory, timeout: 60 * 1000};
     execFile(command, args, options, (err, stdout, stderr) => {
       if (err) {

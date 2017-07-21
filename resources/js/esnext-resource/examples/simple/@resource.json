@@ -4,7 +4,8 @@
   "@implementation": "./dist",
   "dependencies": ["chalk@^2.0.1"],
   "hello": {
-    "@type": "command"
+    "@type": "command",
+    "@listen": "hi"
   },
   "@options": {
     "color": "green"
