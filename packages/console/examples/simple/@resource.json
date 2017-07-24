@@ -1,0 +1,6 @@
+{
+  "@type": "js/esnext-resource",
+  "dependencies": [
+    "sleep-promise@^2.0.0"
+  ]
+}

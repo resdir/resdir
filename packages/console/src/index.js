@@ -8,7 +8,6 @@ export function formatString(string) {
   if (typeof string !== 'string') {
     throw new TypeError('\'string\' must be a string');
   }
-
   return yellow('\'' + string + '\'');
 }
 
@@ -16,7 +15,6 @@ export function formatURL(url) {
   if (typeof url !== 'string') {
     throw new TypeError('\'url\' must be a string');
   }
-
   return cyan.underline(url);
 }
 
@@ -24,7 +22,6 @@ export function formatPath(path) {
   if (typeof path !== 'string') {
     throw new TypeError('\'path\' must be a string');
   }
-
   return yellow('\'' + path + '\'');
 }
 
@@ -32,7 +29,6 @@ export function formatCode(code) {
   if (typeof code !== 'string') {
     throw new TypeError('\'code\' must be a string');
   }
-
   return cyan('`' + code + '`');
 }
 
@@ -42,7 +38,14 @@ export function formatMessage(message, {info, status} = {}) {
   }
 
   if (info) {
-    info = ` ${gray(`(${info})`)}`;
+    if (!Array.isArray(info)) {
+      info = [];
+    }
+    let str = '';
+    for (const item of info) {
+      str += ` ${gray(`→ ${item}`)}`;
+    }
+    info = str;
   } else {
     info = '';
   }
@@ -64,106 +67,135 @@ export function formatMessage(message, {info, status} = {}) {
   return `${status}${message}${info}`;
 }
 
-export async function task(fn, {intro, outro, debug, verbose, quiet}) {
+class AbstractTaskView {
+  constructor({parent, outro}) {
+    this.parent = parent;
+    this.outro = outro;
+  }
+
+  start(message) {
+    this.setMessage(message);
+  }
+
+  complete() {}
+
+  fail() {}
+
+  setMessage(message) {
+    this.message = message;
+    this.renderMessage();
+  }
+
+  renderMessage() {}
+
+  setOutro(message) {
+    this.outro = message;
+    return this;
+  }
+}
+
+class QuietTaskView extends AbstractTaskView {}
+
+class VerboseTaskView extends AbstractTaskView {
+  complete() {
+    super.complete();
+    console.log(getSuccessSymbol() + '  ' + this.outro);
+  }
+
+  renderMessage() {
+    console.log(getRunningSymbol() + '  ' + this.message);
+  }
+}
+
+class AnimatedTaskView extends AbstractTaskView {
+  constructor({parent, outro}) {
+    super({parent, outro});
+    this.spinner = ora({spinner: cliSpinners.runner});
+  }
+
+  start(message) {
+    super.start(message);
+    this.spinner.start();
+  }
+
+  complete() {
+    this.spinner.stopAndPersist({text: this.outro, symbol: getSuccessSymbol() + ' '});
+  }
+
+  fail() {
+    this.spinner.stopAndPersist({symbol: getErrorSymbol() + ' '});
+  }
+
+  renderMessage({info} = {}) {
+    let message = this.message;
+    if (info) {
+      message = formatMessage(message, {info});
+    }
+    this.spinner.text = adjustToWindowWidth(message, {leftMargin: 3});
+  }
+}
+
+class SubAnimatedTaskView extends AbstractTaskView {
+  complete() {
+    this.parent.renderMessage();
+  }
+
+  renderMessage() {
+    const views = [];
+    let view = this;
+    do {
+      views.unshift(view);
+      view = view.parent;
+    } while (view);
+
+    const firstView = views.shift();
+    const messages = views.map(view => view.message);
+    firstView.renderMessage({info: messages});
+  }
+}
+
+export async function task(fn, {intro, outro, verbose, debug, quiet}) {
   if (typeof fn !== 'function') {
     throw new TypeError('\'fn\' must be a function');
   }
 
+  if (!global.resdirConsoleTaskStack) {
+    global.resdirConsoleTaskStack = [];
+  }
+
+  const stack = global.resdirConsoleTaskStack;
+
+  let ViewClass;
+  if (stack.length > 0) {
+    ViewClass = stack[0].constructor;
+    if (ViewClass.name === 'AnimatedTaskView') {
+      ViewClass = SubAnimatedTaskView;
+    }
+  } else if (quiet) {
+    ViewClass = QuietTaskView;
+  } else if (verbose || debug) {
+    ViewClass = VerboseTaskView;
+  } else {
+    ViewClass = AnimatedTaskView;
+  }
+
+  const parent = stack[stack.length - 1];
+
+  const view = new ViewClass({parent, outro});
+
   try {
-    if (global.resdirConsoleTaskCount === undefined) {
-      global.resdirConsoleTaskCount = 0;
-    }
-
-    global.resdirConsoleTaskCount++;
-
-    let progress;
-
-    if (quiet || global.resdirConsoleTaskCount > 1) {
-      progress = {
-        start() {
-          return this;
-        },
-        complete() {
-          return this;
-        },
-        fail() {
-          return this;
-        },
-        setMessage(_message) {
-          return this;
-        },
-        setOutro(_message) {
-          return this;
-        }
-      };
-    } else if (debug || verbose) {
-      progress = {
-        outro,
-        start() {
-          return this;
-        },
-        complete() {
-          console.log(getSuccessSymbol() + '  ' + this.outro);
-          return this;
-        },
-        fail() {
-          return this;
-        },
-        setMessage(message) {
-          console.log(getRunningSymbol() + '  ' + message);
-          return this;
-        },
-        setOutro(message) {
-          this.outro = message;
-          return this;
-        }
-      };
-    } else {
-      progress = {
-        spinner: ora({
-          spinner: cliSpinners.runner
-        }),
-        outro,
-        start() {
-          this.spinner.start();
-          return this;
-        },
-        complete() {
-          this.spinner.stopAndPersist({
-            text: this.outro,
-            symbol: getSuccessSymbol() + ' '
-          });
-          return this;
-        },
-        fail() {
-          this.spinner.stopAndPersist({
-            symbol: getErrorSymbol() + ' '
-          });
-          return this;
-        },
-        setMessage(message) {
-          this.spinner.text = adjustToWindowWidth(message, {leftMargin: 3});
-          return this;
-        },
-        setOutro(message) {
-          this.outro = message;
-          return this;
-        }
-      };
-    }
-
-    progress.setMessage(intro).start();
-
+    stack.push(view);
+    view.start(intro);
     try {
-      const result = await fn(progress);
-      progress.complete();
+      const result = await fn(view);
+      view.complete();
       return result;
     } catch (err) {
-      progress.fail();
+      view.fail();
       throw err;
     }
   } finally {
-    global.resdirConsoleTaskCount--;
+    stack.pop();
   }
 }
 
