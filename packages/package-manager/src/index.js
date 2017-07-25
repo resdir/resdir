@@ -1,8 +1,9 @@
 import {join} from 'path';
 import {entries} from 'lodash';
 import {execFile, spawn} from 'child-process-promise';
-import {loadFile, saveFile, fetchJSON} from 'run-common';
+import {fetchJSON} from 'run-common';
 import {formatString, formatCode, formatPath} from '@resdir/console';
+import {load, save} from '@resdir/file-manager';
 
 const NPM_REGISTRY_URL = 'https://registry.npmjs.org';
 export const PACKAGE_FILENAME = 'package.json';
@@ -10,7 +11,7 @@ export const PACKAGE_FILENAME = 'package.json';
 export function updatePackageFile(directory, definition) {
   const file = join(directory, PACKAGE_FILENAME);
 
-  let pkg = loadFile(file, {throwIfNotFound: false, parse: true});
+  let pkg = load(file, {throwIfNotFound: false});
   if (!pkg) {
     pkg = {};
   }
@@ -35,7 +36,7 @@ export function updatePackageFile(directory, definition) {
   delete pkg['@managed']; // Put the @managed property at the end of the object
   pkg['@managed'] = managed;
 
-  saveFile(file, pkg, {stringify: true});
+  save(file, pkg);
 }
 
 export async function installPackage(

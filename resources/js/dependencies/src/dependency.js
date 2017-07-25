@@ -1,8 +1,8 @@
 import {join, isAbsolute} from 'path';
 import {isEqual} from 'lodash';
-import {loadFile} from 'run-common';
 import {formatString, formatPath, formatCode} from '@resdir/console';
 import {VersionRange} from '@resdir/version-range';
+import {load} from '@resdir/file-manager';
 
 import {fetchNPMRegistry} from '@resdir/package-manager';
 
@@ -51,7 +51,7 @@ export class Dependency {
     if (pkg.startsWith('.') || isAbsolute(pkg)) {
       let location = pkg;
       const packageFile = join(location, 'package.json');
-      pkg = loadFile(packageFile, {throwIfNotFound: false, parse: true});
+      pkg = load(packageFile, {throwIfNotFound: false});
       if (!pkg) {
         throw new Error(`No ${formatPath('package.json')} file found at ${formatPath(location)}`);
       }

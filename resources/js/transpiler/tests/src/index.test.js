@@ -2,7 +2,7 @@ import {join, resolve} from 'path';
 import {emptyDirSync, pathExistsSync, outputFile} from 'fs-extra';
 import tempDir from 'temp-dir';
 import {Resource} from 'run-core';
-import {loadFile, saveFile} from 'run-common';
+import {load, save} from '@resdir/file-manager';
 
 const CODE = `
 import {format} from 'util';
@@ -36,7 +36,7 @@ describe('js/transpiler', () => {
         '@type': resolve(__dirname, '../..')
       }
     };
-    saveFile(resourceFile, definition, {stringify: true});
+    save(resourceFile, definition);
 
     const Person = await Resource.$load(directory);
     await Person.transpiler.run({quiet: true});
@@ -45,7 +45,7 @@ describe('js/transpiler', () => {
     expect(pathExistsSync(distDirectory)).toBe(true);
 
     const distCodeFile = join(directory, 'dist', 'index.js');
-    const distCode = loadFile(distCodeFile);
+    const distCode = load(distCodeFile, {parse: false});
 
     // After transpilation there should be no more 'import' statement
     expect(distCode).not.toContain('import');

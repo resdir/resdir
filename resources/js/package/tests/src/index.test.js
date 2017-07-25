@@ -2,7 +2,7 @@ import {join} from 'path';
 import {emptyDirSync} from 'fs-extra';
 import tempDir from 'temp-dir';
 import {Resource} from 'run-core';
-import {loadFile} from 'run-common';
+import {load} from '@resdir/file-manager';
 
 describe('js/package', () => {
   let Package;
@@ -46,7 +46,7 @@ describe('js/package', () => {
     await pkg.$save({directory});
     expect(pkg.$getResourceFile()).toBeDefined();
 
-    const resourceDefinition = loadFile(pkg.$getResourceFile(), {parse: true});
+    const resourceDefinition = load(pkg.$getResourceFile());
     expect(resourceDefinition).toEqual({
       name: 'my-package',
       version: '1.0.0',
@@ -60,7 +60,7 @@ describe('js/package', () => {
       preferGlobal: true
     });
 
-    const packageDefinition = loadFile(join(directory, 'package.json'), {parse: true});
+    const packageDefinition = load(join(directory, 'package.json'));
     const managed = packageDefinition['@managed'];
     expect(managed).toBeDefined();
     expect(managed.properties).toBeInstanceOf(Array);
