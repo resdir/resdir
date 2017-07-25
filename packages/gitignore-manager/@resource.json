@@ -1,0 +1,9 @@
+{
+  "@type": "js/esnext-package",
+  "name": "@resdir/gitignore-manager",
+  "version": "0.1.0",
+  "description": "Help managing gitignore files",
+  "files": ["./dist"],
+  "main": "./dist/index.js",
+  "dependencies": ["lodash.union@^4.6.0"]
+}
