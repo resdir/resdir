@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@type": "js/dependencies",
-    "@value": ["fs-extra@^4.0.0"]
+    "@value": ["fs-extra@^4.0.0", "@resdir/gitignore-manager@^0.1.0"]
   },
   "@export": {
     "@runtime": "node@>=6.10.0",
@@ -20,6 +20,11 @@
     },
     "_createJSResource": {
       "@type": "command",
+      "@parameter": {
+        "name": {
+          "@type": "string"
+        }
+      },
       "@hidden": true,
       "@listen": "after:@create"
     }

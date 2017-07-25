@@ -2,9 +2,12 @@ import {join} from 'path';
 import {outputFileSync} from 'fs-extra';
 import {updatePackageFile, publishPackage, fetchNPMRegistry} from '@resdir/package-manager';
 import {task, formatString, formatCode} from '@resdir/console';
+import GitIgnore from '@resdir/gitignore-manager';
 
 const PACKAGE_CODE = `// Package implementation
 `;
+
+const GIT_IGNORE = ['.DS_STORE', 'node_modules', '*.log', '/package.json'];
 
 export default base =>
   class Package extends base {
@@ -86,16 +89,21 @@ export default base =>
       await publishPackage(directory, {access, debug});
     }
 
-    async _createJSPackage() {
+    async _createJSPackage(name) {
       const directory = this.$getCurrentDirectory();
+
       const file = join(directory, 'src', 'index.js');
       outputFileSync(file, PACKAGE_CODE);
-      this.name = this.$name;
+
+      GitIgnore.load(directory).add(GIT_IGNORE).save();
+
+      this.name = name;
       this.$name = undefined;
       this.version = this.$version.toString();
       this.$version = undefined;
       this.files = ['./src'];
       await this.$setChild('main', './src/index.js');
+
       await this.$save();
     }
   };

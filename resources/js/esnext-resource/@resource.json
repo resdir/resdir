@@ -1,30 +1,46 @@
 {
   "@name": "js/esnext-resource",
   "@version": "0.1.0",
-  "@files": ["./dist"],
+  "@files": [
+    "./dist"
+  ],
   "transpiler": {
     "@type": "js/transpiler",
     "run": {
-      "@listen": ["after:@build", "after:@fileModified"]
+      "@listen": [
+        "after:@build",
+        "after:@fileModified"
+      ]
     }
   },
   "dependencies": {
     "@type": "js/dependencies",
-    "@value": ["fs-extra@^4.0.0"]
+    "@value": [
+      "fs-extra@^4.0.0",
+      "@resdir/gitignore-manager@^0.1.0"
+    ]
   },
   "@export": {
-    "@types": ["js/resource"],
+    "@type": "js/resource",
     "@implementation": "./dist",
     "transpiler": {
       "@type": "js/transpiler",
       "run": {
-        "@listen": ["after:@build", "after:@fileModified"]
+        "@listen": [
+          "after:@build",
+          "after:@fileModified"
+        ]
       }
     },
     "_createJSESNextResource": {
       "@type": "command",
-      "@listen": "after:@create",
-      "@hidden": true
+      "@hidden": true,
+      "@parameter": {
+        "name": {
+          "@type": "string"
+        }
+      },
+      "@listen": "after:@create"
     }
   }
 }

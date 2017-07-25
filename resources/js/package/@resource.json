@@ -2,19 +2,26 @@
   "@type": "js/esnext-resource",
   "@name": "js/package",
   "@version": "0.1.1",
-  "@files": ["./dist"],
+  "@files": [
+    "./dist"
+  ],
   "dependencies": [
     "fs-extra@^4.0.0",
     "lodash@^4.17.4",
     "@resdir/console@^0.1.0",
+    "@resdir/gitignore-manager@^0.1.0",
     "@resdir/package-manager@^0.1.0",
     "@resdir/version@^0.1.1"
   ],
   "tests": {
     "@type": "js/esnext-jest",
     "@directory": "./tests",
+    "dependencies": [
+      "fs-extra@^3.0.1",
+      "run-core@^0.10.0",
+      "temp-dir@^1.0.0"
+    ],
     "testEnvironment": "node",
-    "dependencies": ["fs-extra@^3.0.1", "run-core@^0.10.0", "temp-dir@^1.0.0"],
     "run": {
       "@listen": "after:@test"
     }
@@ -88,11 +95,19 @@
     },
     "updatePackageFile": {
       "@type": "command",
-      "@listen": ["after:@build", "after:@save"]
+      "@listen": [
+        "after:@build",
+        "after:@save"
+      ]
     },
     "_createJSPackage": {
       "@type": "command",
       "@hidden": true,
+      "@parameter": {
+        "name": {
+          "@type": "string"
+        }
+      },
       "@listen": "after:@create"
     }
   }
