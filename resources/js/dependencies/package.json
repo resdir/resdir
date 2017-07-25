@@ -33,7 +33,6 @@
     "@resdir/version-range": "^0.1.0",
     "fs-extra": "^3.0.1",
     "lodash": "^4.17.4",
-    "run-common": "^0.6.0",
     "tempy": "^0.1.0"
   },
   "devDependencies": {

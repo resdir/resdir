@@ -2,6 +2,7 @@
   "_test": {
     "@type": "macro",
     "@expressions": [
+      "./packages/util @test",
       "./packages/version @test",
       "./packages/version-range @test",
       "./resources/js/dependencies @test",
