@@ -6,6 +6,7 @@
   "dependencies": ["jest@^20.0.4", "@resdir/console@^0.1.0"],
   "@export": {
     "@implementation": "./dist",
+    "@publishable": false,
     "@options": {
       "verbose": false,
       "quiet": false,

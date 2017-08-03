@@ -11,5 +11,13 @@
   },
   "@options": {
     "color": "green"
+  },
+  "tests": {
+    "@type": "js/esnext-jest",
+    "@directory": "./tests",
+    "testEnvironment": "node",
+    "run": {
+      "@listen": "after:@test"
+    }
   }
 }
