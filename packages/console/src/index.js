@@ -199,40 +199,24 @@ export async function task(fn, {intro, outro, verbose, debug, quiet}) {
   }
 }
 
-export function addContextToErrors(targetOrFn, _key, descriptor) {
-  if (typeof targetOrFn === 'function') {
-    // A function is passed
-    return _addContextToErrors(targetOrFn);
-  }
-
-  // Decorator
-  const oldFn = descriptor.value;
-  const newFn = _addContextToErrors(oldFn);
-  Object.defineProperty(newFn, 'name', {value: oldFn.name, configurable: true});
-  descriptor.value = newFn;
-  return descriptor;
-}
-
-function _addContextToErrors(fn) {
-  return function (...args) {
-    const rethrow = err => {
-      if (!err.contextStack) {
-        err.contextStack = [];
-      }
-      err.contextStack.push(this);
-      throw err;
-    };
-
-    try {
-      let result = fn.apply(this, args);
-      if (result && typeof result.then === 'function') {
-        result = result.catch(rethrow);
-      }
-      return result;
-    } catch (err) {
-      rethrow(err);
+export function catchContext(context, fn) {
+  const rethrow = err => {
+    if (!err.contextStack) {
+      err.contextStack = [];
     }
+    err.contextStack.push(context);
+    throw err;
   };
+
+  try {
+    let result = fn();
+    if (result && typeof result.then === 'function') {
+      result = result.catch(rethrow);
+    }
+    return result;
+  } catch (err) {
+    rethrow(err);
+  }
 }
 
 export function showError(error) {
