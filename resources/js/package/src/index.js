@@ -31,8 +31,6 @@ export default base =>
 
       const main = this.main.toPackageMainProperty();
 
-      const bin = this.$getChild('bin').$serialize(); // TODO: simplify
-
       updatePackageFile(directory, {
         name: this.name,
         version: this.version,
@@ -43,7 +41,7 @@ export default base =>
         repository: this.repository,
         files,
         main,
-        bin,
+        bin: this.bin,
         preferGlobal: this.preferGlobal
       });
     }
