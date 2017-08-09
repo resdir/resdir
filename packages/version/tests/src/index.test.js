@@ -14,10 +14,12 @@ describe('Version', () => {
   });
 
   test('normalization', () => {
+    expect(Version.normalize(undefined)).toBeUndefined();
     expect(Version.normalize('1.0.0')).toBeInstanceOf(Version);
     expect(Version.normalize('1.0.0').toString()).toBe('1.0.0');
     const version = new Version('1.0.0');
     expect(Version.normalize(version)).toBe(version);
+    expect(() => Version.normalize(123)).toThrow();
   });
 
   test('bumping', () => {

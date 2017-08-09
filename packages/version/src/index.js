@@ -11,10 +11,16 @@ export class Version {
   }
 
   static normalize(version) {
-    if (typeof version === 'string') {
-      version = new this(version);
+    if (version === undefined) {
+      return undefined;
     }
-    return version;
+    if (typeof version === 'string') {
+      return new this(version);
+    }
+    if (version instanceof this) {
+      return version;
+    }
+    throw new Error('Invalid \'version\' argument');
   }
 
   bump(part = 'patch') {
