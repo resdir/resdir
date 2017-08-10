@@ -1,0 +1,21 @@
+{
+  "@type": "js/esnext-package",
+  "name": "@resdir/secret-generator",
+  "version": "1.0.0",
+  "description": "Generate a secret",
+  "files": [
+    "./dist"
+  ],
+  "main": "./dist/index.js",
+  "tests": {
+    "@type": "js/esnext-jest",
+    "@directory": "./tests",
+    "dependencies": [
+      "lodash@^4.17.4"
+    ],
+    "testEnvironment": "node",
+    "run": {
+      "@listen": "after:@test"
+    }
+  }
+}
