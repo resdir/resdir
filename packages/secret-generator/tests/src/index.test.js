@@ -4,7 +4,7 @@ import {generateSecret, CHARACTERS} from '../..';
 
 describe('@resdir/secret-generator', () => {
   test('generate secrets of different size', () => {
-    expect(generateSecret().length).toBe(32);
+    expect(generateSecret().length).toBe(48);
     expect(generateSecret(10).length).toBe(10);
     expect(generateSecret(100).length).toBe(100);
     expect(generateSecret(1000).length).toBe(1000);
@@ -34,7 +34,7 @@ describe('@resdir/secret-generator', () => {
     // Stolen from https://github.com/ai/nanoid/blob/master/test/generate.test.js
 
     const COUNT = 100000;
-    const LENGTH = 32;
+    const LENGTH = 48;
 
     const counters = {};
 

@@ -4,7 +4,7 @@ const DIGITS = '0123456789';
 const LETTERS = 'abcdefghijklmnopqrstuvwxyz';
 export const CHARACTERS = DIGITS + LETTERS + LETTERS.toUpperCase();
 
-export function generateSecret(length = 32) {
+export function generateSecret(length = 48) {
   return generate(CHARACTERS, length);
 }
 
