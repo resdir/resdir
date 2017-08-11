@@ -1,6 +1,6 @@
 import {sortedIndex} from 'lodash';
 
-import generateSecret from '../..';
+import {generateSecret, CHARACTERS} from '../..';
 
 describe('@resdir/secret-generator', () => {
   test('generate secrets of different size', () => {
@@ -11,9 +11,10 @@ describe('@resdir/secret-generator', () => {
   });
 
   test('detect collisions', () => {
-    const secrets = [];
     let collisions = 0;
-    for (let i = 0; i < 100000; i++) {
+
+    const secrets = [];
+    for (let i = 0; i < 50000; i++) {
       const secret = generateSecret();
       if (i > 0) {
         const index = sortedIndex(secrets, secret);
@@ -25,6 +26,35 @@ describe('@resdir/secret-generator', () => {
         secrets.push(secret);
       }
     }
+
     expect(collisions).toBe(0);
+  });
+
+  test('check distribution', () => {
+    // Stolen from https://github.com/ai/nanoid/blob/master/test/generate.test.js
+
+    const COUNT = 100000;
+    const LENGTH = 32;
+
+    const counters = {};
+
+    for (let i = 0; i < COUNT; i++) {
+      const secret = generateSecret(LENGTH);
+      for (const char of secret) {
+        if (!counters[char]) {
+          counters[char] = 0;
+        }
+        counters[char] += 1;
+      }
+    }
+
+    const chars = Object.keys(counters);
+
+    expect(chars).toHaveLength(CHARACTERS.length);
+
+    for (const char of chars) {
+      const distribution = counters[char] * CHARACTERS.length / (COUNT * LENGTH);
+      expect(distribution).toBeCloseTo(1, 1);
+    }
   });
 });

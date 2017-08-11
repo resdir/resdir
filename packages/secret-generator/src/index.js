@@ -1,16 +1,11 @@
-import crypto from 'crypto';
+import generate from 'nanoid/generate';
 
-const digits = '0123456789';
-const letters = 'abcdefghijklmnopqrstuvwxyz';
-const characters = digits + letters + letters.toUpperCase();
+const DIGITS = '0123456789';
+const LETTERS = 'abcdefghijklmnopqrstuvwxyz';
+export const CHARACTERS = DIGITS + LETTERS + LETTERS.toUpperCase();
 
 export function generateSecret(length = 32) {
-  let secret = '';
-  const bytes = crypto.randomBytes(length);
-  for (const byte of bytes) {
-    secret += characters[byte % characters.length];
-  }
-  return secret;
+  return generate(CHARACTERS, length);
 }
 
 export default generateSecret;
