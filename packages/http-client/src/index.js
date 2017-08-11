@@ -2,7 +2,6 @@ import {join} from 'path';
 import {readFileSync, statSync} from 'fs';
 import {tmpdir} from 'os';
 import {outputFile} from 'fs-extra';
-import pick from 'lodash.pick';
 import nodeFetch from 'node-fetch';
 import strictUriEncode from 'strict-uri-encode';
 
@@ -14,14 +13,28 @@ export async function getJSON(url, options = {}) {
   return await fetch(url, options);
 }
 
+export async function postJSON(url, options = {}) {
+  options.method = 'POST';
+  options.json = 'true';
+  if (!options.expectedStatus) {
+    options.expectedStatus = [201, 204];
+  }
+  return await fetch(url, options);
+}
+
 export async function fetch(url, options = {}) {
   if (typeof url !== 'string') {
     throw new TypeError('\'url\' must be a string');
   }
 
+  const method = (options.method && options.method.toUpperCase()) || 'GET';
+
   let cacheFile;
 
   if (options.cacheTime) {
+    if (!method === 'GET') {
+      throw new Error(`Cache can't be used with a ${method} request`);
+    }
     const cacheDir = join(tmpdir(), 'resdir-http-client', 'cache');
     cacheFile = join(cacheDir, strictUriEncode(url));
 
@@ -41,15 +54,31 @@ export async function fetch(url, options = {}) {
     }
   }
 
-  const opts = {};
+  const finalOptions = {method};
+
+  const headers = options.headers || {};
 
   if (options.json) {
-    opts.headers = {Accept: 'application/json'};
+    headers.Accept = 'application/json';
   }
 
-  Object.assign(opts, pick(options, ['method', 'headers', 'timeout']));
+  let body = options.body;
+  if (body !== undefined) {
+    if (options.json) {
+      headers['Content-Type'] = 'application/json';
+      body = JSON.stringify(body);
+    }
+    finalOptions.body = body;
+  }
 
-  const response = await nodeFetch(url, opts);
+  const timeout = options.timeout;
+  if (timeout !== undefined) {
+    finalOptions.timeout = timeout;
+  }
+
+  finalOptions.headers = headers;
+
+  const response = await nodeFetch(url, finalOptions);
 
   let expectedStatus = options.expectedStatus;
   if (expectedStatus) {
@@ -64,10 +93,13 @@ export async function fetch(url, options = {}) {
   }
 
   let result;
-  if (options.json) {
-    result = await response.json();
-  } else {
-    result = await response.arrayBuffer();
+
+  if (response.status !== 204) {
+    if (options.json) {
+      result = await response.json();
+    } else {
+      result = await response.arrayBuffer();
+    }
   }
 
   if (cacheFile) {
