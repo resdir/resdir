@@ -36,61 +36,32 @@ export class Version {
     return this.value;
   }
 
-  static serialize(version) {
-    version = this.normalize(version);
-
-    const value = version.value;
-    const major = serializeNumber(semver.major(value));
-    const minor = serializeNumber(semver.minor(value));
-    const patch = serializeNumber(semver.patch(value));
+  toArray() {
+    const value = this.value;
+    const array = [semver.major(value), semver.minor(value), semver.patch(value)];
     const prerelease = semver.prerelease(value);
-
-    let result = major + '.' + minor + '.' + patch;
     if (prerelease) {
-      result += '-' + prerelease.join('.');
+      array.push(...prerelease);
     }
-    return result;
+    return array;
   }
 
-  static deserialize(version) {
-    if (typeof version !== 'string') {
-      throw new Error('\'version\' argument must be a string');
+  static fromArray(array) {
+    if (!Array.isArray(array)) {
+      throw new Error('\'array\' argument must be an array');
     }
 
-    let [numbers, prerelease] = version.split('-');
-
-    numbers = numbers.split('.');
-    if (numbers.length !== 3) {
-      throw new Error(`Invalid serialized version: ${version}`);
-    }
-    const major = deserializeNumber(numbers[0]);
-    const minor = deserializeNumber(numbers[1]);
-    const patch = deserializeNumber(numbers[2]);
-
-    let result = String(major) + '.' + String(minor) + '.' + String(patch);
-
-    if (prerelease) {
-      result += '-' + prerelease;
+    if (array.length < 3) {
+      throw new Error('\'array\' argument is invalid');
     }
 
-    return result;
+    const [major, minor, patch, ...prerelease] = array;
+    let value = String(major) + '.' + String(minor) + '.' + String(patch);
+    if (prerelease.length) {
+      value += '-' + prerelease.join('.');
+    }
+    return new this(value);
   }
-}
-
-function serializeNumber(number) {
-  if (number > 99999) {
-    throw new Error('Can\'t serialize a number greater than 99999');
-  }
-  number = '0000' + String(number);
-  number = number.slice(-5);
-  return number;
-}
-
-function deserializeNumber(str) {
-  if (str.length !== 5) {
-    throw new Error(`Invalid serialized version number: ${str}`);
-  }
-  return Number(str);
 }
 
 export default Version;
