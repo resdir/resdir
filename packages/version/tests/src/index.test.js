@@ -22,6 +22,14 @@ describe('Version', () => {
     expect(() => Version.normalize(123)).toThrow();
   });
 
+  test('reading parts', () => {
+    expect(new Version('1.2.3').getMajor()).toBe(1);
+    expect(new Version('1.2.3').getMinor()).toBe(2);
+    expect(new Version('1.2.3').getPatch()).toBe(3);
+    expect(new Version('1.2.3').getPreRelease()).toBeUndefined();
+    expect(new Version('1.2.3-alpha.1').getPreRelease()).toEqual(['alpha', 1]);
+  });
+
   test('bumping', () => {
     expect(new Version('1.0.0').bump().toString()).toBe('1.0.1');
     expect(new Version('1.0.0').bump('patch').toString()).toBe('1.0.1');

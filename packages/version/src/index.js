@@ -28,6 +28,26 @@ export class Version {
     return this;
   }
 
+  getMajor() {
+    return semver.major(this.value);
+  }
+
+  getMinor() {
+    return semver.minor(this.value);
+  }
+
+  getPatch() {
+    return semver.patch(this.value);
+  }
+
+  getPreRelease() {
+    const preRelease = semver.prerelease(this.value);
+    if (!preRelease) {
+      return undefined;
+    }
+    return preRelease;
+  }
+
   toJSON() {
     return this.toString();
   }
@@ -37,11 +57,10 @@ export class Version {
   }
 
   toArray() {
-    const value = this.value;
-    const array = [semver.major(value), semver.minor(value), semver.patch(value)];
-    const prerelease = semver.prerelease(value);
-    if (prerelease) {
-      array.push(...prerelease);
+    const array = [this.getMajor(), this.getMinor(), this.getPatch()];
+    const preRelease = this.getPreRelease();
+    if (preRelease) {
+      array.push(...preRelease);
     }
     return array;
   }
