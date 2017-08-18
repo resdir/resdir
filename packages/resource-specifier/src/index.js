@@ -14,13 +14,14 @@ export function parse(specifier) {
   const index = name.indexOf('@', 1);
   if (index !== -1) {
     version = name.slice(index + 1);
-    version = new VersionRange(version);
     name = name.slice(0, index);
   }
 
   if (!validateName(name)) {
     throw new Error(`Resource name ${formatString(name)} is invalid`);
   }
+
+  version = new VersionRange(version);
 
   return {name, version};
 }
