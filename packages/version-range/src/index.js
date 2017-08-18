@@ -11,10 +11,11 @@ export class VersionRange {
     // '~1.0.0': Tilde range
     // '<1.0.0':  Before range
     // '>=1.5.0':  After range
-    // '>=1.0.0 <2.0.0':  Between range
-    // '^1.0.0 !1.2.3': Range with an exclusion
+    // '>=1.0.0,<2.0.0':  Between range
+    // '^1.0.0,!1.2.3': Range with an exclusion
 
     str = str.trim();
+    str = str.replace(/\s/g, ',');
 
     if (str === '') {
       this.type = 'any';
@@ -33,7 +34,7 @@ export class VersionRange {
 
     const parts = [];
     const exclusions = [];
-    for (const part of compact(str.split(' '))) {
+    for (const part of compact(str.split(','))) {
       if (part.startsWith('!')) {
         const exclusion = semver.clean(part.substr(1));
         if (!exclusion) {
@@ -78,9 +79,9 @@ export class VersionRange {
       throw error;
     }
 
-    const value = parts.join(' ');
+    const value = parts.join(',');
 
-    if (!semver.validRange(value)) {
+    if (!semver.validRange(value.replace(/,/g, ' '))) {
       throw error;
     }
 
@@ -98,7 +99,7 @@ export class VersionRange {
       return str;
     }
     for (const exclusion of this.exclusions) {
-      str += ' !' + exclusion;
+      str += ',!' + exclusion;
     }
     return str;
   }
@@ -118,7 +119,7 @@ export class VersionRange {
       return true;
     }
 
-    if (!semver.satisfies(version, this.value)) {
+    if (!semver.satisfies(version, this.value.replace(/,/g, ' '))) {
       return false;
     }
 

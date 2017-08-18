@@ -6,12 +6,16 @@ describe('VersionRange', () => {
     expect(() => new VersionRange('1.2.3')).not.toThrow();
     expect(() => new VersionRange('1.2.3.4')).toThrow();
     expect(() => new VersionRange('^1.2.3')).not.toThrow();
-    expect(() => new VersionRange('^1.2.3 <=2.2.2')).toThrow();
-    expect(() => new VersionRange('^1.2.3 ~2.2.2')).toThrow();
+    expect(() => new VersionRange('^1.2.3,<=2.2.2')).toThrow();
+    expect(() => new VersionRange('^1.2.3,~2.2.2')).toThrow();
     expect(() => new VersionRange('>=1.2.3')).not.toThrow();
-    expect(() => new VersionRange('>=1.2.3 >=1.2.7')).toThrow();
-    expect(() => new VersionRange('>=1.2.3 <=1.2.7 <=1.3.0')).toThrow();
-    expect(() => new VersionRange('1.2.3 !1.2.7')).toThrow();
+    expect(() => new VersionRange('>=1.2.3,>=1.2.7')).toThrow();
+    expect(() => new VersionRange('>=1.2.3,<2.0.0')).not.toThrow();
+    expect(() => new VersionRange('>=1.2.3 <2.0.0')).not.toThrow();
+    expect(() => new VersionRange('>=1.2.3,<=1.2.7,<=1.3.0')).toThrow();
+    expect(() => new VersionRange('1.2.3,!1.2.7')).toThrow();
+    expect(() => new VersionRange('>=1.2.3,!1.2.7')).not.toThrow();
+    expect(() => new VersionRange('>=1.2.3 !1.2.7')).not.toThrow();
   });
 
   test('\'exact\' version', () => {
@@ -100,8 +104,8 @@ describe('VersionRange', () => {
   });
 
   test('\'between\' range', () => {
-    const range = new VersionRange('>=2.0.0 <3.0.0');
-    expect(range.toString()).toBe('>=2.0.0 <3.0.0');
+    const range = new VersionRange('>=2.0.0,<3.0.0');
+    expect(range.toString()).toBe('>=2.0.0,<3.0.0');
     expect(range.includes('1.20.5')).toBe(false);
     expect(range.includes('2.0.0')).toBe(true);
     expect(range.includes('2.3.1')).toBe(true);
@@ -110,8 +114,8 @@ describe('VersionRange', () => {
   });
 
   test('blacklist', () => {
-    const range = new VersionRange('^2.0.0 !2.6.6 !2.7.7');
-    expect(range.toString()).toBe('^2.0.0 !2.6.6 !2.7.7');
+    const range = new VersionRange('^2.0.0,!2.6.6,!2.7.7');
+    expect(range.toString()).toBe('^2.0.0,!2.6.6,!2.7.7');
     expect(range.includes('1.20.5')).toBe(false);
     expect(range.includes('2.0.0')).toBe(true);
     expect(range.includes('2.5.1')).toBe(true);
