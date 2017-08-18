@@ -43,17 +43,49 @@ describe('VersionRange', () => {
   test('\'tilde\' range', () => {
     const range = new VersionRange('~1.2.3');
     expect(range.toString()).toBe('~1.2.3');
+    expect(range.includes('1.2.2')).toBe(false);
+    expect(range.includes('1.2.3')).toBe(true);
+    expect(range.includes('1.2.4')).toBe(true);
+    expect(range.includes('1.3.0')).toBe(false);
+    expect(range.simplify().toString()).toBe('>=1.2.3,<=1.2.999999999');
+    expect(range.getInclusiveBegin()).toBe('1.2.3');
+    expect(range.getInclusiveEnd()).toBe('1.2.999999999');
+
+    const range2 = new VersionRange('~1.2');
+    expect(range2.toString()).toBe('~1.2');
+    expect(range2.includes('1.1.99')).toBe(false);
+    expect(range2.includes('1.2.0')).toBe(true);
+    expect(range2.includes('1.2.1')).toBe(true);
+    expect(range2.includes('1.3.0')).toBe(false);
+    expect(range2.simplify().toString()).toBe('>=1.2.0,<=1.2.999999999');
+    expect(range2.getInclusiveBegin()).toBe('1.2.0');
+    expect(range2.getInclusiveEnd()).toBe('1.2.999999999');
+
+    const range3 = new VersionRange('~1');
+    expect(range3.toString()).toBe('~1');
+    expect(range3.includes('0.99.99')).toBe(false);
+    expect(range3.includes('1.0.0')).toBe(true);
+    expect(range3.includes('1.1.0')).toBe(true);
+    expect(range3.includes('2.0.0')).toBe(false);
+    expect(range3.simplify().toString()).toBe('>=1.0.0,<=1.999999999.999999999');
+    expect(range3.getInclusiveBegin()).toBe('1.0.0');
+    expect(range3.getInclusiveEnd()).toBe('1.999999999.999999999');
+  });
+
+  test('\'caret\' range', () => {
+    const range = new VersionRange('^1.2.3');
+    expect(range.toString()).toBe('^1.2.3');
     expect(range.includes('1.2.3')).toBe(true);
     expect(range.includes('1.2.9')).toBe(true);
     expect(range.includes('0.5.1')).toBe(false);
     expect(range.includes('1.2.1')).toBe(false);
-    expect(range.includes('1.3.0')).toBe(false);
+    expect(range.includes('1.3.0')).toBe(true);
     expect(range.simplify().toString()).toBe('>=1.2.3,<=1.999999999.999999999');
     expect(range.getInclusiveBegin()).toBe('1.2.3');
     expect(range.getInclusiveEnd()).toBe('1.999999999.999999999');
 
-    const range2 = new VersionRange('~0.5.1');
-    expect(range2.toString()).toBe('~0.5.1');
+    const range2 = new VersionRange('^0.5.1');
+    expect(range2.toString()).toBe('^0.5.1');
     expect(range2.includes('0.5.1')).toBe(true);
     expect(range2.includes('0.5.12')).toBe(true);
     expect(range2.includes('0.4.1')).toBe(false);
@@ -62,31 +94,6 @@ describe('VersionRange', () => {
     expect(range2.simplify().toString()).toBe('>=0.5.1,<=0.5.999999999');
     expect(range2.getInclusiveBegin()).toBe('0.5.1');
     expect(range2.getInclusiveEnd()).toBe('0.5.999999999');
-  });
-
-  test('\'caret\' range', () => {
-    const range = new VersionRange('^1.2.3');
-    expect(range.toString()).toBe('^1.2.3');
-    expect(range.includes('1.2.3')).toBe(true);
-    expect(range.includes('1.2.9')).toBe(true);
-    expect(range.includes('1.8.0')).toBe(true);
-    expect(range.includes('0.5.1')).toBe(false);
-    expect(range.includes('1.2.0')).toBe(false);
-    expect(range.includes('2.0.0')).toBe(false);
-    expect(range.simplify().toString()).toBe('>=1.2.3,<=1.999999999.999999999');
-    expect(range.getInclusiveBegin()).toBe('1.2.3');
-    expect(range.getInclusiveEnd()).toBe('1.999999999.999999999');
-
-    const range2 = new VersionRange('^0.5.2');
-    expect(range2.toString()).toBe('^0.5.2');
-    expect(range2.includes('0.5.2')).toBe(true);
-    expect(range2.includes('0.5.12')).toBe(true);
-    expect(range2.includes('0.4.1')).toBe(false);
-    expect(range2.includes('0.5.1')).toBe(false);
-    expect(range2.includes('0.6.0')).toBe(false);
-    expect(range2.simplify().toString()).toBe('>=0.5.2,<=0.999999999.999999999');
-    expect(range2.getInclusiveBegin()).toBe('0.5.2');
-    expect(range2.getInclusiveEnd()).toBe('0.999999999.999999999');
   });
 
   test('\'before\' range', () => {

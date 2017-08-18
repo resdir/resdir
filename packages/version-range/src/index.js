@@ -99,6 +99,30 @@ export class VersionRange {
   }
 
   _simplifyTilde() {
+    let from = this.value.slice(1);
+    const [majorString, minorString, patchString] = from.split('.');
+    from = [majorString || '0', minorString || '0', patchString || '0'].join('.');
+    let major = Number(majorString) || 0;
+    let minor = Number(minorString) || 0;
+    let patch = Number(patchString) || 0;
+    if (patchString) {
+      // ~1.2.3: >=1.2.3,<1.3.0
+      minor++;
+      patch = 0;
+    } else if (minorString) {
+      // ~1.2: >=1.2.0,<1.3.0
+      minor++;
+    } else {
+      // ~1: >=1.0.0,<2.0.0
+      major++;
+    }
+    const to = `${major}.${minor}.${patch}`;
+    this.type = 'between';
+    this.value = `>=${from},<${to}`;
+    this._simplifyBetween();
+  }
+
+  _simplifyCaret() {
     const from = this.value.slice(1);
     let major = semver.major(from);
     let minor = semver.minor(from);
@@ -114,15 +138,6 @@ export class VersionRange {
       patch++;
     }
     const to = `${major}.${minor}.${patch}`;
-    this.type = 'between';
-    this.value = `>=${from},<${to}`;
-    this._simplifyBetween();
-  }
-
-  _simplifyCaret() {
-    const from = this.value.slice(1);
-    const major = semver.major(from) + 1;
-    const to = `${major}.0.0`;
     this.type = 'between';
     this.value = `>=${from},<${to}`;
     this._simplifyBetween();
