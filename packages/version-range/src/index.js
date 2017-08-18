@@ -11,12 +11,8 @@ export class VersionRange {
       input = parse(input);
     }
     this.type = input.type || 'any';
-    if (input.value !== undefined) {
-      this.value = input.value;
-    }
-    if (input.exclusions !== undefined) {
-      this.exclusions = [...input.exclusions];
-    }
+    this.value = input.value;
+    this.exclusions = [...(input.exclusions || [])];
   }
 
   clone() {
@@ -50,15 +46,12 @@ export class VersionRange {
   }
 
   toString() {
-    if (this.type === 'any') {
-      return '';
-    }
-    let str = this.value;
-    if (this.type === 'exact') {
-      return str;
-    }
+    let str = this.value || '';
     for (const exclusion of this.exclusions) {
-      str += ',!' + exclusion;
+      if (str) {
+        str += ',';
+      }
+      str += '!' + exclusion;
     }
     return str;
   }
@@ -74,19 +67,19 @@ export class VersionRange {
       throw new Error(`Version ${formatString(version)} is invalid`);
     }
 
+    if (this.exclusions.includes(version)) {
+      return false;
+    }
+
     if (this.type === 'any') {
       return true;
     }
 
-    if (!semver.satisfies(version, this.value.replace(/,/g, ' '))) {
-      return false;
+    if (semver.satisfies(version, this.value.replace(/,/g, ' '))) {
+      return true;
     }
 
-    if (this.exclusions && this.exclusions.includes(version)) {
-      return false;
-    }
-
-    return true;
+    return false;
   }
 
   simplify() {
@@ -177,6 +170,7 @@ function parse(str) {
   // '<1.0.0':  Before range
   // '>=1.5.0':  After range
   // '>=1.0.0,<2.0.0':  Between range
+  // '!1.2.3': Exclusion
   // '^1.0.0,!1.2.3': Range with an exclusion
 
   str = str.trim();
@@ -194,8 +188,11 @@ function parse(str) {
 
   const error = new Error(`Version range ${formatString(str)} is invalid`);
 
-  const parts = [];
+  let type;
+  let value;
   const exclusions = [];
+
+  const parts = [];
   for (const part of compact(str.split(','))) {
     if (part.startsWith('!')) {
       const exclusion = semver.clean(part.substr(1));
@@ -212,39 +209,42 @@ function parse(str) {
     throw error;
   }
 
-  let type;
-  if (parts[0].startsWith('~')) {
-    if (parts.length > 1) {
-      throw error;
-    }
-    type = 'tilde';
-  } else if (parts[0].startsWith('^')) {
-    if (parts.length > 1) {
-      throw error;
-    }
-    type = 'caret';
-  } else if (parts[0].startsWith('<')) {
-    if (parts.length > 1) {
-      throw error;
-    }
-    type = 'before';
-  } else if (parts[0].startsWith('>')) {
-    if (parts.length === 1) {
-      type = 'after';
-    } else {
-      if (!parts[1].startsWith('<')) {
+  if (parts.length === 0) {
+    type = 'any';
+  } else {
+    if (parts[0].startsWith('~')) {
+      if (parts.length > 1) {
         throw error;
       }
-      type = 'between';
+      type = 'tilde';
+    } else if (parts[0].startsWith('^')) {
+      if (parts.length > 1) {
+        throw error;
+      }
+      type = 'caret';
+    } else if (parts[0].startsWith('<')) {
+      if (parts.length > 1) {
+        throw error;
+      }
+      type = 'before';
+    } else if (parts[0].startsWith('>')) {
+      if (parts.length === 1) {
+        type = 'after';
+      } else {
+        if (!parts[1].startsWith('<')) {
+          throw error;
+        }
+        type = 'between';
+      }
+    } else {
+      throw error;
     }
-  } else {
-    throw error;
-  }
 
-  const value = parts.join(',');
+    value = parts.join(',');
 
-  if (!semver.validRange(value.replace(/,/g, ' '))) {
-    throw error;
+    if (!semver.validRange(value.replace(/,/g, ' '))) {
+      throw error;
+    }
   }
 
   return {type, value, exclusions};

@@ -16,6 +16,7 @@ describe('VersionRange', () => {
     expect(() => new VersionRange('1.2.3,!1.2.7')).toThrow();
     expect(() => new VersionRange('>=1.2.3,!1.2.7')).not.toThrow();
     expect(() => new VersionRange('>=1.2.3 !1.2.7')).not.toThrow();
+    expect(() => new VersionRange('!1.2.7')).not.toThrow();
   });
 
   test('\'exact\' version', () => {
@@ -149,7 +150,7 @@ describe('VersionRange', () => {
     expect(range.getInclusiveEnd()).toBe('2.999999999.999999999');
   });
 
-  test('blacklist', () => {
+  test('exclusions', () => {
     const range = new VersionRange('^2.0.0,!2.6.6,!2.7.7');
     expect(range.toString()).toBe('^2.0.0,!2.6.6,!2.7.7');
     expect(range.includes('1.20.5')).toBe(false);
@@ -158,5 +159,12 @@ describe('VersionRange', () => {
     expect(range.includes('2.6.6')).toBe(false);
     expect(range.includes('2.7.7')).toBe(false);
     expect(range.includes('3.0.0')).toBe(false);
+
+    const range2 = new VersionRange('!2.6.6');
+    expect(range2.toString()).toBe('!2.6.6');
+    expect(range2.includes('0.5.5')).toBe(true);
+    expect(range2.includes('2.0.0')).toBe(true);
+    expect(range2.includes('2.6.6')).toBe(false);
+    expect(range2.includes('3.0.0')).toBe(true);
   });
 });
