@@ -35,6 +35,26 @@ describe('VersionRange', () => {
     expect(range.toJSON()).toBeUndefined();
   });
 
+  test('\'tilde\' range', () => {
+    const range = new VersionRange('~1.2.3');
+    expect(range.toString()).toBe('~1.2.3');
+    expect(range.includes('1.2.3')).toBe(true);
+    expect(range.includes('1.2.9')).toBe(true);
+    expect(range.includes('0.5.1')).toBe(false);
+    expect(range.includes('1.2.1')).toBe(false);
+    expect(range.includes('1.3.0')).toBe(false);
+    expect(range.simplify().toString()).toBe('>=1.2.3,<2.0.0');
+
+    const range2 = new VersionRange('~0.5.1');
+    expect(range2.toString()).toBe('~0.5.1');
+    expect(range2.includes('0.5.1')).toBe(true);
+    expect(range2.includes('0.5.12')).toBe(true);
+    expect(range2.includes('0.4.1')).toBe(false);
+    expect(range2.includes('0.5.0')).toBe(false);
+    expect(range2.includes('0.6.0')).toBe(false);
+    expect(range2.simplify().toString()).toBe('>=0.5.1,<0.6.0');
+  });
+
   test('\'caret\' range', () => {
     const range = new VersionRange('^1.2.3');
     expect(range.toString()).toBe('^1.2.3');
@@ -44,6 +64,7 @@ describe('VersionRange', () => {
     expect(range.includes('0.5.1')).toBe(false);
     expect(range.includes('1.2.0')).toBe(false);
     expect(range.includes('2.0.0')).toBe(false);
+    expect(range.simplify().toString()).toBe('>=1.2.3,<2.0.0');
 
     const range2 = new VersionRange('^0.5.2');
     expect(range2.toString()).toBe('^0.5.2');
@@ -52,24 +73,7 @@ describe('VersionRange', () => {
     expect(range2.includes('0.4.1')).toBe(false);
     expect(range2.includes('0.5.1')).toBe(false);
     expect(range2.includes('0.6.0')).toBe(false);
-  });
-
-  test('\'tilde\' range', () => {
-    const range = new VersionRange('~1.2.3');
-    expect(range.toString()).toBe('~1.2.3');
-    expect(range.includes('1.2.3')).toBe(true);
-    expect(range.includes('1.2.9')).toBe(true);
-    expect(range.includes('0.5.1')).toBe(false);
-    expect(range.includes('1.2.1')).toBe(false);
-    expect(range.includes('1.3.0')).toBe(false);
-
-    const range2 = new VersionRange('~0.5.1');
-    expect(range2.toString()).toBe('~0.5.1');
-    expect(range2.includes('0.5.1')).toBe(true);
-    expect(range2.includes('0.5.12')).toBe(true);
-    expect(range2.includes('0.4.1')).toBe(false);
-    expect(range2.includes('0.5.0')).toBe(false);
-    expect(range2.includes('0.6.0')).toBe(false);
+    expect(range2.simplify().toString()).toBe('>=0.5.2,<1.0.0');
   });
 
   test('\'before\' range', () => {

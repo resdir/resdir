@@ -4,7 +4,20 @@ import semver from 'semver';
 import {formatString} from '@resdir/console';
 
 export class VersionRange {
-  constructor(str = '') {
+  constructor(input = {}) {
+    if (typeof input === 'string') {
+      input = VersionRange._parseString(input);
+    }
+    this.type = input.type || 'any';
+    if (input.value !== undefined) {
+      this.value = input.value;
+    }
+    if (input.exclusions !== undefined) {
+      this.exclusions = [...input.exclusions];
+    }
+  }
+
+  static _parseString(str) {
     // '': All versions
     // '1.2.0': Exact version
     // '^1.0.0': Caret range
@@ -18,16 +31,13 @@ export class VersionRange {
     str = str.replace(/\s/g, ',');
 
     if (str === '') {
-      this.type = 'any';
-      return;
+      return {};
     }
 
     const exactVersion = semver.clean(str);
     if (exactVersion) {
       // '0.3.2', '2.3.1-beta',...
-      this.type = 'exact';
-      this.value = exactVersion;
-      return;
+      return {type: 'exact', value: exactVersion};
     }
 
     const error = new Error(`Version range ${formatString(str)} is invalid`);
@@ -85,9 +95,11 @@ export class VersionRange {
       throw error;
     }
 
-    this.type = type;
-    this.value = value;
-    this.exclusions = exclusions;
+    return {type, value, exclusions};
+  }
+
+  clone() {
+    return new VersionRange(this);
   }
 
   toString() {
@@ -128,6 +140,44 @@ export class VersionRange {
     }
 
     return true;
+  }
+
+  simplify() {
+    const clone = this.clone();
+    if (clone.type === 'tilde') {
+      clone._simplifyTilde();
+    } else if (clone.type === 'caret') {
+      clone._simplifyCaret();
+    }
+    return clone;
+  }
+
+  _simplifyTilde() {
+    const from = this.value.slice(1);
+    let major = semver.major(from);
+    let minor = semver.minor(from);
+    let patch = semver.patch(from);
+    if (major >= 1) {
+      major++;
+      minor = 0;
+      patch = 0;
+    } else if (minor >= 1) {
+      minor++;
+      patch = 0;
+    } else {
+      patch++;
+    }
+    const to = `${major}.${minor}.${patch}`;
+    this.type = 'between';
+    this.value = `>=${from},<${to}`;
+  }
+
+  _simplifyCaret() {
+    const from = this.value.slice(1);
+    const major = semver.major(from) + 1;
+    const to = `${major}.0.0`;
+    this.type = 'between';
+    this.value = `>=${from},<${to}`;
   }
 }
 
