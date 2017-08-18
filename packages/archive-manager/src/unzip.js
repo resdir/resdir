@@ -18,14 +18,20 @@ export function unzip(directory, archive) {
             return;
           }
 
-          readStream.on('end', () => {
-            zipFile.readEntry();
-          });
-
           const file = join(directory, entry.fileName);
-          ensureDirSync(dirname(file));
-          const writeStream = createWriteStream(file);
-          readStream.pipe(writeStream);
+          if (file.endsWith('/')) {
+            // Handle directory
+            ensureDirSync(file);
+            zipFile.readEntry();
+          } else {
+            // Handle file
+            readStream.on('end', () => {
+              zipFile.readEntry();
+            });
+            ensureDirSync(dirname(file));
+            const writeStream = createWriteStream(file);
+            readStream.pipe(writeStream);
+          }
         });
       });
 
