@@ -98,7 +98,7 @@ export async function fetch(url, options = {}) {
     if (options.json) {
       result = await response.json();
     } else {
-      result = await response.arrayBuffer();
+      result = await response.buffer();
     }
   }
 
