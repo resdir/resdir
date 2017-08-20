@@ -75,11 +75,18 @@ export class VersionRange {
       return true;
     }
 
-    if (semver.satisfies(version, this.value.replace(/,/g, ' '))) {
+    if (semver.satisfies(version, toNodeRange(this.value))) {
       return true;
     }
 
     return false;
+  }
+
+  findMaximum(versions) {
+    versions = versions.filter(version => !this.exclusions.includes(version));
+    const range = this.type === 'any' ? '>=0.0.0' : this.value;
+    const version = semver.maxSatisfying(versions, toNodeRange(range));
+    return version || undefined;
   }
 
   simplify() {
@@ -257,7 +264,7 @@ function parse(str) {
 
     value = parts.join(',');
 
-    if (!semver.validRange(value.replace(/,/g, ' '))) {
+    if (!semver.validRange(toNodeRange(value))) {
       throw error;
     }
   }
@@ -289,6 +296,10 @@ function increment(version) {
   const minor = semver.minor(version);
   const patch = semver.patch(version) + 1;
   return `${major}.${minor}.${patch}`;
+}
+
+function toNodeRange(value) {
+  return value.replace(/,/g, ' ');
 }
 
 export default VersionRange;
