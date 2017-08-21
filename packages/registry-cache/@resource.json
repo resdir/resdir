@@ -1,0 +1,18 @@
+{
+  "@type": "js/esnext-package",
+  "name": "@resdir/registry-cache",
+  "version": "0.1.1",
+  "description": "Resdir registry cache",
+  "files": [
+    "./dist"
+  ],
+  "main": "./dist/index.js",
+  "dependencies": [
+    "fs-extra@^4.0.1",
+    "@resdir/console@^0.1.4",
+    "@resdir/file-manager@^0.1.0",
+    "@resdir/resource-name@^0.1.0",
+    "@resdir/resource-specifier@^0.1.1",
+    "@resdir/version-range@^0.1.8"
+  ]
+}

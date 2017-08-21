@@ -1,41 +1,47 @@
-import {join} from 'path';
-import {existsSync, readFileSync} from 'fs';
-import {homedir} from 'os';
-import {outputFileSync, emptyDir} from 'fs-extra';
-import {formatString, formatCode} from '@resdir/console';
-import {load, save} from '@resdir/file-manager';
-import {getScope, getIdentifier} from '@resdir/resource-name';
-import {parse as parseSpecifier} from '@resdir/resource-specifier';
+import {resolve} from 'path';
+import {existsSync} from 'fs';
+// import {homedir} from 'os';
+// import {outputFileSync, emptyDir} from 'fs-extra';
+import S3 from 'aws-sdk/clients/s3';
+import hasha from 'hasha';
+import s3urls from '@mapbox/s3urls';
+import tempy from 'tempy';
+import isDirectory from 'is-directory';
+import readDirectory from 'recursive-readdir';
+import {formatPath, formatCode} from '@resdir/console';
+// import {load, save} from '@resdir/file-manager';
+import {getScope} from '@resdir/resource-name';
+import {validate as validateSpecifier} from '@resdir/resource-specifier';
+import generateSecret from '@resdir/secret-generator';
+import {getJSON, postJSON, fetch} from '@resdir/http-client';
+import {zip, unzip} from '@resdir/archive-manager';
 
-const RUN_DIRECTORY = join(homedir(), '.run');
-const PUBLISHED_RESOURCES_DIRECTORY = join(RUN_DIRECTORY, 'published-resources');
+const RESDIR_REGISTRY_LOCAL_SERVER_URL = 'http://localhost:3000/registry';
 
 export class RegistryClient {
-  async fetch(specifier) {
-    const {name} = parseSpecifier(specifier);
+  async fetch(specifier, {cachedVersion} = {}) {
+    validateSpecifier(specifier);
 
-    const scope = getScope(name);
-    if (!scope) {
-      throw new Error(`Can't fetch a resource with a unscoped name: ${formatString(name)}`);
+    let url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/resources/${specifier}`;
+    if (cachedVersion) {
+      url += `?cachedVersion=${cachedVersion}`;
+    }
+    const {unchanged, definition, filesURL} = await getJSON(url);
+
+    if (unchanged) {
+      return {unchanged};
     }
 
-    const identifier = getIdentifier(name);
+    const directory = tempy.directory();
 
-    const publishedResourceDirectory = join(PUBLISHED_RESOURCES_DIRECTORY, scope, identifier);
-    if (!existsSync(publishedResourceDirectory)) {
-      throw new Error(`Can't find resource ${formatString(name)} in Resdir`);
-    }
+    // TODO: Instead of a buffer, use a stream to download and unzip files
+    const files = await fetch(filesURL);
+    await unzip(directory, files);
 
-    const resourceFile = join(publishedResourceDirectory, '@resource.json');
-    const definition = load(resourceFile);
-
-    const archiveFile = join(publishedResourceDirectory, 'files.zip');
-    const files = readFileSync(archiveFile);
-
-    return {definition, files};
+    return {definition, directory};
   }
 
-  async publish(definition, files) {
+  async publish(definition, directory) {
     const name = definition['@name'];
     if (!name) {
       throw new Error(`Can't publish a resource without a ${formatCode('@name')} property`);
@@ -43,24 +49,63 @@ export class RegistryClient {
 
     const scope = getScope(name);
     if (!scope) {
-      throw new Error(`Can't publish a resource with a unscoped ${formatCode('@name')}`);
+      throw new Error(`Can't publish a resource with an unscoped ${formatCode('@name')}`);
     }
-
-    const identifier = getIdentifier(name);
 
     if (!definition['@version']) {
       throw new Error(`Can't publish a resource without a ${formatCode('@version')} property`);
     }
 
-    const publishedResourceDirectory = join(PUBLISHED_RESOURCES_DIRECTORY, scope, identifier);
+    let files = await this._getFiles(definition, directory);
 
-    await emptyDir(publishedResourceDirectory);
+    // TODO: Instead of a buffer, use a stream to zip and upload files
+    files = await zip(directory, files);
 
-    const resourceFile = join(publishedResourceDirectory, '@resource.json');
-    save(resourceFile, definition);
+    const REGION = 'ap-northeast-1';
+    const BUCKET_NAME = 'resdir-registry-0-1-x-development';
+    const UPLOADS_PREFIX = 'resources/uploads/';
 
-    const archiveFile = join(publishedResourceDirectory, 'files.zip');
-    outputFileSync(archiveFile, files);
+    const s3 = new S3({region: REGION, apiVersion: '2006-03-01'});
+    const md5 = await hasha(files, {algorithm: 'md5', encoding: 'base64'});
+    const key = UPLOADS_PREFIX + generateSecret() + '.zip';
+    await s3
+      .putObject({
+        Bucket: BUCKET_NAME,
+        Key: key,
+        Body: files,
+        ContentMD5: md5
+      })
+      .promise();
+
+    const temporaryFilesURL = s3urls.toUrl(BUCKET_NAME, key)['bucket-in-host'];
+
+    const url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/resources`;
+    const body = {definition, temporaryFilesURL};
+    await postJSON(url, {body});
+  }
+
+  async _getFiles(definition, directory) {
+    const files = [];
+
+    const filesProperty = definition['@files'] || [];
+    for (const file of filesProperty) {
+      const resolvedFile = resolve(directory, file);
+
+      if (!existsSync(resolvedFile)) {
+        throw new Error(
+          `File ${formatPath(file)} specified in ${formatCode('@files')} property doesn't exist`
+        );
+      }
+
+      if (isDirectory.sync(resolvedFile)) {
+        const newFiles = await readDirectory(resolvedFile);
+        files.push(...newFiles);
+      } else {
+        files.push(resolvedFile);
+      }
+    }
+
+    return files;
   }
 }
 

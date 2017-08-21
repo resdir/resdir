@@ -1,16 +1,16 @@
 {
   "@type": "js/esnext-resource",
   "@name": "resdir/example",
-  "@version": "0.1.0",
-  "@files": ["./dist"],
+  "@version": "0.2.7",
   "@implementation": "./dist",
+  "@files": ["./dist"],
+  "@option": {
+    "color": "green"
+  },
   "dependencies": ["chalk@^2.0.1"],
   "hello": {
     "@type": "command",
     "@listen": "hi"
-  },
-  "@options": {
-    "color": "green"
   },
   "tests": {
     "@type": "js/esnext-jest",
