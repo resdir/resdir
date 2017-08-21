@@ -1,4 +1,4 @@
-import Version from '../..';
+import {Version, compareVersions} from '../..';
 
 describe('Version', () => {
   test('emptiness', () => {
@@ -37,9 +37,22 @@ describe('Version', () => {
     expect(new Version('1.5.0').bump('major').toString()).toBe('2.0.0');
   });
 
+  test('comparison', () => {
+    expect(new Version('1.0.0').compareTo(new Version('1.1.0'), '<')).toBe(true);
+    expect(new Version('1.0.0').compareTo('1.1.0', '<')).toBe(true);
+    expect(compareVersions('1.0.0', '<', '1.1.0')).toBe(true);
+    expect(compareVersions('1.1.0', '<', '1.1.0')).toBe(false);
+    expect(compareVersions('1.1.0', '<=', '1.1.0')).toBe(true);
+    expect(compareVersions('1.0.0', '>', '1.1.0')).toBe(false);
+    expect(compareVersions('1.2.0', '>', '1.1.0')).toBe(true);
+    expect(compareVersions('1.2.0', '=', '1.2.0')).toBe(true);
+    expect(compareVersions('1.2.0', '!=', '1.3.0')).toBe(true);
+  });
+
   test('stringification', () => {
     expect(new Version('1.2.3').toJSON()).toBe('1.2.3');
     expect(new Version('1.2.3').toString()).toBe('1.2.3');
+    expect(String(new Version('1.2.3'))).toBe('1.2.3');
   });
 
   test('implicit conversion', () => {

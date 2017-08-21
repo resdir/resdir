@@ -48,6 +48,10 @@ export class Version {
     return preRelease;
   }
 
+  compareTo(other, comparator) {
+    return compareVersions(this, comparator, other);
+  }
+
   toJSON() {
     return this.toString();
   }
@@ -81,6 +85,10 @@ export class Version {
     }
     return new this(value);
   }
+}
+
+export function compareVersions(v1, comparator, v2) {
+  return semver.cmp(String(v1), comparator, String(v2));
 }
 
 export default Version;
