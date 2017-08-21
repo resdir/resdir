@@ -10,7 +10,7 @@ export class VersionRange {
     if (typeof input === 'string') {
       input = parse(input);
     }
-    this.type = input.type || 'any';
+    this.type = input.type || 'ANY';
     this.value = input.value;
     this.exclusions = [...(input.exclusions || [])];
   }
@@ -22,10 +22,10 @@ export class VersionRange {
   getInclusiveBegin() {
     const version = this.simplify();
     const type = version.type;
-    if (type === 'after') {
+    if (type === 'AFTER') {
       const value = version.value;
       return value.slice(2);
-    } else if (type === 'between') {
+    } else if (type === 'BETWEEN') {
       const value = version.value.split(',')[0];
       return value.slice(2);
     }
@@ -35,10 +35,10 @@ export class VersionRange {
   getInclusiveEnd() {
     const version = this.simplify();
     const type = version.type;
-    if (type === 'before') {
+    if (type === 'BEFORE') {
       const value = version.value;
       return value.slice(2);
-    } else if (type === 'between') {
+    } else if (type === 'BETWEEN') {
       const value = version.value.split(',')[1];
       return value.slice(2);
     }
@@ -71,7 +71,7 @@ export class VersionRange {
       return false;
     }
 
-    if (this.type === 'any') {
+    if (this.type === 'ANY') {
       return true;
     }
 
@@ -84,22 +84,22 @@ export class VersionRange {
 
   findMaximum(versions) {
     versions = versions.filter(version => !this.exclusions.includes(version));
-    const range = this.type === 'any' ? '>=0.0.0' : this.value;
+    const range = this.type === 'ANY' ? '>=0.0.0' : this.value;
     const version = semver.maxSatisfying(versions, toNodeRange(range));
     return version || undefined;
   }
 
   simplify() {
     const clone = this.clone();
-    if (clone.type === 'tilde') {
+    if (clone.type === 'TILDE') {
       clone._simplifyTilde();
-    } else if (clone.type === 'caret') {
+    } else if (clone.type === 'CARET') {
       clone._simplifyCaret();
-    } else if (clone.type === 'before') {
+    } else if (clone.type === 'BEFORE') {
       clone._simplifyBefore();
-    } else if (clone.type === 'after') {
+    } else if (clone.type === 'AFTER') {
       clone._simplifyAfter();
-    } else if (clone.type === 'between') {
+    } else if (clone.type === 'BETWEEN') {
       clone._simplifyBetween();
     }
     return clone;
@@ -124,7 +124,7 @@ export class VersionRange {
       major++;
     }
     const to = `${major}.${minor}.${patch}`;
-    this.type = 'between';
+    this.type = 'BETWEEN';
     this.value = `>=${from},<${to}`;
     this._simplifyBetween();
   }
@@ -145,7 +145,7 @@ export class VersionRange {
       patch++;
     }
     const to = `${major}.${minor}.${patch}`;
-    this.type = 'between';
+    this.type = 'BETWEEN';
     this.value = `>=${from},<${to}`;
     this._simplifyBetween();
   }
@@ -205,7 +205,7 @@ function parse(str) {
   const exactVersion = semver.clean(str);
   if (exactVersion) {
     // '0.3.2', '2.3.1-beta',...
-    return {type: 'exact', value: exactVersion};
+    return {type: 'EXACT', value: exactVersion};
   }
 
   const error = new Error(`Version range ${formatString(str)} is invalid`);
@@ -232,31 +232,31 @@ function parse(str) {
   }
 
   if (parts.length === 0) {
-    type = 'any';
+    type = 'ANY';
   } else {
     if (parts[0].startsWith('~')) {
       if (parts.length > 1) {
         throw error;
       }
-      type = 'tilde';
+      type = 'TILDE';
     } else if (parts[0].startsWith('^')) {
       if (parts.length > 1) {
         throw error;
       }
-      type = 'caret';
+      type = 'CARET';
     } else if (parts[0].startsWith('<')) {
       if (parts.length > 1) {
         throw error;
       }
-      type = 'before';
+      type = 'BEFORE';
     } else if (parts[0].startsWith('>')) {
       if (parts.length === 1) {
-        type = 'after';
+        type = 'AFTER';
       } else {
         if (!parts[1].startsWith('<')) {
           throw error;
         }
-        type = 'between';
+        type = 'BETWEEN';
       }
     } else {
       throw error;
