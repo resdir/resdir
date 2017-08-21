@@ -1,7 +1,6 @@
 import {isAbsolute} from 'path';
 import {validate as validateName} from '@resdir/resource-name';
 import VersionRange from '@resdir/version-range';
-import {formatString} from '@resdir/console';
 
 export function parse(specifier) {
   if (specifier.startsWith('.') || isAbsolute(specifier)) {
@@ -9,19 +8,21 @@ export function parse(specifier) {
   }
 
   let name = specifier;
-  let version;
+  let versionRange;
 
   const index = name.indexOf('@', 1);
   if (index !== -1) {
-    version = name.slice(index + 1);
+    versionRange = name.slice(index + 1);
     name = name.slice(0, index);
   }
 
-  if (!validateName(name)) {
-    throw new Error(`Resource name ${formatString(name)} is invalid`);
-  }
+  validateName(name, {throwIfUnscoped: true});
 
-  version = new VersionRange(version);
+  versionRange = new VersionRange(versionRange);
 
-  return {name, version};
+  return {name, versionRange};
+}
+
+export function validate(specifier) {
+  parse(specifier);
 }
