@@ -1,42 +1,78 @@
-export function getScope(name) {
-  if (!name) {
+import {formatString} from '@resdir/console';
+
+export function parse(name, {throwIfMissing = true, throwIfUnscoped} = {}) {
+  const parsedName = _parse(name);
+  if (!parsedName) {
+    if (throwIfMissing || throwIfUnscoped) {
+      throw new Error(`Resource name is missing`);
+    }
     return undefined;
   }
-  const [scope, identifier] = name.split('/');
-  if (!identifier) {
-    return undefined;
+  if (!parsedName.scope && throwIfUnscoped) {
+    throw new Error(`Scope is missing in resource name '${formatString(name)}'`);
   }
-  return scope;
+  return parsedName;
 }
 
-export function getIdentifier(name) {
-  if (!name) {
+function _parse(name) {
+  if (typeof name !== 'string') {
     return undefined;
   }
-  const [scope, identifier] = name.split('/');
-  if (!identifier) {
-    return scope;
-  }
-  return identifier;
-}
-
-export function validate(name) {
   let [scope, identifier, rest] = name.split('/');
-
-  if (scope && identifier === undefined) {
+  if (rest !== undefined) {
+    return undefined;
+  }
+  if (identifier === undefined) {
     identifier = scope;
     scope = undefined;
   }
+  if (identifier === '' || scope === '') {
+    return undefined;
+  }
+  return {scope, identifier};
+}
 
-  if (scope !== undefined && !validatePart(scope)) {
+export function getScope(name) {
+  const parsedName = _parse(name);
+  return parsedName && parsedName.scope;
+}
+
+export function getIdentifier(name) {
+  const parsedName = _parse(name);
+  return parsedName && parsedName.identifier;
+}
+
+export function validate(name, {throwIfInvalid = true, throwIfUnscoped} = {}) {
+  const isValid = _validate(name);
+
+  if (!isValid) {
+    if (throwIfInvalid) {
+      throw new Error(`Resource name ${formatString(name)} is invalid`);
+    }
     return false;
   }
+
+  if (throwIfUnscoped && !getScope(name)) {
+    throw new Error(`Scope is missing in resource name '${formatString(name)}'`);
+  }
+
+  return true;
+}
+
+function _validate(name) {
+  const parsedName = _parse(name);
+
+  if (!parsedName) {
+    return false;
+  }
+
+  const {scope, identifier} = parsedName;
 
   if (!validatePart(identifier)) {
     return false;
   }
 
-  if (rest) {
+  if (scope && !validatePart(scope)) {
     return false;
   }
 
