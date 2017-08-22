@@ -6,7 +6,10 @@ import {formatString} from '@resdir/console';
 import {load, save} from '@resdir/file-manager';
 import {parse as parseName} from '@resdir/resource-name';
 import {parse as parseSpecifier} from '@resdir/resource-specifier';
+import {compareVersions} from '@resdir/version';
 import VersionRange from '@resdir/version-range';
+
+const debug = require('debug')('resdir:registry:cache');
 
 const CACHE_DIRECTORY = join(homedir(), '.resdir', 'caches', 'registry-proxy');
 const RESOURCE_CACHE_DIRECTORY = join(CACHE_DIRECTORY, 'resources');
@@ -37,6 +40,12 @@ export class RegistryCache {
   }
 
   async fetch(specifier) {
+    const result = await this._fetch(specifier);
+    debug('fetch(%o) => %o', specifier, result);
+    return result;
+  }
+
+  async _fetch(specifier) {
     const {name, versionRange} = parseSpecifier(specifier);
 
     let result;
@@ -110,8 +119,10 @@ export class RegistryCache {
       if (versionRange.includes(version)) {
         const requestFile = join(requestsDirectory, filename);
         const data = load(requestFile);
-        data.invalidated = true;
-        save(requestFile, data);
+        if (compareVersions(version, '>', data.version)) {
+          data.invalidated = true;
+          save(requestFile, data);
+        }
       }
     }
   }
@@ -206,6 +217,11 @@ export class RegistryCache {
   }
 
   async publish(definition, directory) {
+    await this._publish(definition, directory);
+    debug('publish(%o, %o)', definition, directory);
+  }
+
+  async _publish(definition, directory) {
     await this.client.publish(definition, directory);
     await this._invalidateCache(definition['@name'], definition['@version']);
   }

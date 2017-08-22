@@ -1,7 +1,7 @@
 {
   "@type": "js/esnext-resource",
   "@name": "resdir/example",
-  "@version": "0.2.7",
+  "@version": "0.2.11",
   "@implementation": "./dist",
   "@files": ["./dist"],
   "@option": {

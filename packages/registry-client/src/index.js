@@ -16,10 +16,18 @@ import generateSecret from '@resdir/secret-generator';
 import {getJSON, postJSON, fetch} from '@resdir/http-client';
 import {zip, unzip} from '@resdir/archive-manager';
 
+const debug = require('debug')('resdir:registry:client');
+
 const RESDIR_REGISTRY_LOCAL_SERVER_URL = 'http://localhost:3000/registry';
 
 export class RegistryClient {
-  async fetch(specifier, {cachedVersion} = {}) {
+  async fetch(specifier, options) {
+    const result = await this._fetch(specifier, options);
+    debug('fetch(%o, %o) => %o', specifier, options, result);
+    return result;
+  }
+
+  async _fetch(specifier, {cachedVersion} = {}) {
     validateSpecifier(specifier);
 
     let url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/resources/${specifier}`;
@@ -42,6 +50,11 @@ export class RegistryClient {
   }
 
   async publish(definition, directory) {
+    await this._publish(definition, directory);
+    debug('publish(%o, %o)', definition, directory);
+  }
+
+  async _publish(definition, directory) {
     const name = definition['@name'];
     if (!name) {
       throw new Error(`Can't publish a resource without a ${formatCode('@name')} property`);
