@@ -5,37 +5,39 @@ import windowSize from 'window-size';
 import sliceANSI from 'slice-ansi';
 
 export function formatString(string) {
-  if (typeof string !== 'string') {
-    throw new TypeError('\'string\' must be a string');
+  if (string === undefined) {
+    throw new TypeError('\'string\' is undefined');
   }
-  return yellow('\'' + string + '\'');
+  return yellow('\'' + String(string) + '\'');
 }
 
 export function formatURL(url) {
-  if (typeof url !== 'string') {
-    throw new TypeError('\'url\' must be a string');
+  if (url === undefined) {
+    throw new TypeError('\'url\' is undefined');
   }
-  return cyan.underline(url);
+  return cyan.underline(String(url));
 }
 
 export function formatPath(path) {
-  if (typeof path !== 'string') {
-    throw new TypeError('\'path\' must be a string');
+  if (path === undefined) {
+    throw new TypeError('\'path\' is undefined');
   }
-  return yellow('\'' + path + '\'');
+  return yellow('\'' + String(path) + '\'');
 }
 
 export function formatCode(code) {
-  if (typeof code !== 'string') {
-    throw new TypeError('\'code\' must be a string');
+  if (code === undefined) {
+    throw new TypeError('\'code\' is undefined');
   }
-  return cyan('`' + code + '`');
+  return cyan('`' + String(code) + '`');
 }
 
 export function formatMessage(message, {info, status} = {}) {
-  if (typeof message !== 'string') {
-    throw new TypeError('\'message\' must be a string');
+  if (message === undefined) {
+    throw new TypeError('\'message\' is undefined');
   }
+
+  message = String(message);
 
   if (info) {
     if (!Array.isArray(info)) {
@@ -173,7 +175,7 @@ export async function task(fn, {intro, outro, verbose, debug, quiet}) {
     }
   } else if (quiet) {
     ViewClass = QuietTaskView;
-  } else if (verbose || debug) {
+  } else if (verbose || debug || process.env.DEBUG) {
     ViewClass = VerboseTaskView;
   } else {
     ViewClass = AnimatedTaskView;
@@ -228,7 +230,7 @@ export function showError(error) {
     }
   }
 
-  if (process.env.RUN_DEBUG) {
+  if (process.env.DEBUG) {
     console.error(error);
     return;
   }
