@@ -1,8 +1,8 @@
 import {isAbsolute} from 'path';
-import {validate as validateName} from '@resdir/resource-name';
+import {validateResourceName} from '@resdir/resource-name';
 import VersionRange from '@resdir/version-range';
 
-export function parse(specifier) {
+export function parseResourceSpecifier(specifier) {
   if (specifier.startsWith('.') || isAbsolute(specifier)) {
     return {location: specifier};
   }
@@ -16,13 +16,13 @@ export function parse(specifier) {
     name = name.slice(0, index);
   }
 
-  validateName(name, {throwIfUnscoped: true});
+  validateResourceName(name, {throwIfUnscoped: true});
 
   versionRange = new VersionRange(versionRange);
 
   return {name, versionRange};
 }
 
-export function validate(specifier) {
-  parse(specifier);
+export function validateResourceSpecifier(specifier) {
+  parseResourceSpecifier(specifier);
 }

@@ -1,6 +1,6 @@
 import {formatString} from '@resdir/console';
 
-export function parse(name, {throwIfMissing = true, throwIfUnscoped} = {}) {
+export function parseResourceName(name, {throwIfMissing = true, throwIfUnscoped} = {}) {
   const parsedName = _parse(name);
   if (!parsedName) {
     if (throwIfMissing || throwIfUnscoped) {
@@ -32,17 +32,17 @@ function _parse(name) {
   return {scope, identifier};
 }
 
-export function getScope(name) {
+export function getResourceScope(name) {
   const parsedName = _parse(name);
   return parsedName && parsedName.scope;
 }
 
-export function getIdentifier(name) {
+export function getResourceIdentifier(name) {
   const parsedName = _parse(name);
   return parsedName && parsedName.identifier;
 }
 
-export function validate(name, {throwIfInvalid = true, throwIfUnscoped} = {}) {
+export function validateResourceName(name, {throwIfInvalid = true, throwIfUnscoped} = {}) {
   const isValid = _validate(name);
 
   if (!isValid) {
@@ -52,7 +52,7 @@ export function validate(name, {throwIfInvalid = true, throwIfUnscoped} = {}) {
     return false;
   }
 
-  if (throwIfUnscoped && !getScope(name)) {
+  if (throwIfUnscoped && !getResourceScope(name)) {
     throw new Error(`Scope is missing in resource name '${formatString(name)}'`);
   }
 

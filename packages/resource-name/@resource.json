@@ -1,13 +1,13 @@
 {
   "@type": "js/esnext-package",
-  "name": "@resdir/resource-name",
-  "version": "0.1.1",
   "description": "Useful functions to handle Resource's names",
-  "files": [
-    "./dist"
-  ],
   "main": "./dist/index.js",
+  "version": "0.1.2",
   "dependencies": [
     "@resdir/console@^0.1.4"
+  ],
+  "name": "@resdir/resource-name",
+  "files": [
+    "./dist"
   ]
 }

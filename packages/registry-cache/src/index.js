@@ -4,8 +4,8 @@ import {homedir} from 'os';
 import {ensureDirSync, moveSync} from 'fs-extra';
 import {formatString} from '@resdir/console';
 import {load, save} from '@resdir/file-manager';
-import {parse as parseName} from '@resdir/resource-name';
-import {parse as parseSpecifier} from '@resdir/resource-specifier';
+import {parseResourceName} from '@resdir/resource-name';
+import {parseResourceSpecifier} from '@resdir/resource-specifier';
 import {compareVersions} from '@resdir/version';
 import VersionRange from '@resdir/version-range';
 
@@ -46,7 +46,7 @@ export class RegistryCache {
   }
 
   async _fetch(specifier) {
-    const {name, versionRange} = parseSpecifier(specifier);
+    const {name, versionRange} = parseResourceSpecifier(specifier);
 
     let result;
 
@@ -105,7 +105,7 @@ export class RegistryCache {
   }
 
   async _invalidateCache(name, version) {
-    const {scope, identifier} = parseName(name, {throwIfUnscoped: true});
+    const {scope, identifier} = parseResourceName(name, {throwIfUnscoped: true});
     const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, scope, identifier);
     const requestsDirectory = join(resourceDirectory, RESOURCE_REQUESTS_DIRECTORY_NAME);
 
@@ -136,7 +136,7 @@ export class RegistryCache {
   }
 
   _getCachedRequestFile(name, versionRange) {
-    const {scope, identifier} = parseName(name, {throwIfUnscoped: true});
+    const {scope, identifier} = parseResourceName(name, {throwIfUnscoped: true});
     const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, scope, identifier);
     const requestsDirectory = join(resourceDirectory, RESOURCE_REQUESTS_DIRECTORY_NAME);
     const requestFile = join(
@@ -184,7 +184,7 @@ export class RegistryCache {
   }
 
   _getCachedResourceFile(name, version) {
-    const {scope, identifier} = parseName(name, {throwIfUnscoped: true});
+    const {scope, identifier} = parseResourceName(name, {throwIfUnscoped: true});
     const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, scope, identifier);
     const versionsDirectory = join(resourceDirectory, RESOURCE_VERSIONS_DIRECTORY_NAME);
     const directory = join(versionsDirectory, version);
@@ -193,7 +193,7 @@ export class RegistryCache {
   }
 
   async _findLatestCachedVersion(name, versionRange) {
-    const {scope, identifier} = parseName(name, {throwIfUnscoped: true});
+    const {scope, identifier} = parseResourceName(name, {throwIfUnscoped: true});
     const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, scope, identifier);
     const versionsDirectory = join(resourceDirectory, RESOURCE_VERSIONS_DIRECTORY_NAME);
 

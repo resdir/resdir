@@ -10,8 +10,8 @@ import isDirectory from 'is-directory';
 import readDirectory from 'recursive-readdir';
 import {formatPath, formatCode} from '@resdir/console';
 // import {load, save} from '@resdir/file-manager';
-import {getScope} from '@resdir/resource-name';
-import {validate as validateSpecifier} from '@resdir/resource-specifier';
+import {getResourceScope} from '@resdir/resource-name';
+import {validateResourceSpecifier} from '@resdir/resource-specifier';
 import generateSecret from '@resdir/secret-generator';
 import {getJSON, postJSON, fetch} from '@resdir/http-client';
 import {zip, unzip} from '@resdir/archive-manager';
@@ -28,7 +28,7 @@ export class RegistryClient {
   }
 
   async _fetch(specifier, {cachedVersion} = {}) {
-    validateSpecifier(specifier);
+    validateResourceSpecifier(specifier);
 
     let url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/resources/${specifier}`;
     if (cachedVersion) {
@@ -60,7 +60,7 @@ export class RegistryClient {
       throw new Error(`Can't publish a resource without a ${formatCode('@name')} property`);
     }
 
-    const scope = getScope(name);
+    const scope = getResourceScope(name);
     if (!scope) {
       throw new Error(`Can't publish a resource with an unscoped ${formatCode('@name')}`);
     }
