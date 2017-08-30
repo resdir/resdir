@@ -2,7 +2,7 @@
   "@type": "js/esnext-package",
   "description": "Resdir registry client",
   "main": "./dist/index.js",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "dependencies": [
     "aws-sdk@^2.95.0",
     "debug@^3.0.0",

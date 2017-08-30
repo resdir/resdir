@@ -10,7 +10,6 @@ import isDirectory from 'is-directory';
 import readDirectory from 'recursive-readdir';
 import {formatPath, formatCode} from '@resdir/console';
 // import {load, save} from '@resdir/file-manager';
-import {getResourceScope} from '@resdir/resource-name';
 import {validateResourceSpecifier} from '@resdir/resource-specifier';
 import generateSecret from '@resdir/secret-generator';
 import {getJSON, postJSON, fetch} from '@resdir/http-client';
@@ -21,6 +20,12 @@ const debug = require('debug')('resdir:registry:client');
 const RESDIR_REGISTRY_LOCAL_SERVER_URL = 'http://localhost:3000/registry';
 
 export class RegistryClient {
+  constructor({awsRegion, awsS3BucketName, awsS3ResourceUploadsPrefix}) {
+    this.awsRegion = awsRegion;
+    this.awsS3BucketName = awsS3BucketName;
+    this.awsS3ResourceUploadsPrefix = awsS3ResourceUploadsPrefix;
+  }
+
   async fetch(specifier, options) {
     const result = await this._fetch(specifier, options);
     debug('fetch(%o, %o) => %o', specifier, options, result);
@@ -60,11 +65,6 @@ export class RegistryClient {
       throw new Error(`Can't publish a resource without a ${formatCode('@name')} property`);
     }
 
-    const scope = getResourceScope(name);
-    if (!scope) {
-      throw new Error(`Can't publish a resource with an unscoped ${formatCode('@name')}`);
-    }
-
     if (!definition['@version']) {
       throw new Error(`Can't publish a resource without a ${formatCode('@version')} property`);
     }
@@ -74,23 +74,19 @@ export class RegistryClient {
     // TODO: Instead of a buffer, use a stream to zip and upload files
     files = await zip(directory, files);
 
-    const REGION = 'ap-northeast-1';
-    const BUCKET_NAME = 'resdir-registry-0-1-x-development';
-    const UPLOADS_PREFIX = 'resources/uploads/';
-
-    const s3 = new S3({region: REGION, apiVersion: '2006-03-01'});
+    const s3 = new S3({region: this.awsRegion, apiVersion: '2006-03-01'});
     const md5 = await hasha(files, {algorithm: 'md5', encoding: 'base64'});
-    const key = UPLOADS_PREFIX + generateSecret() + '.zip';
+    const key = this.awsS3ResourceUploadsPrefix + generateSecret() + '.zip';
     await s3
       .putObject({
-        Bucket: BUCKET_NAME,
+        Bucket: this.awsS3BucketName,
         Key: key,
         Body: files,
         ContentMD5: md5
       })
       .promise();
 
-    const temporaryFilesURL = s3urls.toUrl(BUCKET_NAME, key)['bucket-in-host'];
+    const temporaryFilesURL = s3urls.toUrl(this.awsS3BucketName, key)['bucket-in-host'];
 
     const url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/resources`;
     const body = {definition, temporaryFilesURL};

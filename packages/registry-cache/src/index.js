@@ -105,8 +105,8 @@ export class RegistryCache {
   }
 
   async _invalidateCache(name, version) {
-    const {scope, identifier} = parseResourceName(name, {throwIfUnscoped: true});
-    const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, scope, identifier);
+    const {namespace, identifier} = parseResourceName(name);
+    const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, namespace, identifier);
     const requestsDirectory = join(resourceDirectory, RESOURCE_REQUESTS_DIRECTORY_NAME);
 
     if (!existsSync(requestsDirectory)) {
@@ -136,8 +136,8 @@ export class RegistryCache {
   }
 
   _getCachedRequestFile(name, versionRange) {
-    const {scope, identifier} = parseResourceName(name, {throwIfUnscoped: true});
-    const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, scope, identifier);
+    const {namespace, identifier} = parseResourceName(name);
+    const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, namespace, identifier);
     const requestsDirectory = join(resourceDirectory, RESOURCE_REQUESTS_DIRECTORY_NAME);
     const requestFile = join(
       requestsDirectory,
@@ -184,8 +184,8 @@ export class RegistryCache {
   }
 
   _getCachedResourceFile(name, version) {
-    const {scope, identifier} = parseResourceName(name, {throwIfUnscoped: true});
-    const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, scope, identifier);
+    const {namespace, identifier} = parseResourceName(name);
+    const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, namespace, identifier);
     const versionsDirectory = join(resourceDirectory, RESOURCE_VERSIONS_DIRECTORY_NAME);
     const directory = join(versionsDirectory, version);
     const file = join(directory, RESOURCE_FILE_NAME);
@@ -193,8 +193,8 @@ export class RegistryCache {
   }
 
   async _findLatestCachedVersion(name, versionRange) {
-    const {scope, identifier} = parseResourceName(name, {throwIfUnscoped: true});
-    const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, scope, identifier);
+    const {namespace, identifier} = parseResourceName(name);
+    const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, namespace, identifier);
     const versionsDirectory = join(resourceDirectory, RESOURCE_VERSIONS_DIRECTORY_NAME);
 
     if (!existsSync(versionsDirectory)) {

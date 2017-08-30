@@ -16,7 +16,7 @@ export function parseResourceSpecifier(specifier) {
     name = name.slice(0, index);
   }
 
-  validateResourceName(name, {throwIfUnscoped: true});
+  validateResourceName(name);
 
   versionRange = new VersionRange(versionRange);
 

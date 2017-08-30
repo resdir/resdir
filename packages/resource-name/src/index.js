@@ -1,15 +1,15 @@
 import {formatString} from '@resdir/console';
 
-export function parseResourceName(name, {throwIfMissing = true, throwIfUnscoped} = {}) {
+export function parseResourceName(name, {throwIfMissing = true} = {}) {
   const parsedName = _parse(name);
   if (!parsedName) {
-    if (throwIfMissing || throwIfUnscoped) {
+    if (throwIfMissing) {
       throw new Error(`Resource name is missing`);
     }
     return undefined;
   }
-  if (!parsedName.scope && throwIfUnscoped) {
-    throw new Error(`Scope is missing in resource name '${formatString(name)}'`);
+  if (!parsedName.namespace) {
+    throw new Error(`Namespace is missing in resource name '${formatString(name)}'`);
   }
   return parsedName;
 }
@@ -18,23 +18,23 @@ function _parse(name) {
   if (typeof name !== 'string') {
     return undefined;
   }
-  let [scope, identifier, rest] = name.split('/');
+  let [namespace, identifier, rest] = name.split('/');
   if (rest !== undefined) {
     return undefined;
   }
   if (identifier === undefined) {
-    identifier = scope;
-    scope = undefined;
+    identifier = namespace;
+    namespace = undefined;
   }
-  if (identifier === '' || scope === '') {
+  if (identifier === '' || namespace === '') {
     return undefined;
   }
-  return {scope, identifier};
+  return {namespace, identifier};
 }
 
-export function getResourceScope(name) {
+export function getResourceNamespace(name) {
   const parsedName = _parse(name);
-  return parsedName && parsedName.scope;
+  return parsedName && parsedName.namespace;
 }
 
 export function getResourceIdentifier(name) {
@@ -42,7 +42,7 @@ export function getResourceIdentifier(name) {
   return parsedName && parsedName.identifier;
 }
 
-export function validateResourceName(name, {throwIfInvalid = true, throwIfUnscoped} = {}) {
+export function validateResourceName(name, {throwIfInvalid = true} = {}) {
   const isValid = _validate(name);
 
   if (!isValid) {
@@ -50,10 +50,6 @@ export function validateResourceName(name, {throwIfInvalid = true, throwIfUnscop
       throw new Error(`Resource name ${formatString(name)} is invalid`);
     }
     return false;
-  }
-
-  if (throwIfUnscoped && !getResourceScope(name)) {
-    throw new Error(`Scope is missing in resource name '${formatString(name)}'`);
   }
 
   return true;
@@ -66,13 +62,13 @@ function _validate(name) {
     return false;
   }
 
-  const {scope, identifier} = parsedName;
+  const {namespace, identifier} = parsedName;
 
-  if (!validatePart(identifier)) {
+  if (!validatePart(namespace)) {
     return false;
   }
 
-  if (scope && !validatePart(scope)) {
+  if (!validatePart(identifier)) {
     return false;
   }
 
@@ -84,15 +80,11 @@ function validatePart(part) {
     return false;
   }
 
-  if (/[^a-z0-9_]/i.test(part[0])) {
+  if (/[^a-z0-9-]/.test(part)) {
     return false;
   }
 
-  if (/[^a-z0-9._-]/i.test(part.slice(1, -1))) {
-    return false;
-  }
-
-  if (/[^a-z0-9]/i.test(part.slice(-1))) {
+  if (part.startsWith('-') || part.endsWith('-') || part.includes('--')) {
     return false;
   }
 
