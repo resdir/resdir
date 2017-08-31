@@ -11,7 +11,7 @@ import VersionRange from '@resdir/version-range';
 
 const debug = require('debug')('resdir:registry:cache');
 
-const CACHE_DIRECTORY = join(homedir(), '.resdir', 'caches', 'registry-proxy');
+const CACHE_DIRECTORY = join(homedir(), '.resdir', 'caches', 'registry-cache');
 const RESOURCE_CACHE_DIRECTORY = join(CACHE_DIRECTORY, 'resources');
 const RESOURCE_REQUESTS_DIRECTORY_NAME = 'requests';
 const RESOURCE_VERSIONS_DIRECTORY_NAME = 'versions';
@@ -20,7 +20,7 @@ const RESOURCE_FILE_NAME = '@resource.json';
 /*
 Cache is stored on disk as follow:
 
-  registry-proxy
+  registry-cache
     resources
       resdir
         example
