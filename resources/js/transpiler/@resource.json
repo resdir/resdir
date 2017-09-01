@@ -1,6 +1,6 @@
 {
   "@name": "js/transpiler",
-  "@version": "0.1.0",
+  "@version": "0.1.1",
   "@files": ["./dist"],
   "dependencies": {
     "@type": "js/dependencies",
@@ -13,6 +13,7 @@
       "babel-core@^6.25.0",
       "babel-plugin-transform-class-properties@^6.24.1",
       "babel-plugin-transform-object-rest-spread@^6.23.0",
+      "babel-plugin-transform-react-jsx@^6.24.1",
       "babel-preset-env@^1.5.2",
       "fs-extra@^3.0.1",
       "is-directory@^0.3.1",
@@ -37,11 +38,16 @@
     "source": "./src",
     "destination": "./dist",
     "extensions": [".js", ".jsx", ".es6", ".es"],
+    "jsxPragma": {
+      "@type": "string"
+    },
     "run": {
       "@type": "command",
       "@alias": "run",
       "@parameter": {
-        "files": {"@type": "string"}
+        "files": {
+          "@type": "string"
+        }
       },
       "@variadic": true
     }

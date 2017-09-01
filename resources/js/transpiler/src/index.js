@@ -85,6 +85,21 @@ export default base =>
     }
 
     async _transpile(srcDirectory, destDirectory, files, {verbose}) {
+      const transformOptions = {
+        presets: [
+          [
+            require.resolve('babel-preset-env'),
+            {targets: {node: 8}, loose: true, exclude: ['transform-regenerator']}
+          ]
+        ],
+        plugins: [
+          require.resolve('babel-plugin-transform-class-properties'),
+          require.resolve('babel-plugin-transform-object-rest-spread'),
+          [require.resolve('babel-plugin-transform-react-jsx'), {pragma: this.jsxPragma}]
+        ],
+        sourceMaps: 'inline'
+      };
+
       for (const file of files) {
         const srcFile = join(srcDirectory, file);
         const destFile = join(destDirectory, file);
@@ -96,19 +111,7 @@ export default base =>
         let code = await readFile(srcFile, 'utf8');
         const {mode} = statSync(srcFile);
 
-        ({code} = transform(code, {
-          presets: [
-            [
-              require.resolve('babel-preset-env'),
-              {targets: {node: 8}, loose: true, exclude: ['transform-regenerator']}
-            ]
-          ],
-          plugins: [
-            require.resolve('babel-plugin-transform-class-properties'),
-            require.resolve('babel-plugin-transform-object-rest-spread')
-          ],
-          sourceMaps: 'inline'
-        }));
+        ({code} = transform(code, transformOptions));
 
         await outputFile(destFile, code);
         chmodSync(destFile, mode);
