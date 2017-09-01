@@ -3,7 +3,7 @@ import ora from 'ora';
 import cliSpinners from 'cli-spinners';
 import windowSize from 'window-size';
 import sliceANSI from 'slice-ansi';
-import inquirer from 'inquirer';
+import read from 'read';
 
 export function formatString(string) {
   if (string === undefined) {
@@ -282,9 +282,13 @@ export function adjustToWindowWidth(text, {leftMargin = 0, rightMargin = 0} = {}
   return sliceANSI(text, 0, windowSize.width - leftMargin - rightMargin);
 }
 
-export async function prompt(message, options = {}) {
-  const answers = await inquirer.prompt([
-    {type: 'input', name: 'input', message, default: options.default}
-  ]);
-  return answers.input;
+export async function prompt(message) {
+  return new Promise((resolve, reject) => {
+    read({prompt: `${gray('~>')} ${message}`}, (err, response) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(response);
+    });
+  });
 }
