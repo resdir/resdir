@@ -13,8 +13,9 @@ export async function getJSON(url, options = {}) {
   return await fetch(url, options);
 }
 
-export async function postJSON(url, options = {}) {
+export async function postJSON(url, body, options = {}) {
   options.method = 'POST';
+  options.body = body;
   options.json = 'true';
   if (!options.expectedStatus) {
     options.expectedStatus = [201, 204];
