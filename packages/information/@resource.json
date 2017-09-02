@@ -1,0 +1,8 @@
+{
+  "@type": "js/esnext-package",
+  "name": "@resdir/information",
+  "version": "0.1.0",
+  "description": "General information about Resdir service",
+  "files": ["./dist"],
+  "main": "./dist/index.js"
+}
