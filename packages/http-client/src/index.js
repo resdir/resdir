@@ -23,6 +23,7 @@ export async function postJSON(url, body, options = {}) {
   return await fetch(url, options);
 }
 
+/* eslint-disable complexity */
 export async function fetch(url, options = {}) {
   if (typeof url !== 'string') {
     throw new TypeError('\'url\' must be a string');
@@ -57,7 +58,7 @@ export async function fetch(url, options = {}) {
 
   const finalOptions = {method};
 
-  const headers = options.headers || {};
+  const headers = options.headers ? {...options.headers} : {};
 
   if (options.json) {
     headers.Accept = 'application/json';
@@ -70,6 +71,10 @@ export async function fetch(url, options = {}) {
       body = JSON.stringify(body);
     }
     finalOptions.body = body;
+  }
+
+  if (options.authorization) {
+    headers.Authorization = options.authorization;
   }
 
   const timeout = options.timeout;
@@ -113,3 +118,4 @@ export async function fetch(url, options = {}) {
 
   return result;
 }
+/* eslint-enable complexity */
