@@ -1,7 +1,7 @@
 import {formatString} from '@resdir/console';
 
 export function parseResourceName(name, {throwIfMissing = true} = {}) {
-  const parsedName = _parse(name);
+  const parsedName = parse(name);
   if (!parsedName) {
     if (throwIfMissing) {
       throw new Error(`Resource name is missing`);
@@ -14,7 +14,41 @@ export function parseResourceName(name, {throwIfMissing = true} = {}) {
   return parsedName;
 }
 
-function _parse(name) {
+export function getResourceNamespace(name) {
+  const parsedName = parse(name);
+  return parsedName && parsedName.namespace;
+}
+
+export function getResourceIdentifier(name) {
+  const parsedName = parse(name);
+  return parsedName && parsedName.identifier;
+}
+
+export function validateResourceName(name, {throwIfInvalid = true} = {}) {
+  const isValid = validate(name);
+
+  if (!isValid) {
+    if (throwIfInvalid) {
+      throw new Error(`Resource name ${formatString(name)} is invalid`);
+    }
+    return false;
+  }
+
+  return true;
+}
+
+export function validateNamespace(namespace, {throwIfInvalid = true} = {}) {
+  if (!validatePart(namespace)) {
+    if (throwIfInvalid) {
+      throw new Error(`Namespace ${formatString(namespace)} is invalid`);
+    }
+    return false;
+  }
+
+  return true;
+}
+
+function parse(name) {
   if (typeof name !== 'string') {
     return undefined;
   }
@@ -32,31 +66,8 @@ function _parse(name) {
   return {namespace, identifier};
 }
 
-export function getResourceNamespace(name) {
-  const parsedName = _parse(name);
-  return parsedName && parsedName.namespace;
-}
-
-export function getResourceIdentifier(name) {
-  const parsedName = _parse(name);
-  return parsedName && parsedName.identifier;
-}
-
-export function validateResourceName(name, {throwIfInvalid = true} = {}) {
-  const isValid = _validate(name);
-
-  if (!isValid) {
-    if (throwIfInvalid) {
-      throw new Error(`Resource name ${formatString(name)} is invalid`);
-    }
-    return false;
-  }
-
-  return true;
-}
-
-function _validate(name) {
-  const parsedName = _parse(name);
+function validate(name) {
+  const parsedName = parse(name);
 
   if (!parsedName) {
     return false;
