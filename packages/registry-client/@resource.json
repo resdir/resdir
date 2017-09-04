@@ -1,8 +1,12 @@
 {
   "@type": "js/esnext-package",
+  "name": "@resdir/registry-client",
+  "version": "0.1.4",
   "description": "Resdir registry client",
+  "files": [
+    "./dist"
+  ],
   "main": "./dist/index.js",
-  "version": "0.1.3",
   "dependencies": [
     "aws-sdk@^2.95.0",
     "debug@^3.0.0",
@@ -19,9 +23,5 @@
     "@resdir/resource-specifier@^0.1.0",
     "@resdir/secret-generator@^1.0.0",
     "tempy@^0.1.0"
-  ],
-  "name": "@resdir/registry-client",
-  "files": [
-    "./dist"
   ]
 }
