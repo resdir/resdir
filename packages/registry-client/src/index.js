@@ -1,6 +1,5 @@
 import {join, resolve, dirname} from 'path';
 import {existsSync} from 'fs';
-import {homedir} from 'os';
 import {upperFirst} from 'lodash';
 import {ensureDirSync} from 'fs-extra';
 import S3 from 'aws-sdk/clients/s3';
@@ -18,18 +17,25 @@ import {zip, unzip} from '@resdir/archive-manager';
 
 const debug = require('debug')('resdir:registry:client');
 
-const RESDIR_DIRECTORY = join(homedir(), '.resdir');
-const USER_FILE = join(RESDIR_DIRECTORY, 'user.json');
-const CACHE_FILE = join(RESDIR_DIRECTORY, 'caches', 'registry-client', 'data.json');
-
 const RESDIR_REGISTRY_LOCAL_SERVER_URL = 'http://localhost:3000/registry';
 
 export class RegistryClient {
-  constructor({awsRegion, awsS3BucketName, awsS3ResourceUploadsPrefix, clientId}) {
+  constructor({runDirectory, clientId, awsRegion, awsS3BucketName, awsS3ResourceUploadsPrefix}) {
+    if (!runDirectory) {
+      throw new Error('\'runDirectory\' argument is missing');
+    }
+    if (!clientId) {
+      throw new Error('\'clientId\' argument is missing');
+    }
+    if (!(awsRegion && awsS3BucketName && awsS3ResourceUploadsPrefix)) {
+      throw new Error('AWS configuration is missing or incomplete');
+    }
+    this.userFile = join(runDirectory, 'user.json');
+    this.cacheFile = join(runDirectory, 'caches', 'registry-client', 'data.json');
+    this.clientId = clientId;
     this.awsRegion = awsRegion;
     this.awsS3BucketName = awsS3BucketName;
     this.awsS3ResourceUploadsPrefix = awsS3ResourceUploadsPrefix;
-    this.clientId = clientId;
   }
 
   async signUp(email) {
@@ -250,12 +256,12 @@ export class RegistryClient {
   }
 
   _loadUserData() {
-    return load(USER_FILE, {throwIfNotFound: false}) || {};
+    return load(this.userFile, {throwIfNotFound: false}) || {};
   }
 
   _saveUserData(data) {
-    ensureDirSync(dirname(USER_FILE));
-    save(USER_FILE, data);
+    ensureDirSync(dirname(this.userFile));
+    save(this.userFile, data);
   }
 
   _updateUserData(data) {
@@ -341,12 +347,12 @@ export class RegistryClient {
   // === Cache ===
 
   _loadCache() {
-    return load(CACHE_FILE, {throwIfNotFound: false}) || {};
+    return load(this.cacheFile, {throwIfNotFound: false}) || {};
   }
 
   _saveCache(data) {
-    ensureDirSync(dirname(CACHE_FILE));
-    save(CACHE_FILE, data);
+    ensureDirSync(dirname(this.cacheFile));
+    save(this.cacheFile, data);
   }
 
   _updateCache(data) {

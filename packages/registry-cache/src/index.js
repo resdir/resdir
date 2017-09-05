@@ -1,6 +1,5 @@
 import {join, dirname} from 'path';
 import {existsSync, readdirSync} from 'fs';
-import {homedir} from 'os';
 import {ensureDirSync, moveSync} from 'fs-extra';
 import {formatString} from '@resdir/console';
 import {load, save} from '@resdir/file-manager';
@@ -10,13 +9,6 @@ import {compareVersions} from '@resdir/version';
 import VersionRange from '@resdir/version-range';
 
 const debug = require('debug')('resdir:registry:cache');
-
-const RESDIR_DIRECTORY = join(homedir(), '.resdir');
-const CACHE_DIRECTORY = join(RESDIR_DIRECTORY, 'caches', 'registry-cache');
-const RESOURCE_CACHE_DIRECTORY = join(CACHE_DIRECTORY, 'resources');
-const RESOURCE_REQUESTS_DIRECTORY_NAME = 'requests';
-const RESOURCE_VERSIONS_DIRECTORY_NAME = 'versions';
-const RESOURCE_FILE_NAME = '@resource.json';
 
 /*
 Cache is stored on disk as follow:
@@ -37,9 +29,20 @@ Cache is stored on disk as follow:
                   index.js
 */
 
+const RESOURCE_REQUESTS_DIRECTORY_NAME = 'requests';
+const RESOURCE_VERSIONS_DIRECTORY_NAME = 'versions';
+const RESOURCE_FILE_NAME = '@resource.json';
+
 export class RegistryCache {
-  constructor(client) {
+  constructor({client, runDirectory}) {
+    if (!client) {
+      throw new Error('\'client\' argument is missing');
+    }
+    if (!runDirectory) {
+      throw new Error('\'runDirectory\' argument is missing');
+    }
     this.client = client;
+    this.resourceCacheDirectory = join(runDirectory, 'caches', 'registry-cache', 'resources');
   }
 
   async signUp(...args) {
@@ -125,7 +128,7 @@ export class RegistryCache {
 
   async _invalidateCache(name, version) {
     const {namespace, identifier} = parseResourceName(name);
-    const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, namespace, identifier);
+    const resourceDirectory = join(this.resourceCacheDirectory, namespace, identifier);
     const requestsDirectory = join(resourceDirectory, RESOURCE_REQUESTS_DIRECTORY_NAME);
 
     if (!existsSync(requestsDirectory)) {
@@ -156,7 +159,7 @@ export class RegistryCache {
 
   _getCachedRequestFile(name, versionRange) {
     const {namespace, identifier} = parseResourceName(name);
-    const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, namespace, identifier);
+    const resourceDirectory = join(this.resourceCacheDirectory, namespace, identifier);
     const requestsDirectory = join(resourceDirectory, RESOURCE_REQUESTS_DIRECTORY_NAME);
     const requestFile = join(
       requestsDirectory,
@@ -204,7 +207,7 @@ export class RegistryCache {
 
   _getCachedResourceFile(name, version) {
     const {namespace, identifier} = parseResourceName(name);
-    const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, namespace, identifier);
+    const resourceDirectory = join(this.resourceCacheDirectory, namespace, identifier);
     const versionsDirectory = join(resourceDirectory, RESOURCE_VERSIONS_DIRECTORY_NAME);
     const directory = join(versionsDirectory, version);
     const file = join(directory, RESOURCE_FILE_NAME);
@@ -213,7 +216,7 @@ export class RegistryCache {
 
   async _findLatestCachedVersion(name, versionRange) {
     const {namespace, identifier} = parseResourceName(name);
-    const resourceDirectory = join(RESOURCE_CACHE_DIRECTORY, namespace, identifier);
+    const resourceDirectory = join(this.resourceCacheDirectory, namespace, identifier);
     const versionsDirectory = join(resourceDirectory, RESOURCE_VERSIONS_DIRECTORY_NAME);
 
     if (!existsSync(versionsDirectory)) {
