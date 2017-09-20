@@ -1,0 +1,13 @@
+{
+  "@type": "js/esnext-package",
+  "name": "@resdir/namespace",
+  "version": "0.1.0",
+  "description": "Useful functions to handle namespaces",
+  "files": [
+    "./dist"
+  ],
+  "main": "./dist/index.js",
+  "dependencies": [
+    "@resdir/console@^0.1.7"
+  ]
+}

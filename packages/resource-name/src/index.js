@@ -1,3 +1,4 @@
+import {validateNamespace as importedValidateNamespace} from '@resdir/namespace';
 import {formatString} from '@resdir/console';
 
 export function parseResourceName(name, {throwIfMissing = true} = {}) {
@@ -37,17 +38,6 @@ export function validateResourceName(name, {throwIfInvalid = true} = {}) {
   return true;
 }
 
-export function validateNamespace(namespace, {throwIfInvalid = true} = {}) {
-  if (!validatePart(namespace)) {
-    if (throwIfInvalid) {
-      throw new Error(`Namespace ${formatString(namespace)} is invalid`);
-    }
-    return false;
-  }
-
-  return true;
-}
-
 function parse(name) {
   if (typeof name !== 'string') {
     return undefined;
@@ -75,27 +65,35 @@ function validate(name) {
 
   const {namespace, identifier} = parsedName;
 
-  if (!validatePart(namespace)) {
+  if (!validateNamespace(namespace)) {
     return false;
   }
 
-  if (!validatePart(identifier)) {
+  if (!validateIdentifier(identifier)) {
     return false;
   }
 
   return true;
 }
 
-function validatePart(part) {
-  if (!part) {
+export function validateNamespace(...args) {
+  return importedValidateNamespace(...args);
+}
+
+function validateIdentifier(identifier) {
+  if (typeof identifier !== 'string') {
     return false;
   }
 
-  if (/[^a-z0-9-]/.test(part)) {
+  if (identifier.length < 1) {
     return false;
   }
 
-  if (part.startsWith('-') || part.endsWith('-') || part.includes('--')) {
+  if (/[^a-z0-9-]/.test(identifier)) {
+    return false;
+  }
+
+  if (identifier.startsWith('-') || identifier.endsWith('-') || identifier.includes('--')) {
     return false;
   }
 
