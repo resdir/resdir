@@ -1,0 +1,9 @@
+{
+  "@type": "js/esnext-package",
+  "name": "@resdir/top-level-domains",
+  "version": "0.1.0",
+  "description": "List of Top Level Domains",
+  "files": ["./dist", "data.js"],
+  "main": "./dist/index.js",
+  "dependencies": ["lodash@^4.17.4"]
+}
