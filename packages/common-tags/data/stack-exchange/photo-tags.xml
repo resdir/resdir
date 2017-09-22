@@ -1,0 +1,1122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tags>
+  <row Id="2" TagName="canon" Count="1898" ExcerptPostId="2992" WikiPostId="2938" />
+  <row Id="5" TagName="depth-of-field" Count="249" ExcerptPostId="4472" WikiPostId="4471" />
+  <row Id="6" TagName="technique" Count="281" ExcerptPostId="7710" WikiPostId="7709" />
+  <row Id="7" TagName="photoshop" Count="664" ExcerptPostId="9852" WikiPostId="9851" />
+  <row Id="9" TagName="travel" Count="146" ExcerptPostId="17303" WikiPostId="17302" />
+  <row Id="10" TagName="lighting" Count="560" ExcerptPostId="10143" WikiPostId="10142" />
+  <row Id="11" TagName="flash" Count="820" ExcerptPostId="7093" WikiPostId="7092" />
+  <row Id="14" TagName="workflow" Count="163" ExcerptPostId="7192" WikiPostId="7191" />
+  <row Id="16" TagName="tips" Count="50" ExcerptPostId="15705" WikiPostId="15704" />
+  <row Id="18" TagName="noise" Count="146" ExcerptPostId="17282" WikiPostId="17281" />
+  <row Id="19" TagName="micro-four-thirds" Count="93" ExcerptPostId="2994" WikiPostId="2993" />
+  <row Id="20" TagName="slr" Count="81" ExcerptPostId="21015" WikiPostId="21014" />
+  <row Id="21" TagName="dslr" Count="692" ExcerptPostId="2996" WikiPostId="2995" />
+  <row Id="22" TagName="sensor" Count="334" ExcerptPostId="11240" WikiPostId="11239" />
+  <row Id="23" TagName="cleaning" Count="138" ExcerptPostId="17280" WikiPostId="17279" />
+  <row Id="24" TagName="lightroom" Count="947" ExcerptPostId="2997" WikiPostId="2952" />
+  <row Id="25" TagName="raw" Count="613" ExcerptPostId="2999" WikiPostId="2998" />
+  <row Id="26" TagName="jpeg" Count="226" ExcerptPostId="15703" WikiPostId="15702" />
+  <row Id="28" TagName="tutorial" Count="27" />
+  <row Id="29" TagName="inspiration" Count="18" />
+  <row Id="36" TagName="lens" Count="2291" ExcerptPostId="3001" WikiPostId="3000" />
+  <row Id="38" TagName="marketing" Count="13" />
+  <row Id="40" TagName="tripod" Count="213" ExcerptPostId="9996" WikiPostId="9995" />
+  <row Id="42" TagName="focus" Count="401" ExcerptPostId="4468" WikiPostId="4467" />
+  <row Id="43" TagName="nikon" Count="1488" ExcerptPostId="3003" WikiPostId="3002" />
+  <row Id="44" TagName="aperture" Count="490" ExcerptPostId="3004" WikiPostId="2983" />
+  <row Id="45" TagName="focal-length" Count="353" ExcerptPostId="12848" WikiPostId="12847" />
+  <row Id="48" TagName="back-focus" Count="20" />
+  <row Id="49" TagName="filters" Count="382" ExcerptPostId="5488" WikiPostId="5487" />
+  <row Id="50" TagName="uv" Count="36" ExcerptPostId="17233" WikiPostId="17232" />
+  <row Id="52" TagName="composition" Count="188" ExcerptPostId="14159" WikiPostId="14158" />
+  <row Id="53" TagName="slides" Count="35" />
+  <row Id="56" TagName="dng" Count="59" ExcerptPostId="7375" WikiPostId="7374" />
+  <row Id="58" TagName="iso" Count="215" ExcerptPostId="7095" WikiPostId="7094" />
+  <row Id="61" TagName="wavelength" Count="5" ExcerptPostId="39206" WikiPostId="39205" />
+  <row Id="62" TagName="chromatic-aberration" Count="49" ExcerptPostId="25230" WikiPostId="25229" />
+  <row Id="66" TagName="zoom" Count="268" ExcerptPostId="3006" WikiPostId="3005" />
+  <row Id="67" TagName="negative-scanner" Count="27" />
+  <row Id="68" TagName="film" Count="482" ExcerptPostId="10357" WikiPostId="10356" />
+  <row Id="69" TagName="flickr" Count="43" ExcerptPostId="9857" WikiPostId="9856" />
+  <row Id="71" TagName="lee" Count="10" />
+  <row Id="73" TagName="blog" Count="9" ExcerptPostId="37688" WikiPostId="37687" />
+  <row Id="77" TagName="adapter" Count="67" ExcerptPostId="22518" WikiPostId="22517" />
+  <row Id="78" TagName="concert" Count="24" />
+  <row Id="80" TagName="tagging" Count="44" ExcerptPostId="46595" WikiPostId="46594" />
+  <row Id="81" TagName="hdr" Count="184" ExcerptPostId="11257" WikiPostId="11256" />
+  <row Id="86" TagName="prime" Count="136" ExcerptPostId="3008" WikiPostId="3007" />
+  <row Id="87" TagName="macro" Count="398" ExcerptPostId="3010" WikiPostId="3009" />
+  <row Id="88" TagName="crop-factor" Count="77" ExcerptPostId="24960" WikiPostId="24959" />
+  <row Id="89" TagName="point-and-shoot" Count="180" ExcerptPostId="10174" WikiPostId="10173" />
+  <row Id="90" TagName="field-of-view" Count="103" ExcerptPostId="46516" WikiPostId="46515" />
+  <row Id="93" TagName="pixels" Count="33" />
+  <row Id="96" TagName="digital-vs-film" Count="62" ExcerptPostId="17164" WikiPostId="17163" />
+  <row Id="99" TagName="web" Count="110" ExcerptPostId="17198" WikiPostId="17197" />
+  <row Id="102" TagName="lens-flare" Count="56" ExcerptPostId="22496" WikiPostId="22495" />
+  <row Id="103" TagName="sunlight" Count="54" />
+  <row Id="104" TagName="outdoor" Count="52" ExcerptPostId="22838" WikiPostId="22837" />
+  <row Id="106" TagName="camera-bag" Count="61" ExcerptPostId="17573" WikiPostId="17572" />
+  <row Id="107" TagName="storage" Count="99" ExcerptPostId="17333" WikiPostId="17332" />
+  <row Id="109" TagName="android" Count="54" ExcerptPostId="22044" WikiPostId="22043" />
+  <row Id="110" TagName="scanner" Count="27" />
+  <row Id="112" TagName="video" Count="155" ExcerptPostId="12454" WikiPostId="12453" />
+  <row Id="115" TagName="panorama" Count="163" ExcerptPostId="11411" WikiPostId="11410" />
+  <row Id="116" TagName="photo-editing" Count="490" ExcerptPostId="8188" WikiPostId="8187" />
+  <row Id="118" TagName="sigma" Count="154" ExcerptPostId="10345" WikiPostId="10344" />
+  <row Id="122" TagName="display" Count="60" />
+  <row Id="123" TagName="presets" Count="34" ExcerptPostId="37590" WikiPostId="37589" />
+  <row Id="124" TagName="display-calibration" Count="88" ExcerptPostId="22434" WikiPostId="22433" />
+  <row Id="125" TagName="colorimeter" Count="7" />
+  <row Id="126" TagName="post-processing" Count="689" ExcerptPostId="10146" WikiPostId="10145" />
+  <row Id="127" TagName="fair-use" Count="6" ExcerptPostId="27561" WikiPostId="27560" />
+  <row Id="128" TagName="copyright" Count="107" ExcerptPostId="12897" WikiPostId="12896" />
+  <row Id="130" TagName="software" Count="563" ExcerptPostId="10141" WikiPostId="10140" />
+  <row Id="131" TagName="legal" Count="153" ExcerptPostId="10654" WikiPostId="10653" />
+  <row Id="132" TagName="dust" Count="51" ExcerptPostId="37891" WikiPostId="37890" />
+  <row Id="133" TagName="metering" Count="131" ExcerptPostId="17296" WikiPostId="17295" />
+  <row Id="134" TagName="sunrise" Count="18" />
+  <row Id="135" TagName="sunset" Count="24" />
+  <row Id="136" TagName="printed-album" Count="9" />
+  <row Id="139" TagName="backup" Count="66" ExcerptPostId="10042" WikiPostId="10041" />
+  <row Id="140" TagName="prints" Count="132" ExcerptPostId="17301" WikiPostId="17300" />
+  <row Id="141" TagName="photo-galleries" Count="17" ExcerptPostId="38871" WikiPostId="38870" />
+  <row Id="142" TagName="monitors" Count="59" ExcerptPostId="22526" WikiPostId="22525" />
+  <row Id="144" TagName="neutral-density" Count="90" ExcerptPostId="22438" WikiPostId="22437" />
+  <row Id="145" TagName="color-management" Count="280" ExcerptPostId="10176" WikiPostId="10175" />
+  <row Id="147" TagName="linux" Count="66" ExcerptPostId="12204" WikiPostId="12203" />
+  <row Id="148" TagName="photo-management" Count="64" ExcerptPostId="22524" WikiPostId="22523" />
+  <row Id="149" TagName="umbrella" Count="23" ExcerptPostId="82618" WikiPostId="82617" />
+  <row Id="150" TagName="lighting-modifiers" Count="48" ExcerptPostId="82620" WikiPostId="82619" />
+  <row Id="152" TagName="write-speed" Count="17" />
+  <row Id="153" TagName="wide-angle" Count="150" ExcerptPostId="17252" WikiPostId="17251" />
+  <row Id="154" TagName="ultra-wide" Count="46" ExcerptPostId="17254" WikiPostId="17253" />
+  <row Id="155" TagName="strobist" Count="21" ExcerptPostId="37287" WikiPostId="37286" />
+  <row Id="159" TagName="shutter-speed" Count="239" ExcerptPostId="12458" WikiPostId="12457" />
+  <row Id="160" TagName="autofocus" Count="553" ExcerptPostId="11242" WikiPostId="11241" />
+  <row Id="162" TagName="facebook" Count="27" ExcerptPostId="10045" WikiPostId="10044" />
+  <row Id="163" TagName="low-light" Count="226" ExcerptPostId="11374" WikiPostId="11373" />
+  <row Id="165" TagName="workshops" Count="2" />
+  <row Id="166" TagName="white-balance" Count="253" ExcerptPostId="11809" WikiPostId="11808" />
+  <row Id="167" TagName="image-processing" Count="178" ExcerptPostId="17615" WikiPostId="17614" />
+  <row Id="168" TagName="street-photography" Count="69" ExcerptPostId="22415" WikiPostId="22414" />
+  <row Id="171" TagName="stock-photography" Count="46" ExcerptPostId="14334" WikiPostId="14333" />
+  <row Id="174" TagName="sharing" Count="33" />
+  <row Id="179" TagName="metadata" Count="380" ExcerptPostId="9999" WikiPostId="9998" />
+  <row Id="181" TagName="bokeh" Count="109" ExcerptPostId="14831" WikiPostId="14830" />
+  <row Id="182" TagName="telephoto" Count="159" ExcerptPostId="17168" WikiPostId="17167" />
+  <row Id="184" TagName="teleconverter" Count="82" ExcerptPostId="17904" WikiPostId="17903" />
+  <row Id="190" TagName="histogram" Count="33" ExcerptPostId="37564" WikiPostId="37563" />
+  <row Id="191" TagName="tonal-range" Count="4" ExcerptPostId="22328" WikiPostId="22327" />
+  <row Id="192" TagName="tonal-distribution" Count="2" ExcerptPostId="25245" WikiPostId="25244" />
+  <row Id="195" TagName="wildlife" Count="60" ExcerptPostId="34743" WikiPostId="34742" />
+  <row Id="196" TagName="fun" Count="2" />
+  <row Id="199" TagName="ppi" Count="17" ExcerptPostId="20862" WikiPostId="20861" />
+  <row Id="201" TagName="diy" Count="128" ExcerptPostId="11246" WikiPostId="11245" />
+  <row Id="202" TagName="moon" Count="53" ExcerptPostId="46405" WikiPostId="46404" />
+  <row Id="203" TagName="exposure" Count="592" ExcerptPostId="10148" WikiPostId="10147" />
+  <row Id="205" TagName="viewfinder" Count="130" ExcerptPostId="22430" WikiPostId="22429" />
+  <row Id="207" TagName="optical-quality" Count="21" />
+  <row Id="208" TagName="coolpix" Count="27" />
+  <row Id="209" TagName="aberration" Count="16" ExcerptPostId="37682" WikiPostId="37681" />
+  <row Id="210" TagName="optics" Count="257" ExcerptPostId="12456" WikiPostId="12455" />
+  <row Id="211" TagName="noise-removal" Count="13" ExcerptPostId="20924" WikiPostId="20923" />
+  <row Id="215" TagName="manual-focus" Count="180" ExcerptPostId="11244" WikiPostId="11243" />
+  <row Id="217" TagName="lens-mount" Count="187" ExcerptPostId="22475" WikiPostId="22474" />
+  <row Id="220" TagName="extension-tubes" Count="62" ExcerptPostId="22436" WikiPostId="22435" />
+  <row Id="222" TagName="accessories" Count="70" ExcerptPostId="22510" WikiPostId="22509" />
+  <row Id="224" TagName="tamron" Count="87" ExcerptPostId="22489" WikiPostId="22488" />
+  <row Id="226" TagName="landscape" Count="199" ExcerptPostId="17222" WikiPostId="17221" />
+  <row Id="227" TagName="keyboard-shortcuts" Count="14" ExcerptPostId="67472" WikiPostId="67471" />
+  <row Id="228" TagName="gimp" Count="94" ExcerptPostId="6880" WikiPostId="6879" />
+  <row Id="229" TagName="second-curtain" Count="16" ExcerptPostId="24433" WikiPostId="24432" />
+  <row Id="233" TagName="professional" Count="49" ExcerptPostId="7031" WikiPostId="7030" />
+  <row Id="234" TagName="amateur" Count="29" ExcerptPostId="7033" WikiPostId="7032" />
+  <row Id="237" TagName="color-filters" Count="41" ExcerptPostId="54405" WikiPostId="54404" />
+  <row Id="238" TagName="books" Count="51" ExcerptPostId="22514" WikiPostId="22513" />
+  <row Id="240" TagName="shutter" Count="147" ExcerptPostId="22477" WikiPostId="22476" />
+  <row Id="241" TagName="f-stop" Count="65" ExcerptPostId="22487" WikiPostId="22486" />
+  <row Id="245" TagName="color-correction" Count="116" ExcerptPostId="21804" WikiPostId="21803" />
+  <row Id="246" TagName="gray-card" Count="32" ExcerptPostId="37587" WikiPostId="37586" />
+  <row Id="248" TagName="people" Count="26" />
+  <row Id="250" TagName="digital" Count="369" ExcerptPostId="82472" WikiPostId="82471" />
+  <row Id="251" TagName="tethering" Count="108" ExcerptPostId="17288" WikiPostId="17287" />
+  <row Id="252" TagName="portrait" Count="411" ExcerptPostId="10166" WikiPostId="10165" />
+  <row Id="254" TagName="windows" Count="79" ExcerptPostId="17291" WikiPostId="17290" />
+  <row Id="256" TagName="education" Count="9" />
+  <row Id="257" TagName="cinema" Count="8" />
+  <row Id="258" TagName="polarizer" Count="93" ExcerptPostId="17286" WikiPostId="17285" />
+  <row Id="259" TagName="image-stabilization" Count="126" ExcerptPostId="3012" WikiPostId="3011" />
+  <row Id="260" TagName="aerial-photography" Count="25" ExcerptPostId="49471" WikiPostId="49470" />
+  <row Id="261" TagName="scanning" Count="94" ExcerptPostId="22506" WikiPostId="22505" />
+  <row Id="262" TagName="sports" Count="80" ExcerptPostId="18233" WikiPostId="18232" />
+  <row Id="264" TagName="wide-aperture" Count="20" />
+  <row Id="268" TagName="locations" Count="23" ExcerptPostId="17184" WikiPostId="17183" />
+  <row Id="269" TagName="terminology" Count="332" ExcerptPostId="11807" WikiPostId="11806" />
+  <row Id="270" TagName="timelapse" Count="174" ExcerptPostId="10348" WikiPostId="10347" />
+  <row Id="271" TagName="macintosh" Count="69" ExcerptPostId="20690" WikiPostId="20689" />
+  <row Id="273" TagName="repair" Count="214" ExcerptPostId="20062" WikiPostId="20061" />
+  <row Id="275" TagName="style" Count="37" />
+  <row Id="278" TagName="photoshop-elements" Count="38" ExcerptPostId="37368" WikiPostId="37367" />
+  <row Id="280" TagName="learning" Count="88" ExcerptPostId="10555" WikiPostId="10554" />
+  <row Id="282" TagName="studio-setup" Count="53" ExcerptPostId="19179" WikiPostId="19178" />
+  <row Id="283" TagName="equipment-recommendation" Count="1297" ExcerptPostId="6697" WikiPostId="6696" />
+  <row Id="288" TagName="memory-card" Count="141" ExcerptPostId="11719" WikiPostId="11718" />
+  <row Id="291" TagName="tripod-heads" Count="71" ExcerptPostId="20710" WikiPostId="20709" />
+  <row Id="299" TagName="disability" Count="4" />
+  <row Id="300" TagName="brightness" Count="44" />
+  <row Id="301" TagName="aspect-ratio" Count="50" ExcerptPostId="37327" WikiPostId="37326" />
+  <row Id="303" TagName="iphoto" Count="28" />
+  <row Id="304" TagName="iphone" Count="92" ExcerptPostId="17231" WikiPostId="17230" />
+  <row Id="305" TagName="body" Count="123" ExcerptPostId="10450" WikiPostId="10449" />
+  <row Id="306" TagName="sync-speed" Count="32" ExcerptPostId="22797" WikiPostId="22796" />
+  <row Id="315" TagName="softbox" Count="43" ExcerptPostId="37562" WikiPostId="37561" />
+  <row Id="317" TagName="cropped-sensor" Count="96" ExcerptPostId="20864" WikiPostId="20863" />
+  <row Id="318" TagName="full-frame" Count="106" ExcerptPostId="10452" WikiPostId="10451" />
+  <row Id="319" TagName="zone-system" Count="7" />
+  <row Id="325" TagName="noise-reduction" Count="78" ExcerptPostId="20922" WikiPostId="20921" />
+  <row Id="327" TagName="old-lenses" Count="142" ExcerptPostId="20816" WikiPostId="20815" />
+  <row Id="328" TagName="infrared" Count="54" />
+  <row Id="331" TagName="manual-mode" Count="101" ExcerptPostId="18170" WikiPostId="18169" />
+  <row Id="333" TagName="fill-flash" Count="21" />
+  <row Id="338" TagName="light" Count="170" ExcerptPostId="17774" WikiPostId="17773" />
+  <row Id="340" TagName="bibble" Count="5" ExcerptPostId="18894" WikiPostId="18893" />
+  <row Id="341" TagName="project" Count="9" />
+  <row Id="342" TagName="shooting-mode" Count="22" />
+  <row Id="347" TagName="negative-film" Count="41" />
+  <row Id="349" TagName="picasa" Count="50" ExcerptPostId="24441" WikiPostId="24440" />
+  <row Id="350" TagName="film-grain" Count="7" />
+  <row Id="351" TagName="artistic" Count="11" />
+  <row Id="352" TagName="photographer" Count="29" ExcerptPostId="14229" WikiPostId="14228" />
+  <row Id="353" TagName="lens-hood" Count="40" ExcerptPostId="7097" WikiPostId="7096" />
+  <row Id="355" TagName="posing" Count="38" />
+  <row Id="356" TagName="strobes" Count="54" ExcerptPostId="52820" WikiPostId="52819" />
+  <row Id="358" TagName="triggers" Count="32" />
+  <row Id="360" TagName="dynamic-range" Count="124" ExcerptPostId="17298" WikiPostId="17297" />
+  <row Id="361" TagName="used-equipment" Count="50" ExcerptPostId="24443" WikiPostId="24442" />
+  <row Id="362" TagName="35mm" Count="117" ExcerptPostId="34524" WikiPostId="34523" />
+  <row Id="363" TagName="developing" Count="115" ExcerptPostId="18240" WikiPostId="18239" />
+  <row Id="364" TagName="digitizing" Count="25" />
+  <row Id="365" TagName="tilt-shift" Count="48" ExcerptPostId="22940" WikiPostId="22939" />
+  <row Id="367" TagName="cross-processing" Count="7" />
+  <row Id="371" TagName="astrophotography" Count="231" ExcerptPostId="9850" WikiPostId="9849" />
+  <row Id="372" TagName="ipad" Count="25" />
+  <row Id="373" TagName="weather" Count="58" ExcerptPostId="22512" WikiPostId="22511" />
+  <row Id="374" TagName="apple-aperture" Count="123" ExcerptPostId="3014" WikiPostId="3013" />
+  <row Id="376" TagName="nature" Count="26" />
+  <row Id="378" TagName="continuous-autofocus" Count="25" />
+  <row Id="379" TagName="gps" Count="51" ExcerptPostId="22504" WikiPostId="22503" />
+  <row Id="380" TagName="thumbnail-preview" Count="6" />
+  <row Id="381" TagName="windows-7" Count="22" />
+  <row Id="383" TagName="tiff" Count="43" ExcerptPostId="34459" WikiPostId="34458" />
+  <row Id="385" TagName="unsharp-mask" Count="6" />
+  <row Id="387" TagName="alt-process" Count="15" ExcerptPostId="43624" WikiPostId="43623" />
+  <row Id="391" TagName="long-exposure" Count="210" ExcerptPostId="17627" WikiPostId="17626" />
+  <row Id="392" TagName="maintenance" Count="44" ExcerptPostId="39266" WikiPostId="39265" />
+  <row Id="393" TagName="rangefinder" Count="33" />
+  <row Id="396" TagName="sharpness" Count="185" ExcerptPostId="17219" WikiPostId="17218" />
+  <row Id="397" TagName="image-quality" Count="320" ExcerptPostId="17157" WikiPostId="17156" />
+  <row Id="399" TagName="underwater" Count="26" />
+  <row Id="401" TagName="sun" Count="52" />
+  <row Id="406" TagName="golden-hour" Count="7" />
+  <row Id="408" TagName="high-key" Count="14" ExcerptPostId="36140" WikiPostId="36139" />
+  <row Id="412" TagName="teaching" Count="7" />
+  <row Id="414" TagName="mirror-lockup" Count="13" ExcerptPostId="38975" WikiPostId="38974" />
+  <row Id="416" TagName="printing" Count="339" ExcerptPostId="10354" WikiPostId="10353" />
+  <row Id="418" TagName="renting" Count="18" ExcerptPostId="10454" WikiPostId="10453" />
+  <row Id="421" TagName="ink-jet" Count="28" ExcerptPostId="37888" WikiPostId="37887" />
+  <row Id="422" TagName="dpi" Count="42" ExcerptPostId="20860" WikiPostId="20859" />
+  <row Id="423" TagName="camera-shake" Count="28" ExcerptPostId="37556" WikiPostId="37555" />
+  <row Id="424" TagName="firmware" Count="42" ExcerptPostId="38174" WikiPostId="38173" />
+  <row Id="425" TagName="black-and-white" Count="131" ExcerptPostId="17305" WikiPostId="17304" />
+  <row Id="428" TagName="darkness" Count="32" />
+  <row Id="430" TagName="sony" Count="229" ExcerptPostId="9992" WikiPostId="9991" />
+  <row Id="432" TagName="fisheye" Count="59" ExcerptPostId="22502" WikiPostId="22501" />
+  <row Id="435" TagName="studio" Count="72" ExcerptPostId="37546" WikiPostId="37545" />
+  <row Id="436" TagName="studio-lighting" Count="163" ExcerptPostId="6894" WikiPostId="6893" />
+  <row Id="443" TagName="background" Count="92" ExcerptPostId="57535" WikiPostId="57534" />
+  <row Id="445" TagName="wireless-triggers" Count="107" ExcerptPostId="37366" WikiPostId="37365" />
+  <row Id="447" TagName="printer" Count="41" />
+  <row Id="449" TagName="canon-7d" Count="99" ExcerptPostId="17284" WikiPostId="17283" />
+  <row Id="451" TagName="canon-g11" Count="4" ExcerptPostId="25000" WikiPostId="24999" />
+  <row Id="454" TagName="memory-card-size" Count="9" ExcerptPostId="71979" WikiPostId="71978" />
+  <row Id="455" TagName="risk" Count="2" />
+  <row Id="456" TagName="brushes" Count="8" />
+  <row Id="463" TagName="adr" Count="3" ExcerptPostId="37536" WikiPostId="37535" />
+  <row Id="466" TagName="d-lighting" Count="6" />
+  <row Id="467" TagName="dead-pixel" Count="8" />
+  <row Id="470" TagName="framing" Count="14" ExcerptPostId="63447" WikiPostId="63446" />
+  <row Id="472" TagName="usb" Count="49" ExcerptPostId="37560" WikiPostId="37559" />
+  <row Id="473" TagName="card-reader" Count="7" ExcerptPostId="38969" WikiPostId="38968" />
+  <row Id="474" TagName="intervalometer" Count="43" ExcerptPostId="30423" WikiPostId="30422" />
+  <row Id="477" TagName="iso-noise" Count="59" ExcerptPostId="37550" WikiPostId="37549" />
+  <row Id="482" TagName="pentax" Count="138" ExcerptPostId="6688" WikiPostId="6687" />
+  <row Id="483" TagName="water" Count="32" />
+  <row Id="484" TagName="model-releases" Count="29" ExcerptPostId="84790" WikiPostId="84789" />
+  <row Id="485" TagName="camera-basics" Count="166" ExcerptPostId="10150" WikiPostId="10149" />
+  <row Id="486" TagName="theory" Count="16" />
+  <row Id="488" TagName="shooting-technique" Count="137" ExcerptPostId="24439" WikiPostId="24438" />
+  <row Id="498" TagName="firmware-hacks" Count="23" ExcerptPostId="37370" WikiPostId="37369" />
+  <row Id="501" TagName="pricing" Count="96" ExcerptPostId="17629" WikiPostId="17628" />
+  <row Id="502" TagName="business" Count="93" ExcerptPostId="12899" WikiPostId="12898" />
+  <row Id="504" TagName="canon-550d" Count="154" ExcerptPostId="9863" WikiPostId="9862" />
+  <row Id="507" TagName="art" Count="40" />
+  <row Id="510" TagName="equipment-protection" Count="173" ExcerptPostId="12574" WikiPostId="12573" />
+  <row Id="513" TagName="wireless" Count="47" ExcerptPostId="55927" WikiPostId="55926" />
+  <row Id="514" TagName="remote" Count="118" ExcerptPostId="17344" WikiPostId="17343" />
+  <row Id="515" TagName="shutter-release" Count="81" ExcerptPostId="22500" WikiPostId="22499" />
+  <row Id="519" TagName="optical-viewfinder" Count="15" />
+  <row Id="522" TagName="canon-450d" Count="41" ExcerptPostId="4128" WikiPostId="4127" />
+  <row Id="525" TagName="ball-head" Count="17" ExcerptPostId="85427" WikiPostId="85426" />
+  <row Id="526" TagName="clubs" Count="5" />
+  <row Id="527" TagName="models" Count="33" />
+  <row Id="528" TagName="transport" Count="17" />
+  <row Id="530" TagName="perspective" Count="67" ExcerptPostId="65497" WikiPostId="65496" />
+  <row Id="531" TagName="compatibility" Count="77" ExcerptPostId="55935" WikiPostId="55934" />
+  <row Id="532" TagName="picture-samples" Count="14" />
+  <row Id="535" TagName="hobbyist" Count="5" />
+  <row Id="538" TagName="large-format" Count="40" ExcerptPostId="87253" WikiPostId="87252" />
+  <row Id="542" TagName="canon-ixus" Count="4" />
+  <row Id="543" TagName="sdhc" Count="33" ExcerptPostId="24994" WikiPostId="24993" />
+  <row Id="544" TagName="ghosting" Count="23" />
+  <row Id="547" TagName="manual-flash" Count="39" />
+  <row Id="548" TagName="off-camera-flash" Count="219" ExcerptPostId="17166" WikiPostId="17165" />
+  <row Id="550" TagName="photojournalism" Count="19" />
+  <row Id="552" TagName="time" Count="31" />
+  <row Id="553" TagName="batch" Count="92" ExcerptPostId="15674" WikiPostId="15673" />
+  <row Id="554" TagName="panasonic" Count="54" ExcerptPostId="37739" WikiPostId="37738" />
+  <row Id="558" TagName="paper" Count="40" />
+  <row Id="565" TagName="dvd" Count="5" />
+  <row Id="566" TagName="photo-critique" Count="19" ExcerptPostId="21341" WikiPostId="21340" />
+  <row Id="567" TagName="thumbnails" Count="10" />
+  <row Id="568" TagName="scanning-service" Count="6" />
+  <row Id="569" TagName="service-recommendation" Count="47" ExcerptPostId="22520" WikiPostId="22519" />
+  <row Id="570" TagName="ring-flash" Count="16" />
+  <row Id="571" TagName="nikon-d90" Count="93" ExcerptPostId="10097" WikiPostId="10096" />
+  <row Id="573" TagName="photo-shoot" Count="9" />
+  <row Id="577" TagName="monopod" Count="21" ExcerptPostId="17327" WikiPostId="17326" />
+  <row Id="579" TagName="cheap" Count="16" />
+  <row Id="580" TagName="permission" Count="13" />
+  <row Id="582" TagName="light-box" Count="8" />
+  <row Id="583" TagName="canvas" Count="19" ExcerptPostId="22935" WikiPostId="22934" />
+  <row Id="590" TagName="xmp" Count="26" />
+  <row Id="599" TagName="leica" Count="22" ExcerptPostId="24992" WikiPostId="24991" />
+  <row Id="600" TagName="zeiss" Count="26" ExcerptPostId="55929" WikiPostId="55928" />
+  <row Id="601" TagName="lens-design" Count="189" ExcerptPostId="17331" WikiPostId="17330" />
+  <row Id="602" TagName="focusing-screen" Count="38" ExcerptPostId="36092" WikiPostId="36091" />
+  <row Id="611" TagName="gels" Count="22" ExcerptPostId="53129" WikiPostId="53128" />
+  <row Id="613" TagName="digital-iso" Count="11" />
+  <row Id="614" TagName="nikon-d7000" Count="155" ExcerptPostId="4164" WikiPostId="4163" />
+  <row Id="618" TagName="battery" Count="173" ExcerptPostId="20814" WikiPostId="20813" />
+  <row Id="620" TagName="powershot" Count="49" ExcerptPostId="37745" WikiPostId="37744" />
+  <row Id="621" TagName="medium-format" Count="56" ExcerptPostId="37552" WikiPostId="37551" />
+  <row Id="627" TagName="mraw" Count="3" />
+  <row Id="628" TagName="sraw" Count="4" />
+  <row Id="630" TagName="spyder3" Count="7" />
+  <row Id="633" TagName="wedding" Count="95" ExcerptPostId="22522" WikiPostId="22521" />
+  <row Id="634" TagName="spots" Count="25" ExcerptPostId="17186" WikiPostId="17185" />
+  <row Id="635" TagName="canon-5d" Count="19" />
+  <row Id="636" TagName="file" Count="19" />
+  <row Id="639" TagName="presentation" Count="37" />
+  <row Id="641" TagName="movie" Count="8" />
+  <row Id="642" TagName="reflection" Count="54" />
+  <row Id="647" TagName="color" Count="321" ExcerptPostId="8198" WikiPostId="8197" />
+  <row Id="649" TagName="preview" Count="38" />
+  <row Id="653" TagName="ebay" Count="5" />
+  <row Id="656" TagName="canon-60d" Count="100" ExcerptPostId="14161" WikiPostId="14160" />
+  <row Id="660" TagName="hd-video" Count="30" ExcerptPostId="13692" WikiPostId="13691" />
+  <row Id="662" TagName="low-budget" Count="25" ExcerptPostId="67474" WikiPostId="67473" />
+  <row Id="664" TagName="shutter-actuations" Count="42" ExcerptPostId="22498" WikiPostId="22497" />
+  <row Id="666" TagName="canon-5d-mark-ii" Count="85" ExcerptPostId="14778" WikiPostId="14777" />
+  <row Id="667" TagName="upgrade" Count="44" />
+  <row Id="669" TagName="error" Count="78" ExcerptPostId="67476" WikiPostId="67475" />
+  <row Id="670" TagName="third-party" Count="28" />
+  <row Id="671" TagName="wide-gamut" Count="11" />
+  <row Id="672" TagName="internet" Count="10" />
+  <row Id="674" TagName="levels" Count="13" ExcerptPostId="21888" WikiPostId="21887" />
+  <row Id="675" TagName="curves" Count="17" />
+  <row Id="677" TagName="texture" Count="17" />
+  <row Id="678" TagName="plugin" Count="20" />
+  <row Id="680" TagName="lcd" Count="50" ExcerptPostId="43035" WikiPostId="43034" />
+  <row Id="681" TagName="resolution" Count="207" ExcerptPostId="12460" WikiPostId="12459" />
+  <row Id="682" TagName="photoshop-cs5" Count="29" ExcerptPostId="20075" WikiPostId="20074" />
+  <row Id="683" TagName="nikon-d40" Count="30" ExcerptPostId="22479" WikiPostId="22478" />
+  <row Id="685" TagName="backlight" Count="16" />
+  <row Id="686" TagName="chdk" Count="17" />
+  <row Id="690" TagName="canon-50d" Count="21" ExcerptPostId="24974" WikiPostId="24973" />
+  <row Id="692" TagName="canon-1000d" Count="17" ExcerptPostId="24972" WikiPostId="24971" />
+  <row Id="693" TagName="canon-400d" Count="11" ExcerptPostId="24976" WikiPostId="24975" />
+  <row Id="695" TagName="nikon-d3000" Count="17" ExcerptPostId="24962" WikiPostId="24961" />
+  <row Id="696" TagName="nikon-d3100" Count="109" ExcerptPostId="22432" WikiPostId="22431" />
+  <row Id="697" TagName="nikon-d80" Count="17" ExcerptPostId="24966" WikiPostId="24965" />
+  <row Id="698" TagName="nikon-d50" Count="6" ExcerptPostId="24964" WikiPostId="24963" />
+  <row Id="699" TagName="nikon-d5000" Count="30" ExcerptPostId="22485" WikiPostId="22484" />
+  <row Id="700" TagName="nikon-d300" Count="14" />
+  <row Id="703" TagName="fluorescent" Count="17" />
+  <row Id="706" TagName="aurora-borealis" Count="18" ExcerptPostId="27269" WikiPostId="27268" />
+  <row Id="708" TagName="film-scanner" Count="19" />
+  <row Id="710" TagName="canon-500d" Count="25" ExcerptPostId="24446" WikiPostId="24445" />
+  <row Id="711" TagName="charger" Count="38" />
+  <row Id="714" TagName="canon-350d" Count="18" ExcerptPostId="24978" WikiPostId="24977" />
+  <row Id="720" TagName="lightroom-3" Count="58" ExcerptPostId="18142" WikiPostId="18141" />
+  <row Id="722" TagName="50mm" Count="77" ExcerptPostId="22491" WikiPostId="22490" />
+  <row Id="724" TagName="fireworks" Count="14" />
+  <row Id="725" TagName="smart-collections" Count="25" />
+  <row Id="726" TagName="sensor-size" Count="111" ExcerptPostId="39281" WikiPostId="39280" />
+  <row Id="727" TagName="search" Count="23" />
+  <row Id="728" TagName="date" Count="20" />
+  <row Id="729" TagName="fast-lenses" Count="22" />
+  <row Id="733" TagName="gray-market" Count="2" />
+  <row Id="736" TagName="haze" Count="15" />
+  <row Id="739" TagName="panasonic-lumix" Count="58" ExcerptPostId="46378" WikiPostId="46377" />
+  <row Id="740" TagName="children" Count="34" />
+  <row Id="741" TagName="product-photography" Count="189" ExcerptPostId="14332" WikiPostId="14331" />
+  <row Id="743" TagName="exposure-compensation" Count="54" ExcerptPostId="11386" WikiPostId="11385" />
+  <row Id="746" TagName="cameraphones" Count="80" ExcerptPostId="35434" WikiPostId="35433" />
+  <row Id="748" TagName="cropping" Count="91" ExcerptPostId="37329" WikiPostId="37328" />
+  <row Id="749" TagName="generic-brand" Count="11" />
+  <row Id="757" TagName="color-spaces" Count="87" ExcerptPostId="57424" WikiPostId="57423" />
+  <row Id="758" TagName="rgb" Count="20" ExcerptPostId="53880" WikiPostId="53879" />
+  <row Id="760" TagName="cmyk" Count="14" />
+  <row Id="762" TagName="keywords" Count="41" />
+  <row Id="763" TagName="gifts" Count="6" />
+  <row Id="767" TagName="polaroid" Count="31" ExcerptPostId="50470" WikiPostId="50469" />
+  <row Id="770" TagName="camera-controls" Count="88" ExcerptPostId="20712" WikiPostId="20711" />
+  <row Id="771" TagName="ufraw" Count="10" ExcerptPostId="43782" WikiPostId="43781" />
+  <row Id="772" TagName="watermark" Count="29" ExcerptPostId="37743" WikiPostId="37742" />
+  <row Id="773" TagName="3d" Count="40" ExcerptPostId="49331" WikiPostId="49330" />
+  <row Id="779" TagName="blur" Count="125" ExcerptPostId="20818" WikiPostId="20817" />
+  <row Id="780" TagName="lensbaby" Count="8" />
+  <row Id="782" TagName="110" Count="3" ExcerptPostId="18235" WikiPostId="18234" />
+  <row Id="786" TagName="self-portrait" Count="27" />
+  <row Id="787" TagName="minolta" Count="44" ExcerptPostId="37741" WikiPostId="37740" />
+  <row Id="789" TagName="statistics" Count="4" />
+  <row Id="791" TagName="photography-basics" Count="138" ExcerptPostId="77774" WikiPostId="77773" />
+  <row Id="793" TagName="open-source" Count="38" ExcerptPostId="8982" WikiPostId="8981" />
+  <row Id="796" TagName="masks" Count="8" />
+  <row Id="798" TagName="licensing" Count="42" ExcerptPostId="18130" WikiPostId="18129" />
+  <row Id="799" TagName="public-domain" Count="2" />
+  <row Id="800" TagName="snow" Count="18" />
+  <row Id="802" TagName="dx" Count="26" ExcerptPostId="34345" WikiPostId="34344" />
+  <row Id="806" TagName="computer-hardware" Count="30" />
+  <row Id="807" TagName="performance" Count="35" />
+  <row Id="808" TagName="canon-40d" Count="11" ExcerptPostId="24984" WikiPostId="24983" />
+  <row Id="809" TagName="vignetting" Count="35" ExcerptPostId="55931" WikiPostId="55930" />
+  <row Id="810" TagName="rotation" Count="33" />
+  <row Id="816" TagName="motivation" Count="3" />
+  <row Id="819" TagName="geotagging" Count="60" ExcerptPostId="14163" WikiPostId="14162" />
+  <row Id="825" TagName="sky" Count="35" />
+  <row Id="827" TagName="contrast" Count="51" ExcerptPostId="25239" WikiPostId="25238" />
+  <row Id="829" TagName="adobe" Count="42" ExcerptPostId="37678" WikiPostId="37677" />
+  <row Id="830" TagName="eclipse" Count="28" />
+  <row Id="831" TagName="negative" Count="25" />
+  <row Id="833" TagName="glass" Count="34" ExcerptPostId="43037" WikiPostId="43036" />
+  <row Id="834" TagName="philosophy" Count="10" ExcerptPostId="37534" WikiPostId="37533" />
+  <row Id="837" TagName="lights" Count="13" ExcerptPostId="37673" WikiPostId="37672" />
+  <row Id="838" TagName="cls" Count="14" ExcerptPostId="21239" WikiPostId="21238" />
+  <row Id="839" TagName="data-corruption" Count="68" ExcerptPostId="37548" WikiPostId="37547" />
+  <row Id="844" TagName="baby-photos" Count="19" />
+  <row Id="847" TagName="import" Count="43" />
+  <row Id="848" TagName="duplicates" Count="13" />
+  <row Id="853" TagName="hugin" Count="33" ExcerptPostId="27451" WikiPostId="27450" />
+  <row Id="856" TagName="lighting-basics" Count="28" ExcerptPostId="6891" WikiPostId="6890" />
+  <row Id="857" TagName="artwork" Count="30" />
+  <row Id="858" TagName="glare" Count="22" />
+  <row Id="859" TagName="diopter" Count="11" />
+  <row Id="860" TagName="panning" Count="14" />
+  <row Id="870" TagName="cmos-image-sensor" Count="32" ExcerptPostId="75252" WikiPostId="75251" />
+  <row Id="872" TagName="rolling-shutter" Count="12" />
+  <row Id="874" TagName="roadtrip" Count="3" />
+  <row Id="875" TagName="creative-commons" Count="9" />
+  <row Id="877" TagName="troubleshooting" Count="475" ExcerptPostId="15681" WikiPostId="15680" />
+  <row Id="878" TagName="lightroom-2" Count="2" />
+  <row Id="879" TagName="soft-focus" Count="6" />
+  <row Id="883" TagName="lightroom-catalog" Count="48" ExcerptPostId="46597" WikiPostId="46596" />
+  <row Id="887" TagName="school" Count="7" />
+  <row Id="888" TagName="history" Count="67" ExcerptPostId="46521" WikiPostId="46520" />
+  <row Id="890" TagName="event" Count="31" />
+  <row Id="891" TagName="automation" Count="42" />
+  <row Id="892" TagName="filenames" Count="39" />
+  <row Id="899" TagName="kit-lens" Count="104" ExcerptPostId="7973" WikiPostId="7972" />
+  <row Id="902" TagName="selling" Count="57" ExcerptPostId="24435" WikiPostId="24434" />
+  <row Id="903" TagName="canon-30d" Count="5" ExcerptPostId="24990" WikiPostId="24989" />
+  <row Id="904" TagName="photobooks" Count="15" />
+  <row Id="905" TagName="publishing" Count="28" />
+  <row Id="907" TagName="compactflash" Count="22" />
+  <row Id="910" TagName="normal" Count="12" ExcerptPostId="17256" WikiPostId="17255" />
+  <row Id="911" TagName="fashion" Count="34" />
+  <row Id="915" TagName="high-speed" Count="24" />
+  <row Id="916" TagName="gamma" Count="12" />
+  <row Id="917" TagName="rescaling" Count="51" />
+  <row Id="919" TagName="distortion" Count="90" ExcerptPostId="22508" WikiPostId="22507" />
+  <row Id="924" TagName="features" Count="28" />
+  <row Id="925" TagName="human-vision-system" Count="54" />
+  <row Id="926" TagName="sdxc" Count="8" />
+  <row Id="927" TagName="specification" Count="18" />
+  <row Id="928" TagName="competitions" Count="7" />
+  <row Id="929" TagName="power-supply" Count="25" />
+  <row Id="930" TagName="archive" Count="22" />
+  <row Id="931" TagName="portfolio" Count="25" />
+  <row Id="933" TagName="photo-viewer" Count="14" ExcerptPostId="37747" WikiPostId="37746" />
+  <row Id="936" TagName="real-estate" Count="24" />
+  <row Id="939" TagName="delete" Count="13" />
+  <row Id="940" TagName="k-mount" Count="8" />
+  <row Id="944" TagName="motion-blur" Count="53" ExcerptPostId="37554" WikiPostId="37553" />
+  <row Id="947" TagName="ycbcr" Count="5" ExcerptPostId="17244" WikiPostId="17243" />
+  <row Id="948" TagName="stop-motion" Count="12" />
+  <row Id="950" TagName="ansel-adams" Count="4" ExcerptPostId="25004" WikiPostId="25003" />
+  <row Id="951" TagName="file-format" Count="80" ExcerptPostId="22516" WikiPostId="22515" />
+  <row Id="957" TagName="pets" Count="7" />
+  <row Id="958" TagName="sb-600" Count="7" />
+  <row Id="961" TagName="grid" Count="8" />
+  <row Id="965" TagName="multiple-exposure" Count="36" />
+  <row Id="968" TagName="aps-c" Count="51" ExcerptPostId="34348" WikiPostId="34347" />
+  <row Id="969" TagName="technology-generations" Count="41" />
+  <row Id="974" TagName="vibrance" Count="6" ExcerptPostId="17545" WikiPostId="17544" />
+  <row Id="975" TagName="saturation" Count="29" ExcerptPostId="37593" WikiPostId="37592" />
+  <row Id="976" TagName="chroma-key" Count="13" />
+  <row Id="977" TagName="sharpening" Count="47" ExcerptPostId="39270" WikiPostId="39269" />
+  <row Id="979" TagName="freelensing" Count="7" />
+  <row Id="980" TagName="hot-pixels" Count="21" ExcerptPostId="37573" WikiPostId="37572" />
+  <row Id="981" TagName="artifacts" Count="160" ExcerptPostId="17335" WikiPostId="17334" />
+  <row Id="982" TagName="ethics" Count="11" />
+  <row Id="983" TagName="curation" Count="14" />
+  <row Id="984" TagName="ttl" Count="69" ExcerptPostId="55924" WikiPostId="55923" />
+  <row Id="985" TagName="cables" Count="9" />
+  <row Id="986" TagName="lomo" Count="14" />
+  <row Id="988" TagName="quick-release" Count="17" ExcerptPostId="17224" WikiPostId="17223" />
+  <row Id="989" TagName="bracketing" Count="71" ExcerptPostId="11389" WikiPostId="11388" />
+  <row Id="992" TagName="judging" Count="5" />
+  <row Id="993" TagName="megapixels" Count="68" ExcerptPostId="22494" WikiPostId="22493" />
+  <row Id="994" TagName="contracts" Count="22" />
+  <row Id="1001" TagName="image-compression" Count="66" ExcerptPostId="20064" WikiPostId="20063" />
+  <row Id="1002" TagName="focus-adjust" Count="20" />
+  <row Id="1003" TagName="front-focus" Count="10" />
+  <row Id="1005" TagName="fine-art" Count="16" ExcerptPostId="45086" WikiPostId="45085" />
+  <row Id="1007" TagName="creative-process" Count="10" />
+  <row Id="1008" TagName="hotshoe-flash" Count="168" ExcerptPostId="39284" WikiPostId="39283" />
+  <row Id="1010" TagName="aperture-priority" Count="45" ExcerptPostId="37680" WikiPostId="37679" />
+  <row Id="1011" TagName="architecture" Count="28" />
+  <row Id="1012" TagName="indoor" Count="50" ExcerptPostId="22834" WikiPostId="22833" />
+  <row Id="1013" TagName="science" Count="17" />
+  <row Id="1014" TagName="electronics" Count="9" />
+  <row Id="1015" TagName="insurance" Count="6" />
+  <row Id="1017" TagName="computerless" Count="2" />
+  <row Id="1020" TagName="highlights" Count="33" />
+  <row Id="1023" TagName="srgb" Count="36" ExcerptPostId="83742" WikiPostId="83741" />
+  <row Id="1027" TagName="bit-depth" Count="31" ExcerptPostId="85429" WikiPostId="85428" />
+  <row Id="1028" TagName="mtf" Count="11" />
+  <row Id="1030" TagName="photolabs" Count="34" />
+  <row Id="1031" TagName="file-recovery" Count="31" />
+  <row Id="1032" TagName="sdcard" Count="117" ExcerptPostId="34339" WikiPostId="34338" />
+  <row Id="1033" TagName="bicycling" Count="5" />
+  <row Id="1036" TagName="environmental-dangers" Count="29" />
+  <row Id="1038" TagName="perception" Count="8" />
+  <row Id="1042" TagName="canon-600d" Count="114" ExcerptPostId="21013" WikiPostId="21012" />
+  <row Id="1045" TagName="smoke" Count="5" />
+  <row Id="1052" TagName="file-management" Count="145" ExcerptPostId="48900" WikiPostId="48899" />
+  <row Id="1055" TagName="security" Count="15" />
+  <row Id="1058" TagName="collage" Count="14" />
+  <row Id="1059" TagName="montage" Count="3" />
+  <row Id="1061" TagName="sld" Count="5" />
+  <row Id="1062" TagName="tests" Count="16" />
+  <row Id="1063" TagName="canon-s90" Count="5" ExcerptPostId="24998" WikiPostId="24997" />
+  <row Id="1067" TagName="property-release" Count="6" />
+  <row Id="1068" TagName="live-view" Count="103" ExcerptPostId="17347" WikiPostId="17346" />
+  <row Id="1069" TagName="skylight" Count="3" />
+  <row Id="1070" TagName="group-photos" Count="30" />
+  <row Id="1071" TagName="starbursts" Count="6" />
+  <row Id="1072" TagName="canon-sx30" Count="2" />
+  <row Id="1077" TagName="lightning" Count="8" />
+  <row Id="1080" TagName="foveon" Count="7" ExcerptPostId="53876" WikiPostId="53875" />
+  <row Id="1081" TagName="color-red" Count="14" />
+  <row Id="1086" TagName="still-life" Count="20" />
+  <row Id="1087" TagName="color-blue" Count="16" />
+  <row Id="1093" TagName="hoya" Count="7" ExcerptPostId="17188" WikiPostId="17187" />
+  <row Id="1097" TagName="animals" Count="9" />
+  <row Id="1098" TagName="reverse-mount" Count="30" ExcerptPostId="25237" WikiPostId="25236" />
+  <row Id="1103" TagName="canon-300d" Count="3" ExcerptPostId="24988" WikiPostId="24987" />
+  <row Id="1104" TagName="food-photography" Count="30" ExcerptPostId="20725" WikiPostId="20724" />
+  <row Id="1106" TagName="jewelry" Count="14" />
+  <row Id="1110" TagName="diffraction" Count="16" ExcerptPostId="37749" WikiPostId="37748" />
+  <row Id="1112" TagName="bryan-peterson" Count="6" />
+  <row Id="1113" TagName="infrared-conversion" Count="17" ExcerptPostId="29395" WikiPostId="29394" />
+  <row Id="1114" TagName="thom-hogan" Count="2" ExcerptPostId="37874" WikiPostId="37873" />
+  <row Id="1118" TagName="lo-fi" Count="8" />
+  <row Id="1120" TagName="condensation" Count="13" />
+  <row Id="1122" TagName="superzoom" Count="55" ExcerptPostId="37585" WikiPostId="37584" />
+  <row Id="1124" TagName="keeping-quiet" Count="5" />
+  <row Id="1125" TagName="overexposure" Count="50" ExcerptPostId="37569" WikiPostId="37568" />
+  <row Id="1126" TagName="pinhole-cameras" Count="24" ExcerptPostId="53249" WikiPostId="53248" />
+  <row Id="1127" TagName="reviews" Count="20" />
+  <row Id="1128" TagName="magnification" Count="35" />
+  <row Id="1129" TagName="camera-systems" Count="7" />
+  <row Id="1130" TagName="exposure-correction" Count="18" ExcerptPostId="11382" WikiPostId="11381" />
+  <row Id="1131" TagName="popup-flash" Count="56" ExcerptPostId="37544" WikiPostId="37543" />
+  <row Id="1136" TagName="composition-basics" Count="25" ExcerptPostId="11885" WikiPostId="11884" />
+  <row Id="1141" TagName="wireless-flash" Count="103" ExcerptPostId="57422" WikiPostId="57421" />
+  <row Id="1142" TagName="file-size" Count="47" />
+  <row Id="1143" TagName="cityscape" Count="24" />
+  <row Id="1144" TagName="png" Count="14" ExcerptPostId="67470" WikiPostId="67469" />
+  <row Id="1146" TagName="image-manipulation" Count="77" ExcerptPostId="50479" WikiPostId="50478" />
+  <row Id="1148" TagName="gopro" Count="49" ExcerptPostId="49473" WikiPostId="49472" />
+  <row Id="1149" TagName="extreme-sports" Count="3" />
+  <row Id="1155" TagName="continuous-drive" Count="20" />
+  <row Id="1156" TagName="burst-mode" Count="35" ExcerptPostId="37571" WikiPostId="37570" />
+  <row Id="1157" TagName="layers" Count="37" ExcerptPostId="34461" WikiPostId="34460" />
+  <row Id="1158" TagName="konica" Count="4" />
+  <row Id="1160" TagName="viewpoint" Count="3" />
+  <row Id="1162" TagName="spot-metering" Count="11" />
+  <row Id="1163" TagName="mountain" Count="7" />
+  <row Id="1164" TagName="tripod-socket" Count="21" />
+  <row Id="1165" TagName="camera-straps" Count="30" />
+  <row Id="1166" TagName="portable" Count="9" />
+  <row Id="1167" TagName="limited-space" Count="4" />
+  <row Id="1173" TagName="weight" Count="15" />
+  <row Id="1177" TagName="adobe-camera-raw" Count="63" ExcerptPostId="19938" WikiPostId="19937" />
+  <row Id="1178" TagName="olympus" Count="117" ExcerptPostId="39268" WikiPostId="39267" />
+  <row Id="1179" TagName="ruggedized-equipment" Count="2" />
+  <row Id="1181" TagName="rear-lcd" Count="42" ExcerptPostId="55933" WikiPostId="55932" />
+  <row Id="1183" TagName="digital-zoom" Count="4" />
+  <row Id="1194" TagName="camera-design" Count="57" ExcerptPostId="46447" WikiPostId="46446" />
+  <row Id="1196" TagName="motion" Count="14" />
+  <row Id="1197" TagName="heat" Count="12" />
+  <row Id="1201" TagName="shutter-priority" Count="22" />
+  <row Id="1203" TagName="focus-point-selection" Count="49" />
+  <row Id="1204" TagName="equipment-damage" Count="175" ExcerptPostId="18237" WikiPostId="18236" />
+  <row Id="1205" TagName="online-shopping" Count="17" ExcerptPostId="34886" WikiPostId="34885" />
+  <row Id="1207" TagName="mirror" Count="38" ExcerptPostId="38862" WikiPostId="38861" />
+  <row Id="1211" TagName="cfcard" Count="22" />
+  <row Id="1212" TagName="nikon-d300s" Count="4" />
+  <row Id="1214" TagName="subject-distance" Count="44" />
+  <row Id="1219" TagName="high-iso" Count="39" ExcerptPostId="44030" WikiPostId="44029" />
+  <row Id="1222" TagName="handling" Count="7" />
+  <row Id="1223" TagName="nikon-d700" Count="18" />
+  <row Id="1225" TagName="adobe-rgb" Count="18" />
+  <row Id="1233" TagName="eos-utility" Count="19" ExcerptPostId="72229" WikiPostId="72228" />
+  <row Id="1234" TagName="airshows" Count="5" />
+  <row Id="1235" TagName="airplanes" Count="9" />
+  <row Id="1236" TagName="action" Count="28" />
+  <row Id="1238" TagName="fujifilm" Count="114" ExcerptPostId="39264" WikiPostId="39263" />
+  <row Id="1239" TagName="auto-alignment" Count="14" />
+  <row Id="1240" TagName="camera-recommendation" Count="155" ExcerptPostId="15712" WikiPostId="15711" />
+  <row Id="1241" TagName="color-black" Count="14" />
+  <row Id="1245" TagName="course" Count="7" />
+  <row Id="1248" TagName="lens-cap" Count="12" />
+  <row Id="1249" TagName="cars" Count="8" />
+  <row Id="1258" TagName="subject-isolation" Count="4" />
+  <row Id="1259" TagName="birds" Count="30" />
+  <row Id="1260" TagName="selective-color" Count="16" />
+  <row Id="1262" TagName="tint" Count="7" />
+  <row Id="1263" TagName="biermann-weber" Count="3" ExcerptPostId="17149" WikiPostId="17148" />
+  <row Id="1265" TagName="archival" Count="18" />
+  <row Id="1278" TagName="light-field" Count="6" />
+  <row Id="1279" TagName="computational-photography" Count="8" />
+  <row Id="1280" TagName="nude-photography" Count="11" ExcerptPostId="37876" WikiPostId="37875" />
+  <row Id="1285" TagName="filter-stacking" Count="13" />
+  <row Id="1287" TagName="lenticular-printing" Count="3" />
+  <row Id="1288" TagName="four-thirds" Count="15" ExcerptPostId="37692" WikiPostId="37691" />
+  <row Id="1291" TagName="image-review" Count="27" />
+  <row Id="1297" TagName="digital-preservation" Count="10" />
+  <row Id="1299" TagName="lens-adapter" Count="155" ExcerptPostId="24956" WikiPostId="24955" />
+  <row Id="1300" TagName="rain" Count="16" />
+  <row Id="1301" TagName="lens-recommendation" Count="83" ExcerptPostId="77776" WikiPostId="77775" />
+  <row Id="1302" TagName="compact-cameras" Count="84" ExcerptPostId="37542" WikiPostId="37541" />
+  <row Id="1306" TagName="canada" Count="4" ExcerptPostId="14226" WikiPostId="14225" />
+  <row Id="1307" TagName="old-cameras" Count="42" />
+  <row Id="1308" TagName="united-states" Count="2" ExcerptPostId="14232" WikiPostId="14231" />
+  <row Id="1311" TagName="tokina" Count="17" />
+  <row Id="1312" TagName="camera-settings" Count="257" ExcerptPostId="33514" WikiPostId="33513" />
+  <row Id="1313" TagName="print-preservation" Count="17" />
+  <row Id="1316" TagName="reverse-engineering" Count="125" ExcerptPostId="17162" WikiPostId="17161" />
+  <row Id="1320" TagName="exiftool" Count="57" ExcerptPostId="77778" WikiPostId="77777" />
+  <row Id="1323" TagName="continuous-lighting" Count="17" />
+  <row Id="1325" TagName="safety" Count="22" ExcerptPostId="73344" WikiPostId="73343" />
+  <row Id="1330" TagName="promotion" Count="7" />
+  <row Id="1335" TagName="shadows" Count="39" />
+  <row Id="1337" TagName="image-stitching" Count="29" ExcerptPostId="39139" WikiPostId="39138" />
+  <row Id="1339" TagName="file-transfer" Count="66" ExcerptPostId="48110" WikiPostId="48109" />
+  <row Id="1340" TagName="slt" Count="15" />
+  <row Id="1343" TagName="giclee" Count="3" />
+  <row Id="1344" TagName="fungus" Count="20" />
+  <row Id="1345" TagName="battery-grip" Count="33" ExcerptPostId="22714" WikiPostId="22713" />
+  <row Id="1346" TagName="sand" Count="5" />
+  <row Id="1347" TagName="equipment-storage" Count="9" />
+  <row Id="1351" TagName="processing" Count="17" />
+  <row Id="1352" TagName="webcam" Count="21" ExcerptPostId="39204" WikiPostId="39203" />
+  <row Id="1361" TagName="autumn" Count="3" />
+  <row Id="1363" TagName="clouds" Count="8" />
+  <row Id="1364" TagName="focus-stacking" Count="23" ExcerptPostId="25741" WikiPostId="25740" />
+  <row Id="1365" TagName="auto-iso" Count="21" />
+  <row Id="1366" TagName="nikon-d5100" Count="139" ExcerptPostId="24958" WikiPostId="24957" />
+  <row Id="1370" TagName="pocket-wizard" Count="15" ExcerptPostId="39202" WikiPostId="39201" />
+  <row Id="1371" TagName="focus-assist" Count="17" />
+  <row Id="1372" TagName="cold" Count="23" />
+  <row Id="1375" TagName="lens-correction" Count="31" />
+  <row Id="1379" TagName="privacy" Count="14" />
+  <row Id="1382" TagName="boat-cruise" Count="5" />
+  <row Id="1383" TagName="attribution" Count="6" />
+  <row Id="1386" TagName="apple" Count="28" ExcerptPostId="37540" WikiPostId="37539" />
+  <row Id="1387" TagName="kodak" Count="22" />
+  <row Id="1389" TagName="mirrorless" Count="104" ExcerptPostId="25243" WikiPostId="25242" />
+  <row Id="1394" TagName="adobe-bridge" Count="17" ExcerptPostId="46601" WikiPostId="46600" />
+  <row Id="1395" TagName="tone-mapping" Count="10" />
+  <row Id="1396" TagName="sidecar" Count="6" />
+  <row Id="1400" TagName="instant-camera" Count="13" />
+  <row Id="1402" TagName="backdrops" Count="29" />
+  <row Id="1404" TagName="program-mode" Count="15" />
+  <row Id="1407" TagName="fixer" Count="7" />
+  <row Id="1408" TagName="flash-bracket" Count="5" />
+  <row Id="1410" TagName="framerate" Count="16" />
+  <row Id="1411" TagName="microscopy" Count="20" />
+  <row Id="1415" TagName="commercial-photography" Count="13" />
+  <row Id="1416" TagName="sb-700" Count="11" />
+  <row Id="1418" TagName="guide-number" Count="11" ExcerptPostId="67468" WikiPostId="67467" />
+  <row Id="1419" TagName="580exii" Count="4" />
+  <row Id="1422" TagName="trend" Count="4" />
+  <row Id="1424" TagName="wind" Count="5" />
+  <row Id="1425" TagName="programming" Count="17" />
+  <row Id="1427" TagName="eye-damage" Count="4" />
+  <row Id="1430" TagName="physics" Count="16" />
+  <row Id="1431" TagName="pixel-density" Count="9" />
+  <row Id="1434" TagName="canon-1d-x" Count="10" ExcerptPostId="24986" WikiPostId="24985" />
+  <row Id="1435" TagName="af-s" Count="12" ExcerptPostId="37372" WikiPostId="37371" />
+  <row Id="1437" TagName="subject-positioning" Count="5" />
+  <row Id="1439" TagName="commander-mode" Count="6" />
+  <row Id="1442" TagName="filter-diameter" Count="31" />
+  <row Id="1446" TagName="eyes" Count="20" />
+  <row Id="1448" TagName="metz" Count="9" />
+  <row Id="1449" TagName="sound" Count="30" ExcerptPostId="18885" WikiPostId="18884" />
+  <row Id="1450" TagName="laptop" Count="10" />
+  <row Id="1453" TagName="build-quality" Count="10" />
+  <row Id="1458" TagName="document-reproduction" Count="17" />
+  <row Id="1459" TagName="interior" Count="10" />
+  <row Id="1465" TagName="nikon-v1" Count="5" />
+  <row Id="1467" TagName="united-kingdom" Count="5" ExcerptPostId="91805" WikiPostId="91804" />
+  <row Id="1470" TagName="darkroom" Count="39" ExcerptPostId="88904" WikiPostId="88903" />
+  <row Id="1471" TagName="chemicals" Count="18" />
+  <row Id="1474" TagName="color-violet" Count="3" />
+  <row Id="1476" TagName="humidity" Count="14" />
+  <row Id="1477" TagName="visualization" Count="3" />
+  <row Id="1481" TagName="macro-lenses" Count="78" ExcerptPostId="25006" WikiPostId="25005" />
+  <row Id="1482" TagName="ken-rockwell" Count="5" />
+  <row Id="1483" TagName="micro-stock" Count="5" />
+  <row Id="1485" TagName="market-segments" Count="9" />
+  <row Id="1489" TagName="effect" Count="151" ExcerptPostId="34337" WikiPostId="34336" />
+  <row Id="1491" TagName="manfrotto" Count="12" />
+  <row Id="1492" TagName="slideshow" Count="16" />
+  <row Id="1494" TagName="bridge-camera" Count="26" ExcerptPostId="46599" WikiPostId="46598" />
+  <row Id="1496" TagName="sony-nex" Count="77" ExcerptPostId="37567" WikiPostId="37566" />
+  <row Id="1498" TagName="ettr" Count="8" ExcerptPostId="17941" WikiPostId="17940" />
+  <row Id="1503" TagName="image-alignment" Count="22" />
+  <row Id="1505" TagName="camera-types" Count="7" />
+  <row Id="1506" TagName="hand-held" Count="11" />
+  <row Id="1508" TagName="scene-modes" Count="8" />
+  <row Id="1510" TagName="internal-focus" Count="3" ExcerptPostId="54217" WikiPostId="54216" />
+  <row Id="1512" TagName="gorillapod" Count="13" ExcerptPostId="38973" WikiPostId="38972" />
+  <row Id="1517" TagName="tablet" Count="18" ExcerptPostId="61009" WikiPostId="61008" />
+  <row Id="1518" TagName="distance-markers" Count="3" />
+  <row Id="1525" TagName="testing" Count="13" />
+  <row Id="1527" TagName="in-camera-processing" Count="15" />
+  <row Id="1529" TagName="raw-vs-jpeg" Count="29" />
+  <row Id="1538" TagName="raynox" Count="7" />
+  <row Id="1539" TagName="macro-converter" Count="30" ExcerptPostId="36134" WikiPostId="36133" />
+  <row Id="1541" TagName="camera-cases" Count="9" />
+  <row Id="1543" TagName="tone-curves" Count="19" />
+  <row Id="1547" TagName="lumen" Count="6" ExcerptPostId="38971" WikiPostId="38970" />
+  <row Id="1552" TagName="cloth" Count="8" />
+  <row Id="1554" TagName="file-sharing" Count="6" />
+  <row Id="1555" TagName="lightroom-4" Count="102" ExcerptPostId="19935" WikiPostId="19934" />
+  <row Id="1556" TagName="bulb-ramping" Count="3" />
+  <row Id="1557" TagName="scale" Count="6" />
+  <row Id="1562" TagName="zenit" Count="2" />
+  <row Id="1563" TagName="fog" Count="12" />
+  <row Id="1564" TagName="color-fringing" Count="7" />
+  <row Id="1566" TagName="magic-lantern" Count="22" ExcerptPostId="26697" WikiPostId="26696" />
+  <row Id="1567" TagName="aps" Count="3" />
+  <row Id="1570" TagName="apps" Count="27" ExcerptPostId="26784" WikiPostId="26783" />
+  <row Id="1573" TagName="screw-mount" Count="5" ExcerptPostId="90962" WikiPostId="90961" />
+  <row Id="1574" TagName="viewfinder-indicators" Count="5" />
+  <row Id="1577" TagName="photographers-rights" Count="13" />
+  <row Id="1578" TagName="europe" Count="3" />
+  <row Id="1581" TagName="canvas-prints" Count="9" />
+  <row Id="1582" TagName="reproduction" Count="11" />
+  <row Id="1583" TagName="lenscoat" Count="2" />
+  <row Id="1587" TagName="canon-1100d" Count="20" ExcerptPostId="24980" WikiPostId="24979" />
+  <row Id="1589" TagName="diffusers" Count="17" ExcerptPostId="21011" WikiPostId="21010" />
+  <row Id="1593" TagName="500px" Count="7" ExcerptPostId="21003" WikiPostId="21002" />
+  <row Id="1594" TagName="nikon-d4" Count="4" ExcerptPostId="21017" WikiPostId="21016" />
+  <row Id="1603" TagName="focus-distance" Count="14" />
+  <row Id="1604" TagName="focus-motor" Count="41" />
+  <row Id="1608" TagName="hotshoe" Count="30" ExcerptPostId="21001" WikiPostId="21000" />
+  <row Id="1610" TagName="safari" Count="11" />
+  <row Id="1611" TagName="reflectors" Count="11" />
+  <row Id="1612" TagName="shaped-bokeh" Count="11" ExcerptPostId="25443" WikiPostId="25442" />
+  <row Id="1613" TagName="zone-plate" Count="5" ExcerptPostId="20573" WikiPostId="20572" />
+  <row Id="1615" TagName="color-green" Count="6" />
+  <row Id="1616" TagName="interpolation" Count="2" />
+  <row Id="1617" TagName="oversample" Count="4" />
+  <row Id="1618" TagName="borders" Count="5" />
+  <row Id="1620" TagName="warmth" Count="8" />
+  <row Id="1621" TagName="halos" Count="14" ExcerptPostId="20999" WikiPostId="20998" />
+  <row Id="1624" TagName="exposure-fusion" Count="11" />
+  <row Id="1631" TagName="mirror-lens" Count="14" ExcerptPostId="38880" WikiPostId="38879" />
+  <row Id="1635" TagName="dxo-optics" Count="4" />
+  <row Id="1638" TagName="anti-aliasing" Count="15" ExcerptPostId="37538" WikiPostId="37537" />
+  <row Id="1640" TagName="weather-sealing" Count="18" />
+  <row Id="1641" TagName="canon-5d-mark-iii" Count="67" ExcerptPostId="24982" WikiPostId="24981" />
+  <row Id="1643" TagName="semantics" Count="2" ExcerptPostId="39200" WikiPostId="39199" />
+  <row Id="1645" TagName="restoration" Count="22" />
+  <row Id="1653" TagName="storytelling" Count="6" />
+  <row Id="1654" TagName="fft" Count="2" />
+  <row Id="1656" TagName="image-analysis" Count="10" ExcerptPostId="85074" WikiPostId="85073" />
+  <row Id="1663" TagName="variable-nd" Count="10" ExcerptPostId="39208" WikiPostId="39207" />
+  <row Id="1666" TagName="stereoscopy" Count="14" />
+  <row Id="1667" TagName="ideas" Count="5" />
+  <row Id="1675" TagName="image-plane" Count="9" />
+  <row Id="1677" TagName="color-theory" Count="10" />
+  <row Id="1680" TagName="rule-of-thirds" Count="12" ExcerptPostId="22264" WikiPostId="22263" />
+  <row Id="1682" TagName="graduated-filters" Count="9" ExcerptPostId="25249" WikiPostId="25248" />
+  <row Id="1690" TagName="lens-coatings" Count="11" />
+  <row Id="1692" TagName="tone" Count="13" />
+  <row Id="1696" TagName="optical-coating" Count="15" ExcerptPostId="22411" WikiPostId="22410" />
+  <row Id="1700" TagName="lens-construction" Count="12" />
+  <row Id="1701" TagName="aperture-blades" Count="5" ExcerptPostId="22413" WikiPostId="22412" />
+  <row Id="1702" TagName="splash" Count="4" />
+  <row Id="1710" TagName="algorithms" Count="17" ExcerptPostId="37676" WikiPostId="37675" />
+  <row Id="1712" TagName="demosaicing" Count="13" />
+  <row Id="1714" TagName="event-photography" Count="25" />
+  <row Id="1715" TagName="fujifilm-xpro1" Count="14" />
+  <row Id="1716" TagName="bayer" Count="16" ExcerptPostId="37686" WikiPostId="37685" />
+  <row Id="1717" TagName="photosites" Count="4" ExcerptPostId="26668" WikiPostId="26667" />
+  <row Id="1719" TagName="infinity-focus" Count="20" ExcerptPostId="22836" WikiPostId="22835" />
+  <row Id="1720" TagName="canon-ef" Count="24" ExcerptPostId="25002" WikiPostId="25001" />
+  <row Id="1724" TagName="nik-software" Count="13" />
+  <row Id="1725" TagName="tripod-collar" Count="4" />
+  <row Id="1737" TagName="zoom-lock" Count="2" />
+  <row Id="1738" TagName="rawtherapee" Count="27" ExcerptPostId="37668" WikiPostId="37667" />
+  <row Id="1739" TagName="darktable" Count="64" ExcerptPostId="47041" WikiPostId="47040" />
+  <row Id="1743" TagName="monochrome" Count="14" />
+  <row Id="1744" TagName="red-eye" Count="10" />
+  <row Id="1747" TagName="3rd-party" Count="14" ExcerptPostId="39210" WikiPostId="39209" />
+  <row Id="1750" TagName="retouching" Count="32" />
+  <row Id="1754" TagName="split-tone" Count="8" />
+  <row Id="1756" TagName="brenizer-method" Count="4" ExcerptPostId="23712" WikiPostId="23711" />
+  <row Id="1758" TagName="softness" Count="9" />
+  <row Id="1761" TagName="hitech" Count="3" />
+  <row Id="1762" TagName="bulb-mode" Count="30" />
+  <row Id="1771" TagName="stars" Count="48" />
+  <row Id="1778" TagName="canon-650d" Count="36" ExcerptPostId="24437" WikiPostId="24436" />
+  <row Id="1779" TagName="canon-g1-x" Count="6" ExcerptPostId="24771" WikiPostId="24770" />
+  <row Id="1781" TagName="superresolution" Count="10" ExcerptPostId="64092" WikiPostId="64091" />
+  <row Id="1784" TagName="nd-filter" Count="12" ExcerptPostId="77935" WikiPostId="77934" />
+  <row Id="1785" TagName="banding" Count="10" />
+  <row Id="1787" TagName="olympus-omd" Count="21" />
+  <row Id="1789" TagName="image-circle" Count="9" />
+  <row Id="1790" TagName="evf" Count="9" />
+  <row Id="1792" TagName="special-effects" Count="31" />
+  <row Id="1798" TagName="canon-dpp" Count="13" ExcerptPostId="43382" WikiPostId="43381" />
+  <row Id="1804" TagName="yashica" Count="14" />
+  <row Id="1805" TagName="dry-box" Count="5" />
+  <row Id="1806" TagName="dry-cabinet" Count="5" />
+  <row Id="1807" TagName="nikon-d800" Count="20" ExcerptPostId="63932" WikiPostId="63931" />
+  <row Id="1814" TagName="olympics2012" Count="2" />
+  <row Id="1819" TagName="canon-m" Count="17" ExcerptPostId="38965" WikiPostId="38964" />
+  <row Id="1823" TagName="software-recommendation" Count="72" ExcerptPostId="62103" WikiPostId="62102" />
+  <row Id="1828" TagName="reverse-geocoding" Count="4" />
+  <row Id="1832" TagName="depth-of-focus" Count="3" ExcerptPostId="67510" WikiPostId="67509" />
+  <row Id="1835" TagName="forensics" Count="14" />
+  <row Id="1837" TagName="light-pollution" Count="3" ExcerptPostId="26192" WikiPostId="26191" />
+  <row Id="1852" TagName="high-altitude" Count="3" />
+  <row Id="1854" TagName="color-depth" Count="5" />
+  <row Id="1860" TagName="back-illuminated" Count="3" ExcerptPostId="85425" WikiPostId="85424" />
+  <row Id="1861" TagName="shutter-lag" Count="11" />
+  <row Id="1863" TagName="subject-movement" Count="7" />
+  <row Id="1869" TagName="nikon-d600" Count="18" ExcerptPostId="27577" WikiPostId="27576" />
+  <row Id="1871" TagName="manufacture" Count="5" />
+  <row Id="1873" TagName="face-detection" Count="23" />
+  <row Id="1874" TagName="microfiche" Count="3" ExcerptPostId="27957" WikiPostId="27956" />
+  <row Id="1876" TagName="imagemagick" Count="10" />
+  <row Id="1879" TagName="power" Count="18" />
+  <row Id="1881" TagName="nimh" Count="2" ExcerptPostId="39198" WikiPostId="39197" />
+  <row Id="1882" TagName="dell" Count="5" />
+  <row Id="1887" TagName="auto-exposure-lock" Count="7" />
+  <row Id="1890" TagName="candlelight" Count="7" />
+  <row Id="1895" TagName="vivitar" Count="19" />
+  <row Id="1902" TagName="instagram" Count="21" ExcerptPostId="38636" WikiPostId="38635" />
+  <row Id="1906" TagName="hasselblad" Count="13" ExcerptPostId="33495" WikiPostId="33494" />
+  <row Id="1912" TagName="reciprocity" Count="4" />
+  <row Id="1914" TagName="ricoh" Count="8" />
+  <row Id="1915" TagName="moire" Count="17" />
+  <row Id="1919" TagName="canon-6d" Count="62" ExcerptPostId="43039" WikiPostId="43038" />
+  <row Id="1926" TagName="sheet-film" Count="1" ExcerptPostId="30618" WikiPostId="30617" />
+  <row Id="1931" TagName="seascape" Count="1" ExcerptPostId="30615" WikiPostId="30614" />
+  <row Id="1932" TagName="canon-mp-e-65mm" Count="5" />
+  <row Id="1934" TagName="international-differences" Count="5" />
+  <row Id="1935" TagName="cartier-bresson" Count="1" ExcerptPostId="37690" WikiPostId="37689" />
+  <row Id="1939" TagName="zoom-creep" Count="5" ExcerptPostId="53878" WikiPostId="53877" />
+  <row Id="1940" TagName="huey" Count="2" ExcerptPostId="31098" WikiPostId="31097" />
+  <row Id="1941" TagName="macbook" Count="12" />
+  <row Id="1947" TagName="laser" Count="8" ExcerptPostId="32395" WikiPostId="32394" />
+  <row Id="1951" TagName="novoflex" Count="1" ExcerptPostId="38967" WikiPostId="38966" />
+  <row Id="1957" TagName="mood" Count="9" />
+  <row Id="1958" TagName="theater" Count="4" />
+  <row Id="1959" TagName="galleries" Count="7" ExcerptPostId="38873" WikiPostId="38872" />
+  <row Id="1966" TagName="m-mount" Count="2" ExcerptPostId="34637" WikiPostId="34636" />
+  <row Id="1968" TagName="argus" Count="2" ExcerptPostId="37684" WikiPostId="37683" />
+  <row Id="1969" TagName="nikon-d7100" Count="27" ExcerptPostId="37650" WikiPostId="37649" />
+  <row Id="1970" TagName="multi-focal" Count="2" />
+  <row Id="1971" TagName="samyang" Count="28" ExcerptPostId="37662" WikiPostId="37661" />
+  <row Id="1972" TagName="deconvolution" Count="5" ExcerptPostId="35102" WikiPostId="35101" />
+  <row Id="1973" TagName="pentaprism" Count="3" ExcerptPostId="37864" WikiPostId="37863" />
+  <row Id="1974" TagName="image-stacking" Count="50" ExcerptPostId="37583" WikiPostId="37582" />
+  <row Id="1976" TagName="digital-lens-optimizer" Count="1" ExcerptPostId="37666" WikiPostId="37665" />
+  <row Id="1977" TagName="smartphone" Count="72" ExcerptPostId="35408" WikiPostId="35407" />
+  <row Id="1979" TagName="ambient-light" Count="6" ExcerptPostId="35624" WikiPostId="35623" />
+  <row Id="1983" TagName="bait-and-switch-scam" Count="2" ExcerptPostId="35992" WikiPostId="35991" />
+  <row Id="1984" TagName="nikon-d3200" Count="68" ExcerptPostId="37635" WikiPostId="37634" />
+  <row Id="1985" TagName="phase-one" Count="4" ExcerptPostId="37637" WikiPostId="37636" />
+  <row Id="1988" TagName="led-lighting" Count="21" ExcerptPostId="37656" WikiPostId="37655" />
+  <row Id="1989" TagName="low-key" Count="15" ExcerptPostId="36142" WikiPostId="36141" />
+  <row Id="1996" TagName="eye-fi" Count="12" ExcerptPostId="37342" WikiPostId="37341" />
+  <row Id="1998" TagName="bounce-flash" Count="7" ExcerptPostId="37579" WikiPostId="37578" />
+  <row Id="1999" TagName="high-speed-sync" Count="28" ExcerptPostId="37576" WikiPostId="37575" />
+  <row Id="2000" TagName="soligor" Count="4" ExcerptPostId="37558" WikiPostId="37557" />
+  <row Id="2006" TagName="olympus-om1" Count="1" ExcerptPostId="37658" WikiPostId="37657" />
+  <row Id="2008" TagName="straight-photography" Count="1" ExcerptPostId="37660" WikiPostId="37659" />
+  <row Id="2010" TagName="natural-lighting" Count="8" ExcerptPostId="37700" WikiPostId="37699" />
+  <row Id="2012" TagName="praktica" Count="1" ExcerptPostId="37872" WikiPostId="37871" />
+  <row Id="2014" TagName="nightclubs" Count="8" />
+  <row Id="2016" TagName="milky-way" Count="23" />
+  <row Id="2019" TagName="nikon-1" Count="12" ExcerptPostId="38160" WikiPostId="38159" />
+  <row Id="2029" TagName="microsoft-ice" Count="2" />
+  <row Id="2035" TagName="canon-700d" Count="33" />
+  <row Id="2036" TagName="elinchrom" Count="3" />
+  <row Id="2038" TagName="nikon-d70" Count="9" />
+  <row Id="2039" TagName="selective-focus" Count="1" ExcerptPostId="39617" WikiPostId="39616" />
+  <row Id="2043" TagName="circle-of-confusion" Count="5" />
+  <row Id="2044" TagName="painting" Count="15" />
+  <row Id="2045" TagName="raw-plus-jpeg" Count="5" />
+  <row Id="2048" TagName="photo-mechanic" Count="4" ExcerptPostId="66075" WikiPostId="66074" />
+  <row Id="2055" TagName="yongnuo" Count="141" ExcerptPostId="72147" WikiPostId="72146" />
+  <row Id="2057" TagName="color-gamut" Count="11" />
+  <row Id="2058" TagName="light-painting" Count="8" />
+  <row Id="2060" TagName="vintage" Count="46" />
+  <row Id="2062" TagName="dandelion-chip" Count="4" ExcerptPostId="56018" WikiPostId="56017" />
+  <row Id="2066" TagName="headshot" Count="7" />
+  <row Id="2068" TagName="effective-aperture" Count="9" />
+  <row Id="2072" TagName="trick-photography" Count="7" />
+  <row Id="2073" TagName="360-panorama" Count="65" ExcerptPostId="67830" WikiPostId="67829" />
+  <row Id="2082" TagName="nokia" Count="5" ExcerptPostId="53350" WikiPostId="53349" />
+  <row Id="2090" TagName="skin-tones" Count="17" />
+  <row Id="2095" TagName="shot-to-shot-time" Count="3" />
+  <row Id="2097" TagName="color-blindness" Count="3" />
+  <row Id="2100" TagName="windows-phone" Count="2" />
+  <row Id="2108" TagName="anamorphic" Count="3" />
+  <row Id="2116" TagName="marexar" Count="2" />
+  <row Id="2117" TagName="serial-number" Count="7" />
+  <row Id="2118" TagName="comparison" Count="28" />
+  <row Id="2121" TagName="calculations" Count="111" ExcerptPostId="64957" WikiPostId="64956" />
+  <row Id="2123" TagName="photo-booth" Count="10" />
+  <row Id="2128" TagName="stuck-pixel" Count="6" />
+  <row Id="2132" TagName="reversed-lens" Count="10" />
+  <row Id="2139" TagName="compact" Count="5" />
+  <row Id="2142" TagName="careers" Count="2" />
+  <row Id="2149" TagName="projector" Count="6" />
+  <row Id="2151" TagName="m42" Count="12" ExcerptPostId="65346" WikiPostId="65345" />
+  <row Id="2157" TagName="lightroom-5" Count="68" ExcerptPostId="47335" WikiPostId="47334" />
+  <row Id="2158" TagName="glass-plate" Count="4" />
+  <row Id="2160" TagName="triggertrap" Count="3" />
+  <row Id="2161" TagName="focus-confirmation" Count="6" />
+  <row Id="2167" TagName="contax" Count="4" />
+  <row Id="2169" TagName="fire" Count="3" />
+  <row Id="2177" TagName="disposable-cameras" Count="2" />
+  <row Id="2180" TagName="phase-detection" Count="11" />
+  <row Id="2181" TagName="contrast-detection" Count="9" />
+  <row Id="2183" TagName="rust" Count="2" />
+  <row Id="2185" TagName="os-x" Count="26" />
+  <row Id="2186" TagName="network" Count="8" />
+  <row Id="2191" TagName="mamiya" Count="12" />
+  <row Id="2197" TagName="canon-70d" Count="47" ExcerptPostId="47549" WikiPostId="47548" />
+  <row Id="2198" TagName="wifi" Count="32" ExcerptPostId="56116" WikiPostId="56115" />
+  <row Id="2199" TagName="metal" Count="8" />
+  <row Id="2206" TagName="soft-proofing" Count="13" />
+  <row Id="2210" TagName="stroboscopic-flash" Count="4" ExcerptPostId="61667" WikiPostId="61666" />
+  <row Id="2211" TagName="color-white" Count="14" />
+  <row Id="2214" TagName="nikon-d3300" Count="62" ExcerptPostId="48406" WikiPostId="48405" />
+  <row Id="2216" TagName="on-location" Count="2" />
+  <row Id="2218" TagName="microsd" Count="10" ExcerptPostId="71991" WikiPostId="71990" />
+  <row Id="2234" TagName="fujifilm-x100" Count="17" />
+  <row Id="2235" TagName="fujifilm-xe1" Count="3" ExcerptPostId="49482" WikiPostId="49481" />
+  <row Id="2236" TagName="night" Count="195" ExcerptPostId="57419" WikiPostId="57418" />
+  <row Id="2237" TagName="samsung" Count="16" />
+  <row Id="2239" TagName="focus-point-indicators" Count="9" />
+  <row Id="2243" TagName="patents" Count="2" />
+  <row Id="2246" TagName="macro-flash" Count="3" />
+  <row Id="2254" TagName="hair" Count="3" />
+  <row Id="2260" TagName="compositing" Count="8" ExcerptPostId="50764" WikiPostId="50763" />
+  <row Id="2264" TagName="kirlian-photography" Count="1" ExcerptPostId="51933" WikiPostId="51932" />
+  <row Id="2268" TagName="prefocus" Count="2" />
+  <row Id="2275" TagName="android-app" Count="8" />
+  <row Id="2277" TagName="voigtlander" Count="1" ExcerptPostId="55922" WikiPostId="55921" />
+  <row Id="2278" TagName="support-equipment" Count="20" ExcerptPostId="52868" WikiPostId="52867" />
+  <row Id="2282" TagName="wifi-sd" Count="8" ExcerptPostId="52929" WikiPostId="52928" />
+  <row Id="2283" TagName="minimum-focus-distance" Count="9" />
+  <row Id="2285" TagName="hyperfocal-distance" Count="17" ExcerptPostId="54691" WikiPostId="54690" />
+  <row Id="2291" TagName="sony-alpha" Count="53" ExcerptPostId="57857" WikiPostId="57856" />
+  <row Id="2294" TagName="focus-breathing" Count="7" ExcerptPostId="54197" WikiPostId="54196" />
+  <row Id="2295" TagName="canon-1v" Count="2" ExcerptPostId="54445" WikiPostId="54444" />
+  <row Id="2296" TagName="canon-1ds" Count="1" ExcerptPostId="54447" WikiPostId="54446" />
+  <row Id="2297" TagName="canon-1d-mark-iii" Count="2" ExcerptPostId="54449" WikiPostId="54448" />
+  <row Id="2298" TagName="canon-1d-mark-ii" Count="2" ExcerptPostId="54451" WikiPostId="54450" />
+  <row Id="2299" TagName="canon-1ds-mark-ii" Count="2" ExcerptPostId="54453" WikiPostId="54452" />
+  <row Id="2300" TagName="canon-1d-mark-iv" Count="1" ExcerptPostId="54465" WikiPostId="54464" />
+  <row Id="2302" TagName="emotion" Count="3" />
+  <row Id="2311" TagName="stage-lighting" Count="3" />
+  <row Id="2312" TagName="battery-drain" Count="21" />
+  <row Id="2317" TagName="film-cameras" Count="6" />
+  <row Id="2319" TagName="capture-one" Count="14" ExcerptPostId="70544" WikiPostId="70543" />
+  <row Id="2323" TagName="repair-parts" Count="8" />
+  <row Id="2325" TagName="colorization" Count="2" />
+  <row Id="2326" TagName="corel" Count="1" ExcerptPostId="57360" WikiPostId="57359" />
+  <row Id="2327" TagName="epson" Count="16" ExcerptPostId="57358" WikiPostId="57357" />
+  <row Id="2328" TagName="sequences" Count="3" />
+  <row Id="2329" TagName="pixel-hk" Count="1" ExcerptPostId="57185" WikiPostId="57184" />
+  <row Id="2330" TagName="nikon-d5300" Count="28" />
+  <row Id="2337" TagName="cyanotype" Count="2" ExcerptPostId="57448" WikiPostId="57447" />
+  <row Id="2344" TagName="electronic-shutter" Count="9" />
+  <row Id="2346" TagName="pentax-k1000" Count="7" />
+  <row Id="2347" TagName="extraterrestrial-cameras" Count="7" />
+  <row Id="2356" TagName="canon-ex430ii" Count="6" />
+  <row Id="2359" TagName="pictorialism" Count="2" />
+  <row Id="2363" TagName="changing-lenses" Count="8" />
+  <row Id="2368" TagName="object-removal" Count="8" />
+  <row Id="2369" TagName="beauty-dish" Count="5" />
+  <row Id="2372" TagName="filesystems" Count="3" />
+  <row Id="2375" TagName="photoshop-cs6" Count="4" />
+  <row Id="2382" TagName="low-iso" Count="2" />
+  <row Id="2383" TagName="nikon-d5200" Count="24" />
+  <row Id="2385" TagName="lightstands" Count="4" />
+  <row Id="2389" TagName="light-meter" Count="24" ExcerptPostId="61475" WikiPostId="61474" />
+  <row Id="2390" TagName="nissin" Count="7" />
+  <row Id="2393" TagName="pano-projections" Count="11" />
+  <row Id="2397" TagName="bulk-load" Count="3" ExcerptPostId="61956" WikiPostId="61955" />
+  <row Id="2398" TagName="sony-a7ii" Count="6" />
+  <row Id="2403" TagName="lightroom-6" Count="32" ExcerptPostId="62260" WikiPostId="62259" />
+  <row Id="2405" TagName="frames" Count="15" ExcerptPostId="63449" WikiPostId="63448" />
+  <row Id="2407" TagName="colorhug" Count="3" />
+  <row Id="2410" TagName="highlight-recovery" Count="5" />
+  <row Id="2413" TagName="push-processing" Count="3" />
+  <row Id="2414" TagName="phottix" Count="4" />
+  <row Id="2415" TagName="cokin" Count="4" />
+  <row Id="2418" TagName="digikam" Count="11" />
+  <row Id="2423" TagName="selfie-sticks" Count="3" />
+  <row Id="2424" TagName="google" Count="9" />
+  <row Id="2425" TagName="self-timer" Count="14" />
+  <row Id="2426" TagName="fujifilm-x10t" Count="2" />
+  <row Id="2429" TagName="volcanos" Count="2" />
+  <row Id="2433" TagName="ilford" Count="6" />
+  <row Id="2434" TagName="image" Count="30" />
+  <row Id="2436" TagName="lowepro" Count="2" ExcerptPostId="67466" WikiPostId="67465" />
+  <row Id="2438" TagName="untagged" Count="3" />
+  <row Id="2439" TagName="diaphragm" Count="4" />
+  <row Id="2440" TagName="eyepiece" Count="4" />
+  <row Id="2443" TagName="profoto" Count="5" />
+  <row Id="2445" TagName="light-leaks" Count="12" />
+  <row Id="2446" TagName="social-media" Count="4" />
+  <row Id="2447" TagName="scratches" Count="7" />
+  <row Id="2449" TagName="manufacturing" Count="3" />
+  <row Id="2450" TagName="godox" Count="13" ExcerptPostId="90822" WikiPostId="90821" />
+  <row Id="2451" TagName="windows-10" Count="9" />
+  <row Id="2452" TagName="focusing" Count="2" />
+  <row Id="2458" TagName="nikon-d810" Count="9" ExcerptPostId="90039" WikiPostId="90038" />
+  <row Id="2459" TagName="fujifilm-xt10" Count="2" />
+  <row Id="2461" TagName="monolights" Count="4" />
+  <row Id="2465" TagName="ef-s" Count="7" />
+  <row Id="2469" TagName="background-removal" Count="4" />
+  <row Id="2477" TagName="enlarging" Count="10" ExcerptPostId="91670" WikiPostId="91669" />
+  <row Id="2481" TagName="light-transmission" Count="14" />
+  <row Id="2483" TagName="limited-editions" Count="2" />
+  <row Id="2489" TagName="clothing" Count="9" />
+  <row Id="2492" TagName="cactus" Count="3" />
+  <row Id="2494" TagName="golden-ratio" Count="3" />
+  <row Id="2499" TagName="colorchecker" Count="4" />
+  <row Id="2500" TagName="wide-angle-converter" Count="4" />
+  <row Id="2503" TagName="trap-focus" Count="2" />
+  <row Id="2505" TagName="leaf-shutter" Count="4" />
+  <row Id="2508" TagName="nikon-d750" Count="14" />
+  <row Id="2517" TagName="night-photography" Count="24" />
+  <row Id="2519" TagName="slave-flash" Count="2" />
+  <row Id="2525" TagName="85mm" Count="4" />
+  <row Id="2526" TagName="projection" Count="6" />
+  <row Id="2529" TagName="camera-identification" Count="9" ExcerptPostId="77391" WikiPostId="77390" />
+  <row Id="2537" TagName="image-orientation" Count="2" />
+  <row Id="2539" TagName="symbolism" Count="2" />
+  <row Id="2540" TagName="raspberry-pi" Count="2" />
+  <row Id="2543" TagName="flowers" Count="2" />
+  <row Id="2549" TagName="google-cardboard" Count="3" />
+  <row Id="2553" TagName="mechanical-shutter" Count="2" />
+  <row Id="2555" TagName="back-button-autofocus" Count="4" ExcerptPostId="85423" WikiPostId="85422" />
+  <row Id="2560" TagName="canon-80d" Count="5" />
+  <row Id="2564" TagName="wacom-tablet" Count="2" />
+  <row Id="2565" TagName="bellows" Count="12" />
+  <row Id="2569" TagName="old-prints" Count="2" />
+  <row Id="2573" TagName="albums" Count="2" />
+  <row Id="2577" TagName="tethered-shooting" Count="7" />
+  <row Id="2578" TagName="prophoto" Count="2" ExcerptPostId="83739" WikiPostId="83738" />
+  <row Id="2581" TagName="modeling-light" Count="2" />
+  <row Id="2583" TagName="make-up" Count="2" />
+  <row Id="2584" TagName="editing" Count="5" />
+  <row Id="2585" TagName="equipment-identification" Count="18" />
+  <row Id="2586" TagName="mobile" Count="3" />
+  <row Id="2587" TagName="sync" Count="4" />
+  <row Id="2589" TagName="hangs" Count="2" />
+  <row Id="2590" TagName="selection" Count="2" />
+  <row Id="2591" TagName="field-curvature" Count="12" />
+  <row Id="2598" TagName="composite" Count="2" />
+  <row Id="2604" TagName="nikon-d5500" Count="7" ExcerptPostId="85421" WikiPostId="85420" />
+  <row Id="2605" TagName="affinity-photo" Count="4" />
+  <row Id="2614" TagName="gimbal-head" Count="3" />
+  <row Id="2615" TagName="bird-photography" Count="4" />
+  <row Id="2616" TagName="sony-rx100" Count="3" />
+  <row Id="2619" TagName="pixel-size" Count="3" />
+  <row Id="2624" TagName="icc-profile" Count="8" />
+  <row Id="2629" TagName="dubai" Count="1" />
+  <row Id="2630" TagName="export" Count="9" />
+  <row Id="2631" TagName="e-mount" Count="3" />
+  <row Id="2632" TagName="sony-a6500" Count="1" />
+  <row Id="2633" TagName="shutter-release-halfway" Count="1" />
+  <row Id="2634" TagName="external" Count="1" />
+  <row Id="2635" TagName="drive" Count="1" />
+  <row Id="2636" TagName="lab-colorspace" Count="2" />
+  <row Id="2637" TagName="frequency-separation" Count="3" />
+  <row Id="2638" TagName="check-layers" Count="1" />
+  <row Id="2639" TagName="photosphere" Count="1" />
+  <row Id="2640" TagName="binoculars" Count="3" />
+  <row Id="2641" TagName="sensitivity" Count="1" />
+  <row Id="2642" TagName="t-mount" Count="3" />
+  <row Id="2643" TagName="advertising" Count="1" />
+  <row Id="2644" TagName="sb-25" Count="1" />
+  <row Id="2647" TagName="digital-asset-management" Count="1" />
+  <row Id="2648" TagName="apodization" Count="1" />
+  <row Id="2649" TagName="sleeves" Count="1" />
+  <row Id="2650" TagName="instant-film" Count="1" />
+  <row Id="2651" TagName="cheese" Count="1" />
+  <row Id="2652" TagName="resize" Count="2" />
+  <row Id="2653" TagName="nikon-df" Count="4" ExcerptPostId="90041" WikiPostId="90040" />
+  <row Id="2654" TagName="nikon-d5600" Count="3" />
+  <row Id="2655" TagName="warranty" Count="1" />
+  <row Id="2656" TagName="deserts" Count="1" />
+  <row Id="2657" TagName="exposure-preview" Count="2" />
+  <row Id="2660" TagName="rodenstock" Count="1" />
+  <row Id="2661" TagName="snapbridge" Count="3" ExcerptPostId="90261" WikiPostId="90260" />
+  <row Id="2664" TagName="pentax-k-70" Count="1" />
+  <row Id="2665" TagName="af-p" Count="1" ExcerptPostId="90263" WikiPostId="90262" />
+  <row Id="2666" TagName="nikon-d7500" Count="1" />
+  <row Id="2667" TagName="microfiber" Count="1" />
+  <row Id="2668" TagName="double-exposure" Count="1" />
+  <row Id="2669" TagName="zoom-blur" Count="2" ExcerptPostId="90921" WikiPostId="90920" />
+  <row Id="2670" TagName="arca-swiss" Count="1" />
+  <row Id="2671" TagName="camera" Count="4" />
+</tags>

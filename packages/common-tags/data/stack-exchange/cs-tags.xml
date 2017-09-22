@@ -1,0 +1,547 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tags>
+  <row Id="1" TagName="cpu-pipelines" Count="52" />
+  <row Id="2" TagName="compilers" Count="283" ExcerptPostId="96" WikiPostId="95" />
+  <row Id="3" TagName="database-theory" Count="126" ExcerptPostId="47" WikiPostId="46" />
+  <row Id="4" TagName="algorithms" Count="4939" ExcerptPostId="40" WikiPostId="39" />
+  <row Id="5" TagName="computer-architecture" Count="540" ExcerptPostId="927" WikiPostId="926" />
+  <row Id="6" TagName="scheduling" Count="114" ExcerptPostId="236" WikiPostId="235" />
+  <row Id="9" TagName="sorting" Count="392" ExcerptPostId="68" WikiPostId="67" />
+  <row Id="10" TagName="operating-systems" Count="367" ExcerptPostId="187" WikiPostId="186" />
+  <row Id="11" TagName="graphics" Count="78" />
+  <row Id="14" TagName="data-structures" Count="1012" ExcerptPostId="98" WikiPostId="97" />
+  <row Id="15" TagName="computational-geometry" Count="386" ExcerptPostId="2256" WikiPostId="2255" />
+  <row Id="17" TagName="formal-languages" Count="1473" ExcerptPostId="50" WikiPostId="49" />
+  <row Id="18" TagName="applied-theory" Count="46" ExcerptPostId="94" WikiPostId="93" />
+  <row Id="21" TagName="time-complexity" Count="811" ExcerptPostId="92" WikiPostId="91" />
+  <row Id="22" TagName="average-case" Count="50" />
+  <row Id="23" TagName="relational-algebra" Count="45" ExcerptPostId="45" WikiPostId="44" />
+  <row Id="24" TagName="finite-model-theory" Count="8" ExcerptPostId="384" WikiPostId="383" />
+  <row Id="25" TagName="memory-allocation" Count="31" />
+  <row Id="26" TagName="computability" Count="1011" ExcerptPostId="59" WikiPostId="58" />
+  <row Id="28" TagName="undecidability" Count="402" ExcerptPostId="52" WikiPostId="51" />
+  <row Id="29" TagName="formal-grammars" Count="650" ExcerptPostId="64" WikiPostId="63" />
+  <row Id="30" TagName="parsers" Count="184" ExcerptPostId="66" WikiPostId="65" />
+  <row Id="31" TagName="automata" Count="795" ExcerptPostId="54" WikiPostId="53" />
+  <row Id="33" TagName="lambda-calculus" Count="258" ExcerptPostId="747" WikiPostId="746" />
+  <row Id="34" TagName="type-theory" Count="219" ExcerptPostId="532" WikiPostId="531" />
+  <row Id="35" TagName="logic" Count="475" ExcerptPostId="71" WikiPostId="70" />
+  <row Id="39" TagName="algorithm-analysis" Count="1103" ExcerptPostId="83" WikiPostId="82" />
+  <row Id="40" TagName="software-engineering" Count="66" ExcerptPostId="87" WikiPostId="86" />
+  <row Id="43" TagName="complexity-theory" Count="2471" ExcerptPostId="85" WikiPostId="84" />
+  <row Id="44" TagName="np-hard" Count="310" ExcerptPostId="497" WikiPostId="496" />
+  <row Id="46" TagName="data-mining" Count="108" ExcerptPostId="3066" WikiPostId="3065" />
+  <row Id="48" TagName="distributed-systems" Count="219" ExcerptPostId="2138" WikiPostId="2137" />
+  <row Id="49" TagName="clocks" Count="22" />
+  <row Id="50" TagName="coq" Count="28" ExcerptPostId="523" WikiPostId="522" />
+  <row Id="51" TagName="recursion" Count="226" ExcerptPostId="517" WikiPostId="516" />
+  <row Id="54" TagName="computer-networks" Count="165" ExcerptPostId="2136" WikiPostId="2135" />
+  <row Id="55" TagName="reference-request" Count="683" ExcerptPostId="1366" WikiPostId="1365" />
+  <row Id="56" TagName="formal-methods" Count="69" ExcerptPostId="536" WikiPostId="535" />
+  <row Id="57" TagName="model-checking" Count="52" ExcerptPostId="749" WikiPostId="748" />
+  <row Id="58" TagName="trees" Count="371" ExcerptPostId="513" WikiPostId="512" />
+  <row Id="59" TagName="learning-theory" Count="39" ExcerptPostId="69753" WikiPostId="69752" />
+  <row Id="60" TagName="machine-learning" Count="694" ExcerptPostId="763" WikiPostId="762" />
+  <row Id="62" TagName="combinatorics" Count="352" ExcerptPostId="499" WikiPostId="498" />
+  <row Id="63" TagName="optimization" Count="834" ExcerptPostId="713" WikiPostId="712" />
+  <row Id="66" TagName="knowledge-representation" Count="28" />
+  <row Id="67" TagName="reasoning" Count="10" />
+  <row Id="69" TagName="quantum-computing" Count="145" ExcerptPostId="128" WikiPostId="127" />
+  <row Id="70" TagName="turing-machines" Count="996" ExcerptPostId="966" WikiPostId="965" />
+  <row Id="71" TagName="regular-languages" Count="794" ExcerptPostId="218" WikiPostId="217" />
+  <row Id="73" TagName="parallel-computing" Count="200" ExcerptPostId="189" WikiPostId="188" />
+  <row Id="75" TagName="descriptive-complexity" Count="19" ExcerptPostId="756" WikiPostId="755" />
+  <row Id="76" TagName="statistics" Count="81" />
+  <row Id="78" TagName="category-theory" Count="41" ExcerptPostId="28105" WikiPostId="28104" />
+  <row Id="79" TagName="kolmogorov-complexity" Count="61" ExcerptPostId="719" WikiPostId="718" />
+  <row Id="80" TagName="type-checking" Count="53" ExcerptPostId="534" WikiPostId="533" />
+  <row Id="81" TagName="network-topology" Count="19" />
+  <row Id="82" TagName="programming-languages" Count="513" ExcerptPostId="191" WikiPostId="190" />
+  <row Id="83" TagName="databases" Count="109" />
+  <row Id="85" TagName="sudoku" Count="9" ExcerptPostId="607" WikiPostId="606" />
+  <row Id="86" TagName="finite-automata" Count="728" ExcerptPostId="505" WikiPostId="504" />
+  <row Id="87" TagName="information-theory" Count="146" ExcerptPostId="43381" WikiPostId="43380" />
+  <row Id="88" TagName="binary-trees" Count="281" ExcerptPostId="183" WikiPostId="182" />
+  <row Id="90" TagName="graphs" Count="1326" ExcerptPostId="507" WikiPostId="506" />
+  <row Id="91" TagName="runtime-analysis" Count="557" ExcerptPostId="964" WikiPostId="963" />
+  <row Id="92" TagName="dynamic-programming" Count="318" ExcerptPostId="745" WikiPostId="744" />
+  <row Id="93" TagName="graph-theory" Count="1097" ExcerptPostId="1765" WikiPostId="1764" />
+  <row Id="94" TagName="context-free" Count="799" ExcerptPostId="382" WikiPostId="381" />
+  <row Id="96" TagName="efficiency" Count="194" ExcerptPostId="511" WikiPostId="510" />
+  <row Id="98" TagName="satisfiability" Count="277" ExcerptPostId="760" WikiPostId="759" />
+  <row Id="99" TagName="3-sat" Count="61" ExcerptPostId="483" WikiPostId="482" />
+  <row Id="103" TagName="filesystems" Count="32" ExcerptPostId="29634" WikiPostId="29633" />
+  <row Id="105" TagName="semantics" Count="124" ExcerptPostId="292" WikiPostId="291" />
+  <row Id="106" TagName="cellular-automata" Count="44" ExcerptPostId="12086" WikiPostId="12085" />
+  <row Id="107" TagName="concurrency" Count="179" ExcerptPostId="503" WikiPostId="502" />
+  <row Id="108" TagName="reflection" Count="3" />
+  <row Id="110" TagName="hash-tables" Count="117" ExcerptPostId="509" WikiPostId="508" />
+  <row Id="112" TagName="proof-techniques" Count="388" ExcerptPostId="1095" WikiPostId="1094" />
+  <row Id="114" TagName="social-networks" Count="24" />
+  <row Id="116" TagName="power-consumption" Count="5" />
+  <row Id="117" TagName="machine-models" Count="28" />
+  <row Id="121" TagName="circuits" Count="127" ExcerptPostId="1097" WikiPostId="1096" />
+  <row Id="126" TagName="typing" Count="41" ExcerptPostId="530" WikiPostId="529" />
+  <row Id="130" TagName="p-vs-np" Count="106" />
+  <row Id="131" TagName="data-compression" Count="131" />
+  <row Id="132" TagName="in-place" Count="9" ExcerptPostId="730" WikiPostId="729" />
+  <row Id="133" TagName="arrays" Count="225" ExcerptPostId="1212" WikiPostId="1211" />
+  <row Id="134" TagName="encryption" Count="33" ExcerptPostId="501" WikiPostId="500" />
+  <row Id="137" TagName="discrete-mathematics" Count="187" ExcerptPostId="353" WikiPostId="352" />
+  <row Id="138" TagName="asymptotics" Count="662" ExcerptPostId="979" WikiPostId="978" />
+  <row Id="139" TagName="landau-notation" Count="194" ExcerptPostId="6706" WikiPostId="6705" />
+  <row Id="140" TagName="education" Count="108" ExcerptPostId="863" WikiPostId="862" />
+  <row Id="143" TagName="real-numbers" Count="30" />
+  <row Id="144" TagName="heuristics" Count="125" ExcerptPostId="962" WikiPostId="961" />
+  <row Id="145" TagName="cryptography" Count="142" ExcerptPostId="410" WikiPostId="409" />
+  <row Id="147" TagName="nondeterminism" Count="170" ExcerptPostId="515" WikiPostId="514" />
+  <row Id="148" TagName="pushdown-automata" Count="237" ExcerptPostId="732" WikiPostId="731" />
+  <row Id="149" TagName="approximation" Count="277" ExcerptPostId="2145" WikiPostId="2144" />
+  <row Id="150" TagName="security" Count="55" ExcerptPostId="2134" WikiPostId="2133" />
+  <row Id="151" TagName="protocols" Count="20" />
+  <row Id="155" TagName="access-control" Count="8" />
+  <row Id="156" TagName="structured-data" Count="6" />
+  <row Id="158" TagName="shared-memory" Count="12" />
+  <row Id="159" TagName="imperative-programming" Count="16" />
+  <row Id="160" TagName="neural-networks" Count="280" ExcerptPostId="3308" WikiPostId="3307" />
+  <row Id="161" TagName="process-algebras" Count="16" ExcerptPostId="519" WikiPostId="518" />
+  <row Id="162" TagName="authentication" Count="9" />
+  <row Id="165" TagName="cpu-cache" Count="155" ExcerptPostId="754" WikiPostId="753" />
+  <row Id="167" TagName="amortized-analysis" Count="69" ExcerptPostId="958" WikiPostId="957" />
+  <row Id="168" TagName="priority-queues" Count="31" />
+  <row Id="170" TagName="artificial-intelligence" Count="356" ExcerptPostId="2140" WikiPostId="2139" />
+  <row Id="176" TagName="probability-theory" Count="226" ExcerptPostId="728" WikiPostId="727" />
+  <row Id="180" TagName="hash" Count="133" ExcerptPostId="779" WikiPostId="778" />
+  <row Id="181" TagName="empirical-research" Count="16" ExcerptPostId="1165" WikiPostId="1164" />
+  <row Id="182" TagName="integers" Count="93" ExcerptPostId="10830" WikiPostId="10829" />
+  <row Id="183" TagName="strings" Count="245" ExcerptPostId="1767" WikiPostId="1766" />
+  <row Id="184" TagName="randomness" Count="144" ExcerptPostId="63748" WikiPostId="63747" />
+  <row Id="185" TagName="randomized-algorithms" Count="195" ExcerptPostId="717" WikiPostId="716" />
+  <row Id="186" TagName="regular-expressions" Count="337" ExcerptPostId="2143" WikiPostId="2142" />
+  <row Id="187" TagName="linear-programming" Count="166" ExcerptPostId="721" WikiPostId="720" />
+  <row Id="188" TagName="coding-theory" Count="105" ExcerptPostId="894" WikiPostId="893" />
+  <row Id="191" TagName="word-combinatorics" Count="21" ExcerptPostId="1769" WikiPostId="1768" />
+  <row Id="192" TagName="functional-programming" Count="173" ExcerptPostId="767" WikiPostId="766" />
+  <row Id="194" TagName="order-theory" Count="12" ExcerptPostId="774" WikiPostId="773" />
+  <row Id="199" TagName="reductions" Count="609" ExcerptPostId="793" WikiPostId="792" />
+  <row Id="200" TagName="recurrence-relation" Count="315" ExcerptPostId="787" WikiPostId="786" />
+  <row Id="201" TagName="stack-inspection" Count="2" />
+  <row Id="204" TagName="evolutionary-computing" Count="28" />
+  <row Id="205" TagName="didactics" Count="22" ExcerptPostId="861" WikiPostId="860" />
+  <row Id="206" TagName="automated-theorem-proving" Count="32" ExcerptPostId="829" WikiPostId="828" />
+  <row Id="208" TagName="probabilistic-algorithms" Count="92" ExcerptPostId="1927" WikiPostId="1926" />
+  <row Id="210" TagName="pattern-recognition" Count="80" ExcerptPostId="956" WikiPostId="955" />
+  <row Id="211" TagName="inductive-datatypes" Count="23" />
+  <row Id="215" TagName="proof-assistants" Count="32" ExcerptPostId="905" WikiPostId="904" />
+  <row Id="216" TagName="smt-solvers" Count="11" ExcerptPostId="920" WikiPostId="919" />
+  <row Id="218" TagName="unification" Count="24" />
+  <row Id="220" TagName="spanning-trees" Count="82" ExcerptPostId="922" WikiPostId="921" />
+  <row Id="221" TagName="np-complete" Count="682" ExcerptPostId="913" WikiPostId="912" />
+  <row Id="223" TagName="search-problem" Count="73" ExcerptPostId="1492" WikiPostId="1491" />
+  <row Id="224" TagName="decision-problem" Count="246" ExcerptPostId="952" WikiPostId="951" />
+  <row Id="227" TagName="mathematical-analysis" Count="61" ExcerptPostId="977" WikiPostId="976" />
+  <row Id="228" TagName="computation-models" Count="247" ExcerptPostId="986" WikiPostId="985" />
+  <row Id="229" TagName="constraint-programming" Count="34" />
+  <row Id="230" TagName="board-games" Count="42" ExcerptPostId="1026" WikiPostId="1025" />
+  <row Id="233" TagName="natural-language-processing" Count="122" ExcerptPostId="3059" WikiPostId="3058" />
+  <row Id="236" TagName="pumping-lemma" Count="240" ExcerptPostId="1193" WikiPostId="1192" />
+  <row Id="238" TagName="shortest-path" Count="306" ExcerptPostId="1195" WikiPostId="1194" />
+  <row Id="241" TagName="game-theory" Count="70" ExcerptPostId="1189" WikiPostId="1188" />
+  <row Id="246" TagName="history" Count="78" ExcerptPostId="1110" WikiPostId="1109" />
+  <row Id="249" TagName="process-scheduling" Count="78" ExcerptPostId="1199" WikiPostId="1198" />
+  <row Id="250" TagName="hidden-markov-models" Count="29" />
+  <row Id="251" TagName="pseudo-random-generators" Count="64" ExcerptPostId="1897" WikiPostId="1896" />
+  <row Id="252" TagName="shift-register" Count="5" />
+  <row Id="253" TagName="recommendation-systems" Count="13" ExcerptPostId="1191" WikiPostId="1190" />
+  <row Id="255" TagName="search-algorithms" Count="338" ExcerptPostId="1187" WikiPostId="1186" />
+  <row Id="257" TagName="computable-analysis" Count="8" ExcerptPostId="1221" WikiPostId="1220" />
+  <row Id="259" TagName="data-sets" Count="34" ExcerptPostId="1163" WikiPostId="1162" />
+  <row Id="260" TagName="hci" Count="7" ExcerptPostId="1159" WikiPostId="1158" />
+  <row Id="263" TagName="loop-invariants" Count="33" ExcerptPostId="1167" WikiPostId="1166" />
+  <row Id="264" TagName="benchmarking" Count="13" ExcerptPostId="1161" WikiPostId="1160" />
+  <row Id="265" TagName="computer-algebra" Count="27" />
+  <row Id="266" TagName="hoare-logic" Count="31" ExcerptPostId="1214" WikiPostId="1213" />
+  <row Id="267" TagName="software-verification" Count="43" ExcerptPostId="1210" WikiPostId="1209" />
+  <row Id="268" TagName="packing" Count="39" ExcerptPostId="1267" WikiPostId="1266" />
+  <row Id="269" TagName="user-interface" Count="8" />
+  <row Id="270" TagName="space-complexity" Count="217" ExcerptPostId="10828" WikiPostId="10827" />
+  <row Id="274" TagName="search-trees" Count="202" ExcerptPostId="2224" WikiPostId="2223" />
+  <row Id="276" TagName="algorithm-design" Count="43" ExcerptPostId="69807" WikiPostId="69806" />
+  <row Id="279" TagName="relativization" Count="15" />
+  <row Id="281" TagName="turing-completeness" Count="98" />
+  <row Id="282" TagName="lattices" Count="17" ExcerptPostId="1312" WikiPostId="1311" />
+  <row Id="283" TagName="integrity" Count="2" />
+  <row Id="284" TagName="matrices" Count="120" />
+  <row Id="287" TagName="closure-properties" Count="240" ExcerptPostId="1483" WikiPostId="1482" />
+  <row Id="289" TagName="lists" Count="43" />
+  <row Id="292" TagName="terminology" Count="828" ExcerptPostId="1439" WikiPostId="1438" />
+  <row Id="294" TagName="video" Count="10" />
+  <row Id="296" TagName="numerical-analysis" Count="43" />
+  <row Id="297" TagName="modelling" Count="67" ExcerptPostId="1443" WikiPostId="1442" />
+  <row Id="298" TagName="virtual-memory" Count="74" ExcerptPostId="29643" WikiPostId="29642" />
+  <row Id="299" TagName="paging" Count="54" ExcerptPostId="29636" WikiPostId="29635" />
+  <row Id="300" TagName="lower-bounds" Count="130" />
+  <row Id="301" TagName="knapsack-problems" Count="108" ExcerptPostId="1572" WikiPostId="1571" />
+  <row Id="304" TagName="digital-preservation" Count="4" ExcerptPostId="1895" WikiPostId="1894" />
+  <row Id="305" TagName="vc-dimension" Count="18" ExcerptPostId="47602" WikiPostId="47601" />
+  <row Id="308" TagName="linear-algebra" Count="117" />
+  <row Id="315" TagName="random-number-generator" Count="30" />
+  <row Id="316" TagName="check-my-algorithm" Count="4" />
+  <row Id="317" TagName="storage" Count="30" />
+  <row Id="318" TagName="performance" Count="73" />
+  <row Id="319" TagName="operational-semantics" Count="31" />
+  <row Id="320" TagName="correctness-proof" Count="162" ExcerptPostId="10834" WikiPostId="10833" />
+  <row Id="323" TagName="factoring" Count="48" />
+  <row Id="324" TagName="searching" Count="39" />
+  <row Id="325" TagName="number-theory" Count="120" />
+  <row Id="326" TagName="program-optimization" Count="48" ExcerptPostId="3451" WikiPostId="3450" />
+  <row Id="328" TagName="check-my-proof" Count="20" ExcerptPostId="9983" WikiPostId="9982" />
+  <row Id="333" TagName="complexity-classes" Count="234" ExcerptPostId="10832" WikiPostId="10831" />
+  <row Id="334" TagName="string-metrics" Count="50" ExcerptPostId="1862" WikiPostId="1861" />
+  <row Id="335" TagName="intuition" Count="35" ExcerptPostId="1893" WikiPostId="1892" />
+  <row Id="337" TagName="program-verification" Count="23" />
+  <row Id="338" TagName="markov-chains" Count="36" />
+  <row Id="341" TagName="online-algorithms" Count="34" ExcerptPostId="1929" WikiPostId="1928" />
+  <row Id="342" TagName="equality" Count="20" />
+  <row Id="343" TagName="memory-management" Count="150" />
+  <row Id="345" TagName="greedy-algorithms" Count="132" ExcerptPostId="2112" WikiPostId="2111" />
+  <row Id="347" TagName="prolog" Count="10" ExcerptPostId="48091" WikiPostId="48090" />
+  <row Id="348" TagName="logic-programming" Count="15" />
+  <row Id="349" TagName="neural-computing" Count="11" />
+  <row Id="351" TagName="communication-protocols" Count="51" />
+  <row Id="353" TagName="books" Count="54" ExcerptPostId="31955" WikiPostId="31954" />
+  <row Id="357" TagName="random-graphs" Count="11" />
+  <row Id="358" TagName="sat-solvers" Count="49" ExcerptPostId="2173" WikiPostId="2172" />
+  <row Id="359" TagName="mathematical-software" Count="11" />
+  <row Id="360" TagName="streaming-algorithm" Count="22" ExcerptPostId="12844" WikiPostId="12843" />
+  <row Id="361" TagName="weighted-graphs" Count="109" ExcerptPostId="2930" WikiPostId="2929" />
+  <row Id="365" TagName="human-computing" Count="8" />
+  <row Id="369" TagName="threads" Count="57" />
+  <row Id="370" TagName="voting" Count="6" />
+  <row Id="372" TagName="uncountability" Count="23" />
+  <row Id="373" TagName="network-flow" Count="137" ExcerptPostId="63741" WikiPostId="63740" />
+  <row Id="376" TagName="logical-validity" Count="9" />
+  <row Id="377" TagName="colorings" Count="41" ExcerptPostId="9511" WikiPostId="9510" />
+  <row Id="379" TagName="random-walks" Count="18" />
+  <row Id="380" TagName="type-inference" Count="41" />
+  <row Id="381" TagName="java" Count="35" ExcerptPostId="48211" WikiPostId="48210" />
+  <row Id="383" TagName="modal-logic" Count="10" />
+  <row Id="384" TagName="linear-temporal-logic" Count="38" ExcerptPostId="2550" WikiPostId="2549" />
+  <row Id="385" TagName="error-correcting-codes" Count="43" ExcerptPostId="28042" WikiPostId="28041" />
+  <row Id="387" TagName="xor" Count="19" />
+  <row Id="395" TagName="buchi-automata" Count="17" ExcerptPostId="56119" WikiPostId="56118" />
+  <row Id="396" TagName="agent-based-computing" Count="12" />
+  <row Id="398" TagName="church-turing-thesis" Count="32" />
+  <row Id="400" TagName="polynomial-time" Count="181" ExcerptPostId="52308" WikiPostId="52307" />
+  <row Id="403" TagName="ambiguity" Count="65" />
+  <row Id="405" TagName="halting-problem" Count="177" ExcerptPostId="2926" WikiPostId="2925" />
+  <row Id="408" TagName="simulation" Count="116" ExcerptPostId="6836" WikiPostId="6835" />
+  <row Id="409" TagName="parsing" Count="44" />
+  <row Id="411" TagName="ontologies" Count="10" />
+  <row Id="414" TagName="software-testing" Count="19" />
+  <row Id="417" TagName="induction" Count="81" />
+  <row Id="419" TagName="fault-tolerance" Count="14" />
+  <row Id="421" TagName="normal-forms" Count="56" ExcerptPostId="66447" WikiPostId="66446" />
+  <row Id="422" TagName="object-oriented" Count="44" ExcerptPostId="3070" WikiPostId="3069" />
+  <row Id="424" TagName="code-generation" Count="16" ExcerptPostId="40282" WikiPostId="40281" />
+  <row Id="427" TagName="floating-point" Count="90" ExcerptPostId="65763" WikiPostId="65762" />
+  <row Id="429" TagName="rounding" Count="10" />
+  <row Id="431" TagName="sampling" Count="59" ExcerptPostId="3243" WikiPostId="3242" />
+  <row Id="433" TagName="computer-vision" Count="155" ExcerptPostId="43595" WikiPostId="43594" />
+  <row Id="434" TagName="image-processing" Count="161" ExcerptPostId="3389" WikiPostId="3388" />
+  <row Id="436" TagName="computer-games" Count="24" />
+  <row Id="440" TagName="partitions" Count="42" ExcerptPostId="63744" WikiPostId="63743" />
+  <row Id="441" TagName="sets" Count="182" ExcerptPostId="45075" WikiPostId="45074" />
+  <row Id="442" TagName="mathematical-programming" Count="58" ExcerptPostId="28552" WikiPostId="28551" />
+  <row Id="443" TagName="encoding-scheme" Count="73" />
+  <row Id="444" TagName="first-order-logic" Count="93" ExcerptPostId="48089" WikiPostId="48088" />
+  <row Id="446" TagName="binary-arithmetic" Count="32" />
+  <row Id="447" TagName="substrings" Count="50" />
+  <row Id="448" TagName="program-correctness" Count="20" />
+  <row Id="455" TagName="synchronization" Count="74" ExcerptPostId="29632" WikiPostId="29631" />
+  <row Id="466" TagName="assignment-problem" Count="51" />
+  <row Id="467" TagName="number-formats" Count="52" />
+  <row Id="468" TagName="graph-traversal" Count="172" ExcerptPostId="63042" WikiPostId="63041" />
+  <row Id="469" TagName="eulerian-paths" Count="13" ExcerptPostId="4756" WikiPostId="4755" />
+  <row Id="476" TagName="enumeration" Count="85" ExcerptPostId="44059" WikiPostId="44058" />
+  <row Id="477" TagName="master-theorem" Count="66" ExcerptPostId="6224" WikiPostId="6223" />
+  <row Id="478" TagName="big-data" Count="12" />
+  <row Id="480" TagName="interactive-proof-systems" Count="22" />
+  <row Id="483" TagName="tape-complexity" Count="4" />
+  <row Id="484" TagName="context-sensitive" Count="51" />
+  <row Id="485" TagName="subsequences" Count="40" />
+  <row Id="486" TagName="permutations" Count="107" />
+  <row Id="488" TagName="edit-distance" Count="36" ExcerptPostId="43379" WikiPostId="43378" />
+  <row Id="489" TagName="branch-and-bound" Count="17" />
+  <row Id="490" TagName="loops" Count="90" />
+  <row Id="492" TagName="finite-sets" Count="13" />
+  <row Id="493" TagName="partial-order" Count="28" />
+  <row Id="494" TagName="c" Count="24" ExcerptPostId="35953" WikiPostId="35952" />
+  <row Id="496" TagName="entropy" Count="50" />
+  <row Id="500" TagName="abstract-data-types" Count="15" />
+  <row Id="505" TagName="np" Count="265" ExcerptPostId="43122" WikiPostId="43121" />
+  <row Id="506" TagName="heaps" Count="104" />
+  <row Id="510" TagName="bipartite-matching" Count="71" />
+  <row Id="511" TagName="arithmetic" Count="169" />
+  <row Id="523" TagName="mu-calculus" Count="9" />
+  <row Id="529" TagName="adjacency-matrix" Count="18" />
+  <row Id="530" TagName="memory-access" Count="71" />
+  <row Id="531" TagName="genetic-algorithms" Count="79" ExcerptPostId="9509" WikiPostId="9508" />
+  <row Id="532" TagName="matching" Count="83" ExcerptPostId="50408" WikiPostId="50407" />
+  <row Id="534" TagName="bioinformatics" Count="23" />
+  <row Id="538" TagName="routing" Count="26" />
+  <row Id="540" TagName="programming-paradigms" Count="20" />
+  <row Id="541" TagName="mutual-exclusion" Count="36" ExcerptPostId="29641" WikiPostId="29640" />
+  <row Id="544" TagName="research" Count="37" />
+  <row Id="545" TagName="denotational-semantics" Count="17" />
+  <row Id="547" TagName="group-theory" Count="16" />
+  <row Id="548" TagName="memory-hardware" Count="91" />
+  <row Id="549" TagName="ocr" Count="6" ExcerptPostId="9335" WikiPostId="9334" />
+  <row Id="550" TagName="lempel-ziv" Count="6" />
+  <row Id="557" TagName="signal-processing" Count="12" ExcerptPostId="67156" WikiPostId="67155" />
+  <row Id="561" TagName="suffix-array" Count="9" />
+  <row Id="563" TagName="reliability" Count="6" />
+  <row Id="564" TagName="backtracking" Count="23" />
+  <row Id="566" TagName="pseudo-polynomial" Count="14" />
+  <row Id="567" TagName="tree-grammars" Count="10" />
+  <row Id="569" TagName="expanders" Count="7" />
+  <row Id="570" TagName="integer-programming" Count="93" />
+  <row Id="571" TagName="computer-vs-human" Count="10" />
+  <row Id="572" TagName="interpreters" Count="24" />
+  <row Id="573" TagName="binary-search" Count="51" />
+  <row Id="574" TagName="fourier-transform" Count="27" />
+  <row Id="575" TagName="linked-lists" Count="44" />
+  <row Id="576" TagName="continuations" Count="10" />
+  <row Id="579" TagName="small-step-semantics" Count="6" />
+  <row Id="582" TagName="term-rewriting" Count="32" ExcerptPostId="10405" WikiPostId="10404" />
+  <row Id="583" TagName="one-way-functions" Count="21" ExcerptPostId="10417" WikiPostId="10416" />
+  <row Id="584" TagName="graph-isomorphism" Count="44" />
+  <row Id="585" TagName="divide-and-conquer" Count="57" />
+  <row Id="588" TagName="sequential-circuit" Count="10" />
+  <row Id="590" TagName="primes" Count="51" />
+  <row Id="591" TagName="intervals" Count="37" />
+  <row Id="592" TagName="set-cover" Count="49" />
+  <row Id="594" TagName="partition-problem" Count="18" />
+  <row Id="595" TagName="parameterized-complexity" Count="31" ExcerptPostId="12204" WikiPostId="12203" />
+  <row Id="596" TagName="linear-bounded-automata" Count="18" />
+  <row Id="599" TagName="check-my-answer" Count="26" ExcerptPostId="11236" WikiPostId="11235" />
+  <row Id="600" TagName="variable-binding" Count="21" />
+  <row Id="605" TagName="counting" Count="79" ExcerptPostId="29660" WikiPostId="29659" />
+  <row Id="614" TagName="quicksort" Count="53" />
+  <row Id="615" TagName="square-grid" Count="14" />
+  <row Id="616" TagName="classification" Count="102" />
+  <row Id="617" TagName="information-retrieval" Count="29" />
+  <row Id="618" TagName="notation" Count="99" ExcerptPostId="11709" WikiPostId="11708" />
+  <row Id="619" TagName="splay-trees" Count="6" />
+  <row Id="621" TagName="reference-question" Count="26" ExcerptPostId="12491" WikiPostId="12490" />
+  <row Id="622" TagName="radix-sort" Count="15" />
+  <row Id="624" TagName="busy-beaver" Count="16" ExcerptPostId="53071" WikiPostId="53070" />
+  <row Id="627" TagName="traveling-salesman" Count="100" ExcerptPostId="12488" WikiPostId="12487" />
+  <row Id="629" TagName="cluster" Count="33" />
+  <row Id="630" TagName="bloom-filters" Count="22" ExcerptPostId="76795" WikiPostId="76794" />
+  <row Id="631" TagName="oracle-machines" Count="64" />
+  <row Id="635" TagName="homotopy-type-theory" Count="11" ExcerptPostId="13443" WikiPostId="13442" />
+  <row Id="639" TagName="bdd" Count="8" ExcerptPostId="13908" WikiPostId="13907" />
+  <row Id="640" TagName="tiling" Count="18" />
+  <row Id="644" TagName="computational-linguistics" Count="12" />
+  <row Id="645" TagName="facial-recognition" Count="7" />
+  <row Id="651" TagName="pi-calculus" Count="7" ExcerptPostId="14389" WikiPostId="14388" />
+  <row Id="652" TagName="ccs" Count="2" ExcerptPostId="14387" WikiPostId="14386" />
+  <row Id="653" TagName="church-numerals" Count="5" ExcerptPostId="14449" WikiPostId="14448" />
+  <row Id="654" TagName="hamiltonian-path" Count="44" ExcerptPostId="16179" WikiPostId="16178" />
+  <row Id="655" TagName="polynomials" Count="51" />
+  <row Id="656" TagName="error-estimation" Count="16" />
+  <row Id="657" TagName="numerical-algorithms" Count="75" ExcerptPostId="64035" WikiPostId="64034" />
+  <row Id="659" TagName="game-semantics" Count="3" />
+  <row Id="660" TagName="answer-set-programming" Count="3" ExcerptPostId="14623" WikiPostId="14622" />
+  <row Id="661" TagName="approximation-algorithms" Count="9" />
+  <row Id="662" TagName="max-cut" Count="9" ExcerptPostId="16181" WikiPostId="16180" />
+  <row Id="665" TagName="graph-algorithms" Count="20" ExcerptPostId="16185" WikiPostId="16184" />
+  <row Id="666" TagName="crossing-number" Count="2" ExcerptPostId="16183" WikiPostId="16182" />
+  <row Id="667" TagName="boltzmann-machine" Count="5" />
+  <row Id="668" TagName="dependent-types" Count="51" />
+  <row Id="669" TagName="lisp" Count="11" />
+  <row Id="671" TagName="api-design" Count="8" />
+  <row Id="676" TagName="proof-of-work" Count="2" ExcerptPostId="16276" WikiPostId="16275" />
+  <row Id="682" TagName="multiplication" Count="34" />
+  <row Id="684" TagName="transitivity" Count="5" />
+  <row Id="685" TagName="modular-arithmetic" Count="31" />
+  <row Id="686" TagName="duality" Count="7" />
+  <row Id="687" TagName="epistemology" Count="1" ExcerptPostId="27655" WikiPostId="27654" />
+  <row Id="688" TagName="numeral-representations" Count="15" />
+  <row Id="691" TagName="chernoff-bounds" Count="8" ExcerptPostId="42132" WikiPostId="42131" />
+  <row Id="693" TagName="comparison" Count="22" />
+  <row Id="694" TagName="boolean-algebra" Count="114" />
+  <row Id="701" TagName="sat" Count="2" />
+  <row Id="702" TagName="temporal-logic" Count="19" />
+  <row Id="703" TagName="curry-howard" Count="20" />
+  <row Id="708" TagName="message-passing" Count="5" />
+  <row Id="714" TagName="semi-decidability" Count="104" />
+  <row Id="716" TagName="topology" Count="9" />
+  <row Id="717" TagName="left-recursion" Count="31" />
+  <row Id="719" TagName="dictionaries" Count="41" ExcerptPostId="49631" WikiPostId="49630" />
+  <row Id="720" TagName="syntax-trees" Count="16" />
+  <row Id="723" TagName="resource-allocation" Count="15" />
+  <row Id="724" TagName="deadlocks" Count="44" />
+  <row Id="725" TagName="reversible-computing" Count="6" />
+  <row Id="739" TagName="complexity" Count="3" />
+  <row Id="740" TagName="monte-carlo" Count="19" />
+  <row Id="742" TagName="co-np" Count="19" />
+  <row Id="748" TagName="propositional-logic" Count="76" />
+  <row Id="754" TagName="mathematical-foundations" Count="54" ExcerptPostId="22996" WikiPostId="22995" />
+  <row Id="757" TagName="bayesian-statistics" Count="19" />
+  <row Id="761" TagName="nearest-neighbour" Count="25" ExcerptPostId="29785" WikiPostId="29784" />
+  <row Id="769" TagName="constant-time" Count="5" />
+  <row Id="770" TagName="persistent-data-structure" Count="13" ExcerptPostId="25958" WikiPostId="25957" />
+  <row Id="773" TagName="speech-recognition" Count="10" />
+  <row Id="775" TagName="longest-common-substring" Count="7" />
+  <row Id="776" TagName="rolling-hash" Count="5" />
+  <row Id="777" TagName="clique" Count="35" ExcerptPostId="27653" WikiPostId="27652" />
+  <row Id="781" TagName="maximum-subarray" Count="9" />
+  <row Id="787" TagName="precedence-graph" Count="3" ExcerptPostId="27665" WikiPostId="27664" />
+  <row Id="789" TagName="reinforcement-learning" Count="40" />
+  <row Id="799" TagName="planning" Count="11" ExcerptPostId="28490" WikiPostId="28489" />
+  <row Id="801" TagName="euclidean-distance" Count="17" />
+  <row Id="803" TagName="combinatory-logic" Count="17" />
+  <row Id="805" TagName="language-design" Count="38" />
+  <row Id="818" TagName="base-conversion" Count="14" />
+  <row Id="819" TagName="dag" Count="38" />
+  <row Id="820" TagName="testing" Count="6" />
+  <row Id="823" TagName="robotics" Count="8" />
+  <row Id="824" TagName="communication-complexity" Count="24" />
+  <row Id="825" TagName="digital-circuits" Count="49" />
+  <row Id="826" TagName="real-time" Count="17" />
+  <row Id="828" TagName="multi-tasking" Count="15" ExcerptPostId="29979" WikiPostId="29978" />
+  <row Id="831" TagName="recursion-theory" Count="11" />
+  <row Id="833" TagName="kernel-functions" Count="7" ExcerptPostId="30288" WikiPostId="30287" />
+  <row Id="834" TagName="os-kernel" Count="33" ExcerptPostId="30299" WikiPostId="30298" />
+  <row Id="835" TagName="balls-and-bins" Count="4" />
+  <row Id="840" TagName="turing-test" Count="5" />
+  <row Id="842" TagName="factorial" Count="3" />
+  <row Id="844" TagName="consensus" Count="24" />
+  <row Id="845" TagName="petri-nets" Count="17" />
+  <row Id="846" TagName="balanced-search-trees" Count="74" />
+  <row Id="847" TagName="selection-problem" Count="30" />
+  <row Id="848" TagName="space-analysis" Count="25" />
+  <row Id="849" TagName="philosophy" Count="9" />
+  <row Id="852" TagName="decomposition" Count="6" />
+  <row Id="857" TagName="higher-order-logic" Count="3" ExcerptPostId="40274" WikiPostId="40273" />
+  <row Id="858" TagName="memoization" Count="11" />
+  <row Id="859" TagName="features" Count="20" ExcerptPostId="51375" WikiPostId="51374" />
+  <row Id="860" TagName="svm" Count="21" ExcerptPostId="57857" WikiPostId="57856" />
+  <row Id="861" TagName="peer-to-peer" Count="9" />
+  <row Id="864" TagName="network-analysis" Count="14" />
+  <row Id="869" TagName="termination" Count="7" />
+  <row Id="874" TagName="syntax" Count="20" />
+  <row Id="876" TagName="transition-systems" Count="10" />
+  <row Id="878" TagName="computation-tree-logic" Count="21" />
+  <row Id="880" TagName="primitive-recursion" Count="33" />
+  <row Id="883" TagName="suffix-trees" Count="8" />
+  <row Id="884" TagName="ordering" Count="8" />
+  <row Id="885" TagName="planar-graphs" Count="20" />
+  <row Id="886" TagName="union-find" Count="17" ExcerptPostId="40272" WikiPostId="40271" />
+  <row Id="887" TagName="design-patterns" Count="7" />
+  <row Id="891" TagName="graphical-models" Count="9" />
+  <row Id="893" TagName="space-partitioning" Count="9" />
+  <row Id="894" TagName="nc" Count="2" />
+  <row Id="897" TagName="heap-sort" Count="11" />
+  <row Id="899" TagName="meta-programming" Count="5" ExcerptPostId="39919" WikiPostId="39918" />
+  <row Id="901" TagName="graph-drawing" Count="5" />
+  <row Id="902" TagName="queueing-theory" Count="9" />
+  <row Id="908" TagName="minimum-spanning-tree" Count="56" />
+  <row Id="912" TagName="evaluation-strategies" Count="13" ExcerptPostId="40760" WikiPostId="40759" />
+  <row Id="913" TagName="lr-k" Count="23" ExcerptPostId="40817" WikiPostId="40816" />
+  <row Id="915" TagName="constraint-satisfaction" Count="35" />
+  <row Id="917" TagName="garbage-collection" Count="15" />
+  <row Id="918" TagName="2-sat" Count="13" />
+  <row Id="920" TagName="hamiltonian-circuit" Count="9" />
+  <row Id="921" TagName="rice-theorem" Count="20" ExcerptPostId="42666" WikiPostId="42665" />
+  <row Id="924" TagName="max-flow" Count="23" />
+  <row Id="926" TagName="ford-fulkerson" Count="18" />
+  <row Id="927" TagName="data-flow-analysis" Count="12" />
+  <row Id="930" TagName="sketching" Count="4" />
+  <row Id="932" TagName="isabelle" Count="2" ExcerptPostId="43196" WikiPostId="43195" />
+  <row Id="935" TagName="physics" Count="7" ExcerptPostId="43437" WikiPostId="43436" />
+  <row Id="936" TagName="sparse-matrices" Count="10" />
+  <row Id="938" TagName="hamming-code" Count="15" />
+  <row Id="945" TagName="kleene-star" Count="17" />
+  <row Id="947" TagName="np-intermediate" Count="4" />
+  <row Id="948" TagName="transducers" Count="12" />
+  <row Id="949" TagName="incompleteness" Count="4" />
+  <row Id="950" TagName="mapreduce" Count="7" />
+  <row Id="956" TagName="cpu" Count="77" />
+  <row Id="957" TagName="experimental-analysis" Count="9" />
+  <row Id="960" TagName="search" Count="11" />
+  <row Id="961" TagName="hashing" Count="47" />
+  <row Id="962" TagName="hypercomputation" Count="5" />
+  <row Id="969" TagName="perceptron" Count="14" />
+  <row Id="971" TagName="dfa" Count="12" />
+  <row Id="973" TagName="time-series-analysis" Count="16" />
+  <row Id="976" TagName="ll-k" Count="15" />
+  <row Id="977" TagName="huffman-coding" Count="26" />
+  <row Id="980" TagName="algebra" Count="8" />
+  <row Id="983" TagName="quadratic-programming" Count="5" />
+  <row Id="987" TagName="tail-recursion" Count="3" />
+  <row Id="988" TagName="calculus-of-constructions" Count="3" />
+  <row Id="990" TagName="gradient-descent" Count="18" />
+  <row Id="991" TagName="prims-algorithm" Count="5" ExcerptPostId="50966" WikiPostId="50965" />
+  <row Id="992" TagName="convex-hull" Count="12" />
+  <row Id="993" TagName="karnaugh-map" Count="10" />
+  <row Id="996" TagName="polygons" Count="12" />
+  <row Id="1001" TagName="connected" Count="6" />
+  <row Id="1002" TagName="subtree" Count="3" />
+  <row Id="1003" TagName="computational-complexity" Count="3" />
+  <row Id="1004" TagName="wireless" Count="3" />
+  <row Id="1005" TagName="domain-specific-languages" Count="4" />
+  <row Id="1008" TagName="static-analysis" Count="12" />
+  <row Id="1010" TagName="filtering-problem" Count="6" />
+  <row Id="1011" TagName="case-based-reasoning" Count="2" />
+  <row Id="1012" TagName="exact-string-matching" Count="11" />
+  <row Id="1013" TagName="attribute-grammars" Count="13" />
+  <row Id="1016" TagName="succinct-data-structures" Count="3" />
+  <row Id="1017" TagName="binary-search-trees" Count="34" ExcerptPostId="62869" WikiPostId="62868" />
+  <row Id="1018" TagName="chomsky-hierarchy" Count="12" />
+  <row Id="1020" TagName="bio-inspired-computing" Count="4" />
+  <row Id="1021" TagName="b-method" Count="2" />
+  <row Id="1025" TagName="crc" Count="11" ExcerptPostId="56362" WikiPostId="56361" />
+  <row Id="1029" TagName="clustering" Count="29" ExcerptPostId="63738" WikiPostId="63737" />
+  <row Id="1030" TagName="voronoi-diagrams" Count="4" />
+  <row Id="1034" TagName="queues" Count="13" ExcerptPostId="58234" WikiPostId="58233" />
+  <row Id="1035" TagName="stacks" Count="37" ExcerptPostId="58232" WikiPostId="58231" />
+  <row Id="1042" TagName="critical-section" Count="8" />
+  <row Id="1046" TagName="z-notation" Count="1" ExcerptPostId="62336" WikiPostId="62335" />
+  <row Id="1048" TagName="fuzzy-logic" Count="6" />
+  <row Id="1049" TagName="upper-bound" Count="11" />
+  <row Id="1050" TagName="minimum-cuts" Count="12" />
+  <row Id="1051" TagName="integer-partitions" Count="7" ExcerptPostId="63746" WikiPostId="63745" />
+  <row Id="1053" TagName="polymorphisms" Count="5" />
+  <row Id="1054" TagName="coinduction" Count="4" />
+  <row Id="1057" TagName="program-synthesis" Count="2" />
+  <row Id="1060" TagName="mu-recursion" Count="6" />
+  <row Id="1061" TagName="types" Count="8" />
+  <row Id="1065" TagName="lexical-analysis" Count="12" />
+  <row Id="1070" TagName="haskell" Count="3" />
+  <row Id="1079" TagName="iteration" Count="3" />
+  <row Id="1082" TagName="expert-systems" Count="4" />
+  <row Id="1083" TagName="applications" Count="5" />
+  <row Id="1086" TagName="fixed-point" Count="8" />
+  <row Id="1089" TagName="coin-change" Count="5" />
+  <row Id="1091" TagName="naming" Count="4" />
+  <row Id="1093" TagName="mergesort" Count="7" />
+  <row Id="1095" TagName="dominating-set" Count="1" />
+  <row Id="1098" TagName="string-matching" Count="3" ExcerptPostId="71238" WikiPostId="71237" />
+  <row Id="1102" TagName="tree-automata" Count="2" ExcerptPostId="72160" WikiPostId="72159" />
+  <row Id="1103" TagName="mips" Count="4" />
+  <row Id="1104" TagName="matroids" Count="6" />
+  <row Id="1105" TagName="caching" Count="3" />
+  <row Id="1106" TagName="oracles" Count="2" />
+  <row Id="1107" TagName="bayesian-network" Count="2" />
+  <row Id="1109" TagName="proof-checking" Count="1" />
+  <row Id="1111" TagName="nominal-logic" Count="1" />
+  <row Id="1112" TagName="risc" Count="1" />
+  <row Id="1113" TagName="datalog" Count="1" />
+  <row Id="1115" TagName="competitive-ratio" Count="1" />
+  <row Id="1116" TagName="decision-tree" Count="3" />
+  <row Id="1117" TagName="binary" Count="3" />
+  <row Id="1118" TagName="solomonoff-induction" Count="1" />
+</tags>

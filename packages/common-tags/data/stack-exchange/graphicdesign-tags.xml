@@ -1,0 +1,557 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tags>
+  <row Id="2" TagName="color-theory" Count="255" ExcerptPostId="3813" WikiPostId="3812" />
+  <row Id="4" TagName="illustration" Count="220" ExcerptPostId="20742" WikiPostId="20741" />
+  <row Id="5" TagName="color" Count="1186" ExcerptPostId="15288" WikiPostId="15287" />
+  <row Id="6" TagName="tools" Count="204" ExcerptPostId="18530" WikiPostId="18529" />
+  <row Id="7" TagName="hardware" Count="31" />
+  <row Id="8" TagName="website-design" Count="1204" ExcerptPostId="3805" WikiPostId="3804" />
+  <row Id="11" TagName="fonts" Count="1060" ExcerptPostId="3227" WikiPostId="3226" />
+  <row Id="14" TagName="background" Count="267" ExcerptPostId="18532" WikiPostId="18531" />
+  <row Id="15" TagName="photo-editing" Count="297" ExcerptPostId="18291" WikiPostId="18290" />
+  <row Id="18" TagName="line-height" Count="12" ExcerptPostId="25219" WikiPostId="25218" />
+  <row Id="19" TagName="typography" Count="736" ExcerptPostId="3941" WikiPostId="3940" />
+  <row Id="20" TagName="font-size" Count="58" ExcerptPostId="37041" WikiPostId="37040" />
+  <row Id="22" TagName="contrast" Count="63" ExcerptPostId="25849" WikiPostId="25848" />
+  <row Id="24" TagName="pixelation" Count="75" ExcerptPostId="26405" WikiPostId="26404" />
+  <row Id="27" TagName="focus" Count="8" />
+  <row Id="28" TagName="logo" Count="767" ExcerptPostId="4536" WikiPostId="4535" />
+  <row Id="30" TagName="image-format" Count="107" ExcerptPostId="3811" WikiPostId="3810" />
+  <row Id="31" TagName="slices" Count="64" ExcerptPostId="26401" WikiPostId="26400" />
+  <row Id="33" TagName="export" Count="523" ExcerptPostId="18333" WikiPostId="18332" />
+  <row Id="34" TagName="typefaces" Count="155" ExcerptPostId="18775" WikiPostId="18774" />
+  <row Id="35" TagName="file-size" Count="116" ExcerptPostId="36969" WikiPostId="36968" />
+  <row Id="36" TagName="optimization" Count="38" ExcerptPostId="42208" WikiPostId="42207" />
+  <row Id="39" TagName="icon" Count="506" ExcerptPostId="3807" WikiPostId="3806" />
+  <row Id="40" TagName="typesetting" Count="145" ExcerptPostId="26693" WikiPostId="26692" />
+  <row Id="43" TagName="book" Count="107" ExcerptPostId="19056" WikiPostId="19055" />
+  <row Id="46" TagName="color-spaces" Count="110" ExcerptPostId="36967" WikiPostId="36966" />
+  <row Id="48" TagName="drawing" Count="196" ExcerptPostId="16175" WikiPostId="16174" />
+  <row Id="51" TagName="animation" Count="358" ExcerptPostId="20737" WikiPostId="20736" />
+  <row Id="53" TagName="adobe-illustrator" Count="5306" ExcerptPostId="884" WikiPostId="883" />
+  <row Id="54" TagName="vector" Count="1033" ExcerptPostId="14010" WikiPostId="14009" />
+  <row Id="55" TagName="information-graphics" Count="114" ExcerptPostId="25809" WikiPostId="25808" />
+  <row Id="56" TagName="style" Count="87" ExcerptPostId="25774" WikiPostId="25773" />
+  <row Id="57" TagName="scanning" Count="64" ExcerptPostId="18289" WikiPostId="18288" />
+  <row Id="60" TagName="visual-artifacts" Count="28" ExcerptPostId="27942" WikiPostId="27941" />
+  <row Id="61" TagName="stock-images" Count="71" ExcerptPostId="19058" WikiPostId="19057" />
+  <row Id="62" TagName="images" Count="496" ExcerptPostId="18421" WikiPostId="18420" />
+  <row Id="63" TagName="adobe-photoshop" Count="5611" ExcerptPostId="881" WikiPostId="880" />
+  <row Id="64" TagName="desktop" Count="7" />
+  <row Id="65" TagName="cross-platform" Count="10" ExcerptPostId="18295" WikiPostId="18294" />
+  <row Id="66" TagName="mobile" Count="119" ExcerptPostId="20744" WikiPostId="20743" />
+  <row Id="68" TagName="free" Count="52" ExcerptPostId="24948" WikiPostId="24947" />
+  <row Id="71" TagName="gimp" Count="835" ExcerptPostId="3809" WikiPostId="3808" />
+  <row Id="72" TagName="tutorial" Count="40" ExcerptPostId="3949" WikiPostId="3948" />
+  <row Id="73" TagName="inkscape" Count="829" ExcerptPostId="3344" WikiPostId="3343" />
+  <row Id="74" TagName="blender" Count="27" ExcerptPostId="4868" WikiPostId="4867" />
+  <row Id="77" TagName="comics" Count="24" ExcerptPostId="25270" WikiPostId="25269" />
+  <row Id="78" TagName="sketching" Count="38" ExcerptPostId="25445" WikiPostId="25444" />
+  <row Id="79" TagName="png" Count="387" ExcerptPostId="17757" WikiPostId="17756" />
+  <row Id="80" TagName="gradient" Count="330" ExcerptPostId="2708" WikiPostId="2707" />
+  <row Id="82" TagName="terminology" Count="163" ExcerptPostId="25399" WikiPostId="25398" />
+  <row Id="84" TagName="workflow" Count="218" ExcerptPostId="11044" WikiPostId="11043" />
+  <row Id="88" TagName="open-source" Count="35" ExcerptPostId="21582" WikiPostId="21581" />
+  <row Id="91" TagName="mac" Count="100" ExcerptPostId="18032" WikiPostId="18031" />
+  <row Id="92" TagName="units" Count="20" ExcerptPostId="66943" WikiPostId="66942" />
+  <row Id="94" TagName="texture" Count="185" ExcerptPostId="15369" WikiPostId="15368" />
+  <row Id="95" TagName="overlay" Count="47" ExcerptPostId="27989" WikiPostId="27988" />
+  <row Id="97" TagName="monitor" Count="22" ExcerptPostId="76624" WikiPostId="76623" />
+  <row Id="98" TagName="calibration" Count="20" />
+  <row Id="99" TagName="css" Count="269" ExcerptPostId="5210" WikiPostId="5209" />
+  <row Id="100" TagName="sprite" Count="42" ExcerptPostId="24940" WikiPostId="24939" />
+  <row Id="101" TagName="cmyk" Count="252" ExcerptPostId="945" WikiPostId="944" />
+  <row Id="102" TagName="rgb" Count="137" ExcerptPostId="15407" WikiPostId="15406" />
+  <row Id="103" TagName="color-profile" Count="143" ExcerptPostId="24835" WikiPostId="24834" />
+  <row Id="105" TagName="patterns" Count="210" ExcerptPostId="15367" WikiPostId="15366" />
+  <row Id="107" TagName="svg" Count="523" ExcerptPostId="3953" WikiPostId="3952" />
+  <row Id="108" TagName="balance" Count="13" ExcerptPostId="51011" WikiPostId="51010" />
+  <row Id="110" TagName="kerning" Count="48" ExcerptPostId="18298" WikiPostId="18297" />
+  <row Id="111" TagName="font-face" Count="34" ExcerptPostId="7497" WikiPostId="7496" />
+  <row Id="116" TagName="page-layout" Count="316" ExcerptPostId="3943" WikiPostId="3942" />
+  <row Id="120" TagName="copy-protection" Count="9" ExcerptPostId="35908" WikiPostId="35907" />
+  <row Id="121" TagName="design-principles" Count="207" ExcerptPostId="18341" WikiPostId="18340" />
+  <row Id="126" TagName="color-reproduction" Count="91" ExcerptPostId="37039" WikiPostId="37038" />
+  <row Id="128" TagName="royalty-free" Count="9" ExcerptPostId="94680" WikiPostId="94679" />
+  <row Id="129" TagName="games" Count="56" ExcerptPostId="15359" WikiPostId="15358" />
+  <row Id="130" TagName="composition" Count="69" ExcerptPostId="10833" WikiPostId="10832" />
+  <row Id="131" TagName="software-recommendation" Count="438" ExcerptPostId="18293" WikiPostId="18292" />
+  <row Id="132" TagName="marquee-tool" Count="14" ExcerptPostId="94682" WikiPostId="94681" />
+  <row Id="133" TagName="branding" Count="157" ExcerptPostId="13182" WikiPostId="13181" />
+  <row Id="135" TagName="identity" Count="48" ExcerptPostId="13908" WikiPostId="13907" />
+  <row Id="136" TagName="web-safe" Count="24" ExcerptPostId="19060" WikiPostId="19059" />
+  <row Id="137" TagName="licensing" Count="78" ExcerptPostId="30381" WikiPostId="30380" />
+  <row Id="138" TagName="legal" Count="123" ExcerptPostId="25513" WikiPostId="25512" />
+  <row Id="143" TagName="browser" Count="19" ExcerptPostId="35906" WikiPostId="35905" />
+  <row Id="145" TagName="print-design" Count="1157" ExcerptPostId="4977" WikiPostId="4976" />
+  <row Id="146" TagName="white-space" Count="39" ExcerptPostId="24883" WikiPostId="24882" />
+  <row Id="148" TagName="adobe-bridge" Count="17" ExcerptPostId="18308" WikiPostId="18307" />
+  <row Id="150" TagName="plugin" Count="44" ExcerptPostId="94087" WikiPostId="94086" />
+  <row Id="153" TagName="laser" Count="8" />
+  <row Id="155" TagName="symbolism" Count="64" ExcerptPostId="26644" WikiPostId="26643" />
+  <row Id="157" TagName="adobe-fireworks" Count="146" ExcerptPostId="3955" WikiPostId="3954" />
+  <row Id="158" TagName="photoshop-effects" Count="357" ExcerptPostId="18528" WikiPostId="18527" />
+  <row Id="159" TagName="tiles" Count="36" ExcerptPostId="27979" WikiPostId="27978" />
+  <row Id="160" TagName="microsoft-expression" Count="5" ExcerptPostId="94626" WikiPostId="94625" />
+  <row Id="163" TagName="subpixel-rendering" Count="18" />
+  <row Id="164" TagName="adobe-indesign" Count="1653" ExcerptPostId="2622" WikiPostId="2621" />
+  <row Id="169" TagName="adobe-flash" Count="98" ExcerptPostId="3951" WikiPostId="3950" />
+  <row Id="172" TagName="visualization" Count="34" ExcerptPostId="26505" WikiPostId="26504" />
+  <row Id="178" TagName="text" Count="751" ExcerptPostId="15379" WikiPostId="15378" />
+  <row Id="179" TagName="layers" Count="605" ExcerptPostId="3945" WikiPostId="3944" />
+  <row Id="180" TagName="education" Count="109" ExcerptPostId="36965" WikiPostId="36964" />
+  <row Id="181" TagName="photography" Count="70" ExcerptPostId="36971" WikiPostId="36970" />
+  <row Id="184" TagName="adobe-acrobat" Count="117" ExcerptPostId="18306" WikiPostId="18305" />
+  <row Id="185" TagName="windows" Count="67" ExcerptPostId="24934" WikiPostId="24933" />
+  <row Id="186" TagName="how-to" Count="525" ExcerptPostId="15362" WikiPostId="15361" />
+  <row Id="187" TagName="portfolio" Count="67" ExcerptPostId="25016" WikiPostId="25015" />
+  <row Id="188" TagName="business" Count="164" ExcerptPostId="35627" WikiPostId="35626" />
+  <row Id="190" TagName="font-identification" Count="588" ExcerptPostId="1897" WikiPostId="1896" />
+  <row Id="191" TagName="anti-aliasing" Count="83" ExcerptPostId="24905" WikiPostId="24904" />
+  <row Id="192" TagName="copyright" Count="219" ExcerptPostId="24833" WikiPostId="24832" />
+  <row Id="202" TagName="opentype" Count="32" ExcerptPostId="35898" WikiPostId="35897" />
+  <row Id="204" TagName="transform" Count="120" ExcerptPostId="18415" WikiPostId="18414" />
+  <row Id="206" TagName="lettering" Count="42" ExcerptPostId="25215" WikiPostId="25214" />
+  <row Id="209" TagName="critique" Count="199" ExcerptPostId="24950" WikiPostId="24949" />
+  <row Id="210" TagName="prepress" Count="33" ExcerptPostId="27354" WikiPostId="27353" />
+  <row Id="211" TagName="line-art" Count="107" ExcerptPostId="26478" WikiPostId="26477" />
+  <row Id="212" TagName="actions" Count="110" ExcerptPostId="24801" WikiPostId="24800" />
+  <row Id="214" TagName="batch-processing" Count="170" ExcerptPostId="7951" WikiPostId="7950" />
+  <row Id="215" TagName="font-weight" Count="10" ExcerptPostId="41239" WikiPostId="41238" />
+  <row Id="218" TagName="shapes" Count="498" ExcerptPostId="9473" WikiPostId="9472" />
+  <row Id="219" TagName="alignment" Count="215" ExcerptPostId="26465" WikiPostId="26464" />
+  <row Id="224" TagName="3d" Count="364" ExcerptPostId="18106" WikiPostId="18105" />
+  <row Id="227" TagName="corel-draw" Count="128" ExcerptPostId="18302" WikiPostId="18301" />
+  <row Id="229" TagName="adobe-creative-suite" Count="27" ExcerptPostId="74271" WikiPostId="74270" />
+  <row Id="233" TagName="paint.net" Count="44" ExcerptPostId="18287" WikiPostId="18286" />
+  <row Id="235" TagName="designers" Count="182" ExcerptPostId="2034" WikiPostId="2033" />
+  <row Id="239" TagName="pdf" Count="611" ExcerptPostId="15364" WikiPostId="15363" />
+  <row Id="242" TagName="font-management" Count="70" ExcerptPostId="36616" WikiPostId="36615" />
+  <row Id="243" TagName="proofing" Count="15" ExcerptPostId="94703" WikiPostId="94702" />
+  <row Id="245" TagName="effects" Count="205" ExcerptPostId="20740" WikiPostId="20739" />
+  <row Id="246" TagName="screenshot" Count="50" ExcerptPostId="26439" WikiPostId="26438" />
+  <row Id="247" TagName="laser-cutting" Count="29" />
+  <row Id="248" TagName="website-templates" Count="50" ExcerptPostId="24852" WikiPostId="24851" />
+  <row Id="252" TagName="spec-work" Count="11" ExcerptPostId="35900" WikiPostId="35899" />
+  <row Id="255" TagName="competitions" Count="5" ExcerptPostId="94583" WikiPostId="94582" />
+  <row Id="256" TagName="perspective" Count="90" ExcerptPostId="25272" WikiPostId="25271" />
+  <row Id="260" TagName="mask" Count="247" ExcerptPostId="25689" WikiPostId="25688" />
+  <row Id="263" TagName="pantone" Count="124" ExcerptPostId="18579" WikiPostId="18578" />
+  <row Id="264" TagName="color-conversion" Count="175" ExcerptPostId="36675" WikiPostId="36674" />
+  <row Id="265" TagName="corel-paint-shop-pro" Count="23" ExcerptPostId="15357" WikiPostId="15356" />
+  <row Id="266" TagName="concept-art" Count="12" />
+  <row Id="267" TagName="resize" Count="375" ExcerptPostId="18778" WikiPostId="18777" />
+  <row Id="268" TagName="resolution" Count="233" ExcerptPostId="26688" WikiPostId="26687" />
+  <row Id="269" TagName="information-design" Count="35" ExcerptPostId="16506" WikiPostId="16505" />
+  <row Id="270" TagName="trademark" Count="28" ExcerptPostId="24885" WikiPostId="24884" />
+  <row Id="271" TagName="scribus" Count="46" ExcerptPostId="18304" WikiPostId="18303" />
+  <row Id="272" TagName="raster" Count="78" ExcerptPostId="24839" WikiPostId="24838" />
+  <row Id="276" TagName="presentation-design" Count="53" ExcerptPostId="37031" WikiPostId="37030" />
+  <row Id="278" TagName="japanese" Count="16" ExcerptPostId="30390" WikiPostId="30389" />
+  <row Id="280" TagName="transparency" Count="429" ExcerptPostId="15453" WikiPostId="15452" />
+  <row Id="284" TagName="trends" Count="18" ExcerptPostId="27991" WikiPostId="27990" />
+  <row Id="285" TagName="osx" Count="36" ExcerptPostId="24859" WikiPostId="24858" />
+  <row Id="286" TagName="microsoft-powerpoint" Count="61" ExcerptPostId="27987" WikiPostId="27986" />
+  <row Id="287" TagName="dpi" Count="132" ExcerptPostId="6077" WikiPostId="6076" />
+  <row Id="291" TagName="layer-style" Count="60" ExcerptPostId="37027" WikiPostId="37026" />
+  <row Id="294" TagName="gif" Count="202" ExcerptPostId="19079" WikiPostId="19078" />
+  <row Id="297" TagName="photoshop-scripting" Count="161" ExcerptPostId="5641" WikiPostId="5640" />
+  <row Id="298" TagName="posters" Count="42" ExcerptPostId="25202" WikiPostId="25201" />
+  <row Id="299" TagName="metal" Count="11" ExcerptPostId="51125" WikiPostId="51124" />
+  <row Id="302" TagName="style-identification" Count="160" ExcerptPostId="26640" WikiPostId="26639" />
+  <row Id="306" TagName="symbols" Count="100" ExcerptPostId="20728" WikiPostId="20727" />
+  <row Id="307" TagName="artboard" Count="153" ExcerptPostId="24805" WikiPostId="24804" />
+  <row Id="309" TagName="jpg" Count="110" ExcerptPostId="24817" WikiPostId="24816" />
+  <row Id="310" TagName="compression" Count="55" ExcerptPostId="37044" WikiPostId="37043" />
+  <row Id="311" TagName="image-quality" Count="187" ExcerptPostId="26690" WikiPostId="26689" />
+  <row Id="325" TagName="paragraph" Count="21" ExcerptPostId="94103" WikiPostId="94102" />
+  <row Id="327" TagName="brush" Count="163" ExcerptPostId="25843" WikiPostId="25842" />
+  <row Id="329" TagName="ios" Count="109" ExcerptPostId="4814" WikiPostId="4813" />
+  <row Id="331" TagName="resource-recommendations" Count="178" ExcerptPostId="84325" WikiPostId="84324" />
+  <row Id="333" TagName="halftone" Count="22" ExcerptPostId="27358" WikiPostId="27357" />
+  <row Id="334" TagName="xml" Count="42" ExcerptPostId="4812" WikiPostId="4811" />
+  <row Id="337" TagName="android" Count="112" ExcerptPostId="4810" WikiPostId="4809" />
+  <row Id="339" TagName="asset-management" Count="24" />
+  <row Id="341" TagName="newsletter" Count="4" ExcerptPostId="15355" WikiPostId="15354" />
+  <row Id="344" TagName="caveats" Count="2" />
+  <row Id="345" TagName="best-practice" Count="54" ExcerptPostId="44425" WikiPostId="44424" />
+  <row Id="346" TagName="forms" Count="24" ExcerptPostId="26650" WikiPostId="26649" />
+  <row Id="347" TagName="automation" Count="194" ExcerptPostId="25841" WikiPostId="25840" />
+  <row Id="348" TagName="save" Count="120" ExcerptPostId="36677" WikiPostId="36676" />
+  <row Id="352" TagName="black" Count="53" ExcerptPostId="44429" WikiPostId="44428" />
+  <row Id="355" TagName="contract" Count="21" ExcerptPostId="64105" WikiPostId="64104" />
+  <row Id="356" TagName="freelance" Count="99" ExcerptPostId="24813" WikiPostId="24812" />
+  <row Id="357" TagName="smartobject" Count="98" ExcerptPostId="24799" WikiPostId="24798" />
+  <row Id="358" TagName="filter" Count="85" ExcerptPostId="26642" WikiPostId="26641" />
+  <row Id="360" TagName="pixelmator" Count="33" ExcerptPostId="27981" WikiPostId="27980" />
+  <row Id="361" TagName="ppi" Count="97" ExcerptPostId="6079" WikiPostId="6078" />
+  <row Id="363" TagName="quarkxpress" Count="11" ExcerptPostId="8136" WikiPostId="8135" />
+  <row Id="364" TagName="adobe-photoshop-elements" Count="41" ExcerptPostId="13753" WikiPostId="13752" />
+  <row Id="367" TagName="compensation" Count="2" />
+  <row Id="372" TagName="video" Count="64" ExcerptPostId="44423" WikiPostId="44422" />
+  <row Id="374" TagName="favicon" Count="16" ExcerptPostId="24809" WikiPostId="24808" />
+  <row Id="376" TagName="grids" Count="148" ExcerptPostId="26630" WikiPostId="26629" />
+  <row Id="378" TagName="camera" Count="6" ExcerptPostId="19036" WikiPostId="19035" />
+  <row Id="380" TagName="iphone" Count="63" ExcerptPostId="24837" WikiPostId="24836" />
+  <row Id="381" TagName="diagram" Count="38" ExcerptPostId="26296" WikiPostId="26295" />
+  <row Id="385" TagName="packaging" Count="54" ExcerptPostId="25217" WikiPostId="25216" />
+  <row Id="386" TagName="google" Count="35" ExcerptPostId="24956" WikiPostId="24955" />
+  <row Id="388" TagName="typekit" Count="13" ExcerptPostId="41243" WikiPostId="41242" />
+  <row Id="389" TagName="epub" Count="16" ExcerptPostId="26437" WikiPostId="26436" />
+  <row Id="391" TagName="illustrator-scripting" Count="139" ExcerptPostId="25847" WikiPostId="25846" />
+  <row Id="392" TagName="pixel" Count="115" ExcerptPostId="24789" WikiPostId="24788" />
+  <row Id="393" TagName="measurement" Count="54" />
+  <row Id="395" TagName="wayfinding" Count="8" ExcerptPostId="26659" WikiPostId="26658" />
+  <row Id="396" TagName="blending-objects" Count="17" />
+  <row Id="399" TagName="adobe-lightroom" Count="19" ExcerptPostId="7220" WikiPostId="7219" />
+  <row Id="401" TagName="cs4" Count="46" ExcerptPostId="18337" WikiPostId="18336" />
+  <row Id="402" TagName="master-page" Count="52" ExcerptPostId="18300" WikiPostId="18299" />
+  <row Id="407" TagName="blur" Count="77" ExcerptPostId="25845" WikiPostId="25844" />
+  <row Id="408" TagName="pro-bono" Count="4" ExcerptPostId="24942" WikiPostId="24941" />
+  <row Id="412" TagName="stroke" Count="255" ExcerptPostId="36614" WikiPostId="36613" />
+  <row Id="413" TagName="cs6" Count="470" ExcerptPostId="18101" WikiPostId="18100" />
+  <row Id="414" TagName="pen-tool" Count="117" ExcerptPostId="34932" WikiPostId="34931" />
+  <row Id="419" TagName="background-removal" Count="100" ExcerptPostId="8100" WikiPostId="8099" />
+  <row Id="420" TagName="dreamweaver" Count="14" ExcerptPostId="20977" WikiPostId="20976" />
+  <row Id="422" TagName="hex" Count="24" ExcerptPostId="27356" WikiPostId="27355" />
+  <row Id="423" TagName="fontlab-fontographer" Count="5" />
+  <row Id="424" TagName="fontlab-studio" Count="15" ExcerptPostId="27352" WikiPostId="27351" />
+  <row Id="428" TagName="web-fonts" Count="175" ExcerptPostId="18581" WikiPostId="18580" />
+  <row Id="430" TagName="web-standards" Count="5" />
+  <row Id="433" TagName="reflection" Count="14" />
+  <row Id="435" TagName="paragraph-styles" Count="79" ExcerptPostId="38907" WikiPostId="38906" />
+  <row Id="436" TagName="ibooks-author" Count="4" ExcerptPostId="94535" WikiPostId="94534" />
+  <row Id="438" TagName="technique" Count="37" />
+  <row Id="439" TagName="snapping" Count="47" ExcerptPostId="26699" WikiPostId="26698" />
+  <row Id="440" TagName="client-relations" Count="204" ExcerptPostId="25811" WikiPostId="25810" />
+  <row Id="441" TagName="shortcuts" Count="84" ExcerptPostId="26467" WikiPostId="26466" />
+  <row Id="443" TagName="cs5" Count="198" ExcerptPostId="18335" WikiPostId="18334" />
+  <row Id="444" TagName="indesign-scripting" Count="88" ExcerptPostId="26648" WikiPostId="26647" />
+  <row Id="445" TagName="color-match" Count="13" ExcerptPostId="48479" WikiPostId="48478" />
+  <row Id="446" TagName="text-wrap" Count="30" ExcerptPostId="24938" WikiPostId="24937" />
+  <row Id="448" TagName="raw-format" Count="9" ExcerptPostId="26435" WikiPostId="26434" />
+  <row Id="449" TagName="pixel-art" Count="50" ExcerptPostId="10917" WikiPostId="10916" />
+  <row Id="450" TagName="communication" Count="8" />
+  <row Id="452" TagName="button" Count="35" ExcerptPostId="27983" WikiPostId="27982" />
+  <row Id="454" TagName="highlights" Count="19" />
+  <row Id="455" TagName="borders" Count="65" ExcerptPostId="44421" WikiPostId="44420" />
+  <row Id="457" TagName="folding" Count="8" ExcerptPostId="27369" WikiPostId="27368" />
+  <row Id="458" TagName="opacity" Count="54" ExcerptPostId="94072" WikiPostId="94071" />
+  <row Id="459" TagName="autodesk-sketchbook-pro" Count="6" ExcerptPostId="25685" WikiPostId="25684" />
+  <row Id="463" TagName="html" Count="118" ExcerptPostId="24946" WikiPostId="24945" />
+  <row Id="464" TagName="adobe-after-effects" Count="165" ExcerptPostId="24899" WikiPostId="24898" />
+  <row Id="465" TagName="file-format" Count="141" ExcerptPostId="37025" WikiPostId="37024" />
+  <row Id="466" TagName="irfanview" Count="4" ExcerptPostId="26664" WikiPostId="26663" />
+  <row Id="467" TagName="hyphenation" Count="7" ExcerptPostId="13695" WikiPostId="13694" />
+  <row Id="468" TagName="history" Count="48" ExcerptPostId="16282" WikiPostId="16281" />
+  <row Id="469" TagName="empirical-research" Count="6" ExcerptPostId="13007" WikiPostId="13006" />
+  <row Id="470" TagName="signage" Count="12" ExcerptPostId="26657" WikiPostId="26656" />
+  <row Id="472" TagName="design-process" Count="52" ExcerptPostId="13180" WikiPostId="13179" />
+  <row Id="481" TagName="conceptualization" Count="29" ExcerptPostId="13123" WikiPostId="13122" />
+  <row Id="486" TagName="adobe" Count="225" ExcerptPostId="20971" WikiPostId="20970" />
+  <row Id="488" TagName="template-design" Count="52" ExcerptPostId="38532" WikiPostId="38531" />
+  <row Id="489" TagName="responsive-design" Count="56" ExcerptPostId="13379" WikiPostId="13378" />
+  <row Id="490" TagName="mobile-first" Count="8" ExcerptPostId="13381" WikiPostId="13380" />
+  <row Id="492" TagName="marketing" Count="28" ExcerptPostId="51123" WikiPostId="51122" />
+  <row Id="494" TagName="swatches" Count="74" ExcerptPostId="13728" WikiPostId="13727" />
+  <row Id="496" TagName="user-experience" Count="53" ExcerptPostId="15663" WikiPostId="15662" />
+  <row Id="497" TagName="screen-printing" Count="42" ExcerptPostId="25274" WikiPostId="25273" />
+  <row Id="499" TagName="image-trace" Count="61" ExcerptPostId="26646" WikiPostId="26645" />
+  <row Id="500" TagName="fill" Count="112" ExcerptPostId="26407" WikiPostId="26406" />
+  <row Id="504" TagName="drawing-tablet" Count="93" ExcerptPostId="15467" WikiPostId="15466" />
+  <row Id="506" TagName="resume" Count="20" ExcerptPostId="24857" WikiPostId="24856" />
+  <row Id="507" TagName="pathfinder" Count="133" ExcerptPostId="25206" WikiPostId="25205" />
+  <row Id="508" TagName="flatten" Count="16" ExcerptPostId="27367" WikiPostId="27366" />
+  <row Id="509" TagName="accessibility" Count="16" ExcerptPostId="24887" WikiPostId="24886" />
+  <row Id="511" TagName="retina" Count="42" ExcerptPostId="24944" WikiPostId="24943" />
+  <row Id="512" TagName="painting" Count="39" ExcerptPostId="16165" WikiPostId="16164" />
+  <row Id="513" TagName="fine-arts" Count="13" ExcerptPostId="26697" WikiPostId="26696" />
+  <row Id="516" TagName="character-design" Count="19" ExcerptPostId="24907" WikiPostId="24906" />
+  <row Id="517" TagName="traditional-media" Count="17" ExcerptPostId="26695" WikiPostId="26694" />
+  <row Id="518" TagName="anatomy-for-artists" Count="9" />
+  <row Id="526" TagName="chart-design" Count="36" ExcerptPostId="16427" WikiPostId="16426" />
+  <row Id="527" TagName="glyphs" Count="48" ExcerptPostId="24958" WikiPostId="24957" />
+  <row Id="532" TagName="character-styles" Count="32" />
+  <row Id="533" TagName="formatting" Count="37" ExcerptPostId="94156" WikiPostId="94155" />
+  <row Id="534" TagName="gradient-mesh" Count="24" ExcerptPostId="35915" WikiPostId="35914" />
+  <row Id="537" TagName="sketchup" Count="24" ExcerptPostId="18147" WikiPostId="18146" />
+  <row Id="538" TagName="path" Count="480" ExcerptPostId="25776" WikiPostId="25775" />
+  <row Id="541" TagName="tables" Count="56" ExcerptPostId="27363" WikiPostId="27362" />
+  <row Id="542" TagName="cell" Count="5" ExcerptPostId="26661" WikiPostId="26660" />
+  <row Id="543" TagName="ipad" Count="26" ExcerptPostId="24962" WikiPostId="24961" />
+  <row Id="546" TagName="color-indexing" Count="9" />
+  <row Id="547" TagName="sketch-app" Count="440" ExcerptPostId="18030" WikiPostId="18029" />
+  <row Id="549" TagName="maya" Count="40" ExcerptPostId="18145" WikiPostId="18144" />
+  <row Id="551" TagName="applications" Count="31" ExcerptPostId="39605" WikiPostId="39604" />
+  <row Id="552" TagName="windows-8" Count="5" ExcerptPostId="24936" WikiPostId="24935" />
+  <row Id="553" TagName="content" Count="10" />
+  <row Id="556" TagName="blending" Count="60" ExcerptPostId="66907" WikiPostId="66906" />
+  <row Id="560" TagName="image-processing" Count="19" />
+  <row Id="561" TagName="ascii" Count="5" ExcerptPostId="24954" WikiPostId="24953" />
+  <row Id="562" TagName="skillset" Count="12" />
+  <row Id="563" TagName="cs2" Count="8" ExcerptPostId="19072" WikiPostId="19071" />
+  <row Id="566" TagName="mockup" Count="86" ExcerptPostId="18808" WikiPostId="18807" />
+  <row Id="567" TagName="adobe-edge-animate" Count="6" ExcerptPostId="24901" WikiPostId="24900" />
+  <row Id="568" TagName="wpf" Count="4" ExcerptPostId="18611" WikiPostId="18610" />
+  <row Id="569" TagName="minimalistic" Count="13" />
+  <row Id="570" TagName="hsb" Count="6" ExcerptPostId="24960" WikiPostId="24959" />
+  <row Id="571" TagName="image-sprite" Count="28" ExcerptPostId="18855" WikiPostId="18854" />
+  <row Id="572" TagName="cs3" Count="17" ExcerptPostId="19070" WikiPostId="19069" />
+  <row Id="573" TagName="crop" Count="91" ExcerptPostId="35891" WikiPostId="35890" />
+  <row Id="574" TagName="selections" Count="167" ExcerptPostId="33473" WikiPostId="33472" />
+  <row Id="575" TagName="information-architecture" Count="13" ExcerptPostId="18944" WikiPostId="18943" />
+  <row Id="577" TagName="data-merge" Count="42" ExcerptPostId="19068" WikiPostId="19067" />
+  <row Id="578" TagName="grep" Count="34" ExcerptPostId="22458" WikiPostId="22457" />
+  <row Id="582" TagName="representation" Count="11" />
+  <row Id="585" TagName="shadows" Count="79" ExcerptPostId="27350" WikiPostId="27349" />
+  <row Id="586" TagName="advertising" Count="18" />
+  <row Id="590" TagName="font-forge" Count="23" ExcerptPostId="26038" WikiPostId="26037" />
+  <row Id="592" TagName="cinema4d" Count="21" ExcerptPostId="24807" WikiPostId="24806" />
+  <row Id="594" TagName="presentation" Count="9" />
+  <row Id="598" TagName="hardware-recommendation" Count="39" ExcerptPostId="94076" WikiPostId="94075" />
+  <row Id="599" TagName="product-design" Count="13" ExcerptPostId="24855" WikiPostId="24854" />
+  <row Id="601" TagName="print-production" Count="160" ExcerptPostId="44427" WikiPostId="44426" />
+  <row Id="607" TagName="organizations" Count="1" ExcerptPostId="20539" WikiPostId="20538" />
+  <row Id="608" TagName="community" Count="6" ExcerptPostId="20575" WikiPostId="20574" />
+  <row Id="610" TagName="repurposing" Count="3" ExcerptPostId="20861" WikiPostId="20860" />
+  <row Id="611" TagName="skew" Count="13" ExcerptPostId="21041" WikiPostId="21040" />
+  <row Id="612" TagName="bleed" Count="39" ExcerptPostId="24952" WikiPostId="24951" />
+  <row Id="613" TagName="imagemagick" Count="32" ExcerptPostId="25210" WikiPostId="25209" />
+  <row Id="614" TagName="creative-cloud" Count="148" ExcerptPostId="26441" WikiPostId="26440" />
+  <row Id="615" TagName="monochrome" Count="7" ExcerptPostId="35912" WikiPostId="35911" />
+  <row Id="617" TagName="actionscript" Count="8" ExcerptPostId="24803" WikiPostId="24802" />
+  <row Id="619" TagName="latex" Count="27" ExcerptPostId="35585" WikiPostId="35584" />
+  <row Id="621" TagName="ms-paint" Count="6" ExcerptPostId="35924" WikiPostId="35923" />
+  <row Id="622" TagName="lighting-effects" Count="27" />
+  <row Id="625" TagName="margin" Count="19" />
+  <row Id="626" TagName="white" Count="27" />
+  <row Id="628" TagName="illustrator-effects" Count="108" ExcerptPostId="27365" WikiPostId="27364" />
+  <row Id="633" TagName="3ds-max" Count="82" ExcerptPostId="22301" WikiPostId="22300" />
+  <row Id="634" TagName="vignette" Count="3" ExcerptPostId="22320" WikiPostId="22319" />
+  <row Id="637" TagName="panorama" Count="5" ExcerptPostId="26433" WikiPostId="26432" />
+  <row Id="638" TagName="microsoft-office" Count="28" ExcerptPostId="35904" WikiPostId="35903" />
+  <row Id="639" TagName="drop-shadow" Count="51" ExcerptPostId="24811" WikiPostId="24810" />
+  <row Id="641" TagName="mathematics" Count="23" ExcerptPostId="22531" WikiPostId="22530" />
+  <row Id="642" TagName="font-pairing" Count="26" />
+  <row Id="643" TagName="gamut" Count="5" ExcerptPostId="24819" WikiPostId="24818" />
+  <row Id="644" TagName="paper-size" Count="18" />
+  <row Id="645" TagName="adobe-freehand" Count="8" ExcerptPostId="24923" WikiPostId="24922" />
+  <row Id="646" TagName="bold" Count="5" ExcerptPostId="94217" WikiPostId="94216" />
+  <row Id="649" TagName="overprint" Count="14" ExcerptPostId="94167" WikiPostId="94166" />
+  <row Id="650" TagName="abstract" Count="10" ExcerptPostId="27373" WikiPostId="27372" />
+  <row Id="651" TagName="art" Count="34" />
+  <row Id="652" TagName="dicom" Count="1" ExcerptPostId="26431" WikiPostId="26430" />
+  <row Id="655" TagName="tv-series" Count="4" ExcerptPostId="35926" WikiPostId="35925" />
+  <row Id="658" TagName="restoration" Count="4" ExcerptPostId="94496" WikiPostId="94495" />
+  <row Id="660" TagName="scale" Count="54" ExcerptPostId="94083" WikiPostId="94082" />
+  <row Id="662" TagName="ebook" Count="18" />
+  <row Id="663" TagName="multiple-sizes" Count="15" />
+  <row Id="664" TagName="modeling" Count="29" ExcerptPostId="26655" WikiPostId="26654" />
+  <row Id="665" TagName="cartography" Count="19" ExcerptPostId="26298" WikiPostId="26297" />
+  <row Id="666" TagName="maps" Count="49" ExcerptPostId="26301" WikiPostId="26300" />
+  <row Id="668" TagName="collaboration" Count="11" />
+  <row Id="671" TagName="readability" Count="13" />
+  <row Id="674" TagName="flexography" Count="4" ExcerptPostId="94494" WikiPostId="94493" />
+  <row Id="676" TagName="data-visualisation" Count="71" ExcerptPostId="26429" WikiPostId="26428" />
+  <row Id="677" TagName="apple" Count="19" />
+  <row Id="678" TagName="anime-studio" Count="1" ExcerptPostId="26321" WikiPostId="26320" />
+  <row Id="680" TagName="dimensions" Count="34" ExcerptPostId="32287" WikiPostId="32286" />
+  <row Id="681" TagName="solidworks" Count="5" ExcerptPostId="27375" WikiPostId="27374" />
+  <row Id="682" TagName="wiki" Count="1" ExcerptPostId="26449" WikiPostId="26448" />
+  <row Id="683" TagName="live-trace" Count="17" ExcerptPostId="35910" WikiPostId="35909" />
+  <row Id="684" TagName="image-editing" Count="83" />
+  <row Id="686" TagName="character" Count="28" ExcerptPostId="26667" WikiPostId="26666" />
+  <row Id="687" TagName="paper" Count="35" />
+  <row Id="688" TagName="web-applications" Count="19" />
+  <row Id="689" TagName="bitmap" Count="39" ExcerptPostId="27944" WikiPostId="27943" />
+  <row Id="691" TagName="krita" Count="19" />
+  <row Id="693" TagName="publishing" Count="22" ExcerptPostId="87865" WikiPostId="87864" />
+  <row Id="695" TagName="canvas" Count="42" />
+  <row Id="697" TagName="apparel" Count="11" ExcerptPostId="27371" WikiPostId="27370" />
+  <row Id="699" TagName="hiring" Count="20" />
+  <row Id="700" TagName="front-end-development" Count="18" ExcerptPostId="94158" WikiPostId="94157" />
+  <row Id="705" TagName="simulation" Count="6" />
+  <row Id="706" TagName="copyleft" Count="4" ExcerptPostId="27514" WikiPostId="27513" />
+  <row Id="707" TagName="creative-commons" Count="14" />
+  <row Id="711" TagName="sans-serif" Count="78" ExcerptPostId="35894" WikiPostId="35893" />
+  <row Id="712" TagName="interaction" Count="13" />
+  <row Id="714" TagName="outdoors" Count="2" />
+  <row Id="716" TagName="layout" Count="80" />
+  <row Id="717" TagName="linux" Count="14" ExcerptPostId="45331" WikiPostId="45330" />
+  <row Id="718" TagName="script" Count="53" ExcerptPostId="45426" WikiPostId="45425" />
+  <row Id="719" TagName="eps" Count="79" ExcerptPostId="35902" WikiPostId="35901" />
+  <row Id="724" TagName="word-cloud" Count="6" />
+  <row Id="726" TagName="work" Count="23" ExcerptPostId="68281" WikiPostId="68280" />
+  <row Id="729" TagName="monospace" Count="16" ExcerptPostId="35920" WikiPostId="35919" />
+  <row Id="730" TagName="cur" Count="2" ExcerptPostId="43148" WikiPostId="43147" />
+  <row Id="731" TagName="idraw" Count="4" ExcerptPostId="94617" WikiPostId="94616" />
+  <row Id="733" TagName="numbering" Count="24" />
+  <row Id="734" TagName="serif" Count="46" ExcerptPostId="30516" WikiPostId="30515" />
+  <row Id="736" TagName="blog" Count="2" />
+  <row Id="737" TagName="eyedropper" Count="10" ExcerptPostId="35918" WikiPostId="35917" />
+  <row Id="738" TagName="tiff" Count="19" ExcerptPostId="35928" WikiPostId="35927" />
+  <row Id="739" TagName="chart" Count="10" ExcerptPostId="41241" WikiPostId="41240" />
+  <row Id="741" TagName="embedded" Count="20" />
+  <row Id="744" TagName="digital" Count="27" />
+  <row Id="745" TagName="layer-composition" Count="9" />
+  <row Id="746" TagName="distort" Count="45" />
+  <row Id="747" TagName="adobe-kuler" Count="4" ExcerptPostId="30368" WikiPostId="30367" />
+  <row Id="751" TagName="wireframing" Count="15" />
+  <row Id="753" TagName="document-setup" Count="37" />
+  <row Id="754" TagName="zoom" Count="29" ExcerptPostId="35110" WikiPostId="35109" />
+  <row Id="757" TagName="catia" Count="2" />
+  <row Id="759" TagName="font-recommendation" Count="202" ExcerptPostId="35931" WikiPostId="35930" />
+  <row Id="761" TagName="font-design" Count="136" ExcerptPostId="37023" WikiPostId="37022" />
+  <row Id="763" TagName="font-licensing" Count="73" ExcerptPostId="35306" WikiPostId="35305" />
+  <row Id="764" TagName="font-manipulation" Count="4" ExcerptPostId="94579" WikiPostId="94578" />
+  <row Id="765" TagName="inspiration" Count="8" />
+  <row Id="766" TagName="plagiarism" Count="13" />
+  <row Id="770" TagName="usability" Count="9" ExcerptPostId="32188" WikiPostId="32187" />
+  <row Id="774" TagName="grayscale" Count="33" ExcerptPostId="33500" WikiPostId="33499" />
+  <row Id="779" TagName="e-mail" Count="13" />
+  <row Id="780" TagName="cross-reference" Count="7" />
+  <row Id="781" TagName="cc-2014" Count="70" ExcerptPostId="35533" WikiPostId="35532" />
+  <row Id="784" TagName="registration" Count="4" ExcerptPostId="94387" WikiPostId="94386" />
+  <row Id="785" TagName="arabic" Count="22" ExcerptPostId="87648" WikiPostId="87647" />
+  <row Id="788" TagName="calligraphy" Count="10" ExcerptPostId="51131" WikiPostId="51130" />
+  <row Id="789" TagName="reference-request" Count="8" />
+  <row Id="790" TagName="noise" Count="17" />
+  <row Id="794" TagName="vintage" Count="7" />
+  <row Id="795" TagName="vinyl" Count="15" ExcerptPostId="94160" WikiPostId="94159" />
+  <row Id="796" TagName="cutter" Count="11" />
+  <row Id="797" TagName="metallic" Count="7" ExcerptPostId="51127" WikiPostId="51126" />
+  <row Id="798" TagName="graphic-styles" Count="29" ExcerptPostId="37546" WikiPostId="37545" />
+  <row Id="802" TagName="portrait" Count="8" />
+  <row Id="805" TagName="javascript" Count="53" ExcerptPostId="94074" WikiPostId="94073" />
+  <row Id="807" TagName="anchor-point" Count="63" ExcerptPostId="93952" WikiPostId="93951" />
+  <row Id="808" TagName="isometric" Count="28" ExcerptPostId="39280" WikiPostId="39279" />
+  <row Id="810" TagName="table-of-contents" Count="25" ExcerptPostId="94221" WikiPostId="94220" />
+  <row Id="811" TagName="section-marker" Count="6" />
+  <row Id="813" TagName="slab-serif" Count="5" ExcerptPostId="67252" WikiPostId="67251" />
+  <row Id="814" TagName="spot-color" Count="19" />
+  <row Id="817" TagName="pixel-grid" Count="16" />
+  <row Id="819" TagName="procedural-art" Count="3" ExcerptPostId="41216" WikiPostId="41215" />
+  <row Id="821" TagName="bezier-curve" Count="31" ExcerptPostId="73810" WikiPostId="73809" />
+  <row Id="823" TagName="behance" Count="3" ExcerptPostId="94330" WikiPostId="94329" />
+  <row Id="824" TagName="adobe-muse" Count="4" ExcerptPostId="44836" WikiPostId="44835" />
+  <row Id="825" TagName="affinity-designer" Count="29" ExcerptPostId="69539" WikiPostId="69538" />
+  <row Id="826" TagName="bit" Count="3" ExcerptPostId="44834" WikiPostId="44833" />
+  <row Id="827" TagName="depth" Count="10" />
+  <row Id="830" TagName="google-material-design" Count="60" />
+  <row Id="831" TagName="swf" Count="4" ExcerptPostId="44560" WikiPostId="44559" />
+  <row Id="835" TagName="interpolation" Count="10" ExcerptPostId="44832" WikiPostId="44831" />
+  <row Id="836" TagName="placeholder" Count="2" ExcerptPostId="44838" WikiPostId="44837" />
+  <row Id="837" TagName="binding" Count="7" ExcerptPostId="44830" WikiPostId="44829" />
+  <row Id="838" TagName="blackletter" Count="5" ExcerptPostId="44766" WikiPostId="44765" />
+  <row Id="839" TagName="flat-design" Count="34" />
+  <row Id="840" TagName="script-typeface" Count="3" />
+  <row Id="842" TagName="palette" Count="28" />
+  <row Id="844" TagName="configuration" Count="13" ExcerptPostId="45668" WikiPostId="45667" />
+  <row Id="846" TagName="billboard" Count="11" />
+  <row Id="848" TagName="keynote" Count="6" ExcerptPostId="94624" WikiPostId="94623" />
+  <row Id="849" TagName="bug" Count="5" ExcerptPostId="93272" WikiPostId="93271" />
+  <row Id="850" TagName="appearance" Count="16" ExcerptPostId="46618" WikiPostId="46617" />
+  <row Id="852" TagName="autocad" Count="17" ExcerptPostId="46901" WikiPostId="46900" />
+  <row Id="854" TagName="animate" Count="8" />
+  <row Id="856" TagName="post-press" Count="3" ExcerptPostId="48450" WikiPostId="48449" />
+  <row Id="858" TagName="teaching" Count="5" ExcerptPostId="48591" WikiPostId="48590" />
+  <row Id="860" TagName="ink" Count="10" />
+  <row Id="861" TagName="perception" Count="8" />
+  <row Id="862" TagName="optical-illusion" Count="9" />
+  <row Id="868" TagName="object-styles" Count="11" />
+  <row Id="869" TagName="newspaper" Count="2" ExcerptPostId="94328" WikiPostId="94327" />
+  <row Id="872" TagName="alpha" Count="23" />
+  <row Id="873" TagName="consistency" Count="4" ExcerptPostId="51013" WikiPostId="51012" />
+  <row Id="876" TagName="pagemaker" Count="1" ExcerptPostId="51216" WikiPostId="51215" />
+  <row Id="879" TagName="barcodes" Count="15" ExcerptPostId="51917" WikiPostId="51916" />
+  <row Id="880" TagName="design-specifications" Count="6" />
+  <row Id="882" TagName="microsoft-excel" Count="13" />
+  <row Id="884" TagName="unicode" Count="18" />
+  <row Id="886" TagName="type-theory" Count="4" ExcerptPostId="94532" WikiPostId="94531" />
+  <row Id="887" TagName="interface-design" Count="389" ExcerptPostId="54218" WikiPostId="54217" />
+  <row Id="890" TagName="environmental" Count="2" ExcerptPostId="54571" WikiPostId="54570" />
+  <row Id="892" TagName="microsoft-word" Count="45" />
+  <row Id="895" TagName="template" Count="19" />
+  <row Id="898" TagName="rasterization" Count="15" />
+  <row Id="900" TagName="booklet" Count="12" />
+  <row Id="907" TagName="cc-2015" Count="28" ExcerptPostId="84278" WikiPostId="84277" />
+  <row Id="908" TagName="windows-7" Count="3" ExcerptPostId="94550" WikiPostId="94549" />
+  <row Id="910" TagName="file-conversion" Count="39" />
+  <row Id="911" TagName="blend-modes" Count="49" ExcerptPostId="57980" WikiPostId="57979" />
+  <row Id="913" TagName="trapping" Count="6" ExcerptPostId="73871" WikiPostId="73870" />
+  <row Id="917" TagName="wacom" Count="31" />
+  <row Id="919" TagName="pictures" Count="2" />
+  <row Id="920" TagName="lists" Count="9" ExcerptPostId="94449" WikiPostId="94448" />
+  <row Id="921" TagName="text-on-path" Count="17" />
+  <row Id="922" TagName="import" Count="33" ExcerptPostId="73743" WikiPostId="73742" />
+  <row Id="925" TagName="path-effects" Count="13" ExcerptPostId="94621" WikiPostId="94620" />
+  <row Id="926" TagName="guides" Count="47" />
+  <row Id="928" TagName="project-management" Count="3" />
+  <row Id="931" TagName="photomontage" Count="6" />
+  <row Id="932" TagName="dieline" Count="7" />
+  <row Id="933" TagName="diecut" Count="7" />
+  <row Id="936" TagName="digital-printing" Count="13" />
+  <row Id="937" TagName="imposition" Count="1" ExcerptPostId="73300" WikiPostId="73299" />
+  <row Id="940" TagName="bootstrap" Count="10" ExcerptPostId="94188" WikiPostId="94187" />
+  <row Id="942" TagName="axonometric-projection" Count="4" ExcerptPostId="64679" WikiPostId="64678" />
+  <row Id="943" TagName="intellectual-property" Count="6" />
+  <row Id="944" TagName="freelancing" Count="4" ExcerptPostId="94464" WikiPostId="94463" />
+  <row Id="947" TagName="clipping-mask" Count="54" />
+  <row Id="948" TagName="prototyping" Count="8" />
+  <row Id="949" TagName="embroidery" Count="4" ExcerptPostId="94554" WikiPostId="94553" />
+  <row Id="950" TagName="dst" Count="2" ExcerptPostId="73406" WikiPostId="73405" />
+  <row Id="951" TagName="autodesk-inventor" Count="1" ExcerptPostId="66837" WikiPostId="66836" />
+  <row Id="960" TagName="file-management" Count="13" />
+  <row Id="963" TagName="ttf" Count="8" ExcerptPostId="68589" WikiPostId="68588" />
+  <row Id="964" TagName="pixlr" Count="7" ExcerptPostId="68609" WikiPostId="68608" />
+  <row Id="966" TagName="sai" Count="5" ExcerptPostId="69254" WikiPostId="69253" />
+  <row Id="967" TagName="style-guide" Count="13" />
+  <row Id="973" TagName="adobe-animate" Count="7" ExcerptPostId="70751" WikiPostId="70750" />
+  <row Id="974" TagName="adobe-library" Count="3" ExcerptPostId="70746" WikiPostId="70745" />
+  <row Id="977" TagName="xfig" Count="1" ExcerptPostId="73297" WikiPostId="73296" />
+  <row Id="984" TagName="principle-app" Count="6" ExcerptPostId="73695" WikiPostId="73694" />
+  <row Id="994" TagName="error" Count="10" ExcerptPostId="94619" WikiPostId="94618" />
+  <row Id="1002" TagName="adobe-xd" Count="6" ExcerptPostId="93121" WikiPostId="93120" />
+  <row Id="1005" TagName="gnuplot" Count="3" ExcerptPostId="94469" WikiPostId="94468" />
+  <row Id="1007" TagName="adobe-draw" Count="5" ExcerptPostId="94552" WikiPostId="94551" />
+  <row Id="1009" TagName="python" Count="12" ExcerptPostId="94105" WikiPostId="94104" />
+  <row Id="1011" TagName="axure" Count="7" ExcerptPostId="93869" WikiPostId="93868" />
+  <row Id="1012" TagName="rotate" Count="12" />
+  <row Id="1013" TagName="data-extraction" Count="4" />
+  <row Id="1015" TagName="varnish" Count="2" ExcerptPostId="94219" WikiPostId="94218" />
+  <row Id="1017" TagName="research" Count="8" />
+  <row Id="1018" TagName="postscript" Count="1" ExcerptPostId="94326" WikiPostId="94325" />
+  <row Id="1019" TagName="ligatures" Count="6" ExcerptPostId="94085" WikiPostId="94084" />
+  <row Id="1020" TagName="metadata" Count="2" />
+  <row Id="1021" TagName="saturation" Count="2" />
+  <row Id="1022" TagName="vibrance" Count="1" ExcerptPostId="94459" WikiPostId="94458" />
+  <row Id="1023" TagName="corners" Count="9" />
+  <row Id="1026" TagName="visual-research" Count="3" />
+  <row Id="1028" TagName="editorial-design" Count="2" ExcerptPostId="93999" WikiPostId="93998" />
+  <row Id="1029" TagName="editorial" Count="2" />
+  <row Id="1031" TagName="file-placing" Count="9" ExcerptPostId="94581" WikiPostId="94580" />
+  <row Id="1032" TagName="cc-2017" Count="10" ExcerptPostId="93449" WikiPostId="93448" />
+  <row Id="1033" TagName="pricing" Count="7" ExcerptPostId="94190" WikiPostId="94189" />
+  <row Id="1035" TagName="risograph" Count="2" />
+  <row Id="1036" TagName="color-separation" Count="1" ExcerptPostId="94457" WikiPostId="94456" />
+  <row Id="1037" TagName="vellum" Count="1" ExcerptPostId="94056" WikiPostId="94055" />
+  <row Id="1040" TagName="dribbble" Count="1" ExcerptPostId="94066" WikiPostId="94065" />
+  <row Id="1042" TagName="fees" Count="2" />
+  <row Id="1043" TagName="chrome" Count="1" ExcerptPostId="93903" WikiPostId="93902" />
+  <row Id="1048" TagName="workspace" Count="2" />
+  <row Id="1049" TagName="academic-publishing" Count="2" />
+  <row Id="1050" TagName="color-grading" Count="1" ExcerptPostId="92287" WikiPostId="92286" />
+  <row Id="1052" TagName="famous-designers" Count="3" ExcerptPostId="94467" WikiPostId="94466" />
+  <row Id="1053" TagName="libre-office" Count="1" ExcerptPostId="94101" WikiPostId="94100" />
+  <row Id="1054" TagName="canonical" Count="2" ExcerptPostId="92508" WikiPostId="92507" />
+  <row Id="1055" TagName="footnotes" Count="1" ExcerptPostId="93901" WikiPostId="93900" />
+  <row Id="1057" TagName="pinta" Count="1" ExcerptPostId="93950" WikiPostId="93949" />
+  <row Id="1061" TagName="indentation" Count="1" />
+  <row Id="1063" TagName="wallpaper" Count="1" />
+  <row Id="1064" TagName="collage" Count="1" />
+  <row Id="1065" TagName="incopy" Count="1" />
+  <row Id="1067" TagName="umlaute" Count="1" />
+  <row Id="1068" TagName="interactive" Count="1" />
+  <row Id="1069" TagName="acrobat" Count="1" />
+  <row Id="1070" TagName="generate-image-assets" Count="1" />
+</tags>

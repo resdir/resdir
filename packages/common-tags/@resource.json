@@ -1,0 +1,9 @@
+{
+  "@type": "js/esnext-package",
+  "name": "@resdir/common-tags",
+  "version": "0.1.0",
+  "description": "Huge list of tags (source: Stack Exchange)",
+  "files": ["./dist", "data.js"],
+  "main": "./dist/index.js",
+  "dependencies": ["lodash@^4.17.4"]
+}

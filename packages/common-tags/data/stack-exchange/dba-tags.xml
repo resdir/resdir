@@ -1,0 +1,1007 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<tags>
+  <row Id="1" TagName="mysql" Count="13900" ExcerptPostId="2667" WikiPostId="2666" />
+  <row Id="2" TagName="innodb" Count="1553" ExcerptPostId="3131" WikiPostId="3130" />
+  <row Id="3" TagName="myisam" Count="387" ExcerptPostId="3144" WikiPostId="3143" />
+  <row Id="4" TagName="schema" Count="648" ExcerptPostId="4367" WikiPostId="4366" />
+  <row Id="6" TagName="nosql" Count="269" ExcerptPostId="13428" WikiPostId="13427" />
+  <row Id="9" TagName="rdbms" Count="119" ExcerptPostId="13541" WikiPostId="13540" />
+  <row Id="10" TagName="postgresql" Count="6844" ExcerptPostId="1454" WikiPostId="1453" />
+  <row Id="12" TagName="replication" Count="2226" ExcerptPostId="4365" WikiPostId="4364" />
+  <row Id="13" TagName="mariadb" Count="727" ExcerptPostId="27261" WikiPostId="27260" />
+  <row Id="14" TagName="mysql-5" Count="180" ExcerptPostId="3219" WikiPostId="3218" />
+  <row Id="15" TagName="mysqldump" Count="519" ExcerptPostId="3168" WikiPostId="3167" />
+  <row Id="17" TagName="sqlite" Count="309" ExcerptPostId="13431" WikiPostId="13430" />
+  <row Id="18" TagName="trigger" Count="861" ExcerptPostId="3984" WikiPostId="3983" />
+  <row Id="19" TagName="embedded" Count="12" ExcerptPostId="83282" WikiPostId="83281" />
+  <row Id="20" TagName="sql" Count="8564" ExcerptPostId="1886" WikiPostId="1885" />
+  <row Id="21" TagName="performance" Count="2227" ExcerptPostId="13293" WikiPostId="13292" />
+  <row Id="22" TagName="slow-log" Count="80" />
+  <row Id="23" TagName="benchmark" Count="45" />
+  <row Id="27" TagName="index" Count="1831" ExcerptPostId="1888" WikiPostId="1887" />
+  <row Id="28" TagName="sql-server-2005" Count="1301" ExcerptPostId="2318" WikiPostId="2317" />
+  <row Id="29" TagName="sql-server-2008" Count="3537" ExcerptPostId="2320" WikiPostId="2319" />
+  <row Id="30" TagName="tree" Count="33" />
+  <row Id="31" TagName="document-oriented" Count="21" />
+  <row Id="34" TagName="mongodb" Count="1305" ExcerptPostId="4161" WikiPostId="4160" />
+  <row Id="35" TagName="google-app-engine" Count="15" />
+  <row Id="37" TagName="null" Count="195" ExcerptPostId="13495" WikiPostId="13494" />
+  <row Id="38" TagName="empty-string" Count="10" />
+  <row Id="42" TagName="erd" Count="176" ExcerptPostId="21102" WikiPostId="21101" />
+  <row Id="43" TagName="process" Count="39" />
+  <row Id="44" TagName="source-control" Count="14" />
+  <row Id="47" TagName="normalization" Count="456" ExcerptPostId="8437" WikiPostId="8436" />
+  <row Id="48" TagName="oracle" Count="5048" ExcerptPostId="1237" WikiPostId="1236" />
+  <row Id="49" TagName="monitoring" Count="158" ExcerptPostId="13480" WikiPostId="13479" />
+  <row Id="50" TagName="tools" Count="75" ExcerptPostId="4371" WikiPostId="4370" />
+  <row Id="54" TagName="vendor-support" Count="12" />
+  <row Id="55" TagName="authentication" Count="210" ExcerptPostId="13515" WikiPostId="13514" />
+  <row Id="56" TagName="security" Count="690" ExcerptPostId="1893" WikiPostId="1892" />
+  <row Id="57" TagName="join" Count="1020" ExcerptPostId="8729" WikiPostId="8728" />
+  <row Id="58" TagName="foreign-key" Count="558" ExcerptPostId="13306" WikiPostId="13305" />
+  <row Id="60" TagName="phpmyadmin" Count="236" ExcerptPostId="14238" WikiPostId="14237" />
+  <row Id="62" TagName="xml" Count="261" ExcerptPostId="13493" WikiPostId="13492" />
+  <row Id="63" TagName="ms-access" Count="491" ExcerptPostId="5911" WikiPostId="5910" />
+  <row Id="66" TagName="performance-testing" Count="62" />
+  <row Id="67" TagName="data-warehouse" Count="277" ExcerptPostId="13207" WikiPostId="13206" />
+  <row Id="68" TagName="database-design" Count="3789" ExcerptPostId="1546" WikiPostId="1545" />
+  <row Id="69" TagName="sql-server" Count="19049" ExcerptPostId="2669" WikiPostId="2668" />
+  <row Id="71" TagName="deadlock" Count="332" ExcerptPostId="13302" WikiPostId="13301" />
+  <row Id="72" TagName="sql-injection" Count="40" ExcerptPostId="110630" WikiPostId="110629" />
+  <row Id="74" TagName="audit" Count="226" ExcerptPostId="15529" WikiPostId="15528" />
+  <row Id="75" TagName="delete" Count="250" ExcerptPostId="15527" WikiPostId="15526" />
+  <row Id="76" TagName="authorization" Count="23" />
+  <row Id="77" TagName="etl" Count="157" ExcerptPostId="13204" WikiPostId="13203" />
+  <row Id="81" TagName="constraint" Count="306" ExcerptPostId="13433" WikiPostId="13432" />
+  <row Id="83" TagName="testing" Count="48" />
+  <row Id="84" TagName="backup" Count="1474" ExcerptPostId="8265" WikiPostId="8264" />
+  <row Id="85" TagName="regular-expression" Count="45" />
+  <row Id="87" TagName="db2" Count="554" ExcerptPostId="2800" WikiPostId="2799" />
+  <row Id="88" TagName="windows" Count="444" ExcerptPostId="13288" WikiPostId="13287" />
+  <row Id="90" TagName="database-link" Count="36" ExcerptPostId="111432" WikiPostId="111431" />
+  <row Id="92" TagName="query" Count="241" ExcerptPostId="2671" WikiPostId="2670" />
+  <row Id="93" TagName="wallet" Count="8" />
+  <row Id="94" TagName="migration" Count="528" ExcerptPostId="5909" WikiPostId="5908" />
+  <row Id="95" TagName="best-practices" Count="276" ExcerptPostId="2316" WikiPostId="2315" />
+  <row Id="96" TagName="stored-procedures" Count="1047" ExcerptPostId="13229" WikiPostId="13228" />
+  <row Id="97" TagName="optimization" Count="1020" ExcerptPostId="13296" WikiPostId="13295" />
+  <row Id="100" TagName="storage-engine" Count="71" />
+  <row Id="101" TagName="career" Count="7" />
+  <row Id="103" TagName="management" Count="25" />
+  <row Id="105" TagName="learning" Count="19" ExcerptPostId="13768" WikiPostId="13767" />
+  <row Id="107" TagName="syntax" Count="126" ExcerptPostId="13801" WikiPostId="13800" />
+  <row Id="108" TagName="primary-key" Count="393" ExcerptPostId="4369" WikiPostId="4368" />
+  <row Id="109" TagName="aggregate" Count="299" ExcerptPostId="14236" WikiPostId="14235" />
+  <row Id="110" TagName="oracle-11g-r2" Count="1067" ExcerptPostId="2103" WikiPostId="2102" />
+  <row Id="111" TagName="data-pages" Count="33" />
+  <row Id="112" TagName="clustered-index" Count="183" ExcerptPostId="13491" WikiPostId="13490" />
+  <row Id="114" TagName="collation" Count="173" ExcerptPostId="31677" WikiPostId="31676" />
+  <row Id="115" TagName="uniqueidentifier" Count="39" />
+  <row Id="116" TagName="express-edition" Count="15" />
+  <row Id="118" TagName="maintenance" Count="162" ExcerptPostId="13417" WikiPostId="13416" />
+  <row Id="119" TagName="features" Count="10" />
+  <row Id="123" TagName="style" Count="3" />
+  <row Id="125" TagName="version-control" Count="32" />
+  <row Id="126" TagName="oracle-11g" Count="526" ExcerptPostId="1891" WikiPostId="1890" />
+  <row Id="132" TagName="datatypes" Count="295" ExcerptPostId="8242" WikiPostId="8241" />
+  <row Id="133" TagName="derby" Count="14" />
+  <row Id="134" TagName="database-recommendation" Count="289" ExcerptPostId="13334" WikiPostId="13333" />
+  <row Id="135" TagName="instance" Count="67" ExcerptPostId="15016" WikiPostId="15015" />
+  <row Id="138" TagName="ssas" Count="261" ExcerptPostId="3494" WikiPostId="3493" />
+  <row Id="140" TagName="linux" Count="515" ExcerptPostId="13499" WikiPostId="13498" />
+  <row Id="141" TagName="shrink" Count="124" ExcerptPostId="21105" WikiPostId="21104" />
+  <row Id="142" TagName="flashback" Count="22" ExcerptPostId="89812" WikiPostId="89811" />
+  <row Id="143" TagName="datapump" Count="44" ExcerptPostId="73641" WikiPostId="73640" />
+  <row Id="144" TagName="export" Count="207" ExcerptPostId="13543" WikiPostId="13542" />
+  <row Id="145" TagName="logs" Count="185" ExcerptPostId="13391" WikiPostId="13390" />
+  <row Id="146" TagName="documentation" Count="31" />
+  <row Id="149" TagName="oracle-10g" Count="367" ExcerptPostId="14867" WikiPostId="14866" />
+  <row Id="150" TagName="full-text-search" Count="381" ExcerptPostId="13419" WikiPostId="13418" />
+  <row Id="151" TagName="hierarchical" Count="105" ExcerptPostId="17187" WikiPostId="17186" />
+  <row Id="153" TagName="permissions" Count="905" ExcerptPostId="13311" WikiPostId="13310" />
+  <row Id="156" TagName="varchar" Count="92" ExcerptPostId="16266" WikiPostId="16265" />
+  <row Id="157" TagName="mysql-workbench" Count="298" ExcerptPostId="8135" WikiPostId="8134" />
+  <row Id="159" TagName="sqlplus" Count="180" ExcerptPostId="3993" WikiPostId="3992" />
+  <row Id="167" TagName="feature-comparison" Count="23" ExcerptPostId="13790" WikiPostId="13789" />
+  <row Id="168" TagName="insert" Count="429" ExcerptPostId="13465" WikiPostId="13464" />
+  <row Id="171" TagName="sql-server-2000" Count="255" ExcerptPostId="8246" WikiPostId="8245" />
+  <row Id="173" TagName="profiler" Count="136" ExcerptPostId="13507" WikiPostId="13506" />
+  <row Id="174" TagName="terminology" Count="46" ExcerptPostId="116187" WikiPostId="116186" />
+  <row Id="175" TagName="sybase" Count="154" ExcerptPostId="13534" WikiPostId="13533" />
+  <row Id="176" TagName="freetds" Count="15" />
+  <row Id="177" TagName="isql" Count="4" />
+  <row Id="178" TagName="storage" Count="176" ExcerptPostId="77842" WikiPostId="77841" />
+  <row Id="179" TagName="locked-objects" Count="9" />
+  <row Id="180" TagName="cte" Count="146" ExcerptPostId="13502" WikiPostId="13501" />
+  <row Id="182" TagName="memory" Count="446" ExcerptPostId="13414" WikiPostId="13413" />
+  <row Id="183" TagName="odbc" Count="158" ExcerptPostId="15553" WikiPostId="15552" />
+  <row Id="184" TagName="unixodbc" Count="10" />
+  <row Id="185" TagName="concurrency" Count="166" ExcerptPostId="77848" WikiPostId="77847" />
+  <row Id="186" TagName="ssms" Count="678" ExcerptPostId="13298" WikiPostId="13297" />
+  <row Id="189" TagName="order-by" Count="238" ExcerptPostId="13513" WikiPostId="13512" />
+  <row Id="190" TagName="database-tuning" Count="118" ExcerptPostId="13545" WikiPostId="13544" />
+  <row Id="193" TagName="parallelism" Count="90" ExcerptPostId="17193" WikiPostId="17192" />
+  <row Id="194" TagName="my.cnf" Count="114" ExcerptPostId="3174" WikiPostId="3173" />
+  <row Id="195" TagName="plsql" Count="379" ExcerptPostId="1970" WikiPostId="1969" />
+  <row Id="196" TagName="orm" Count="32" ExcerptPostId="21238" WikiPostId="21237" />
+  <row Id="197" TagName="determinism" Count="5" />
+  <row Id="199" TagName="architecture" Count="113" />
+  <row Id="200" TagName="dbcc" Count="90" ExcerptPostId="4572" WikiPostId="4571" />
+  <row Id="202" TagName="entity-framework" Count="76" ExcerptPostId="132059" WikiPostId="132058" />
+  <row Id="206" TagName="ubuntu" Count="300" ExcerptPostId="14234" WikiPostId="14233" />
+  <row Id="208" TagName="client" Count="59" />
+  <row Id="210" TagName="statistics" Count="209" ExcerptPostId="155003" WikiPostId="155002" />
+  <row Id="211" TagName="bigtable" Count="3" ExcerptPostId="29730" WikiPostId="29729" />
+  <row Id="213" TagName="interview-question" Count="15" ExcerptPostId="2328" WikiPostId="2327" />
+  <row Id="214" TagName="pivot" Count="231" ExcerptPostId="20174" WikiPostId="20173" />
+  <row Id="218" TagName="rman" Count="180" ExcerptPostId="14560" WikiPostId="14559" />
+  <row Id="219" TagName="ssrs" Count="402" ExcerptPostId="13214" WikiPostId="13213" />
+  <row Id="221" TagName="parse" Count="20" />
+  <row Id="223" TagName="gae-datastore" Count="6" />
+  <row Id="225" TagName="dump" Count="87" />
+  <row Id="228" TagName="dml" Count="33" ExcerptPostId="13799" WikiPostId="13798" />
+  <row Id="230" TagName="jdbc" Count="111" ExcerptPostId="17965" WikiPostId="17964" />
+  <row Id="235" TagName="role" Count="134" ExcerptPostId="16922" WikiPostId="16921" />
+  <row Id="236" TagName="intellisense" Count="21" />
+  <row Id="239" TagName="clustering" Count="392" ExcerptPostId="77833" WikiPostId="77832" />
+  <row Id="240" TagName="max-connections" Count="47" />
+  <row Id="242" TagName="ado.net" Count="38" />
+  <row Id="243" TagName="sharepoint" Count="52" ExcerptPostId="17185" WikiPostId="17184" />
+  <row Id="245" TagName="hints" Count="34" />
+  <row Id="247" TagName="pgadmin" Count="167" ExcerptPostId="27666" WikiPostId="27665" />
+  <row Id="248" TagName="auto-increment" Count="115" ExcerptPostId="41246" WikiPostId="41245" />
+  <row Id="249" TagName="psql" Count="153" ExcerptPostId="3989" WikiPostId="3988" />
+  <row Id="250" TagName="command-line" Count="57" />
+  <row Id="251" TagName="bcp" Count="65" ExcerptPostId="8244" WikiPostId="8243" />
+  <row Id="252" TagName="bulk" Count="40" />
+  <row Id="253" TagName="ssis" Count="713" ExcerptPostId="13212" WikiPostId="13211" />
+  <row Id="255" TagName="filegroups" Count="70" />
+  <row Id="256" TagName="disk-structures" Count="29" />
+  <row Id="257" TagName="visual-studio" Count="49" />
+  <row Id="258" TagName="deployment" Count="63" />
+  <row Id="259" TagName="bulkcopy" Count="28" />
+  <row Id="260" TagName="powershell" Count="187" ExcerptPostId="6284" WikiPostId="6283" />
+  <row Id="264" TagName="database-agnostic" Count="41" ExcerptPostId="17183" WikiPostId="17182" />
+  <row Id="267" TagName="business-intelligence" Count="77" ExcerptPostId="13224" WikiPostId="13223" />
+  <row Id="268" TagName="duplication" Count="156" ExcerptPostId="48624" WikiPostId="48623" />
+  <row Id="270" TagName="usertypes" Count="16" />
+  <row Id="271" TagName="metadata" Count="101" ExcerptPostId="8250" WikiPostId="8249" />
+  <row Id="272" TagName="random" Count="46" />
+  <row Id="273" TagName="openldap" Count="4" ExcerptPostId="108188" WikiPostId="108187" />
+  <row Id="274" TagName="access-control" Count="54" ExcerptPostId="123827" WikiPostId="123826" />
+  <row Id="276" TagName="sequence" Count="103" ExcerptPostId="21230" WikiPostId="21229" />
+  <row Id="277" TagName="naming-convention" Count="53" />
+  <row Id="279" TagName="scripting" Count="216" ExcerptPostId="158885" WikiPostId="158884" />
+  <row Id="286" TagName="dynamic-sql" Count="217" ExcerptPostId="13246" WikiPostId="13245" />
+  <row Id="288" TagName="t-sql" Count="1756" ExcerptPostId="8267" WikiPostId="8266" />
+  <row Id="289" TagName="mirroring" Count="262" ExcerptPostId="13421" WikiPostId="13420" />
+  <row Id="292" TagName="facttable" Count="32" />
+  <row Id="293" TagName="execution-plan" Count="481" ExcerptPostId="13486" WikiPostId="13485" />
+  <row Id="295" TagName="sql-server-2008-r2" Count="3457" ExcerptPostId="4570" WikiPostId="4569" />
+  <row Id="296" TagName="pgcrypto" Count="9" />
+  <row Id="297" TagName="encryption" Count="180" ExcerptPostId="77844" WikiPostId="77843" />
+  <row Id="298" TagName="installation" Count="400" ExcerptPostId="15521" WikiPostId="15520" />
+  <row Id="299" TagName="view" Count="430" ExcerptPostId="8248" WikiPostId="8247" />
+  <row Id="303" TagName="prepared-statement" Count="42" />
+  <row Id="305" TagName="perfmon" Count="33" ExcerptPostId="5203" WikiPostId="5202" />
+  <row Id="306" TagName="dmv" Count="110" ExcerptPostId="21109" WikiPostId="21108" />
+  <row Id="311" TagName="partitioning" Count="556" ExcerptPostId="13304" WikiPostId="13303" />
+  <row Id="312" TagName="subquery" Count="375" ExcerptPostId="14241" WikiPostId="14240" />
+  <row Id="314" TagName="database-size" Count="83" />
+  <row Id="315" TagName="size" Count="54" />
+  <row Id="316" TagName="cache" Count="101" />
+  <row Id="317" TagName="count" Count="232" ExcerptPostId="47891" WikiPostId="47890" />
+  <row Id="319" TagName="web-server" Count="22" />
+  <row Id="320" TagName="license" Count="52" />
+  <row Id="321" TagName="transaction" Count="419" ExcerptPostId="13300" WikiPostId="13299" />
+  <row Id="324" TagName="configuration" Count="413" ExcerptPostId="15523" WikiPostId="15522" />
+  <row Id="325" TagName="oracle-grid-control" Count="17" />
+  <row Id="330" TagName="php" Count="471" ExcerptPostId="13342" WikiPostId="13341" />
+  <row Id="333" TagName="tablespaces" Count="120" ExcerptPostId="17960" WikiPostId="17959" />
+  <row Id="336" TagName="extended-events" Count="85" ExcerptPostId="155069" WikiPostId="155068" />
+  <row Id="337" TagName="olap" Count="73" ExcerptPostId="13221" WikiPostId="13220" />
+  <row Id="338" TagName="oracle-sql-developer" Count="175" ExcerptPostId="12264" WikiPostId="12263" />
+  <row Id="341" TagName="import" Count="397" ExcerptPostId="31548" WikiPostId="31547" />
+  <row Id="342" TagName="tuning" Count="65" />
+  <row Id="343" TagName="cursors" Count="112" ExcerptPostId="3315" WikiPostId="3314" />
+  <row Id="345" TagName="timestamp" Count="149" ExcerptPostId="158895" WikiPostId="158894" />
+  <row Id="346" TagName="date-format" Count="89" ExcerptPostId="121906" WikiPostId="121905" />
+  <row Id="349" TagName="unique-key" Count="127" ExcerptPostId="94498" WikiPostId="94497" />
+  <row Id="352" TagName="select" Count="594" ExcerptPostId="13483" WikiPostId="13482" />
+  <row Id="353" TagName="default-value" Count="49" ExcerptPostId="162850" WikiPostId="162849" />
+  <row Id="356" TagName="referential-integrity" Count="78" ExcerptPostId="13235" WikiPostId="13234" />
+  <row Id="357" TagName="alter-table" Count="204" ExcerptPostId="13488" WikiPostId="13487" />
+  <row Id="358" TagName="money" Count="11" ExcerptPostId="21114" WikiPostId="21113" />
+  <row Id="360" TagName="temp-tables" Count="121" ExcerptPostId="77852" WikiPostId="77851" />
+  <row Id="361" TagName="parameter" Count="96" />
+  <row Id="365" TagName="mac-os-x" Count="113" />
+  <row Id="366" TagName="database-internals" Count="111" ExcerptPostId="30355" WikiPostId="30354" />
+  <row Id="367" TagName="materialized-view" Count="136" ExcerptPostId="13497" WikiPostId="13496" />
+  <row Id="370" TagName="csv-file" Count="122" ExcerptPostId="86196" WikiPostId="86195" />
+  <row Id="373" TagName="c#" Count="181" ExcerptPostId="3726" WikiPostId="3725" />
+  <row Id="375" TagName="snapshot" Count="104" ExcerptPostId="90244" WikiPostId="90243" />
+  <row Id="384" TagName="excel" Count="115" ExcerptPostId="3724" WikiPostId="3723" />
+  <row Id="385" TagName="information-schema" Count="90" ExcerptPostId="3358" WikiPostId="3357" />
+  <row Id="386" TagName="percona" Count="226" ExcerptPostId="3360" WikiPostId="3359" />
+  <row Id="389" TagName="index-statistics" Count="45" />
+  <row Id="390" TagName="linq" Count="10" />
+  <row Id="391" TagName="type-conversion" Count="85" />
+  <row Id="392" TagName="truncate" Count="68" ExcerptPostId="21236" WikiPostId="21235" />
+  <row Id="393" TagName="disk-space" Count="203" ExcerptPostId="158891" WikiPostId="158890" />
+  <row Id="395" TagName="perl" Count="22" />
+  <row Id="396" TagName="character-set" Count="95" />
+  <row Id="397" TagName="enterprise-manager" Count="22" ExcerptPostId="11103" WikiPostId="11102" />
+  <row Id="406" TagName="oracle-9i" Count="51" ExcerptPostId="115484" WikiPostId="115483" />
+  <row Id="409" TagName="identity" Count="106" ExcerptPostId="155047" WikiPostId="155046" />
+  <row Id="413" TagName="ndbcluster" Count="90" ExcerptPostId="30414" WikiPostId="30413" />
+  <row Id="417" TagName="network" Count="102" />
+  <row Id="418" TagName="mysql-5.5" Count="1028" ExcerptPostId="13899" WikiPostId="13898" />
+  <row Id="419" TagName="ddl" Count="156" ExcerptPostId="13504" WikiPostId="13503" />
+  <row Id="420" TagName="mysql-5.1" Count="260" ExcerptPostId="47992" WikiPostId="47991" />
+  <row Id="422" TagName="recovery" Count="259" ExcerptPostId="15011" WikiPostId="15010" />
+  <row Id="423" TagName="index-tuning" Count="470" ExcerptPostId="16268" WikiPostId="16267" />
+  <row Id="429" TagName="couchdb" Count="21" ExcerptPostId="30885" WikiPostId="30884" />
+  <row Id="430" TagName="scalability" Count="117" />
+  <row Id="432" TagName="distributed-databases" Count="39" />
+  <row Id="435" TagName="application-design" Count="62" />
+  <row Id="439" TagName="database-theory" Count="77" />
+  <row Id="441" TagName="database-engine" Count="10" />
+  <row Id="444" TagName="cassandra" Count="109" ExcerptPostId="20498" WikiPostId="20497" />
+  <row Id="445" TagName="heap" Count="24" />
+  <row Id="453" TagName="upgrade" Count="263" ExcerptPostId="31629" WikiPostId="31628" />
+  <row Id="454" TagName="interface" Count="5" />
+  <row Id="455" TagName="graph" Count="32" ExcerptPostId="168330" WikiPostId="168329" />
+  <row Id="456" TagName="service-broker" Count="106" ExcerptPostId="40326" WikiPostId="40325" />
+  <row Id="465" TagName="fragmentation" Count="98" ExcerptPostId="155044" WikiPostId="155043" />
+  <row Id="468" TagName="rollback" Count="83" ExcerptPostId="16918" WikiPostId="16917" />
+  <row Id="469" TagName="lock-escalation" Count="9" />
+  <row Id="470" TagName="corruption" Count="172" ExcerptPostId="31557" WikiPostId="31556" />
+  <row Id="471" TagName="condition" Count="39" />
+  <row Id="474" TagName="oracle-xe" Count="64" ExcerptPostId="14869" WikiPostId="14868" />
+  <row Id="476" TagName="sqlcmd" Count="112" ExcerptPostId="47828" WikiPostId="47827" />
+  <row Id="477" TagName="san" Count="33" ExcerptPostId="17256" WikiPostId="17255" />
+  <row Id="478" TagName="activity-monitor" Count="18" ExcerptPostId="125693" WikiPostId="125692" />
+  <row Id="479" TagName="compression" Count="96" ExcerptPostId="17191" WikiPostId="17190" />
+  <row Id="480" TagName="restore" Count="834" ExcerptPostId="13231" WikiPostId="13230" />
+  <row Id="481" TagName="linked-server" Count="385" ExcerptPostId="15525" WikiPostId="15524" />
+  <row Id="482" TagName="java" Count="171" ExcerptPostId="16915" WikiPostId="16914" />
+  <row Id="483" TagName="error-handling" Count="80" />
+  <row Id="486" TagName="azure-sql-database" Count="272" ExcerptPostId="5922" WikiPostId="5921" />
+  <row Id="492" TagName="mysql-proxy" Count="7" ExcerptPostId="6266" WikiPostId="6265" />
+  <row Id="495" TagName="sql-server-2012" Count="3413" ExcerptPostId="6483" WikiPostId="6482" />
+  <row Id="496" TagName="informix" Count="44" ExcerptPostId="12303" WikiPostId="12302" />
+  <row Id="497" TagName="locking" Count="471" ExcerptPostId="13290" WikiPostId="13289" />
+  <row Id="498" TagName="isolation-level" Count="95" />
+  <row Id="501" TagName="rac" Count="66" ExcerptPostId="20176" WikiPostId="20175" />
+  <row Id="502" TagName="sql-server-express" Count="125" ExcerptPostId="8724" WikiPostId="8723" />
+  <row Id="503" TagName="procedure-definition" Count="11" />
+  <row Id="504" TagName="smo" Count="26" ExcerptPostId="21112" WikiPostId="21111" />
+  <row Id="505" TagName="tempdb" Count="162" ExcerptPostId="47831" WikiPostId="47830" />
+  <row Id="507" TagName="optimizer" Count="50" ExcerptPostId="8727" WikiPostId="8726" />
+  <row Id="509" TagName="oracle-se" Count="5" ExcerptPostId="7432" WikiPostId="7431" />
+  <row Id="510" TagName="visual-studio-2010" Count="24" />
+  <row Id="511" TagName="clustered-primary-key" Count="24" />
+  <row Id="512" TagName="sql-server-agent" Count="336" ExcerptPostId="48514" WikiPostId="48513" />
+  <row Id="514" TagName="sql-loader" Count="20" ExcerptPostId="46956" WikiPostId="46955" />
+  <row Id="520" TagName="debugging" Count="51" />
+  <row Id="521" TagName="remote" Count="98" />
+  <row Id="523" TagName="oracle-rac" Count="15" ExcerptPostId="8719" WikiPostId="8718" />
+  <row Id="524" TagName="listener" Count="85" ExcerptPostId="17189" WikiPostId="17188" />
+  <row Id="525" TagName="sorting" Count="80" />
+  <row Id="528" TagName="row-level-security" Count="15" />
+  <row Id="529" TagName="foxpro" Count="9" ExcerptPostId="8716" WikiPostId="8715" />
+  <row Id="531" TagName="oracle-asm" Count="45" ExcerptPostId="8786" WikiPostId="8785" />
+  <row Id="532" TagName="percona-tools" Count="57" ExcerptPostId="43713" WikiPostId="43712" />
+  <row Id="534" TagName="transaction-log" Count="473" ExcerptPostId="31627" WikiPostId="31626" />
+  <row Id="535" TagName="query-refactor" Count="16" />
+  <row Id="536" TagName="case" Count="89" />
+  <row Id="539" TagName="floating-point" Count="16" />
+  <row Id="541" TagName="query-performance" Count="1587" ExcerptPostId="13241" WikiPostId="13240" />
+  <row Id="542" TagName="progress-database" Count="15" ExcerptPostId="9308" WikiPostId="9307" />
+  <row Id="543" TagName="checkpoint" Count="19" ExcerptPostId="9378" WikiPostId="9377" />
+  <row Id="544" TagName="exception" Count="31" />
+  <row Id="548" TagName="failover" Count="195" ExcerptPostId="47833" WikiPostId="47832" />
+  <row Id="549" TagName="spatial" Count="161" ExcerptPostId="25595" WikiPostId="25594" />
+  <row Id="550" TagName="mysqlhotcopy" Count="2" />
+  <row Id="551" TagName="plpgsql" Count="206" ExcerptPostId="9892" WikiPostId="9891" />
+  <row Id="554" TagName="page-splits" Count="16" ExcerptPostId="156275" WikiPostId="156274" />
+  <row Id="558" TagName="development" Count="28" />
+  <row Id="561" TagName="columnstore" Count="74" />
+  <row Id="563" TagName="xtrabackup" Count="57" ExcerptPostId="60344" WikiPostId="60343" />
+  <row Id="564" TagName="pattern-matching" Count="60" />
+  <row Id="566" TagName="filestream" Count="65" ExcerptPostId="179553" WikiPostId="179552" />
+  <row Id="569" TagName="mysqladmin" Count="28" ExcerptPostId="62020" WikiPostId="62019" />
+  <row Id="570" TagName="dns" Count="13" />
+  <row Id="571" TagName="wait-types" Count="64" ExcerptPostId="155092" WikiPostId="155091" />
+  <row Id="573" TagName="slony" Count="20" ExcerptPostId="12300" WikiPostId="12299" />
+  <row Id="576" TagName="window-functions" Count="148" ExcerptPostId="13238" WikiPostId="13237" />
+  <row Id="581" TagName="percona-server" Count="85" ExcerptPostId="13218" WikiPostId="13217" />
+  <row Id="582" TagName="reporting" Count="104" ExcerptPostId="13233" WikiPostId="13232" />
+  <row Id="584" TagName="ibdata" Count="32" ExcerptPostId="60346" WikiPostId="60345" />
+  <row Id="586" TagName="functions" Count="336" ExcerptPostId="13664" WikiPostId="13663" />
+  <row Id="587" TagName="xtradb" Count="19" ExcerptPostId="43721" WikiPostId="43720" />
+  <row Id="588" TagName="cognos" Count="8" ExcerptPostId="13691" WikiPostId="13690" />
+  <row Id="592" TagName="vacuum" Count="70" ExcerptPostId="174193" WikiPostId="174192" />
+  <row Id="593" TagName="oledb" Count="37" ExcerptPostId="14207" WikiPostId="14206" />
+  <row Id="595" TagName="change-management" Count="13" ExcerptPostId="14282" WikiPostId="14281" />
+  <row Id="597" TagName="high-availability" Count="235" ExcerptPostId="77838" WikiPostId="77837" />
+  <row Id="599" TagName="union" Count="119" ExcerptPostId="21233" WikiPostId="21232" />
+  <row Id="601" TagName="virtual-columns" Count="9" />
+  <row Id="604" TagName="central-management-server" Count="22" ExcerptPostId="50542" WikiPostId="50541" />
+  <row Id="605" TagName="oracle-10g-r2" Count="16" ExcerptPostId="115486" WikiPostId="115485" />
+  <row Id="610" TagName="fill-factor" Count="26" />
+  <row Id="611" TagName="database-mail" Count="105" ExcerptPostId="132244" WikiPostId="132243" />
+  <row Id="612" TagName="event-notification" Count="19" />
+  <row Id="613" TagName="update" Count="531" ExcerptPostId="31675" WikiPostId="31674" />
+  <row Id="614" TagName="replace" Count="35" />
+  <row Id="615" TagName="firebird" Count="53" ExcerptPostId="16744" WikiPostId="16743" />
+  <row Id="616" TagName="sql-server-tools" Count="11" ExcerptPostId="15797" WikiPostId="15796" />
+  <row Id="618" TagName="hardware" Count="57" />
+  <row Id="619" TagName="slowly-changing-dimension" Count="23" />
+  <row Id="622" TagName="cross-apply" Count="27" />
+  <row Id="625" TagName="alias" Count="43" ExcerptPostId="16536" WikiPostId="16535" />
+  <row Id="627" TagName="datafile" Count="96" />
+  <row Id="631" TagName="mysqli" Count="39" ExcerptPostId="108762" WikiPostId="108761" />
+  <row Id="633" TagName="redhat" Count="48" />
+  <row Id="634" TagName="oracle-fail-safe" Count="2" />
+  <row Id="636" TagName="service-pack" Count="42" />
+  <row Id="637" TagName="teradata" Count="43" ExcerptPostId="17139" WikiPostId="17138" />
+  <row Id="638" TagName="merge" Count="111" ExcerptPostId="33746" WikiPostId="33745" />
+  <row Id="639" TagName="log-shipping" Count="185" ExcerptPostId="77850" WikiPostId="77849" />
+  <row Id="640" TagName="incremental-load" Count="2" />
+  <row Id="643" TagName="ssrs-2008" Count="42" ExcerptPostId="167021" WikiPostId="167020" />
+  <row Id="646" TagName="session" Count="33" />
+  <row Id="648" TagName="shutdown" Count="28" />
+  <row Id="650" TagName="mysql-cluster" Count="120" ExcerptPostId="62957" WikiPostId="62956" />
+  <row Id="652" TagName="iseries" Count="44" />
+  <row Id="653" TagName="troubleshooting" Count="33" />
+  <row Id="654" TagName="mdx" Count="49" ExcerptPostId="18009" WikiPostId="18008" />
+  <row Id="656" TagName="netezza" Count="26" ExcerptPostId="109152" WikiPostId="109151" />
+  <row Id="660" TagName="mysqld-multi" Count="4" />
+  <row Id="662" TagName="informatica" Count="13" />
+  <row Id="664" TagName="jobs" Count="232" ExcerptPostId="115417" WikiPostId="115416" />
+  <row Id="667" TagName="wamp" Count="28" />
+  <row Id="668" TagName="dts" Count="15" />
+  <row Id="671" TagName="merge-replication" Count="173" ExcerptPostId="31118" WikiPostId="31117" />
+  <row Id="676" TagName="limits" Count="51" />
+  <row Id="678" TagName="password-recovery" Count="14" />
+  <row Id="679" TagName="toad" Count="40" ExcerptPostId="21089" WikiPostId="21088" />
+  <row Id="681" TagName="msdb" Count="28" />
+  <row Id="685" TagName="serialization" Count="17" />
+  <row Id="686" TagName="blob" Count="103" ExcerptPostId="44300" WikiPostId="44299" />
+  <row Id="688" TagName="btree" Count="28" />
+  <row Id="690" TagName="physical-design" Count="24" />
+  <row Id="692" TagName="cube" Count="26" />
+  <row Id="693" TagName="dimension" Count="27" />
+  <row Id="696" TagName="utc-time" Count="7" />
+  <row Id="697" TagName="users" Count="181" ExcerptPostId="158889" WikiPostId="158888" />
+  <row Id="698" TagName="binlog" Count="73" />
+  <row Id="699" TagName="data-integrity" Count="42" />
+  <row Id="700" TagName="msdtc" Count="27" ExcerptPostId="21077" WikiPostId="21076" />
+  <row Id="704" TagName="queue" Count="15" />
+  <row Id="706" TagName="awr" Count="10" />
+  <row Id="712" TagName="mysql-console" Count="2" />
+  <row Id="714" TagName="utf-8" Count="54" />
+  <row Id="719" TagName="dataguard" Count="61" ExcerptPostId="107938" WikiPostId="107937" />
+  <row Id="720" TagName="cloud" Count="34" />
+  <row Id="722" TagName="availability-groups" Count="613" ExcerptPostId="21073" WikiPostId="21072" />
+  <row Id="724" TagName="cast" Count="59" ExcerptPostId="46499" WikiPostId="46498" />
+  <row Id="725" TagName="unit-test" Count="14" />
+  <row Id="729" TagName="explain" Count="111" ExcerptPostId="155042" WikiPostId="155041" />
+  <row Id="730" TagName="transparent-data-encryption" Count="57" ExcerptPostId="76746" WikiPostId="76745" />
+  <row Id="731" TagName="group-by" Count="360" ExcerptPostId="62259" WikiPostId="62258" />
+  <row Id="734" TagName="performance-tuning" Count="325" ExcerptPostId="77840" WikiPostId="77839" />
+  <row Id="735" TagName="xtradb-cluster" Count="47" ExcerptPostId="25432" WikiPostId="25431" />
+  <row Id="736" TagName="data-collection" Count="14" />
+  <row Id="737" TagName="multi-tenant" Count="44" />
+  <row Id="738" TagName="pgpool" Count="56" ExcerptPostId="21654" WikiPostId="21653" />
+  <row Id="739" TagName="repmgr" Count="15" ExcerptPostId="21660" WikiPostId="21659" />
+  <row Id="740" TagName="oracle-streams" Count="8" />
+  <row Id="741" TagName="load" Count="38" />
+  <row Id="742" TagName="errors" Count="197" ExcerptPostId="158887" WikiPostId="158886" />
+  <row Id="743" TagName="transactional-replication" Count="303" ExcerptPostId="36197" WikiPostId="36196" />
+  <row Id="746" TagName="visio" Count="6" ExcerptPostId="102264" WikiPostId="102263" />
+  <row Id="747" TagName="alerts" Count="45" />
+  <row Id="751" TagName="rockmongo" Count="5" />
+  <row Id="753" TagName="logins" Count="162" ExcerptPostId="158893" WikiPostId="158892" />
+  <row Id="754" TagName="change-tracking" Count="34" />
+  <row Id="755" TagName="change-data-capture" Count="74" ExcerptPostId="33991" WikiPostId="33990" />
+  <row Id="757" TagName="reserved-word" Count="6" />
+  <row Id="759" TagName="source-code" Count="8" />
+  <row Id="760" TagName="postgresql-8.3" Count="14" ExcerptPostId="30223" WikiPostId="30222" />
+  <row Id="761" TagName="sql-clr" Count="84" ExcerptPostId="126053" WikiPostId="126052" />
+  <row Id="762" TagName="postgis" Count="145" ExcerptPostId="177763" WikiPostId="177762" />
+  <row Id="763" TagName="vmware" Count="55" />
+  <row Id="764" TagName="virtualisation" Count="45" />
+  <row Id="765" TagName="sql-server-compact" Count="28" ExcerptPostId="115477" WikiPostId="115476" />
+  <row Id="766" TagName="vertica" Count="38" ExcerptPostId="43939" WikiPostId="43938" />
+  <row Id="767" TagName="ontology" Count="3" ExcerptPostId="24105" WikiPostId="24104" />
+  <row Id="768" TagName="nonclustered-index" Count="82" ExcerptPostId="126036" WikiPostId="126035" />
+  <row Id="772" TagName="postgresql-9.1" Count="277" ExcerptPostId="30221" WikiPostId="30220" />
+  <row Id="774" TagName="surrogate-key" Count="20" ExcerptPostId="50919" WikiPostId="50918" />
+  <row Id="775" TagName="pervasive" Count="3" />
+  <row Id="779" TagName="query-timeout" Count="35" />
+  <row Id="780" TagName="aws" Count="198" ExcerptPostId="115607" WikiPostId="115606" />
+  <row Id="781" TagName="if-not-exists" Count="26" ExcerptPostId="24533" WikiPostId="24532" />
+  <row Id="782" TagName="gaps-and-islands" Count="69" ExcerptPostId="24570" WikiPostId="24569" />
+  <row Id="783" TagName="encoding" Count="66" />
+  <row Id="784" TagName="hang" Count="12" />
+  <row Id="785" TagName="riak" Count="8" ExcerptPostId="159404" WikiPostId="159403" />
+  <row Id="786" TagName="crash" Count="65" />
+  <row Id="787" TagName="impdp" Count="52" />
+  <row Id="789" TagName="plugins" Count="12" />
+  <row Id="791" TagName="log" Count="112" />
+  <row Id="792" TagName="warning" Count="8" />
+  <row Id="796" TagName="relational-theory" Count="367" ExcerptPostId="128123" WikiPostId="128122" />
+  <row Id="797" TagName="ansi-sql-standard" Count="46" ExcerptPostId="102797" WikiPostId="102796" />
+  <row Id="802" TagName="oracle-database-appliance" Count="8" ExcerptPostId="107946" WikiPostId="107945" />
+  <row Id="803" TagName="goldengate" Count="14" />
+  <row Id="805" TagName="heroku" Count="24" />
+  <row Id="806" TagName="array" Count="127" />
+  <row Id="808" TagName="timezone" Count="71" />
+  <row Id="809" TagName="distributed-transactions" Count="39" ExcerptPostId="53387" WikiPostId="53386" />
+  <row Id="810" TagName="sql-variant-property" Count="7" />
+  <row Id="811" TagName="enterprisedb" Count="22" />
+  <row Id="812" TagName="data-versioning" Count="31" />
+  <row Id="814" TagName="amazon-linux" Count="12" />
+  <row Id="816" TagName="sleep" Count="7" />
+  <row Id="817" TagName="hadr" Count="14" ExcerptPostId="53254" WikiPostId="53253" />
+  <row Id="819" TagName="relational-division" Count="21" ExcerptPostId="52862" WikiPostId="52861" />
+  <row Id="820" TagName="eav" Count="68" ExcerptPostId="28475" WikiPostId="28474" />
+  <row Id="823" TagName="group-concatenation" Count="30" />
+  <row Id="824" TagName="mysql-5.0" Count="36" ExcerptPostId="62959" WikiPostId="62958" />
+  <row Id="830" TagName="auto-commit" Count="8" />
+  <row Id="832" TagName="dependencies" Count="48" />
+  <row Id="834" TagName="acid" Count="16" ExcerptPostId="105751" WikiPostId="105750" />
+  <row Id="836" TagName="python" Count="113" />
+  <row Id="839" TagName="kerberos" Count="27" ExcerptPostId="33269" WikiPostId="33268" />
+  <row Id="840" TagName="index-spool" Count="3" ExcerptPostId="30190" WikiPostId="30189" />
+  <row Id="841" TagName="offset-fetch" Count="5" ExcerptPostId="30248" WikiPostId="30247" />
+  <row Id="842" TagName="postgresql-9.2" Count="229" ExcerptPostId="30219" WikiPostId="30218" />
+  <row Id="844" TagName="spn" Count="12" />
+  <row Id="846" TagName="bitmap-index" Count="7" />
+  <row Id="847" TagName="star-schema" Count="27" />
+  <row Id="848" TagName="h2" Count="12" ExcerptPostId="30492" WikiPostId="30491" />
+  <row Id="849" TagName="expdp" Count="29" />
+  <row Id="850" TagName="postgresql-9.0" Count="15" ExcerptPostId="62704" WikiPostId="62703" />
+  <row Id="852" TagName="hadoop" Count="32" ExcerptPostId="31536" WikiPostId="31535" />
+  <row Id="854" TagName="voltdb" Count="3" ExcerptPostId="30672" WikiPostId="30671" />
+  <row Id="855" TagName="filtered-index" Count="28" />
+  <row Id="859" TagName="windows-server" Count="77" ExcerptPostId="155088" WikiPostId="155087" />
+  <row Id="861" TagName="scheduled-tasks" Count="32" />
+  <row Id="865" TagName="native-client" Count="13" />
+  <row Id="866" TagName="connectivity" Count="215" ExcerptPostId="130985" WikiPostId="130984" />
+  <row Id="867" TagName="unix" Count="28" />
+  <row Id="870" TagName="ssl" Count="92" ExcerptPostId="31750" WikiPostId="31749" />
+  <row Id="872" TagName="row" Count="36" />
+  <row Id="873" TagName="record" Count="14" />
+  <row Id="874" TagName="database-maintenance" Count="43" ExcerptPostId="33793" WikiPostId="33792" />
+  <row Id="877" TagName="catalogs" Count="27" />
+  <row Id="878" TagName="postgresql-8.4" Count="48" ExcerptPostId="62696" WikiPostId="62695" />
+  <row Id="881" TagName="upsert" Count="41" ExcerptPostId="33344" WikiPostId="33343" />
+  <row Id="882" TagName="xquery" Count="23" />
+  <row Id="886" TagName="system-tables" Count="45" ExcerptPostId="33989" WikiPostId="33988" />
+  <row Id="887" TagName="pgbouncer" Count="30" />
+  <row Id="889" TagName="output-clause" Count="7" />
+  <row Id="890" TagName="active-directory" Count="81" ExcerptPostId="57023" WikiPostId="57022" />
+  <row Id="891" TagName="ssdt" Count="93" ExcerptPostId="50106" WikiPostId="50105" />
+  <row Id="892" TagName="visual-studio-2012" Count="22" />
+  <row Id="895" TagName="datetime" Count="209" ExcerptPostId="115273" WikiPostId="115272" />
+  <row Id="899" TagName="disaster-recovery" Count="100" ExcerptPostId="155081" WikiPostId="155080" />
+  <row Id="900" TagName="ssrs-2008-r2" Count="38" ExcerptPostId="167025" WikiPostId="167024" />
+  <row Id="901" TagName="load-balancing" Count="33" />
+  <row Id="902" TagName="nolock" Count="18" ExcerptPostId="34916" WikiPostId="34915" />
+  <row Id="903" TagName="dblink" Count="42" ExcerptPostId="140526" WikiPostId="140525" />
+  <row Id="905" TagName="error-log" Count="43" />
+  <row Id="906" TagName="dbcc-checkdb" Count="86" ExcerptPostId="35600" WikiPostId="35599" />
+  <row Id="908" TagName="mysql-5.6" Count="673" ExcerptPostId="41644" WikiPostId="41643" />
+  <row Id="909" TagName="system-databases" Count="18" />
+  <row Id="911" TagName="mysqld" Count="36" ExcerptPostId="38819" WikiPostId="38818" />
+  <row Id="912" TagName="mysqld-safe" Count="7" ExcerptPostId="36105" WikiPostId="36104" />
+  <row Id="913" TagName="startup" Count="52" />
+  <row Id="915" TagName="tempdb-version-store" Count="8" ExcerptPostId="38704" WikiPostId="38703" />
+  <row Id="917" TagName="greenplum" Count="29" ExcerptPostId="161613" WikiPostId="161612" />
+  <row Id="918" TagName="maxdop" Count="20" ExcerptPostId="38699" WikiPostId="38698" />
+  <row Id="919" TagName="crystal-reports" Count="8" />
+  <row Id="920" TagName="fields" Count="21" />
+  <row Id="922" TagName="mysqlbinlog" Count="51" ExcerptPostId="41251" WikiPostId="41250" />
+  <row Id="924" TagName="sql-server-7" Count="5" ExcerptPostId="38821" WikiPostId="38820" />
+  <row Id="929" TagName="dimensional-modeling" Count="44" />
+  <row Id="930" TagName="composite-types" Count="24" />
+  <row Id="931" TagName="plpython" Count="11" ExcerptPostId="39448" WikiPostId="39447" />
+  <row Id="932" TagName="fast-refresh" Count="4" />
+  <row Id="933" TagName="exclusion-constraint" Count="12" />
+  <row Id="934" TagName="gist-index" Count="15" />
+  <row Id="935" TagName="memcached" Count="13" ExcerptPostId="39917" WikiPostId="39916" />
+  <row Id="937" TagName="gin-index" Count="7" />
+  <row Id="939" TagName="cryptography" Count="6" />
+  <row Id="942" TagName="maintenance-plans" Count="85" ExcerptPostId="155085" WikiPostId="155084" />
+  <row Id="943" TagName="number-formatting" Count="20" ExcerptPostId="39446" WikiPostId="39445" />
+  <row Id="945" TagName="mysqlslap" Count="5" />
+  <row Id="949" TagName="pentaho" Count="20" ExcerptPostId="168826" WikiPostId="168825" />
+  <row Id="951" TagName="integration" Count="12" />
+  <row Id="954" TagName="drupal" Count="16" />
+  <row Id="955" TagName="paging" Count="26" ExcerptPostId="156272" WikiPostId="156271" />
+  <row Id="958" TagName="sap" Count="16" />
+  <row Id="961" TagName="windows-8" Count="20" />
+  <row Id="966" TagName="erwin" Count="10" />
+  <row Id="968" TagName="semi-sync-replication" Count="6" ExcerptPostId="62254" WikiPostId="62253" />
+  <row Id="969" TagName="oracle-apex" Count="28" ExcerptPostId="105818" WikiPostId="105817" />
+  <row Id="970" TagName="tokudb" Count="37" />
+  <row Id="971" TagName="decimal" Count="12" />
+  <row Id="973" TagName="connection-pooling" Count="36" />
+  <row Id="974" TagName="neo4j" Count="16" ExcerptPostId="63209" WikiPostId="63208" />
+  <row Id="976" TagName="nls" Count="11" />
+  <row Id="977" TagName="data-synchronization" Count="126" />
+  <row Id="980" TagName="sybase-sql-anywhere" Count="47" />
+  <row Id="982" TagName="setup" Count="9" />
+  <row Id="986" TagName="oracle-enterprise-manager" Count="46" ExcerptPostId="62465" WikiPostId="62464" />
+  <row Id="987" TagName="database-tuning-advisor" Count="10" ExcerptPostId="171591" WikiPostId="171590" />
+  <row Id="990" TagName="exadata" Count="9" ExcerptPostId="43719" WikiPostId="43718" />
+  <row Id="996" TagName="postgres-xc" Count="3" ExcerptPostId="43563" WikiPostId="43562" />
+  <row Id="998" TagName="maatkit" Count="3" ExcerptPostId="43715" WikiPostId="43714" />
+  <row Id="1001" TagName="ssrs-2012" Count="41" ExcerptPostId="167023" WikiPostId="167022" />
+  <row Id="1002" TagName="filetable" Count="15" />
+  <row Id="1005" TagName="postgresql-performance" Count="302" ExcerptPostId="82444" WikiPostId="82443" />
+  <row Id="1006" TagName="database-denormalization" Count="61" ExcerptPostId="97838" WikiPostId="97837" />
+  <row Id="1007" TagName="inheritance" Count="48" ExcerptPostId="166532" WikiPostId="166531" />
+  <row Id="1012" TagName="enum" Count="15" />
+  <row Id="1016" TagName="fusion-io" Count="2" ExcerptPostId="44924" WikiPostId="44923" />
+  <row Id="1017" TagName="design-pattern" Count="41" />
+  <row Id="1019" TagName="mysql-4" Count="4" ExcerptPostId="115494" WikiPostId="115493" />
+  <row Id="1020" TagName="tungsten-replicator" Count="7" />
+  <row Id="1021" TagName="oracle-8i" Count="4" ExcerptPostId="115488" WikiPostId="115487" />
+  <row Id="1024" TagName="string" Count="48" />
+  <row Id="1027" TagName="trace" Count="58" />
+  <row Id="1029" TagName="snapshot-isolation" Count="27" />
+  <row Id="1031" TagName="polymorphic-associations" Count="13" />
+  <row Id="1032" TagName="berkeley-db" Count="5" ExcerptPostId="86329" WikiPostId="86328" />
+  <row Id="1034" TagName="varbinary" Count="22" />
+  <row Id="1035" TagName="alter-database" Count="16" />
+  <row Id="1037" TagName="password" Count="79" />
+  <row Id="1038" TagName="dbms" Count="38" ExcerptPostId="48334" WikiPostId="48333" />
+  <row Id="1039" TagName="mongo-repair" Count="21" />
+  <row Id="1040" TagName="sybasease" Count="35" ExcerptPostId="50013" WikiPostId="50012" />
+  <row Id="1041" TagName="dax" Count="5" ExcerptPostId="47319" WikiPostId="47318" />
+  <row Id="1042" TagName="tabular-model" Count="24" ExcerptPostId="47809" WikiPostId="47808" />
+  <row Id="1045" TagName="timesten" Count="5" ExcerptPostId="133153" WikiPostId="133152" />
+  <row Id="1047" TagName="in-memory-database" Count="25" />
+  <row Id="1048" TagName="integer" Count="10" ExcerptPostId="118040" WikiPostId="118039" />
+  <row Id="1049" TagName="dynamic-ports" Count="5" />
+  <row Id="1050" TagName="tcpip" Count="23" />
+  <row Id="1051" TagName="archive" Count="61" />
+  <row Id="1055" TagName="sql-server-pdw" Count="5" ExcerptPostId="103596" WikiPostId="103595" />
+  <row Id="1058" TagName="format" Count="22" />
+  <row Id="1061" TagName="vldb" Count="13" />
+  <row Id="1064" TagName="openrowset" Count="29" />
+  <row Id="1066" TagName="hstore" Count="27" ExcerptPostId="86001" WikiPostId="86000" />
+  <row Id="1069" TagName="standby" Count="46" />
+  <row Id="1072" TagName="auto-growth" Count="24" />
+  <row Id="1073" TagName="oracle-12c" Count="416" ExcerptPostId="105000" WikiPostId="104999" />
+  <row Id="1078" TagName="xbase" Count="2" />
+  <row Id="1079" TagName="ssrs-2005" Count="4" />
+  <row Id="1080" TagName="event" Count="18" />
+  <row Id="1083" TagName="nhibernate" Count="9" />
+  <row Id="1084" TagName="ssis-2012" Count="113" ExcerptPostId="50922" WikiPostId="50921" />
+  <row Id="1086" TagName="data-tier-application" Count="9" />
+  <row Id="1087" TagName="concat" Count="35" ExcerptPostId="50466" WikiPostId="50465" />
+  <row Id="1088" TagName="query-cache" Count="37" />
+  <row Id="1089" TagName="database-diagrams" Count="68" />
+  <row Id="1094" TagName="postgresql-9.3" Count="538" ExcerptPostId="62694" WikiPostId="62693" />
+  <row Id="1095" TagName="natural-key" Count="5" ExcerptPostId="50917" WikiPostId="50916" />
+  <row Id="1102" TagName="kill" Count="10" />
+  <row Id="1103" TagName="date" Count="126" ExcerptPostId="177765" WikiPostId="177764" />
+  <row Id="1104" TagName="time" Count="52" />
+  <row Id="1105" TagName="datetime2" Count="7" />
+  <row Id="1108" TagName="plan-cache" Count="53" />
+  <row Id="1109" TagName="resource-governor" Count="18" />
+  <row Id="1110" TagName="json" Count="186" ExcerptPostId="155005" WikiPostId="155004" />
+  <row Id="1111" TagName="greatest-n-per-group" Count="144" ExcerptPostId="111758" WikiPostId="111757" />
+  <row Id="1112" TagName="environment-variables" Count="8" />
+  <row Id="1113" TagName="sharding" Count="162" ExcerptPostId="76297" WikiPostId="76296" />
+  <row Id="1116" TagName="db2-9.5" Count="6" />
+  <row Id="1117" TagName="quoted-identifier" Count="4" />
+  <row Id="1123" TagName="pgadmin-1.18" Count="5" />
+  <row Id="1124" TagName="ssis-expressions" Count="10" />
+  <row Id="1125" TagName="rails" Count="34" ExcerptPostId="126051" WikiPostId="126050" />
+  <row Id="1129" TagName="generalization" Count="4" />
+  <row Id="1130" TagName="table" Count="282" ExcerptPostId="57221" WikiPostId="57220" />
+  <row Id="1133" TagName="pg-dump" Count="90" />
+  <row Id="1135" TagName="unpivot" Count="23" />
+  <row Id="1138" TagName="windows-server-2003" Count="9" />
+  <row Id="1141" TagName="ibm-tsm" Count="3" ExcerptPostId="54929" WikiPostId="54928" />
+  <row Id="1142" TagName="amazon-ec2" Count="83" ExcerptPostId="115609" WikiPostId="115608" />
+  <row Id="1143" TagName="dbms-redefinition" Count="8" />
+  <row Id="1144" TagName="blocking" Count="83" ExcerptPostId="75063" WikiPostId="75062" />
+  <row Id="1145" TagName="plsql-developer" Count="22" ExcerptPostId="125696" WikiPostId="125695" />
+  <row Id="1146" TagName="ms-access-2007" Count="18" />
+  <row Id="1149" TagName="solaris" Count="16" />
+  <row Id="1150" TagName="redis" Count="29" ExcerptPostId="58112" WikiPostId="58111" />
+  <row Id="1153" TagName="sql-server-2014" Count="1711" ExcerptPostId="64911" WikiPostId="64910" />
+  <row Id="1156" TagName="vba" Count="28" />
+  <row Id="1163" TagName="raiserror" Count="15" />
+  <row Id="1164" TagName="interbase" Count="3" />
+  <row Id="1165" TagName="mondrian" Count="2" />
+  <row Id="1166" TagName="ssd" Count="29" />
+  <row Id="1167" TagName="check-constraints" Count="49" />
+  <row Id="1168" TagName="windows-server-2008-r2" Count="72" />
+  <row Id="1169" TagName="data-loss" Count="7" />
+  <row Id="1170" TagName="derived-tables" Count="8" />
+  <row Id="1171" TagName="copy" Count="53" ExcerptPostId="118042" WikiPostId="118041" />
+  <row Id="1173" TagName="smallsql" Count="1" ExcerptPostId="59332" WikiPostId="59331" />
+  <row Id="1175" TagName="sum" Count="61" />
+  <row Id="1176" TagName="recursive" Count="89" />
+  <row Id="1178" TagName="query-optimization" Count="91" ExcerptPostId="88999" WikiPostId="88998" />
+  <row Id="1182" TagName="redshift" Count="75" ExcerptPostId="62688" WikiPostId="62687" />
+  <row Id="1183" TagName="alt-linux" Count="1" ExcerptPostId="61298" WikiPostId="61297" />
+  <row Id="1185" TagName="master-data-services" Count="8" />
+  <row Id="1186" TagName="sybaseiq" Count="16" ExcerptPostId="131511" WikiPostId="131510" />
+  <row Id="1187" TagName="osx" Count="13" />
+  <row Id="1189" TagName="multi-master" Count="58" ExcerptPostId="62429" WikiPostId="62428" />
+  <row Id="1190" TagName="splitting" Count="10" />
+  <row Id="1192" TagName="synonyms" Count="22" />
+  <row Id="1193" TagName="visual-studio-2013" Count="23" />
+  <row Id="1194" TagName="database-projects" Count="16" />
+  <row Id="1195" TagName="extended-stored-procedure" Count="6" />
+  <row Id="1196" TagName="galera" Count="139" ExcerptPostId="63222" WikiPostId="63221" />
+  <row Id="1197" TagName="set-returning-functions" Count="28" ExcerptPostId="65935" WikiPostId="65934" />
+  <row Id="1199" TagName="nearest-neighbor" Count="9" />
+  <row Id="1201" TagName="operator" Count="23" />
+  <row Id="1202" TagName="foreign-data" Count="11" />
+  <row Id="1204" TagName="aerospike" Count="3" ExcerptPostId="64793" WikiPostId="64792" />
+  <row Id="1205" TagName="standard-edition" Count="22" />
+  <row Id="1206" TagName="couchbase" Count="19" ExcerptPostId="64531" WikiPostId="64530" />
+  <row Id="1208" TagName="connections" Count="110" ExcerptPostId="130987" WikiPostId="130986" />
+  <row Id="1211" TagName="advantage" Count="4" ExcerptPostId="65024" WikiPostId="65023" />
+  <row Id="1216" TagName="checksum" Count="8" />
+  <row Id="1217" TagName="code" Count="5" />
+  <row Id="1218" TagName="read-only-database" Count="25" />
+  <row Id="1219" TagName="mysqltuner" Count="21" />
+  <row Id="1220" TagName="undefined-relations" Count="3" />
+  <row Id="1226" TagName="dynamodb" Count="23" ExcerptPostId="66825" WikiPostId="66824" />
+  <row Id="1229" TagName="rank" Count="33" />
+  <row Id="1230" TagName="like" Count="33" />
+  <row Id="1232" TagName="debian" Count="44" />
+  <row Id="1233" TagName="mysql-fabric" Count="6" />
+  <row Id="1234" TagName="tokumx" Count="3" />
+  <row Id="1235" TagName="isnull" Count="7" />
+  <row Id="1236" TagName="coalesce" Count="17" />
+  <row Id="1237" TagName="percona-toolkit" Count="22" />
+  <row Id="1238" TagName="pt-table-checksum" Count="10" />
+  <row Id="1241" TagName="postgresql-fdw" Count="12" ExcerptPostId="70103" WikiPostId="70102" />
+  <row Id="1246" TagName="temporary-tables" Count="32" />
+  <row Id="1247" TagName="exists" Count="22" />
+  <row Id="1250" TagName="schema-copy" Count="6" ExcerptPostId="71771" WikiPostId="71770" />
+  <row Id="1252" TagName="centos" Count="77" ExcerptPostId="125699" WikiPostId="125698" />
+  <row Id="1255" TagName="overlapping" Count="4" />
+  <row Id="1257" TagName="timeout" Count="27" />
+  <row Id="1259" TagName="cron" Count="14" />
+  <row Id="1263" TagName="subtypes" Count="59" ExcerptPostId="72779" WikiPostId="72778" />
+  <row Id="1266" TagName="db2-9.7" Count="13" />
+  <row Id="1267" TagName="bucardo" Count="2" ExcerptPostId="106148" WikiPostId="106147" />
+  <row Id="1268" TagName="ssma" Count="12" ExcerptPostId="73274" WikiPostId="73273" />
+  <row Id="1270" TagName="postgresql-domain" Count="4" ExcerptPostId="73644" WikiPostId="73643" />
+  <row Id="1271" TagName="ms-access-2010" Count="46" />
+  <row Id="1274" TagName="range-types" Count="25" />
+  <row Id="1277" TagName="datadir" Count="7" ExcerptPostId="76865" WikiPostId="76864" />
+  <row Id="1283" TagName="regex" Count="28" ExcerptPostId="76863" WikiPostId="76862" />
+  <row Id="1284" TagName="infosphere-data-architect" Count="1" ExcerptPostId="75251" WikiPostId="75250" />
+  <row Id="1285" TagName="memory-optimized-tables" Count="35" ExcerptPostId="76861" WikiPostId="76860" />
+  <row Id="1286" TagName="substring" Count="22" ExcerptPostId="76858" WikiPostId="76857" />
+  <row Id="1288" TagName="sql-server-core" Count="5" ExcerptPostId="76850" WikiPostId="76849" />
+  <row Id="1289" TagName="ibm-netezza-administrator" Count="2" ExcerptPostId="76847" WikiPostId="76846" />
+  <row Id="1293" TagName="centos-7" Count="17" />
+  <row Id="1296" TagName="string-representation" Count="7" ExcerptPostId="77275" WikiPostId="77274" />
+  <row Id="1297" TagName="dtexec" Count="2" ExcerptPostId="78500" WikiPostId="78499" />
+  <row Id="1298" TagName="outer-join" Count="45" ExcerptPostId="78505" WikiPostId="78504" />
+  <row Id="1308" TagName="postgresql-9.4" Count="418" ExcerptPostId="78890" WikiPostId="78889" />
+  <row Id="1310" TagName="wal" Count="32" ExcerptPostId="80280" WikiPostId="80279" />
+  <row Id="1311" TagName="consistency" Count="13" />
+  <row Id="1317" TagName="data-validation" Count="19" ExcerptPostId="119613" WikiPostId="119612" />
+  <row Id="1319" TagName="hashing" Count="23" />
+  <row Id="1320" TagName="pg-basebackup" Count="13" />
+  <row Id="1321" TagName="pg-hba.conf" Count="14" />
+  <row Id="1324" TagName="odp.net" Count="5" ExcerptPostId="81474" WikiPostId="81473" />
+  <row Id="1325" TagName="many-to-many" Count="57" ExcerptPostId="155071" WikiPostId="155070" />
+  <row Id="1326" TagName="keyboard-shortcuts" Count="8" />
+  <row Id="1327" TagName="hsqldb" Count="6" />
+  <row Id="1328" TagName="unique-constraint" Count="40" />
+  <row Id="1329" TagName="unique-index" Count="13" />
+  <row Id="1330" TagName="temporal-tables" Count="24" />
+  <row Id="1333" TagName="barman" Count="10" ExcerptPostId="83057" WikiPostId="83056" />
+  <row Id="1334" TagName="files" Count="13" />
+  <row Id="1338" TagName="service-accounts" Count="29" />
+  <row Id="1339" TagName="hibernate" Count="25" />
+  <row Id="1344" TagName="drop-table" Count="18" />
+  <row Id="1345" TagName="raid" Count="19" />
+  <row Id="1346" TagName="csv" Count="49" />
+  <row Id="1350" TagName="elasticsearch" Count="18" ExcerptPostId="124405" WikiPostId="124404" />
+  <row Id="1351" TagName="cascade" Count="26" />
+  <row Id="1354" TagName="running-totals" Count="21" />
+  <row Id="1356" TagName="unicode" Count="45" />
+  <row Id="1360" TagName="ssis-2014" Count="49" ExcerptPostId="167010" WikiPostId="167009" />
+  <row Id="1366" TagName="ssrs-2014" Count="20" ExcerptPostId="167029" WikiPostId="167028" />
+  <row Id="1368" TagName="multi-server-admin" Count="2" ExcerptPostId="91117" WikiPostId="91116" />
+  <row Id="1378" TagName="natural-sort" Count="7" ExcerptPostId="94529" WikiPostId="94528" />
+  <row Id="1379" TagName="postgresql-bdr" Count="12" ExcerptPostId="94654" WikiPostId="94653" />
+  <row Id="1381" TagName="vpd" Count="7" ExcerptPostId="95065" WikiPostId="95064" />
+  <row Id="1384" TagName="proxy" Count="11" />
+  <row Id="1385" TagName="distinct" Count="46" />
+  <row Id="1386" TagName="mysql-upgrade" Count="19" />
+  <row Id="1388" TagName="mongodb-3.0" Count="99" ExcerptPostId="96919" WikiPostId="96918" />
+  <row Id="1389" TagName="gtid" Count="12" ExcerptPostId="97231" WikiPostId="97230" />
+  <row Id="1390" TagName="solr" Count="9" ExcerptPostId="102261" WikiPostId="102260" />
+  <row Id="1392" TagName="webscalesql" Count="2" ExcerptPostId="97826" WikiPostId="97825" />
+  <row Id="1393" TagName="batch-mode" Count="7" />
+  <row Id="1394" TagName="mysql-3" Count="3" ExcerptPostId="115496" WikiPostId="115495" />
+  <row Id="1395" TagName="dbms-datapump" Count="3" />
+  <row Id="1397" TagName="haproxy" Count="8" />
+  <row Id="1399" TagName="nuodb" Count="2" ExcerptPostId="100586" WikiPostId="100585" />
+  <row Id="1404" TagName="ms-query" Count="2" />
+  <row Id="1406" TagName="wordpress" Count="37" ExcerptPostId="103083" WikiPostId="103082" />
+  <row Id="1409" TagName="localization" Count="11" />
+  <row Id="1413" TagName="pgagent" Count="12" ExcerptPostId="102799" WikiPostId="102798" />
+  <row Id="1415" TagName="sql-server-2016" Count="639" ExcerptPostId="104589" WikiPostId="104588" />
+  <row Id="1418" TagName="data-cleansing" Count="4" ExcerptPostId="102952" WikiPostId="102951" />
+  <row Id="1419" TagName="mysql-mha" Count="2" ExcerptPostId="103085" WikiPostId="103084" />
+  <row Id="1421" TagName="mysql-event" Count="12" ExcerptPostId="106146" WikiPostId="106145" />
+  <row Id="1423" TagName="contained-database" Count="6" />
+  <row Id="1424" TagName="cartodb" Count="1" ExcerptPostId="105749" WikiPostId="105748" />
+  <row Id="1427" TagName="enterprise-edition" Count="14" ExcerptPostId="106139" WikiPostId="106138" />
+  <row Id="1428" TagName="downgrade" Count="7" ExcerptPostId="106270" WikiPostId="106269" />
+  <row Id="1435" TagName="sco-unix" Count="1" ExcerptPostId="105557" WikiPostId="105556" />
+  <row Id="1436" TagName="ldap" Count="7" ExcerptPostId="105553" WikiPostId="105552" />
+  <row Id="1438" TagName="geometry" Count="20" ExcerptPostId="106272" WikiPostId="106271" />
+  <row Id="1439" TagName="srid" Count="1" ExcerptPostId="105555" WikiPostId="105554" />
+  <row Id="1440" TagName="user-defined-table-type" Count="9" />
+  <row Id="1443" TagName="ms-access-365" Count="4" />
+  <row Id="1444" TagName="number-table" Count="4" />
+  <row Id="1446" TagName="logparser" Count="2" ExcerptPostId="105734" WikiPostId="105733" />
+  <row Id="1448" TagName="automation" Count="17" ExcerptPostId="106109" WikiPostId="106108" />
+  <row Id="1453" TagName="dbms-resource-manager" Count="1" ExcerptPostId="106707" WikiPostId="106706" />
+  <row Id="1456" TagName="windows-server-2012" Count="68" />
+  <row Id="1461" TagName="max" Count="28" ExcerptPostId="111184" WikiPostId="111183" />
+  <row Id="1462" TagName="multi-thread" Count="13" />
+  <row Id="1463" TagName="spider" Count="1" ExcerptPostId="107687" WikiPostId="107686" />
+  <row Id="1466" TagName="mobilink" Count="8" ExcerptPostId="107996" WikiPostId="107995" />
+  <row Id="1467" TagName="soundex" Count="3" ExcerptPostId="111144" WikiPostId="111143" />
+  <row Id="1471" TagName="sybase-central" Count="9" />
+  <row Id="1472" TagName="table-variable" Count="12" />
+  <row Id="1474" TagName="non-deterministic" Count="1" ExcerptPostId="111182" WikiPostId="111181" />
+  <row Id="1476" TagName="gtt" Count="2" />
+  <row Id="1477" TagName="azure-vm" Count="43" ExcerptPostId="108535" WikiPostId="108534" />
+  <row Id="1478" TagName="l10n" Count="2" ExcerptPostId="111128" WikiPostId="111127" />
+  <row Id="1479" TagName="mlagent" Count="3" />
+  <row Id="1482" TagName="windows-10" Count="27" />
+  <row Id="1483" TagName="latch" Count="6" ExcerptPostId="111214" WikiPostId="111213" />
+  <row Id="1486" TagName="r-language" Count="1" ExcerptPostId="109394" WikiPostId="109393" />
+  <row Id="1492" TagName="sap-hana" Count="5" ExcerptPostId="111174" WikiPostId="111173" />
+  <row Id="1493" TagName="pg-stat-activity" Count="2" ExcerptPostId="111162" WikiPostId="111161" />
+  <row Id="1495" TagName="numa" Count="16" ExcerptPostId="116290" WikiPostId="116289" />
+  <row Id="1499" TagName="my.ini" Count="4" />
+  <row Id="1500" TagName="data-quality-services" Count="5" ExcerptPostId="111643" WikiPostId="111642" />
+  <row Id="1502" TagName="page-life-expectancy" Count="23" ExcerptPostId="116288" WikiPostId="116287" />
+  <row Id="1503" TagName="savepoint" Count="3" ExcerptPostId="116375" WikiPostId="116374" />
+  <row Id="1504" TagName="mysql-5.7" Count="225" ExcerptPostId="112636" WikiPostId="112635" />
+  <row Id="1508" TagName="computed-column" Count="40" ExcerptPostId="116286" WikiPostId="116285" />
+  <row Id="1512" TagName="bitwise-comparison" Count="6" ExcerptPostId="116284" WikiPostId="116283" />
+  <row Id="1513" TagName="join-conditions" Count="9" />
+  <row Id="1514" TagName="where" Count="53" ExcerptPostId="116205" WikiPostId="116204" />
+  <row Id="1516" TagName="full-outer-join" Count="14" />
+  <row Id="1518" TagName="acl" Count="1" ExcerptPostId="116200" WikiPostId="116199" />
+  <row Id="1519" TagName="dbms-network-acl-admin" Count="1" ExcerptPostId="116203" WikiPostId="116202" />
+  <row Id="1521" TagName="postgresql-9.5" Count="186" ExcerptPostId="139170" WikiPostId="139169" />
+  <row Id="1525" TagName="visual-foxpro" Count="9" ExcerptPostId="116775" WikiPostId="116774" />
+  <row Id="1527" TagName="compatibility-level" Count="43" ExcerptPostId="117617" WikiPostId="117616" />
+  <row Id="1528" TagName="db2-midrange" Count="4" ExcerptPostId="118363" WikiPostId="118362" />
+  <row Id="1532" TagName="ingres" Count="3" ExcerptPostId="118999" WikiPostId="118998" />
+  <row Id="1533" TagName="navicat" Count="7" />
+  <row Id="1534" TagName="uuid" Count="32" />
+  <row Id="1535" TagName="dpm" Count="3" ExcerptPostId="120615" WikiPostId="120614" />
+  <row Id="1538" TagName="signature" Count="13" ExcerptPostId="158737" WikiPostId="158736" />
+  <row Id="1539" TagName="certificate" Count="28" ExcerptPostId="158739" WikiPostId="158738" />
+  <row Id="1541" TagName="postgresql-8.1" Count="4" ExcerptPostId="120358" WikiPostId="120357" />
+  <row Id="1544" TagName="sybase-ase-15.7" Count="11" />
+  <row Id="1546" TagName="windows-server-core" Count="2" ExcerptPostId="120120" WikiPostId="120119" />
+  <row Id="1547" TagName="tnsnames" Count="16" />
+  <row Id="1548" TagName="autovacuum" Count="21" />
+  <row Id="1553" TagName="logging" Count="22" />
+  <row Id="1554" TagName="pg-restore" Count="26" />
+  <row Id="1557" TagName="sql-server-localdb" Count="26" ExcerptPostId="120988" WikiPostId="120987" />
+  <row Id="1558" TagName="sqlpsx" Count="1" ExcerptPostId="121116" WikiPostId="121115" />
+  <row Id="1561" TagName="data-masking" Count="4" ExcerptPostId="121724" WikiPostId="121723" />
+  <row Id="1565" TagName="dbcc-checktable" Count="2" ExcerptPostId="125682" WikiPostId="125681" />
+  <row Id="1566" TagName="relations" Count="49" ExcerptPostId="122289" WikiPostId="122288" />
+  <row Id="1571" TagName="hammerdb" Count="1" ExcerptPostId="125684" WikiPostId="125683" />
+  <row Id="1572" TagName="load-testing" Count="6" />
+  <row Id="1574" TagName="azure-sql-database-v12" Count="27" ExcerptPostId="123099" WikiPostId="123098" />
+  <row Id="1575" TagName="azure-sql-database-v11" Count="2" ExcerptPostId="123101" WikiPostId="123100" />
+  <row Id="1576" TagName="table-valued-functions" Count="17" ExcerptPostId="125679" WikiPostId="125678" />
+  <row Id="1580" TagName="anemometer" Count="2" ExcerptPostId="123223" WikiPostId="123222" />
+  <row Id="1582" TagName="clojure" Count="1" ExcerptPostId="126020" WikiPostId="126019" />
+  <row Id="1583" TagName="ibm-data-studio" Count="4" ExcerptPostId="163051" WikiPostId="163050" />
+  <row Id="1584" TagName="sysdba" Count="15" ExcerptPostId="125677" WikiPostId="125676" />
+  <row Id="1590" TagName="unaccent" Count="7" />
+  <row Id="1593" TagName="ibm-bluemix" Count="1" ExcerptPostId="125671" WikiPostId="125670" />
+  <row Id="1596" TagName="azure-blob-storage" Count="15" ExcerptPostId="125263" WikiPostId="125262" />
+  <row Id="1597" TagName="wiredtiger" Count="14" ExcerptPostId="125667" WikiPostId="125666" />
+  <row Id="1604" TagName="sp-blitzindex" Count="19" ExcerptPostId="125637" WikiPostId="125636" />
+  <row Id="1605" TagName="sp-blitz" Count="26" ExcerptPostId="125635" WikiPostId="125634" />
+  <row Id="1606" TagName="microsoft-mds" Count="8" ExcerptPostId="125665" WikiPostId="125664" />
+  <row Id="1607" TagName="db2-10.5" Count="25" ExcerptPostId="125669" WikiPostId="125668" />
+  <row Id="1608" TagName="sqlnet" Count="3" ExcerptPostId="126018" WikiPostId="126017" />
+  <row Id="1612" TagName="xp-cmdshell" Count="18" ExcerptPostId="129388" WikiPostId="129387" />
+  <row Id="1615" TagName="patching" Count="24" />
+  <row Id="1619" TagName="table-valued-parameters" Count="14" ExcerptPostId="127342" WikiPostId="127341" />
+  <row Id="1620" TagName="datagrip" Count="5" ExcerptPostId="142815" WikiPostId="142814" />
+  <row Id="1621" TagName="recovery-model" Count="13" ExcerptPostId="127739" WikiPostId="127738" />
+  <row Id="1624" TagName="wsrep" Count="4" />
+  <row Id="1626" TagName="federated-table" Count="6" />
+  <row Id="1628" TagName="visual-studio-2015" Count="20" />
+  <row Id="1629" TagName="firebase" Count="3" />
+  <row Id="1631" TagName="sp-askbrent" Count="5" ExcerptPostId="128409" WikiPostId="128408" />
+  <row Id="1632" TagName="phppgadmin" Count="5" />
+  <row Id="1634" TagName="vss" Count="7" />
+  <row Id="1637" TagName="ssdt-bi" Count="3" />
+  <row Id="1638" TagName="top" Count="13" ExcerptPostId="129158" WikiPostId="129157" />
+  <row Id="1642" TagName="mvcc" Count="11" />
+  <row Id="1645" TagName="offline" Count="6" ExcerptPostId="129434" WikiPostId="129433" />
+  <row Id="1649" TagName="daas" Count="2" ExcerptPostId="130215" WikiPostId="130214" />
+  <row Id="1651" TagName="r" Count="25" ExcerptPostId="130581" WikiPostId="130580" />
+  <row Id="1653" TagName="scan" Count="5" />
+  <row Id="1654" TagName="maxscale" Count="3" />
+  <row Id="1655" TagName="ola-hallengren" Count="40" ExcerptPostId="131317" WikiPostId="131316" />
+  <row Id="1661" TagName="aurora" Count="9" />
+  <row Id="1664" TagName="distributed-replay" Count="1" ExcerptPostId="132574" WikiPostId="132573" />
+  <row Id="1671" TagName="db2-luw" Count="69" ExcerptPostId="132976" WikiPostId="132975" />
+  <row Id="1674" TagName="xsd" Count="5" />
+  <row Id="1675" TagName="mongodb-3.2" Count="80" ExcerptPostId="181683" WikiPostId="181682" />
+  <row Id="1676" TagName="always-encrypted" Count="15" ExcerptPostId="158731" WikiPostId="158730" />
+  <row Id="1677" TagName="ssrs-2016" Count="25" ExcerptPostId="167027" WikiPostId="167026" />
+  <row Id="1678" TagName="ms-access-2016" Count="8" />
+  <row Id="1679" TagName="deprecation" Count="2" ExcerptPostId="134434" WikiPostId="134433" />
+  <row Id="1682" TagName="truncation" Count="4" />
+  <row Id="1683" TagName="waits" Count="26" />
+  <row Id="1691" TagName="django" Count="16" />
+  <row Id="1693" TagName="postgresql-7.3" Count="1" ExcerptPostId="154136" WikiPostId="154135" />
+  <row Id="1697" TagName="magento" Count="4" />
+  <row Id="1699" TagName="index-maintenance" Count="31" ExcerptPostId="138307" WikiPostId="138306" />
+  <row Id="1700" TagName="mdw" Count="13" ExcerptPostId="138418" WikiPostId="138417" />
+  <row Id="1701" TagName="bulk-insert" Count="109" />
+  <row Id="1702" TagName="online-operations" Count="9" ExcerptPostId="138425" WikiPostId="138424" />
+  <row Id="1707" TagName="index-design" Count="5" />
+  <row Id="1709" TagName="tls-1.2" Count="6" ExcerptPostId="139662" WikiPostId="139661" />
+  <row Id="1710" TagName="trace-flags" Count="12" ExcerptPostId="139673" WikiPostId="139672" />
+  <row Id="1711" TagName="ssh" Count="8" />
+  <row Id="1713" TagName="windows-server-2012-r2" Count="24" />
+  <row Id="1714" TagName="impala" Count="3" />
+  <row Id="1725" TagName="trim" Count="3" />
+  <row Id="1727" TagName="convert" Count="15" />
+  <row Id="1728" TagName="report-builder" Count="4" />
+  <row Id="1730" TagName="google-cloud-platform" Count="2" />
+  <row Id="1733" TagName="mariadb-10.1" Count="45" />
+  <row Id="1734" TagName="delphi" Count="2" />
+  <row Id="1736" TagName="mobile-reports" Count="2" />
+  <row Id="1739" TagName="sqldump" Count="3" />
+  <row Id="1741" TagName="sp-blitzfirst" Count="15" ExcerptPostId="146640" WikiPostId="146639" />
+  <row Id="1742" TagName="encryption-key" Count="5" />
+  <row Id="1743" TagName="ms-access-2013" Count="7" />
+  <row Id="1744" TagName="azure" Count="30" />
+  <row Id="1748" TagName="configuration-manager" Count="8" ExcerptPostId="173737" WikiPostId="173736" />
+  <row Id="1750" TagName="razorsql" Count="2" ExcerptPostId="147406" WikiPostId="147405" />
+  <row Id="1753" TagName="listagg" Count="2" />
+  <row Id="1756" TagName="docker" Count="16" ExcerptPostId="148634" WikiPostId="148633" />
+  <row Id="1757" TagName="containers" Count="2" />
+  <row Id="1758" TagName="dbeaver" Count="10" ExcerptPostId="148714" WikiPostId="148713" />
+  <row Id="1761" TagName="polybase" Count="4" ExcerptPostId="148836" WikiPostId="148835" />
+  <row Id="1766" TagName="external-environment" Count="1" ExcerptPostId="149543" WikiPostId="149542" />
+  <row Id="1767" TagName="user-defined-type" Count="4" ExcerptPostId="149584" WikiPostId="149583" />
+  <row Id="1770" TagName="windows-server-2016" Count="7" />
+  <row Id="1775" TagName="sap-ase-16" Count="2" ExcerptPostId="150096" WikiPostId="150095" />
+  <row Id="1778" TagName="sp-configure" Count="2" ExcerptPostId="154752" WikiPostId="154751" />
+  <row Id="1779" TagName="distributed-queries" Count="4" />
+  <row Id="1780" TagName="postgresql-extensions" Count="27" ExcerptPostId="150874" WikiPostId="150873" />
+  <row Id="1784" TagName="metrics" Count="7" />
+  <row Id="1789" TagName="ghost-cleanup" Count="7" ExcerptPostId="151339" WikiPostId="151338" />
+  <row Id="1790" TagName="integration-services" Count="8" />
+  <row Id="1791" TagName="web-service" Count="9" />
+  <row Id="1792" TagName="ole-automation" Count="5" ExcerptPostId="158533" WikiPostId="158532" />
+  <row Id="1793" TagName="google-bigquery" Count="9" ExcerptPostId="151659" WikiPostId="151658" />
+  <row Id="1797" TagName="google-cloud-sql" Count="8" ExcerptPostId="176908" WikiPostId="176907" />
+  <row Id="1799" TagName="query-store" Count="11" ExcerptPostId="151911" WikiPostId="151910" />
+  <row Id="1800" TagName="cardinality-estimates" Count="44" />
+  <row Id="1801" TagName="r-services" Count="3" ExcerptPostId="154750" WikiPostId="154749" />
+  <row Id="1806" TagName="postgresql-9.6" Count="101" ExcerptPostId="154134" WikiPostId="154133" />
+  <row Id="1807" TagName="sort-operator" Count="4" />
+  <row Id="1808" TagName="buffer-pool" Count="48" />
+  <row Id="1812" TagName="impersonation" Count="6" ExcerptPostId="158723" WikiPostId="158722" />
+  <row Id="1813" TagName="hive" Count="10" ExcerptPostId="153347" WikiPostId="153346" />
+  <row Id="1814" TagName="string-manipulation" Count="12" ExcerptPostId="153854" WikiPostId="153853" />
+  <row Id="1815" TagName="query-syntax" Count="6" />
+  <row Id="1817" TagName="symmetric-ds" Count="1" ExcerptPostId="153975" WikiPostId="153974" />
+  <row Id="1818" TagName="ssas-2016" Count="6" />
+  <row Id="1820" TagName="case-sensitive" Count="20" />
+  <row Id="1825" TagName="protocol" Count="2" />
+  <row Id="1826" TagName="master-slave-replication" Count="56" />
+  <row Id="1827" TagName="master-system-database" Count="11" ExcerptPostId="156346" WikiPostId="156345" />
+  <row Id="1828" TagName="master-master-replication" Count="12" />
+  <row Id="1831" TagName="netbackup" Count="1" ExcerptPostId="156625" WikiPostId="156624" />
+  <row Id="1833" TagName="microsoft-dynamics" Count="18" ExcerptPostId="156652" WikiPostId="156651" />
+  <row Id="1837" TagName="mongodump" Count="5" />
+  <row Id="1840" TagName="plan-guides" Count="8" ExcerptPostId="157626" WikiPostId="157625" />
+  <row Id="1842" TagName="exec" Count="4" />
+  <row Id="1844" TagName="data-dictionary" Count="6" />
+  <row Id="1845" TagName="ctas" Count="11" ExcerptPostId="158636" WikiPostId="158635" />
+  <row Id="1848" TagName="pipelinedb" Count="1" ExcerptPostId="158839" WikiPostId="158838" />
+  <row Id="1849" TagName="azure-sql-data-warehouse" Count="13" ExcerptPostId="158898" WikiPostId="158897" />
+  <row Id="1852" TagName="sp-blitzcache" Count="6" ExcerptPostId="159645" WikiPostId="159644" />
+  <row Id="1854" TagName="row-modification-time" Count="9" ExcerptPostId="159808" WikiPostId="159807" />
+  <row Id="1857" TagName="relational-algebra" Count="9" />
+  <row Id="1858" TagName="db2-zos" Count="7" ExcerptPostId="160458" WikiPostId="160457" />
+  <row Id="1860" TagName="amazon-rds" Count="387" ExcerptPostId="160512" WikiPostId="160511" />
+  <row Id="1863" TagName="geocoding" Count="4" />
+  <row Id="1868" TagName="mongodb-3.4" Count="42" ExcerptPostId="163226" WikiPostId="163225" />
+  <row Id="1869" TagName="influx-db" Count="3" ExcerptPostId="163363" WikiPostId="163362" />
+  <row Id="1870" TagName="time-series-database" Count="6" />
+  <row Id="1871" TagName="interval" Count="8" />
+  <row Id="1873" TagName="gdal" Count="2" />
+  <row Id="1874" TagName="raster" Count="3" />
+  <row Id="1875" TagName="data-vault" Count="2" ExcerptPostId="163928" WikiPostId="163927" />
+  <row Id="1876" TagName="pgrouting" Count="2" />
+  <row Id="1878" TagName="anomaly" Count="1" />
+  <row Id="1879" TagName="proxysql" Count="3" />
+  <row Id="1880" TagName="pgadmin-4" Count="15" ExcerptPostId="168747" WikiPostId="168746" />
+  <row Id="1881" TagName="ttl-index" Count="1" />
+  <row Id="1882" TagName="archive-log" Count="9" />
+  <row Id="1884" TagName="address" Count="10" ExcerptPostId="165947" WikiPostId="165946" />
+  <row Id="1885" TagName="scylladb" Count="1" ExcerptPostId="165937" WikiPostId="165936" />
+  <row Id="1887" TagName="mobile-report-publisher" Count="1" />
+  <row Id="1888" TagName="documentdb" Count="1" />
+  <row Id="1889" TagName="ssis-2016" Count="6" ExcerptPostId="167012" WikiPostId="167011" />
+  <row Id="1892" TagName="comments" Count="6" />
+  <row Id="1893" TagName="ops-manager" Count="6" ExcerptPostId="179559" WikiPostId="179558" />
+  <row Id="1894" TagName="pgadmin-3" Count="9" ExcerptPostId="168745" WikiPostId="168744" />
+  <row Id="1897" TagName="plv8" Count="1" />
+  <row Id="1899" TagName="bsondump" Count="1" />
+  <row Id="1904" TagName="postgres-9.4" Count="3" />
+  <row Id="1905" TagName="sqlalchemy" Count="4" />
+  <row Id="1906" TagName="chart" Count="6" ExcerptPostId="168332" WikiPostId="168331" />
+  <row Id="1907" TagName="filemaker" Count="6" ExcerptPostId="177738" WikiPostId="177737" />
+  <row Id="1909" TagName="bacpac" Count="4" />
+  <row Id="1910" TagName="snappy" Count="1" />
+  <row Id="1911" TagName="mariadb-5.5" Count="1" />
+  <row Id="1913" TagName="oracle-fdw" Count="1" />
+  <row Id="1916" TagName="named-pipes" Count="1" />
+  <row Id="1917" TagName="policy-based-management" Count="2" ExcerptPostId="172400" WikiPostId="172399" />
+  <row Id="1918" TagName="vpn" Count="2" />
+  <row Id="1920" TagName="postgres-xl" Count="4" />
+  <row Id="1922" TagName="powerbi" Count="3" />
+  <row Id="1924" TagName="sp-whoisactive" Count="5" ExcerptPostId="173761" WikiPostId="173760" />
+  <row Id="1925" TagName="probabilistic-databases" Count="1" />
+  <row Id="1926" TagName="sql-server-2017" Count="10" ExcerptPostId="184074" WikiPostId="184073" />
+  <row Id="1927" TagName="azure-data-factory" Count="2" />
+  <row Id="1928" TagName="monetdb" Count="1" />
+  <row Id="1929" TagName="bytea" Count="17" ExcerptPostId="174522" WikiPostId="174521" />
+  <row Id="1930" TagName="dbatools" Count="3" ExcerptPostId="176316" WikiPostId="176315" />
+  <row Id="1931" TagName="attach" Count="2" ExcerptPostId="175263" WikiPostId="175262" />
+  <row Id="1932" TagName="snowflake" Count="1" ExcerptPostId="176010" WikiPostId="176009" />
+  <row Id="1933" TagName="amazon-dms" Count="3" ExcerptPostId="176111" WikiPostId="176110" />
+  <row Id="1934" TagName="dynamic-data-masking" Count="3" />
+  <row Id="1935" TagName="mount-point" Count="2" />
+  <row Id="1936" TagName="azure-key-vault" Count="1" />
+  <row Id="1939" TagName="postgresql-10" Count="5" ExcerptPostId="177772" WikiPostId="177771" />
+  <row Id="1940" TagName="ssis-2008" Count="2" />
+  <row Id="1941" TagName="capacity-planning" Count="1" />
+  <row Id="1942" TagName="hsm" Count="4" ExcerptPostId="180447" WikiPostId="180446" />
+  <row Id="1944" TagName="candidate-key" Count="1" ExcerptPostId="181869" WikiPostId="181868" />
+  <row Id="1947" TagName="oracle-forms" Count="1" ExcerptPostId="181927" WikiPostId="181926" />
+  <row Id="1949" TagName="pg-dumpall" Count="1" />
+  <row Id="1950" TagName="string-searching" Count="6" ExcerptPostId="183141" WikiPostId="183140" />
+  <row Id="1951" TagName="event-trigger" Count="2" ExcerptPostId="183250" WikiPostId="183249" />
+  <row Id="1952" TagName="distributed-availability-groups" Count="1" />
+  <row Id="1953" TagName="bookmark-lookup" Count="7" ExcerptPostId="183337" WikiPostId="183336" />
+  <row Id="1954" TagName="icu" Count="3" ExcerptPostId="183389" WikiPostId="183388" />
+  <row Id="1956" TagName="couchdb-2.1" Count="1" />
+  <row Id="1957" TagName="sql-server-on-linux" Count="1" />
+  <row Id="1958" TagName="cpu" Count="1" />
+</tags>
