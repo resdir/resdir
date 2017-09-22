@@ -16,7 +16,7 @@ function validate(namespace) {
     return false;
   }
 
-  if (namespace.length < 2) {
+  if (namespace.length === 0) {
     return false;
   }
 
