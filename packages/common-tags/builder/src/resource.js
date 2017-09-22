@@ -1,7 +1,8 @@
 import {readFileSync, writeFileSync} from 'fs';
 import {join} from 'path';
 import {promisify} from 'util';
-import {sortBy, union, trim as trimString} from 'lodash';
+import assert from 'assert';
+import {sortBy, union, uniq, trim as trimString} from 'lodash';
 import {parseString as parseXML} from 'xml2js';
 
 const parseXMLAsync = promisify(parseXML);
@@ -55,6 +56,10 @@ export default base =>
         }
 
         for (let tag of tags) {
+          if (tag.endsWith('js') && tag.substr(-3, 1).match(/[a-z0-9]/)) {
+            // 'nodejs' => 'node.js' (later producing 'node-js', 'nodejs', etc.)
+            tag = tag.slice(0, -2) + '.js';
+          }
           const matches = tag.match(/[^a-z0-9-#+.]/);
           if (matches) {
             throw new Error(`Invalid character found in tag '${tag}'`);
@@ -115,6 +120,8 @@ export default base =>
       }
 
       allTags.sort();
+
+      assert(uniq(allTags).length === allTags.length, 'No duplicate tags');
 
       const js = 'module.exports = ' + JSON.stringify(allTags) + ';';
       writeFileSync(join(__dirname, '..', '..', 'data.js'), js);
