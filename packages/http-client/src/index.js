@@ -1,6 +1,7 @@
 import {join} from 'path';
 import {readFileSync, statSync} from 'fs';
 import {tmpdir} from 'os';
+import {pick} from 'lodash';
 import {outputFile} from 'fs-extra';
 import nodeFetch from 'node-fetch';
 import strictUriEncode from 'strict-uri-encode';
@@ -31,6 +32,8 @@ export async function fetch(url, options = {}) {
 
   const method = (options.method && options.method.toUpperCase()) || 'GET';
 
+  let result;
+
   let cacheFile;
 
   if (options.cacheTime) {
@@ -47,75 +50,98 @@ export async function fetch(url, options = {}) {
       /* File is missing */
     }
     if (stats && Date.now() - stats.mtime.getTime() < options.cacheTime) {
-      let result = readFileSync(cacheFile);
-      if (options.json) {
-        result = result.toString();
-        result = JSON.parse(result);
+      result = readFileSync(cacheFile, 'utf8');
+      result = JSON.parse(result);
+      if (result.body) {
+        result.body = new Buffer(result.body.data);
       }
-      return result;
     }
   }
 
-  const finalOptions = {method};
+  if (!result) {
+    const finalOptions = {method};
 
-  const headers = options.headers ? {...options.headers} : {};
+    const headers = options.headers ? {...options.headers} : {};
 
-  if (options.json) {
-    headers.Accept = 'application/json';
-  }
-
-  let body = options.body;
-  if (body !== undefined) {
     if (options.json) {
-      headers['Content-Type'] = 'application/json';
-      body = JSON.stringify(body);
+      headers.Accept = 'application/json';
     }
-    finalOptions.body = body;
+
+    let body = options.body;
+    if (body !== undefined) {
+      if (options.json) {
+        headers['Content-Type'] = 'application/json';
+        body = JSON.stringify(body);
+      }
+      finalOptions.body = body;
+    }
+
+    if (options.authorization) {
+      headers.Authorization = options.authorization;
+    }
+
+    const timeout = options.timeout;
+    if (timeout !== undefined) {
+      finalOptions.timeout = timeout;
+    }
+
+    finalOptions.headers = headers;
+
+    const response = await nodeFetch(url, finalOptions);
+
+    result = {status: response.status};
+
+    if (response.status !== 204) {
+      result.body = await response.buffer();
+      // if (options.json) {
+      //   result.body = await response.json();
+      // } else {
+      //   result.body = await response.buffer();
+      // }
+    }
+
+    // TODO: Use a standard way to get headers
+    result.headers = response.headers._headers;
+    if (!result.headers) {
+      // We are probably in a browser
+      throw new Error('Can\'t get response headers');
+    }
+    for (const key of Object.keys(result.headers)) {
+      result.headers[key] = result.headers[key].join(',');
+    }
+
+    if (cacheFile) {
+      const data = JSON.stringify(result);
+      await outputFile(cacheFile, data);
+    }
   }
-
-  if (options.authorization) {
-    headers.Authorization = options.authorization;
-  }
-
-  const timeout = options.timeout;
-  if (timeout !== undefined) {
-    finalOptions.timeout = timeout;
-  }
-
-  finalOptions.headers = headers;
-
-  const response = await nodeFetch(url, finalOptions);
 
   let expectedStatus = options.expectedStatus;
   if (expectedStatus) {
     if (!Array.isArray(expectedStatus)) {
       expectedStatus = [expectedStatus];
     }
-    if (!expectedStatus.includes(response.status)) {
-      const error = new Error(`Unexpected ${response.status} HTTP status`);
-      error.httpStatus = response.status;
+    if (!expectedStatus.includes(result.status)) {
+      const error = new Error(`Unexpected ${result.status} HTTP status`);
+      error.httpStatus = result.status;
       throw error;
     }
   }
 
-  let result;
-
-  if (response.status !== 204) {
-    if (options.json) {
-      result = await response.json();
-    } else {
-      result = await response.buffer();
-    }
+  if (options.json && result.body) {
+    result.body = JSON.parse(result.body.toString());
   }
 
-  if (cacheFile) {
-    let data = result;
-    if (options.json) {
-      data = JSON.stringify(data);
-    }
-    await outputFile(cacheFile, data);
+  const returnOption = options.return || 'body';
+
+  if (typeof returnOption === 'string') {
+    return result[returnOption];
   }
 
-  return result;
+  if (!Array.isArray(returnOption)) {
+    throw new TypeError('Invalid \'return\' option');
+  }
+
+  return pick(result, returnOption);
 }
 /* eslint-enable complexity */
