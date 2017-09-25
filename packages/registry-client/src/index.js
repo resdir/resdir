@@ -17,7 +17,7 @@ import {zip, unzip} from '@resdir/archive-manager';
 
 const debug = require('debug')('resdir:registry:client');
 
-const RESDIR_REGISTRY_LOCAL_SERVER_URL = 'http://localhost:3000/registry';
+const RESDIR_REGISTRY_LOCAL_SERVER_URL = 'http://registry.dev.resdir.com';
 
 export class RegistryClient {
   constructor({runDirectory, clientId, awsRegion, awsS3BucketName, awsS3ResourceUploadsPrefix}) {
