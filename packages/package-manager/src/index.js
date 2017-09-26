@@ -4,8 +4,10 @@ import {execFile, spawn} from 'child-process-promise';
 import {formatString, formatCode, formatPath} from '@resdir/console';
 import {load, save} from '@resdir/file-manager';
 import {getJSON} from '@resdir/http-client';
+import LocalCache from '@resdir/local-cache';
 
 const NPM_REGISTRY_URL = 'https://registry.npmjs.org';
+const NPM_REGISTRY_CACHE_TIME = 60 * 1000; // 1 minute
 export const PACKAGE_FILENAME = 'package.json';
 
 export function updatePackageFile(directory, definition) {
@@ -102,7 +104,7 @@ export async function fetchNPMRegistry(name, {throwIfNotFound = true} = {}) {
     return await getJSON(url, {
       headers: {Accept: 'application/vnd.npm.install-v1+json; q=1.0, application/json; q=0.8, */*'},
       timeout: 15 * 1000,
-      cacheTime: 60 * 1000
+      cache: getNPMRegistryCache()
     });
   } catch (err) {
     if (err.httpStatus === 404) {
@@ -113,4 +115,12 @@ export async function fetchNPMRegistry(name, {throwIfNotFound = true} = {}) {
     }
     throw err;
   }
+}
+
+let npmRegistryCache;
+function getNPMRegistryCache() {
+  if (!npmRegistryCache) {
+    npmRegistryCache = new LocalCache({time: NPM_REGISTRY_CACHE_TIME});
+  }
+  return npmRegistryCache;
 }
