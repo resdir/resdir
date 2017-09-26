@@ -37,7 +37,7 @@ export async function fetch(url, options = {}) {
     if (result) {
       result = JSON.parse(result);
       if (result.body) {
-        result.body = new Buffer(result.body.data);
+        result.body = new Buffer(result.body, 'base64');
       }
     }
   }
@@ -77,11 +77,6 @@ export async function fetch(url, options = {}) {
 
     if (response.status !== 204) {
       result.body = await response.buffer();
-      // if (options.json) {
-      //   result.body = await response.json();
-      // } else {
-      //   result.body = await response.buffer();
-      // }
     }
 
     // TODO: Use a standard way to get headers
@@ -95,7 +90,12 @@ export async function fetch(url, options = {}) {
     }
 
     if (options.cache) {
-      await options.cache.write(url, JSON.stringify(result));
+      let serializedResult = {...result};
+      if (serializedResult.body) {
+        serializedResult.body = serializedResult.body.toString('base64');
+      }
+      serializedResult = JSON.stringify(serializedResult);
+      await options.cache.write(url, serializedResult);
     }
   }
 
