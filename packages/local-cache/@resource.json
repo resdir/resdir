@@ -1,7 +1,7 @@
 {
   "@type": "js/esnext-package",
   "name": "@resdir/local-cache",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Simple cache using files to persist data",
   "files": [
     "./dist"
@@ -9,5 +9,10 @@
   "main": "./dist/index.js",
   "dependencies": [
     "strict-uri-encode@^2.0.0"
-  ]
+  ],
+  "transpiler": {
+    "targets": {
+      "node": 6
+    }
+  }
 }

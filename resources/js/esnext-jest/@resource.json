@@ -1,10 +1,13 @@
 {
   "@name": "js/esnext-jest",
-  "@version": "0.1.0",
+  "@version": "0.1.1",
   "@export": {
     "@type": ["js/jest"],
     "transpiler": {
       "@type": "js/transpiler",
+      "targets": {
+        "node": 8
+      },
       "run": {
         "@listen": ["after:@build", "after:@fileModified"]
       }

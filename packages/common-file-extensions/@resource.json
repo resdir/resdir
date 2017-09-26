@@ -1,7 +1,7 @@
 {
   "@type": "js/esnext-package",
   "name": "@resdir/common-file-extensions",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "List of common file extensions (ex.: 'doc', 'mp3', 'js',...)",
   "files": [
     "./dist"
@@ -9,5 +9,10 @@
   "main": "./dist/index.js",
   "dependencies": [
     "mime-db@^1.30.0"
-  ]
+  ],
+  "transpiler": {
+    "targets": {
+      "node": 6
+    }
+  }
 }

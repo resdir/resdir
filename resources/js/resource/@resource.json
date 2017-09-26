@@ -1,9 +1,12 @@
 {
   "@name": "js/resource",
-  "@version": "0.1.0",
+  "@version": "0.1.1",
   "@files": ["./dist"],
   "transpiler": {
     "@type": "js/transpiler",
+    "targets": {
+      "node": 8
+    },
     "run": {
       "@listen": ["after:@build", "after:@fileModified"]
     }

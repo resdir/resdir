@@ -1,7 +1,7 @@
 {
   "@type": "js/esnext-package",
   "name": "@resdir/resource-name",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Useful functions to handle Resource's names",
   "files": [
     "./dist"
@@ -10,5 +10,10 @@
   "dependencies": [
     "@resdir/console@^0.1.4",
     "@resdir/namespace@^0.1.0"
-  ]
+  ],
+  "transpiler": {
+    "targets": {
+      "node": 6
+    }
+  }
 }

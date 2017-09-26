@@ -1,14 +1,19 @@
 {
   "@type": "js/esnext-package",
+  "name": "@resdir/resource-specifier",
+  "version": "0.1.5",
   "description": "Useful functions to handle Resource's specifiers",
+  "files": [
+    "./dist"
+  ],
   "main": "./dist/index.js",
-  "version": "0.1.4",
   "dependencies": [
     "@resdir/resource-name@^0.1.0",
     "@resdir/version-range@^0.1.2"
   ],
-  "name": "@resdir/resource-specifier",
-  "files": [
-    "./dist"
-  ]
+  "transpiler": {
+    "targets": {
+      "node": 6
+    }
+  }
 }

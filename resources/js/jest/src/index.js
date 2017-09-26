@@ -1,4 +1,4 @@
-import {resolve} from 'path';
+import {join, resolve} from 'path';
 import jest from 'jest';
 import {task} from '@resdir/console';
 
@@ -25,6 +25,7 @@ export default base =>
 
       const config = {
         roots,
+        setupFiles: [require.resolve('regenerator-runtime/runtime')],
         testEnvironment: this.testEnvironment,
         transform: {}
       };

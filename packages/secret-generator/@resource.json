@@ -1,7 +1,7 @@
 {
   "@type": "js/esnext-package",
   "name": "@resdir/secret-generator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generate a secret",
   "files": [
     "./dist"
@@ -10,6 +10,11 @@
   "dependencies": [
     "nanoid@^0.2.0"
   ],
+  "transpiler": {
+    "targets": {
+      "node": 6
+    }
+  },
   "tests": {
     "@type": "js/esnext-jest",
     "@directory": "./tests",

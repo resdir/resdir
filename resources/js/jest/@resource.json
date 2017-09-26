@@ -1,9 +1,9 @@
 {
   "@type": "js/esnext-resource",
   "@name": "js/jest",
-  "@version": "0.1.0",
+  "@version": "0.1.1",
   "@files": ["./dist"],
-  "dependencies": ["jest@^20.0.4", "@resdir/console@^0.1.0"],
+  "dependencies": ["jest@^20.0.4", "regenerator-runtime@^0.11.0", "@resdir/console@^0.1.0"],
   "@export": {
     "@implementation": "./dist",
     "@publishable": false,
@@ -24,7 +24,9 @@
     "run": {
       "@type": "command",
       "@parameter": {
-        "testPathPattern": {"@type": "string"}
+        "testPathPattern": {
+          "@type": "string"
+        }
       }
     }
   }

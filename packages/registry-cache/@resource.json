@@ -1,7 +1,7 @@
 {
   "@type": "js/esnext-package",
   "name": "@resdir/registry-cache",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Resdir registry cache",
   "files": [
     "./dist"
@@ -16,5 +16,10 @@
     "@resdir/resource-specifier@^0.1.1",
     "@resdir/version@^0.1.8",
     "@resdir/version-range@^0.1.8"
-  ]
+  ],
+  "transpiler": {
+    "targets": {
+      "node": 8
+    }
+  }
 }

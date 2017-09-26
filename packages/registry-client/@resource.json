@@ -1,7 +1,7 @@
 {
   "@type": "js/esnext-package",
   "name": "@resdir/registry-client",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Resdir registry client",
   "files": [
     "./dist"
@@ -23,5 +23,10 @@
     "@resdir/resource-specifier@^0.1.0",
     "@resdir/secret-generator@^1.0.0",
     "tempy@^0.1.0"
-  ]
+  ],
+  "transpiler": {
+    "targets": {
+      "node": 8
+    }
+  }
 }

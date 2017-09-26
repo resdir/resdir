@@ -1,9 +1,18 @@
 {
   "@type": "js/esnext-package",
   "name": "@resdir/gitignore-manager",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Help managing gitignore files",
-  "files": ["./dist"],
+  "files": [
+    "./dist"
+  ],
   "main": "./dist/index.js",
-  "dependencies": ["lodash.union@^4.6.0"]
+  "dependencies": [
+    "lodash.union@^4.6.0"
+  ],
+  "transpiler": {
+    "targets": {
+      "node": 8
+    }
+  }
 }
