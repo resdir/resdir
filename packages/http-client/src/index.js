@@ -1,4 +1,3 @@
-import {pick} from 'lodash';
 import isomorphicFetch from 'isomorphic-fetch';
 
 export async function getJSON(url, options = {}) {
@@ -76,17 +75,28 @@ export async function fetch(url, options = {}) {
     result = {status: response.status};
 
     if (response.status !== 204) {
-      result.body = await response.buffer();
+      if (process.browser) {
+        // TODO: Use arrayBuffer() or blob()
+        result.body = await response.text();
+      } else {
+        result.body = await response.buffer();
+      }
     }
 
-    // TODO: Use a standard way to get headers
-    result.headers = response.headers._headers;
-    if (!result.headers) {
-      // We are probably in a browser
-      throw new Error('Can\'t get response headers');
-    }
-    for (const key of Object.keys(result.headers)) {
-      result.headers[key] = result.headers[key].join(',');
+    if (process.browser) {
+      result.headers = {};
+      for (const key of response.headers.keys()) {
+        result.headers[key] = response.headers.get(key);
+      }
+    } else {
+      // TODO: Use a standard way to get headers
+      result.headers = response.headers._headers;
+      if (!result.headers) {
+        throw new Error('Can\'t get response headers');
+      }
+      for (const key of Object.keys(result.headers)) {
+        result.headers[key] = result.headers[key].join(',');
+      }
     }
 
     if (options.cache) {
@@ -115,16 +125,6 @@ export async function fetch(url, options = {}) {
     result.body = JSON.parse(result.body.toString());
   }
 
-  const returnOption = options.return || 'body';
-
-  if (typeof returnOption === 'string') {
-    return result[returnOption];
-  }
-
-  if (!Array.isArray(returnOption)) {
-    throw new TypeError('Invalid \'return\' option');
-  }
-
-  return pick(result, returnOption);
+  return result;
 }
 /* eslint-enable complexity */
