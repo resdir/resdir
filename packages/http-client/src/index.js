@@ -1,10 +1,5 @@
-import {join} from 'path';
-import {readFileSync, statSync} from 'fs';
-import {tmpdir} from 'os';
 import {pick} from 'lodash';
-import {outputFile} from 'fs-extra';
-import nodeFetch from 'node-fetch';
-import strictUriEncode from 'strict-uri-encode';
+import isomorphicFetch from 'isomorphic-fetch';
 
 export async function getJSON(url, options = {}) {
   options.json = 'true';
@@ -34,23 +29,12 @@ export async function fetch(url, options = {}) {
 
   let result;
 
-  let cacheFile;
-
-  if (options.cacheTime) {
-    if (!method === 'GET') {
+  if (options.cache) {
+    if (method !== 'GET') {
       throw new Error(`Cache can't be used with a ${method} request`);
     }
-    const cacheDir = join(tmpdir(), 'resdir-http-client', 'cache');
-    cacheFile = join(cacheDir, strictUriEncode(url));
-
-    let stats;
-    try {
-      stats = statSync(cacheFile);
-    } catch (err) {
-      /* File is missing */
-    }
-    if (stats && Date.now() - stats.mtime.getTime() < options.cacheTime) {
-      result = readFileSync(cacheFile, 'utf8');
+    result = await options.cache.read(url, 'utf8');
+    if (result) {
       result = JSON.parse(result);
       if (result.body) {
         result.body = new Buffer(result.body.data);
@@ -87,7 +71,7 @@ export async function fetch(url, options = {}) {
 
     finalOptions.headers = headers;
 
-    const response = await nodeFetch(url, finalOptions);
+    const response = await isomorphicFetch(url, finalOptions);
 
     result = {status: response.status};
 
@@ -110,9 +94,8 @@ export async function fetch(url, options = {}) {
       result.headers[key] = result.headers[key].join(',');
     }
 
-    if (cacheFile) {
-      const data = JSON.stringify(result);
-      await outputFile(cacheFile, data);
+    if (options.cache) {
+      await options.cache.write(url, JSON.stringify(result));
     }
   }
 
