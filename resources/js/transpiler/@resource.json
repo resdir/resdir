@@ -1,6 +1,6 @@
 {
   "@name": "js/transpiler",
-  "@version": "0.1.1",
+  "@version": "0.1.2",
   "@files": ["./dist"],
   "dependencies": {
     "@type": "js/dependencies",
@@ -38,6 +38,11 @@
     "source": "./src",
     "destination": "./dist",
     "extensions": [".js", ".jsx", ".es6", ".es"],
+    "targets": {
+      "@type": "object",
+      "@value": {"ie": 10, "node": 4}
+    },
+    "transformJSX": false,
     "jsxPragma": {
       "@type": "string"
     },

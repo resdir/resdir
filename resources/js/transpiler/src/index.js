@@ -85,18 +85,23 @@ export default base =>
     }
 
     async _transpile(srcDirectory, destDirectory, files, {verbose}) {
+      const presets = [[require.resolve('babel-preset-env'), {targets: this.targets, loose: true}]];
+
+      const plugins = [
+        require.resolve('babel-plugin-transform-class-properties'),
+        require.resolve('babel-plugin-transform-object-rest-spread')
+      ];
+
+      if (this.transformJSX) {
+        plugins.push([
+          require.resolve('babel-plugin-transform-react-jsx'),
+          {pragma: this.jsxPragma}
+        ]);
+      }
+
       const transformOptions = {
-        presets: [
-          [
-            require.resolve('babel-preset-env'),
-            {targets: {node: 8}, loose: true, exclude: ['transform-regenerator']}
-          ]
-        ],
-        plugins: [
-          require.resolve('babel-plugin-transform-class-properties'),
-          require.resolve('babel-plugin-transform-object-rest-spread'),
-          [require.resolve('babel-plugin-transform-react-jsx'), {pragma: this.jsxPragma}]
-        ],
+        presets,
+        plugins,
         sourceMaps: 'inline'
       };
 
