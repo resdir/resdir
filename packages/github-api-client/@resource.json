@@ -1,13 +1,14 @@
 {
   "@type": "js/esnext-package",
-  "name": "@resdir/github-api-client",
-  "version": "0.1.1",
   "description": "Convenient wrapper over GitHub API v3",
+  "main": "./dist/index.js",
+  "version": "0.1.2",
+  "dependencies": [
+    "@resdir/http-client@^0.1.4",
+    "@resdir/local-cache@^0.1.0"
+  ],
+  "name": "@resdir/github-api-client",
   "files": [
     "./dist"
-  ],
-  "main": "./dist/index.js",
-  "dependencies": [
-    "@resdir/http-client@^0.1.4"
   ]
 }

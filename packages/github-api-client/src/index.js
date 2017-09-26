@@ -1,4 +1,5 @@
 import {getJSON} from '@resdir/http-client';
+import LocalCache from '@resdir/local-cache';
 
 const ROOT_URL = 'https://api.github.com';
 const CACHE_TIME = 5 * 60 * 1000; // 5 minutes
@@ -15,7 +16,7 @@ export class GitHubAPIClient {
 
     options = {
       authorization: this.authorization,
-      cacheTime: CACHE_TIME,
+      cache: getCache(),
       timeout: TIMEOUT,
       ...options
     };
@@ -29,6 +30,14 @@ export class GitHubAPIClient {
       throw err;
     }
   }
+}
+
+let cache;
+function getCache() {
+  if (!cache) {
+    cache = new LocalCache({time: CACHE_TIME});
+  }
+  return cache;
 }
 
 export default GitHubAPIClient;
