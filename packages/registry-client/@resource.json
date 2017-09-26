@@ -1,7 +1,7 @@
 {
   "@type": "js/esnext-package",
   "name": "@resdir/registry-client",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Resdir registry client",
   "files": [
     "./dist"
@@ -18,7 +18,7 @@
     "@resdir/archive-manager@^0.1.1",
     "@resdir/console@^0.1.3",
     "@resdir/file-manager@^0.1.0",
-    "@resdir/http-client@^0.1.0",
+    "@resdir/http-client@^0.2.0",
     "@resdir/resource-name@^0.1.0",
     "@resdir/resource-specifier@^0.1.0",
     "@resdir/secret-generator@^1.0.0",

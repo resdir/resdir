@@ -101,11 +101,12 @@ async function exec(command, args, {directory, commandName, debug} = {}) {
 export async function fetchNPMRegistry(name, {throwIfNotFound = true} = {}) {
   const url = NPM_REGISTRY_URL + '/' + name.replace('/', '%2F');
   try {
-    return await getJSON(url, {
+    const {body} = await getJSON(url, {
       headers: {Accept: 'application/vnd.npm.install-v1+json; q=1.0, application/json; q=0.8, */*'},
       timeout: 15 * 1000,
       cache: getNPMRegistryCache()
     });
+    return body;
   } catch (err) {
     if (err.httpStatus === 404) {
       if (throwIfNotFound) {

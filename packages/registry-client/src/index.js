@@ -80,7 +80,7 @@ export class RegistryClient {
       await task(
         async () => {
           const url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/user/complete-${urlPart}`;
-          const {userId, refreshToken} = await postJSON(url, {verificationToken});
+          const {body: {userId, refreshToken}} = await postJSON(url, {verificationToken});
           this._saveUserId(userId);
           this._saveRefreshToken(refreshToken);
           completed = true;
@@ -143,7 +143,7 @@ export class RegistryClient {
       url += `?cachedVersion=${cachedVersion}`;
     }
 
-    const {unchanged, definition, filesURL} = await this._userRequest(authorization =>
+    const {body: {unchanged, definition, filesURL}} = await this._userRequest(authorization =>
       getJSON(url, {authorization})
     );
 
@@ -154,7 +154,7 @@ export class RegistryClient {
     const directory = tempy.directory();
 
     // TODO: Instead of a buffer, use a stream to download and unzip files
-    const files = await fetch(filesURL);
+    const {body: files} = await fetch(filesURL);
     await unzip(directory, files);
 
     return {definition, directory};
@@ -331,7 +331,7 @@ export class RegistryClient {
         return;
       }
       const url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/user/access-tokens`;
-      const {accessToken: {value, expiresIn}} = await postJSON(url, {refreshToken});
+      const {body: {accessToken: {value, expiresIn}}} = await postJSON(url, {refreshToken});
       accessToken = {value, expiresOn: new Date(Date.now() + expiresIn)};
       return value;
     } finally {
