@@ -13,7 +13,7 @@ export async function postJSON(url, body, options = {}) {
   options.body = body;
   options.json = 'true';
   if (!options.expectedStatus) {
-    options.expectedStatus = [201, 204];
+    options.expectedStatus = [200, 201, 204];
   }
   return await fetch(url, options);
 }

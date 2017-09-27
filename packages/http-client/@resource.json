@@ -1,7 +1,7 @@
 {
   "@type": "js/esnext-package",
   "name": "@resdir/http-client",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Convenient wrapper over Fetch API",
   "files": [
     "./dist"
