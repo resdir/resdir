@@ -65,6 +65,10 @@ export class RegistryCache {
     return await this.client.createUserNamespace(...args);
   }
 
+  async removeUserNamespace(...args) {
+    return await this.client.removeUserNamespace(...args);
+  }
+
   async fetch(specifier) {
     const result = await this._fetch(specifier);
     debug('fetch(%o) => %o', specifier, result);

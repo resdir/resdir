@@ -12,7 +12,7 @@ import {formatString, formatPath, formatCode, prompt, task} from '@resdir/consol
 import {load, save} from '@resdir/file-manager';
 import {validateResourceSpecifier} from '@resdir/resource-specifier';
 import generateSecret from '@resdir/secret-generator';
-import {getJSON, postJSON, fetch} from '@resdir/http-client';
+import {getJSON, postJSON, deleteJSON, fetch} from '@resdir/http-client';
 import {zip, unzip} from '@resdir/archive-manager';
 
 const debug = require('debug')('resdir:registry:client');
@@ -120,36 +120,74 @@ export class RegistryClient {
   }
 
   async showUser() {
+    console.dir(await this.getUser(), {depth: null, colors: true});
+  }
+
+  async getUser() {
     const userId = this._ensureSignedInUser();
 
-    let user;
-
-    await task(
+    const {body: user} = await task(
       async () => {
         const url = `${this.registryURL}/users/${userId}`;
-        ({body: user} = await this._userRequest(authorization => getJSON(url, {authorization})));
+        return await this._userRequest(authorization => getJSON(url, {authorization}));
       },
       {intro: `Fetching user...`, outro: `User fetched`}
     );
 
-    console.dir(user, {depth: null, colors: true});
+    return user;
   }
 
   async createUserNamespace(namespace) {
-    const userId = this._ensureSignedInUser();
+    const user = await this.getUser();
+    if (user.namespace) {
+      throw new Error(`You already have a namespace (${formatString(user.namespace)})`);
+    }
 
     while (!namespace) {
       namespace = await prompt('Choose a name for your personal namespace:');
     }
 
-    await task(
+    const {body: result} = await task(
       async () => {
-        const url = `${this.registryURL}/users/${userId}/namespace`;
-        await this._userRequest(authorization => postJSON(url, {namespace}, {authorization}));
+        const url = `${this.registryURL}/namespaces/check-availability`;
+        return await this._userRequest(authorization =>
+          postJSON(url, {namespace}, {authorization})
+        );
       },
       {
-        intro: `Creating namespace ${formatString(namespace)}...`,
-        outro: `Namespace ${formatString(namespace)} created`
+        intro: `Checking namespace availibilty...`,
+        outro: `Namespace availibilty checked`
+      }
+    );
+
+    console.log(result);
+
+    // await task(
+    //   async () => {
+    //     const url = `${this.registryURL}/users/${userId}/namespace`;
+    //     await this._userRequest(authorization => postJSON(url, {namespace}, {authorization}));
+    //   },
+    //   {
+    //     intro: `Creating namespace ${formatString(namespace)}...`,
+    //     outro: `Namespace ${formatString(namespace)} created`
+    //   }
+    // );
+  }
+
+  async removeUserNamespace() {
+    const user = await this.getUser();
+    if (!user.namespace) {
+      throw new Error(`You don't have a namespace`);
+    }
+
+    await task(
+      async () => {
+        const url = `${this.registryURL}/users/${user.id}/namespace`;
+        await this._userRequest(authorization => deleteJSON(url, {authorization}));
+      },
+      {
+        intro: `Removing namespace ${formatString(user.namespace)}...`,
+        outro: `Namespace ${formatString(user.namespace)} removed`
       }
     );
   }
