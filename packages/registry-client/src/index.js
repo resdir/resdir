@@ -17,10 +17,18 @@ import {zip, unzip} from '@resdir/archive-manager';
 
 const debug = require('debug')('resdir:registry:client');
 
-const RESDIR_REGISTRY_LOCAL_SERVER_URL = 'http://registry.dev.resdir.com';
-
 export class RegistryClient {
-  constructor({runDirectory, clientId, awsRegion, awsS3BucketName, awsS3ResourceUploadsPrefix}) {
+  constructor({
+    registryURL,
+    runDirectory,
+    clientId,
+    awsRegion,
+    awsS3BucketName,
+    awsS3ResourceUploadsPrefix
+  }) {
+    if (!registryURL) {
+      throw new Error('\'registryURL\' argument is missing');
+    }
     if (!runDirectory) {
       throw new Error('\'runDirectory\' argument is missing');
     }
@@ -30,6 +38,7 @@ export class RegistryClient {
     if (!(awsRegion && awsS3BucketName && awsS3ResourceUploadsPrefix)) {
       throw new Error('AWS configuration is missing or incomplete');
     }
+    this.registryURL = registryURL;
     this.userFile = join(runDirectory, 'user.json');
     this.cacheFile = join(runDirectory, 'caches', 'registry-client', 'data.json');
     this.clientId = clientId;
@@ -60,7 +69,7 @@ export class RegistryClient {
 
     await task(
       async () => {
-        const url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/user/start-${urlPart}`;
+        const url = `${this.registryURL}/user/start-${urlPart}`;
         await postJSON(url, {email, clientId: this.clientId});
       },
       {
@@ -79,7 +88,7 @@ export class RegistryClient {
       }
       await task(
         async () => {
-          const url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/user/complete-${urlPart}`;
+          const url = `${this.registryURL}/user/complete-${urlPart}`;
           const {body: {userId, refreshToken}} = await postJSON(url, {verificationToken});
           this._saveUserId(userId);
           this._saveRefreshToken(refreshToken);
@@ -99,7 +108,7 @@ export class RegistryClient {
 
     await task(
       async () => {
-        const url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/user/sign-out`;
+        const url = `${this.registryURL}/user/sign-out`;
         const refreshToken = this._loadRefreshToken();
         await postJSON(url, {refreshToken});
         this._saveUserId(undefined);
@@ -108,6 +117,22 @@ export class RegistryClient {
       },
       {intro: `Signing out...`, outro: `Signed out`}
     );
+  }
+
+  async showUser() {
+    const userId = this._ensureSignedInUser();
+
+    let user;
+
+    await task(
+      async () => {
+        const url = `${this.registryURL}/users/${userId}`;
+        ({body: user} = await this._userRequest(authorization => getJSON(url, {authorization})));
+      },
+      {intro: `Fetching user...`, outro: `User fetched`}
+    );
+
+    console.dir(user, {depth: null, colors: true});
   }
 
   async createUserNamespace(namespace) {
@@ -119,7 +144,7 @@ export class RegistryClient {
 
     await task(
       async () => {
-        const url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/users/${userId}/namespace`;
+        const url = `${this.registryURL}/users/${userId}/namespace`;
         await this._userRequest(authorization => postJSON(url, {namespace}, {authorization}));
       },
       {
@@ -138,7 +163,7 @@ export class RegistryClient {
   async _fetch(specifier, {cachedVersion} = {}) {
     validateResourceSpecifier(specifier);
 
-    let url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/resources/${specifier}`;
+    let url = `${this.registryURL}/resources/${specifier}`;
     if (cachedVersion) {
       url += `?cachedVersion=${cachedVersion}`;
     }
@@ -196,7 +221,7 @@ export class RegistryClient {
 
     const temporaryFilesURL = s3urls.toUrl(this.awsS3BucketName, key)['bucket-in-host'];
 
-    const url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/resources`;
+    const url = `${this.registryURL}/resources`;
     await this._userRequest(authorization =>
       postJSON(url, {definition, temporaryFilesURL}, {authorization})
     );
@@ -330,7 +355,7 @@ export class RegistryClient {
       if (!refreshToken) {
         return;
       }
-      const url = `${RESDIR_REGISTRY_LOCAL_SERVER_URL}/user/access-tokens`;
+      const url = `${this.registryURL}/user/access-tokens`;
       const {body: {accessToken: {value, expiresIn}}} = await postJSON(url, {refreshToken});
       accessToken = {value, expiresOn: new Date(Date.now() + expiresIn)};
       return value;

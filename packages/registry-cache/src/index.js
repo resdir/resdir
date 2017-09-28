@@ -57,6 +57,10 @@ export class RegistryCache {
     return await this.client.signOut(...args);
   }
 
+  async showUser(...args) {
+    return await this.client.showUser(...args);
+  }
+
   async createUserNamespace(...args) {
     return await this.client.createUserNamespace(...args);
   }
