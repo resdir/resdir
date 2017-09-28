@@ -1,7 +1,7 @@
 {
   "@type": "js/esnext-package",
   "name": "@resdir/console",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "description": "Miscellaneous functions used by Resdir to manage console",
   "files": [
     "./dist"

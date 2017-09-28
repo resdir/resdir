@@ -4,6 +4,82 @@ import cliSpinners from 'cli-spinners';
 import windowSize from 'window-size';
 import sliceANSI from 'slice-ansi';
 import read from 'read';
+import wrapANSI from 'wrap-ansi';
+
+export function print(message) {
+  console.log(message !== undefined ? message : '');
+}
+
+export function printProgress(message) {
+  print(formatMessage(message, {status: 'progress'}));
+}
+
+export function printSuccess(message) {
+  print(formatMessage(message, {status: 'success'}));
+}
+
+export function printText(text) {
+  print(formatText(text));
+}
+
+export function printError(error) {
+  let stdErr = error.capturedStandardError;
+  if (stdErr) {
+    stdErr = stdErr.trim();
+    if (stdErr) {
+      console.error(stdErr);
+    }
+  }
+
+  if (process.env.DEBUG) {
+    console.error(error);
+    return;
+  }
+
+  if (error.hidden) {
+    return;
+  }
+
+  console.error(error.message);
+
+  if (error.contextStack) {
+    for (const context of error.contextStack) {
+      let identifier = gray((context.constructor && context.constructor.name) || 'Object');
+      if (context.toIdentifier) {
+        identifier += gray(': ') + formatString(context.toIdentifier());
+      }
+      console.error('  ' + identifier);
+    }
+  }
+}
+
+export function printErrorAndExit(error, code = 1) {
+  printError(error);
+  process.exit(code);
+}
+
+export async function prompt(message) {
+  return new Promise((resolve, reject) => {
+    read({prompt: `${gray('~>')} ${message}`}, (err, response) => {
+      if (err) {
+        return reject(err);
+      }
+      resolve(response);
+    });
+  });
+}
+
+export async function confirm(message, options = {}) {
+  const choices = options.default === true ? 'Y/n' : 'y/N';
+  const answer = await prompt(`${message} (${choices})`);
+  if (!answer) {
+    return options.default;
+  }
+  if (answer.toLowerCase().startsWith('y')) {
+    return true;
+  }
+  return false;
+}
 
 export function formatString(string) {
   if (string === undefined) {
@@ -33,6 +109,10 @@ export function formatCode(code) {
   return cyan('`' + String(code) + '`');
 }
 
+export function formatText(text, {width = 80} = {}) {
+  return wrapANSI(text, width);
+}
+
 export function formatMessage(message, {info, status} = {}) {
   if (message === undefined) {
     throw new TypeError('\'message\' is undefined');
@@ -53,14 +133,12 @@ export function formatMessage(message, {info, status} = {}) {
     info = '';
   }
 
-  if (status === 'success') {
+  if (status === 'progress') {
+    status = getProgressSymbol() + '  ';
+  } else if (status === 'success') {
     status = getSuccessSymbol() + '  ';
   } else if (status === 'error') {
     status = getErrorSymbol() + '  ';
-  } else if (status === 'info') {
-    status = 'ℹ️️  ';
-  } else if (status === 'deployed') {
-    status = '🚀  ';
   } else if (status === undefined) {
     status = '';
   } else {
@@ -68,6 +146,18 @@ export function formatMessage(message, {info, status} = {}) {
   }
 
   return `${status}${message}${info}`;
+}
+
+export function getProgressSymbol() {
+  return '🏃';
+}
+
+export function getSuccessSymbol() {
+  return '⚡';
+}
+
+export function getErrorSymbol() {
+  return '😡';
 }
 
 class AbstractTaskView {
@@ -102,11 +192,11 @@ class QuietTaskView extends AbstractTaskView {}
 class VerboseTaskView extends AbstractTaskView {
   complete() {
     super.complete();
-    console.log(getSuccessSymbol() + '  ' + this.outro);
+    printSuccess(this.outro);
   }
 
   renderMessage() {
-    console.log(getRunningSymbol() + '  ' + this.message);
+    printProgress(this.message);
   }
 }
 
@@ -202,6 +292,18 @@ export async function task(fn, {intro, outro, verbose, debug, quiet}) {
   }
 }
 
+export function adjustToWindowWidth(text, {leftMargin = 0, rightMargin = 0} = {}) {
+  if (typeof text !== 'string') {
+    throw new TypeError('\'text\' must be a string');
+  }
+
+  if (!windowSize) {
+    return text;
+  }
+
+  return sliceANSI(text, 0, windowSize.width - leftMargin - rightMargin);
+}
+
 export function catchContext(context, fn) {
   const rethrow = err => {
     if (!err.contextStack) {
@@ -220,75 +322,4 @@ export function catchContext(context, fn) {
   } catch (err) {
     rethrow(err);
   }
-}
-
-export function showError(error) {
-  let stdErr = error.capturedStandardError;
-  if (stdErr) {
-    stdErr = stdErr.trim();
-    if (stdErr) {
-      console.error(stdErr);
-    }
-  }
-
-  if (process.env.DEBUG) {
-    console.error(error);
-    return;
-  }
-
-  if (error.hidden) {
-    return;
-  }
-
-  console.error(error.message);
-
-  if (error.contextStack) {
-    for (const context of error.contextStack) {
-      let identifier = gray((context.constructor && context.constructor.name) || 'Object');
-      if (context.toIdentifier) {
-        identifier += gray(': ') + formatString(context.toIdentifier());
-      }
-      console.error('  ' + identifier);
-    }
-  }
-}
-
-export function showErrorAndExit(error, code = 1) {
-  showError(error);
-  process.exit(code);
-}
-
-export function getRunningSymbol() {
-  return '🏃';
-}
-
-export function getSuccessSymbol() {
-  return '⚡';
-}
-
-export function getErrorSymbol() {
-  return '😡';
-}
-
-export function adjustToWindowWidth(text, {leftMargin = 0, rightMargin = 0} = {}) {
-  if (typeof text !== 'string') {
-    throw new TypeError('\'text\' must be a string');
-  }
-
-  if (!windowSize) {
-    return text;
-  }
-
-  return sliceANSI(text, 0, windowSize.width - leftMargin - rightMargin);
-}
-
-export async function prompt(message) {
-  return new Promise((resolve, reject) => {
-    read({prompt: `${gray('~>')} ${message}`}, (err, response) => {
-      if (err) {
-        return reject(err);
-      }
-      resolve(response);
-    });
-  });
 }
