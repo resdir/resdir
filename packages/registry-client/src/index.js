@@ -154,7 +154,7 @@ export class RegistryClient {
     const directory = tempy.directory();
 
     // TODO: Instead of a buffer, use a stream to download and unzip files
-    const {body: files} = await fetch(filesURL);
+    const {body: files} = await fetch(filesURL, {expectedStatus: 200});
     await unzip(directory, files);
 
     return {definition, directory};

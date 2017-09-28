@@ -1,20 +1,22 @@
 import isomorphicFetch from 'isomorphic-fetch';
 
 export async function getJSON(url, options = {}) {
-  options.json = 'true';
-  if (!options.expectedStatus) {
-    options.expectedStatus = 200;
-  }
+  options = {json: true, expectedStatus: 200, ...options};
   return await fetch(url, options);
 }
 
 export async function postJSON(url, body, options = {}) {
-  options.method = 'POST';
-  options.body = body;
-  options.json = 'true';
-  if (!options.expectedStatus) {
-    options.expectedStatus = [200, 201, 204];
-  }
+  options = {method: 'POST', body, json: true, expectedStatus: [200, 201, 204], ...options};
+  return await fetch(url, options);
+}
+
+export async function putJSON(url, body, options = {}) {
+  options = {method: 'PUT', body, json: true, expectedStatus: [200, 204], ...options};
+  return await fetch(url, options);
+}
+
+export async function deleteJSON(url, options = {}) {
+  options = {method: 'DELETE', json: true, expectedStatus: [200, 204], ...options};
   return await fetch(url, options);
 }
 
@@ -110,15 +112,26 @@ export async function fetch(url, options = {}) {
   }
 
   let expectedStatus = options.expectedStatus;
-  if (expectedStatus) {
-    if (!Array.isArray(expectedStatus)) {
-      expectedStatus = [expectedStatus];
-    }
-    if (!expectedStatus.includes(result.status)) {
-      const error = new Error(`Unexpected ${result.status} HTTP status`);
-      error.httpStatus = result.status;
-      throw error;
-    }
+  if (expectedStatus === undefined) {
+    expectedStatus = [];
+  } else if (typeof expectedStatus === 'number') {
+    expectedStatus = [expectedStatus];
+  } else if (!Array.isArray(expectedStatus)) {
+    throw new Error('\'expectedStatus\' option is invalid');
+  }
+
+  let throwIfNotFound = options.throwIfNotFound;
+  if (throwIfNotFound === undefined) {
+    throwIfNotFound = true;
+  }
+  if (!throwIfNotFound) {
+    expectedStatus.push(404);
+  }
+
+  if (!expectedStatus.includes(result.status)) {
+    const error = new Error(`Unexpected ${result.status} HTTP status`);
+    error.httpStatus = result.status;
+    throw error;
   }
 
   if (options.json && result.body) {
