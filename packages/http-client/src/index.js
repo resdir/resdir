@@ -111,6 +111,13 @@ export async function fetch(url, options = {}) {
     }
   }
 
+  if (options.json && result.body) {
+    const contentType = result.headers['content-type'];
+    if (contentType.startsWith('application/json')) {
+      result.body = JSON.parse(result.body.toString());
+    }
+  }
+
   let expectedStatus = options.expectedStatus;
   if (expectedStatus === undefined) {
     expectedStatus = [];
@@ -129,13 +136,14 @@ export async function fetch(url, options = {}) {
   }
 
   if (!expectedStatus.includes(result.status)) {
-    const error = new Error(`Unexpected ${result.status} HTTP status`);
-    error.httpStatus = result.status;
+    const message =
+      (result.body && result.body.message) || `Unexpected ${result.status} HTTP status`;
+    const error = new Error(message);
+    error.status = result.status;
+    if (result.body && result.body.code) {
+      error.code = result.body.code;
+    }
     throw error;
-  }
-
-  if (options.json && result.body) {
-    result.body = JSON.parse(result.body.toString());
   }
 
   return result;
