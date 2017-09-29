@@ -108,7 +108,7 @@ export async function fetchNPMRegistry(name, {throwIfNotFound = true} = {}) {
     });
     return body;
   } catch (err) {
-    if (err.httpStatus === 404) {
+    if (err.status === 404) {
       if (throwIfNotFound) {
         throw new Error(`Package not found in npm registry: ${formatString(name)}`);
       }
