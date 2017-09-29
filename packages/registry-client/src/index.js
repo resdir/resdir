@@ -27,6 +27,7 @@ import {validateResourceSpecifier} from '@resdir/resource-specifier';
 import generateSecret from '@resdir/secret-generator';
 import {getJSON, postJSON, deleteJSON, fetch} from '@resdir/http-client';
 import {zip, unzip} from '@resdir/archive-manager';
+import {SERVICE_NAME, SUPPORT_EMAIL_ADDRESS} from '@resdir/information';
 
 const debug = require('debug')('resdir:registry:client');
 
@@ -220,7 +221,7 @@ export class RegistryClient {
 
     const formattedNamespace = formatString(namespace);
 
-    const result = await this.checkNamespaceAvailability(namespace);
+    const result = await this.checkNamespaceAvailability(namespace, 'USER');
 
     let {available, reason} = result;
 
@@ -243,7 +244,7 @@ export class RegistryClient {
     }
 
     if (!available && reason === 'IMPORTANT_GITHUB_USER') {
-      const message = `There is a popular GitHub user named ${formattedNamespace}. Although Resdir is not related to GitHub, most popular GitHub usernames are reserved so that their owner can get them in the future.`;
+      const message = `There is a popular GitHub user named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most popular GitHub usernames are reserved so that their owner can get them in the future.`;
 
       if (result.userHasGitHubAccountConnection) {
         throw new Error(message);
@@ -253,7 +254,7 @@ export class RegistryClient {
       printText(message);
       emptyLine();
       printText(
-        `If the GitHub account named ${formattedNamespace} is yours and you care about this name, you can get it by connecting your Resdir account to your GitHub account. Don't worry, Resdir will only have access to your GitHub public information.`
+        `If the GitHub account named ${formattedNamespace} is yours and you care about this name, you can get it by connecting your ${SERVICE_NAME} account to your GitHub account. Don't worry, ${SERVICE_NAME} will only have access to your GitHub public information.`
       );
       emptyLine();
       const okay = await confirm(`Do you want to continue?`, {default: true});
@@ -265,7 +266,7 @@ export class RegistryClient {
 
       await this.connectGitHubAccount();
 
-      ({available, reason} = await this.checkNamespaceAvailability(namespace));
+      ({available, reason} = await this.checkNamespaceAvailability(namespace, 'USER'));
 
       if (!available) {
         await this.disconnectGitHubAccount();
@@ -278,8 +279,50 @@ export class RegistryClient {
       }
     }
 
+    if (!available && reason === 'IMPORTANT_GITHUB_ORGANIZATION') {
+      throw new Error(
+        `Sorry, this namespace is not available because there is a popular GitHub organization named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub organizations are reserved for future ${SERVICE_NAME} organizations or communities.`
+      );
+    }
+
+    if (!available && reason === 'BIG_COMPANY') {
+      throw new Error(
+        `Sorry, this namespace is not available because it matches the name of a big company (${formatString(
+          result.company
+        )}).`
+      );
+    }
+
+    const contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think you should have ${formattedNamespace} as a personal namespace, please contact ${SERVICE_NAME} at ${formatURL(
+      SUPPORT_EMAIL_ADDRESS
+    )}.`;
+
+    if (!available && reason === 'COMMON_NUMBER') {
+      throw new Error(
+        `Sorry, this namespace is not available because it is quite a common number. ${contactSupport}`
+      );
+    }
+
+    if (!available && reason === 'TOP_LEVEL_DOMAIN') {
+      throw new Error(
+        `Sorry, this namespace is not available because it is a Top Level Domain. ${contactSupport}`
+      );
+    }
+
+    if (!available && reason === 'COMMON_FILE_EXTENSION') {
+      throw new Error(
+        `Sorry, this namespace is not available because it is a common file extension. ${contactSupport}`
+      );
+    }
+
+    if (!available && (reason === 'COMMON_ENGLISH_WORD' || reason === 'COMMON_TAG')) {
+      throw new Error(
+        `Sorry, this namespace is not available because it is quite a common term. ${contactSupport}`
+      );
+    }
+
     if (!available) {
-      throw new Error(`The namespace ${formattedNamespace} is not available`);
+      throw new Error(`Sorry, this namespace is not available.`);
     }
 
     await task(
@@ -312,12 +355,12 @@ export class RegistryClient {
     );
   }
 
-  async checkNamespaceAvailability(namespace) {
+  async checkNamespaceAvailability(namespace, type) {
     const {body: result} = await task(
       async () => {
         const url = `${this.registryURL}/namespaces/check-availability`;
         return await this._userRequest(authorization =>
-          postJSON(url, {namespace}, {authorization})
+          postJSON(url, {namespace, type}, {authorization})
         );
       },
       {
