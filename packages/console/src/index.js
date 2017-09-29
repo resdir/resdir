@@ -6,8 +6,30 @@ import sliceANSI from 'slice-ansi';
 import read from 'read';
 import wrapANSI from 'wrap-ansi';
 
-export function print(message) {
-  console.log(message !== undefined ? message : '');
+export function print(message, {output = 'log'} = {}) {
+  console[output](message);
+  resetEmptyLinesCount();
+}
+
+export function emptyLine(count = 1) {
+  for (let i = 0; i < count; i++) {
+    if (getEmptyLinesCount() < count) {
+      console.log('');
+      incrementEmptyLinesCount();
+    }
+  }
+}
+
+function getEmptyLinesCount() {
+  return global.resdirConsoleEmptyLinesCount || 0;
+}
+
+function incrementEmptyLinesCount() {
+  global.resdirConsoleEmptyLinesCount = getEmptyLinesCount() + 1;
+}
+
+function resetEmptyLinesCount() {
+  global.resdirConsoleEmptyLinesCount = 0;
 }
 
 export function printProgress(message) {
@@ -27,12 +49,12 @@ export function printError(error) {
   if (stdErr) {
     stdErr = stdErr.trim();
     if (stdErr) {
-      console.error(stdErr);
+      print(stdErr, {output: 'error'});
     }
   }
 
   if (process.env.DEBUG) {
-    console.error(error);
+    print(error, {output: 'error'});
     return;
   }
 
@@ -40,7 +62,7 @@ export function printError(error) {
     return;
   }
 
-  console.error(error.message);
+  print(error.message, {output: 'error'});
 
   if (error.contextStack) {
     for (const context of error.contextStack) {
@@ -48,7 +70,7 @@ export function printError(error) {
       if (context.toIdentifier) {
         identifier += gray(': ') + formatString(context.toIdentifier());
       }
-      console.error('  ' + identifier);
+      print('  ' + identifier, {output: 'error'});
     }
   }
 }
@@ -58,9 +80,19 @@ export function printErrorAndExit(error, code = 1) {
   process.exit(code);
 }
 
-export async function prompt(message) {
+export function prompt(message, {type} = {}) {
   return new Promise((resolve, reject) => {
-    read({prompt: `${gray('~>')} ${message}`}, (err, response) => {
+    resetEmptyLinesCount();
+
+    const options = {prompt: `${gray('>>')} ${message}`};
+
+    if (type === 'PASSWORD') {
+      options.silent = true;
+      options.replace = '*';
+      incrementEmptyLinesCount(); // Turn around a bug in 'read' module
+    }
+
+    read(options, (err, response) => {
       if (err) {
         return reject(err);
       }
@@ -70,8 +102,8 @@ export async function prompt(message) {
 }
 
 export async function confirm(message, options = {}) {
-  const choices = options.default === true ? 'Y/n' : 'y/N';
-  const answer = await prompt(`${message} (${choices})`);
+  const choices = options.default === true ? 'Y|n' : 'y|N';
+  const answer = await prompt(`${message} ${gray(`[${choices}]`)}`);
   if (!answer) {
     return options.default;
   }
@@ -209,6 +241,7 @@ class AnimatedTaskView extends AbstractTaskView {
   start(message) {
     super.start(message);
     this.spinner.start();
+    resetEmptyLinesCount();
   }
 
   complete() {
