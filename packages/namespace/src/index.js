@@ -1,6 +1,7 @@
+import sortedIndexOf from 'lodash.sortedindexof';
 import {formatString} from '@resdir/console';
-
-const RESERVED_NAMESPACES = ['connect-github-account'];
+const genericNamespaces = require('./generic.json');
+const reservedNamespaces = require('./reserved.json');
 
 export function validateNamespace(namespace, {throwIfInvalid = true} = {}) {
   if (!validate(namespace)) {
@@ -33,6 +34,10 @@ function validate(namespace) {
   return true;
 }
 
+export function isGenericNamespace(namespace) {
+  return sortedIndexOf(genericNamespaces, namespace) !== -1;
+}
+
 export function isReservedNamespace(namespace) {
-  return RESERVED_NAMESPACES.includes(namespace);
+  return reservedNamespaces.includes(namespace);
 }

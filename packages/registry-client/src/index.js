@@ -206,6 +206,7 @@ export class RegistryClient {
 
   // === Namespaces ===
 
+  /* eslint-disable complexity */
   async createUserNamespace(namespace) {
     const user = await this.getUser();
 
@@ -241,6 +242,16 @@ export class RegistryClient {
 
     if (!available && reason === 'RESERVED') {
       throw new Error(`Sorry, this namespace is reserved`);
+    }
+
+    const contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think you should have ${formattedNamespace} as a personal namespace, please contact ${SERVICE_NAME} at ${formatURL(
+      SUPPORT_EMAIL_ADDRESS
+    )}.`;
+
+    if (!available && reason === 'GENERIC') {
+      throw new Error(
+        `Sorry, this namespace is not available because it is a very generic term. ${contactSupport}`
+      );
     }
 
     if (!available && reason === 'IMPORTANT_GITHUB_USER') {
@@ -293,10 +304,6 @@ export class RegistryClient {
       );
     }
 
-    const contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think you should have ${formattedNamespace} as a personal namespace, please contact ${SERVICE_NAME} at ${formatURL(
-      SUPPORT_EMAIL_ADDRESS
-    )}.`;
-
     if (!available && reason === 'COMMON_NUMBER') {
       throw new Error(
         `Sorry, this namespace is not available because it is quite a common number. ${contactSupport}`
@@ -336,6 +343,7 @@ export class RegistryClient {
       }
     );
   }
+  /* eslint-enable complexity */
 
   async removeUserNamespace() {
     const user = await this.getUser();
