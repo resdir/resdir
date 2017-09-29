@@ -1,5 +1,7 @@
 import {formatString} from '@resdir/console';
 
+const RESERVED_NAMESPACES = ['connect-github-account'];
+
 export function validateNamespace(namespace, {throwIfInvalid = true} = {}) {
   if (!validate(namespace)) {
     if (throwIfInvalid) {
@@ -29,4 +31,8 @@ function validate(namespace) {
   }
 
   return true;
+}
+
+export function isReservedNamespace(namespace) {
+  return RESERVED_NAMESPACES.includes(namespace);
 }

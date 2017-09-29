@@ -61,6 +61,10 @@ export class RegistryCache {
     return await this.client.showUser(...args);
   }
 
+  async deleteUser(...args) {
+    return await this.client.deleteUser(...args);
+  }
+
   async createUserNamespace(...args) {
     return await this.client.createUserNamespace(...args);
   }
@@ -69,48 +73,61 @@ export class RegistryCache {
     return await this.client.removeUserNamespace(...args);
   }
 
-  async fetch(specifier) {
-    const result = await this._fetch(specifier);
-    debug('fetch(%o) => %o', specifier, result);
+  async connectGitHubAccount(...args) {
+    return await this.client.connectGitHubAccount(...args);
+  }
+
+  async disconnectGitHubAccount(...args) {
+    return await this.client.disconnectGitHubAccount(...args);
+  }
+
+  async fetchResource(specifier) {
+    const result = await this._fetchResource(specifier);
+    debug('fetchResource(%o) => %o', specifier, result);
     return result;
   }
 
-  async _fetch(specifier) {
+  async _fetchResource(specifier) {
     const {name, versionRange} = parseResourceSpecifier(specifier);
 
     let result;
 
-    result = await this._fetchCache(name, versionRange);
+    result = await this._fetchResourceCache(name, versionRange);
     const cacheStatus = result.cacheStatus;
     if (cacheStatus === 'HIT') {
       return result;
     }
 
-    const cachedVersion = await this._findLatestCachedVersion(name, versionRange);
+    const cachedVersion = await this._findLatestCachedResourceVersion(name, versionRange);
 
-    result = await this.client.fetch(specifier, {cachedVersion});
+    result = await this.client.fetchResource(specifier, {cachedVersion});
     if (!result) {
       return undefined;
     }
 
     if (result.unchanged) {
-      await this._saveCachedRequest(name, versionRange, cachedVersion);
-      result = await this._loadCachedVersion(name, cachedVersion);
+      await this._saveCachedResourceRequest(name, versionRange, cachedVersion);
+      result = await this._loadCachedResourceVersion(name, cachedVersion);
       return {...result, cacheStatus};
     }
 
     const definition = result.definition;
     const version = definition['@version'];
-    await this._saveCachedRequest(name, versionRange, version);
+    await this._saveCachedResourceRequest(name, versionRange, version);
 
     const temporaryDirectory = result.directory;
-    const directory = await this._saveCachedVersion(name, version, definition, temporaryDirectory);
+    const directory = await this._saveCachedResourceVersion(
+      name,
+      version,
+      definition,
+      temporaryDirectory
+    );
 
     return {definition, directory, cacheStatus};
   }
 
-  async _fetchCache(name, versionRange) {
-    const requestFile = this._getCachedRequestFile(name, versionRange);
+  async _fetchResourceCache(name, versionRange) {
+    const requestFile = this._getCachedResourceRequestFile(name, versionRange);
     const data = load(requestFile, {throwIfNotFound: false});
     if (!data) {
       return {cacheStatus: 'MISS'};
@@ -126,7 +143,7 @@ export class RegistryCache {
       return {cacheStatus: 'INVALIDATED'};
     }
 
-    const result = await this._loadCachedVersion(name, version, {throwIfNotFound: false});
+    const result = await this._loadCachedResourceVersion(name, version, {throwIfNotFound: false});
     if (!result) {
       return {cacheStatus: 'CORRUPTED'};
     }
@@ -134,7 +151,7 @@ export class RegistryCache {
     return {...result, cacheStatus: 'HIT'};
   }
 
-  async _invalidateCache(name, version) {
+  async _invalidateResourceCache(name, version) {
     const {namespace, identifier} = parseResourceName(name);
     const resourceDirectory = join(this.resourceCacheDirectory, namespace, identifier);
     const requestsDirectory = join(resourceDirectory, RESOURCE_REQUESTS_DIRECTORY_NAME);
@@ -145,7 +162,7 @@ export class RegistryCache {
 
     const filenames = readdirSync(requestsDirectory).filter(file => !file.startsWith('.'));
     for (const filename of filenames) {
-      const versionRange = this._cachedRequestFilenameToVersionRange(filename);
+      const versionRange = this._cachedResourceRequestFilenameToVersionRange(filename);
       if (versionRange.includes(version)) {
         const requestFile = join(requestsDirectory, filename);
         const data = load(requestFile);
@@ -157,30 +174,30 @@ export class RegistryCache {
     }
   }
 
-  async _saveCachedRequest(name, versionRange, version) {
-    const requestFile = this._getCachedRequestFile(name, versionRange);
-    const expiresOn = this._createExpirationDate();
+  async _saveCachedResourceRequest(name, versionRange, version) {
+    const requestFile = this._getCachedResourceRequestFile(name, versionRange);
+    const expiresOn = this._createResourceExpirationDate();
     const data = {version, expiresOn};
     ensureDirSync(dirname(requestFile));
     save(requestFile, data);
   }
 
-  _getCachedRequestFile(name, versionRange) {
+  _getCachedResourceRequestFile(name, versionRange) {
     const {namespace, identifier} = parseResourceName(name);
     const resourceDirectory = join(this.resourceCacheDirectory, namespace, identifier);
     const requestsDirectory = join(resourceDirectory, RESOURCE_REQUESTS_DIRECTORY_NAME);
     const requestFile = join(
       requestsDirectory,
-      this._versionRangeToCachedRequestFilename(versionRange)
+      this._resourceVersionRangeToCachedRequestFilename(versionRange)
     );
     return requestFile;
   }
 
-  _versionRangeToCachedRequestFilename(versionRange) {
+  _resourceVersionRangeToCachedRequestFilename(versionRange) {
     return (versionRange.toString() || '_') + '.json';
   }
 
-  _cachedRequestFilenameToVersionRange(filename) {
+  _cachedResourceRequestFilenameToVersionRange(filename) {
     if (!filename.endsWith('.json')) {
       throw new Error(`Invalid cached request filename: ${formatString(filename)}`);
     }
@@ -191,7 +208,7 @@ export class RegistryCache {
     return new VersionRange(versionRange);
   }
 
-  async _loadCachedVersion(name, version, {throwIfNotFound = true} = {}) {
+  async _loadCachedResourceVersion(name, version, {throwIfNotFound = true} = {}) {
     const file = this._getCachedResourceFile(name, version);
     const directory = dirname(file);
     const definition = load(file, {throwIfNotFound});
@@ -201,7 +218,7 @@ export class RegistryCache {
     return {definition, directory};
   }
 
-  async _saveCachedVersion(name, version, definition, temporaryDirectory) {
+  async _saveCachedResourceVersion(name, version, definition, temporaryDirectory) {
     const file = this._getCachedResourceFile(name, version);
     const directory = dirname(file);
     if (existsSync(directory)) {
@@ -222,7 +239,7 @@ export class RegistryCache {
     return file;
   }
 
-  async _findLatestCachedVersion(name, versionRange) {
+  async _findLatestCachedResourceVersion(name, versionRange) {
     const {namespace, identifier} = parseResourceName(name);
     const resourceDirectory = join(this.resourceCacheDirectory, namespace, identifier);
     const versionsDirectory = join(resourceDirectory, RESOURCE_VERSIONS_DIRECTORY_NAME);
@@ -237,7 +254,7 @@ export class RegistryCache {
     return latestCachedVersion;
   }
 
-  _createExpirationDate() {
+  _createResourceExpirationDate() {
     // Randomly create an expiration date from 3 to 4 days
     const DAY = 24 * 60 * 60;
     let seconds = 3 * DAY;
@@ -246,9 +263,9 @@ export class RegistryCache {
     return new Date(Date.now() + milliseconds);
   }
 
-  async publish(definition, directory) {
-    await this.client.publish(definition, directory);
-    await this._invalidateCache(definition['@name'], definition['@version']);
+  async publishResource(definition, directory) {
+    await this.client.publishResource(definition, directory);
+    await this._invalidateResourceCache(definition['@name'], definition['@version']);
   }
 }
 

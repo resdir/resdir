@@ -8,7 +8,20 @@ import s3urls from '@mapbox/s3urls';
 import tempy from 'tempy';
 import isDirectory from 'is-directory';
 import readDirectory from 'recursive-readdir';
-import {formatString, formatPath, formatCode, prompt, task} from '@resdir/console';
+import opn from 'opn';
+import {
+  formatString,
+  formatPath,
+  formatCode,
+  formatURL,
+  print,
+  emptyLine,
+  printSuccess,
+  printText,
+  prompt,
+  confirm,
+  task
+} from '@resdir/console';
 import {load, save} from '@resdir/file-manager';
 import {validateResourceSpecifier} from '@resdir/resource-specifier';
 import generateSecret from '@resdir/secret-generator';
@@ -47,6 +60,8 @@ export class RegistryClient {
     this.awsS3ResourceUploadsPrefix = awsS3ResourceUploadsPrefix;
   }
 
+  // === Users ===
+
   async signUp(email) {
     return await this._signUpOrSignIn('SIGN_UP', email);
   }
@@ -61,7 +76,9 @@ export class RegistryClient {
     }
 
     while (!email) {
+      emptyLine();
       email = await prompt('Enter your email address:');
+      emptyLine();
     }
 
     const messagePart = action === 'SIGN_UP' ? 'sign up' : 'sign in';
@@ -80,12 +97,17 @@ export class RegistryClient {
 
     let completed;
     while (!completed) {
+      emptyLine();
       const verificationToken = await prompt(
-        'Check your mailbox and copy/paste the received token:'
+        'Check your mailbox and copy/paste the received token:',
+        {type: 'PASSWORD'}
       );
+      emptyLine();
+
       if (!verificationToken) {
         continue;
       }
+
       await task(
         async () => {
           const url = `${this.registryURL}/user/complete-${urlPart}`;
@@ -111,67 +133,165 @@ export class RegistryClient {
         const url = `${this.registryURL}/user/sign-out`;
         const refreshToken = this._loadRefreshToken();
         await postJSON(url, {refreshToken});
-        this._saveUserId(undefined);
-        this._saveRefreshToken(undefined);
-        this._saveAccessToken(undefined);
       },
       {intro: `Signing out...`, outro: `Signed out`}
     );
+
+    this._signOut();
+  }
+
+  _signOut() {
+    this._saveUserId(undefined);
+    this._saveRefreshToken(undefined);
+    this._saveAccessToken(undefined);
   }
 
   async showUser() {
     console.dir(await this.getUser(), {depth: null, colors: true});
   }
 
-  async getUser() {
-    const userId = this._ensureSignedInUser();
+  async deleteUser() {
+    const user = await this.getUser();
 
-    const {body: user} = await task(
+    emptyLine();
+    const okay = await confirm(
+      `Are you sure you want to delete your account (${formatString(user.email)})?`
+    );
+    emptyLine();
+
+    if (!okay) {
+      return;
+    }
+
+    emptyLine();
+    const reallyOkay = await confirm(`Really?`);
+    emptyLine();
+
+    if (!reallyOkay) {
+      return;
+    }
+
+    await task(
       async () => {
-        const url = `${this.registryURL}/users/${userId}`;
-        return await this._userRequest(authorization => getJSON(url, {authorization}));
+        const url = `${this.registryURL}/users/${user.id}`;
+        await this._userRequest(authorization => deleteJSON(url, {authorization}));
       },
-      {intro: `Fetching user...`, outro: `User fetched`}
+      {
+        intro: `Deleting ${formatString(user.email)} account...`,
+        outro: `${formatString(user.email)} account deleted`
+      }
     );
 
-    return user;
+    this._signOut();
   }
+
+  async getUser() {
+    if (!this._user) {
+      const userId = this._ensureSignedInUser();
+
+      const {body: user} = await task(
+        async () => {
+          const url = `${this.registryURL}/users/${userId}`;
+          return await this._userRequest(authorization => getJSON(url, {authorization}));
+        },
+        {intro: `Fetching user...`, outro: `User fetched`}
+      );
+
+      this._user = user;
+    }
+
+    return this._user;
+  }
+
+  // === Namespaces ===
 
   async createUserNamespace(namespace) {
     const user = await this.getUser();
+
     if (user.namespace) {
       throw new Error(`You already have a namespace (${formatString(user.namespace)})`);
     }
 
     while (!namespace) {
+      emptyLine();
       namespace = await prompt('Choose a name for your personal namespace:');
+      emptyLine();
     }
 
-    const {body: result} = await task(
-      async () => {
-        const url = `${this.registryURL}/namespaces/check-availability`;
-        return await this._userRequest(authorization =>
-          postJSON(url, {namespace}, {authorization})
+    const formattedNamespace = formatString(namespace);
+
+    const result = await this.checkNamespaceAvailability(namespace);
+
+    let {available, reason} = result;
+
+    if (!available && reason === 'INVALID') {
+      throw new Error(
+        `Sorry, this namespace is invalid. A namespace must be composed of lowercase letters, numbers and dashes ("-").`
+      );
+    }
+
+    if (!available && reason === 'TOO_SHORT') {
+      throw new Error(`Sorry, a namespace must have a minimum of 2 characters`);
+    }
+
+    if (!available && reason === 'ALREADY_TAKEN') {
+      throw new Error(`Sorry, this namespace is alrady taken`);
+    }
+
+    if (!available && reason === 'RESERVED') {
+      throw new Error(`Sorry, this namespace is reserved`);
+    }
+
+    if (!available && reason === 'IMPORTANT_GITHUB_USER') {
+      const message = `There is a popular GitHub user named ${formattedNamespace}. Although Resdir is not related to GitHub, most popular GitHub usernames are reserved so that their owner can get them in the future.`;
+
+      if (result.userHasGitHubAccountConnection) {
+        throw new Error(message);
+      }
+
+      emptyLine();
+      printText(message);
+      emptyLine();
+      printText(
+        `If the GitHub account named ${formattedNamespace} is yours and you care about this name, you can get it by connecting your Resdir account to your GitHub account. Don't worry, Resdir will only have access to your GitHub public information.`
+      );
+      emptyLine();
+      const okay = await confirm(`Do you want to continue?`, {default: true});
+      emptyLine();
+
+      if (!okay) {
+        return;
+      }
+
+      await this.connectGitHubAccount();
+
+      ({available, reason} = await this.checkNamespaceAvailability(namespace));
+
+      if (!available) {
+        await this.disconnectGitHubAccount();
+      }
+
+      if (!available && reason === 'IMPORTANT_GITHUB_USER') {
+        throw new Error(
+          `The username of the GitHub account you connected to is not ${formattedNamespace}`
         );
+      }
+    }
+
+    if (!available) {
+      throw new Error(`The namespace ${formattedNamespace} is not available`);
+    }
+
+    await task(
+      async () => {
+        const url = `${this.registryURL}/users/${user.id}/namespace`;
+        await this._userRequest(authorization => postJSON(url, {namespace}, {authorization}));
       },
       {
-        intro: `Checking namespace availibilty...`,
-        outro: `Namespace availibilty checked`
+        intro: `Creating namespace ${formatString(namespace)}...`,
+        outro: `Namespace ${formatString(namespace)} created`
       }
     );
-
-    console.log(result);
-
-    // await task(
-    //   async () => {
-    //     const url = `${this.registryURL}/users/${userId}/namespace`;
-    //     await this._userRequest(authorization => postJSON(url, {namespace}, {authorization}));
-    //   },
-    //   {
-    //     intro: `Creating namespace ${formatString(namespace)}...`,
-    //     outro: `Namespace ${formatString(namespace)} created`
-    //   }
-    // );
   }
 
   async removeUserNamespace() {
@@ -192,13 +312,103 @@ export class RegistryClient {
     );
   }
 
-  async fetch(specifier, options) {
-    const result = await this._fetch(specifier, options);
-    debug('fetch(%o, %o) => %o', specifier, options, result);
+  async checkNamespaceAvailability(namespace) {
+    const {body: result} = await task(
+      async () => {
+        const url = `${this.registryURL}/namespaces/check-availability`;
+        return await this._userRequest(authorization =>
+          postJSON(url, {namespace}, {authorization})
+        );
+      },
+      {
+        intro: `Checking namespace...`,
+        outro: `Namespace checked`
+      }
+    );
     return result;
   }
 
-  async _fetch(specifier, {cachedVersion} = {}) {
+  // === GitHub account connections ===
+
+  async connectGitHubAccount() {
+    this._ensureSignedInUser();
+
+    const {body: {gitHubAccountConnectionURL}} = await task(
+      async () => {
+        const url = `${this.registryURL}/user/start-connect-github-account`;
+        return await this._userRequest(authorization => postJSON(url, undefined, {authorization}));
+      },
+      {
+        intro: `Fetching connection URL...`,
+        outro: `Connection URL fetched`
+      }
+    );
+
+    printSuccess(`GitHub connection page opened in your browser`);
+    emptyLine();
+    printText(
+      `If the GitHub connection page doesn't open automatically, please copy/paste the following URL in your browser:`
+    );
+    emptyLine();
+    print(formatURL(gitHubAccountConnectionURL));
+
+    opn(gitHubAccountConnectionURL, {wait: false});
+
+    emptyLine();
+    const okay = await confirm(`Have you completed the GitHub connection?`, {default: true});
+    emptyLine();
+
+    if (!okay) {
+      throw new Error('GitHub account connection aborted');
+    }
+
+    await this.ensureGitHubConnection();
+  }
+
+  async disconnectGitHubAccount() {
+    this._ensureSignedInUser();
+
+    await task(
+      async () => {
+        const url = `${this.registryURL}/user/disconnect-github-account`;
+        await this._userRequest(authorization => postJSON(url, undefined, {authorization}));
+      },
+      {
+        intro: `Diconnecting GitHub account...`,
+        outro: `GitHub account diconnected`
+      }
+    );
+  }
+
+  async ensureGitHubConnection() {
+    this._ensureSignedInUser();
+
+    return await task(
+      async () => {
+        const url = `${this.registryURL}/user/check-github-connection`;
+        const {body: {connected}} = await this._userRequest(authorization =>
+          postJSON(url, undefined, {authorization})
+        );
+        if (!connected) {
+          throw new Error('GitHub account connection failed');
+        }
+      },
+      {
+        intro: `Checking GitHub account connection...`,
+        outro: `GitHub account connection checked`
+      }
+    );
+  }
+
+  // === Resources ===
+
+  async fetchResource(specifier, options) {
+    const result = await this._fetchResource(specifier, options);
+    debug('fetchResource(%o, %o) => %o', specifier, options, result);
+    return result;
+  }
+
+  async _fetchResource(specifier, {cachedVersion} = {}) {
     validateResourceSpecifier(specifier);
 
     let url = `${this.registryURL}/resources/${specifier}`;
@@ -223,12 +433,12 @@ export class RegistryClient {
     return {definition, directory};
   }
 
-  async publish(definition, directory) {
-    await this._publish(definition, directory);
-    debug('publish(%o, %o)', definition, directory);
+  async publishResource(definition, directory) {
+    await this._publishResource(definition, directory);
+    debug('publishResource(%o, %o)', definition, directory);
   }
 
-  async _publish(definition, directory) {
+  async _publishResource(definition, directory) {
     this._ensureSignedInUser();
 
     const name = definition['@name'];
@@ -289,7 +499,7 @@ export class RegistryClient {
     return files;
   }
 
-  // === User ===
+  // === User session ===
 
   _ensureSignedInUser({throwIfNoSignedInUser = true} = {}) {
     const userId = this._loadUserId();
@@ -344,7 +554,7 @@ export class RegistryClient {
     try {
       return await request();
     } catch (err) {
-      if (err.httpStatus === 401) {
+      if (err.status === 401) {
         accessToken = await this._refreshAccessToken();
         return await request();
       }
