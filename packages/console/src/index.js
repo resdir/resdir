@@ -141,6 +141,13 @@ export function formatCode(code) {
   return cyan('`' + String(code) + '`');
 }
 
+export function formatExample(example) {
+  if (example === undefined) {
+    throw new TypeError('\'example\' is undefined');
+  }
+  return gray('(e.g., "' + String(example) + '")');
+}
+
 export function formatText(text, {width = 80} = {}) {
   return wrapANSI(text, width);
 }
