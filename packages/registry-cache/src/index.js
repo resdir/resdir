@@ -81,6 +81,26 @@ export class RegistryCache {
     return await this.client.disconnectGitHubAccount(...args);
   }
 
+  async createOrganization(...args) {
+    return await this.client.createOrganization(...args);
+  }
+
+  async deleteOrganization(...args) {
+    return await this.client.deleteOrganization(...args);
+  }
+
+  async listUserOrganizations(...args) {
+    return await this.client.listUserOrganizations(...args);
+  }
+
+  async addOrganizationMember(...args) {
+    return await this.client.addOrganizationMember(...args);
+  }
+
+  async removeOrganizationMember(...args) {
+    return await this.client.removeOrganizationMember(...args);
+  }
+
   async fetchResource(specifier) {
     const result = await this._fetchResource(specifier);
     debug('fetchResource(%o) => %o', specifier, result);

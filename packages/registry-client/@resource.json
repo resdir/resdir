@@ -1,7 +1,7 @@
 {
   "@type": "js/esnext-package",
   "name": "@resdir/registry-client",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "Resdir registry client",
   "files": [
     "./dist"
