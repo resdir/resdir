@@ -1,7 +1,7 @@
 {
   "@type": "js/esnext-package",
   "name": "@resdir/registry-cache",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Resdir registry cache",
   "files": [
     "./dist"

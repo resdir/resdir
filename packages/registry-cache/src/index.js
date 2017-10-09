@@ -24,14 +24,14 @@ Cache is stored on disk as follow:
               ^0.1.0.json => {"version":"0.1.2","expiresOn":"..."}
             versions
               0.1.2
-                @resource.json
+                @resource.json5
                 dist
                   index.js
 */
 
 const RESOURCE_REQUESTS_DIRECTORY_NAME = 'requests';
 const RESOURCE_VERSIONS_DIRECTORY_NAME = 'versions';
-const RESOURCE_FILE_NAME = '@resource.json';
+const RESOURCE_FILE_NAME = '@resource.json5';
 
 export class RegistryCache {
   constructor({client, runDirectory}) {
