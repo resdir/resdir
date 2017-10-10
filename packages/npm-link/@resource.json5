@@ -1,0 +1,16 @@
+{
+  "@type": "js/esnext-package",
+  name: "@resdir/npm-link",
+  version: "0.1.0",
+  description: "'npm link' easier",
+  files: [
+    "./dist"
+  ],
+  main: "./dist/index.js",
+  "bin": {
+    "npm-link": "dist/bin/index.js"
+  },
+  dependencies: [
+    "fs-extra@^4.0.2"
+  ]
+}
