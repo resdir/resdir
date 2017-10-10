@@ -120,7 +120,8 @@ export async function publishPackage(directory, {access, debug} = {}) {
 // }
 
 export async function execNPM(args, options) {
-  const command = require.resolve('npm/bin/npm-cli.js');
+  // TODO: Include NPM has a dependency
+  const command = 'npm'; // require.resolve('npm/bin/npm-cli.js');
   args = [...args];
   await exec(command, args, {...options, commandName: 'npm'});
 }
