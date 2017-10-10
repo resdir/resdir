@@ -1,6 +1,7 @@
 import {resolve, join, relative} from 'path';
-import {readFileSync, existsSync} from 'fs';
+import {existsSync} from 'fs';
 import {removeSync, ensureSymlink} from 'fs-extra';
+import {load} from '@resdir/file-manager';
 
 export function run() {
   const currentDirectory = process.cwd();
@@ -13,12 +14,32 @@ export function run() {
 
   packageDirectory = resolve(currentDirectory, packageDirectory);
 
+  let name;
+
   const packageFile = join(packageDirectory, 'package.json');
+  const pkg = load(packageFile, {throwIfNotFound: false});
+  if (pkg) {
+    name = pkg.name;
+  }
 
-  const pkg = JSON.parse(readFileSync(packageFile, 'utf8'));
+  if (!name) {
+    const resourceFile = join(packageDirectory, '@resource.json5');
+    const resourceDefinition = load(resourceFile, {throwIfNotFound: false});
+    if (resourceDefinition) {
+      name = resourceDefinition.name;
+    }
+  }
 
-  if (!pkg.name) {
-    throw new Error('\'pkg.name\' is missing');
+  if (!name) {
+    const resourceFile = join(packageDirectory, '@resource.json');
+    const resourceDefinition = load(resourceFile, {throwIfNotFound: false});
+    if (resourceDefinition) {
+      name = resourceDefinition.name;
+    }
+  }
+
+  if (!name) {
+    throw new Error('Can\'t determine package name');
   }
 
   const modulesDirectory = join(currentDirectory, 'node_modules');
@@ -27,11 +48,11 @@ export function run() {
     throw new Error('\'node_modules\' directory not found in the current directory');
   }
 
-  const linkFile = join(modulesDirectory, pkg.name);
+  const linkFile = join(modulesDirectory, name);
 
   removeSync(linkFile);
 
   ensureSymlink(relative(currentDirectory, packageDirectory), linkFile);
 
-  console.log(`'${pkg.name}' linked`);
+  console.log(`'${name}' linked`);
 }
