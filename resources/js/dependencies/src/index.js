@@ -1,9 +1,6 @@
-import {join} from 'path';
 import {omit, isEmpty, remove, sortBy, lowerCase} from 'lodash';
-import {removeSync} from 'fs-extra';
-import tempy from 'tempy';
 import {task, formatString} from '@resdir/console';
-import {updatePackageFile, installPackage} from '@resdir/package-manager';
+import {updatePackageFile, removePackageFile, installPackage} from '@resdir/package-manager';
 
 import Dependency from './dependency';
 
@@ -107,14 +104,16 @@ export default base =>
     }
 
     async _installDependencies({debug} = {}) {
-      const packageDirectory = tempy.directory();
+      const packageDirectory = this.$getParent().$getCurrentDirectory();
+      let packageFileCreated;
       try {
-        this._updatePackageFile(packageDirectory);
-        const directory = this.$getParent().$getCurrentDirectory();
-        const modulesDirectory = join(directory, 'node_modules');
-        await installPackage(packageDirectory, {modulesDirectory, debug});
+        const {status} = this._updatePackageFile(packageDirectory);
+        packageFileCreated = status === 'CREATED';
+        await installPackage(packageDirectory, {debug});
       } finally {
-        removeSync(packageDirectory);
+        if (packageFileCreated) {
+          removePackageFile(packageDirectory);
+        }
       }
     }
 
@@ -158,7 +157,7 @@ export default base =>
         }
       };
 
-      updatePackageFile(directory, {
+      return updatePackageFile(directory, {
         dependencies: getDependencies('production'),
         peerDependencies: getDependencies('peer'),
         optionalDependencies: getDependencies('optional'),

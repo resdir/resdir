@@ -1,5 +1,6 @@
 import {join} from 'path';
-import {entries} from 'lodash';
+import {existsSync, unlinkSync} from 'fs';
+import {entries, difference} from 'lodash';
 import {execFile, spawn} from 'child-process-promise';
 import {formatString, formatCode, formatPath} from '@resdir/console';
 import {load, save} from '@resdir/file-manager';
@@ -11,11 +12,16 @@ const NPM_REGISTRY_CACHE_TIME = 60 * 1000; // 1 minute
 export const PACKAGE_FILENAME = 'package.json';
 
 export function updatePackageFile(directory, definition) {
+  let status;
+
   const file = join(directory, PACKAGE_FILENAME);
 
   let pkg = load(file, {throwIfNotFound: false});
-  if (!pkg) {
+  if (pkg) {
+    status = 'UPDATED';
+  } else {
     pkg = {};
+    status = 'CREATED';
   }
 
   let managed = pkg['@managed'];
@@ -39,25 +45,64 @@ export function updatePackageFile(directory, definition) {
   pkg['@managed'] = managed;
 
   save(file, pkg);
+
+  return {status};
 }
 
-export async function installPackage(
-  directory,
-  {production, useLockfile, modulesDirectory, debug} = {}
-) {
+export function removePackageFile(directory) {
+  const file = join(directory, PACKAGE_FILENAME);
+  if (existsSync(file)) {
+    unlinkSync(file);
+  }
+}
+
+export function removePackageFileIfFullyManaged(directory) {
+  const file = join(directory, PACKAGE_FILENAME);
+
+  const pkg = load(file, {throwIfNotFound: false}) || {};
+
+  const packageProperties = Object.keys(pkg);
+  const managedProperties = (pkg['@managed'] && pkg['@managed'].properties) || [];
+  const remainingProperties = difference(packageProperties, managedProperties, ['@managed']);
+
+  if (remainingProperties.length === 0) {
+    unlinkSync(file);
+  }
+}
+
+export async function installPackage(directory, {production, useLockfile, debug} = {}) {
+  // TODO: try to use https://github.com/pnpm/pnpm
+
   const args = ['install'];
+
   if (production) {
     args.push('--production');
   }
+
   if (!useLockfile) {
-    args.push('--no-lockfile');
+    args.push('--no-package-lock');
   }
-  if (modulesDirectory) {
-    args.push('--modules-folder');
-    args.push(modulesDirectory);
-  }
-  await execYarn(args, {directory, debug});
+
+  await execNPM(args, {directory, debug});
 }
+
+// export async function installPackage(
+//   directory,
+//   {production, useLockfile, modulesDirectory, debug} = {}
+// ) {
+//   const args = ['install'];
+//   if (production) {
+//     args.push('--production');
+//   }
+//   if (!useLockfile) {
+//     args.push('--no-lockfile');
+//   }
+//   if (modulesDirectory) {
+//     args.push('--modules-folder');
+//     args.push(modulesDirectory);
+//   }
+//   await execYarn(args, {directory, debug});
+// }
 
 export async function publishPackage(directory, {access, debug} = {}) {
   const args = ['publish'];
@@ -68,15 +113,15 @@ export async function publishPackage(directory, {access, debug} = {}) {
   await execNPM(args, {directory, debug});
 }
 
-export async function execYarn(args, options) {
-  const command = require.resolve('yarn/bin/yarn.js');
-  args = [...args, '--no-progress', '--no-emoji', '--non-interactive'];
-  await exec(command, args, {...options, commandName: 'yarn'});
-}
+// export async function execYarn(args, options) {
+//   const command = require.resolve('yarn/bin/yarn.js');
+//   args = [...args, '--no-progress', '--no-emoji', '--non-interactive'];
+//   await exec(command, args, {...options, commandName: 'yarn'});
+// }
 
 export async function execNPM(args, options) {
   const command = require.resolve('npm/bin/npm-cli.js');
-  args = [...args, '--no-shrinkwrap'];
+  args = [...args];
   await exec(command, args, {...options, commandName: 'npm'});
 }
 

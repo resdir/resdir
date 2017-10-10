@@ -1,10 +1,8 @@
 {
   "@type": "js/esnext-resource",
   "@name": "js/package",
-  "@version": "0.1.1",
-  "@files": [
-    "./dist"
-  ],
+  "@version": "0.1.2",
+  "@files": ["./dist"],
   "dependencies": [
     "fs-extra@^4.0.0",
     "lodash@^4.17.4",
@@ -96,10 +94,7 @@
     },
     "updatePackageFile": {
       "@type": "command",
-      "@listen": [
-        "after:@build",
-        "after:@save"
-      ]
+      "@listen": ["after:@build", "after:@save"]
     },
     "_createJSPackage": {
       "@type": "command",

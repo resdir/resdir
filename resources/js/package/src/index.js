@@ -93,7 +93,9 @@ export default base =>
       const file = join(directory, 'src', 'index.js');
       outputFileSync(file, PACKAGE_CODE);
 
-      GitIgnore.load(directory).add(GIT_IGNORE).save();
+      GitIgnore.load(directory)
+        .add(GIT_IGNORE)
+        .save();
 
       this.name = name;
       this.$name = undefined;

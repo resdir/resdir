@@ -3,11 +3,15 @@
   "@name": "resdir/example",
   "@version": "0.2.12",
   "@implementation": "./dist",
-  "@files": ["./dist"],
+  "@files": [
+    "./dist"
+  ],
   "@option": {
     "color": "green"
   },
-  "dependencies": ["chalk@^2.0.1"],
+  "dependencies": [
+    "chalk@^2.1.0"
+  ],
   "hello": {
     "@type": "command",
     "@listen": "hi"
