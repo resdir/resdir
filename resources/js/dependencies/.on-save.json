@@ -3,6 +3,7 @@
     "srcDir": "src",
     "destDir": "dist",
     "files": "**/*.js",
-    "command": "./node_modules/.bin/babel ${srcFile} --out-file ${destFile}"
+    "command":
+      "./node_modules/.bin/babel ${srcFile} --out-file ${destFile} && ./node_modules/.bin/rollup --config"
   }
 ]

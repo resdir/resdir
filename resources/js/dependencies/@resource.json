@@ -1,7 +1,7 @@
 {
   "@name": "js/dependencies",
-  "@version": "0.1.1",
-  "@files": ["./dist", "package.json"],
+  "@version": "0.1.2",
+  "@files": ["bundle.js"],
   "_testJSDependencies": {
     "@type": "macro",
     "@expression": "./tests run",
@@ -11,7 +11,7 @@
   "@export": {
     "@alias": ["dependencies", "dependency", "deps", "dep"],
     "@runtime": "node@>=6.10.0",
-    "@implementation": "./dist",
+    "@implementation": "./bundle.js",
     "add": {
       "@type": "command",
       "@parameter": {

@@ -3,7 +3,7 @@
   "description": "Resdir js/dependencies resource",
   "private": true,
   "scripts": {
-    "build": "rm -rf dist && babel src --out-dir dist"
+    "build": "rm -rf dist && babel src --out-dir dist && rollup --config"
   },
   "babel": {
     "presets": [
@@ -37,6 +37,10 @@
     "babel-cli": "^6.24.1",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.5.2"
+    "babel-preset-env": "^1.5.2",
+    "rollup": "^0.50.0",
+    "rollup-plugin-commonjs": "^8.2.1",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.0"
   }
 }
