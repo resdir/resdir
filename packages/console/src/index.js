@@ -1,6 +1,5 @@
-import {gray, cyan, yellow} from 'chalk';
+import {gray, cyan, yellow, green, red} from 'chalk';
 import ora from 'ora';
-import cliSpinners from 'cli-spinners';
 import windowSize from 'window-size';
 import sliceANSI from 'slice-ansi';
 import read from 'read';
@@ -173,11 +172,11 @@ export function formatMessage(message, {info, status} = {}) {
   }
 
   if (status === 'progress') {
-    status = getProgressSymbol() + '  ';
+    status = getProgressSymbol() + ' ';
   } else if (status === 'success') {
-    status = getSuccessSymbol() + '  ';
+    status = getSuccessSymbol() + ' ';
   } else if (status === 'error') {
-    status = getErrorSymbol() + '  ';
+    status = getErrorSymbol() + ' ';
   } else if (status === undefined) {
     status = '';
   } else {
@@ -187,16 +186,43 @@ export function formatMessage(message, {info, status} = {}) {
   return `${status}${message}${info}`;
 }
 
-export function getProgressSymbol() {
-  return '🏃';
-}
-
 export function getSuccessSymbol() {
-  return '⚡';
+  return emojisAreSupported() ? '⚡' : green('✓');
 }
 
 export function getErrorSymbol() {
-  return '😡';
+  return emojisAreSupported() ? '😡' : red('✗');
+}
+
+export function getProgressSymbol() {
+  return emojisAreSupported() ? '🏃' : gray('⠒');
+}
+
+export function getProgressSpinner() {
+  // Source: https://github.com/sindresorhus/cli-spinners
+  return emojisAreSupported() ?
+    {interval: 140, frames: ['🚶', '🏃']} :
+    {
+      interval: 80,
+      frames: ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'].map(char => gray(char))
+    };
+}
+
+let _emojisAreSupported;
+export function emojisAreSupported() {
+  // TODO: Support more terminals
+  if (_emojisAreSupported === undefined) {
+    if (
+      process.env.TERM_PROGRAM === 'Apple_Terminal' &&
+      Number(process.env.TERM_PROGRAM_VERSION) >= 400
+    ) {
+      // macOS High Sierra Terminal
+      _emojisAreSupported = true;
+    } else {
+      _emojisAreSupported = false;
+    }
+  }
+  return _emojisAreSupported;
 }
 
 class AbstractTaskView {
@@ -242,7 +268,7 @@ class VerboseTaskView extends AbstractTaskView {
 class AnimatedTaskView extends AbstractTaskView {
   constructor({parent, outro}) {
     super({parent, outro});
-    this.spinner = ora({spinner: cliSpinners.runner});
+    this.spinner = ora({spinner: getProgressSpinner()});
   }
 
   start(message) {
@@ -252,11 +278,11 @@ class AnimatedTaskView extends AbstractTaskView {
   }
 
   complete() {
-    this.spinner.stopAndPersist({text: this.outro, symbol: getSuccessSymbol() + ' '});
+    this.spinner.stopAndPersist({text: this.outro, symbol: getSuccessSymbol()});
   }
 
   fail() {
-    this.spinner.stopAndPersist({symbol: getErrorSymbol() + ' '});
+    this.spinner.stopAndPersist({symbol: getErrorSymbol()});
   }
 
   renderMessage({info} = {}) {

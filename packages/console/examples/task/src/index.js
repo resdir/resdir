@@ -1,6 +1,8 @@
 import sleep from 'sleep-promise';
 import {task} from '../../../dist';
 
+const verbose = process.argv.includes('--verbose');
+
 (async () => {
   await task(
     async () => {
@@ -26,6 +28,6 @@ import {task} from '../../../dist';
       );
       await sleep(1000);
     },
-    {intro: 'Publishing resource...', outro: 'Resource published'}
+    {intro: 'Publishing resource...', outro: 'Resource published', verbose}
   );
 })().catch(err => console.error(err));
