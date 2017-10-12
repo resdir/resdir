@@ -7,12 +7,15 @@ import {task, formatString, formatPath} from '@resdir/console';
 
 export default base =>
   class Transpiler extends base {
-    async run(...files) {
-      const {verbose, quiet, debug} = files.pop();
-
+    async run({file, verbose, quiet, debug}) {
       let name = this.$getParent().$name;
       if (name) {
         name = formatString(name);
+      }
+
+      const files = [];
+      if (file) {
+        files.push(file); // TODO: Handle multiple files
       }
 
       await task(

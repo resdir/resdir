@@ -1,10 +1,10 @@
-import {join, resolve} from 'path';
+import {resolve} from 'path';
 import jest from 'jest';
 import {task} from '@resdir/console';
 
 export default base =>
   class JestResource extends base {
-    async run(testPathPattern, {verbose, quiet, debug}) {
+    async run({testPathPattern, verbose, quiet, debug}) {
       await task(
         async () => {
           await this._run({testPathPattern, verbose, quiet, debug});

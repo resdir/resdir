@@ -24,9 +24,9 @@ describe('js/dependencies', () => {
 
     const pkg = await Package.$extend({dependencies: ['json5@^1.0.0', 'lodash']});
     expect(await pkg.dependencies.count()).toBe(2);
-    expect(await pkg.dependencies.includes('json5')).toBe(true);
-    expect(await pkg.dependencies.includes('lodash')).toBe(true);
-    expect(await pkg.dependencies.includes('babel')).toBe(false);
+    expect(await pkg.dependencies.includes({name: 'json5'})).toBe(true);
+    expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(true);
+    expect(await pkg.dependencies.includes({name: 'babel'})).toBe(false);
   });
 
   test('normalization and serialization', async () => {
@@ -42,9 +42,13 @@ describe('js/dependencies', () => {
     emptyDirSync(directory);
     const pkg = await Package.$extend({}, {directory});
 
-    expect(await pkg.dependencies.includes('lodash')).toBe(false);
-    await pkg.dependencies.add('lodash', {quiet: true});
-    expect(await pkg.dependencies.includes('lodash')).toBe(true);
+    expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(false);
+
+    expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
+
+    await pkg.dependencies.add({specifier: 'lodash', quiet: true});
+
+    expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(true);
 
     let resourceDefinition = load(pkg.$getResourceFile());
     expect(resourceDefinition.dependencies).toHaveLength(1);
@@ -52,13 +56,14 @@ describe('js/dependencies', () => {
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(true);
 
-    await pkg.dependencies.remove('lodash', {quiet: true});
-    expect(await pkg.dependencies.includes('lodash')).toBe(false);
+    await pkg.dependencies.remove({name: 'lodash', quiet: true});
+
+    expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(false);
 
     resourceDefinition = load(pkg.$getResourceFile());
     expect(resourceDefinition.dependencies).toBeUndefined();
 
-    // expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
+    expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
   });
 
   test('add development dependency', async () => {
@@ -66,9 +71,13 @@ describe('js/dependencies', () => {
     emptyDirSync(directory);
     const pkg = await Package.$extend({}, {directory});
 
-    expect(await pkg.dependencies.includes('lodash')).toBe(false);
-    await pkg.dependencies.add('lodash@4.5.1', {development: true, quiet: true});
-    expect(await pkg.dependencies.includes('lodash')).toBe(true);
+    expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(false);
+
+    expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
+
+    await pkg.dependencies.add({specifier: 'lodash@4.5.1', development: true, quiet: true});
+
+    expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(true);
 
     let resourceDefinition = load(pkg.$getResourceFile());
     expect(resourceDefinition.dependencies).toHaveLength(1);
@@ -80,12 +89,13 @@ describe('js/dependencies', () => {
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(true);
 
-    await pkg.dependencies.remove('lodash', {quiet: true});
-    expect(await pkg.dependencies.includes('lodash')).toBe(false);
+    await pkg.dependencies.remove({name: 'lodash', quiet: true});
+
+    expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(false);
 
     resourceDefinition = load(pkg.$getResourceFile());
     expect(resourceDefinition.dependencies).toBeUndefined();
 
-    // expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
+    expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
   });
 });

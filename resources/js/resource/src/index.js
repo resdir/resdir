@@ -12,13 +12,15 @@ const GIT_IGNORE = ['.DS_STORE', 'node_modules', '*.log'];
 
 export default base =>
   class JSResource extends base {
-    async _createJSResource(_name) {
+    async _createJSResource() {
       const directory = this.$getCurrentDirectory();
 
       const implementation = join(directory, 'src', 'resource.js');
       outputFileSync(implementation, RESOURCE_IMPLEMENTATION);
 
-      GitIgnore.load(directory).add(GIT_IGNORE).save();
+      GitIgnore.load(directory)
+        .add(GIT_IGNORE)
+        .save();
 
       this.$implementation = './src/resource.js';
 

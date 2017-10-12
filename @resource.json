@@ -1,7 +1,7 @@
 {
   "_test": {
     "@type": "macro",
-    "@expressions": [
+    "@expression": [
       "./packages/util @test",
       "./packages/version @test",
       "./packages/version-range @test",
@@ -14,7 +14,7 @@
   },
   "publish": {
     "@type": "macro",
-    "@expressions": [
+    "@expression": [
       "./resources/js/dependencies @publish",
       "./resources/js/resource @publish",
       "./resources/js/jest @publish",

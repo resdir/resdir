@@ -1,6 +1,6 @@
 {
   "@name": "js/transpiler",
-  "@version": "0.1.3",
+  "@version": "0.1.4",
   "@files": ["./dist"],
   "dependencies": {
     "@type": "js/dependencies",
@@ -30,11 +30,6 @@
   "@export": {
     "@runtime": "node@>=6.10.0",
     "@implementation": "./dist",
-    "@options": {
-      "verbose": false,
-      "quiet": false,
-      "debug": false
-    },
     "source": "./src",
     "destination": "./dist",
     "extensions": [".js", ".jsx", ".es6", ".es"],
@@ -47,14 +42,15 @@
       "@type": "string"
     },
     "run": {
-      "@type": "command",
-      "@alias": "run",
-      "@parameter": {
-        "files": {
-          "@type": "string"
-        }
-      },
-      "@variadic": true
+      "@type": "method",
+      "@parameters": {
+        "file": {"@type": "string", "@position": 0}
+      }
+    },
+    "@parameters": {
+      "verbose": false,
+      "quiet": false,
+      "debug": false
     }
   }
 }

@@ -1,32 +1,23 @@
 {
   "@type": "js/esnext-resource",
   "@name": "js/esnext-package",
-  "@version": "0.1.0",
-  "@files": [
-    "./dist"
-  ],
-  "dependencies": [
-    "@resdir/gitignore-manager@^0.1.0"
-  ],
+  "@version": "0.1.1",
+  "@files": ["./dist"],
+  "dependencies": ["@resdir/gitignore-manager@^0.1.0"],
   "@export": {
     "@type": "js/package",
     "@implementation": "./dist",
     "transpiler": {
       "@type": "js/transpiler",
       "run": {
-        "@listen": [
-          "after:@build",
-          "after:@fileModified"
-        ]
+        "@listen": ["after:@build", "after:@fileModified"]
       }
     },
     "_createJSESNextPackage": {
-      "@type": "command",
+      "@type": "method",
       "@hidden": true,
-      "@parameter": {
-        "name": {
-          "@type": "string"
-        }
+      "@parameters": {
+        "name": {"@type": "string", "@position": 0}
       },
       "@listen": "after:@create"
     }

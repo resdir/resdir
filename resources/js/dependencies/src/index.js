@@ -14,8 +14,7 @@ export default base =>
       this._dependencies = dependencies;
     }
 
-    async add(...packages) {
-      const {production, development, peer, optional, verbose, quiet, debug} = packages.pop();
+    async add({specifier, production, development, peer, optional, verbose, quiet, debug}) {
       let type;
       if (production) {
         type = 'production';
@@ -29,8 +28,13 @@ export default base =>
         type = 'production';
       }
 
-      for (const packageIdentifier of packages) {
-        const dependency = new Dependency(packageIdentifier, {type});
+      const specifiers = [];
+      if (specifier) {
+        specifiers.push(specifier); // TODO: Handle multiple packages
+      }
+
+      for (const specifier of specifiers) {
+        const dependency = new Dependency(specifier, {type});
         await task(
           async () => {
             await this._addDependency(dependency);
@@ -48,10 +52,13 @@ export default base =>
       }
     }
 
-    async remove(...packages) {
-      const {verbose, quiet, debug} = packages.pop();
+    async remove({name, verbose, quiet, debug}) {
+      const names = [];
+      if (name) {
+        names.push(name); // TODO: Handle multiple packages
+      }
 
-      for (const name of packages) {
+      for (const name of names) {
         await task(
           async () => {
             this._removeDependency(name);
@@ -125,7 +132,7 @@ export default base =>
       return this._dependencies.length;
     }
 
-    async includes(name) {
+    async includes({name}) {
       const found = this._dependencies.find(dependency => dependency.name === name);
       return Boolean(found);
     }

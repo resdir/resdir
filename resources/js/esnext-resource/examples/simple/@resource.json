@@ -6,10 +6,10 @@
   "@implementation": "./dist",
   "dependencies": ["chalk@^2.0.1"],
   "hello": {
-    "@type": "command",
+    "@type": "method",
     "@listen": "hi"
   },
-  "@options": {
+  "@parameters": {
     "color": "green"
   }
 }

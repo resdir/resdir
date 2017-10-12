@@ -4,9 +4,9 @@
   "@implementation": "./src/index.js",
   "dependencies": ["chalk@^2.0.1"],
   "hello": {
-    "@type": "command"
+    "@type": "method"
   },
-  "@options": {
+  "@parameters": {
     "color": "green"
   }
 }

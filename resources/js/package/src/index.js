@@ -87,7 +87,7 @@ export default base =>
       await publishPackage(directory, {access, debug});
     }
 
-    async _createJSPackage(name) {
+    async _createJSPackage({name}) {
       const directory = this.$getCurrentDirectory();
 
       const file = join(directory, 'src', 'index.js');

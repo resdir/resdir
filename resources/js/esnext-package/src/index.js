@@ -4,9 +4,11 @@ const GIT_IGNORE = ['/dist'];
 
 export default base =>
   class JSESNextPackage extends base {
-    async _createJSESNextPackage(_name) {
+    async _createJSESNextPackage() {
       const directory = this.$getCurrentDirectory();
-      GitIgnore.load(directory).add(GIT_IGNORE).save();
+      GitIgnore.load(directory)
+        .add(GIT_IGNORE)
+        .save();
 
       this.files = ['./dist'];
       await this.$setChild('main', './dist/index.js');

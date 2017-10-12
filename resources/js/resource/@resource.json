@@ -1,6 +1,6 @@
 {
   "@name": "js/resource",
-  "@version": "0.1.1",
+  "@version": "0.1.2",
   "@files": ["./dist"],
   "transpiler": {
     "@type": "js/transpiler",
@@ -22,11 +22,9 @@
       "@type": "js/dependencies"
     },
     "_createJSResource": {
-      "@type": "command",
-      "@parameter": {
-        "name": {
-          "@type": "string"
-        }
+      "@type": "method",
+      "@parameters": {
+        "name": {"@type": "string", "@position": 0}
       },
       "@hidden": true,
       "@listen": "after:@create"

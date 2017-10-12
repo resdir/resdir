@@ -15,7 +15,7 @@ export class Dependency {
     }
 
     if (typeof definition === 'string') {
-      const {name, version, location} = Dependency.parsePackageIdentifier(definition);
+      const {name, version, location} = Dependency.parsePackageSpecifier(definition);
       if (!name) {
         throw new Error(`Dependency ${formatCode('name')} is missing`);
       }
@@ -47,7 +47,7 @@ export class Dependency {
     this._version = version;
   }
 
-  static parsePackageIdentifier(pkg) {
+  static parsePackageSpecifier(pkg) {
     if (pkg.startsWith('.') || isAbsolute(pkg)) {
       let location = pkg;
       const packageFile = join(location, 'package.json');

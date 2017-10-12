@@ -1,6 +1,6 @@
 {
   "@name": "js/esnext-resource",
-  "@version": "0.1.1",
+  "@version": "0.1.2",
   "@files": ["./dist"],
   "transpiler": {
     "@type": "js/transpiler",
@@ -28,12 +28,10 @@
       }
     },
     "_createJSESNextResource": {
-      "@type": "command",
+      "@type": "method",
       "@hidden": true,
-      "@parameter": {
-        "name": {
-          "@type": "string"
-        }
+      "@parameters": {
+        "name": {"@type": "string", "@position": 0}
       },
       "@listen": "after:@create"
     }
