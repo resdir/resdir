@@ -113,37 +113,22 @@ export async function confirm(message, options = {}) {
 }
 
 export function formatString(string) {
-  if (string === undefined) {
-    throw new TypeError('\'string\' is undefined');
-  }
   return yellow('\'' + String(string) + '\'');
 }
 
 export function formatURL(url) {
-  if (url === undefined) {
-    throw new TypeError('\'url\' is undefined');
-  }
   return cyan.underline(String(url));
 }
 
 export function formatPath(path) {
-  if (path === undefined) {
-    throw new TypeError('\'path\' is undefined');
-  }
   return yellow('\'' + String(path) + '\'');
 }
 
 export function formatCode(code) {
-  if (code === undefined) {
-    throw new TypeError('\'code\' is undefined');
-  }
   return cyan('`' + String(code) + '`');
 }
 
 export function formatExample(example) {
-  if (example === undefined) {
-    throw new TypeError('\'example\' is undefined');
-  }
   return gray('(e.g., "' + String(example) + '")');
 }
 
@@ -152,10 +137,6 @@ export function formatText(text, {width = 80} = {}) {
 }
 
 export function formatMessage(message, {info, status} = {}) {
-  if (message === undefined) {
-    throw new TypeError('\'message\' is undefined');
-  }
-
   message = String(message);
 
   if (info) {
