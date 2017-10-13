@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-resource",
+  "@import": "js/esnext-resource",
   "@name": "resdir/example",
   "@version": "0.3.0",
   "@code": "./dist",
@@ -13,7 +13,7 @@
     "color": "green"
   },
   "tests": {
-    "@type": "js/esnext-jest",
+    "@import": "js/esnext-jest",
     "@directory": "./tests",
     "testEnvironment": "node",
     "run": {

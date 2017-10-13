@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "name": "@resdir/github-api-client",
   "version": "0.1.4",
   "description": "Convenient wrapper over GitHub API v3",

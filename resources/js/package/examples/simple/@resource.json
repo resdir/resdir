@@ -1,5 +1,5 @@
 {
-  "@type": "../..",
+  "@import": "../..",
   "name": "@resdir/js-package-simple-example",
   "version": "1.0.0",
   "description": "Example of simple package",

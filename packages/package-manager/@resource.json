@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "name": "@resdir/package-manager",
   "version": "0.1.18",
   "description": "Abstract Node package managers",

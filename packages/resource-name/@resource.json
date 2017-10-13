@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "name": "@resdir/resource-name",
   "version": "0.1.6",
   "description": "Useful functions to handle Resource's names",

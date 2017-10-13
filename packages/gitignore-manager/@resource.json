@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "name": "@resdir/gitignore-manager",
   "version": "0.1.1",
   "description": "Help managing gitignore files",

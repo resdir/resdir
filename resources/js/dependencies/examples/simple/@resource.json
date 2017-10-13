@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@type": "../..",
+    "@import": "../..",
     "@value": [
       "lodash@^4.17.4"
     ]

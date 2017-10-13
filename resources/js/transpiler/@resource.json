@@ -1,9 +1,9 @@
 {
   "@name": "js/transpiler",
-  "@version": "0.1.4",
+  "@version": "0.1.5",
   "@files": ["./dist"],
   "dependencies": {
-    "@type": "js/dependencies",
+    "@import": "js/dependencies",
     "@value": [
       {
         "name": "babel-cli",

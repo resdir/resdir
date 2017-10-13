@@ -1,6 +1,6 @@
 {
   "@name": "resdir/js-resource-simple-example",
-  "@type": "../..",
+  "@import": "../..",
   "@code": "./src/index.js",
   "dependencies": ["chalk@^2.0.1"],
   "hello": {

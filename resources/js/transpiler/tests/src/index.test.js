@@ -33,7 +33,7 @@ describe('js/transpiler', () => {
     const definition = {
       '@name': 'resdir/js-transpiler-person-test',
       transpiler: {
-        '@type': resolve(__dirname, '../..')
+        '@import': resolve(__dirname, '../..')
       }
     };
     save(resourceFile, definition);

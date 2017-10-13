@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "name": "@resdir/file-manager",
   "version": "0.1.1",
   "description": "Help managing files in most common formats (JSON, JSON5, YAML)",

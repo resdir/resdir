@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   name: "@resdir/npm-link",
   version: "0.1.1",
   description: "'npm link' easier",

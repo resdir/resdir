@@ -1,6 +1,6 @@
 {
   "@name": "js/dependencies",
-  "@version": "0.1.3",
+  "@version": "0.1.4",
   "@files": ["bundle.js"],
   "_testJSDependencies": {
     "@type": "macro",

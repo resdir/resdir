@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "description": "Miscellaneous functions used by Resdir to manage console",
   "main": "./dist/index.js",
   "version": "0.1.15",

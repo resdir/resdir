@@ -1,6 +1,6 @@
 {
   "@name": "resdir/js-transpiler-person-example",
   "transpiler": {
-    "@type": "../.."
+    "@import": "../.."
   }
 }

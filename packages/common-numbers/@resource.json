@@ -1,15 +1,11 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "name": "@resdir/common-numbers",
   "version": "0.1.1",
   "description": "List of common numbers (ex.: 3.14, 666, 911,...)",
-  "files": [
-    "./dist"
-  ],
+  "files": ["./dist"],
   "main": "./dist/index.js",
-  "dependencies": [
-    "node-status-codes@^2.0.1"
-  ],
+  "dependencies": ["node-status-codes@^2.0.1"],
   "transpiler": {
     "targets": {
       "node": 6

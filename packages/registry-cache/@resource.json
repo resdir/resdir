@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "name": "@resdir/registry-cache",
   "version": "0.1.10",
   "description": "Resdir registry cache",

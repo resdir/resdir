@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "name": "@resdir/version-range",
   "version": "0.1.9",
   "description": "VersionRange class used by Resdir",
@@ -21,7 +21,7 @@
     }
   },
   "tests": {
-    "@type": "js/esnext-jest",
+    "@import": "js/esnext-jest",
     "@directory": "./tests",
     "testEnvironment": "node",
     "run": {

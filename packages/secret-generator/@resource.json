@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "name": "@resdir/secret-generator",
   "version": "1.0.3",
   "description": "Generate a secret",
@@ -16,7 +16,7 @@
     }
   },
   "tests": {
-    "@type": "js/esnext-jest",
+    "@import": "js/esnext-jest",
     "@directory": "./tests",
     "dependencies": [
       "lodash@^4.17.4"

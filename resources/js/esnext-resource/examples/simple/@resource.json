@@ -1,5 +1,5 @@
 {
-  "@type": "../..",
+  "@import": "../..",
   "@name": "resdir/js-esnext-resource-simple-example",
   "@version": "0.1.0",
   "@files": ["./dist"],

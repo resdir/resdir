@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "name": "@resdir/namespace",
   "version": "0.1.5",
   "description": "Useful functions to handle namespaces",

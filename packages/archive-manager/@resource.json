@@ -1,11 +1,9 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "name": "@resdir/archive-manager",
   "version": "0.1.2",
   "description": "Manage archive files (currently implemented: zip and unzip)",
-  "files": [
-    "./dist"
-  ],
+  "files": ["./dist"],
   "main": "./dist/index.js",
   "dependencies": [
     "fs-extra@^4.0.0",

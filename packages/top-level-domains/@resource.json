@@ -1,5 +1,5 @@
 {
-  "@type": "js/esnext-package",
+  "@import": "js/esnext-package",
   "name": "@resdir/top-level-domains",
   "version": "0.1.1",
   "description": "List of Top Level Domains",
