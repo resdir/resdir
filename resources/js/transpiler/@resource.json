@@ -29,7 +29,7 @@
   },
   "@export": {
     "@runtime": "node@>=6.10.0",
-    "@implementation": "./dist",
+    "@code": "./dist",
     "source": "./src",
     "destination": "./dist",
     "extensions": [".js", ".jsx", ".es6", ".es"],

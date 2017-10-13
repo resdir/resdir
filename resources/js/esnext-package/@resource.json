@@ -6,7 +6,7 @@
   "dependencies": ["@resdir/gitignore-manager@^0.1.0"],
   "@export": {
     "@type": "js/package",
-    "@implementation": "./dist",
+    "@code": "./dist",
     "transpiler": {
       "@type": "js/transpiler",
       "run": {

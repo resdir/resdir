@@ -11,7 +11,7 @@
   "@export": {
     "@alias": ["dependencies", "dependency", "deps", "dep"],
     "@runtime": "node@>=6.10.0",
-    "@implementation": "./bundle.js",
+    "@code": "./bundle.js",
     "add": {
       "@type": "method",
       "@parameters": {

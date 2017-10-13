@@ -2,7 +2,7 @@
   "@type": "js/esnext-resource",
   "@name": "resdir/example",
   "@version": "0.3.0",
-  "@implementation": "./dist",
+  "@code": "./dist",
   "@files": ["./dist"],
   "dependencies": ["chalk@^2.1.0"],
   "hello": {

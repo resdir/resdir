@@ -17,7 +17,7 @@
   },
   "@export": {
     "@type": "js/resource",
-    "@implementation": "./dist",
+    "@code": "./dist",
     "transpiler": {
       "@type": "js/transpiler",
       "targets": {

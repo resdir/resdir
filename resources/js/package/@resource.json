@@ -27,13 +27,13 @@
   },
   "@export": {
     "@runtime": "node@>=6.10.0",
-    "@implementation": "./dist",
+    "@code": "./dist",
     "name": {
       "@type": "string"
     },
     "version": {
       "@type": "string",
-      "@implementation": "./dist/version-property",
+      "@code": "./dist/version-property",
       "bump": {
         "@type": "method",
         "@parameters": {
@@ -62,7 +62,7 @@
       "@type": "array"
     },
     "main": {
-      "@implementation": "./dist/main-property",
+      "@code": "./dist/main-property",
       "es5": {
         "@type": "string"
       },
