@@ -1,6 +1,6 @@
 {
-  "@name": "js/resource",
-  "@version": "0.1.4",
+  "@id": "js/resource",
+  "@version": "0.1.5",
   "@files": [
     "./dist"
   ],

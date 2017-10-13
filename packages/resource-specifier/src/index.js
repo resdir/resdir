@@ -1,5 +1,5 @@
 import {isAbsolute} from 'path';
-import {validateResourceName} from '@resdir/resource-name';
+import {validateResourceIdentifier} from '@resdir/resource-identifier';
 import VersionRange from '@resdir/version-range';
 
 export function parseResourceSpecifier(specifier) {
@@ -7,36 +7,36 @@ export function parseResourceSpecifier(specifier) {
     return {location: specifier};
   }
 
-  let name = specifier;
+  let identifier = specifier;
   let versionRange;
 
-  const index = name.indexOf('#', 1);
+  const index = identifier.indexOf('#', 1);
   if (index !== -1) {
-    versionRange = name.slice(index + 1);
-    name = name.slice(0, index);
+    versionRange = identifier.slice(index + 1);
+    identifier = identifier.slice(0, index);
   }
 
-  validateResourceName(name);
+  validateResourceIdentifier(identifier);
 
   versionRange = new VersionRange(versionRange);
 
-  return {name, versionRange};
+  return {identifier, versionRange};
 }
 
 export function validateResourceSpecifier(specifier) {
   parseResourceSpecifier(specifier);
 }
 
-export function formatResourceSpecifier({name, versionRange, location}) {
+export function formatResourceSpecifier({identifier, versionRange, location}) {
   if (location) {
     return location;
   }
 
-  if (!name) {
-    throw new Error('\'name\' argument is missing');
+  if (!identifier) {
+    throw new Error('\'identifier\' argument is missing');
   }
 
-  let specifier = name;
+  let specifier = identifier;
   if (versionRange) {
     specifier += '#' + String(versionRange);
   }

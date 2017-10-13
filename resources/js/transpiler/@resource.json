@@ -1,6 +1,6 @@
 {
-  "@name": "js/transpiler",
-  "@version": "0.1.6",
+  "@id": "js/transpiler",
+  "@version": "0.1.7",
   "@files": [
     "./dist"
   ],

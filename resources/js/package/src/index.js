@@ -103,7 +103,7 @@ export default base =>
         .save();
 
       this.name = name;
-      this.$name = undefined;
+      this.$identifier = undefined;
       this.version = this.$version.toString();
       this.$version = undefined;
       this.files = ['./src'];

@@ -727,9 +727,9 @@ export class RegistryClient {
   async _publishResource(definition, directory) {
     this._ensureSignedInUser();
 
-    const name = definition['@name'];
-    if (!name) {
-      throw new Error(`Can't publish a resource without a ${formatCode('@name')} property`);
+    const identifier = definition['@id'];
+    if (!identifier) {
+      throw new Error(`Can't publish a resource without a ${formatCode('@id')} property`);
     }
 
     if (!definition['@version']) {

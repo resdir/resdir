@@ -1,6 +1,6 @@
 {
-  "@name": "js/dependencies",
-  "@version": "0.1.6",
+  "@id": "js/dependencies",
+  "@version": "0.1.7",
   "@files": [
     "bundle.js"
   ],

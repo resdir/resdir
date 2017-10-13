@@ -1,10 +1,10 @@
 {
   "@import": "js/esnext-resource",
-  "@name": "resdir/example",
+  "@id": "resdir/example",
   "@parameters": {
     "color": "green"
   },
-  "@version": "0.3.2",
+  "@version": "0.3.3",
   "@implementation": "./dist",
   "@files": [
     "./dist"

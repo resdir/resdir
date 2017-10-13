@@ -1,7 +1,7 @@
 {
   "@import": "js/esnext-resource",
-  "@name": "js/esnext-package",
-  "@version": "0.1.3",
+  "@id": "js/esnext-package",
+  "@version": "0.1.4",
   "@files": [
     "./dist"
   ],

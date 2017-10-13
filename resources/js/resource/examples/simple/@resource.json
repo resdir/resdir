@@ -1,5 +1,5 @@
 {
-  "@name": "resdir/js-resource-simple-example",
+  "@id": "resdir/js-resource-simple-example",
   "@import": "../..",
   "@implementation": "./src/index.js",
   "dependencies": ["chalk@^2.0.1"],

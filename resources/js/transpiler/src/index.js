@@ -8,9 +8,9 @@ import {task, formatString, formatPath} from '@resdir/console';
 export default base =>
   class Transpiler extends base {
     async run({file, verbose, quiet, debug}) {
-      let name = this.$getParent().$name;
-      if (name) {
-        name = formatString(name);
+      let identifier = this.$getParent().$identifier;
+      if (identifier) {
+        identifier = formatString(identifier);
       }
 
       const files = [];
@@ -23,8 +23,8 @@ export default base =>
           await this._transpileOrCopy(files, {verbose, quiet});
         },
         {
-          intro: `Transpiling ${name ? name : 'resource'}...`,
-          outro: `${name ? name : 'Resource'} transpiled`,
+          intro: `Transpiling ${identifier ? identifier : 'resource'}...`,
+          outro: `${identifier ? identifier : 'Resource'} transpiled`,
           verbose,
           quiet,
           debug
