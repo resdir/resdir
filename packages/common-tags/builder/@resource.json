@@ -1,6 +1,6 @@
 {
   "@import": "js/esnext-resource",
-  "@code": "./dist/resource.js",
+  "@implementation": "./dist/resource.js",
   "dependencies": ["lodash@^4.17.4", "xml2js@^0.4.19"],
   "transpiler": {
     "targets": {

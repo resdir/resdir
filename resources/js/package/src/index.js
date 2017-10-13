@@ -46,9 +46,14 @@ export default base =>
       });
     }
 
-    async publish({access, verbose, quiet, debug}) {
+    async publish({major, minor, patch, access, verbose, quiet, debug}) {
       await this['@build']();
       await this['@test']();
+
+      if (major || minor || patch) {
+        await this.$getChild('version').bump({major, minor, patch});
+      }
+
       await task(
         async () => {
           await this._publish({access, debug});

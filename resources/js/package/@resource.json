@@ -1,8 +1,10 @@
 {
   "@import": "js/esnext-resource",
   "@name": "js/package",
-  "@version": "0.1.4",
-  "@files": ["./dist"],
+  "@version": "0.1.5",
+  "@files": [
+    "./dist"
+  ],
   "dependencies": [
     "fs-extra@^4.0.0",
     "lodash@^4.17.4",
@@ -26,14 +28,19 @@
     }
   },
   "@export": {
+    "@parameters": {
+      "verbose": false,
+      "quiet": false,
+      "debug": false
+    },
     "@runtime": "node@>=6.10.0",
-    "@code": "./dist",
+    "@implementation": "./dist",
     "name": {
       "@type": "string"
     },
     "version": {
       "@type": "string",
-      "@code": "./dist/version-property",
+      "@implementation": "./dist/version-property",
       "bump": {
         "@type": "method",
         "@parameters": {
@@ -62,7 +69,7 @@
       "@type": "array"
     },
     "main": {
-      "@code": "./dist/main-property",
+      "@implementation": "./dist/main-property",
       "es5": {
         "@type": "string"
       },
@@ -82,6 +89,9 @@
     "publish": {
       "@type": "method",
       "@parameters": {
+        "major": false,
+        "minor": false,
+        "patch": false,
         "access": {
           "@type": "string"
         }
@@ -89,20 +99,21 @@
     },
     "updatePackageFile": {
       "@type": "method",
-      "@listen": ["after:@build", "after:@save"]
+      "@listen": [
+        "after:@build",
+        "after:@save"
+      ]
     },
     "_createJSPackage": {
       "@type": "method",
-      "@hidden": true,
       "@parameters": {
-        "name": {"@type": "string", "@position": 0}
+        "name": {
+          "@type": "string",
+          "@position": 0
+        }
       },
+      "@hidden": true,
       "@listen": "after:@create"
-    },
-    "@parameters": {
-      "verbose": false,
-      "quiet": false,
-      "debug": false
     }
   }
 }

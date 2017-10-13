@@ -1,7 +1,9 @@
 {
   "@name": "js/transpiler",
-  "@version": "0.1.5",
-  "@files": ["./dist"],
+  "@version": "0.1.6",
+  "@files": [
+    "./dist"
+  ],
   "dependencies": {
     "@import": "js/dependencies",
     "@value": [
@@ -28,14 +30,27 @@
     "@expression": "./tests run"
   },
   "@export": {
+    "@parameters": {
+      "verbose": false,
+      "quiet": false,
+      "debug": false
+    },
     "@runtime": "node@>=6.10.0",
-    "@code": "./dist",
+    "@implementation": "./dist",
     "source": "./src",
     "destination": "./dist",
-    "extensions": [".js", ".jsx", ".es6", ".es"],
+    "extensions": [
+      ".js",
+      ".jsx",
+      ".es6",
+      ".es"
+    ],
     "targets": {
       "@type": "object",
-      "@value": {"ie": 11, "node": 4}
+      "@value": {
+        "ie": 11,
+        "node": 4
+      }
     },
     "transformJSX": false,
     "jsxPragma": {
@@ -44,13 +59,11 @@
     "run": {
       "@type": "method",
       "@parameters": {
-        "file": {"@type": "string", "@position": 0}
+        "file": {
+          "@type": "string",
+          "@position": 0
+        }
       }
-    },
-    "@parameters": {
-      "verbose": false,
-      "quiet": false,
-      "debug": false
     }
   }
 }

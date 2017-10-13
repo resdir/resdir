@@ -1,30 +1,41 @@
 {
   "@name": "js/resource",
-  "@version": "0.1.3",
-  "@files": ["./dist"],
+  "@version": "0.1.4",
+  "@files": [
+    "./dist"
+  ],
   "transpiler": {
     "@import": "js/transpiler",
     "targets": {
       "node": 8
     },
     "run": {
-      "@listen": ["after:@build", "after:@fileModified"]
+      "@listen": [
+        "after:@build",
+        "after:@fileModified"
+      ]
     }
   },
   "dependencies": {
     "@import": "js/dependencies",
-    "@value": ["fs-extra@^4.0.0", "@resdir/gitignore-manager@^0.1.0"]
+    "@value": [
+      "fs-extra@^4.0.0",
+      "@resdir/gitignore-manager@^0.1.0"
+    ]
   },
   "@export": {
     "@runtime": "node@>=6.10.0",
-    "@code": "./dist",
+    "@implementation": "./dist",
     "dependencies": {
       "@import": "js/dependencies"
     },
     "_createJSResource": {
       "@type": "method",
       "@parameters": {
-        "name": {"@type": "string", "@position": 0}
+        "name": {
+          "@type": "string",
+          "@position": 0
+        }
       },
       "@hidden": true,
       "@listen": "after:@create"

@@ -1,17 +1,22 @@
 {
   "@name": "js/esnext-jest",
-  "@version": "0.1.3",
+  "@version": "0.1.4",
   "@export": {
     "@import": "js/jest",
+    "roots": [
+      "./dist"
+    ],
     "transpiler": {
       "@import": "js/transpiler",
       "targets": {
         "node": 8
       },
       "run": {
-        "@listen": ["after:@build", "after:@fileModified"]
+        "@listen": [
+          "after:@build",
+          "after:@fileModified"
+        ]
       }
-    },
-    "roots": ["./dist"]
+    }
   }
 }

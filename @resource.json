@@ -15,14 +15,14 @@
   "publish": {
     "@type": "macro",
     "@expression": [
-      "./resources/js/dependencies @publish",
-      "./resources/js/resource @publish",
-      "./resources/js/jest @publish",
-      "./resources/js/package @publish",
-      "./resources/js/transpiler @publish",
-      "./resources/js/esnext-resource @publish",
-      "./resources/js/esnext-jest @publish",
-      "./resources/js/esnext-package @publish"
+      "./resources/js/dependencies @publish --patch",
+      "./resources/js/resource @publish --patch",
+      "./resources/js/jest @publish --patch",
+      "./resources/js/package @publish --patch",
+      "./resources/js/transpiler @publish --patch",
+      "./resources/js/esnext-resource @publish --patch",
+      "./resources/js/esnext-jest @publish --patch",
+      "./resources/js/esnext-package @publish --patch"
     ]
   }
 }
