@@ -1,7 +1,7 @@
 import {join, resolve, dirname} from 'path';
-import {existsSync} from 'fs';
+import {existsSync, readdirSync} from 'fs';
 import {upperFirst} from 'lodash';
-import {ensureDirSync} from 'fs-extra';
+import {ensureDirSync, moveSync} from 'fs-extra';
 import S3 from 'aws-sdk/clients/s3';
 import hasha from 'hasha';
 import s3urls from '@mapbox/s3urls';
@@ -24,7 +24,10 @@ import {
   task
 } from '@resdir/console';
 import {load, save} from '@resdir/file-manager';
-import {validateResourceSpecifier} from '@resdir/resource-specifier';
+import {parseResourceIdentifier} from '@resdir/resource-identifier';
+import {parseResourceSpecifier, validateResourceSpecifier} from '@resdir/resource-specifier';
+import {compareVersions} from '@resdir/version';
+import VersionRange from '@resdir/version-range';
 import generateSecret from '@resdir/secret-generator';
 import {getJSON, postJSON, deleteJSON, fetch} from '@resdir/http-client';
 import {zip, unzip} from '@resdir/archive-manager';
@@ -32,11 +35,34 @@ import {SERVICE_NAME, SUPPORT_EMAIL_ADDRESS} from '@resdir/information';
 
 const debug = require('debug')('resdir:registry:client');
 
+const RESOURCE_REQUESTS_DIRECTORY_NAME = 'requests';
+const RESOURCE_VERSIONS_DIRECTORY_NAME = 'versions';
+const RESOURCE_FILE_NAME = '@resource.json5';
+
+/*
+Data are stored on disk as follow:
+
+<clientDirectory>
+  resdir-registry
+    data.json
+    resource-cache
+      resdir
+        example
+          requests
+            _.json => {"version":"0.2.0","expiresOn":"..."}
+            ^0.1.0.json => {"version":"0.1.2","expiresOn":"..."}
+          versions
+            0.1.2
+              @resource.json5
+              dist
+                index.js
+*/
+
 export class RegistryClient {
   constructor({
     registryURL,
-    runDirectory,
     clientId,
+    clientDirectory,
     awsRegion,
     awsS3BucketName,
     awsS3ResourceUploadsPrefix
@@ -44,22 +70,22 @@ export class RegistryClient {
     if (!registryURL) {
       throw new Error('\'registryURL\' argument is missing');
     }
-    if (!runDirectory) {
-      throw new Error('\'runDirectory\' argument is missing');
-    }
     if (!clientId) {
       throw new Error('\'clientId\' argument is missing');
     }
-    if (!(awsRegion && awsS3BucketName && awsS3ResourceUploadsPrefix)) {
-      throw new Error('AWS configuration is missing or incomplete');
+    if (!clientDirectory) {
+      throw new Error('\'clientDirectory\' argument is missing');
     }
+
     this.registryURL = registryURL;
-    this.userFile = join(runDirectory, 'user.json');
-    this.cacheFile = join(runDirectory, 'caches', 'registry-client', 'data.json');
     this.clientId = clientId;
+    this.clientDirectory = clientDirectory;
     this.awsRegion = awsRegion;
     this.awsS3BucketName = awsS3BucketName;
     this.awsS3ResourceUploadsPrefix = awsS3ResourceUploadsPrefix;
+
+    this.dataFile = join(clientDirectory, 'resdir-registry', 'data.json');
+    this.resourceCacheDirectory = join(clientDirectory, 'resdir-registry', 'resource-cache');
   }
 
   // === Users ===
@@ -115,7 +141,7 @@ export class RegistryClient {
           const url = `${this.registryURL}/user/complete-${urlPart}`;
           const {body: {userId, refreshToken}} = await postJSON(url, {verificationToken});
           this._saveUserId(userId);
-          this._saveRefreshToken(refreshToken);
+          this._saveUserRefreshToken(refreshToken);
           completed = true;
         },
         {intro: `Completing ${messagePart}...`, outro: `${upperFirst(messagePart)} completed`}
@@ -133,7 +159,7 @@ export class RegistryClient {
     await task(
       async () => {
         const url = `${this.registryURL}/user/sign-out`;
-        const refreshToken = this._loadRefreshToken();
+        const refreshToken = this._loadUserRefreshToken();
         await postJSON(url, {refreshToken});
       },
       {intro: `Signing out...`, outro: `Signed out`}
@@ -144,8 +170,8 @@ export class RegistryClient {
 
   _signOut() {
     this._saveUserId(undefined);
-    this._saveRefreshToken(undefined);
-    this._saveAccessToken(undefined);
+    this._saveUserRefreshToken(undefined);
+    this._saveUserAccessToken(undefined);
   }
 
   async showUser() {
@@ -688,13 +714,52 @@ export class RegistryClient {
 
   // === Resources ===
 
-  async fetchResource(specifier, options) {
-    const result = await this._fetchResource(specifier, options);
-    debug('fetchResource(%o, %o) => %o', specifier, options, result);
+  async fetchResource(specifier) {
+    const result = await this._fetchResource(specifier);
+    debug('fetchResource(%o) => %o', specifier, result);
     return result;
   }
 
-  async _fetchResource(specifier, {cachedVersion} = {}) {
+  async _fetchResource(specifier) {
+    const {identifier, versionRange} = parseResourceSpecifier(specifier);
+
+    let result;
+
+    result = await this._fetchResourceFromCache(identifier, versionRange);
+    const cacheStatus = result.cacheStatus;
+    if (cacheStatus === 'HIT') {
+      return result;
+    }
+
+    const cachedVersion = await this._findLatestCachedResourceVersion(identifier, versionRange);
+
+    result = await this._fetchResourceFromRegistry(specifier, {cachedVersion});
+    if (!result) {
+      return undefined;
+    }
+
+    if (result.unchanged) {
+      await this._saveCachedResourceRequest(identifier, versionRange, cachedVersion);
+      result = await this._loadCachedResourceVersion(identifier, cachedVersion);
+      return {...result, cacheStatus};
+    }
+
+    const definition = result.definition;
+    const version = definition['@version'];
+    await this._saveCachedResourceRequest(identifier, versionRange, version);
+
+    const temporaryDirectory = result.directory;
+    const directory = await this._saveCachedResourceVersion(
+      identifier,
+      version,
+      definition,
+      temporaryDirectory
+    );
+
+    return {definition, directory, cacheStatus};
+  }
+
+  async _fetchResourceFromRegistry(specifier, {cachedVersion} = {}) {
     validateResourceSpecifier(specifier);
 
     let url = `${this.registryURL}/resources/${specifier}`;
@@ -719,7 +784,150 @@ export class RegistryClient {
     return {definition, directory};
   }
 
+  async _fetchResourceFromCache(identifier, versionRange) {
+    const requestFile = this._getCachedResourceRequestFile(identifier, versionRange);
+    const data = load(requestFile, {throwIfNotFound: false});
+    if (!data) {
+      return {cacheStatus: 'MISS'};
+    }
+
+    const {version, expiresOn, invalidated} = data;
+
+    if (expiresOn && new Date(expiresOn) < new Date()) {
+      return {cacheStatus: 'EXPIRED'};
+    }
+
+    if (invalidated) {
+      return {cacheStatus: 'INVALIDATED'};
+    }
+
+    const result = await this._loadCachedResourceVersion(identifier, version, {
+      throwIfNotFound: false
+    });
+    if (!result) {
+      return {cacheStatus: 'CORRUPTED'};
+    }
+
+    return {...result, cacheStatus: 'HIT'};
+  }
+
+  async _invalidateResourceCache(identifier, version) {
+    const {namespace, name} = parseResourceIdentifier(identifier);
+    const resourceDirectory = join(this.resourceCacheDirectory, namespace, name);
+    const requestsDirectory = join(resourceDirectory, RESOURCE_REQUESTS_DIRECTORY_NAME);
+
+    if (!existsSync(requestsDirectory)) {
+      return;
+    }
+
+    const filenames = readdirSync(requestsDirectory).filter(file => !file.startsWith('.'));
+    for (const filename of filenames) {
+      const versionRange = this._cachedResourceRequestFilenameToVersionRange(filename);
+      if (versionRange.includes(version)) {
+        const requestFile = join(requestsDirectory, filename);
+        const data = load(requestFile);
+        if (compareVersions(version, '>', data.version)) {
+          data.invalidated = true;
+          save(requestFile, data);
+        }
+      }
+    }
+  }
+
+  async _saveCachedResourceRequest(identifier, versionRange, version) {
+    const requestFile = this._getCachedResourceRequestFile(identifier, versionRange);
+    const expiresOn = this._createResourceExpirationDate();
+    const data = {version, expiresOn};
+    ensureDirSync(dirname(requestFile));
+    save(requestFile, data);
+  }
+
+  _getCachedResourceRequestFile(identifier, versionRange) {
+    const {namespace, name} = parseResourceIdentifier(identifier);
+    const resourceDirectory = join(this.resourceCacheDirectory, namespace, name);
+    const requestsDirectory = join(resourceDirectory, RESOURCE_REQUESTS_DIRECTORY_NAME);
+    const requestFile = join(
+      requestsDirectory,
+      this._resourceVersionRangeToCachedRequestFilename(versionRange)
+    );
+    return requestFile;
+  }
+
+  _resourceVersionRangeToCachedRequestFilename(versionRange) {
+    return (versionRange.toString() || '_') + '.json';
+  }
+
+  _cachedResourceRequestFilenameToVersionRange(filename) {
+    if (!filename.endsWith('.json')) {
+      throw new Error(`Invalid cached request filename: ${formatString(filename)}`);
+    }
+    let versionRange = filename.slice(0, -5);
+    if (versionRange === '_') {
+      versionRange = '';
+    }
+    return new VersionRange(versionRange);
+  }
+
+  async _loadCachedResourceVersion(identifier, version, {throwIfNotFound = true} = {}) {
+    const file = this._getCachedResourceFile(identifier, version);
+    const directory = dirname(file);
+    const definition = load(file, {throwIfNotFound});
+    if (!definition) {
+      return undefined;
+    }
+    return {definition, directory};
+  }
+
+  async _saveCachedResourceVersion(identifier, version, definition, temporaryDirectory) {
+    const file = this._getCachedResourceFile(identifier, version);
+    const directory = dirname(file);
+    if (existsSync(directory)) {
+      // Should rarely happen
+      return directory;
+    }
+    moveSync(temporaryDirectory, directory);
+    save(file, definition);
+    return directory;
+  }
+
+  _getCachedResourceFile(identifier, version) {
+    const {namespace, name} = parseResourceIdentifier(identifier);
+    const resourceDirectory = join(this.resourceCacheDirectory, namespace, name);
+    const versionsDirectory = join(resourceDirectory, RESOURCE_VERSIONS_DIRECTORY_NAME);
+    const directory = join(versionsDirectory, version);
+    const file = join(directory, RESOURCE_FILE_NAME);
+    return file;
+  }
+
+  async _findLatestCachedResourceVersion(identifier, versionRange) {
+    const {namespace, name} = parseResourceIdentifier(identifier);
+    const resourceDirectory = join(this.resourceCacheDirectory, namespace, name);
+    const versionsDirectory = join(resourceDirectory, RESOURCE_VERSIONS_DIRECTORY_NAME);
+
+    if (!existsSync(versionsDirectory)) {
+      return undefined;
+    }
+
+    const cachedVersions = readdirSync(versionsDirectory).filter(file => !file.startsWith('.'));
+    const latestCachedVersion = versionRange.findMaximum(cachedVersions);
+
+    return latestCachedVersion;
+  }
+
+  _createResourceExpirationDate() {
+    // Randomly create an expiration date from 3 to 4 days
+    const DAY = 24 * 60 * 60;
+    let seconds = 3 * DAY;
+    seconds += Math.floor(Math.random() * DAY);
+    const milliseconds = seconds * 1000;
+    return new Date(Date.now() + milliseconds);
+  }
+
   async publishResource(definition, directory) {
+    if (!(this.awsRegion && this.awsS3BucketName && this.awsS3ResourceUploadsPrefix)) {
+      throw new Error('AWS configuration is missing or incomplete');
+    }
+
     await this._publishResource(definition, directory);
     debug('publishResource(%o, %o)', definition, directory);
   }
@@ -732,7 +940,8 @@ export class RegistryClient {
       throw new Error(`Can't publish a resource without a ${formatCode('@id')} property`);
     }
 
-    if (!definition['@version']) {
+    const version = definition['@version'];
+    if (!version) {
       throw new Error(`Can't publish a resource without a ${formatCode('@version')} property`);
     }
 
@@ -759,6 +968,8 @@ export class RegistryClient {
     await this._userRequest(authorization =>
       postJSON(url, {definition, temporaryFilesURL}, {authorization})
     );
+
+    await this._invalidateResourceCache(identifier, version);
   }
 
   async _getFiles(definition, directory) {
@@ -804,120 +1015,112 @@ export class RegistryClient {
 
   _loadUserId() {
     if (!this._userId) {
-      this._userId = this._loadUserData().id;
+      this._userId = this._loadData().userId;
     }
     return this._userId;
   }
 
-  _saveUserId(id) {
-    this._userId = id;
-    this._updateUserData({id});
-  }
-
-  _loadUserData() {
-    return load(this.userFile, {throwIfNotFound: false}) || {};
-  }
-
-  _saveUserData(data) {
-    ensureDirSync(dirname(this.userFile));
-    save(this.userFile, data);
-  }
-
-  _updateUserData(data) {
-    const userData = this._loadUserData();
-    Object.assign(userData, data);
-    this._saveUserData(userData);
+  _saveUserId(userId) {
+    this._userId = userId;
+    this._updateData({userId});
   }
 
   // === Authentication ===
 
   async _userRequest(fn) {
-    let accessToken = await this._loadAccessToken();
+    let userAccessToken = await this._loadUserAccessToken();
     const request = async () => {
-      const authorization = accessToken && `Bearer ${accessToken}`;
+      const authorization = userAccessToken && `Bearer ${userAccessToken}`;
       return await fn(authorization);
     };
     try {
       return await request();
     } catch (err) {
       if (err.status === 401) {
-        accessToken = await this._refreshAccessToken();
+        userAccessToken = await this._refreshUserAccessToken();
         return await request();
       }
       throw err;
     }
   }
 
-  _loadRefreshToken() {
-    if (!this._refreshToken) {
-      this._refreshToken = this._loadUserData().refreshToken;
+  _loadUserRefreshToken() {
+    if (!this._userRefreshToken) {
+      this._userRefreshToken = this._loadData().userRefreshToken;
     }
-    return this._refreshToken;
+    return this._userRefreshToken;
   }
 
-  _saveRefreshToken(refreshToken) {
-    this._refreshToken = refreshToken;
-    this._updateUserData({refreshToken});
+  _saveUserRefreshToken(userRefreshToken) {
+    this._userRefreshToken = userRefreshToken;
+    this._updateData({userRefreshToken});
   }
 
-  async _loadAccessToken() {
-    if (!this._accessToken) {
-      const cache = this._loadCache();
-      this._accessToken = cache.accessToken;
-      if (this._accessToken) {
-        this._accessToken.expiresOn = new Date(this._accessToken.expiresOn);
+  async _loadUserAccessToken() {
+    if (!this._userAccessTokenValue) {
+      const data = this._loadData();
+      this._userAccessTokenValue = data.userAccessTokenValue;
+      this._userAccessTokenExpiresOn = data.userAccessTokenExpiresOn;
+      if (this._userAccessTokenExpiresOn) {
+        this._userAccessTokenExpiresOn = new Date(this._userAccessTokenExpiresOn);
       }
     }
-    if (!this._accessToken) {
-      await this._refreshAccessToken();
+    if (!this._userAccessTokenValue) {
+      await this._refreshUserAccessToken();
     }
-    if (!this._accessToken) {
+    if (!this._userAccessTokenValue) {
       return undefined;
     }
-    if (Date.now() > this._accessToken.expiresOn - 3 * 60 * 1000) {
+    if (
+      this._userAccessTokenExpiresOn &&
+      Date.now() > this._userAccessTokenExpiresOn - 3 * 60 * 1000
+    ) {
       // Refresh access token 3 minutes before expiration
-      await this._refreshAccessToken();
+      await this._refreshUserAccessToken();
     }
-    return this._accessToken.value;
+    return this._userAccessTokenValue;
   }
 
-  async _refreshAccessToken() {
-    debug('_refreshAccessToken()');
-    let accessToken;
+  async _refreshUserAccessToken() {
+    debug('_refreshUserAccessToken()');
+    let userAccessTokenValue;
+    let userAccessTokenExpiresOn;
     try {
-      const refreshToken = this._loadRefreshToken();
+      const refreshToken = this._loadUserRefreshToken();
       if (!refreshToken) {
         return;
       }
       const url = `${this.registryURL}/user/access-tokens`;
       const {body: {accessToken: {value, expiresIn}}} = await postJSON(url, {refreshToken});
-      accessToken = {value, expiresOn: new Date(Date.now() + expiresIn)};
+      userAccessTokenValue = value;
+      userAccessTokenExpiresOn = new Date(Date.now() + expiresIn);
       return value;
     } finally {
-      this._saveAccessToken(accessToken);
+      this._saveUserAccessToken(userAccessTokenValue, userAccessTokenExpiresOn);
     }
   }
 
-  _saveAccessToken(accessToken) {
-    this._accessToken = accessToken;
-    this._updateCache({accessToken});
+  _saveUserAccessToken(userAccessTokenValue, userAccessTokenExpiresOn) {
+    this._userAccessTokenValue = userAccessTokenValue;
+    this._userAccessTokenExpiresOn = userAccessTokenExpiresOn;
+    this._updateData({userAccessTokenValue, userAccessTokenExpiresOn});
   }
 
-  // === Cache ===
+  // === Data ===
 
-  _loadCache() {
-    return load(this.cacheFile, {throwIfNotFound: false}) || {};
+  _loadData() {
+    return load(this.dataFile, {throwIfNotFound: false}) || {};
   }
 
-  _saveCache(data) {
-    ensureDirSync(dirname(this.cacheFile));
-    save(this.cacheFile, data);
+  _saveData(data) {
+    ensureDirSync(dirname(this.dataFile));
+    save(this.dataFile, data);
   }
 
-  _updateCache(data) {
-    const cache = this._loadCache();
-    Object.assign(cache, data);
-    this._saveCache(cache);
+  _updateData(newData) {
+    const data = this._loadData();
+    Object.assign(data, newData);
+    this._saveData(data);
   }
 }
 
