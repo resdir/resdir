@@ -2,9 +2,7 @@
   "@import": "js/esnext-resource",
   "@id": "js/package",
   "@version": "0.1.6",
-  "@files": [
-    "./dist"
-  ],
+  "@files": ["./dist"],
   "dependencies": [
     "fs-extra@^4.0.0",
     "lodash@^4.17.4",
@@ -33,7 +31,7 @@
       "quiet": false,
       "debug": false
     },
-    "@runtime": "node@>=6.10.0",
+    "@runtime": "node#>=6.10.0",
     "@implementation": "./dist",
     "name": {
       "@type": "string"
@@ -99,10 +97,7 @@
     },
     "updatePackageFile": {
       "@type": "method",
-      "@listen": [
-        "after:@build",
-        "after:@save"
-      ]
+      "@listen": ["after:@build", "after:@save"]
     },
     "_createJSPackage": {
       "@type": "method",

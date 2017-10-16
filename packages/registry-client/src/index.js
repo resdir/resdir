@@ -924,15 +924,15 @@ export class RegistryClient {
   }
 
   async publishResource(definition, directory) {
-    if (!(this.awsRegion && this.awsS3BucketName && this.awsS3ResourceUploadsPrefix)) {
-      throw new Error('AWS configuration is missing or incomplete');
-    }
-
     await this._publishResource(definition, directory);
     debug('publishResource(%o, %o)', definition, directory);
   }
 
   async _publishResource(definition, directory) {
+    if (!(this.awsRegion && this.awsS3BucketName && this.awsS3ResourceUploadsPrefix)) {
+      throw new Error('AWS configuration is missing or incomplete');
+    }
+
     this._ensureSignedInUser();
 
     const identifier = definition['@id'];
