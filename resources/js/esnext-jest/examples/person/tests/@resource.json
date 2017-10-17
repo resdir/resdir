@@ -1,4 +1,4 @@
 {
-  "@id": "resdir/js-esnext-jest-person-example",
-  "@import": "../../.."
+  "@import": "../../..",
+  "id": "resdir/js-esnext-jest-person-example"
 }

@@ -2,9 +2,7 @@ import {join, resolve, dirname} from 'path';
 import {existsSync, readdirSync} from 'fs';
 import {upperFirst} from 'lodash';
 import {ensureDirSync, moveSync} from 'fs-extra';
-import S3 from 'aws-sdk/clients/s3';
 import hasha from 'hasha';
-import s3urls from '@mapbox/s3urls';
 import tempy from 'tempy';
 import isDirectory from 'is-directory';
 import readDirectory from 'recursive-readdir';
@@ -31,9 +29,14 @@ import VersionRange from '@resdir/version-range';
 import generateSecret from '@resdir/secret-generator';
 import {getJSON, postJSON, deleteJSON, fetch} from '@resdir/http-client';
 import {zip, unzip} from '@resdir/archive-manager';
-import {SERVICE_NAME, SUPPORT_EMAIL_ADDRESS} from '@resdir/information';
+import {SERVICE_NAME, SUPPORT_EMAIL_ADDRESS, REGISTRY_URL} from '@resdir/information';
 
 const debug = require('debug')('resdir:registry:client');
+
+// TODO: Change this configuration when production is deployed
+const AWS_REGION = 'ap-northeast-1';
+const AWS_S3_BUCKET_NAME = 'resdir-registry-dev-v1';
+const AWS_S3_RESOURCE_UPLOADS_PREFIX = 'resources/uploads/';
 
 const RESOURCE_REQUESTS_DIRECTORY_NAME = 'requests';
 const RESOURCE_VERSIONS_DIRECTORY_NAME = 'versions';
@@ -67,9 +70,6 @@ export class RegistryClient {
     awsS3BucketName,
     awsS3ResourceUploadsPrefix
   }) {
-    if (!registryURL) {
-      throw new Error('\'registryURL\' argument is missing');
-    }
     if (!clientId) {
       throw new Error('\'clientId\' argument is missing');
     }
@@ -77,12 +77,12 @@ export class RegistryClient {
       throw new Error('\'clientDirectory\' argument is missing');
     }
 
-    this.registryURL = registryURL;
+    this.registryURL = registryURL || REGISTRY_URL;
     this.clientId = clientId;
     this.clientDirectory = clientDirectory;
-    this.awsRegion = awsRegion;
-    this.awsS3BucketName = awsS3BucketName;
-    this.awsS3ResourceUploadsPrefix = awsS3ResourceUploadsPrefix;
+    this.awsRegion = awsRegion || AWS_REGION;
+    this.awsS3BucketName = awsS3BucketName || AWS_S3_BUCKET_NAME;
+    this.awsS3ResourceUploadsPrefix = awsS3ResourceUploadsPrefix || AWS_S3_RESOURCE_UPLOADS_PREFIX;
 
     this.dataFile = join(clientDirectory, 'resdir-registry', 'data.json');
     this.resourceCacheDirectory = join(clientDirectory, 'resdir-registry', 'resource-cache');
@@ -745,7 +745,7 @@ export class RegistryClient {
     }
 
     const definition = result.definition;
-    const version = definition['@version'];
+    const version = definition.version;
     await this._saveCachedResourceRequest(identifier, versionRange, version);
 
     const temporaryDirectory = result.directory;
@@ -775,11 +775,13 @@ export class RegistryClient {
       return {unchanged};
     }
 
-    const directory = tempy.directory();
-
-    // TODO: Instead of a buffer, use a stream to download and unzip files
-    const {body: files} = await fetch(filesURL, {expectedStatus: 200});
-    await unzip(directory, files);
+    let directory;
+    if (filesURL) {
+      directory = tempy.directory();
+      // TODO: Instead of a buffer, use a stream to download and unzip files
+      const {body: files} = await fetch(filesURL, {expectedStatus: 200});
+      await unzip(directory, files);
+    }
 
     return {definition, directory};
   }
@@ -885,7 +887,12 @@ export class RegistryClient {
       // Should rarely happen
       return directory;
     }
-    moveSync(temporaryDirectory, directory);
+    if (temporaryDirectory) {
+      moveSync(temporaryDirectory, directory);
+    } else {
+      // The resource doesn't include any files
+      ensureDirSync(directory);
+    }
     save(file, definition);
     return directory;
   }
@@ -935,34 +942,29 @@ export class RegistryClient {
 
     this._ensureSignedInUser();
 
-    const identifier = definition['@id'];
+    const identifier = definition.id;
     if (!identifier) {
-      throw new Error(`Can't publish a resource without a ${formatCode('@id')} property`);
+      throw new Error(`Can't publish a resource without a ${formatCode('id')} property`);
     }
 
-    const version = definition['@version'];
+    const version = definition.version;
     if (!version) {
-      throw new Error(`Can't publish a resource without a ${formatCode('@version')} property`);
+      throw new Error(`Can't publish a resource without a ${formatCode('version')} property`);
     }
+
+    let temporaryFilesURL;
 
     let files = await this._getFiles(definition, directory);
-
-    // TODO: Instead of a buffer, use a stream to zip and upload files
-    files = await zip(directory, files);
-
-    const s3 = new S3({region: this.awsRegion, apiVersion: '2006-03-01'});
-    const md5 = await hasha(files, {algorithm: 'md5', encoding: 'base64'});
-    const key = this.awsS3ResourceUploadsPrefix + generateSecret() + '.zip';
-    await s3
-      .putObject({
-        Bucket: this.awsS3BucketName,
-        Key: key,
-        Body: files,
-        ContentMD5: md5
-      })
-      .promise();
-
-    const temporaryFilesURL = s3urls.toUrl(this.awsS3BucketName, key)['bucket-in-host'];
+    if (files.length > 0) {
+      // TODO: Instead of a buffer, use a stream to zip and upload files
+      files = await zip(directory, files);
+      const key = this.awsS3ResourceUploadsPrefix + generateSecret() + '.zip';
+      temporaryFilesURL = await this._uploadToS3({
+        bucket: this.awsS3BucketName,
+        key,
+        body: files
+      });
+    }
 
     const url = `${this.registryURL}/resources`;
     await this._userRequest(authorization =>
@@ -972,16 +974,32 @@ export class RegistryClient {
     await this._invalidateResourceCache(identifier, version);
   }
 
+  async _uploadToS3({bucket, key, body}) {
+    const url = `https://${bucket}.s3.amazonaws.com/${key}`;
+    const md5 = await hasha(body, {algorithm: 'md5', encoding: 'base64'});
+    await fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-MD5': md5,
+        'Content-Length': body.length,
+        'x-amz-acl': 'bucket-owner-full-control'
+      },
+      body,
+      expectedStatus: 200
+    });
+    return url;
+  }
+
   async _getFiles(definition, directory) {
     const files = [];
 
-    const filesProperty = definition['@files'] || [];
+    const filesProperty = definition.files || [];
     for (const file of filesProperty) {
       const resolvedFile = resolve(directory, file);
 
       if (!existsSync(resolvedFile)) {
         throw new Error(
-          `File ${formatPath(file)} specified in ${formatCode('@files')} property doesn't exist`
+          `File ${formatPath(file)} specified in ${formatCode('files')} property doesn't exist`
         );
       }
 

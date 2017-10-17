@@ -1,7 +1,10 @@
 {
-  "@id": "js/dependencies",
-  "@version": "0.1.7",
-  "@files": ["bundle.js"],
+  "@import": "resdir/resource",
+  "id": "js/dependencies",
+  "version": "0.1.8",
+  "files": [
+    "bundle.js"
+  ],
   "_testJSDependencies": {
     "@type": "macro",
     "@hidden": true,
@@ -9,7 +12,12 @@
     "@expression": "./tests run"
   },
   "@export": {
-    "@aliases": ["dependencies", "dependency", "deps", "dep"],
+    "@aliases": [
+      "dependencies",
+      "dependency",
+      "deps",
+      "dep"
+    ],
     "@parameters": {
       "verbose": false,
       "quiet": false,
@@ -25,11 +33,15 @@
           "@position": 0
         },
         "production": {
-          "@aliases": ["prod"],
+          "@aliases": [
+            "prod"
+          ],
           "@value": false
         },
         "development": {
-          "@aliases": ["dev"],
+          "@aliases": [
+            "dev"
+          ],
           "@value": false
         },
         "peer": false,
@@ -38,7 +50,9 @@
     },
     "remove": {
       "@type": "method",
-      "@aliases": ["rm"],
+      "@aliases": [
+        "rm"
+      ],
       "@parameters": {
         "name": {
           "@type": "string",

@@ -31,7 +31,7 @@ describe('js/transpiler', () => {
 
     const resourceFile = join(directory, '@resource.json');
     const definition = {
-      '@id': 'resdir/js-transpiler-person-test',
+      id: 'resdir/js-transpiler-person-test',
       transpiler: {
         '@import': resolve(__dirname, '../..')
       }

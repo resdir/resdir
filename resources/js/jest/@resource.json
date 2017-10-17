@@ -1,8 +1,8 @@
 {
   "@import": "js/esnext-resource",
-  "@id": "js/jest",
-  "@version": "0.1.5",
-  "@files": [
+  "id": "js/jest",
+  "version": "0.1.6",
+  "files": [
     "./dist"
   ],
   "dependencies": [

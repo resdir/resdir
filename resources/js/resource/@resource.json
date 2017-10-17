@@ -1,21 +1,31 @@
 {
-  "@id": "js/resource",
-  "@version": "0.1.5",
-  "@files": ["./dist"],
+  "@import": "resdir/resource",
+  "id": "js/resource",
+  "version": "0.1.6",
+  "files": [
+    "./dist"
+  ],
   "transpiler": {
     "@import": "js/transpiler",
     "targets": {
       "node": 8
     },
     "run": {
-      "@listen": ["after:@build", "after:@fileModified"]
+      "@listen": [
+        "after:@build",
+        "after:@fileModified"
+      ]
     }
   },
   "dependencies": {
     "@import": "js/dependencies",
-    "@value": ["fs-extra@^4.0.0", "@resdir/gitignore-manager@^0.1.0"]
+    "@value": [
+      "fs-extra@^4.0.0",
+      "@resdir/gitignore-manager@^0.1.0"
+    ]
   },
   "@export": {
+    "@import": "resdir/resource",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist",
     "dependencies": {

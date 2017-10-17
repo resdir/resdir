@@ -1,7 +1,10 @@
 {
-  "@id": "js/transpiler",
-  "@version": "0.1.7",
-  "@files": ["./dist"],
+  "@import": "resdir/resource",
+  "id": "js/transpiler",
+  "version": "0.1.8",
+  "files": [
+    "./dist"
+  ],
   "dependencies": {
     "@import": "js/dependencies",
     "@value": [
@@ -37,7 +40,12 @@
     "@implementation": "./dist",
     "source": "./src",
     "destination": "./dist",
-    "extensions": [".js", ".jsx", ".es6", ".es"],
+    "extensions": [
+      ".js",
+      ".jsx",
+      ".es6",
+      ".es"
+    ],
     "targets": {
       "@type": "object",
       "@value": {

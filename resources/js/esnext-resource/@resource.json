@@ -1,7 +1,8 @@
 {
-  "@id": "js/esnext-resource",
-  "@version": "0.1.5",
-  "@files": [
+  "@import": "resdir/resource",
+  "id": "js/esnext-resource",
+  "version": "0.1.6",
+  "files": [
     "./dist"
   ],
   "transpiler": {

@@ -1,5 +1,5 @@
 {
-  "@id": "resdir/js-transpiler-person-example",
+  "id": "resdir/js-transpiler-person-example",
   "transpiler": {
     "@import": "../.."
   }

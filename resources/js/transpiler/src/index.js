@@ -3,16 +3,11 @@ import {statSync, chmodSync} from 'fs';
 import {copy, readFile, outputFile, emptyDirSync} from 'fs-extra';
 import isDirectory from 'is-directory';
 import {transform} from 'babel-core';
-import {task, formatString, formatPath} from '@resdir/console';
+import {task, formatPath} from '@resdir/console';
 
 export default base =>
   class Transpiler extends base {
     async run({file, verbose, quiet, debug}) {
-      let identifier = this.$getParent().$identifier;
-      if (identifier) {
-        identifier = formatString(identifier);
-      }
-
       const files = [];
       if (file) {
         files.push(file); // TODO: Handle multiple files
@@ -23,8 +18,8 @@ export default base =>
           await this._transpileOrCopy(files, {verbose, quiet});
         },
         {
-          intro: `Transpiling ${identifier ? identifier : 'resource'}...`,
-          outro: `${identifier ? identifier : 'Resource'} transpiled`,
+          intro: `Transpiling resource...`,
+          outro: `Resource transpiled`,
           verbose,
           quiet,
           debug

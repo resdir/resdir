@@ -1,0 +1,53 @@
+{
+  "@import": "./",
+  id: "resdir/resource",
+  version: "0.1.1",
+  files: [
+    "./bundles"
+  ],
+  "@export": {
+    "@runtime": "node#>=6.10.0",
+    "@implementation": "./bundles/resource.js",
+    id: {
+      "@type": "string"
+    },
+    version: {
+      "@type": "string",
+      "@implementation": "./bundles/version-property.js",
+      bump: {
+        "@type": "method",
+        "@parameters": {
+          major: false,
+          minor: false,
+          patch: false
+        }
+      }
+    },
+    name: {
+      "@type": "string"
+    },
+    description: {
+      "@type": "string"
+    },
+    keywords: {
+      "@type": "array"
+    },
+    homepage: {
+      "@type": "string"
+    },
+    repository: {
+      "@type": "string"
+    },
+    files: {
+      "@type": "array"
+    },
+    publish: {
+      "@type": "method",
+      "@parameters": {
+        major: false,
+        minor: false,
+        patch: false
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+[
+  {
+    "srcDir": "src",
+    "files": "**/*.js",
+    "command": "npm run build"
+  }
+]

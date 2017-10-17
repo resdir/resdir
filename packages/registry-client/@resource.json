@@ -1,19 +1,17 @@
 {
   "@import": "js/esnext-package",
   "name": "@resdir/registry-client",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "description": "Resdir registry client",
   "files": [
     "./dist"
   ],
   "main": "./dist/index.js",
   "dependencies": [
-    "aws-sdk@^2.95.0",
     "debug@^3.0.0",
     "fs-extra@^4.0.0",
     "hasha@^3.0.0",
     "is-directory@^0.3.1",
-    "@mapbox/s3urls@^1.5.2",
     "opn@^5.1.0",
     "recursive-readdir@^2.2.1",
     "@resdir/archive-manager@^0.1.1",

@@ -1,0 +1,44 @@
+{
+  "name": "@resdir/resdir-resource",
+  "description": "Resdir base resource",
+  "private": true,
+  "scripts": {
+    "build": "rm -rf dist && babel src --out-dir dist && rollup --config=rollup-configs/resource.js && rollup --config=rollup-configs/version-property.js"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
+        {
+          "targets": {
+            "node": 8
+          },
+          "loose": true,
+          "exclude": [
+            "transform-regenerator"
+          ]
+        }
+      ]
+    ],
+    "plugins": [
+      "transform-class-properties",
+      "transform-object-rest-spread"
+    ],
+    "sourceMaps": "inline"
+  },
+  "dependencies": {
+    "@resdir/console": "^0.1.0",
+    "@resdir/registry-client": "^0.1.13",
+    "@resdir/version": "^0.1.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.5.2",
+    "rollup": "^0.50.0",
+    "rollup-plugin-commonjs": "^8.2.1",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-resolve": "^3.0.0"
+  }
+}

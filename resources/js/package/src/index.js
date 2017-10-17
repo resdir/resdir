@@ -103,9 +103,7 @@ export default base =>
         .save();
 
       this.name = name;
-      this.$identifier = undefined;
-      this.version = this.$version.toString();
-      this.$version = undefined;
+      this.id = undefined;
       this.files = ['./src'];
       await this.$setChild('main', './src/index.js');
 
