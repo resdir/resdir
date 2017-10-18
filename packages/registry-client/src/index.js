@@ -149,7 +149,7 @@ export class RegistryClient {
     }
 
     if (action === 'SIGN_UP') {
-      await this.createUserNamespace();
+      await this.addUserNamespace();
     }
   }
 
@@ -406,7 +406,7 @@ export class RegistryClient {
 
   // === Namespaces ===
 
-  async createUserNamespace(namespace) {
+  async addUserNamespace(namespace) {
     const user = await this.getUser();
 
     if (user.namespace) {
