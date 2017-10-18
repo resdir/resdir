@@ -1,5 +1,0 @@
-# VersionRange
-
-```javascript
-// TODO: documentation!
-```
