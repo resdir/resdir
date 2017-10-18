@@ -1,15 +1,29 @@
 {
   "@import": "resdir/resource",
   "id": "js/dependencies",
-  "version": "0.1.8",
-  "files": ["bundle.js"],
+  "version": "0.1.10",
+  "files": [
+    "bundle.js"
+  ],
   "builder": {
     "@implementation": "./dist/builder.js",
+    "@publishable": false,
     "run": {
-      "@parameters": {"file": {"@type": "string"}, "quiet": true},
       "@type": "macro",
-      "@expression": ["transpiler run", "bundle"],
-      "@listen": ["after:@build", "after:@fileModified"]
+      "@parameters": {
+        "file": {
+          "@type": "string"
+        },
+        "quiet": true
+      },
+      "@listen": [
+        "after:@build",
+        "after:@fileModified"
+      ],
+      "@expression": [
+        "transpiler run",
+        "bundle"
+      ]
     },
     "transpiler": {
       "@import": "js/transpiler",
@@ -28,7 +42,12 @@
     "@expression": "./tests run"
   },
   "@export": {
-    "@aliases": ["dependencies", "dependency", "deps", "dep"],
+    "@aliases": [
+      "dependencies",
+      "dependency",
+      "deps",
+      "dep"
+    ],
     "@parameters": {
       "verbose": false,
       "quiet": false,
@@ -44,11 +63,15 @@
           "@position": 0
         },
         "production": {
-          "@aliases": ["prod"],
+          "@aliases": [
+            "prod"
+          ],
           "@value": false
         },
         "development": {
-          "@aliases": ["dev"],
+          "@aliases": [
+            "dev"
+          ],
           "@value": false
         },
         "peer": false,
@@ -57,7 +80,9 @@
     },
     "remove": {
       "@type": "method",
-      "@aliases": ["rm"],
+      "@aliases": [
+        "rm"
+      ],
       "@parameters": {
         "name": {
           "@type": "string",

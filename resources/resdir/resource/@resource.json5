@@ -1,19 +1,29 @@
 {
-  "@import": "./",
+  "@import": "js/esnext-resource",
   id: "resdir/resource",
-  version: "0.1.1",
+  version: "0.1.4",
   files: [
-    "./bundles"
+    "./dist"
   ],
+  dependencies: [
+    "@resdir/console@^0.1.0",
+    "@resdir/registry-client@^0.1.13",
+    "@resdir/version@^0.1.0"
+  ],
+  transpiler: {
+    targets: {
+      node: 8
+    }
+  },
   "@export": {
     "@runtime": "node#>=6.10.0",
-    "@implementation": "./bundles/resource.js",
+    "@implementation": "./dist/resource.js",
     id: {
       "@type": "string"
     },
     version: {
       "@type": "string",
-      "@implementation": "./bundles/version-property.js",
+      "@implementation": "./dist/version-property.js",
       bump: {
         "@type": "method",
         "@parameters": {
