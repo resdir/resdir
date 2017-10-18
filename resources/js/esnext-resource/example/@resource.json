@@ -1,6 +1,6 @@
 {
-  "@import": "../..",
-  "id": "resdir/js-esnext-resource-simple-example",
+  "@import": "..",
+  "id": "resdir/js-esnext-resource-example",
   "version": "0.1.0",
   "files": ["./dist"],
   "@implementation": "./dist",

@@ -2,9 +2,7 @@
   "@import": "js/esnext-resource",
   "id": "js/transpiler",
   "version": "0.1.9",
-  "files": [
-    "./dist"
-  ],
+  "files": ["./dist"],
   "dependencies": [
     "babel-core@^6.25.0",
     "babel-plugin-transform-class-properties@^6.24.1",
@@ -37,12 +35,7 @@
     "@implementation": "./dist",
     "source": "./src",
     "destination": "./dist",
-    "extensions": [
-      ".js",
-      ".jsx",
-      ".es6",
-      ".es"
-    ],
+    "extensions": [".js", ".jsx", ".es6", ".es"],
     "targets": {
       "@type": "object",
       "@value": {
@@ -61,7 +54,8 @@
           "@type": "string",
           "@position": 0
         }
-      }
+      },
+      "@emit": "*:run"
     }
   }
 }

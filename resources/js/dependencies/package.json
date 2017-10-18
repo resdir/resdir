@@ -2,30 +2,6 @@
   "name": "@resdir/js-dependencies",
   "description": "Resdir js/dependencies resource",
   "private": true,
-  "scripts": {
-    "build": "rm -rf dist && babel src --out-dir dist && rollup --config"
-  },
-  "babel": {
-    "presets": [
-      [
-        "env",
-        {
-          "targets": {
-            "node": 8
-          },
-          "loose": true,
-          "exclude": [
-            "transform-regenerator"
-          ]
-        }
-      ]
-    ],
-    "plugins": [
-      "transform-class-properties",
-      "transform-object-rest-spread"
-    ],
-    "sourceMaps": "inline"
-  },
   "dependencies": {
     "@resdir/console": "^0.1.0",
     "@resdir/file-manager": "^0.1.0",
@@ -34,10 +10,6 @@
     "lodash": "^4.17.4"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-plugin-transform-object-rest-spread": "^6.23.0",
-    "babel-preset-env": "^1.5.2",
     "rollup": "^0.50.0",
     "rollup-plugin-commonjs": "^8.2.1",
     "rollup-plugin-json": "^2.3.0",

@@ -1,0 +1,9 @@
+{
+  "@import": "..",
+  "name": "@resdir/js-esnext-package-example",
+  "version": "1.0.0",
+  "description": "Example of simple package",
+  "author": "mvila@me.com",
+  "license": "MIT",
+  "dependencies": ["lodash@^4.17.4"]
+}

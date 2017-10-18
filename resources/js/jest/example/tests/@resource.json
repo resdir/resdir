@@ -1,5 +1,5 @@
 {
-  "@import": "../../..",
+  "@import": "../..",
   "id": "resdir/js-jest-person-example",
   "testEnvironment": "node"
 }
