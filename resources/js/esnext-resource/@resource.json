@@ -1,28 +1,18 @@
 {
-  "@import": "resdir/resource",
+  "@import": "./",
   "id": "js/esnext-resource",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "files": [
     "./dist"
   ],
+  "dependencies": [
+    "fs-extra@^4.0.0",
+    "@resdir/gitignore-manager@^0.1.0"
+  ],
   "transpiler": {
-    "@import": "js/transpiler",
     "targets": {
       "node": 8
-    },
-    "run": {
-      "@listen": [
-        "after:@build",
-        "after:@fileModified"
-      ]
     }
-  },
-  "dependencies": {
-    "@import": "js/dependencies",
-    "@value": [
-      "fs-extra@^4.0.0",
-      "@resdir/gitignore-manager@^0.1.0"
-    ]
   },
   "@export": {
     "@import": "js/resource",
