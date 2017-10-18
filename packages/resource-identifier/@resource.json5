@@ -1,0 +1,19 @@
+{
+  "@import": "js/esnext-package",
+  name: "@resdir/resource-identifier",
+  version: "0.1.8",
+  description: "Useful functions to handle Resource's identifiers",
+  files: [
+    "./dist"
+  ],
+  main: "./dist/index.js",
+  dependencies: [
+    "@resdir/console@^0.1.4",
+    "@resdir/namespace@^0.1.0"
+  ],
+  transpiler: {
+    targets: {
+      node: 6
+    }
+  }
+}

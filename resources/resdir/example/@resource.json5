@@ -1,0 +1,27 @@
+{
+  "@import": "js/esnext-resource",
+  "@parameters": {
+    color: "green"
+  },
+  "@implementation": "./dist",
+  id: "resdir/example",
+  version: "0.3.7",
+  files: [
+    "./dist"
+  ],
+  dependencies: [
+    "chalk@^2.1.0"
+  ],
+  hello: {
+    "@type": "method",
+    "@listen": "hi"
+  },
+  tests: {
+    "@import": "js/esnext-jest",
+    "@directory": "./tests",
+    testEnvironment: "node",
+    run: {
+      "@listen": "after:@test"
+    }
+  }
+}

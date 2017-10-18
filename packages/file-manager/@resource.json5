@@ -1,0 +1,20 @@
+{
+  "@import": "js/esnext-package",
+  name: "@resdir/file-manager",
+  version: "0.1.1",
+  description: "Help managing files in most common formats (JSON, JSON5, YAML)",
+  files: [
+    "./dist"
+  ],
+  main: "./dist/index.js",
+  dependencies: [
+    "js-yaml@^3.9.0",
+    "json5@^0.5.1",
+    "@resdir/console@^0.1.3"
+  ],
+  transpiler: {
+    targets: {
+      node: 8
+    }
+  }
+}

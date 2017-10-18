@@ -19,13 +19,19 @@
     signUp: {
       "@type": "method",
       "@parameters": {
-        email: {"@type": "string", "@position": 0}
+        email: {
+          "@type": "string",
+          "@position": 0
+        }
       }
     },
     signIn: {
       "@type": "method",
       "@parameters": {
-        email: {"@type": "string", "@position": 0}
+        email: {
+          "@type": "string",
+          "@position": 0
+        }
       }
     },
     signOut: {
@@ -40,32 +46,50 @@
         "@type": "method"
       },
       organizations: {
-        "@aliases": ["organization", "orgs", "org"],
+        "@aliases": [
+          "organization",
+          "orgs",
+          "org"
+        ],
         "@implementation": "./dist/user-organizations",
         list: {
-          "@aliases": ["ls"],
-          "@type": "method"
+          "@type": "method",
+          "@aliases": [
+            "ls"
+          ]
         }
       },
       namespace: {
-        "@aliases": ["ns"],
+        "@aliases": [
+          "ns"
+        ],
         "@implementation": "./dist/user-namespace",
         add: {
           "@type": "method",
           "@parameters": {
-            namespace: {"@type": "string", "@aliases": ["ns"], "@position": 0}
+            namespace: {
+              "@type": "string",
+              "@aliases": [
+                "ns"
+              ],
+              "@position": 0
+            }
           }
         },
         remove: {
-          "@aliases": ["rm"],
-          "@type": "method"
+          "@type": "method",
+          "@aliases": [
+            "rm"
+          ]
         }
       },
       github: {
-        "@aliases": ["gh"],
+        "@aliases": [
+          "gh"
+        ],
         "@implementation": "./dist/user-github-account",
         connect: {
-          "@type": "method",
+          "@type": "method"
         },
         disconnect: {
           "@type": "method"
@@ -73,33 +97,77 @@
       }
     },
     organizations: {
-      "@aliases": ["organization", "orgs", "org"],
+      "@aliases": [
+        "organization",
+        "orgs",
+        "org"
+      ],
       "@implementation": "./dist/organizations",
       create: {
         "@type": "method",
         "@parameters": {
-          namespace: {"@type": "string", "@aliases": ["ns"], "@position": 0}
+          namespace: {
+            "@type": "string",
+            "@aliases": [
+              "ns"
+            ],
+            "@position": 0
+          }
         }
       },
       delete: {
         "@type": "method",
         "@parameters": {
-          namespace: {"@type": "string", "@aliases": ["ns"], "@position": 0}
+          namespace: {
+            "@type": "string",
+            "@aliases": [
+              "ns"
+            ],
+            "@position": 0
+          }
         }
       },
       addMember: {
         "@type": "method",
         "@parameters": {
-          organizationNamespace: {"@type": "string", "@aliases": ["organization", "org"], "@position": 0},
-          userNamespace: {"@type": "string", "@aliases": ["user"], "@position": 1}
+          organizationNamespace: {
+            "@type": "string",
+            "@aliases": [
+              "organization",
+              "org"
+            ],
+            "@position": 0
+          },
+          userNamespace: {
+            "@type": "string",
+            "@aliases": [
+              "user"
+            ],
+            "@position": 1
+          }
         }
       },
       removeMember: {
         "@type": "method",
-        "@aliases": ["rmMember"],
+        "@aliases": [
+          "rmMember"
+        ],
         "@parameters": {
-          organizationNamespace: {"@type": "string", "@aliases": ["organization", "org"], "@position": 0},
-          userNamespace: {"@type": "string", "@aliases": ["user"], "@position": 1}
+          organizationNamespace: {
+            "@type": "string",
+            "@aliases": [
+              "organization",
+              "org"
+            ],
+            "@position": 0
+          },
+          userNamespace: {
+            "@type": "string",
+            "@aliases": [
+              "user"
+            ],
+            "@position": 1
+          }
         }
       }
     }

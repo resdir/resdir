@@ -1,0 +1,21 @@
+{
+  "@import": "js/esnext-package",
+  name: "@resdir/email-address",
+  version: "0.1.1",
+  description: "Strong email address validation",
+  files: [
+    "./dist"
+  ],
+  main: "./dist/index.js",
+  dependencies: [
+    "disposable-email-domains@^1.0.21",
+    "regex-email@^1.0.2",
+    "@resdir/console@^0.1.7",
+    "validate-email-hostname@^1.0.9"
+  ],
+  transpiler: {
+    targets: {
+      node: 6
+    }
+  }
+}

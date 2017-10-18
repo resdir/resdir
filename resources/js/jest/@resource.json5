@@ -1,0 +1,40 @@
+{
+  "@import": "js/esnext-resource",
+  id: "js/jest",
+  version: "0.1.7",
+  files: [
+    "./dist"
+  ],
+  dependencies: [
+    "jest@^20.0.4",
+    "regenerator-runtime@^0.11.0",
+    "@resdir/console@^0.1.0"
+  ],
+  "@export": {
+    "@parameters": {
+      verbose: false,
+      quiet: false,
+      debug: false
+    },
+    "@implementation": "./dist",
+    "@publishable": false,
+    dependencies: {
+      "@import": "js/dependencies"
+    },
+    roots: {
+      "@type": "array"
+    },
+    testEnvironment: {
+      "@type": "string"
+    },
+    run: {
+      "@type": "method",
+      "@parameters": {
+        testPathPattern: {
+          "@type": "string",
+          "@position": 0
+        }
+      }
+    }
+  }
+}

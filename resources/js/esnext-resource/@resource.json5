@@ -1,0 +1,44 @@
+{
+  "@import": "./",
+  id: "js/esnext-resource",
+  version: "0.1.8",
+  files: [
+    "./dist"
+  ],
+  dependencies: [
+    "fs-extra@^4.0.0",
+    "@resdir/gitignore-manager@^0.1.0"
+  ],
+  transpiler: {
+    targets: {
+      node: 8
+    }
+  },
+  "@export": {
+    "@import": "js/resource",
+    "@implementation": "./dist",
+    transpiler: {
+      "@import": "js/transpiler",
+      targets: {
+        node: 8
+      },
+      run: {
+        "@listen": [
+          "after:@build",
+          "after:@fileModified"
+        ]
+      }
+    },
+    _createJSESNextResource: {
+      "@type": "method",
+      "@parameters": {
+        name: {
+          "@type": "string",
+          "@position": 0
+        }
+      },
+      "@hidden": true,
+      "@listen": "after:@create"
+    }
+  }
+}

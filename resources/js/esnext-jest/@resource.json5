@@ -1,0 +1,23 @@
+{
+  "@import": "resdir/resource",
+  id: "js/esnext-jest",
+  version: "0.1.7",
+  "@export": {
+    "@import": "js/jest",
+    roots: [
+      "./dist"
+    ],
+    transpiler: {
+      "@import": "js/transpiler",
+      targets: {
+        node: 8
+      },
+      run: {
+        "@listen": [
+          "after:@build",
+          "after:@fileModified"
+        ]
+      }
+    }
+  }
+}

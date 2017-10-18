@@ -1,0 +1,19 @@
+{
+  "@import": "js/esnext-package",
+  name: "@resdir/common-tags",
+  version: "0.1.3",
+  description: "Huge list of tags (source: Stack Exchange)",
+  files: [
+    "./dist",
+    "data.js"
+  ],
+  main: "./dist/index.js",
+  dependencies: [
+    "lodash@^4.17.4"
+  ],
+  transpiler: {
+    targets: {
+      node: 6
+    }
+  }
+}
