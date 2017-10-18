@@ -2,7 +2,7 @@ import {task, formatString, formatCode} from '@resdir/console';
 import RegistryClient from '@resdir/registry-client';
 
 export default base =>
-  class Package extends base {
+  class ResdirResource extends base {
     async publish({major, minor, patch}) {
       await this.$emitEvent('before:publish');
 
