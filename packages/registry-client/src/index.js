@@ -371,7 +371,20 @@ export class RegistryClient {
   }
 
   async addOrganizationMember(organizationNamespace, userNamespace) {
+    while (!organizationNamespace) {
+      emptyLine();
+      organizationNamespace = await prompt(`Organization namespace:`);
+      emptyLine();
+    }
+
     const organization = await this.getOrganizationByNamespace(organizationNamespace);
+
+    while (!userNamespace) {
+      emptyLine();
+      userNamespace = await prompt(`User namespace:`);
+      emptyLine();
+    }
+
     const user = await this.getUserByNamespace(userNamespace);
 
     await task(
@@ -389,7 +402,20 @@ export class RegistryClient {
   }
 
   async removeOrganizationMember(organizationNamespace, userNamespace) {
+    while (!organizationNamespace) {
+      emptyLine();
+      organizationNamespace = await prompt(`Organization namespace:`);
+      emptyLine();
+    }
+
     const organization = await this.getOrganizationByNamespace(organizationNamespace);
+
+    while (!userNamespace) {
+      emptyLine();
+      userNamespace = await prompt(`User namespace:`);
+      emptyLine();
+    }
+
     const user = await this.getUserByNamespace(userNamespace);
 
     await task(
@@ -636,7 +662,7 @@ export class RegistryClient {
 
   // === GitHub account connections ===
 
-  async connectGitHubAccount({parentAction}) {
+  async connectGitHubAccount({parentAction} = {}) {
     const user = await this.getUser();
 
     const {body: {gitHubAccountConnectionURL}} = await task(
