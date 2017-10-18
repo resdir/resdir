@@ -10,12 +10,6 @@
     "@publishable": false,
     run: {
       "@type": "macro",
-      "@parameters": {
-        file: {
-          "@type": "string"
-        },
-        quiet: true
-      },
       "@listen": [
         "after:@build",
         "after:@fileModified"

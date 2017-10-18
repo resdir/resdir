@@ -7,10 +7,18 @@ import {task, formatPath} from '@resdir/console';
 
 export default base =>
   class Transpiler extends base {
-    async run({file, verbose, quiet, debug}) {
+    async run({file, verbose, quiet, debug}, {event}) {
       const files = [];
+
       if (file) {
         files.push(file); // TODO: Handle multiple files
+      }
+
+      if (event && event.name === 'after:@fileModified') {
+        if (!event.arguments.file) {
+          throw new Error('\'file\' event argument is missing');
+        }
+        files.push(event.arguments.file);
       }
 
       await task(
