@@ -7,7 +7,7 @@ import {task, formatPath} from '@resdir/console';
 
 export default base =>
   class Transpiler extends base {
-    async run({file, verbose, quiet, debug}, {event}) {
+    async run({file}, {event, verbose, quiet, debug}) {
       const files = [];
 
       if (file) {
@@ -19,6 +19,7 @@ export default base =>
           throw new Error('\'file\' event argument is missing');
         }
         files.push(event.arguments.file);
+        quiet = true;
       }
 
       await task(

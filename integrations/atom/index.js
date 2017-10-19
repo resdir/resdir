@@ -43,8 +43,7 @@ export default {
     const args = [
       '@broadcast',
       '--event=after:@fileModified',
-      `--arguments=${JSON.stringify({file}).replace(/"/g, '\\"')}`,
-      `--@quiet`
+      `--arguments=${JSON.stringify({file}).replace(/"/g, '\\"')}`
     ];
     const options = {cwd: directory, timeout: 60 * 1000};
     execFile(command, args, options, (err, stdout, stderr) => {

@@ -3,7 +3,7 @@ import RegistryClient from '@resdir/registry-client';
 
 export default base =>
   class ResdirResource extends base {
-    async publish({major, minor, patch}) {
+    async publish({major, minor, patch}, {verbose, quiet, debug}) {
       await this.$emitEvent('before:publish');
 
       if (!(this.id && this.version)) {
@@ -15,7 +15,7 @@ export default base =>
       }
 
       if (major || minor || patch) {
-        await this.$getChild('version').bump({major, minor, patch});
+        await this.$getChild('version').bump({major, minor, patch}, {verbose, quiet, debug});
       }
 
       await task(
@@ -26,7 +26,10 @@ export default base =>
         },
         {
           intro: `Publishing resource (${formatString(this.id)})...`,
-          outro: `Resource published (${formatString(this.id)})`
+          outro: `Resource published (${formatString(this.id)})`,
+          verbose,
+          quiet,
+          debug
         }
       );
 

@@ -14,7 +14,7 @@ export default base =>
       this._dependencies = dependencies;
     }
 
-    async add({specifier, production, development, peer, optional, verbose, quiet, debug}) {
+    async add({specifier, production, development, peer, optional}, {verbose, quiet, debug}) {
       let type;
       if (production) {
         type = 'production';
@@ -52,7 +52,7 @@ export default base =>
       }
     }
 
-    async remove({name, verbose, quiet, debug}) {
+    async remove({name}, {verbose, quiet, debug}) {
       const names = [];
       if (name) {
         names.push(name); // TODO: Handle multiple packages
@@ -95,7 +95,7 @@ export default base =>
       }
     }
 
-    async install({verbose, quiet, debug}) {
+    async install(_args, {verbose, quiet, debug}) {
       await task(
         async () => {
           await this._installDependencies();
@@ -141,7 +141,7 @@ export default base =>
       this._dependencies.forEach(fn);
     }
 
-    async updatePackageFile({verbose, quiet, debug}) {
+    async updatePackageFile(_args, {verbose, quiet, debug}) {
       await task(
         async () => {
           const directory = this.$getParent().$getCurrentDirectory();

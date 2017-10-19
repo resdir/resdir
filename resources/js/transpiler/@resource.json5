@@ -1,7 +1,7 @@
 {
   "@import": "js/esnext-resource",
   id: "js/transpiler",
-  version: "0.1.11",
+  version: "0.1.12",
   files: [
     "./dist"
   ],
@@ -28,11 +28,6 @@
     "@expression": "./tests run"
   },
   "@export": {
-    "@parameters": {
-      verbose: false,
-      quiet: false,
-      debug: false
-    },
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist",
     source: "./src",

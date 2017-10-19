@@ -11,7 +11,7 @@ const GIT_IGNORE = ['.DS_STORE', 'node_modules', '*.log', '/package.json'];
 
 export default base =>
   class Package extends base {
-    async updatePackageFile({verbose, quiet, debug}) {
+    async updatePackageFile(_args, {verbose, quiet, debug}) {
       await task(
         async () => {
           this._updatePackageFile();
@@ -46,7 +46,7 @@ export default base =>
       });
     }
 
-    async publish({major, minor, patch, access, verbose, quiet, debug}) {
+    async publish({major, minor, patch, access}, {verbose, quiet, debug}) {
       await this['@build']();
       await this['@test']();
 

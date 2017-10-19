@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   id: "js/dependencies",
-  version: "0.1.10",
+  version: "0.1.11",
   files: [
     "bundle.js"
   ],
@@ -42,11 +42,6 @@
       "deps",
       "dep"
     ],
-    "@parameters": {
-      verbose: false,
-      quiet: false,
-      debug: false
-    },
     "@runtime": "node#>=6.10.0",
     "@implementation": "./bundle.js",
     add: {

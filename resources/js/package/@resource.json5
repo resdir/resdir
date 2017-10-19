@@ -1,7 +1,7 @@
 {
   "@import": "js/esnext-resource",
   id: "js/package",
-  version: "0.1.8",
+  version: "0.1.9",
   files: [
     "./dist"
   ],
@@ -28,11 +28,6 @@
     }
   },
   "@export": {
-    "@parameters": {
-      verbose: false,
-      quiet: false,
-      debug: false
-    },
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist",
     name: {

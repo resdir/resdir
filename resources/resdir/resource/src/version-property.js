@@ -3,7 +3,7 @@ import {task, formatString, formatCode} from '@resdir/console';
 
 export default base =>
   class VersionProperty extends base {
-    async bump({major, minor, patch}) {
+    async bump({major, minor, patch}, {verbose, quiet, debug}) {
       let part;
       if (major) {
         part = 'major';
@@ -21,7 +21,7 @@ export default base =>
           await this.$getRoot().$save();
           progress.setOutro(`Version number bumped to ${formatString(this.$value)}`);
         },
-        {intro: 'Bumping version number...'}
+        {intro: 'Bumping version number...', verbose, quiet, debug}
       );
     }
 

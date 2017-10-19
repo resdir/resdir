@@ -1,7 +1,7 @@
 import sleep from 'sleep-promise';
 import {task} from '../../../dist';
 
-const verbose = process.argv.includes('--verbose');
+const verbose = process.argv.includes('--@verbose');
 
 (async () => {
   await task(
