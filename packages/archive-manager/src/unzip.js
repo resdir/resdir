@@ -5,10 +5,23 @@ import {ensureDirSync} from 'fs-extra';
 
 export function unzip(directory, archive) {
   return new Promise((resolve, reject) => {
-    yauzl.fromBuffer(archive, {lazyEntries: true}, (err, zipFile) => {
+    yauzl.fromBuffer(archive, {autoClose: false, lazyEntries: true}, (err, zipFile) => {
       if (err) {
         reject(err);
         return;
+      }
+
+      let streamCount = 1;
+
+      function incrementStreamCount() {
+        streamCount++;
+      }
+
+      function decrementStreamCount() {
+        streamCount--;
+        if (streamCount === 0) {
+          resolve();
+        }
       }
 
       zipFile.on('entry', entry => {
@@ -30,13 +43,16 @@ export function unzip(directory, archive) {
             });
             ensureDirSync(dirname(file));
             const writeStream = createWriteStream(file);
+            incrementStreamCount();
             readStream.pipe(writeStream);
+            writeStream.once('close', () => decrementStreamCount());
           }
         });
       });
 
-      zipFile.on('end', () => {
-        resolve();
+      zipFile.once('end', () => {
+        zipFile.close();
+        decrementStreamCount();
       });
 
       zipFile.readEntry();
