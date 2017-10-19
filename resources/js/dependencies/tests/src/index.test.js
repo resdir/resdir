@@ -46,7 +46,7 @@ describe('js/dependencies', () => {
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
 
-    await pkg.dependencies.add({specifier: 'lodash', quiet: true});
+    await pkg.dependencies.add({specifier: 'lodash'}, {quiet: true});
 
     expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(true);
 
@@ -56,7 +56,7 @@ describe('js/dependencies', () => {
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(true);
 
-    await pkg.dependencies.remove({name: 'lodash', quiet: true});
+    await pkg.dependencies.remove({name: 'lodash'}, {quiet: true});
 
     expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(false);
 
@@ -75,7 +75,7 @@ describe('js/dependencies', () => {
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
 
-    await pkg.dependencies.add({specifier: 'lodash@4.5.1', development: true, quiet: true});
+    await pkg.dependencies.add({specifier: 'lodash@4.5.1', development: true}, {quiet: true});
 
     expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(true);
 
@@ -89,7 +89,7 @@ describe('js/dependencies', () => {
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(true);
 
-    await pkg.dependencies.remove({name: 'lodash', quiet: true});
+    await pkg.dependencies.remove({name: 'lodash'}, {quiet: true});
 
     expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(false);
 

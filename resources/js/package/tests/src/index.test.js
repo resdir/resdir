@@ -44,7 +44,7 @@ describe('js/package', () => {
 
     expect(pkg.$getResourceFile()).toBeUndefined();
     await pkg.$save({directory});
-    await pkg.updatePackageFile({quiet: true});
+    await pkg.updatePackageFile(undefined, {quiet: true});
     expect(pkg.$getResourceFile()).toBeDefined();
 
     const resourceDefinition = load(pkg.$getResourceFile());

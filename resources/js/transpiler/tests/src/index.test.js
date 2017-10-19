@@ -39,7 +39,7 @@ describe('js/transpiler', () => {
     save(resourceFile, definition);
 
     const Person = await Resource.$load(directory);
-    await Person.transpiler.run({quiet: true});
+    await Person.transpiler.run(undefined, {quiet: true});
 
     const distDirectory = join(directory, 'dist');
     expect(pathExistsSync(distDirectory)).toBe(true);

@@ -1,7 +1,7 @@
 {
   "@import": "js/esnext-resource",
   id: "js/transpiler",
-  version: "0.1.12",
+  version: "0.1.13",
   files: [
     "./dist"
   ],

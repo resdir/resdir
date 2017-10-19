@@ -15,7 +15,7 @@ export default base =>
       await task(
         async () => {
           this._updatePackageFile();
-          await this.dependencies.updatePackageFile({quiet: true});
+          await this.dependencies.updatePackageFile(undefined, {quiet: true});
         },
         {intro: `Updating package file...`, outro: `Package file updated`, verbose, quiet, debug}
       );
