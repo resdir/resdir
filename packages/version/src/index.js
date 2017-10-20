@@ -3,11 +3,8 @@ import {formatString} from '@resdir/console';
 
 export class Version {
   constructor(str) {
-    const value = semver.clean(str);
-    if (!value) {
-      throw new Error(`Version ${formatString(str)} is invalid`);
-    }
-    this.value = value;
+    validateVersion(str);
+    this.value = semver.clean(str);
   }
 
   static normalize(version) {
@@ -85,6 +82,36 @@ export class Version {
     }
     return new this(value);
   }
+}
+
+export function validateVersion(version, {throwIfInvalid = true} = {}) {
+  const isValid = validate(version);
+
+  if (!isValid) {
+    if (throwIfInvalid) {
+      throw new Error(`Version ${formatString(version)} is invalid`);
+    }
+    return false;
+  }
+
+  return true;
+}
+
+function validate(version) {
+  if (version instanceof Version) {
+    return true;
+  }
+
+  if (typeof version !== 'string') {
+    return false;
+  }
+
+  version = semver.clean(version);
+  if (!version) {
+    return false;
+  }
+
+  return true;
 }
 
 export function compareVersions(v1, comparator, v2) {
