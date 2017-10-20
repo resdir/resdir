@@ -4,14 +4,27 @@ const GIT_IGNORE = ['/dist'];
 
 export default base =>
   class JSESNextPackage extends base {
-    async _createJSESNextPackage() {
+    async '@initialize'({gitignore, ...args}) {
       const directory = this.$getCurrentDirectory();
-      GitIgnore.load(directory)
-        .add(GIT_IGNORE)
-        .save();
 
-      this.files = ['./dist'];
-      await this.$setChild('main', './dist/index.js');
+      const mainPropertyIsMissing = !this.main.$serialize();
+      const filesPropertyIsMissing = !this.files;
+
+      await super['@initialize']({gitignore, ...args});
+
+      if (gitignore) {
+        GitIgnore.load(directory)
+          .add(GIT_IGNORE)
+          .save();
+      }
+
+      if (mainPropertyIsMissing) {
+        await this.$setChild('main', './dist/index.js');
+      }
+
+      if (filesPropertyIsMissing) {
+        this.files = ['./dist'];
+      }
 
       await this.$save();
 

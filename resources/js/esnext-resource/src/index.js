@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {outputFileSync} from 'fs-extra';
+import {outputFileSync, pathExistsSync} from 'fs-extra';
 import GitIgnore from '@resdir/gitignore-manager';
 
 const RESOURCE_IMPLEMENTATION = `export default base =>
@@ -12,18 +12,28 @@ const GIT_IGNORE = ['/dist'];
 
 export default base =>
   class JSESNextResource extends base {
-    async _createJSESNextResource() {
+    async '@initialize'({gitignore, ...args}) {
       const directory = this.$getCurrentDirectory();
 
-      const file = join(directory, 'src', 'resource.js');
-      outputFileSync(file, RESOURCE_IMPLEMENTATION);
+      const implementationPropertyIsMissing = !this.$implementation;
+      const implementationFile = join(directory, 'src', 'resource.js');
+      const implementationFileIsMissing = !pathExistsSync(implementationFile);
 
-      GitIgnore.load(directory).add(GIT_IGNORE).save();
+      await super['@initialize']({gitignore, ...args});
 
-      this.$implementation = './dist/resource.js';
+      if (gitignore) {
+        GitIgnore.load(directory)
+          .add(GIT_IGNORE)
+          .save();
+      }
 
-      await this.$save();
-
-      await this['@build']();
+      if (implementationPropertyIsMissing) {
+        this.$implementation = './dist/resource.js';
+        if (implementationFileIsMissing) {
+          outputFileSync(implementationFile, RESOURCE_IMPLEMENTATION);
+          await this['@build']();
+        }
+        await this.$save();
+      }
     }
   };

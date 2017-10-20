@@ -1,13 +1,15 @@
 {
   "@import": "js/esnext-resource",
   id: "resdir/resource",
-  version: "0.1.5",
+  version: "0.1.7",
   files: [
     "./dist"
   ],
   dependencies: [
     "@resdir/console@^0.1.0",
+    "@resdir/gitignore-manager@^0.1.0",
     "@resdir/registry-client@^0.1.13",
+    "@resdir/resource-identifier@^0.1.0",
     "@resdir/version@^0.1.0"
   ],
   transpiler: {
@@ -57,6 +59,22 @@
         major: false,
         minor: false,
         patch: false
+      }
+    },
+    "@initialize": {
+      "@type": "method",
+      "@parameters": {
+        id: {
+          "@type": "string",
+          "@position": 0
+        },
+        version: {
+          "@type": "string",
+          "@aliases": [
+            "v"
+          ]
+        },
+        gitignore: true
       }
     }
   }

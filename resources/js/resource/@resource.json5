@@ -1,7 +1,7 @@
 {
   "@import": "js/esnext-resource",
   id: "js/resource",
-  version: "0.1.8",
+  version: "0.1.9",
   files: [
     "./dist"
   ],
@@ -18,19 +18,11 @@
     "@import": "resdir/resource",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist",
+    "@initialize": {
+      "@type": "method"
+    },
     dependencies: {
       "@import": "js/dependencies"
-    },
-    _createJSResource: {
-      "@type": "method",
-      "@parameters": {
-        name: {
-          "@type": "string",
-          "@position": 0
-        }
-      },
-      "@hidden": true,
-      "@listen": "after:@create"
     }
   }
 }

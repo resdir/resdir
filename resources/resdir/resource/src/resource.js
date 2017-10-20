@@ -1,5 +1,10 @@
 import {task, formatString, formatCode} from '@resdir/console';
 import RegistryClient from '@resdir/registry-client';
+import {validateResourceIdentifier} from '@resdir/resource-identifier';
+import {validateVersion} from '@resdir/version';
+import GitIgnore from '@resdir/gitignore-manager';
+
+const GIT_IGNORE = ['.DS_STORE', '*.log'];
 
 export default base =>
   class ResdirResource extends base {
@@ -34,6 +39,31 @@ export default base =>
       );
 
       await this.$emitEvent('after:publish');
+    }
+
+    async '@initialize'({id, version, gitignore, ...args}) {
+      await super['@initialize'](args);
+
+      if (id) {
+        validateResourceIdentifier(id);
+        this.id = id;
+        if (!version && !this.version) {
+          version = '0.1.0';
+        }
+      }
+
+      if (version) {
+        validateVersion(version);
+        this.version = version;
+      }
+
+      if (gitignore) {
+        GitIgnore.load(this.$getCurrentDirectory())
+          .add(GIT_IGNORE)
+          .save();
+      }
+
+      await this.$save();
     }
 
     _getRegistry() {

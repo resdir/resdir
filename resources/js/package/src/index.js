@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {outputFileSync} from 'fs-extra';
+import {outputFileSync, pathExistsSync} from 'fs-extra';
 import {updatePackageFile, publishPackage, fetchNPMRegistry} from '@resdir/package-manager';
 import {task, formatString, formatCode} from '@resdir/console';
 import GitIgnore from '@resdir/gitignore-manager';
@@ -92,20 +92,46 @@ export default base =>
       await publishPackage(directory, {access, debug});
     }
 
-    async _createJSPackage({name}) {
+    async '@initialize'({name, version, gitignore, ...args}) {
+      if (!name) {
+        throw new Error('\'name\' argument is missing');
+      }
+
       const directory = this.$getCurrentDirectory();
 
-      const file = join(directory, 'src', 'index.js');
-      outputFileSync(file, PACKAGE_CODE);
+      const mainPropertyIsMissing = !this.main.$serialize();
+      const codeFile = join(directory, 'src', 'index.js');
+      const codeFileIsMissing = !pathExistsSync(codeFile);
+      const filesPropertyIsMissing = !this.files;
 
-      GitIgnore.load(directory)
-        .add(GIT_IGNORE)
-        .save();
+      await super['@initialize'](args);
 
       this.name = name;
-      this.id = undefined;
-      this.files = ['./src'];
-      await this.$setChild('main', './src/index.js');
+
+      if (!version && !this.version) {
+        version = '0.1.0';
+      }
+
+      if (version) {
+        this.version = version;
+      }
+
+      if (gitignore) {
+        GitIgnore.load(directory)
+          .add(GIT_IGNORE)
+          .save();
+      }
+
+      if (mainPropertyIsMissing) {
+        await this.$setChild('main', './src/index.js');
+        if (codeFileIsMissing) {
+          outputFileSync(codeFile, PACKAGE_CODE);
+        }
+      }
+
+      if (filesPropertyIsMissing) {
+        this.files = ['./src'];
+      }
 
       await this.$save();
     }

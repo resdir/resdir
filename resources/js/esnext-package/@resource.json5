@@ -1,7 +1,7 @@
 {
   "@import": "js/esnext-resource",
   id: "js/esnext-package",
-  version: "0.1.6",
+  version: "0.1.7",
   files: [
     "./dist"
   ],
@@ -11,6 +11,9 @@
   "@export": {
     "@import": "js/package",
     "@implementation": "./dist",
+    "@initialize": {
+      "@type": "method"
+    },
     transpiler: {
       "@import": "js/transpiler",
       run: {
@@ -19,17 +22,6 @@
           "after:@fileModified"
         ]
       }
-    },
-    _createJSESNextPackage: {
-      "@type": "method",
-      "@parameters": {
-        name: {
-          "@type": "string",
-          "@position": 0
-        }
-      },
-      "@hidden": true,
-      "@listen": "after:@create"
     }
   }
 }

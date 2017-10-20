@@ -16,6 +16,7 @@
     "@type": "macro",
     "@expression": [
       "./resources/resdir/resource publish --patch",
+      "./resources/resdir/registry publish --patch",
       "./resources/resdir/example publish --patch",
       "./resources/js/dependencies publish --patch",
       "./resources/js/resource publish --patch",

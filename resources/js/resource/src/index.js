@@ -1,5 +1,5 @@
 import {join} from 'path';
-import {outputFileSync} from 'fs-extra';
+import {outputFileSync, pathExistsSync} from 'fs-extra';
 import GitIgnore from '@resdir/gitignore-manager';
 
 const RESOURCE_IMPLEMENTATION = `module.exports = base =>
@@ -8,22 +8,31 @@ const RESOURCE_IMPLEMENTATION = `module.exports = base =>
   };
 `;
 
-const GIT_IGNORE = ['.DS_STORE', 'node_modules', '*.log'];
+const GIT_IGNORE = ['node_modules'];
 
 export default base =>
   class JSResource extends base {
-    async _createJSResource() {
+    async '@initialize'({gitignore, ...args}) {
       const directory = this.$getCurrentDirectory();
 
-      const implementation = join(directory, 'src', 'resource.js');
-      outputFileSync(implementation, RESOURCE_IMPLEMENTATION);
+      const implementationPropertyIsMissing = !this.$implementation;
+      const implementationFile = join(directory, 'src', 'resource.js');
+      const implementationFileIsMissing = !pathExistsSync(implementationFile);
 
-      GitIgnore.load(directory)
-        .add(GIT_IGNORE)
-        .save();
+      await super['@initialize']({gitignore, ...args});
 
-      this.$implementation = './src/resource.js';
+      if (gitignore) {
+        GitIgnore.load(directory)
+          .add(GIT_IGNORE)
+          .save();
+      }
 
-      await this.$save();
+      if (implementationPropertyIsMissing) {
+        this.$implementation = './src/resource.js';
+        if (implementationFileIsMissing) {
+          outputFileSync(implementationFile, RESOURCE_IMPLEMENTATION);
+        }
+        await this.$save();
+      }
     }
   };

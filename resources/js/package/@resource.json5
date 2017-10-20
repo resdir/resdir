@@ -1,7 +1,7 @@
 {
   "@import": "js/esnext-resource",
   id: "js/package",
-  version: "0.1.10",
+  version: "0.1.11",
   files: [
     "./dist"
   ],
@@ -99,16 +99,21 @@
         "after:@save"
       ]
     },
-    _createJSPackage: {
+    "@initialize": {
       "@type": "method",
       "@parameters": {
         name: {
           "@type": "string",
           "@position": 0
-        }
-      },
-      "@hidden": true,
-      "@listen": "after:@create"
+        },
+        version: {
+          "@type": "string",
+          "@aliases": [
+            "v"
+          ]
+        },
+        gitignore: true
+      }
     }
   }
 }
