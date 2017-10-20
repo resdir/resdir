@@ -65,7 +65,7 @@ function validate(identifier) {
 
   const {namespace, name} = parsedIdentifier;
 
-  if (!validateNamespace(namespace)) {
+  if (!validateNamespace(namespace, {throwIfInvalid: false})) {
     return false;
   }
 

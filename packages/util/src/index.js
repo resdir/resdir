@@ -14,6 +14,14 @@ export function setProperty(target, source, name, aliases) {
   }
 }
 
+export function takeProperty(source, name, aliases) {
+  const result = getPropertyKeyAndValue(source, name, aliases);
+  if (result) {
+    delete source[result.key];
+    return result.value;
+  }
+}
+
 export function getPropertyKeyAndValue(source, name, aliases = []) {
   if (source === undefined) {
     return;

@@ -1,7 +1,7 @@
 {
   "@import": "js/esnext-package",
   name: "@resdir/resource-identifier",
-  version: "0.1.8",
+  version: "0.1.9",
   description: "Useful functions to handle Resource's identifiers",
   files: [
     "./dist"
