@@ -11,9 +11,11 @@
     "@resdir/console@^0.1.4",
     "@resdir/namespace@^0.1.0"
   ],
-  transpiler: {
-    targets: {
-      node: 6
+  "@private": {
+    transpiler: {
+      targets: {
+        node: 6
+      }
     }
   }
 }

@@ -13,9 +13,11 @@
     "@resdir/console@^0.1.7",
     "validate-email-hostname@^1.0.9"
   ],
-  transpiler: {
-    targets: {
-      node: 6
+  "@private": {
+    transpiler: {
+      targets: {
+        node: 6
+      }
     }
   }
 }

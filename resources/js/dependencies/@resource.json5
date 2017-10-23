@@ -1,39 +1,48 @@
 {
   "@import": "resdir/resource",
   id: "js/dependencies",
-  version: "0.1.12",
+  version: "0.1.13",
   files: [
     "bundle.js"
   ],
-  builder: {
-    "@implementation": "./dist/builder.js",
-    "@publishable": false,
-    run: {
-      "@type": "macro",
-      "@listen": [
-        "after:@build",
-        "after:@fileModified"
-      ],
-      "@expression": [
-        "transpiler run",
-        "bundle"
-      ]
-    },
-    transpiler: {
-      "@import": "js/transpiler",
-      targets: {
-        node: 8
+  "@private": {
+    builder: {
+      "@implementation": "./dist/builder.js",
+      run: {
+        "@type": "macro",
+        "@listen": [
+          "after:@build",
+          "after:@fileModified"
+        ],
+        "@expression": [
+          "transpiler run",
+          "bundle"
+        ]
+      },
+      transpiler: {
+        "@import": "js/transpiler",
+        targets: {
+          node: 8
+        }
+      },
+      bundle: {
+        "@type": "method"
       }
     },
-    bundle: {
-      "@type": "method"
+    tests: {
+      "@import": "js/esnext-jest",
+      "@directory": "./tests",
+      dependencies: [
+        "fs-extra@^3.0.1",
+        "@resdir/file-manager@^0.1.0",
+        "run-core@^0.10.0",
+        "temp-dir@^1.0.0"
+      ],
+      testEnvironment: "node",
+      run: {
+        "@listen": "after:@test"
+      }
     }
-  },
-  _testJSDependencies: {
-    "@type": "macro",
-    "@hidden": true,
-    "@listen": "after:@test",
-    "@expression": "./tests run"
   },
   "@export": {
     "@aliases": [

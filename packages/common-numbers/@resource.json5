@@ -10,9 +10,11 @@
   dependencies: [
     "node-status-codes@^2.0.1"
   ],
-  transpiler: {
-    targets: {
-      node: 6
+  "@private": {
+    transpiler: {
+      targets: {
+        node: 6
+      }
     }
   }
 }

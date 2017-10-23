@@ -18,9 +18,11 @@
     "@resdir/http-client@^0.2.0",
     "@resdir/local-cache@^0.1.0"
   ],
-  transpiler: {
-    targets: {
-      node: 8
+  "@private": {
+    transpiler: {
+      targets: {
+        node: 8
+      }
     }
   }
 }

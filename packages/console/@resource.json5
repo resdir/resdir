@@ -15,9 +15,11 @@
     "window-size@^1.1.0",
     "wrap-ansi@^3.0.1"
   ],
-  transpiler: {
-    targets: {
-      node: 8
+  "@private": {
+    transpiler: {
+      targets: {
+        node: 8
+      }
     }
   }
 }

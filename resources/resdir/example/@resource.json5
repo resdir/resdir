@@ -5,7 +5,7 @@
   },
   "@implementation": "./dist",
   id: "resdir/example",
-  version: "0.3.8",
+  version: "0.3.11",
   files: [
     "./dist"
   ],
@@ -16,12 +16,14 @@
     "@type": "method",
     "@listen": "hi"
   },
-  tests: {
-    "@import": "js/esnext-jest",
-    "@directory": "./tests",
-    testEnvironment: "node",
-    run: {
-      "@listen": "after:@test"
+  "@private": {
+    tests: {
+      "@import": "js/esnext-jest",
+      "@directory": "./tests",
+      testEnvironment: "node",
+      run: {
+        "@listen": "after:@test"
+      }
     }
   }
 }

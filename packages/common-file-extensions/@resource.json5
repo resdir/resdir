@@ -10,9 +10,11 @@
   dependencies: [
     "mime-db@^1.30.0"
   ],
-  transpiler: {
-    targets: {
-      node: 6
+  "@private": {
+    transpiler: {
+      targets: {
+        node: 6
+      }
     }
   }
 }

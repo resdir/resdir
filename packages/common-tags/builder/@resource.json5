@@ -5,12 +5,14 @@
     "lodash@^4.17.4",
     "xml2js@^0.4.19"
   ],
-  transpiler: {
-    targets: {
-      node: 8
+  "@private": {
+    transpiler: {
+      targets: {
+        node: 8
+      }
+    },
+    build: {
+      "@type": "method"
     }
-  },
-  build: {
-    "@type": "method"
   }
 }

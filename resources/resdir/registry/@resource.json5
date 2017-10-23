@@ -1,7 +1,7 @@
 {
   "@import": "js/esnext-resource",
   id: "resdir/registry",
-  version: "0.1.0",
+  version: "0.1.1",
   files: [
     "./dist"
   ],
@@ -9,9 +9,11 @@
     "@resdir/console@^0.1.0",
     "@resdir/registry-client@^0.1.13"
   ],
-  transpiler: {
-    targets: {
-      node: 8
+  "@private": {
+    transpiler: {
+      targets: {
+        node: 8
+      }
     }
   },
   "@export": {

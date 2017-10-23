@@ -10,9 +10,11 @@
   dependencies: [
     "lodash.union@^4.6.0"
   ],
-  transpiler: {
-    targets: {
-      node: 8
+  "@private": {
+    transpiler: {
+      targets: {
+        node: 8
+      }
     }
   }
 }

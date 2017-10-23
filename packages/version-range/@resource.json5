@@ -15,17 +15,19 @@
     "@resdir/console@^0.1.0",
     "semver@^5.3.0"
   ],
-  transpiler: {
-    targets: {
-      node: 6
-    }
-  },
-  tests: {
-    "@import": "js/esnext-jest",
-    "@directory": "./tests",
-    testEnvironment: "node",
-    run: {
-      "@listen": "after:@test"
+  "@private": {
+    transpiler: {
+      targets: {
+        node: 6
+      }
+    },
+    tests: {
+      "@import": "js/esnext-jest",
+      "@directory": "./tests",
+      testEnvironment: "node",
+      run: {
+        "@listen": "after:@test"
+      }
     }
   }
 }

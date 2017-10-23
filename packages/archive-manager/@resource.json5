@@ -14,9 +14,11 @@
     "yauzl@^2.8.0",
     "yazl@^2.4.2"
   ],
-  transpiler: {
-    targets: {
-      node: 8
+  "@private": {
+    transpiler: {
+      targets: {
+        node: 8
+      }
     }
   }
 }

@@ -26,9 +26,11 @@
     "@resdir/version-range@^0.1.9",
     "tempy@^0.1.0"
   ],
-  transpiler: {
-    targets: {
-      node: 8
+  "@private": {
+    transpiler: {
+      targets: {
+        node: 8
+      }
     }
   }
 }
