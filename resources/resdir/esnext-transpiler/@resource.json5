@@ -1,0 +1,17 @@
+{
+  "@import": "resdir/resource",
+  id: "resdir/esnext-transpiler",
+  version: "0.1.1",
+  "@export": {
+    "@import": "js/esnext-transpiler",
+    targets: {
+      node: 8
+    },
+    run: {
+      "@listen": [
+        "after:@build",
+        "after:@fileModified"
+      ]
+    }
+  }
+}

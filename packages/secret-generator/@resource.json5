@@ -1,7 +1,7 @@
 {
-  "@import": "js/esnext-package",
+  "@import": "js/package",
   name: "@resdir/secret-generator",
-  version: "1.0.3",
+  version: "1.0.4",
   description: "Generate a secret",
   files: [
     "./dist"
@@ -12,20 +12,14 @@
   ],
   "@private": {
     transpiler: {
-      targets: {
-        node: 6
-      }
+      "@import": "resdir/esnext-transpiler"
     },
     tests: {
-      "@import": "js/esnext-jest",
+      "@import": "resdir/esnext-jest",
       "@directory": "./tests",
       dependencies: [
         "lodash@^4.17.4"
-      ],
-      testEnvironment: "node",
-      run: {
-        "@listen": "after:@test"
-      }
+      ]
     }
   }
 }

@@ -1,7 +1,7 @@
 {
-  "@import": "js/esnext-package",
+  "@import": "js/package",
   name: "@resdir/namespace",
-  version: "0.1.5",
+  version: "0.1.6",
   description: "Useful functions to handle namespaces",
   files: [
     "./dist"
@@ -13,9 +13,7 @@
   ],
   "@private": {
     transpiler: {
-      targets: {
-        node: 6
-      }
+      "@import": "resdir/esnext-transpiler"
     }
   }
 }

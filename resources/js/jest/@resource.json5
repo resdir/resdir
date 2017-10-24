@@ -1,7 +1,7 @@
 {
-  "@import": "js/esnext-resource",
+  "@import": "js/resource",
   id: "js/jest",
-  version: "0.1.9",
+  version: "0.1.10",
   files: [
     "./dist"
   ],
@@ -10,6 +10,11 @@
     "regenerator-runtime@^0.11.0",
     "@resdir/console@^0.1.0"
   ],
+  "@private": {
+    transpiler: {
+      "@import": "resdir/esnext-transpiler"
+    }
+  },
   "@export": {
     "@implementation": "./dist",
     dependencies: {

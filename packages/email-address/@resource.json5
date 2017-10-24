@@ -1,7 +1,7 @@
 {
-  "@import": "js/esnext-package",
+  "@import": "js/package",
   name: "@resdir/email-address",
-  version: "0.1.1",
+  version: "0.1.2",
   description: "Strong email address validation",
   files: [
     "./dist"
@@ -15,9 +15,7 @@
   ],
   "@private": {
     transpiler: {
-      targets: {
-        node: 6
-      }
+      "@import": "resdir/esnext-transpiler"
     }
   }
 }

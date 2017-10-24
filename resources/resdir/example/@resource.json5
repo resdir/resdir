@@ -1,11 +1,11 @@
 {
-  "@import": "js/esnext-resource",
+  "@import": "js/resource",
   "@parameters": {
     color: "green"
   },
   "@implementation": "./dist",
   id: "resdir/example",
-  version: "0.3.11",
+  version: "0.3.12",
   files: [
     "./dist"
   ],
@@ -17,13 +17,12 @@
     "@listen": "hi"
   },
   "@private": {
+    transpiler: {
+      "@import": "resdir/esnext-transpiler"
+    },
     tests: {
-      "@import": "js/esnext-jest",
-      "@directory": "./tests",
-      testEnvironment: "node",
-      run: {
-        "@listen": "after:@test"
-      }
+      "@import": "resdir/esnext-jest",
+      "@directory": "./tests"
     }
   }
 }

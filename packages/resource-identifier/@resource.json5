@@ -1,7 +1,7 @@
 {
-  "@import": "js/esnext-package",
+  "@import": "js/package",
   name: "@resdir/resource-identifier",
-  version: "0.1.9",
+  version: "0.1.10",
   description: "Useful functions to handle Resource's identifiers",
   files: [
     "./dist"
@@ -13,9 +13,7 @@
   ],
   "@private": {
     transpiler: {
-      targets: {
-        node: 6
-      }
+      "@import": "resdir/esnext-transpiler"
     }
   }
 }

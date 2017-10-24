@@ -2,6 +2,7 @@ import {join} from 'path';
 import {outputFileSync, pathExistsSync} from 'fs-extra';
 import GitIgnore from '@resdir/gitignore-manager';
 
+// Warning: js/esnext-transpiler @initialize method depends on this default implementation:
 const RESOURCE_IMPLEMENTATION = `module.exports = base =>
   class extends base {
     // Resource implementation

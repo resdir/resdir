@@ -1,7 +1,7 @@
 {
-  "@import": "js/esnext-package",
+  "@import": "js/package",
   name: "@resdir/resource-specifier",
-  version: "0.1.7",
+  version: "0.1.8",
   description: "Useful functions to handle Resource's specifiers",
   files: [
     "./dist"
@@ -13,9 +13,7 @@
   ],
   "@private": {
     transpiler: {
-      targets: {
-        node: 6
-      }
+      "@import": "resdir/esnext-transpiler"
     }
   }
 }

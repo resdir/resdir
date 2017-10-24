@@ -1,7 +1,7 @@
 {
-  "@import": "js/esnext-package",
+  "@import": "js/package",
   name: "@resdir/common-tags",
-  version: "0.1.3",
+  version: "0.1.4",
   description: "Huge list of tags (source: Stack Exchange)",
   files: [
     "./dist",
@@ -13,9 +13,7 @@
   ],
   "@private": {
     transpiler: {
-      targets: {
-        node: 6
-      }
+      "@import": "resdir/esnext-transpiler"
     }
   }
 }

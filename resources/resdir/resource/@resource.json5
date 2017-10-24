@@ -1,7 +1,7 @@
 {
-  "@import": "js/esnext-resource",
+  "@import": "js/resource",
   id: "resdir/resource",
-  version: "0.1.8",
+  version: "0.1.9",
   files: [
     "./dist"
   ],
@@ -14,9 +14,7 @@
   ],
   "@private": {
     transpiler: {
-      targets: {
-        node: 8
-      }
+      "@import": "resdir/esnext-transpiler"
     }
   },
   "@export": {

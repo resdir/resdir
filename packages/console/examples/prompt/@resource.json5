@@ -1,3 +1,5 @@
 {
-  "@import": "js/esnext-resource"
+  transpiler: {
+    "@import": "resdir/esnext-transpiler"
+  }
 }

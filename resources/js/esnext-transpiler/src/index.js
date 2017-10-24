@@ -1,12 +1,16 @@
 import {join, resolve, relative, extname} from 'path';
-import {statSync, chmodSync} from 'fs';
+import {readFileSync, writeFileSync, existsSync, statSync, chmodSync} from 'fs';
+import {isEqual} from 'lodash';
 import {copy, readFile, outputFile, emptyDirSync} from 'fs-extra';
 import isDirectory from 'is-directory';
 import {transform} from 'babel-core';
 import {task, formatPath} from '@resdir/console';
+import GitIgnore from '@resdir/gitignore-manager';
+
+const GIT_IGNORE = ['/dist'];
 
 export default base =>
-  class Transpiler extends base {
+  class ESNextTranspiler extends base {
     async run({file}, {event, verbose, quiet, debug}) {
       const files = [];
 
@@ -128,5 +132,56 @@ export default base =>
         await outputFile(destFile, code);
         chmodSync(destFile, mode);
       }
+    }
+
+    async '@initialize'({gitignore, ...args}) {
+      await super['@initialize'](args);
+
+      if (this.$isRoot()) {
+        // This initialization method works only with child properties
+        return;
+      }
+
+      if (this.$private === undefined) {
+        this.$private = true;
+      }
+
+      if (!this.$getChild('run').$getListenedEvents()) {
+        this.$getChild('run').$setListenedEvents(['after:@build', 'after:@fileModified']);
+      }
+
+      const root = this.$getRoot();
+      const directory = root.$getCurrentDirectory();
+
+      if (root.$implementation === './src/resource.js') {
+        root.$implementation = './dist/resource.js';
+        const implementationFile = join(directory, 'src', 'resource.js');
+        if (existsSync(implementationFile)) {
+          let code = readFileSync(implementationFile, 'utf8');
+          if (code.startsWith('module.exports = base =>\n')) {
+            code = 'export default base =>\n' + code.slice('module.exports = base =>\n'.length);
+            writeFileSync(implementationFile, code);
+          }
+        }
+      }
+
+      if (root.isJSPackageResource) {
+        if (root.main.$serialize() === './src/index.js') {
+          await root.$setChild('main', './dist/index.js');
+        }
+        if (isEqual(root.files, ['./src'])) {
+          root.files = ['./dist'];
+        }
+      }
+
+      if (gitignore) {
+        GitIgnore.load(directory)
+          .add(GIT_IGNORE)
+          .save();
+      }
+
+      await root['@build']();
+
+      await root.$save();
     }
   };

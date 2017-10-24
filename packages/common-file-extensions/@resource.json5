@@ -1,7 +1,7 @@
 {
-  "@import": "js/esnext-package",
+  "@import": "js/package",
   name: "@resdir/common-file-extensions",
-  version: "0.1.1",
+  version: "0.1.2",
   description: "List of common file extensions (ex.: 'doc', 'mp3', 'js',...)",
   files: [
     "./dist"
@@ -12,9 +12,7 @@
   ],
   "@private": {
     transpiler: {
-      targets: {
-        node: 6
-      }
+      "@import": "resdir/esnext-transpiler"
     }
   }
 }

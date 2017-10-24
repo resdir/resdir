@@ -14,11 +14,11 @@ export class Person {
 }
 `;
 
-describe('js/transpiler', () => {
+describe('js/esnext-transpiler', () => {
   let tempDirectory;
 
   beforeAll(() => {
-    tempDirectory = join(tempDir, 'js-transpiler-test');
+    tempDirectory = join(tempDir, 'js-esnext-transpiler-test');
     emptyDirSync(tempDirectory);
   });
 
@@ -31,7 +31,7 @@ describe('js/transpiler', () => {
 
     const resourceFile = join(directory, '@resource.json');
     const definition = {
-      id: 'resdir/js-transpiler-person-test',
+      id: 'resdir/js-esnext-transpiler-person-test',
       transpiler: {
         '@import': resolve(__dirname, '../..')
       }

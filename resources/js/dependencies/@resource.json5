@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   id: "js/dependencies",
-  version: "0.1.13",
+  version: "0.1.14",
   files: [
     "bundle.js"
   ],
@@ -20,7 +20,7 @@
         ]
       },
       transpiler: {
-        "@import": "js/transpiler",
+        "@import": "js/esnext-transpiler",
         targets: {
           node: 8
         }
@@ -30,18 +30,14 @@
       }
     },
     tests: {
-      "@import": "js/esnext-jest",
+      "@import": "resdir/esnext-jest",
       "@directory": "./tests",
       dependencies: [
         "fs-extra@^3.0.1",
         "@resdir/file-manager@^0.1.0",
         "run-core@^0.10.0",
         "temp-dir@^1.0.0"
-      ],
-      testEnvironment: "node",
-      run: {
-        "@listen": "after:@test"
-      }
+      ]
     }
   },
   "@export": {

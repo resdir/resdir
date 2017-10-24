@@ -1,6 +1,9 @@
 {
-  "@import": "js/esnext-resource",
+  "@import": "js/resource",
   dependencies: [
     "sleep-promise@^2.0.0"
-  ]
+  ],
+  transpiler: {
+    "@import": "resdir/esnext-transpiler"
+  }
 }

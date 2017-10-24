@@ -1,7 +1,7 @@
 {
-  "@import": "js/esnext-resource",
+  "@import": "js/resource",
   id: "js/package",
-  version: "0.1.12",
+  version: "0.1.15",
   files: [
     "./dist"
   ],
@@ -14,19 +14,27 @@
     "@resdir/version@^0.1.1"
   ],
   "@private": {
+    transpiler: {
+      "@import": "js/esnext-transpiler",
+      targets: {
+        node: 8
+      },
+      run: {
+        "@listen": [
+          "after:@build",
+          "after:@fileModified"
+        ]
+      }
+    },
     tests: {
-      "@import": "js/esnext-jest",
+      "@import": "resdir/esnext-jest",
       "@directory": "./tests",
       dependencies: [
         "fs-extra@^3.0.1",
         "@resdir/file-manager@^0.1.0",
         "run-core@^0.10.0",
         "temp-dir@^1.0.0"
-      ],
-      testEnvironment: "node",
-      run: {
-        "@listen": "after:@test"
-      }
+      ]
     }
   },
   "@export": {
@@ -83,6 +91,7 @@
     dependencies: {
       "@import": "js/dependencies"
     },
+    isJSPackageResource: true,
     publish: {
       "@type": "method",
       "@parameters": {

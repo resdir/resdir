@@ -1,7 +1,7 @@
 {
-  "@import": "js/esnext-package",
+  "@import": "js/package",
   name: "@resdir/common-numbers",
-  version: "0.1.1",
+  version: "0.1.2",
   description: "List of common numbers (ex.: 3.14, 666, 911,...)",
   files: [
     "./dist"
@@ -12,9 +12,7 @@
   ],
   "@private": {
     transpiler: {
-      targets: {
-        node: 6
-      }
+      "@import": "resdir/esnext-transpiler"
     }
   }
 }
