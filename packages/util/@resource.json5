@@ -11,7 +11,7 @@
     "lodash@^4.17.4",
     "@resdir/console@^0.1.3"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     },

@@ -5,7 +5,7 @@
     "lodash@^4.17.4",
     "xml2js@^0.4.19"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     },

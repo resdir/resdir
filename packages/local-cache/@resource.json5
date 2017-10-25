@@ -10,7 +10,7 @@
   dependencies: [
     "strict-uri-encode@^2.0.0"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     }

@@ -142,8 +142,8 @@ export default base =>
         return;
       }
 
-      if (this.$private === undefined) {
-        this.$private = true;
+      if (this.$unpublishable === undefined) {
+        this.$unpublishable = true;
       }
 
       if (!this.$getChild('run').$getListenedEvents()) {

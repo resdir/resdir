@@ -18,7 +18,7 @@
     "@resdir/http-client@^0.2.0",
     "@resdir/local-cache@^0.1.0"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     }

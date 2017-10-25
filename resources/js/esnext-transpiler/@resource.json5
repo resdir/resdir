@@ -1,7 +1,10 @@
 {
-  "@import": "js/resource",
+  "@import": [
+    "resdir/resource",
+    "js/resource"
+  ],
   id: "js/esnext-transpiler",
-  version: "0.1.17",
+  version: "0.1.18",
   files: [
     "./dist"
   ],
@@ -17,7 +20,7 @@
     "@resdir/console@^0.1.0",
     "@resdir/gitignore-manager@^0.1.1"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "./",
       targets: {

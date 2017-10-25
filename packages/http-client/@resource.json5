@@ -12,7 +12,7 @@
     "isomorphic-fetch@^2.2.1",
     "strict-uri-encode@^2.0.0"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler",
       targets: {

@@ -14,7 +14,7 @@
     "@resdir/console@^0.1.0",
     "semver@^5.3.0"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     },

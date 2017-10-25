@@ -11,7 +11,7 @@
     "@resdir/console@^0.1.4",
     "@resdir/namespace@^0.1.0"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     }

@@ -1,11 +1,11 @@
 {
   "@import": "resdir/resource",
   id: "js/dependencies",
-  version: "0.1.14",
+  version: "0.1.15",
   files: [
     "bundle.js"
   ],
-  "@private": {
+  "@unpublishable": {
     builder: {
       "@implementation": "./dist/builder.js",
       run: {

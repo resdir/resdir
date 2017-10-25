@@ -10,7 +10,7 @@
   dependencies: [
     "node-status-codes@^2.0.1"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     }

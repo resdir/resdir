@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   id: "resdir/esnext-jest",
-  version: "0.1.1",
+  version: "0.1.2",
   "@export": {
     "@import": "js/jest",
     roots: [

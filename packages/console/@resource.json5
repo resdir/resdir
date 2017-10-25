@@ -15,7 +15,7 @@
     "window-size@^1.1.0",
     "wrap-ansi@^3.0.1"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     }

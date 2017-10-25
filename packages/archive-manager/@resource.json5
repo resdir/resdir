@@ -14,7 +14,7 @@
     "yauzl@^2.8.0",
     "yazl@^2.4.2"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     }

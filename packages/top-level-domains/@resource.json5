@@ -11,7 +11,7 @@
   dependencies: [
     "lodash@^4.17.4"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     }

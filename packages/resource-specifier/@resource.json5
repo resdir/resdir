@@ -11,7 +11,7 @@
     "@resdir/resource-identifier@^0.1.0",
     "@resdir/version-range@^0.1.2"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     }

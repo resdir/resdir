@@ -1,7 +1,10 @@
 {
-  "@import": "js/resource",
+  "@import": [
+    "resdir/resource",
+    "js/resource"
+  ],
   id: "resdir/registry",
-  version: "0.1.2",
+  version: "0.1.3",
   files: [
     "./dist"
   ],
@@ -9,7 +12,7 @@
     "@resdir/console@^0.1.0",
     "@resdir/registry-client@^0.1.13"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     }

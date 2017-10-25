@@ -1,11 +1,14 @@
 {
-  "@import": "js/resource",
+  "@import": [
+    "resdir/resource",
+    "js/resource"
+  ],
   "@parameters": {
     color: "green"
   },
   "@implementation": "./dist",
   id: "resdir/example",
-  version: "0.3.12",
+  version: "0.3.13",
   files: [
     "./dist"
   ],
@@ -16,7 +19,7 @@
     "@type": "method",
     "@listen": "hi"
   },
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     },

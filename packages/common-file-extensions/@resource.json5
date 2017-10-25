@@ -10,7 +10,7 @@
   dependencies: [
     "mime-db@^1.30.0"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     }

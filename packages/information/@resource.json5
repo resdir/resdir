@@ -7,7 +7,7 @@
     "./dist"
   ],
   main: "./dist/index.js",
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler",
       targets: {

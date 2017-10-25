@@ -1,7 +1,10 @@
 {
-  "@import": "js/resource",
+  "@import": [
+    "resdir/resource",
+    "js/resource"
+  ],
   id: "js/package",
-  version: "0.1.15",
+  version: "0.1.16",
   files: [
     "./dist"
   ],
@@ -13,7 +16,7 @@
     "@resdir/package-manager@^0.1.0",
     "@resdir/version@^0.1.1"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "js/esnext-transpiler",
       targets: {

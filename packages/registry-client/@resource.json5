@@ -26,7 +26,7 @@
     "@resdir/version-range@^0.1.9",
     "tempy@^0.1.0"
   ],
-  "@private": {
+  "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
     }
