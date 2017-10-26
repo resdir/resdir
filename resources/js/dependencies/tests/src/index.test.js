@@ -20,9 +20,9 @@ describe('js/dependencies', () => {
   test('creation', async () => {
     expect(await (await Package.$extend()).dependencies.count()).toBe(0);
 
-    expect(await (await Package.$extend({dependencies: []})).dependencies.count()).toBe(0);
+    expect(await (await Package.$extend({dependencies: {}})).dependencies.count()).toBe(0);
 
-    const pkg = await Package.$extend({dependencies: ['json5@^1.0.0', 'lodash']});
+    const pkg = await Package.$extend({dependencies: {json5: '^1.0.0', lodash: '2.0.0'}});
     expect(await pkg.dependencies.count()).toBe(2);
     expect(await pkg.dependencies.includes({name: 'json5'})).toBe(true);
     expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(true);
@@ -30,10 +30,26 @@ describe('js/dependencies', () => {
   });
 
   test('normalization and serialization', async () => {
-    expect((await Package.$extend({dependencies: []})).$serialize()).toBeUndefined();
+    expect((await Package.$extend({dependencies: {}})).$serialize()).toBeUndefined();
+    expect(
+      (await Package.$extend({
+        dependencies: {json5: '^1.0.0', lodash: '', babel: {version: '6.0.0', type: 'development'}}
+      })).$serialize()
+    ).toEqual({
+      dependencies: {json5: '^1.0.0', lodash: '', babel: {version: '6.0.0', type: 'development'}}
+    });
 
-    expect((await Package.$extend({dependencies: ['lodash']})).$serialize()).toEqual({
-      dependencies: ['lodash']
+    expect((await Package.$extend({dependencies: []})).$serialize()).toBeUndefined();
+    expect(
+      (await Package.$extend({
+        dependencies: [
+          'json5@^1.0.0',
+          'lodash',
+          {name: 'babel', version: '6.0.0', type: 'development'}
+        ]
+      })).$serialize()
+    ).toEqual({
+      dependencies: {json5: '^1.0.0', lodash: '', babel: {version: '6.0.0', type: 'development'}}
     });
   });
 
@@ -51,8 +67,7 @@ describe('js/dependencies', () => {
     expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(true);
 
     let resourceDefinition = load(pkg.$getResourceFile());
-    expect(resourceDefinition.dependencies).toHaveLength(1);
-    expect(resourceDefinition.dependencies[0]).toMatch(/^lodash@.+/);
+    expect(Object.keys(resourceDefinition.dependencies)).toEqual(['lodash']);
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(true);
 
@@ -80,9 +95,7 @@ describe('js/dependencies', () => {
     expect(await pkg.dependencies.includes({name: 'lodash'})).toBe(true);
 
     let resourceDefinition = load(pkg.$getResourceFile());
-    expect(resourceDefinition.dependencies).toHaveLength(1);
-    expect(resourceDefinition.dependencies[0]).toEqual({
-      name: 'lodash',
+    expect(resourceDefinition.dependencies.lodash).toEqual({
       version: '4.5.1',
       type: 'development'
     });

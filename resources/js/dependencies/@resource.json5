@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   id: "js/dependencies",
-  version: "0.1.15",
+  version: "0.1.16",
   files: [
     "bundle.js"
   ],
@@ -32,12 +32,12 @@
     tests: {
       "@import": "resdir/esnext-jest",
       "@directory": "./tests",
-      dependencies: [
-        "fs-extra@^3.0.1",
-        "@resdir/file-manager@^0.1.0",
-        "run-core@^0.10.0",
-        "temp-dir@^1.0.0"
-      ]
+      dependencies: {
+        "fs-extra": "^3.0.1",
+        "@resdir/file-manager": "^0.1.0",
+        "run-core": "^0.10.0",
+        "temp-dir": "^1.0.0"
+      }
     }
   },
   "@export": {

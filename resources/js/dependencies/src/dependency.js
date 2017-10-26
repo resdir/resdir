@@ -1,5 +1,5 @@
 import {join, isAbsolute} from 'path';
-import {isEqual} from 'lodash';
+import {isEqual, isPlainObject} from 'lodash';
 import {formatString, formatPath, formatCode} from '@resdir/console';
 import {VersionRange} from '@resdir/version-range';
 import {load} from '@resdir/file-manager';
@@ -83,28 +83,38 @@ export class Dependency {
     return {name, version, location};
   }
 
-  toJSON() {
-    let json = {name: this.name};
+  toPair() {
+    let value = {};
+
     if (this.version) {
-      json.version = this.version.toString();
+      value.version = this.version.toString();
     }
     if (this.location) {
-      json.location = this.location;
+      value.location = this.location;
     }
     if (this.type !== DEFAULT_TYPE) {
-      json.type = this.type;
+      value.type = this.type;
     }
 
-    const keys = Object.keys(json);
-    if (isEqual(keys, ['name'])) {
-      json = json.name;
-    } else if (isEqual(keys, ['name', 'version'])) {
-      json = json.name + '@' + json.version;
-    } else if (isEqual(keys, ['name', 'location'])) {
-      json = json.name + '@' + json.location;
+    const keys = Object.keys(value);
+    if (keys.length === 0) {
+      value = '';
+    } else if (isEqual(keys, ['version'])) {
+      value = value.version;
+    } else if (isEqual(keys, ['location'])) {
+      value = value.location;
     }
 
-    return json;
+    return [this.name, value];
+  }
+
+  static toDefinition(key, value) {
+    if (typeof value === 'string') {
+      return key + '@' + value;
+    } else if (isPlainObject(value)) {
+      return {name: key, ...value};
+    }
+    throw new Error('Invalid dependency value');
   }
 
   async fetchLatestVersion() {

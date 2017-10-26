@@ -12,9 +12,9 @@
   files: [
     "./dist"
   ],
-  dependencies: [
-    "chalk@^2.1.0"
-  ],
+  dependencies: {
+    chalk: "^2.1.0"
+  },
   hello: {
     "@type": "method",
     "@listen": "hi"

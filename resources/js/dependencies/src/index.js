@@ -1,4 +1,4 @@
-import {omit, isEmpty, remove, sortBy, lowerCase} from 'lodash';
+import {omit, isEmpty, remove, sortBy, lowerCase, isPlainObject, toPairs, fromPairs} from 'lodash';
 import {task, formatString} from '@resdir/console';
 import {updatePackageFile, removePackageFile, installPackage} from '@resdir/package-manager';
 
@@ -7,9 +7,16 @@ import Dependency from './dependency';
 export default base =>
   class Dependencies extends base {
     async $construct(definition = {}, options) {
-      let dependencies = definition['@value'] || [];
+      const value = definition['@value'];
       definition = omit(definition, '@value');
       await super.$construct(definition, options);
+
+      let dependencies = value || [];
+      if (isPlainObject(dependencies)) {
+        dependencies = toPairs(dependencies).map(([key, value]) =>
+          Dependency.toDefinition(key, value)
+        );
+      }
       dependencies = dependencies.map(dependency => new Dependency(dependency));
       this._dependencies = dependencies;
     }
@@ -173,7 +180,13 @@ export default base =>
     }
 
     static $normalize(definition, options) {
-      if (Array.isArray(definition)) {
+      if (
+        Array.isArray(definition) ||
+        (isPlainObject(definition) &&
+          definition['@import'] === undefined &&
+          definition['@value'] === undefined &&
+          definition['@implementation'] === undefined)
+      ) {
         definition = {'@value': definition};
       }
       return super.$normalize(definition, options);
@@ -186,10 +199,9 @@ export default base =>
         definition = {};
       }
 
-      let dependencies = this._dependencies;
+      const dependencies = this._dependencies;
       if (dependencies.length) {
-        dependencies = dependencies.map(dependency => dependency.toJSON());
-        definition['@value'] = dependencies;
+        definition['@value'] = fromPairs(dependencies.map(dependency => dependency.toPair()));
       }
 
       const keys = Object.keys(definition);
