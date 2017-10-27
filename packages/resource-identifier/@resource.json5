@@ -1,5 +1,5 @@
 {
-  "@import": "js/package",
+  "@import": "js/npm-package",
   name: "@resdir/resource-identifier",
   version: "0.1.10",
   description: "Useful functions to handle Resource's identifiers",

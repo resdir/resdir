@@ -1,5 +1,5 @@
 {
-  "@import": "js/package",
+  "@import": "js/npm-package",
   name: "@resdir/top-level-domains",
   version: "0.1.2",
   description: "List of Top Level Domains",

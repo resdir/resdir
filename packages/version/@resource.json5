@@ -1,5 +1,5 @@
 {
-  "@import": "js/package",
+  "@import": "js/npm-package",
   name: "@resdir/version",
   version: "0.1.11",
   description: "Version class used by Resdir",

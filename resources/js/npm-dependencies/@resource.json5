@@ -1,6 +1,6 @@
 {
   "@import": "resdir/resource",
-  id: "js/dependencies",
+  id: "js/npm-dependencies",
   version: "0.1.16",
   files: [
     "bundle.js"

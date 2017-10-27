@@ -1,5 +1,5 @@
 {
-  "@import": "js/package",
+  "@import": "js/npm-package",
   name: "@resdir/http-client",
   version: "0.2.4",
   description: "Convenient wrapper over Fetch API",

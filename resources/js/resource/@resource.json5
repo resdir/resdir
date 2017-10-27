@@ -24,7 +24,7 @@
       "@type": "method"
     },
     dependencies: {
-      "@import": "js/dependencies"
+      "@import": "js/npm-dependencies"
     }
   }
 }

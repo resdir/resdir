@@ -1,5 +1,5 @@
 {
-  "@import": "js/package",
+  "@import": "js/npm-package",
   name: "@resdir/common-file-extensions",
   version: "0.1.2",
   description: "List of common file extensions (ex.: 'doc', 'mp3', 'js',...)",

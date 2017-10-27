@@ -21,7 +21,7 @@
   "@export": {
     "@implementation": "./dist",
     dependencies: {
-      "@import": "js/dependencies"
+      "@import": "js/npm-dependencies"
     },
     roots: {
       "@type": "array"

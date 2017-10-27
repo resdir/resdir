@@ -1,5 +1,5 @@
 {
-  "@import": "js/package",
+  "@import": "js/npm-package",
   name: "@resdir/github-api-client",
   version: "0.1.5",
   description: "Convenient wrapper over GitHub API v3",

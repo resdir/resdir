@@ -3,7 +3,7 @@
     "resdir/resource",
     "js/resource"
   ],
-  id: "js/package",
+  id: "js/npm-package",
   version: "0.1.16",
   files: [
     "./dist"
@@ -92,9 +92,9 @@
       "@type": "boolean"
     },
     dependencies: {
-      "@import": "js/dependencies"
+      "@import": "js/npm-dependencies"
     },
-    isJSPackageResource: true,
+    isJSNPMPackageResource: true,
     publish: {
       "@type": "method",
       "@parameters": {

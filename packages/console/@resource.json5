@@ -1,5 +1,5 @@
 {
-  "@import": "js/package",
+  "@import": "js/npm-package",
   name: "@resdir/console",
   version: "0.1.16",
   description: "Miscellaneous functions used by Resdir to manage console",

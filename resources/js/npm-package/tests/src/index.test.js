@@ -4,7 +4,7 @@ import tempDir from 'temp-dir';
 import {Resource} from 'run-core';
 import {load} from '@resdir/file-manager';
 
-describe('js/package', () => {
+describe('js/npm-package', () => {
   let Package;
   let tempDirectory;
 

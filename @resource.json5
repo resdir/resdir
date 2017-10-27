@@ -7,8 +7,8 @@
       "./packages/util @test",
       "./packages/version @test",
       "./packages/version-range @test",
-      "./resources/js/dependencies @test",
-      "./resources/js/package @test",
+      "./resources/js/npm-dependencies @test",
+      "./resources/js/npm-package @test",
       "./resources/js/esnext-transpiler @test"
     ]
   },
@@ -20,10 +20,10 @@
       "./resources/resdir/esnext-jest publish --patch",
       "./resources/resdir/registry publish --patch",
       "./resources/resdir/example publish --patch",
-      "./resources/js/dependencies publish --patch",
+      "./resources/js/npm-dependencies publish --patch",
       "./resources/js/resource publish --patch",
       "./resources/js/jest publish --patch",
-      "./resources/js/package publish --patch",
+      "./resources/js/npm-package publish --patch",
       "./resources/js/esnext-transpiler publish --patch"
     ]
   }

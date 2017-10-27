@@ -1,5 +1,5 @@
 {
-  "@import": "js/package",
+  "@import": "js/npm-package",
   name: "@resdir/npm-link",
   version: "0.1.2",
   description: "'npm link' easier",

@@ -1,5 +1,5 @@
 {
-  "@import": "js/package",
+  "@import": "js/npm-package",
   name: "@resdir/secret-generator",
   version: "1.0.4",
   description: "Generate a secret",

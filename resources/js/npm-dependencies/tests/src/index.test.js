@@ -7,7 +7,7 @@ import {load} from '@resdir/file-manager';
 // TODO: replace with jest.setTimeout() when Jest 21 is available
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10 * 1000; // eslint-disable-line
 
-describe('js/dependencies', () => {
+describe('js/npm-dependencies', () => {
   let Package;
   let tempDirectory;
 

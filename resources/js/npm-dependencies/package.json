@@ -1,6 +1,6 @@
 {
   "name": "@resdir/js-dependencies",
-  "description": "Resdir js/dependencies resource",
+  "description": "Resdir js/npm-dependencies resource",
   "private": true,
   "dependencies": {
     "@resdir/console": "^0.1.0",

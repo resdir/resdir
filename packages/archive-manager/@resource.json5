@@ -1,5 +1,5 @@
 {
-  "@import": "js/package",
+  "@import": "js/npm-package",
   name: "@resdir/archive-manager",
   version: "0.1.4",
   description: "Manage archive files (currently implemented: zip and unzip)",

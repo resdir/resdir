@@ -1,5 +1,5 @@
 {
-  "@import": "js/package",
+  "@import": "js/npm-package",
   name: "@resdir/gitignore-manager",
   version: "0.1.2",
   description: "Help managing gitignore files",
