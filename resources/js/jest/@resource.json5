@@ -4,15 +4,15 @@
     "js/resource"
   ],
   id: "js/jest",
-  version: "0.1.11",
+  version: "0.1.12",
   files: [
     "./dist"
   ],
-  dependencies: [
-    "jest@^20.0.4",
-    "regenerator-runtime@^0.11.0",
-    "@resdir/console@^0.1.0"
-  ],
+  dependencies: {
+    jest: "^20.0.4",
+    "regenerator-runtime": "^0.11.0",
+    "@resdir/console": "^0.1.0"
+  },
   "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"

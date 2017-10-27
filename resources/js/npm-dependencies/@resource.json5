@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   id: "js/npm-dependencies",
-  version: "0.1.16",
+  version: "0.1.17",
   files: [
     "bundle.js"
   ],
@@ -99,6 +99,12 @@
           "@position": 0
         }
       }
+    },
+    list: {
+      "@type": "method",
+      "@aliases": [
+        "ls"
+      ]
     },
     updatePackageFile: {
       "@type": "method"

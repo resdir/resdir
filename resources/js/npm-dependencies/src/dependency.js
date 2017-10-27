@@ -108,6 +108,20 @@ export class Dependency {
     return [this.name, value];
   }
 
+  toString() {
+    let result = this.name;
+    if (this.version) {
+      result += '@' + this.version.toString();
+    }
+    if (this.location) {
+      result += '@' + this.location;
+    }
+    if (this.type !== DEFAULT_TYPE) {
+      result += ' (' + this.type + ')';
+    }
+    return result;
+  }
+
   static toDefinition(key, value) {
     if (typeof value === 'string') {
       return key + '@' + value;
