@@ -59,6 +59,10 @@ export function save(file, data, {stringify = true} = {}) {
     } else {
       throw new Error(`Unsupported file format: ${formatPath(file)}`);
     }
+
+    if (!data.endsWith('\n')) {
+      data += '\n';
+    }
   }
 
   writeFileSync(file, data);
