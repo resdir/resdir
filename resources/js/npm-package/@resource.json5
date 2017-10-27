@@ -4,17 +4,20 @@
     "js/resource"
   ],
   id: "js/npm-package",
-  version: "0.1.17",
+  version: "0.1.18",
   files: [
     "./dist"
   ],
   dependencies: {
-    "fs-extra": "^4.0.0",
-    lodash: "^4.17.4",
-    "@resdir/console": "^0.1.0",
-    "@resdir/gitignore-manager": "^0.1.0",
-    "@resdir/package-manager": "^0.1.0",
-    "@resdir/version": "^0.1.1"
+    "@import": "js/npm-dependencies",
+    packages: {
+      "fs-extra": "^4.0.0",
+      lodash: "^4.17.4",
+      "@resdir/console": "^0.1.0",
+      "@resdir/gitignore-manager": "^0.1.0",
+      "@resdir/package-manager": "^0.1.0",
+      "@resdir/version": "^0.1.1"
+    }
   },
   "@unpublishable": {
     transpiler: {

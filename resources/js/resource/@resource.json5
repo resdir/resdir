@@ -1,16 +1,16 @@
 {
-  "@import": [
-    "resdir/resource",
-    "./"
-  ],
+  "@import": "resdir/resource",
   id: "js/resource",
-  version: "0.1.13",
+  version: "0.1.14",
   files: [
     "./dist"
   ],
   dependencies: {
-    "fs-extra": "^4.0.0",
-    "@resdir/gitignore-manager": "^0.1.0"
+    "@import": "js/npm-dependencies",
+    packages: {
+      "fs-extra": "^4.0.0",
+      "@resdir/gitignore-manager": "^0.1.0"
+    }
   },
   "@unpublishable": {
     transpiler: {
@@ -22,9 +22,6 @@
     "@implementation": "./dist",
     "@initialize": {
       "@type": "method"
-    },
-    dependencies: {
-      "@import": "js/npm-dependencies"
     }
   }
 }

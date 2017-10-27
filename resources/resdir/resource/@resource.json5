@@ -4,17 +4,20 @@
     "js/resource"
   ],
   id: "resdir/resource",
-  version: "0.1.10",
+  version: "0.1.11",
   files: [
     "./dist"
   ],
-  dependencies: [
-    "@resdir/console@^0.1.0",
-    "@resdir/gitignore-manager@^0.1.0",
-    "@resdir/registry-client@^0.1.13",
-    "@resdir/resource-identifier@^0.1.0",
-    "@resdir/version@^0.1.0"
-  ],
+  dependencies: {
+    "@import": "js/npm-dependencies",
+    packages: {
+      "@resdir/console": "^0.1.0",
+      "@resdir/gitignore-manager": "^0.1.0",
+      "@resdir/registry-client": "^0.1.13",
+      "@resdir/resource-identifier": "^0.1.0",
+      "@resdir/version": "^0.1.0"
+    }
+  },
   "@unpublishable": {
     transpiler: {
       "@import": "resdir/esnext-transpiler"
