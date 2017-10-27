@@ -26,9 +26,13 @@ export default base =>
         quiet = true;
       }
 
-      await task(
-        async () => {
-          await this._transpileOrCopy(files, {verbose, quiet});
+      const transpilationOccurred = await task(
+        async progress => {
+          const transpilationOccurred = await this._transpileOrCopy(files, {verbose, quiet});
+          if (!transpilationOccurred) {
+            progress.setOutro(`Transpiler has not changed anything`);
+          }
+          return transpilationOccurred;
         },
         {
           intro: `Transpiling resource...`,
@@ -38,6 +42,10 @@ export default base =>
           debug
         }
       );
+
+      if (transpilationOccurred) {
+        await this.$emitEvent('transpilationOccurred');
+      }
     }
 
     async _transpileOrCopy(files, {verbose, quiet}) {
@@ -45,6 +53,8 @@ export default base =>
       const srcDirectory = resolve(directory, this.source);
       const destDirectory = resolve(directory, this.destination);
       const extensions = this.extensions;
+
+      let transpilationOccurred = false;
 
       if (!files.length) {
         files = [srcDirectory];
@@ -77,6 +87,7 @@ export default base =>
               }
               const targetDir = join(destDirectory, relativeFile);
               emptyDirSync(targetDir);
+              transpilationOccurred = true;
               return true;
             }
             const extension = extname(file);
@@ -84,6 +95,7 @@ export default base =>
               if (verbose) {
                 console.log(`Copying ${formatPath(file)}...`);
               }
+              transpilationOccurred = true;
               return true;
             }
             transpilableFiles.push(relativeFile);
@@ -92,7 +104,12 @@ export default base =>
         });
       }
 
-      await this._transpile(srcDirectory, destDirectory, transpilableFiles, {verbose});
+      if (transpilableFiles.length > 0) {
+        await this._transpile(srcDirectory, destDirectory, transpilableFiles, {verbose});
+        transpilationOccurred = true;
+      }
+
+      return transpilationOccurred;
     }
 
     async _transpile(srcDirectory, destDirectory, files, {verbose}) {

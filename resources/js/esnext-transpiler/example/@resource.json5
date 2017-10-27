@@ -1,5 +1,10 @@
 {
   transpiler: {
-    "@import": ".."
+    "@import": "..",
+    transpilationOccurred: {
+      "@type": "macro",
+      "@expression": "@console print transpilationOccured",
+      "@listen": "transpilationOccurred"
+    }
   }
 }
