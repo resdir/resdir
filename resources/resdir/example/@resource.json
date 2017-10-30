@@ -8,13 +8,13 @@
   },
   "@implementation": "./dist",
   "id": "resdir/example",
-  "version": "0.3.15",
+  "version": "0.3.16",
   "files": [
     "./dist"
   ],
   "dependencies": {
     "@import": "js/npm-dependencies",
-    "packages": {
+    "@value": {
       "chalk": "^2.1.0"
     }
   },

@@ -1,4 +1,4 @@
-import {omit, isEmpty, remove, sortBy, lowerCase, isPlainObject, toPairs, fromPairs} from 'lodash';
+import {isEmpty, remove, sortBy, lowerCase, toPairs, fromPairs} from 'lodash';
 import {print, task, formatString} from '@resdir/console';
 import {updatePackageFile, removePackageFile, installPackage} from '@resdir/package-manager';
 
@@ -6,21 +6,6 @@ import Dependency from './dependency';
 
 export default base =>
   class Dependencies extends base {
-    async $construct(definition = {}, options) {
-      const packages = definition.packages;
-      definition = omit(definition, 'packages');
-      await super.$construct(definition, options);
-
-      let dependencies = packages || [];
-      if (isPlainObject(dependencies)) {
-        dependencies = toPairs(dependencies).map(([key, value]) =>
-          Dependency.toDefinition(key, value)
-        );
-      }
-      dependencies = dependencies.map(dependency => new Dependency(dependency));
-      this._dependencies = dependencies;
-    }
-
     async add({specifier, production, development, peer, optional}, {verbose, quiet, debug}) {
       let type;
       if (production) {
@@ -91,15 +76,21 @@ export default base =>
 
       this._removeDependency(dependency.name, {throwIfNotFound: false});
 
-      this._dependencies.push(dependency);
-      this._sortDependencies();
+      const dependencies = this._getDependencies();
+      dependencies.push(dependency);
+      this._setDependencies(dependencies);
     }
 
     _removeDependency(name, {throwIfNotFound = true} = {}) {
-      const removed = remove(this._dependencies, dep => dep.name === name);
-      if (removed.length === 0 && throwIfNotFound) {
-        throw new Error(`Dependency not found: ${formatString(name)}`);
+      const dependencies = this._getDependencies();
+      const removed = remove(dependencies, dep => dep.name === name);
+      if (removed.length === 0) {
+        if (throwIfNotFound) {
+          throw new Error(`Dependency not found: ${formatString(name)}`);
+        }
+        return;
       }
+      this._setDependencies(dependencies);
     }
 
     async install(_args, {verbose, quiet, debug}) {
@@ -131,16 +122,12 @@ export default base =>
       }
     }
 
-    _sortDependencies() {
-      this._dependencies = sortBy(this._dependencies, dependency => lowerCase(dependency.name));
-    }
-
     async count() {
-      return this._dependencies.length;
+      return this._getDependencies().length;
     }
 
     async includes({name}) {
-      const found = this._dependencies.find(dependency => dependency.name === name);
+      const found = this._getDependencies().find(dependency => dependency.name === name);
       return Boolean(found);
     }
 
@@ -158,7 +145,7 @@ export default base =>
     }
 
     forEach(fn) {
-      this._dependencies.forEach(fn);
+      this._getDependencies().forEach(fn);
     }
 
     async updatePackageFile(_args, {verbose, quiet, debug}) {
@@ -192,38 +179,21 @@ export default base =>
       });
     }
 
-    static $normalize(definition, options) {
-      if (
-        Array.isArray(definition) ||
-        (isPlainObject(definition) &&
-          definition.packages === undefined &&
-          definition['@import'] === undefined &&
-          definition['@implementation'] === undefined)
-      ) {
-        definition = {packages: definition};
-      }
-      return super.$normalize(definition, options);
+    _getDependencies() {
+      let dependencies = this.$value || {};
+      dependencies = toPairs(dependencies).map(([key, value]) =>
+        Dependency.toDefinition(key, value)
+      );
+      dependencies = dependencies.map(dependency => new Dependency(dependency));
+      return dependencies;
     }
 
-    $serialize(options) {
-      let definition = super.$serialize(options);
-
-      if (definition === undefined) {
-        definition = {};
+    _setDependencies(dependencies) {
+      dependencies = sortBy(dependencies, dependency => lowerCase(dependency.name));
+      if (dependencies.length === 0) {
+        this.$value = undefined;
+        return;
       }
-
-      const dependencies = this._dependencies;
-      if (dependencies.length) {
-        definition.packages = fromPairs(dependencies.map(dependency => dependency.toPair()));
-      }
-
-      const keys = Object.keys(definition);
-      if (keys.length === 0) {
-        definition = undefined;
-      } else if (keys.length === 1 && keys[0] === 'packages') {
-        definition = definition.packages;
-      }
-
-      return definition;
+      this.$value = fromPairs(dependencies.map(dependency => dependency.toPair()));
     }
   };

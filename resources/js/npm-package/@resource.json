@@ -4,13 +4,13 @@
     "js/resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "files": [
     "./dist"
   ],
   "dependencies": {
     "@import": "js/npm-dependencies",
-    "packages": {
+    "@value": {
       "fs-extra": "^4.0.0",
       "lodash": "^4.17.4",
       "@resdir/console": "^0.1.0",

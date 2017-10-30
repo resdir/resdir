@@ -4,13 +4,13 @@
     "js/resource"
   ],
   "id": "resdir/registry",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "files": [
     "./dist"
   ],
   "dependencies": {
     "@import": "js/npm-dependencies",
-    "packages": {
+    "@value": {
       "@resdir/console": "^0.1.0",
       "@resdir/registry-client": "^0.1.13"
     }

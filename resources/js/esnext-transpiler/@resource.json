@@ -4,13 +4,13 @@
     "js/resource"
   ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "files": [
     "./dist"
   ],
   "dependencies": {
     "@import": "js/npm-dependencies",
-    "packages": {
+    "@value": {
       "babel-core": "^6.25.0",
       "babel-plugin-transform-class-properties": "^6.24.1",
       "babel-plugin-transform-object-rest-spread": "^6.23.0",

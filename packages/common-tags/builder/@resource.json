@@ -3,7 +3,7 @@
   "@implementation": "./dist/resource.js",
   "dependencies": {
     "@import": "js/npm-dependencies",
-    "packages": {
+    "@value": {
       "lodash": "^4.17.4",
       "xml2js": "^0.4.19"
     }
