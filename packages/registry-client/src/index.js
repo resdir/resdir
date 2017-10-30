@@ -40,7 +40,7 @@ const AWS_S3_RESOURCE_UPLOADS_PREFIX = 'resources/uploads/';
 
 const RESOURCE_REQUESTS_DIRECTORY_NAME = 'requests';
 const RESOURCE_VERSIONS_DIRECTORY_NAME = 'versions';
-const RESOURCE_FILE_NAME = '@resource.json5';
+const RESOURCE_FILE_NAME = '@resource.json';
 
 /*
 Data are stored on disk as follow:
@@ -56,7 +56,7 @@ Data are stored on disk as follow:
             ^0.1.0.json => {"version":"0.1.2","expiresOn":"..."}
           versions
             0.1.2
-              @resource.json5
+              @resource.json
               dist
                 index.js
 */

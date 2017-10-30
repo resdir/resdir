@@ -23,7 +23,7 @@ export function run() {
   }
 
   if (!name) {
-    const resourceFile = join(packageDirectory, '@resource.json5');
+    const resourceFile = join(packageDirectory, '@resource.json');
     const resourceDefinition = load(resourceFile, {throwIfNotFound: false});
     if (resourceDefinition) {
       name = resourceDefinition.name;
@@ -31,7 +31,7 @@ export function run() {
   }
 
   if (!name) {
-    const resourceFile = join(packageDirectory, '@resource.json');
+    const resourceFile = join(packageDirectory, '@resource.json5');
     const resourceDefinition = load(resourceFile, {throwIfNotFound: false});
     if (resourceDefinition) {
       name = resourceDefinition.name;

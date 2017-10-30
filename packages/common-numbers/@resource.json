@@ -1,0 +1,18 @@
+{
+  "@import": "js/npm-package",
+  "name": "@resdir/common-numbers",
+  "version": "0.1.2",
+  "description": "List of common numbers (ex.: 3.14, 666, 911,...)",
+  "files": [
+    "./dist"
+  ],
+  "main": "./dist/index.js",
+  "dependencies": {
+    "node-status-codes": "^2.0.1"
+  },
+  "@unpublishable": {
+    "transpiler": {
+      "@import": "resdir/esnext-transpiler"
+    }
+  }
+}

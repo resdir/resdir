@@ -1,0 +1,30 @@
+{
+  "_test": {
+    "@type": "macro",
+    "@hidden": "true",
+    "@listen": "after:@test",
+    "@expression": [
+      "./packages/util @test",
+      "./packages/version @test",
+      "./packages/version-range @test",
+      "./resources/js/npm-dependencies @test",
+      "./resources/js/npm-package @test",
+      "./resources/js/esnext-transpiler @test"
+    ]
+  },
+  "publish": {
+    "@type": "macro",
+    "@expression": [
+      "./resources/resdir/resource publish --patch",
+      "./resources/resdir/esnext-transpiler publish --patch",
+      "./resources/resdir/esnext-jest publish --patch",
+      "./resources/resdir/registry publish --patch",
+      "./resources/resdir/example publish --patch",
+      "./resources/js/npm-dependencies publish --patch",
+      "./resources/js/resource publish --patch",
+      "./resources/js/jest publish --patch",
+      "./resources/js/npm-package publish --patch",
+      "./resources/js/esnext-transpiler publish --patch"
+    ]
+  }
+}

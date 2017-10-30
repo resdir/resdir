@@ -1,0 +1,45 @@
+{
+  "@import": [
+    "resdir/resource",
+    "js/resource"
+  ],
+  "id": "js/jest",
+  "version": "0.1.14",
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@import": "js/npm-dependencies",
+    "packages": {
+      "jest": "^20.0.4",
+      "regenerator-runtime": "^0.11.0",
+      "@resdir/console": "^0.1.0"
+    }
+  },
+  "@unpublishable": {
+    "transpiler": {
+      "@import": "resdir/esnext-transpiler"
+    }
+  },
+  "@export": {
+    "@implementation": "./dist",
+    "dependencies": {
+      "@import": "js/npm-dependencies"
+    },
+    "roots": {
+      "@type": "array"
+    },
+    "testEnvironment": {
+      "@type": "string"
+    },
+    "run": {
+      "@type": "method",
+      "@parameters": {
+        "testPathPattern": {
+          "@type": "string",
+          "@position": 0
+        }
+      }
+    }
+  }
+}

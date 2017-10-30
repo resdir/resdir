@@ -1,0 +1,5 @@
+{
+  "transpiler": {
+    "@import": "resdir/esnext-transpiler"
+  }
+}

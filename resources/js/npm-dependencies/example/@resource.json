@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "@import": "..",
+    "packages": {
+      "lodash": "^4.17.4"
+    }
+  }
+}
