@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/jest",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "files": [
     "./dist"
   ],
@@ -13,7 +13,8 @@
     "@value": {
       "jest": "^20.0.4",
       "regenerator-runtime": "^0.11.0",
-      "@resdir/console": "^0.1.0"
+      "@resdir/console": "^0.1.0",
+      "@resdir/method-arguments": "^0.1.0"
     }
   },
   "@unpublishable": {
