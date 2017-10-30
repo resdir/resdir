@@ -29,7 +29,10 @@ export default base =>
         files = files.map(file => (file.startsWith('./') ? file.slice(2) : file));
       }
 
-      const main = this.main.toPackageMainProperty();
+      let main = this.main;
+      if (main && main.startsWith('./')) {
+        main = main.slice(2);
+      }
 
       updatePackageFile(directory, {
         name: this.name,
@@ -99,7 +102,7 @@ export default base =>
 
       const directory = this.$getCurrentDirectory();
 
-      const mainPropertyIsMissing = !this.main.$serialize();
+      const mainPropertyIsMissing = !this.main;
       const codeFile = join(directory, 'src', 'index.js');
       const codeFileIsMissing = !pathExistsSync(codeFile);
       const filesPropertyIsMissing = !this.files;
@@ -123,7 +126,7 @@ export default base =>
       }
 
       if (mainPropertyIsMissing) {
-        await this.$setChild('main', './src/index.js');
+        this.main = './src/index.js';
         if (codeFileIsMissing) {
           outputFileSync(codeFile, PACKAGE_CODE);
         }

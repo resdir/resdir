@@ -16,12 +16,8 @@ describe('js/npm-package', () => {
 
   test('normalization and serialization', async () => {
     expect((await Package.$extend()).$serialize()).toBeUndefined();
-    expect((await Package.$extend({main: {}})).$serialize()).toBeUndefined();
     expect((await Package.$extend({main: './index.js'})).$serialize()).toEqual({
       main: './index.js'
-    });
-    expect((await Package.$extend({main: {es5: './dist', es6: './src'}})).$serialize()).toEqual({
-      main: {es5: './dist', es6: './src'}
     });
   });
 

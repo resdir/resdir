@@ -183,8 +183,8 @@ export default base =>
       }
 
       if (root.isJSNPMPackageResource) {
-        if (root.main.$serialize() === './src/index.js') {
-          await root.$setChild('main', './dist/index.js');
+        if (root.main === './src/index.js') {
+          root.main = './dist/index.js';
         }
         if (isEqual(root.files, ['./src'])) {
           root.files = ['./dist'];

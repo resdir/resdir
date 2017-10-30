@@ -9,8 +9,6 @@ const GIT_IGNORE = ['.DS_STORE', '*.log'];
 export default base =>
   class ResdirResource extends base {
     async publish({major, minor, patch}, {verbose, quiet, debug}) {
-      await this.$emitEvent('before:publish');
-
       if (!(this.id && this.version)) {
         throw new Error(
           `Can't publish a resource without ${formatCode('id')} and ${formatCode(
@@ -18,6 +16,11 @@ export default base =>
           )} properties`
         );
       }
+
+      await this['@build']();
+      await this['@test']();
+
+      await this.$emitEvent('before:publish');
 
       if (major || minor || patch) {
         await this.$getChild('version').bump({major, minor, patch}, {verbose, quiet, debug});
