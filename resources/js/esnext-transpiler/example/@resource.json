@@ -2,7 +2,7 @@
   "transpiler": {
     "@import": "..",
     "transpilationOccurred": {
-      "@type": "macro",
+      "@type": "method",
       "@listen": "transpilationOccurred",
       "@expression": "@console print transpilationOccured"
     }

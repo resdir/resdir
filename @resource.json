@@ -1,6 +1,6 @@
 {
   "_test": {
-    "@type": "macro",
+    "@type": "method",
     "@hidden": "true",
     "@listen": "after:@test",
     "@expression": [
@@ -13,7 +13,7 @@
     ]
   },
   "publish": {
-    "@type": "macro",
+    "@type": "method",
     "@expression": [
       "./resources/resdir/resource publish --patch",
       "./resources/resdir/esnext-transpiler publish --patch",
