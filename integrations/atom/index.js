@@ -32,7 +32,7 @@ export default {
     //   throwIfNotFound: false
     // }).then(resource => {
     //   if (resource) {
-    //     resource.$emitEvent('@fileModified', {file, quiet: true}).catch(err => {
+    //     resource.$emit('@fileModified', {file, quiet: true}).catch(err => {
     //       const message = `resdir: An error occurred while emitting '@fileModified' event`;
     //       atom.notifications.addError(message, {detail: err.message, dismissable: true});
     //     });

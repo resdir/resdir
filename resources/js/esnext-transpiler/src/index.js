@@ -44,7 +44,7 @@ export default base =>
       );
 
       if (transpilationOccurred) {
-        await this.$emitEvent('transpilationOccurred');
+        await this.$emit('transpilationOccurred');
       }
     }
 
@@ -161,10 +161,6 @@ export default base =>
 
       if (this.$unpublishable === undefined) {
         this.$unpublishable = true;
-      }
-
-      if (!this.$getChild('run').$getListenedEvents()) {
-        this.$getChild('run').$setListenedEvents(['@buildRequested', '@fileModified']);
       }
 
       const root = this.$getRoot();
