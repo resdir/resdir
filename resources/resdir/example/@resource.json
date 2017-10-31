@@ -8,7 +8,7 @@
   },
   "@implementation": "./dist",
   "id": "resdir/example",
-  "version": "0.3.17",
+  "version": "0.3.18",
   "files": [
     "./dist"
   ],
@@ -24,10 +24,10 @@
   },
   "@unpublishable": {
     "transpiler": {
-      "@import": "resdir/esnext-transpiler"
+      "@import": "1place/esnext-transpiler"
     },
     "tests": {
-      "@import": "resdir/esnext-jest",
+      "@import": "1place/esnext-jest",
       "@directory": "./tests"
     }
   }

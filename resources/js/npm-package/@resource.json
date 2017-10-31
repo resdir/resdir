@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "files": [
     "./dist"
   ],
@@ -21,19 +21,10 @@
   },
   "@unpublishable": {
     "transpiler": {
-      "@import": "js/esnext-transpiler",
-      "targets": {
-        "node": 8
-      },
-      "run": {
-        "@listen": [
-          "@buildRequested",
-          "@fileModified"
-        ]
-      }
+      "@import": "1place/esnext-transpiler"
     },
     "tests": {
-      "@import": "resdir/esnext-jest",
+      "@import": "1place/esnext-jest",
       "@directory": "./tests",
       "dependencies": {
         "fs-extra": "^3.0.1",

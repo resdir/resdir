@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.27",
+  "version": "0.1.28",
   "files": [
     "./dist"
   ],
@@ -25,19 +25,10 @@
   },
   "@unpublishable": {
     "transpiler": {
-      "@import": "./",
-      "targets": {
-        "node": 8
-      },
-      "run": {
-        "@listen": [
-          "@buildRequested",
-          "@fileModified"
-        ]
-      }
+      "@import": "1place/esnext-transpiler"
     },
     "tests": {
-      "@import": "resdir/esnext-jest",
+      "@import": "1place/esnext-jest",
       "@directory": "./tests",
       "dependencies": {
         "fs-extra": "^3.0.1",
@@ -76,7 +67,11 @@
           "@type": "string",
           "@position": 0
         }
-      }
+      },
+      "@listen": [
+        "@buildRequested",
+        "@fileModified"
+      ]
     },
     "@initialize": {
       "@type": "method",

@@ -10,7 +10,7 @@
   },
   "@unpublishable": {
     "transpiler": {
-      "@import": "resdir/esnext-transpiler#^0.1.5"
+      "@import": "1place/esnext-transpiler#^0.1.5"
     }
   }
 }

@@ -3,8 +3,8 @@
     "resdir/resource",
     "js/resource"
   ],
-  "id": "js/jest",
-  "version": "0.1.17",
+  "id": "1place/jest",
+  "version": "0.1.18",
   "files": [
     "./dist"
   ],
@@ -19,7 +19,7 @@
   },
   "@unpublishable": {
     "transpiler": {
-      "@import": "resdir/esnext-transpiler"
+      "@import": "1place/esnext-transpiler"
     }
   },
   "@export": {
@@ -40,7 +40,8 @@
           "@type": "string",
           "@position": 0
         }
-      }
+      },
+      "@listen": "@testRequested"
     }
   }
 }
