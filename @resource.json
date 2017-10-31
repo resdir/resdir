@@ -3,7 +3,7 @@
     "@type": "method",
     "@hidden": "true",
     "@listen": "after:@test",
-    "@expression": [
+    "@run": [
       "./packages/util @test",
       "./packages/version @test",
       "./packages/version-range @test",
@@ -14,7 +14,7 @@
   },
   "publish": {
     "@type": "method",
-    "@expression": [
+    "@run": [
       "./resources/resdir/resource publish --patch",
       "./resources/resdir/esnext-transpiler publish --patch",
       "./resources/resdir/esnext-jest publish --patch",

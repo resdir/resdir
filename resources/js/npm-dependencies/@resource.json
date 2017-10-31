@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "files": [
     "bundle.js"
   ],
@@ -10,7 +10,7 @@
       "@implementation": "./dist/builder.js",
       "run": {
         "@type": "method",
-        "@expression": [
+        "@run": [
           "transpiler run",
           "bundle"
         ],
