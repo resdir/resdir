@@ -18,7 +18,7 @@ export default base =>
         files.push(file); // TODO: Handle multiple files
       }
 
-      if (event && event.name === 'after:@fileModified') {
+      if (event && event.name === '@fileModified') {
         if (!event.arguments.file) {
           throw new Error('\'file\' event argument is missing');
         }
@@ -164,7 +164,7 @@ export default base =>
       }
 
       if (!this.$getChild('run').$getListenedEvents()) {
-        this.$getChild('run').$setListenedEvents(['after:@build', 'after:@fileModified']);
+        this.$getChild('run').$setListenedEvents(['@buildRequested', '@fileModified']);
       }
 
       const root = this.$getRoot();

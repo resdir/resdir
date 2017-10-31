@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "files": [
     "bundle.js"
   ],
@@ -15,8 +15,8 @@
           "bundle"
         ],
         "@listen": [
-          "after:@build",
-          "after:@fileModified"
+          "@buildRequested",
+          "@fileModified"
         ]
       },
       "transpiler": {
@@ -87,7 +87,7 @@
     },
     "install": {
       "@type": "method",
-      "@listen": "after:@install"
+      "@listen": "@installRequested"
     },
     "count": {
       "@type": "method"

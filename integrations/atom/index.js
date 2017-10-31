@@ -32,8 +32,8 @@ export default {
     //   throwIfNotFound: false
     // }).then(resource => {
     //   if (resource) {
-    //     resource.$emitEvent('after:@fileModified', {file, quiet: true}).catch(err => {
-    //       const message = `resdir: An error occurred while emitting 'after:@fileModified' event`;
+    //     resource.$emitEvent('@fileModified', {file, quiet: true}).catch(err => {
+    //       const message = `resdir: An error occurred while emitting '@fileModified' event`;
     //       atom.notifications.addError(message, {detail: err.message, dismissable: true});
     //     });
     //   }
@@ -42,7 +42,7 @@ export default {
     const command = 'run'; // /Users/mvila/Projects/run/cli/dist/bin/index.js
     const args = [
       '@broadcast',
-      '--event=after:@fileModified',
+      '--event=@fileModified',
       `--arguments=${JSON.stringify({file}).replace(/"/g, '\\"')}`
     ];
     const options = {cwd: directory, timeout: 60 * 1000};
@@ -51,7 +51,7 @@ export default {
         console.log(stdout.trim());
       }
       if (err) {
-        const message = `resdir: An error occurred while emitting 'after:@fileModified' event`;
+        const message = `resdir: An error occurred while emitting '@fileModified' event`;
         atom.notifications.addError(message, {detail: stderr, dismissable: true});
       }
     });

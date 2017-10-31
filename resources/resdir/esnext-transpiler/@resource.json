@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "resdir/esnext-transpiler",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "@export": {
     "@import": "js/esnext-transpiler",
     "targets": {
@@ -9,8 +9,8 @@
     },
     "run": {
       "@listen": [
-        "after:@build",
-        "after:@fileModified"
+        "@buildRequested",
+        "@fileModified"
       ]
     }
   }
