@@ -430,6 +430,93 @@ export class RegistryClient {
     );
   }
 
+  // === Communities ===
+
+  async createCommunity(namespace) {
+    this._ensureSignedInUser();
+
+    while (!namespace) {
+      emptyLine();
+      namespace = await prompt(`Community namespace: ${formatExample('js')}`);
+      emptyLine();
+    }
+
+    await this.checkNamespaceAvailability(namespace, 'COMMUNITY', {
+      parentAction: 'CREATE_COMMUNITY'
+    });
+
+    await task(
+      async () => {
+        const url = `${this.registryURL}/communities`;
+        await this._userRequest(authorization => postJSON(url, {namespace}, {authorization}));
+      },
+      {
+        intro: `Creating community...`,
+        outro: `Community created`
+      }
+    );
+  }
+
+  async deleteCommunity(namespace) {
+    this._ensureSignedInUser();
+
+    while (!namespace) {
+      emptyLine();
+      namespace = await prompt(`Community namespace:`);
+      emptyLine();
+    }
+
+    const community = await this.getCommunityByNamespace(namespace);
+
+    emptyLine();
+    const okay = await confirm(
+      `Are you sure you want to delete ${formatString(namespace)} community?`
+    );
+    emptyLine();
+
+    if (!okay) {
+      return;
+    }
+
+    emptyLine();
+    const reallyOkay = await confirm(`Really?`);
+    emptyLine();
+
+    if (!reallyOkay) {
+      return;
+    }
+
+    await task(
+      async () => {
+        const url = `${this.registryURL}/communities/${community.id}`;
+        await this._userRequest(authorization => deleteJSON(url, {authorization}));
+      },
+      {
+        intro: `Deleting ${formatString(namespace)} community...`,
+        outro: `${formatString(namespace)} community deleted`
+      }
+    );
+  }
+
+  async getCommunityByNamespace(namespace) {
+    if (!namespace) {
+      throw new Error('\'namespace\' argument is missing');
+    }
+
+    const {body: [community]} = await task(
+      async () => {
+        const url = `${this.registryURL}/communities?namespace=${encodeURIComponent(namespace)}`;
+        return await this._userRequest(authorization => getJSON(url, {authorization}));
+      },
+      {
+        intro: `Fetching ${formatString(namespace)} community...`,
+        outro: `${formatString(namespace)} community fetched`
+      }
+    );
+
+    return community;
+  }
+
   // === Namespaces ===
 
   async addUserNamespace(namespace) {
@@ -487,7 +574,7 @@ export class RegistryClient {
     type,
     {parentAction, throwIfUnavailable = true} = {}
   ) {
-    if (!(type === 'USER' || type === 'ORGANIZATION')) {
+    if (!(type === 'USER' || type === 'ORGANIZATION' || type === 'COMMUNITY')) {
       throw new Error('Invalid \'type\'');
     }
 
@@ -537,6 +624,10 @@ export class RegistryClient {
       )}.`;
     } else if (type === 'ORGANIZATION') {
       contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think your ${SERVICE_NAME} organization should have the namespace ${formattedNamespace}, please contact ${SERVICE_NAME} at ${formatURL(
+        SUPPORT_EMAIL_ADDRESS
+      )}.`;
+    } else if (type === 'COMMUNITY') {
+      contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think you should have the namespace ${formattedNamespace} for your community, please contact ${SERVICE_NAME} at ${formatURL(
         SUPPORT_EMAIL_ADDRESS
       )}.`;
     }
@@ -612,15 +703,15 @@ export class RegistryClient {
       throw new Error(`Sorry, this namespace is not available.`);
     }
 
-    if (type === 'USER' && reason === 'IMPORTANT_GITHUB_ORGANIZATION') {
+    if (reason === 'IMPORTANT_GITHUB_USER') {
       throw new Error(
-        `Sorry, this namespace is not available because there is a popular GitHub organization named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub organizations are reserved for future ${SERVICE_NAME} organizations or communities.`
+        `Sorry, this namespace is not available because there is a popular GitHub user named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub usernames are reserved for future ${SERVICE_NAME} users.`
       );
     }
 
-    if (type === 'ORGANIZATION' && reason === 'IMPORTANT_GITHUB_USER') {
+    if (reason === 'IMPORTANT_GITHUB_ORGANIZATION') {
       throw new Error(
-        `Sorry, this namespace is not available because there is a popular GitHub user named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub usernames are reserved for future ${SERVICE_NAME} users.`
+        `Sorry, this namespace is not available because there is a popular GitHub organization named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub organizations are reserved for future ${SERVICE_NAME} organizations or communities.`
       );
     }
 

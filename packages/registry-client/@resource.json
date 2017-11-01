@@ -1,7 +1,7 @@
 {
   "@import": "js/npm-package",
   "name": "@resdir/registry-client",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "Resdir registry client",
   "files": [
     "./dist"
