@@ -95,7 +95,7 @@ export default base =>
       await publishPackage(directory, {access, debug});
     }
 
-    async '@initialize'({name, version, gitignore, ...args}) {
+    async initialize({name, version, gitignore}) {
       if (!name) {
         throw new Error('\'name\' argument is missing');
       }
@@ -106,8 +106,6 @@ export default base =>
       const codeFile = join(directory, 'src', 'index.js');
       const codeFileIsMissing = !pathExistsSync(codeFile);
       const filesPropertyIsMissing = !this.files;
-
-      await super['@initialize'](args);
 
       this.name = name;
 

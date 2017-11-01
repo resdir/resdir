@@ -40,11 +40,7 @@ export default {
     // });
 
     const command = 'run'; // /Users/mvila/Projects/run/cli/dist/bin/index.js
-    const args = [
-      '@broadcast',
-      '--event=@fileModified',
-      `--arguments=${JSON.stringify({file}).replace(/"/g, '\\"')}`
-    ];
+    const args = ['@broadcast', '--event=@fileModified', `--file=${file}`, '--@quiet'];
     const options = {cwd: directory, timeout: 60 * 1000};
     execFile(command, args, options, (err, stdout, stderr) => {
       if (stdout) {

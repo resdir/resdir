@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/resource",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "files": [
     "./dist"
   ],
@@ -25,7 +25,7 @@
   },
   "@export": {
     "@runtime": "node#>=6.10.0",
-    "@implementation": "./dist/resource.js",
+    "@implementation": "./dist",
     "id": {
       "@type": "string"
     },
@@ -67,7 +67,7 @@
         "patch": false
       }
     },
-    "@initialize": {
+    "initialize": {
       "@type": "method",
       "@parameters": {
         "id": {
@@ -81,7 +81,8 @@
           ]
         },
         "gitignore": true
-      }
+      },
+      "@listen": "@created"
     }
   }
 }

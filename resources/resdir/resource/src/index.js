@@ -44,9 +44,7 @@ export default base =>
       await this.$emit('published');
     }
 
-    async '@initialize'({id, version, gitignore, ...args}) {
-      await super['@initialize'](args);
-
+    async initialize({id, version, gitignore}) {
       if (id) {
         validateResourceIdentifier(id);
         this.id = id;

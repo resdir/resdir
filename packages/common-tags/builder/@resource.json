@@ -1,6 +1,6 @@
 {
   "@import": "js/resource",
-  "@implementation": "./dist/resource.js",
+  "@implementation": "./dist",
   "dependencies": {
     "@import": "js/npm-dependencies",
     "@value": {

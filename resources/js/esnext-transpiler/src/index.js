@@ -11,19 +11,11 @@ const GIT_IGNORE = ['/dist'];
 
 export default base =>
   class ESNextTranspiler extends base {
-    async run({file}, {event, verbose, quiet, debug}) {
+    async run({file}, {verbose, quiet, debug}) {
       const files = [];
 
       if (file) {
         files.push(file); // TODO: Handle multiple files
-      }
-
-      if (event && event.name === '@fileModified') {
-        if (!event.arguments.file) {
-          throw new Error('\'file\' event argument is missing');
-        }
-        files.push(event.arguments.file);
-        quiet = true;
       }
 
       const transpilationOccurred = await task(
@@ -151,9 +143,7 @@ export default base =>
       }
     }
 
-    async '@initialize'({gitignore, ...args}) {
-      await super['@initialize'](args);
-
+    async initialize({gitignore}) {
       if (this.$isRoot()) {
         // This initialization method works only with child properties
         return;
@@ -166,9 +156,9 @@ export default base =>
       const root = this.$getRoot();
       const directory = root.$getCurrentDirectory();
 
-      if (root.$implementation === './src/resource.js') {
-        root.$implementation = './dist/resource.js';
-        const implementationFile = join(directory, 'src', 'resource.js');
+      if (root.$implementation === './src') {
+        root.$implementation = './dist';
+        const implementationFile = join(directory, 'src', 'index.js');
         if (existsSync(implementationFile)) {
           let code = readFileSync(implementationFile, 'utf8');
           if (code.startsWith('module.exports = base =>\n')) {

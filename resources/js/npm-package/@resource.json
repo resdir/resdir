@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "files": [
     "./dist"
   ],
@@ -101,7 +101,7 @@
         "@saved"
       ]
     },
-    "@initialize": {
+    "initialize": {
       "@type": "method",
       "@parameters": {
         "name": {
@@ -115,7 +115,8 @@
           ]
         },
         "gitignore": true
-      }
+      },
+      "@listen": "@created"
     }
   }
 }

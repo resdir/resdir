@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/resource",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "files": [
     "./dist"
   ],
@@ -20,8 +20,12 @@
   "@export": {
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist",
-    "@initialize": {
-      "@type": "method"
+    "initialize": {
+      "@type": "method",
+      "@parameters": {
+        "gitignore": true
+      },
+      "@listen": "@created"
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "files": [
     "bundle.js"
   ],
@@ -14,10 +14,17 @@
           "transpiler run",
           "bundle"
         ],
-        "@listen": [
-          "@build",
-          "@fileModified"
-        ]
+        "@listen": "@build"
+      },
+      "runOnFileModified": {
+        "@type": "method",
+        "@parameters": {
+          "file": {
+            "@type": "string"
+          }
+        },
+        "@run": "run",
+        "@listen": "@fileModified"
       },
       "transpiler": {
         "@import": "1place/esnext-transpiler",

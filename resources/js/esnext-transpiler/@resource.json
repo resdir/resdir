@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.29",
+  "version": "0.1.30",
   "files": [
     "./dist"
   ],
@@ -73,11 +73,12 @@
         "@fileModified"
       ]
     },
-    "@initialize": {
+    "initialize": {
       "@type": "method",
       "@parameters": {
         "gitignore": true
-      }
+      },
+      "@listen": "@added"
     }
   }
 }
