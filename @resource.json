@@ -21,6 +21,7 @@
       "./resources/js/resource publish --patch",
       "./resources/js/npm-package publish --patch",
       "./resources/js/esnext-transpiler publish --patch",
+      "./resources/tool/file-watcher publish --patch",
       "./resources/1place/esnext-transpiler publish --patch",
       "./resources/1place/jest publish --patch",
       "./resources/1place/esnext-jest publish --patch"

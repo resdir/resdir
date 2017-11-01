@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/registry",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "files": [
     "./dist"
   ],
@@ -173,6 +173,36 @@
               "user"
             ],
             "@position": 1
+          }
+        }
+      }
+    },
+    "communities": {
+      "@aliases": [
+        "community"
+      ],
+      "@implementation": "./dist/communities",
+      "create": {
+        "@type": "method",
+        "@parameters": {
+          "namespace": {
+            "@type": "string",
+            "@aliases": [
+              "ns"
+            ],
+            "@position": 0
+          }
+        }
+      },
+      "delete": {
+        "@type": "method",
+        "@parameters": {
+          "namespace": {
+            "@type": "string",
+            "@aliases": [
+              "ns"
+            ],
+            "@position": 0
           }
         }
       }

@@ -1,0 +1,7 @@
+{
+  "@import": "../",
+  "files": ["./src/**"],
+  "onFileModified": {
+    "@run": "@console print \"A file has been modified\""
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "@import": [
+    "resdir/resource",
+    "js/resource"
+  ],
+  "id": "tool/file-watcher",
+  "version": "0.1.1",
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@import": "js/npm-dependencies#^0.1.26",
+    "@value": {
+      "minimatch": "^3.0.4"
+    }
+  },
+  "@unpublishable": {
+    "transpiler": {
+      "@import": "1place/esnext-transpiler#^0.1.9"
+    }
+  },
+  "@export": {
+    "@implementation": "./dist",
+    "files": {
+      "@type": "array"
+    },
+    "onFileModified": {
+      "@type": "method",
+      "@parameters": {
+        "file": {
+          "@type": "string"
+        }
+      }
+    },
+    "_handleFileModifiedEvent": {
+      "@type": "method",
+      "@parameters": {
+        "file": {
+          "@type": "string"
+        }
+      },
+      "@hidden": true,
+      "@listen": "@fileModified"
+    }
+  }
+}

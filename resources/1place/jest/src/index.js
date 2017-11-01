@@ -1,6 +1,7 @@
 import {resolve} from 'path';
 import jest from 'jest';
 import {task} from '@resdir/console';
+import {execute} from '@resdir/process-manager';
 
 export default base =>
   class JestResource extends base {
@@ -30,17 +31,11 @@ export default base =>
         transform: {}
       };
 
-      const argv = {
-        config: JSON.stringify(config),
-        testPathPattern
-      };
-
-      await new Promise((resolve, reject) => {
-        jest
-          .runCLI(argv, [directory], results => {
-            resolve(results);
-          })
-          .catch(reject);
-      });
+      const command = require.resolve('jest/bin/jest.js');
+      const args = ['--config=' + JSON.stringify(config)];
+      if (testPathPattern) {
+        args.push('--testPathPattern=' + testPathPattern);
+      }
+      await execute(command, args, {directory, commandName: 'jest', debug: true});
     }
   };
