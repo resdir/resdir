@@ -1,10 +1,10 @@
 import {join} from 'path';
 import {existsSync, unlinkSync} from 'fs';
 import {entries, difference} from 'lodash';
-import {execFile, spawn} from 'child-process-promise';
-import {formatString, formatCode, formatPath} from '@resdir/console';
+import {formatString} from '@resdir/console';
 import {load, save} from '@resdir/file-manager';
 import {getJSON} from '@resdir/http-client';
+import {execute} from '@resdir/process-manager';
 import LocalCache from '@resdir/local-cache';
 
 const NPM_REGISTRY_URL = 'https://registry.npmjs.org';
@@ -116,32 +116,14 @@ export async function publishPackage(directory, {access, debug} = {}) {
 // export async function execYarn(args, options) {
 //   const command = require.resolve('yarn/bin/yarn.js');
 //   args = [...args, '--no-progress', '--no-emoji', '--non-interactive'];
-//   await exec(command, args, {...options, commandName: 'yarn'});
+//   await execute(command, args, {...options, commandName: 'yarn'});
 // }
 
 export async function execNPM(args, options) {
   // TODO: Include NPM has a dependency
   const command = 'npm'; // require.resolve('npm/bin/npm-cli.js');
   args = [...args];
-  await exec(command, args, {...options, commandName: 'npm'});
-}
-
-async function exec(command, args, {directory, commandName, debug} = {}) {
-  try {
-    if (debug) {
-      await spawn(command, args, {cwd: directory, stdio: 'inherit'});
-    } else {
-      await execFile(command, args, {cwd: directory});
-    }
-  } catch (err) {
-    const error = new Error(
-      `An error occured while executing ${commandName ?
-        formatCode(commandName) :
-        formatPath(command)}`
-    );
-    error.capturedStandardError = err.stderr;
-    throw error;
-  }
+  await execute(command, args, {...options, commandName: 'npm'});
 }
 
 export async function fetchNPMRegistry(name, {throwIfNotFound = true} = {}) {
