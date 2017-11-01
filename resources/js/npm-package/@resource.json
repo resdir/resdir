@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.24",
+  "version": "0.1.25",
   "files": [
     "./dist"
   ],
@@ -97,8 +97,8 @@
     "updatePackageFile": {
       "@type": "method",
       "@listen": [
-        "@buildRequested",
-        "@saveCompleted"
+        "@build",
+        "@saved"
       ]
     },
     "@initialize": {

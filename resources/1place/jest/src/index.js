@@ -6,7 +6,7 @@ import {getPositionalArgument} from '@resdir/method-arguments';
 export default base =>
   class JestResource extends base {
     async run({testPathPattern}, {event, verbose, quiet, debug}) {
-      if (event && event.name === '@testRequested') {
+      if (event && event.name === '@test') {
         testPathPattern =
           event.arguments.testPathPattern || getPositionalArgument(event.arguments, 0);
       }

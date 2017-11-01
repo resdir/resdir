@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.24",
+  "version": "0.1.25",
   "files": [
     "bundle.js"
   ],
@@ -15,7 +15,7 @@
           "bundle"
         ],
         "@listen": [
-          "@buildRequested",
+          "@build",
           "@fileModified"
         ]
       },
@@ -23,7 +23,7 @@
         "@import": "1place/esnext-transpiler",
         "run": {
           "@unlisten": [
-            "@buildRequested",
+            "@build",
             "@fileModified"
           ]
         }
@@ -90,7 +90,7 @@
     },
     "install": {
       "@type": "method",
-      "@listen": "@installRequested"
+      "@listen": "@install"
     },
     "count": {
       "@type": "method"

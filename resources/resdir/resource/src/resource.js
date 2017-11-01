@@ -20,7 +20,7 @@ export default base =>
       await this['@build']();
       await this['@test']();
 
-      await this.$emit('publishRequested');
+      await this.$emit('publish');
 
       if (major || minor || patch) {
         await this.$getChild('version').bump({major, minor, patch}, {verbose, quiet, debug});
@@ -41,7 +41,7 @@ export default base =>
         }
       );
 
-      await this.$emit('publishCompleted');
+      await this.$emit('published');
     }
 
     async '@initialize'({id, version, gitignore, ...args}) {

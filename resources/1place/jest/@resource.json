@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "1place/jest",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "files": [
     "./dist"
   ],
@@ -41,7 +41,7 @@
           "@position": 0
         }
       },
-      "@listen": "@testRequested"
+      "@listen": "@test"
     }
   }
 }

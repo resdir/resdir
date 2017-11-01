@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "files": [
     "./dist"
   ],
@@ -69,7 +69,7 @@
         }
       },
       "@listen": [
-        "@buildRequested",
+        "@build",
         "@fileModified"
       ]
     },
