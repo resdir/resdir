@@ -705,21 +705,21 @@ export class RegistryClient {
 
     if (reason === 'IMPORTANT_GITHUB_USER') {
       throw new Error(
-        `Sorry, this namespace is not available because there is a popular GitHub user named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub usernames are reserved for future ${SERVICE_NAME} users.`
+        `Sorry, this namespace is not available because there is a popular GitHub user named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub usernames are reserved for future ${SERVICE_NAME} users. ${contactSupport}`
       );
     }
 
     if (reason === 'IMPORTANT_GITHUB_ORGANIZATION') {
       throw new Error(
-        `Sorry, this namespace is not available because there is a popular GitHub organization named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub organizations are reserved for future ${SERVICE_NAME} organizations or communities.`
+        `Sorry, this namespace is not available because there is a popular GitHub organization named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub organizations are reserved for future ${SERVICE_NAME} organizations or communities. ${contactSupport}`
       );
     }
 
-    if (reason === 'BIG_COMPANY') {
+    if (reason === 'BIG_COMPANY' || reason === 'DEMO_COMPANY') {
       throw new Error(
         `Sorry, this namespace is not available because it matches the name of a big company (${formatString(
           result.company
-        )}).`
+        )}). ${contactSupport}`
       );
     }
 
@@ -747,7 +747,7 @@ export class RegistryClient {
       );
     }
 
-    throw new Error(`Sorry, this namespace is not available.`);
+    throw new Error(`Sorry, this namespace is not available. ${contactSupport}`);
   }
   /* eslint-enable complexity */
 

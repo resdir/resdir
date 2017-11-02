@@ -1,7 +1,8 @@
 import sortedIndexOf from 'lodash.sortedindexof';
 import {formatString} from '@resdir/console';
-const genericNamespaces = require('./generic.json');
-const reservedNamespaces = require('./reserved.json');
+const genericNamespaces = require('./generic-namespaces.json');
+const reservedNamespaces = require('./reserved-namespaces.json');
+const demoCompanies = require('./demo-companies.json');
 
 export function validateNamespace(namespace, {throwIfInvalid = true} = {}) {
   if (!validate(namespace)) {
@@ -41,3 +42,5 @@ export function isGenericNamespace(namespace) {
 export function isReservedNamespace(namespace) {
   return reservedNamespaces.includes(namespace);
 }
+
+export {demoCompanies};
