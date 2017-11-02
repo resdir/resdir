@@ -126,13 +126,13 @@ export async function execNPM(args, options) {
   await execute(command, args, {...options, commandName: 'npm'});
 }
 
-export async function fetchNPMRegistry(name, {throwIfNotFound = true} = {}) {
+export async function fetchNPMRegistry(name, {useCache, throwIfNotFound = true} = {}) {
   const url = NPM_REGISTRY_URL + '/' + name.replace('/', '%2F');
   try {
     const {body} = await getJSON(url, {
       headers: {Accept: 'application/vnd.npm.install-v1+json; q=1.0, application/json; q=0.8, */*'},
       timeout: 15 * 1000,
-      cache: getNPMRegistryCache()
+      cache: useCache && getNPMRegistryCache()
     });
     return body;
   } catch (err) {
