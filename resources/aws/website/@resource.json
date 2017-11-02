@@ -1,0 +1,49 @@
+{
+  "@import": [
+    "resdir/resource",
+    "js/resource"
+  ],
+  "id": "aws/website",
+  "version": "0.1.7",
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@import": "js/npm-dependencies#^0.1.26",
+    "@value": {
+      "lodash": "^4.17.4",
+      "@resdir/aws-client": "^0.1.1"
+    }
+  },
+  "@unpublishable": {
+    "transpiler": {
+      "@import": "1place/esnext-transpiler#^0.1.9"
+    }
+  },
+  "@export": {
+    "@implementation": "./dist",
+    "domainName": {
+      "@type": "string"
+    },
+    "contentDirectory": "./src",
+    "indexPage": "index.html",
+    "spa": false,
+    "aws": {
+      "accessKeyId": {
+        "@type": "string"
+      },
+      "secretAccessKey": {
+        "@type": "string"
+      },
+      "region": {
+        "@type": "string"
+      },
+      "cloudFront": {
+        "priceClass": "PriceClass_100"
+      }
+    },
+    "deploy": {
+      "@type": "method"
+    }
+  }
+}
