@@ -140,14 +140,7 @@ export function formatMessage(message, {info, status} = {}) {
   message = String(message);
 
   if (info) {
-    if (!Array.isArray(info)) {
-      info = [];
-    }
-    let str = '';
-    for (const item of info) {
-      str += ` ${gray(`→ ${item}`)}`;
-    }
-    info = str;
+    info = ' ' + gray(info);
   } else {
     info = '';
   }
@@ -289,8 +282,8 @@ class SubAnimatedTaskView extends AbstractTaskView {
     } while (view);
 
     const firstView = views.shift();
-    const messages = views.map(view => view.message);
-    firstView.renderMessage({info: messages});
+    const info = views.map(view => '→ ' + view.message).join(' ');
+    firstView.renderMessage({info});
   }
 }
 
