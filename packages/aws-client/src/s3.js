@@ -16,14 +16,44 @@ export class S3 {
     return this.client.copyObject(params).promise();
   }
 
+  createBucket(params) {
+    debug('createBucket(%o)', params);
+    return this.client.createBucket(params).promise();
+  }
+
   deleteObject(params) {
     debug('deleteObject(%o)', params);
     return this.client.deleteObject(params).promise();
   }
 
+  getBucketTagging(params) {
+    debug('getBucketTagging(%o)', params);
+    return this.client.getBucketTagging(params).promise();
+  }
+
+  getBucketWebsite(params) {
+    debug('getBucketWebsite(%o)', params);
+    return this.client.getBucketWebsite(params).promise();
+  }
+
   getObject(params) {
     debug('getObject(%o)', params);
     return this.client.getObject(params).promise();
+  }
+
+  listObjectsV2(params) {
+    debug('listObjectsV2(%o)', params);
+    return this.client.listObjectsV2(params).promise();
+  }
+
+  putBucketTagging(params) {
+    debug('PutBucketTagging(%o)', params);
+    return this.client.putBucketTagging(params).promise();
+  }
+
+  putBucketWebsite(params) {
+    debug('putBucketWebsite(%o)', params);
+    return this.client.putBucketWebsite(params).promise();
   }
 
   putObject(params) {
