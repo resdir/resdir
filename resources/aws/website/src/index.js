@@ -2,7 +2,7 @@ import {resolve, relative} from 'path';
 import {statSync, createReadStream} from 'fs';
 import {pick, isEqual} from 'lodash';
 import {task, formatString, formatCode, formatPath, formatMessage} from '@resdir/console';
-import {S3, CloudFront} from '@resdir/aws-client';
+import {S3, getS3WebsiteDomainName, CloudFront} from '@resdir/aws-client';
 import readDir from 'recursive-readdir';
 import hasha from 'hasha';
 import mime from 'mime-types';
@@ -26,23 +26,46 @@ export default base =>
     async configureS3Bucket({verbose, quiet, debug}) {
       const s3 = this.getS3Client();
       const bucketName = this.getS3BucketName();
+      const region = this.getS3BucketRegion();
 
       await task(
         async progress => {
-          const hasBeenCreated = await ensureS3Buket(s3, bucketName);
-
-          if (hasBeenCreated) {
+          let hasBeenCreated;
+          const tags = await getS3BucketTags(s3, bucketName);
+          if (tags === undefined) {
+            // The bucket doesn't exist yet
+            progress.setMessage('Creating S3 bucket...');
+            progress.setOutro('S3 bucket created');
+            const params = {Bucket: bucketName, ACL: 'public-read'};
+            if (region !== 'us-east-1') {
+              params.CreateBucketConfiguration = {LocationConstraint: region};
+            }
+            await s3.createBucket(params);
             await s3.putBucketTagging({
               Bucket: bucketName,
               Tagging: {TagSet: [MANAGED_BY_TAG]}
             });
-          } else {
-            const tags = await getS3BucketTags(s3, bucketName);
-            if (!tags.some(tag => isEqual(tag, MANAGED_BY_TAG))) {
+            hasBeenCreated = true;
+          }
+
+          if (!hasBeenCreated && !tags.some(tag => isEqual(tag, MANAGED_BY_TAG))) {
+            throw new Error(
+              `Can't use a S3 bucket not originally created by ${formatString(
+                RESOURCE_ID
+              )} (bucketName: ${formatString(bucketName)})`
+            );
+          }
+
+          if (!hasBeenCreated) {
+            const result = await s3.getBucketLocation({Bucket: bucketName});
+            const locationConstraint = result.LocationConstraint || 'us-east-1';
+            if (locationConstraint !== region) {
               throw new Error(
-                `Can't use a S3 bucket not originally created by ${formatString(
-                  RESOURCE_ID
-                )} (bucketName: ${formatString(bucketName)})`
+                `Sorry, it is currently not possible to change the region of the S3 bucket associated to your website. Please remove the bucket (${formatString(
+                  bucketName
+                )}) manually or set the region to its initial value (${formatString(
+                  locationConstraint
+                )}).`
               );
             }
           }
@@ -53,26 +76,20 @@ export default base =>
           }
 
           let currentWebsiteConfiguration;
-
           if (!hasBeenCreated) {
             const result = await getS3BucketWebsiteConfiguration(s3, bucketName);
             currentWebsiteConfiguration = pick(result, ['IndexDocument', 'ErrorDocument']);
           }
 
-          let hasBeenUpdated;
-
           if (!isEqual(currentWebsiteConfiguration, websiteConfiguration)) {
+            if (!hasBeenCreated) {
+              progress.setMessage('Updating S3 bucket...');
+              progress.setOutro('S3 bucket updated');
+            }
             await s3.putBucketWebsite({
               Bucket: bucketName,
               WebsiteConfiguration: websiteConfiguration
             });
-            hasBeenUpdated = true;
-          }
-
-          if (hasBeenCreated) {
-            progress.setOutro('S3 bucket created');
-          } else if (hasBeenUpdated) {
-            progress.setOutro('S3 bucket updated');
           }
         },
         {
@@ -243,31 +260,44 @@ export default base =>
             debug
           });
 
-          let distributionHasBeenCreated;
-
+          let hasBeenCreated;
           if (!distribution) {
             progress.setMessage('Creating CloudFront distribution...');
             progress.setOutro('CloudFront distribution created');
             distribution = await this.createCloudFrontDistribution();
-            distributionHasBeenCreated = true;
+            hasBeenCreated = true;
           }
 
-          if (!distributionHasBeenCreated) {
+          if (!hasBeenCreated) {
             await this.checkCloudFrontDistributionTags(distribution, {verbose, quiet, debug});
           }
 
-          if (!distributionHasBeenCreated && !distribution.Enabled) {
+          if (!hasBeenCreated && !distribution.Enabled) {
             throw new Error(
               `The CloudFront distribution is disabled (ARN: ${formatString(distribution.ARN)})`
             );
           }
 
-          if (distributionHasBeenCreated || distribution.Status !== 'Deployed') {
+          if (hasBeenCreated || distribution.Status !== 'Deployed') {
             await waitUntilCloudFrontDistributionIsDeployed(cloudFront, distribution.Id, {
               verbose,
               quiet,
               debug
             });
+          }
+
+          if (!hasBeenCreated) {
+            const needsUpdate = await this.doesCloudFrontDistributionNeedUpdate(distribution);
+            if (needsUpdate) {
+              progress.setMessage('Updating CloudFront distribution...');
+              progress.setOutro('CloudFront distribution updated');
+              await this.updateCloudFrontDistribution(distribution.Id);
+              await waitUntilCloudFrontDistributionIsDeployed(cloudFront, distribution.Id, {
+                verbose,
+                quiet,
+                debug
+              });
+            }
           }
         },
         {
@@ -291,36 +321,45 @@ export default base =>
               Quantity: 1,
               Items: [this.domainName]
             },
-            Comment: '',
-            Enabled: true,
-            Origins: {
-              Quantity: 1,
-              Items: [
-                {
-                  DomainName: this.getS3WebsiteDomainName(),
-                  Id: this.domainName,
-                  CustomOriginConfig: {
-                    HTTPPort: 80,
-                    HTTPSPort: 443,
-                    OriginProtocolPolicy: 'http-only'
-                  }
-                }
-              ]
-            },
+            DefaultRootObject: this.indexPage,
+            Origins: this.generateCloudFrontDistributionOrigins(),
             DefaultCacheBehavior: {
               TargetOriginId: this.domainName,
               ForwardedValues: {
                 QueryString: false,
-                Cookies: {Forward: 'none'}
+                Cookies: {Forward: 'none'},
+                Headers: {Quantity: 0, Items: []},
+                QueryStringCacheKeys: {Quantity: 0, Items: []}
               },
+              TrustedSigners: {Enabled: false, Quantity: 0, Items: []},
               ViewerProtocolPolicy: 'redirect-to-https',
-              TrustedSigners: {
-                Enabled: false,
-                Quantity: 0
+              AllowedMethods: {
+                Quantity: 2,
+                Items: ['HEAD', 'GET'],
+                CachedMethods: {Quantity: 2, Items: ['HEAD', 'GET']}
               },
-              MinTTL: 0 // TODO: try to optimize this
+              SmoothStreaming: false,
+              MinTTL: 0,
+              DefaultTTL: 0,
+              MaxTTL: 31536000,
+              Compress: true,
+              LambdaFunctionAssociations: {Quantity: 0, Items: []}
             },
-            PriceClass: this.aws.cloudFront.priceClass
+            CacheBehaviors: {Quantity: 0, Items: []},
+            CustomErrorResponses: this.generateCloudFrontDistributionCustomErrorResponses(),
+            Comment: '',
+            Logging: {Enabled: false, IncludeCookies: false, Bucket: '', Prefix: ''},
+            PriceClass: this.aws.cloudFront.priceClass,
+            Enabled: true,
+            ViewerCertificate: {
+              CloudFrontDefaultCertificate: true,
+              MinimumProtocolVersion: 'TLSv1',
+              CertificateSource: 'cloudfront'
+            },
+            Restrictions: {GeoRestriction: {RestrictionType: 'none', Quantity: 0, Items: []}},
+            WebACLId: '',
+            HttpVersion: 'http2',
+            IsIPV6Enabled: true
           },
           Tags: {
             Items: [MANAGED_BY_TAG]
@@ -328,22 +367,50 @@ export default base =>
         }
       };
 
-      if (this.spa) {
-        params.DistributionConfig.CustomErrorResponses = {
-          Quantity: 1,
-          Items: [
-            {
-              ErrorCode: 404,
-              ResponseCode: '200',
-              ResponsePagePath: '/' + this.indexPage
-            }
-          ]
-        };
-      }
-
       const result = await cloudFront.createDistributionWithTags(params);
 
       return result.Distribution;
+    }
+
+    async doesCloudFrontDistributionNeedUpdate(distribution) {
+      if (!isEqual(distribution.Origins, this.generateCloudFrontDistributionOrigins())) {
+        return true;
+      }
+
+      if (
+        !isEqual(
+          distribution.CustomErrorResponses,
+          this.generateCloudFrontDistributionCustomErrorResponses()
+        )
+      ) {
+        return true;
+      }
+
+      if (distribution.PriceClass !== this.aws.cloudFront.priceClass) {
+        return true;
+      }
+
+      return false;
+    }
+
+    async updateCloudFrontDistribution(distributionId) {
+      const cloudFront = this.getCloudFrontClient();
+
+      const {DistributionConfig: config, ETag: eTag} = await cloudFront.getDistributionConfig({
+        Id: distributionId
+      });
+
+      config.Origins = this.generateCloudFrontDistributionOrigins();
+
+      config.CustomErrorResponses = this.generateCloudFrontDistributionCustomErrorResponses();
+
+      config.PriceClass = this.aws.cloudFront.priceClass;
+
+      await cloudFront.updateDistribution({
+        Id: distributionId,
+        IfMatch: eTag,
+        DistributionConfig: config
+      });
     }
 
     async checkCloudFrontDistributionTags(distribution, {verbose, quiet, debug}) {
@@ -370,13 +437,54 @@ export default base =>
       );
     }
 
+    generateCloudFrontDistributionOrigins() {
+      return {
+        Quantity: 1,
+        Items: [
+          {
+            Id: this.domainName,
+            DomainName: this.getS3WebsiteDomainName(),
+            OriginPath: '',
+            CustomHeaders: {Quantity: 0, Items: []},
+            CustomOriginConfig: {
+              HTTPPort: 80,
+              HTTPSPort: 443,
+              OriginProtocolPolicy: 'http-only',
+              OriginSslProtocols: {Quantity: 3, Items: ['TLSv1', 'TLSv1.1', 'TLSv1.2']},
+              OriginReadTimeout: 30,
+              OriginKeepaliveTimeout: this.spa ? 5 : 30
+            }
+          }
+        ]
+      };
+    }
+
+    generateCloudFrontDistributionCustomErrorResponses() {
+      const items = [];
+      if (this.spa) {
+        items.push({
+          ErrorCode: 404,
+          ResponseCode: '200',
+          ResponsePagePath: '/' + this.indexPage,
+          ErrorCachingMinTTL: 0
+        });
+      }
+      return {
+        Quantity: items.length,
+        Items: items
+      };
+    }
+
     getS3BucketName() {
       return this.domainName;
     }
 
+    getS3BucketRegion() {
+      return (this.aws.s3 && this.aws.s3.region) || this.aws.region;
+    }
+
     getS3WebsiteDomainName() {
-      const region = (this.aws.s3 && this.aws.s3.region) || this.aws.region;
-      return `${this.domainName}.s3-website-${region}.amazonaws.com`;
+      return getS3WebsiteDomainName(this.getS3BucketName(), this.getS3BucketRegion());
     }
 
     getS3Client() {
@@ -394,20 +502,19 @@ export default base =>
     }
   };
 
-async function ensureS3Buket(s3, bucketName) {
-  let hasBeenCreated;
+async function getS3BucketWebsiteConfiguration(s3, bucketName) {
   try {
-    await s3.createBucket({Bucket: bucketName, ACL: 'public-read'});
-    hasBeenCreated = true;
+    return await s3.getBucketWebsite({Bucket: bucketName});
   } catch (err) {
-    if (err.code !== 'BucketAlreadyOwnedByYou') {
-      throw err;
+    if (err.code === 'NoSuchWebsiteConfiguration') {
+      return {};
     }
+    throw err;
   }
-  return hasBeenCreated;
 }
 
 async function getS3BucketTags(s3, bucketName) {
+  // Returns undefined if the bucket doesn't exist
   try {
     const {TagSet} = await s3.getBucketTagging({Bucket: bucketName});
     return TagSet;
@@ -415,16 +522,11 @@ async function getS3BucketTags(s3, bucketName) {
     if (err.code === 'NoSuchTagSet') {
       return [];
     }
-    throw err;
-  }
-}
-
-async function getS3BucketWebsiteConfiguration(s3, bucketName) {
-  try {
-    return await s3.getBucketWebsite({Bucket: bucketName});
-  } catch (err) {
-    if (err.code === 'NoSuchWebsiteConfiguration') {
-      return {};
+    if (err.code === 'NoSuchBucket') {
+      return undefined;
+    }
+    if (err.code === 'AccessDenied') {
+      throw new Error(`Access denied to S3 bucket (${formatString(bucketName)})`);
     }
     throw err;
   }
@@ -469,7 +571,7 @@ async function waitUntilCloudFrontDistributionIsDeployed(
       await cloudFront.waitFor('distributionDeployed', {Id: distributionId});
     },
     {
-      intro: `Waiting for deployment (be very patient, this operation can take up to 15 minutes)...`,
+      intro: `Waiting for deployment (be patient, it can take up to 15 minutes)...`,
       outro: 'CloudFront distribution deployed',
       verbose,
       quiet,

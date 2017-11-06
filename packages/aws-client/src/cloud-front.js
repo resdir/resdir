@@ -20,6 +20,16 @@ export class CloudFront {
     return this.client.createDistributionWithTags(params).promise();
   }
 
+  getDistribution(params) {
+    debug('getDistribution(%o)', params);
+    return this.client.getDistribution(params).promise();
+  }
+
+  getDistributionConfig(params) {
+    debug('getDistributionConfig(%o)', params);
+    return this.client.getDistributionConfig(params).promise();
+  }
+
   listDistributions(params) {
     debug('listDistributions(%o)', params);
     return this.client.listDistributions(params).promise();
@@ -28,6 +38,11 @@ export class CloudFront {
   listTagsForResource(params) {
     debug('listTagsForResource(%o)', params);
     return this.client.listTagsForResource(params).promise();
+  }
+
+  updateDistribution(params) {
+    debug('updateDistribution(%o)', params);
+    return this.client.updateDistribution(params).promise();
   }
 
   waitFor(state, params) {

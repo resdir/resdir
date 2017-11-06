@@ -27,6 +27,9 @@
     },
     "contentDirectory": "./src",
     "indexPage": "index.html",
+    "errorPage": {
+      "@type": "string"
+    },
     "spa": false,
     "aws": {
       "accessKeyId": {
@@ -37,7 +40,7 @@
       },
       "region": "us-east-1",
       "cloudFront": {
-        "priceClass": "PriceClass_100"
+        "priceClass": "PriceClass_All"
       }
     },
     "deploy": {

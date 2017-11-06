@@ -26,6 +26,11 @@ export class S3 {
     return this.client.deleteObject(params).promise();
   }
 
+  getBucketLocation(params) {
+    debug('getBucketLocation(%o)', params);
+    return this.client.getBucketLocation(params).promise();
+  }
+
   getBucketTagging(params) {
     debug('getBucketTagging(%o)', params);
     return this.client.getBucketTagging(params).promise();
@@ -39,6 +44,11 @@ export class S3 {
   getObject(params) {
     debug('getObject(%o)', params);
     return this.client.getObject(params).promise();
+  }
+
+  headBucket(params) {
+    debug('headBucket(%o)', params);
+    return this.client.headBucket(params).promise();
   }
 
   listObjectsV2(params) {
@@ -62,8 +72,16 @@ export class S3 {
   }
 }
 
+export function getS3Endpoint(bucket) {
+  return `${bucket}.s3.amazonaws.com`;
+}
+
+export function getS3WebsiteDomainName(bucket, region = 'us-east-1') {
+  return `${bucket}.s3-website-${region}.amazonaws.com`;
+}
+
 export function formatS3URL({bucket, key}) {
-  return `https://${bucket}.s3.amazonaws.com/${key}`;
+  return `https://${getS3Endpoint(bucket)}/${key}`;
 }
 
 export function parseS3URL(url) {
