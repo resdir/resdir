@@ -1,6 +1,6 @@
 {
   "@import": "../",
-  "domainName": "website-example-2.resdir.com",
+  "domainName": "website-example.resdir.com",
   "spa": true,
   "errorPage": "404.html"
 }
