@@ -1,6 +1,12 @@
 import {isEqual} from 'lodash';
 import {task, formatString} from '@resdir/console';
 import {CloudFront} from '@resdir/aws-client';
+import sleep from 'sleep-promise';
+
+const CACHING_MIN_TTL = 0;
+const CACHING_DEFAULT_TTL = 86400; // 1 day
+const CACHING_MAX_TTL = 3153600000; // 100 years
+const ERROR_CACHING_MIN_TTL = 86400; // 1 day
 
 export default base =>
   class CloudFrontMixin extends base {
@@ -9,53 +15,55 @@ export default base =>
     async configureCloudFrontDistribution({verbose, quiet, debug}) {
       const cloudFront = this.getCloudFrontClient();
 
-      await task(
-        async progress => {
-          let distribution = await this.findCloudFrontDistribution({
-            verbose,
-            quiet,
-            debug
-          });
+      let hasBeenCreated;
 
-          let hasBeenCreated;
+      let {distribution, status} = await this.checkCloudFrontDistribution({verbose, quiet, debug});
+
+      if (status === 'NOT_FOUND') {
+        distribution = await this.createCloudFrontDistribution({verbose, quiet, debug});
+        hasBeenCreated = true;
+        status = 'DEPLOYING';
+      } else if (status === 'NEEDS_UPDATE') {
+        await this.updateCloudFrontDistribution(distribution.Id, {verbose, quiet, debug});
+        status = 'DEPLOYING';
+      }
+
+      if (status === 'DEPLOYING') {
+        await waitUntilCloudFrontDistributionIsDeployed(cloudFront, distribution.Id, {
+          verbose,
+          quiet,
+          debug
+        });
+      }
+
+      return hasBeenCreated;
+    }
+
+    async checkCloudFrontDistribution({verbose, quiet, debug}) {
+      return await task(
+        async () => {
+          const distribution = await this.findCloudFrontDistribution({verbose, quiet, debug});
           if (!distribution) {
-            progress.setMessage('Creating CloudFront distribution...');
-            progress.setOutro('CloudFront distribution created');
-            distribution = await this.createCloudFrontDistribution();
-            hasBeenCreated = true;
+            return {status: 'NOT_FOUND'};
           }
 
-          if (!hasBeenCreated) {
-            await this.checkCloudFrontDistributionTags(distribution, {verbose, quiet, debug});
-          }
+          await this.checkCloudFrontDistributionTags(distribution, {verbose, quiet, debug});
 
-          if (!hasBeenCreated && !distribution.Enabled) {
+          if (!distribution.Enabled) {
             throw new Error(
               `The CloudFront distribution is disabled (ARN: ${formatString(distribution.ARN)})`
             );
           }
 
-          if (hasBeenCreated || distribution.Status !== 'Deployed') {
-            await waitUntilCloudFrontDistributionIsDeployed(cloudFront, distribution.Id, {
-              verbose,
-              quiet,
-              debug
-            });
+          if (await this.doesCloudFrontDistributionNeedUpdate(distribution)) {
+            return {distribution, status: 'NEEDS_UPDATE'};
           }
 
-          if (!hasBeenCreated) {
-            const needsUpdate = await this.doesCloudFrontDistributionNeedUpdate(distribution);
-            if (needsUpdate) {
-              progress.setMessage('Updating CloudFront distribution...');
-              progress.setOutro('CloudFront distribution updated');
-              await this.updateCloudFrontDistribution(distribution.Id);
-              await waitUntilCloudFrontDistributionIsDeployed(cloudFront, distribution.Id, {
-                verbose,
-                quiet,
-                debug
-              });
-            }
+          if (distribution.Status !== 'Deployed') {
+            return {distribution, status: 'DEPLOYING'};
           }
+
+          return {distribution, status: 'OKAY'};
         },
         {
           intro: `Checking CloudFront distribution...`,
@@ -86,72 +94,78 @@ export default base =>
       return distribution;
     }
 
-    async createCloudFrontDistribution() {
+    async createCloudFrontDistribution({verbose, quiet, debug}) {
       const cloudFront = this.getCloudFrontClient();
 
-      const params = {
-        DistributionConfigWithTags: {
-          DistributionConfig: {
-            CallerReference: String(Date.now()),
-            Aliases: {
-              Quantity: 1,
-              Items: [this.domainName]
-            },
-            DefaultRootObject: this.indexPage,
-            Origins: this.generateCloudFrontDistributionOrigins(),
-            DefaultCacheBehavior: {
-              TargetOriginId: this.domainName,
-              ForwardedValues: {
-                QueryString: false,
-                Cookies: {Forward: 'none'},
-                Headers: {Quantity: 0, Items: []},
-                QueryStringCacheKeys: {Quantity: 0, Items: []}
+      let certificateARN = await this.findACMCertificate({verbose, quiet, debug});
+      if (!certificateARN) {
+        certificateARN = await this.requestACMCertificate({verbose, quiet, debug});
+      }
+
+      return await task(
+        async () => {
+          const params = {
+            DistributionConfigWithTags: {
+              DistributionConfig: {
+                CallerReference: String(Date.now()),
+                Aliases: {
+                  Quantity: 1,
+                  Items: [this.domainName]
+                },
+                DefaultRootObject: this.indexPage,
+                Origins: this.generateCloudFrontDistributionOrigins(),
+                DefaultCacheBehavior: this.generateCloudFrontDistributionDefaultCacheBehavior(),
+                CacheBehaviors: {Quantity: 0, Items: []},
+                CustomErrorResponses: this.generateCloudFrontDistributionCustomErrorResponses(),
+                Comment: '',
+                Logging: {Enabled: false, IncludeCookies: false, Bucket: '', Prefix: ''},
+                PriceClass: this.aws.cloudFront.priceClass,
+                Enabled: true,
+                ViewerCertificate: {
+                  ACMCertificateArn: certificateARN,
+                  SSLSupportMethod: 'sni-only',
+                  MinimumProtocolVersion: 'TLSv1',
+                  Certificate: certificateARN,
+                  CertificateSource: 'acm'
+                },
+                Restrictions: {GeoRestriction: {RestrictionType: 'none', Quantity: 0, Items: []}},
+                WebACLId: '',
+                HttpVersion: 'http2',
+                IsIPV6Enabled: true
               },
-              TrustedSigners: {Enabled: false, Quantity: 0, Items: []},
-              ViewerProtocolPolicy: 'redirect-to-https',
-              AllowedMethods: {
-                Quantity: 2,
-                Items: ['HEAD', 'GET'],
-                CachedMethods: {Quantity: 2, Items: ['HEAD', 'GET']}
-              },
-              SmoothStreaming: false,
-              MinTTL: 0,
-              DefaultTTL: 0,
-              MaxTTL: 31536000,
-              Compress: true,
-              LambdaFunctionAssociations: {Quantity: 0, Items: []}
-            },
-            CacheBehaviors: {Quantity: 0, Items: []},
-            CustomErrorResponses: this.generateCloudFrontDistributionCustomErrorResponses(),
-            Comment: '',
-            Logging: {Enabled: false, IncludeCookies: false, Bucket: '', Prefix: ''},
-            PriceClass: this.aws.cloudFront.priceClass,
-            Enabled: true,
-            ViewerCertificate: {
-              CloudFrontDefaultCertificate: true,
-              MinimumProtocolVersion: 'TLSv1',
-              CertificateSource: 'cloudfront'
-            },
-            Restrictions: {GeoRestriction: {RestrictionType: 'none', Quantity: 0, Items: []}},
-            WebACLId: '',
-            HttpVersion: 'http2',
-            IsIPV6Enabled: true
-          },
-          Tags: {
-            Items: [this.constructor.MANAGED_BY_TAG]
-          }
+              Tags: {
+                Items: [this.constructor.MANAGED_BY_TAG]
+              }
+            }
+          };
+
+          const {Distribution: distribution} = await cloudFront.createDistributionWithTags(params);
+
+          this._cloudFrontDistributions[this.domainName] = distribution;
+
+          return distribution;
+        },
+        {
+          intro: `Creating CloudFront distribution...`,
+          outro: `CloudFront distribution created`,
+          verbose,
+          quiet,
+          debug
         }
-      };
-
-      const {Distribution: distribution} = await cloudFront.createDistributionWithTags(params);
-
-      this._cloudFrontDistributions[this.domainName] = distribution;
-
-      return distribution;
+      );
     }
 
     async doesCloudFrontDistributionNeedUpdate(distribution) {
       if (!isEqual(distribution.Origins, this.generateCloudFrontDistributionOrigins())) {
+        return true;
+      }
+
+      if (
+        !isEqual(
+          distribution.DefaultCacheBehavior,
+          this.generateCloudFrontDistributionDefaultCacheBehavior()
+        )
+      ) {
         return true;
       }
 
@@ -171,24 +185,113 @@ export default base =>
       return false;
     }
 
-    async updateCloudFrontDistribution(distributionId) {
+    async updateCloudFrontDistribution(distributionId, {verbose, quiet, debug}) {
       const cloudFront = this.getCloudFrontClient();
 
-      const {DistributionConfig: config, ETag: eTag} = await cloudFront.getDistributionConfig({
-        Id: distributionId
-      });
+      await task(
+        async () => {
+          const {DistributionConfig: config, ETag: eTag} = await cloudFront.getDistributionConfig({
+            Id: distributionId
+          });
 
-      config.Origins = this.generateCloudFrontDistributionOrigins();
+          config.Origins = this.generateCloudFrontDistributionOrigins();
 
-      config.CustomErrorResponses = this.generateCloudFrontDistributionCustomErrorResponses();
+          config.DefaultCacheBehavior = this.generateCloudFrontDistributionDefaultCacheBehavior();
 
-      config.PriceClass = this.aws.cloudFront.priceClass;
+          config.CustomErrorResponses = this.generateCloudFrontDistributionCustomErrorResponses();
 
-      await cloudFront.updateDistribution({
-        Id: distributionId,
-        IfMatch: eTag,
-        DistributionConfig: config
-      });
+          config.PriceClass = this.aws.cloudFront.priceClass;
+
+          await cloudFront.updateDistribution({
+            Id: distributionId,
+            IfMatch: eTag,
+            DistributionConfig: config
+          });
+        },
+        {
+          intro: `Updating CloudFront distribution...`,
+          outro: `CloudFront distribution updated`,
+          verbose,
+          quiet,
+          debug
+        }
+      );
+    }
+
+    generateCloudFrontDistributionOrigins() {
+      return {
+        Quantity: 1,
+        Items: [
+          {
+            Id: this.domainName,
+            DomainName: this.getS3WebsiteDomainName(),
+            OriginPath: '',
+            CustomHeaders: {Quantity: 0, Items: []},
+            CustomOriginConfig: {
+              HTTPPort: 80,
+              HTTPSPort: 443,
+              OriginProtocolPolicy: 'http-only',
+              OriginSslProtocols: {Quantity: 3, Items: ['TLSv1', 'TLSv1.1', 'TLSv1.2']},
+              OriginReadTimeout: 30,
+              OriginKeepaliveTimeout: 30
+            }
+          }
+        ]
+      };
+    }
+
+    generateCloudFrontDistributionDefaultCacheBehavior() {
+      return {
+        TargetOriginId: this.domainName,
+        ForwardedValues: {
+          QueryString: false,
+          Cookies: {Forward: 'none'},
+          Headers: {Quantity: 0, Items: []},
+          QueryStringCacheKeys: {Quantity: 0, Items: []}
+        },
+        TrustedSigners: {Enabled: false, Quantity: 0, Items: []},
+        ViewerProtocolPolicy: 'redirect-to-https',
+        AllowedMethods: {
+          Quantity: 2,
+          Items: ['HEAD', 'GET'],
+          CachedMethods: {Quantity: 2, Items: ['HEAD', 'GET']}
+        },
+        SmoothStreaming: false,
+        MinTTL: CACHING_MIN_TTL,
+        DefaultTTL: CACHING_DEFAULT_TTL,
+        MaxTTL: CACHING_MAX_TTL,
+        Compress: true,
+        LambdaFunctionAssociations: {Quantity: 0, Items: []}
+      };
+    }
+
+    generateCloudFrontDistributionCustomErrorResponses() {
+      const items = [];
+
+      for (const {errorCode, responseCode, responsePage} of this.customErrors || []) {
+        const item = {
+          ErrorCode: Number(errorCode),
+          ErrorCachingMinTTL: ERROR_CACHING_MIN_TTL
+        };
+
+        if (responseCode) {
+          item.ResponseCode = String(responseCode);
+        }
+
+        if (responsePage) {
+          item.ResponsePagePath = '/' + responsePage;
+          if (!responseCode) {
+            item.ResponseCode = String(errorCode);
+          }
+        }
+
+        items.push(item);
+      }
+
+      return {
+        Quantity: items.length,
+        Items: items
+      };
     }
 
     async checkCloudFrontDistributionTags(distribution, {verbose, quiet, debug}) {
@@ -215,42 +318,57 @@ export default base =>
       );
     }
 
-    generateCloudFrontDistributionOrigins() {
-      return {
-        Quantity: 1,
-        Items: [
-          {
-            Id: this.domainName,
-            DomainName: this.getS3WebsiteDomainName(),
-            OriginPath: '',
-            CustomHeaders: {Quantity: 0, Items: []},
-            CustomOriginConfig: {
-              HTTPPort: 80,
-              HTTPSPort: 443,
-              OriginProtocolPolicy: 'http-only',
-              OriginSslProtocols: {Quantity: 3, Items: ['TLSv1', 'TLSv1.1', 'TLSv1.2']},
-              OriginReadTimeout: 30,
-              OriginKeepaliveTimeout: this.spa ? 5 : 30
+    async runCloudFrontInvalidation(changes, {verbose, quiet, debug}) {
+      if (changes.length === 0) {
+        return;
+      }
+
+      const cloudFront = this.getCloudFrontClient();
+
+      const paths = [];
+      for (const change of changes) {
+        paths.push('/' + change);
+        if (change.endsWith('/' + this.indexPage)) {
+          // 'section/index.html' => /section/
+          paths.push('/' + change.slice(0, -this.indexPage.length));
+        }
+      }
+
+      await task(
+        async () => {
+          const distribution = await this.findCloudFrontDistribution({verbose, quiet, debug});
+          const {Invalidation: invalidation} = await cloudFront.createInvalidation({
+            DistributionId: distribution.Id,
+            InvalidationBatch: {
+              CallerReference: String(Date.now()),
+              Paths: {
+                Quantity: paths.length,
+                Items: paths
+              }
             }
-          }
-        ]
-      };
+          });
+          await waitUntilCloudFrontInvalidationIsCompleted(
+            cloudFront,
+            distribution.Id,
+            invalidation.Id,
+            {
+              quiet: true
+            }
+          );
+        },
+        {
+          intro: `Running CloudFront invalidation...`,
+          outro: `CloudFront invalidation completed`,
+          verbose,
+          quiet,
+          debug
+        }
+      );
     }
 
-    generateCloudFrontDistributionCustomErrorResponses() {
-      const items = [];
-      if (this.spa) {
-        items.push({
-          ErrorCode: 404,
-          ResponseCode: '200',
-          ResponsePagePath: '/' + this.indexPage,
-          ErrorCachingMinTTL: 0
-        });
-      }
-      return {
-        Quantity: items.length,
-        Items: items
-      };
+    async getCloudFrontDomainName({verbose, quiet, debug}) {
+      const distribution = await this.findCloudFrontDistribution({verbose, quiet, debug});
+      return distribution && distribution.DomainName;
     }
 
     getCloudFrontClient() {
@@ -300,8 +418,42 @@ async function waitUntilCloudFrontDistributionIsDeployed(
       await cloudFront.waitFor('distributionDeployed', {Id: distributionId});
     },
     {
-      intro: `Waiting for deployment (be patient, it can take up to 15 minutes)...`,
+      intro: `Waiting for CloudFront deployment (be patient, it can take up to 15 minutes)...`,
       outro: 'CloudFront distribution deployed',
+      verbose,
+      quiet,
+      debug
+    }
+  );
+}
+
+async function waitUntilCloudFrontInvalidationIsCompleted(
+  cloudFront,
+  distributionId,
+  invalidationId,
+  {verbose, quiet, debug}
+) {
+  await task(
+    async () => {
+      const sleepTime = 10000; // 10 seconds
+      const maxSleepTime = 5 * 60 * 1000; // 5 minutes
+      let totalSleepTime = 0;
+      do {
+        await sleep(sleepTime);
+        totalSleepTime += sleepTime;
+        const {Invalidation: invalidation} = await cloudFront.getInvalidation({
+          DistributionId: distributionId,
+          Id: invalidationId
+        });
+        if (invalidation.Status === 'Completed') {
+          return;
+        }
+      } while (totalSleepTime <= maxSleepTime);
+      throw new Error(`CloudFront invalidation uncompleted after ${totalSleepTime / 1000} seconds`);
+    },
+    {
+      intro: `Waiting for CloudFront invalidation completion...`,
+      outro: `CloudFront invalidation completed`,
       verbose,
       quiet,
       debug

@@ -1,3 +1,4 @@
+export * from './acm';
 export * from './cloud-front';
 export * from './dynamodb';
 export * from './route-53';

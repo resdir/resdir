@@ -10,9 +10,11 @@
       "hasha": "^3.0.0",
       "lodash": "^4.17.4",
       "mime-types": "^2.1.17",
+      "minimatch": "^3.0.4",
       "recursive-readdir": "^2.2.1",
       "@resdir/aws-client": "^0.1.1",
-      "@resdir/console": "^0.1.16"
+      "@resdir/console": "^0.1.16",
+      "sleep-promise": "^2.0.0"
     }
   },
   "@unpublishable": {
@@ -27,10 +29,12 @@
     },
     "contentDirectory": "./src",
     "indexPage": "index.html",
-    "errorPage": {
-      "@type": "string"
+    "customErrors": {
+      "@type": "array"
     },
-    "spa": false,
+    "immutableFiles": {
+      "@type": "array"
+    },
     "aws": {
       "accessKeyId": {
         "@type": "string"
@@ -41,6 +45,9 @@
       "region": "us-east-1",
       "cloudFront": {
         "priceClass": "PriceClass_All"
+      },
+      "acm": {
+        "region": "us-east-1"
       }
     },
     "deploy": {

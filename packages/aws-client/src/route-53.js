@@ -15,6 +15,11 @@ export class Route53 {
     return this.client.changeResourceRecordSets(params).promise();
   }
 
+  getChange(params) {
+    debug('getChange(%o)', params);
+    return this.client.getChange(params).promise();
+  }
+
   getHostedZone(params) {
     debug('getHostedZone(%o)', params);
     return this.client.getHostedZone(params).promise();

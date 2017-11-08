@@ -7,8 +7,10 @@ import readDir from 'recursive-readdir';
 import hasha from 'hasha';
 import mime from 'mime-types';
 import bytes from 'bytes';
+import minimatch from 'minimatch';
 
-// TODO: S'assurer qu'il y a une favicon en mode SPA
+const CONFIG_FILE_S3_KEY = '.aws-website-config.json';
+const IMMUTABLE_FILES_MAX_AGE = 3153600000; // 100 years!
 
 export default base =>
   class S3Mixin extends base {
@@ -60,16 +62,11 @@ export default base =>
           }
 
           const websiteConfiguration = {IndexDocument: {Suffix: this.indexPage}};
-          if (this.spa) {
-            websiteConfiguration.ErrorDocument = {Key: this.indexPage};
-          } else if (this.errorPage) {
-            websiteConfiguration.ErrorDocument = {Key: this.errorPage};
-          }
 
           let currentWebsiteConfiguration;
           if (!hasBeenCreated) {
             const result = await getS3BucketWebsiteConfiguration(s3, bucketName);
-            currentWebsiteConfiguration = pick(result, ['IndexDocument', 'ErrorDocument']);
+            currentWebsiteConfiguration = pick(result, ['IndexDocument']);
           }
 
           if (!isEqual(currentWebsiteConfiguration, websiteConfiguration)) {
@@ -97,10 +94,17 @@ export default base =>
       const s3 = this.getS3Client();
       const bucketName = this.getS3BucketName();
 
-      await task(
+      return await task(
         async progress => {
-          const contentDirectory = resolve(this.$getCurrentDirectory(), this.contentDirectory);
+          const directory = this.$getCurrentDirectory();
+          const contentDirectory = resolve(directory, this.contentDirectory);
           const contentFiles = await readDir(contentDirectory, ['.*']);
+          const immutableFiles = this.immutableFiles || [];
+
+          const changes = [];
+
+          const config = {immutableFiles};
+          const previousConfig = await this.loadConfigFromS3(config);
 
           const existingFiles = await task(
             async () => {
@@ -112,12 +116,24 @@ export default base =>
                 );
               }
 
-              return result.Contents.map(item => {
+              const files = [];
+
+              for (const item of result.Contents) {
+                const path = item.Key;
+                if (path === CONFIG_FILE_S3_KEY) {
+                  continue;
+                }
+
+                const size = item.Size;
+
                 let md5 = item.ETag;
                 md5 = md5.slice(1);
                 md5 = md5.slice(0, -1);
-                return {path: item.Key, md5, size: item.Size};
-              });
+
+                files.push({path, size, md5});
+              }
+
+              return files;
             },
             {
               intro: `Listing existing files on S3...`,
@@ -136,6 +152,7 @@ export default base =>
             const path = relative(contentDirectory, contentFile);
             const md5 = await hasha.fromFile(contentFile, {algorithm: 'md5'});
             const size = statSync(contentFile).size;
+            const isImmutable = matchFilePatterns(path, config.immutableFiles);
 
             let existingFile;
             const index = existingFiles.findIndex(file => file.path === path);
@@ -145,7 +162,10 @@ export default base =>
             }
 
             if (existingFile && existingFile.size === size && existingFile.md5 === md5) {
-              continue; // File is identical in S3
+              const wasImmutable = matchFilePatterns(path, previousConfig.immutableFiles);
+              if (isImmutable === wasImmutable) {
+                continue; // No change
+              }
             }
 
             await task(
@@ -153,14 +173,18 @@ export default base =>
                 const contentMD5 = new Buffer(md5, 'hex').toString('base64');
                 const mimeType = mime.lookup(path) || 'application/octet-stream';
                 const stream = createReadStream(contentFile);
-                await s3.putObject({
+                const params = {
                   Bucket: bucketName,
                   Key: path,
                   ACL: 'public-read',
                   Body: stream,
                   ContentType: mimeType,
                   ContentMD5: contentMD5
-                });
+                };
+                if (isImmutable) {
+                  params.CacheControl = `max-age=${IMMUTABLE_FILES_MAX_AGE}`;
+                }
+                await s3.putObject(params);
               },
               {
                 intro: formatMessage(`Uploading ${formatPath(path)}...`, {
@@ -178,6 +202,8 @@ export default base =>
             } else {
               updatedFiles++;
             }
+
+            changes.push(path);
           }
 
           for (const file of existingFiles) {
@@ -185,6 +211,7 @@ export default base =>
               async () => {
                 await s3.deleteObject({Bucket: bucketName, Key: file.path});
                 removedFiles++;
+                changes.push(file.path);
               },
               {
                 intro: `Removing ${formatPath(file.path)}...`,
@@ -195,6 +222,8 @@ export default base =>
               }
             );
           }
+
+          await this.saveConfigToS3(config, previousConfig);
 
           let info = '';
           if (addedFiles) {
@@ -229,6 +258,8 @@ export default base =>
           }
 
           progress.setOutro(formatMessage('Files synchronized', {info: '(' + info + ')'}));
+
+          return changes;
         },
         {
           intro: `Synchronizing files...`,
@@ -238,6 +269,46 @@ export default base =>
           debug
         }
       );
+    }
+
+    async loadConfigFromS3(currentConfig) {
+      const s3 = this.getS3Client();
+      const bucketName = this.getS3BucketName();
+      const body = JSON.stringify(currentConfig);
+      const md5 = await hasha(body, {algorithm: 'md5'});
+      try {
+        const result = await s3.getObject({
+          Bucket: bucketName,
+          Key: CONFIG_FILE_S3_KEY,
+          IfNoneMatch: md5
+        });
+        return JSON.parse(result.Body);
+      } catch (err) {
+        if (err.code === 'NoSuchKey') {
+          return {};
+        } else if (err.code === 'NotModified') {
+          return currentConfig;
+        }
+        throw err;
+      }
+    }
+
+    async saveConfigToS3(currentConfig, previousConfig) {
+      if (isEqual(currentConfig, previousConfig)) {
+        return;
+      }
+      const s3 = this.getS3Client();
+      const bucketName = this.getS3BucketName();
+      const body = JSON.stringify(currentConfig);
+      const md5 = await hasha(body, {algorithm: 'md5'});
+      const contentMD5 = new Buffer(md5, 'hex').toString('base64');
+      await s3.putObject({
+        Bucket: bucketName,
+        Key: CONFIG_FILE_S3_KEY,
+        Body: body,
+        ContentType: 'application/json',
+        ContentMD5: contentMD5
+      });
     }
 
     getS3BucketName() {
@@ -288,4 +359,13 @@ async function getS3BucketTags(s3, bucketName) {
     }
     throw err;
   }
+}
+
+function matchFilePatterns(file, patterns = []) {
+  for (const pattern of patterns) {
+    if (minimatch(file, pattern)) {
+      return true;
+    }
+  }
+  return false;
 }

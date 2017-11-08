@@ -20,6 +20,11 @@ export class CloudFront {
     return this.client.createDistributionWithTags(params).promise();
   }
 
+  createInvalidation(params) {
+    debug('createInvalidation(%o)', params);
+    return this.client.createInvalidation(params).promise();
+  }
+
   getDistribution(params) {
     debug('getDistribution(%o)', params);
     return this.client.getDistribution(params).promise();
@@ -28,6 +33,11 @@ export class CloudFront {
   getDistributionConfig(params) {
     debug('getDistributionConfig(%o)', params);
     return this.client.getDistributionConfig(params).promise();
+  }
+
+  getInvalidation(params) {
+    debug('getInvalidation(%o)', params);
+    return this.client.getInvalidation(params).promise();
   }
 
   listDistributions(params) {

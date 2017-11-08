@@ -1,13 +1,14 @@
 import {takeRight} from 'lodash';
-import {task, formatString} from '@resdir/console';
+import {task} from '@resdir/console';
 import {Route53} from '@resdir/aws-client';
+import sleep from 'sleep-promise';
 
 export default base =>
   class Route53Mixin extends base {
     async configureRoute53HostedZone({verbose, quiet, debug}) {
       const route53 = this.getRoute53Client();
 
-      await task(
+      return await task(
         async progress => {
           const hostedZone = await findRoute53HostedZone(route53, this.domainName, {
             verbose,
@@ -16,14 +17,10 @@ export default base =>
           });
 
           if (!hostedZone) {
-            throw new Error(
-              `Sorry, the current implementation of this tool requires a Route 53 hosted zone matching your domain name (${formatString(
-                this.domainName
-              )})`
-            );
+            return false;
           }
 
-          const cloudFrontDistribution = await this.findCloudFrontDistribution({
+          const cloudFrontDomainName = await this.getCloudFrontDomainName({
             verbose,
             quiet,
             debug
@@ -45,10 +42,7 @@ export default base =>
             progress.setOutro('Route53 record set created');
             changeRequired = true;
           } else if (
-            !(
-              recordSet.AliasTarget &&
-              recordSet.AliasTarget.DNSName === cloudFrontDistribution.DomainName + '.'
-            )
+            !(recordSet.AliasTarget && recordSet.AliasTarget.DNSName === cloudFrontDomainName + '.')
           ) {
             progress.setMessage('Updating Route53 record set...');
             progress.setOutro('Route53 record set updated');
@@ -56,7 +50,7 @@ export default base =>
           }
 
           if (changeRequired) {
-            await route53.changeResourceRecordSets({
+            const {ChangeInfo: changeInfo} = await route53.changeResourceRecordSets({
               HostedZoneId: hostedZone.Id,
               ChangeBatch: {
                 Changes: [
@@ -64,7 +58,7 @@ export default base =>
                     Action: 'UPSERT',
                     ResourceRecordSet: {
                       AliasTarget: {
-                        DNSName: cloudFrontDistribution.DomainName + '.',
+                        DNSName: cloudFrontDomainName + '.',
                         EvaluateTargetHealth: false,
                         HostedZoneId: this.constructor.CLOUD_FRONT_HOSTED_ZONE_ID
                       },
@@ -75,8 +69,15 @@ export default base =>
                 ]
               }
             });
-            // TODO: waitFor DNS update
+
+            await waitUntilRoute53RecordSetIsChanged(route53, changeInfo.Id, {
+              verbose,
+              quiet,
+              debug
+            });
           }
+
+          return true;
         },
         {
           intro: `Checking Route53 hosted zone...`,
@@ -170,6 +171,34 @@ async function findRoute53RecordSet(
     },
     {
       intro: `Searching for the Route 53 record set...`,
+      verbose,
+      quiet,
+      debug
+    }
+  );
+}
+
+async function waitUntilRoute53RecordSetIsChanged(route53, changeId, {verbose, quiet, debug}) {
+  await task(
+    async () => {
+      const sleepTime = 5000; // 5 seconds
+      const maxSleepTime = 3 * 60 * 1000; // 3 minutes
+      let totalSleepTime = 0;
+      do {
+        await sleep(sleepTime);
+        totalSleepTime += sleepTime;
+        const {ChangeInfo: changeInfo} = await route53.getChange({Id: changeId});
+        if (changeInfo.Status !== 'PENDING') {
+          return;
+        }
+      } while (totalSleepTime <= maxSleepTime);
+      throw new Error(
+        `Route 53 record set change uncompleted after ${totalSleepTime / 1000} seconds`
+      );
+    },
+    {
+      intro: `Waiting for Route 53 record set change to complete...`,
+      outro: `Route 53 record set change completed`,
       verbose,
       quiet,
       debug

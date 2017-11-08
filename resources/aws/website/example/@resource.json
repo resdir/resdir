@@ -1,6 +1,12 @@
 {
   "@import": "../",
   "domainName": "website-example.resdir.com",
-  "spa": true,
-  "errorPage": "404.html"
+  "customErrors": [
+    {
+      "errorCode": 404,
+      "responseCode": 200,
+      "responsePage": "index.html"
+    }
+  ],
+  "immutableFiles": ["**/*.immutable.*"]
 }

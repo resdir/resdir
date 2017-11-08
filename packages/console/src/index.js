@@ -1,4 +1,4 @@
-import {gray, cyan, yellow, green, red} from 'chalk';
+import {gray, cyan, yellow, green, red, bold, dim} from 'chalk';
 import ora from 'ora';
 import windowSize from 'window-size';
 import sliceANSI from 'slice-ansi';
@@ -126,6 +126,14 @@ export function formatPath(path) {
 
 export function formatCode(code) {
   return cyan('`' + String(code) + '`');
+}
+
+export function formatBold(str) {
+  return bold(String(str));
+}
+
+export function formatDim(str) {
+  return dim(String(str));
 }
 
 export function formatExample(example) {
@@ -299,13 +307,13 @@ export async function task(fn, {intro, outro, verbose, debug, quiet}) {
   const stack = global.resdirConsoleTaskStack;
 
   let ViewClass;
-  if (stack.length > 0) {
+  if (quiet) {
+    ViewClass = QuietTaskView;
+  } else if (stack.length > 0) {
     ViewClass = stack[0].constructor;
     if (ViewClass.name === 'AnimatedTaskView') {
       ViewClass = SubAnimatedTaskView;
     }
-  } else if (quiet) {
-    ViewClass = QuietTaskView;
   } else if (verbose || debug || process.env.DEBUG) {
     ViewClass = VerboseTaskView;
   } else {
