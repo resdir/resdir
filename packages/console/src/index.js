@@ -1,4 +1,4 @@
-import {gray, cyan, yellow, green, red, bold, dim} from 'chalk';
+import {cyan, yellow, green, red, bold, dim} from 'chalk';
 import ora from 'ora';
 import windowSize from 'window-size';
 import sliceANSI from 'slice-ansi';
@@ -65,9 +65,9 @@ export function printError(error) {
 
   if (error.contextStack) {
     for (const context of error.contextStack) {
-      let identifier = gray((context.constructor && context.constructor.name) || 'Object');
+      let identifier = dim((context.constructor && context.constructor.name) || 'Object');
       if (context.toIdentifier) {
-        identifier += gray(': ') + formatString(context.toIdentifier());
+        identifier += dim(': ') + formatString(context.toIdentifier());
       }
       print('  ' + identifier, {output: 'error'});
     }
@@ -83,7 +83,7 @@ export function prompt(message, {type} = {}) {
   return new Promise((resolve, reject) => {
     resetEmptyLinesCount();
 
-    const options = {prompt: `${gray('>>')} ${message}`};
+    const options = {prompt: `${dim('>>')} ${message}`};
 
     if (type === 'PASSWORD') {
       options.silent = true;
@@ -102,7 +102,7 @@ export function prompt(message, {type} = {}) {
 
 export async function confirm(message, options = {}) {
   const choices = options.default === true ? 'Y|n' : 'y|N';
-  const answer = await prompt(`${message} ${gray(`[${choices}]`)}`);
+  const answer = await prompt(`${message} ${dim(`[${choices}]`)}`);
   if (!answer) {
     return options.default;
   }
@@ -137,7 +137,7 @@ export function formatDim(str) {
 }
 
 export function formatExample(example) {
-  return gray('(e.g., "' + String(example) + '")');
+  return dim('(e.g., "' + String(example) + '")');
 }
 
 export function formatText(text, {width = 80} = {}) {
@@ -148,7 +148,7 @@ export function formatMessage(message, {info, status} = {}) {
   message = String(message);
 
   if (info) {
-    info = ' ' + gray(info);
+    info = ' ' + dim(info);
   } else {
     info = '';
   }
@@ -177,7 +177,7 @@ export function getErrorSymbol() {
 }
 
 export function getProgressSymbol() {
-  return emojisAreSupported() ? '🏃' : gray('⠒');
+  return emojisAreSupported() ? '🏃' : dim('⠒');
 }
 
 export function getProgressSpinner() {
@@ -186,7 +186,7 @@ export function getProgressSpinner() {
     {interval: 140, frames: ['🚶', '🏃']} :
     {
       interval: 80,
-      frames: ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'].map(char => gray(char))
+      frames: ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'].map(char => dim(char))
     };
 }
 
