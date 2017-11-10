@@ -1,0 +1,39 @@
+{
+  "@import": [
+    "resdir/resource",
+    "js/resource",
+    "./"
+  ],
+  "id": "tool/notifier",
+  "version": "0.1.1",
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@import": "js/npm-dependencies#^0.1.26",
+    "@value": {
+      "node-notifier": "^5.1.2"
+    }
+  },
+  "@unpublishable": {
+    "transpiler": {
+      "@import": "1place/esnext-transpiler#^0.1.9"
+    }
+  },
+  "@export": {
+    "@implementation": "./dist",
+    "notify": {
+      "@type": "method",
+      "@parameters": {
+        "title": "⚡run",
+        "message": {
+          "@type": "string",
+          "@position": 0
+        },
+        "icon": {
+          "@type": "string"
+        }
+      }
+    }
+  }
+}
