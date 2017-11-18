@@ -79,6 +79,10 @@ export default base =>
               WebsiteConfiguration: websiteConfiguration
             });
           }
+
+          if (hasBeenCreated) {
+            await s3.waitFor('bucketExists', {Bucket: bucketName});
+          }
         },
         {
           intro: `Checking S3 bucket...`,
