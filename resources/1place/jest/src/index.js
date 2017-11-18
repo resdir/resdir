@@ -1,5 +1,4 @@
 import {resolve} from 'path';
-import jest from 'jest';
 import {task} from '@resdir/console';
 import {execute} from '@resdir/process-manager';
 
