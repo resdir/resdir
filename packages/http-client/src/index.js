@@ -1,23 +1,42 @@
 import isomorphicFetch from 'isomorphic-fetch';
 
-export async function getJSON(url, options = {}) {
-  options = {json: true, expectedStatus: 200, ...options};
+export async function get(url, options) {
   return await fetch(url, options);
 }
 
-export async function postJSON(url, body, options = {}) {
-  options = {method: 'POST', body, json: true, expectedStatus: [200, 201, 204], ...options};
+export async function post(url, body, options) {
+  options = {method: 'POST', body, expectedStatus: [200, 201, 204], ...options};
   return await fetch(url, options);
 }
 
-export async function putJSON(url, body, options = {}) {
-  options = {method: 'PUT', body, json: true, expectedStatus: [200, 204], ...options};
+export async function put(url, body, options) {
+  options = {method: 'PUT', body, expectedStatus: [200, 204], ...options};
   return await fetch(url, options);
 }
 
-export async function deleteJSON(url, options = {}) {
-  options = {method: 'DELETE', json: true, expectedStatus: [200, 204], ...options};
+export async function del(url, options) {
+  options = {method: 'DELETE', expectedStatus: [200, 204], ...options};
   return await fetch(url, options);
+}
+
+export async function getJSON(url, options) {
+  options = {json: true, ...options};
+  return await get(url, options);
+}
+
+export async function postJSON(url, body, options) {
+  options = {body, json: true, ...options};
+  return await post(url, options);
+}
+
+export async function putJSON(url, body, options) {
+  options = {body, json: true, ...options};
+  return await put(url, options);
+}
+
+export async function deleteJSON(url, options) {
+  options = {json: true, ...options};
+  return await del(url, options);
 }
 
 /* eslint-disable complexity */
@@ -120,7 +139,7 @@ export async function fetch(url, options = {}) {
 
   let expectedStatus = options.expectedStatus;
   if (expectedStatus === undefined) {
-    expectedStatus = [];
+    expectedStatus = [200];
   } else if (typeof expectedStatus === 'number') {
     expectedStatus = [expectedStatus];
   } else if (!Array.isArray(expectedStatus)) {
