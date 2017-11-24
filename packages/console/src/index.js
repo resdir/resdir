@@ -177,7 +177,7 @@ export function getErrorSymbol() {
 }
 
 export function getProgressSymbol() {
-  return emojisAreSupported() ? '🏃' : dim('⠒');
+  return emojisAreSupported() ? '🏃' : yellow('⠒');
 }
 
 export function getProgressSpinner() {
@@ -186,25 +186,29 @@ export function getProgressSpinner() {
     {interval: 140, frames: ['🚶', '🏃']} :
     {
       interval: 80,
-      frames: ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'].map(char => dim(char))
+      frames: ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'].map(char => yellow(char))
     };
 }
 
-let _emojisAreSupported;
+// let _emojisAreSupported;
 export function emojisAreSupported() {
-  // TODO: Support more terminals
-  if (_emojisAreSupported === undefined) {
-    if (
-      process.env.TERM_PROGRAM === 'Apple_Terminal' &&
-      Number(process.env.TERM_PROGRAM_VERSION) >= 400
-    ) {
-      // macOS High Sierra Terminal
-      _emojisAreSupported = true;
-    } else {
-      _emojisAreSupported = false;
-    }
-  }
-  return _emojisAreSupported;
+  return false;
+  // Disabled because there is no way to be sure that emojis are correctly supported and rendered
+  // For example:
+  // - With the Menlo font, the ⚡ is dispayed in black and white,
+  // - Since Apple Terminal 2.8 (400), emojis consumes two columns instead of one
+  // if (_emojisAreSupported === undefined) {
+  //   if (
+  //     process.env.TERM_PROGRAM === 'Apple_Terminal' &&
+  //     Number(process.env.TERM_PROGRAM_VERSION) >= 400
+  //   ) {
+  //     // macOS High Sierra Terminal
+  //     _emojisAreSupported = true;
+  //   } else {
+  //     _emojisAreSupported = false;
+  //   }
+  // }
+  // return _emojisAreSupported;
 }
 
 class AbstractTaskView {
