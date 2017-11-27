@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Style} from 'radium';
-import {RadiumStarter} from 'radium-starter';
+import {withRadiumStarter} from 'radium-starter';
 
 import Markdown from '../markdown';
 
@@ -103,30 +103,28 @@ Thanks to the object-oriented nature of @resources, everything is highly configu
 You can add properties or overload methods, compose rich @resources by aggregating several sub-@resources together, create custom @resources by inheriting from existing ones, etc.
 `;
 
-@RadiumStarter
+@withRadiumStarter
 export class Intro extends React.Component {
   static propTypes = {
-    style: PropTypes.object
+    style: PropTypes.object,
+    theme: PropTypes.object.isRequired
   };
 
   render() {
-    const t = this.theme;
-    // const s = this.styles;
+    const {style, theme: t} = this.props;
 
     return (
       <div
         id="intro"
-        style={[
-          this.props.style,
-          {
-            display: 'flex',
-            alignItems: 'baseline',
-            padding: '4.5rem 1.5rem',
-            [`@media (max-width: ${t.mediumBreakpointMinusOne})`]: {
-              flexDirection: 'column'
-            }
+        style={{
+          display: 'flex',
+          alignItems: 'baseline',
+          padding: '4.5rem 1.5rem',
+          ...style,
+          [`@media (max-width: ${t.mediumBreakpointMinusOne})`]: {
+            flexDirection: 'column'
           }
-        ]}
+        }}
       >
         <div className="intro-main" style={{flex: 2}}>
           <Style scopeSelector=".intro-main" rules={{h3: {color: t.accentColor}}} />

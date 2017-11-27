@@ -1,28 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RadiumStarter, Button} from 'radium-starter';
+import {withRadiumStarter, Button} from 'radium-starter';
 
-@RadiumStarter
+@withRadiumStarter
 export class Action extends React.Component {
   static propTypes = {
-    style: PropTypes.object
+    style: PropTypes.object,
+    styles: PropTypes.object.isRequired
   };
 
   render() {
-    // const t = this.theme;
-    const s = this.styles;
+    const {style, styles: s} = this.props;
 
     return (
       <div
-        style={[
-          this.props.style,
-          {
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: '4.5rem 1rem 5.5rem 1rem'
-          }
-        ]}
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          padding: '4.5rem 1rem 5.5rem 1rem',
+          ...style
+        }}
       >
         <h3
           style={{

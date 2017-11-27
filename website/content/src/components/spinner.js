@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RadiumStarter} from 'radium-starter';
+import {withRadiumStarter} from 'radium-starter';
 import MDSpinner from 'react-md-spinner';
 
 const DELAY = 500;
 
-@RadiumStarter
+@withRadiumStarter
 class Spinner extends React.Component {
   static propTypes = {
-    size: PropTypes.number
+    size: PropTypes.number,
+    theme: PropTypes.object.isRequired
   };
 
   state = {
@@ -29,7 +30,7 @@ class Spinner extends React.Component {
   }
 
   render() {
-    const t = this.theme;
+    const {size, theme: t} = this.props;
 
     if (!this.state.isVisible) {
       return false;
@@ -37,7 +38,7 @@ class Spinner extends React.Component {
 
     return (
       <MDSpinner
-        size={this.props.size}
+        size={size}
         color1={t.extraColor1}
         color2={t.accentColor}
         color3={t.extraColor2}

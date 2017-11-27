@@ -9,7 +9,7 @@
       "lodash": "^4.17.4",
       "prop-types": "^15.6.0",
       "radium": "^0.19.6",
-      "radium-starter": "^0.9.10",
+      "radium-starter": "^0.9.13",
       "react-lowlight": "^1.1.1",
       "react-md-spinner": "^0.2.5",
       "react-router-dom": "^4.2.2",
@@ -22,11 +22,7 @@
   },
   "fileWatcher": {
     "@import": "tool/file-watcher",
-    "files": [
-      "./index.html",
-      "./src/**",
-      "./images/**"
-    ],
+    "files": ["./index.html", "./src/**", "./images/**"],
     "onFileModified": {
       "@run": "../ builder run",
       "@after": "tool/notifier notify 'Build completed'"

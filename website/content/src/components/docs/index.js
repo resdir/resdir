@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RadiumStarter} from 'radium-starter';
+import {withRadiumStarter} from 'radium-starter';
 import {withRouter} from 'react-router';
 import {getJSON, get} from '@resdir/http-client';
 // import sleep from 'sleep-promise';
 
 import Layout from '../layout';
-import {ErrorBoundary, errorBoundary} from '../error-boundary';
+import {withErrorBoundary, catchErrors} from '../error-boundary';
 import Loading from '../loading';
 import NotFound from '../not-found';
 import {NavRoot, NavSection, NavItem} from './nav';
@@ -17,12 +17,14 @@ const DOCS_INDEX_PATH = 'index.json';
 const CHAPTER_FILE_EXTENSION = '.md';
 
 @withRouter
-@ErrorBoundary
-@RadiumStarter
+@withErrorBoundary
+@withRadiumStarter
 export class Docs extends React.Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
+    styles: PropTypes.object.isRequired
   };
 
   state = {
@@ -41,8 +43,9 @@ export class Docs extends React.Component {
     }
   }
 
-  @errorBoundary
+  @catchErrors
   async load() {
+    // await sleep(3000);
     const contents = await this._loadContents();
     this.setState({contents}, () => this.loadChapter(this.props.location.pathname));
   }
@@ -72,7 +75,7 @@ export class Docs extends React.Component {
     return contents;
   }
 
-  @errorBoundary
+  @catchErrors
   async loadChapter(url) {
     const chapter = this._findChapter(url);
     if (chapter && !chapter.text) {
@@ -93,8 +96,7 @@ export class Docs extends React.Component {
   }
 
   render() {
-    const t = this.theme;
-    const s = this.styles;
+    const {theme: t, styles: s} = this.props;
 
     if (this.state.isLoading) {
       return <Loading />;
@@ -172,7 +174,7 @@ export class Contents extends React.Component {
   }
 }
 
-@RadiumStarter
+@withRadiumStarter
 export class Chapter extends React.Component {
   static propTypes = {
     style: PropTypes.object,

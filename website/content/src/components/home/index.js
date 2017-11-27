@@ -1,5 +1,6 @@
 import React from 'react';
-import {RadiumStarter} from 'radium-starter';
+import PropTypes from 'prop-types';
+import {withRadiumStarter} from 'radium-starter';
 
 import Header from '../header';
 import Hero from './hero';
@@ -9,14 +10,18 @@ import Action from './action';
 import Footer from '../footer';
 import Link from '../link';
 import FullHeight from '../full-height';
-import ErrorBoundary from '../error-boundary';
+import withErrorBoundary from '../error-boundary';
 
-@ErrorBoundary
-@RadiumStarter
+@withErrorBoundary
+@withRadiumStarter
 export class Home extends React.Component {
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+    styles: PropTypes.object.isRequired
+  };
+
   render() {
-    const t = this.theme;
-    const s = this.styles;
+    const {theme: t, styles: s} = this.props;
 
     return (
       <div>

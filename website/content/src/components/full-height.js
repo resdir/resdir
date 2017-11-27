@@ -13,11 +13,11 @@ export class FullHeight extends React.Component {
       <div style={{display: 'flex'}}>
         <div
           style={{
-            ...this.props.style,
             flexGrow: 1,
             display: 'flex',
             flexDirection: 'column',
-            minHeight: '100vh'
+            minHeight: '100vh',
+            ...this.props.style
           }}
         >
           {this.props.children}

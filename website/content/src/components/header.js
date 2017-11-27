@@ -1,14 +1,19 @@
 import React from 'react';
-import {RadiumStarter} from 'radium-starter';
+import PropTypes from 'prop-types';
+import {withRadiumStarter} from 'radium-starter';
 
 import Logo from './logo';
 import Link from './link';
 
-@RadiumStarter
+@withRadiumStarter
 export class Header extends React.Component {
+  static propTypes = {
+    theme: PropTypes.object.isRequired,
+    styles: PropTypes.object.isRequired
+  };
+
   render() {
-    const t = this.theme;
-    const s = this.styles;
+    const {theme: t, styles: s} = this.props;
 
     const menuStyle = [s.unstyledList, s.noMargins];
     const menuItemStyle = [s.inlineBlock, {marginLeft: '1.3rem'}];

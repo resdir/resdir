@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RadiumStarter} from 'radium-starter';
+import {withRadiumStarter} from 'radium-starter';
 
 import Link from '../link';
 import Terminal from './terminal';
@@ -26,25 +26,26 @@ const COMMAND_EXAMPLES = [
   'run @registry community create'
 ];
 
-@RadiumStarter
+@withRadiumStarter
 export class Hero extends React.Component {
   static propTypes = {
-    style: PropTypes.object
+    style: PropTypes.object,
+    theme: PropTypes.object.isRequired,
+    styles: PropTypes.object.isRequired
   };
 
   render() {
-    const t = this.theme;
-    const s = this.styles;
+    const {style, theme: t, styles: s} = this.props;
 
     return (
       <div
         style={{
-          ...this.props.style,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          padding: '1.5rem 10px 0 10px'
+          padding: '1.5rem 10px 0 10px',
+          ...style
         }}
       >
         <h1 style={{textAlign: 'center'}}>Make software development fun&nbsp;again! 🎉</h1>

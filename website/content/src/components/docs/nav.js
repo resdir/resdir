@@ -1,60 +1,60 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RadiumStarter} from 'radium-starter';
+import {withRadiumStarter} from 'radium-starter';
 
 import Link from '../link';
 
-@RadiumStarter
+@withRadiumStarter
 export class NavRoot extends React.Component {
   static propTypes = {
     style: PropTypes.object,
+    styles: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired
   };
 
   render() {
-    const s = this.styles;
+    const {style, styles: s, children} = this.props;
 
     return (
-      <nav style={this.props.style}>
-        <ul style={{...s.unstyledList, ...s.noMargins}}>{this.props.children}</ul>
+      <nav style={style}>
+        <ul style={{...s.unstyledList, ...s.noMargins}}>{children}</ul>
       </nav>
     );
   }
 }
 
-@RadiumStarter
+@withRadiumStarter
 export class NavSection extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
+    theme: PropTypes.object.isRequired,
+    styles: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired
   };
 
   render() {
-    const t = this.theme;
-    const s = this.styles;
+    const {title, theme: t, styles: s, children} = this.props;
 
     return (
       <li style={{marginBottom: '.5rem'}}>
-        <span style={{color: t.primaryTextColor, fontWeight: 'bold'}}>{this.props.title}</span>
-        <ul style={{...s.unstyledList, ...s.noMargins, marginLeft: '1rem'}}>
-          {this.props.children}
-        </ul>
+        <span style={{color: t.primaryTextColor, fontWeight: 'bold'}}>{title}</span>
+        <ul style={{...s.unstyledList, ...s.noMargins, marginLeft: '1rem'}}>{children}</ul>
       </li>
     );
   }
 }
 
-@RadiumStarter
+@withRadiumStarter
 export class NavItem extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,
-    isActive: PropTypes.bool
+    isActive: PropTypes.bool,
+    theme: PropTypes.object.isRequired
   };
 
   render() {
-    const t = this.theme;
-    const {title, url, isActive} = this.props;
+    const {title, url, isActive, theme: t} = this.props;
     const style = isActive ?
       {color: t.headingsColor, fontWeight: t.headingsFontWeight} :
       {color: t.primaryTextColor};

@@ -15,7 +15,7 @@ export class Layout extends React.Component {
     return (
       <FullHeight>
         <Header />
-        <div style={{...this.props.style, flexGrow: 1, display: 'flex', flexDirection: 'column'}}>
+        <div style={{flexGrow: 1, display: 'flex', flexDirection: 'column', ...this.props.style}}>
           {this.props.children}
         </div>
         <Footer />

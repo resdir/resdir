@@ -1,19 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RadiumStarter} from 'radium-starter';
+import {withRadiumStarter} from 'radium-starter';
 import {postJSON} from '@resdir/http-client';
 import URLSearchParams from 'url-search-params';
 
 import Logo from './logo';
 import FullHeight from './full-height';
-import {ErrorBoundary, errorBoundary} from './error-boundary';
+import {withErrorBoundary, catchErrors} from './error-boundary';
 
-@ErrorBoundary
-@RadiumStarter
+@withErrorBoundary
+@withRadiumStarter
 export class ConnectGitHubAccount extends React.Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired,
+    styles: PropTypes.object.isRequired
   };
 
   state = {
@@ -31,7 +32,7 @@ export class ConnectGitHubAccount extends React.Component {
     }
   }
 
-  @errorBoundary
+  @catchErrors
   async startConnectGitHubAccount(token) {
     this.setState({message: 'Redirecting to GitHub...'});
 
@@ -44,7 +45,7 @@ export class ConnectGitHubAccount extends React.Component {
     window.location = gitHubStartSignInURL;
   }
 
-  @errorBoundary
+  @catchErrors
   async completeConnectGitHubAccount(token, gitHubCode) {
     this.setState({message: 'Completing GitHub connection...'});
 
@@ -61,7 +62,7 @@ export class ConnectGitHubAccount extends React.Component {
   }
 
   render() {
-    const s = this.styles;
+    const {styles: s} = this.props;
 
     const {message, info} = this.state;
 

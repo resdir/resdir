@@ -1,24 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RadiumStarter} from 'radium-starter';
+import {withRadiumStarter} from 'radium-starter';
 
 import Layout from './layout';
 
-@RadiumStarter
+@withRadiumStarter
 export class Sorry extends React.Component {
   static propTypes = {
-    message: PropTypes.string.isRequired
+    message: PropTypes.string.isRequired,
+    styles: PropTypes.object.isRequired
   };
 
   render() {
-    const s = this.styles;
+    const {message, styles: s} = this.props;
 
     return (
       <Layout style={{justifyContent: 'center', alignItems: 'center', padding: '1.5rem 1.5rem'}}>
         <h1>Sorry! 🙇</h1>
-        <h3 style={{...s.subheading, maxWidth: '600px', textAlign: 'center'}}>
-          {this.props.message}
-        </h3>
+        <h3 style={{...s.subheading, maxWidth: '600px', textAlign: 'center'}}>{message}</h3>
       </Layout>
     );
   }

@@ -1,14 +1,19 @@
 import React from 'react';
-import {RadiumStarter} from 'radium-starter';
+import PropTypes from 'prop-types';
+import {withRadiumStarter} from 'radium-starter';
 
 import Layout from './layout';
-import ErrorBoundary from './error-boundary';
+import withErrorBoundary from './error-boundary';
 
-@ErrorBoundary
-@RadiumStarter
+@withErrorBoundary
+@withRadiumStarter
 export class Contact extends React.Component {
+  static propTypes = {
+    styles: PropTypes.object.isRequired
+  };
+
   render() {
-    const s = this.styles;
+    const {styles: s} = this.props;
 
     return (
       <Layout style={{justifyContent: 'center', alignItems: 'center'}}>

@@ -1,13 +1,14 @@
 import shuffle from 'lodash/shuffle';
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RadiumStarter} from 'radium-starter';
+import {withRadiumStarter} from 'radium-starter';
 
-@RadiumStarter
+@withRadiumStarter
 export class Terminal extends React.Component {
   static propTypes = {
     commands: PropTypes.arrayOf(PropTypes.string).isRequired,
-    style: PropTypes.object
+    style: PropTypes.object,
+    theme: PropTypes.object.isRequired
   };
 
   shuffledCommands = shuffle(this.props.commands);
@@ -58,7 +59,7 @@ export class Terminal extends React.Component {
   }
 
   render() {
-    const t = this.theme;
+    const {style, theme: t} = this.props;
 
     return (
       <div
@@ -79,7 +80,7 @@ export class Terminal extends React.Component {
             padding: '7px',
             borderRadius: '7px'
           },
-          ...this.props.style
+          ...style
         }}
       >
         <div

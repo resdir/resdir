@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import Sorry from './sorry';
 
-export function ErrorBoundary(WrappedComponent) {
+export function withErrorBoundary(WrappedComponent) {
   return class ErrorBoundary extends React.Component {
     static propTypes = {
       children: PropTypes.node.isRequired
@@ -30,7 +30,7 @@ export function ErrorBoundary(WrappedComponent) {
   };
 }
 
-export function errorBoundary(target, name, descriptor) {
+export function catchErrors(target, name, descriptor) {
   const original = descriptor.value;
   descriptor.value = async function (...args) {
     try {
@@ -43,4 +43,4 @@ export function errorBoundary(target, name, descriptor) {
   };
 }
 
-export default ErrorBoundary;
+export default withErrorBoundary;

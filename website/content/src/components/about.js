@@ -1,15 +1,20 @@
 import React from 'react';
-import {RadiumStarter} from 'radium-starter';
+import PropTypes from 'prop-types';
+import {withRadiumStarter} from 'radium-starter';
 
 import Layout from './layout';
 import Link from './link';
-import ErrorBoundary from './error-boundary';
+import withErrorBoundary from './error-boundary';
 
-@ErrorBoundary
-@RadiumStarter
+@withErrorBoundary
+@withRadiumStarter
 export class About extends React.Component {
+  static propTypes = {
+    theme: PropTypes.object.isRequired
+  };
+
   render() {
-    const t = this.theme;
+    const {theme: t} = this.props;
 
     return (
       <Layout style={{justifyContent: 'center', alignItems: 'center', padding: '1.5rem 1.5rem'}}>

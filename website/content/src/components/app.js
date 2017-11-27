@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {Style} from 'radium';
-import {RadiumStarterRoot, RadiumStarter} from 'radium-starter';
+import {RadiumStarterRoot, withRadiumStarter} from 'radium-starter';
 import Color from 'color';
 
 import {highlightJSStyles} from './code';
@@ -96,16 +96,19 @@ export class App extends React.Component {
   }
 }
 
-@RadiumStarter
+@withRadiumStarter
 class Main extends React.Component {
   static propTypes = {
+    theme: PropTypes.object.isRequired,
     children: PropTypes.node.isRequired
   };
 
   render() {
     return (
       <div>
-        <Style rules={{...highlightJSStyles(this.theme), ...globalStyles(this.theme)}} />
+        <Style
+          rules={{...highlightJSStyles(this.props.theme), ...globalStyles(this.props.theme)}}
+        />
         <Root />
       </div>
     );

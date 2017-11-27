@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {RadiumStarter} from 'radium-starter';
+import {withRadiumStarter} from 'radium-starter';
 
 import Link from './link';
 
-@RadiumStarter
+@withRadiumStarter
 export class Footer extends React.Component {
   static propTypes = {
-    style: PropTypes.object
+    style: PropTypes.object,
+    theme: PropTypes.object.isRequired,
+    styles: PropTypes.object.isRequired
   };
 
   render() {
-    const t = this.theme;
-    const s = this.styles;
+    const {style, theme: t, styles: s} = this.props;
 
     const columnGapStyle = {
       width: '6rem',
@@ -25,14 +26,12 @@ export class Footer extends React.Component {
     return (
       <footer style={{padding: '3rem 0', backgroundColor: t.screenColor}}>
         <div
-          style={[
-            this.props.style,
-            {
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center'
-            }
-          ]}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            ...style
+          }}
         >
           <div>
             <ul style={[menuStyle]}>
