@@ -25,13 +25,13 @@ export async function getJSON(url, options) {
 }
 
 export async function postJSON(url, body, options) {
-  options = {body, json: true, ...options};
-  return await post(url, options);
+  options = {json: true, ...options};
+  return await post(url, body, options);
 }
 
 export async function putJSON(url, body, options) {
-  options = {body, json: true, ...options};
-  return await put(url, options);
+  options = {json: true, ...options};
+  return await put(url, body, options);
 }
 
 export async function deleteJSON(url, options) {
