@@ -1,0 +1,15 @@
+{
+  "@import": "aws/website",
+  "customErrors": [
+    {
+      "errorCode": 404,
+      "responseCode": 200,
+      "responsePage": "index.html"
+    }
+  ],
+  "immutableFiles": ["**/*.immutable.*"],
+  "builder": {
+    "@import": "./builder",
+    "sourceDirectory": "./content"
+  }
+}
