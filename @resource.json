@@ -4,6 +4,7 @@
     "@listen": "@test",
     "@run": [
       "./packages/util @test",
+      "./packages/resource-key @test",
       "./packages/version @test",
       "./packages/version-range @test",
       "./resources/js/npm-dependencies @test",

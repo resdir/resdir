@@ -1,0 +1,20 @@
+{
+  "@import": "js/npm-package",
+  "description": "Useful functions to handle Resource's keys",
+  "main": "./dist/index.js",
+  "version": "0.1.0",
+  "dependencies": {
+    "@resdir/console": "^0.1.20"
+  },
+  "name": "@resdir/resource-key",
+  "files": ["./dist"],
+  "@unpublishable": {
+    "transpiler": {
+      "@import": "1place/esnext-transpiler"
+    },
+    "tests": {
+      "@import": "1place/esnext-jest",
+      "@directory": "./tests"
+    }
+  }
+}
