@@ -13,6 +13,10 @@ export function ErrorBoundary(WrappedComponent) {
       caughtError: undefined
     };
 
+    componentWillReceiveProps() {
+      this.setState({caughtError: undefined});
+    }
+
     componentDidCatch(error, _info) {
       this.setState({caughtError: error});
     }

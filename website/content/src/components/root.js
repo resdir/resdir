@@ -6,8 +6,10 @@ import Home from './home';
 import Docs from './docs';
 import About from './about';
 import Contact from './contact';
+import Terms from './terms';
+import Privacy from './privacy';
 import ConnectGitHubAccount from './connect-github-account';
-import Sorry from './sorry';
+import NotFound from './not-found';
 
 export class Root extends React.Component {
   render() {
@@ -18,23 +20,11 @@ export class Root extends React.Component {
             <Route exact path="/" component={Home} />
             <Route path="/docs" component={Docs} />
             <Route path="/about" component={About} />
-            <Route
-              path="/terms"
-              component={() => (
-                <Sorry message="Resdir is still in an early stage of development, and legal issues have yet to be
-                resolved." />
-              )}
-            />
-            <Route
-              path="/privacy"
-              component={() => (
-                <Sorry message="Resdir is still in an early stage of development, and privacy issues have yet to be
-              resolved." />
-              )}
-            />
+            <Route path="/terms" component={Terms} />
+            <Route path="/privacy" component={Privacy} />
             <Route path="/contact" component={Contact} />
             <Route path="/connect-github-account/:token" component={ConnectGitHubAccount} />
-            <Route component={() => <Sorry message="There's nothing at this address." />} />
+            <Route component={NotFound} />
           </Switch>
         </ScrollToTop>
       </Router>

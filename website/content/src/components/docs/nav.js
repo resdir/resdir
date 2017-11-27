@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {RadiumStarter} from 'radium-starter';
 
+import Link from '../link';
+
 @RadiumStarter
 export class NavRoot extends React.Component {
   static propTypes = {
@@ -33,9 +35,7 @@ export class NavSection extends React.Component {
 
     return (
       <li style={{marginBottom: '.5rem'}}>
-        <span style={{color: t.headingsColor, fontWeight: t.headingsFontWeight}}>
-          {this.props.title}
-        </span>
+        <span style={{color: t.primaryTextColor, fontWeight: 'bold'}}>{this.props.title}</span>
         <ul style={{...s.unstyledList, ...s.noMargins, marginLeft: '1rem'}}>
           {this.props.children}
         </ul>
@@ -47,10 +47,23 @@ export class NavSection extends React.Component {
 @RadiumStarter
 export class NavItem extends React.Component {
   static propTypes = {
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    isActive: PropTypes.bool
   };
 
   render() {
-    return <li>{this.props.title}</li>;
+    const t = this.theme;
+    const {title, url, isActive} = this.props;
+    const style = isActive ?
+      {color: t.headingsColor, fontWeight: t.headingsFontWeight} :
+      {color: t.primaryTextColor};
+    return (
+      <li>
+        <Link to={url} style={style}>
+          {title}
+        </Link>
+      </li>
+    );
   }
 }

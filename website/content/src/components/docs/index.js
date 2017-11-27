@@ -1,21 +1,30 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {RadiumStarter} from 'radium-starter';
+import {withRouter} from 'react-router';
 import {getJSON, get} from '@resdir/http-client';
 // import sleep from 'sleep-promise';
 
 import Layout from '../layout';
 import {ErrorBoundary, errorBoundary} from '../error-boundary';
 import Loading from '../loading';
+import NotFound from '../not-found';
 import {NavRoot, NavSection, NavItem} from './nav';
 import Markdown from '../markdown';
 
-const DOCS_BASE_URL = 'https://raw.githubusercontent.com/resdir/docs/master/content/';
+const DOCS_BASE_URL = 'https://raw.githubusercontent.com/resdir/resdir/master/docs/content/';
 const DOCS_INDEX_PATH = 'index.json';
+const CHAPTER_FILE_EXTENSION = '.md';
 
+@withRouter
 @ErrorBoundary
 @RadiumStarter
 export class Docs extends React.Component {
+  static propTypes = {
+    match: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired
+  };
+
   state = {
     contents: undefined,
     chapter: undefined,
@@ -26,12 +35,16 @@ export class Docs extends React.Component {
     this.load();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.location.pathname !== this.props.location.pathname) {
+      this.loadChapter(nextProps.location.pathname);
+    }
+  }
+
   @errorBoundary
   async load() {
     const contents = await this._loadContents();
-    const book = contents.books[0];
-    const chapter = await this._loadChapter(book.chapters[0].path);
-    this.setState({contents, chapter, isLoading: false});
+    this.setState({contents}, () => this.loadChapter(this.props.location.pathname));
   }
 
   async _loadContents() {
@@ -40,13 +53,43 @@ export class Docs extends React.Component {
     if (typeof contents === 'string') {
       contents = JSON.parse(contents);
     }
+
+    const rootURL = this.props.match.path;
+    let firstChapter = true;
+    for (const book of contents.books) {
+      for (const chapter of book.chapters) {
+        chapter.url = rootURL + '/' + chapter.path;
+        chapter.url = chapter.url.slice(0, -CHAPTER_FILE_EXTENSION.length);
+        chapter.alternateURLs = [];
+        if (firstChapter) {
+          chapter.alternateURLs.push(rootURL);
+          chapter.alternateURLs.push(rootURL + '/');
+          firstChapter = false;
+        }
+      }
+    }
+
     return contents;
   }
 
-  async _loadChapter(path) {
-    const url = DOCS_BASE_URL + path;
-    const {body: text} = await get(url);
-    return {text};
+  @errorBoundary
+  async loadChapter(url) {
+    const chapter = this._findChapter(url);
+    if (chapter && !chapter.text) {
+      const {body: text} = await get(DOCS_BASE_URL + chapter.path);
+      chapter.text = text;
+    }
+    this.setState({chapter, isLoading: false});
+  }
+
+  _findChapter(url) {
+    for (const book of this.state.contents.books) {
+      for (const chapter of book.chapters) {
+        if (chapter.url === url || chapter.alternateURLs.includes(url)) {
+          return chapter;
+        }
+      }
+    }
   }
 
   render() {
@@ -55,6 +98,10 @@ export class Docs extends React.Component {
 
     if (this.state.isLoading) {
       return <Loading />;
+    }
+
+    if (this.state.contents && !this.state.chapter) {
+      return <NotFound />;
     }
 
     return (
@@ -86,23 +133,38 @@ export class Docs extends React.Component {
   }
 }
 
+@withRouter
 export class Contents extends React.Component {
   static propTypes = {
     style: PropTypes.object,
-    data: PropTypes.object
+    data: PropTypes.object,
+    location: PropTypes.object.isRequired
   };
 
   render() {
-    const {data} = this.props;
+    const {style, data, location} = this.props;
+
     if (!data) {
       return null;
     }
 
     return (
-      <NavRoot style={this.props.style}>
+      <NavRoot style={style}>
         {data.books.map((book, index) => (
           <NavSection key={index} title={book.title}>
-            {book.chapters.map((chapter, index) => <NavItem key={index} title={chapter.title} />)}
+            {book.chapters.map((chapter, index) => {
+              return (
+                <NavItem
+                  key={index}
+                  title={chapter.title}
+                  url={chapter.url}
+                  isActive={
+                    chapter.url === location.pathname ||
+                    chapter.alternateURLs.includes(location.pathname)
+                  }
+                />
+              );
+            })}
           </NavSection>
         ))}
       </NavRoot>
