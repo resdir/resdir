@@ -5,7 +5,7 @@
     "./"
   ],
   "id": "tool/notifier",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "files": [
     "./dist"
   ],
@@ -24,7 +24,7 @@
     "@implementation": "./dist",
     "notify": {
       "@type": "method",
-      "@parameters": {
+      "@input": {
         "title": "⚡run",
         "message": {
           "@type": "string",

@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "files": [
     "bundle.js"
   ],
@@ -61,7 +61,7 @@
     "@implementation": "./bundle.js",
     "add": {
       "@type": "method",
-      "@parameters": {
+      "@input": {
         "specifier": {
           "@type": "string",
           "@position": 0
@@ -87,7 +87,7 @@
       "@aliases": [
         "rm"
       ],
-      "@parameters": {
+      "@input": {
         "name": {
           "@type": "string",
           "@position": 0
@@ -103,7 +103,7 @@
     },
     "includes": {
       "@type": "method",
-      "@parameters": {
+      "@input": {
         "name": {
           "@type": "string",
           "@position": 0

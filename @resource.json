@@ -29,7 +29,8 @@
       "./resources/tool/notifier publish --patch",
       "./resources/1place/esnext-transpiler publish --patch",
       "./resources/1place/jest publish --patch",
-      "./resources/1place/esnext-jest publish --patch"
+      "./resources/1place/esnext-jest publish --patch",
+      "./resources/aws/website publish --patch"
     ]
   }
 }

@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/resource",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "files": [
     "./dist"
   ],
@@ -44,7 +44,7 @@
       },
       "validate": {
         "@type": "method",
-        "@parameters": {
+        "@input": {
           "throwIfInvalid": true
         }
       }
@@ -54,13 +54,13 @@
       "@implementation": "./dist/version-property.js",
       "validate": {
         "@type": "method",
-        "@parameters": {
+        "@input": {
           "throwIfInvalid": true
         }
       },
       "bump": {
         "@type": "method",
-        "@parameters": {
+        "@input": {
           "major": false,
           "minor": false,
           "patch": false
@@ -87,7 +87,7 @@
     },
     "publish": {
       "@type": "method",
-      "@parameters": {
+      "@input": {
         "major": false,
         "minor": false,
         "patch": false
@@ -95,7 +95,7 @@
     },
     "initialize": {
       "@type": "method",
-      "@parameters": {
+      "@input": {
         "id": {
           "@type": "string",
           "@position": 0

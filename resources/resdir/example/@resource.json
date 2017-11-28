@@ -3,12 +3,9 @@
     "resdir/resource",
     "js/resource"
   ],
-  "@parameters": {
-    "color": "green"
-  },
   "@implementation": "./dist",
   "id": "resdir/example",
-  "version": "0.3.20",
+  "version": "0.3.21",
   "files": [
     "./dist"
   ],
@@ -20,6 +17,9 @@
   },
   "hello": {
     "@type": "method",
+    "@input": {
+      "color": "green"
+    },
     "@listen": "hi"
   },
   "@unpublishable": {

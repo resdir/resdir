@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "tool/file-watcher",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "files": [
     "./dist"
   ],
@@ -26,7 +26,7 @@
     },
     "onFileModified": {
       "@type": "method",
-      "@parameters": {
+      "@input": {
         "file": {
           "@type": "string"
         }
@@ -34,12 +34,12 @@
     },
     "_handleFileModifiedEvent": {
       "@type": "method",
-      "@parameters": {
+      "@hidden": true,
+      "@input": {
         "file": {
           "@type": "string"
         }
       },
-      "@hidden": true,
       "@listen": "@fileModified"
     }
   }

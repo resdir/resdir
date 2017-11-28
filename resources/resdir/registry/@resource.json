@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/registry",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "files": [
     "./dist"
   ],
@@ -24,7 +24,7 @@
     "@implementation": "./dist",
     "signUp": {
       "@type": "method",
-      "@parameters": {
+      "@input": {
         "email": {
           "@type": "string",
           "@position": 0
@@ -33,7 +33,7 @@
     },
     "signIn": {
       "@type": "method",
-      "@parameters": {
+      "@input": {
         "email": {
           "@type": "string",
           "@position": 0
@@ -72,7 +72,7 @@
         "@implementation": "./dist/user-namespace",
         "add": {
           "@type": "method",
-          "@parameters": {
+          "@input": {
             "namespace": {
               "@type": "string",
               "@aliases": [
@@ -111,7 +111,7 @@
       "@implementation": "./dist/organizations",
       "create": {
         "@type": "method",
-        "@parameters": {
+        "@input": {
           "namespace": {
             "@type": "string",
             "@aliases": [
@@ -123,7 +123,7 @@
       },
       "delete": {
         "@type": "method",
-        "@parameters": {
+        "@input": {
           "namespace": {
             "@type": "string",
             "@aliases": [
@@ -135,7 +135,7 @@
       },
       "addMember": {
         "@type": "method",
-        "@parameters": {
+        "@input": {
           "organizationNamespace": {
             "@type": "string",
             "@aliases": [
@@ -158,7 +158,7 @@
         "@aliases": [
           "rmMember"
         ],
-        "@parameters": {
+        "@input": {
           "organizationNamespace": {
             "@type": "string",
             "@aliases": [
@@ -184,7 +184,7 @@
       "@implementation": "./dist/communities",
       "create": {
         "@type": "method",
-        "@parameters": {
+        "@input": {
           "namespace": {
             "@type": "string",
             "@aliases": [
@@ -196,7 +196,7 @@
       },
       "delete": {
         "@type": "method",
-        "@parameters": {
+        "@input": {
           "namespace": {
             "@type": "string",
             "@aliases": [
