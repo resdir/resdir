@@ -37,4 +37,12 @@ describe('resdir/resource', () => {
     expect(await res.$getChild('version').validate({throwIfInvalid: false})).toBe(false);
     await expect(res.$getChild('version').validate()).rejects.toBeInstanceOf(Error);
   });
+
+  test('isPublic', async () => {
+    const res = await Resource.$import(RESOURCE_PATH);
+    expect(res.isPublic).toBe(false);
+
+    res.isPublic = true;
+    expect(res.isPublic).toBe(true);
+  });
 });

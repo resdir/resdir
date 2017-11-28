@@ -1,7 +1,8 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.29",
+  "version": "0.1.30",
+  "isPublic": true,
   "files": [
     "bundle.js"
   ],

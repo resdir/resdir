@@ -1,7 +1,8 @@
 {
   "@import": "resdir/resource",
   "id": "1place/esnext-transpiler",
-  "version": "0.1.10",
+  "version": "0.1.11",
+  "isPublic": true,
   "@export": {
     "@import": "js/esnext-transpiler",
     "targets": {

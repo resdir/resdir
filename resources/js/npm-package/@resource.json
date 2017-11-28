@@ -4,7 +4,8 @@
     "js/resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.27",
+  "version": "0.1.28",
+  "isPublic": true,
   "files": [
     "./dist"
   ],

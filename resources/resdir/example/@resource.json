@@ -5,7 +5,8 @@
   ],
   "@implementation": "./dist",
   "id": "resdir/example",
-  "version": "0.3.21",
+  "version": "0.3.29",
+  "isPublic": true,
   "files": [
     "./dist"
   ],
