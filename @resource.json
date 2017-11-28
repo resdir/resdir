@@ -5,8 +5,11 @@
     "@run": [
       "./packages/util @test",
       "./packages/resource-key @test",
+      "./packages/resource-identifier @test",
+      "./packages/resource-specifier @test",
       "./packages/version @test",
       "./packages/version-range @test",
+      "./resources/resdir/resource @test",
       "./resources/js/npm-dependencies @test",
       "./resources/js/npm-package @test",
       "./resources/js/esnext-transpiler @test"

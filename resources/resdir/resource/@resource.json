@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/resource",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "files": [
     "./dist"
   ],
@@ -21,17 +21,43 @@
   "@unpublishable": {
     "transpiler": {
       "@import": "1place/esnext-transpiler"
+    },
+    "tests": {
+      "@import": "1place/esnext-jest",
+      "@directory": "./tests",
+      "dependencies": {
+        "run-core": "^0.10.0"
+      }
     }
   },
   "@export": {
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist",
     "id": {
-      "@type": "string"
+      "@type": "string",
+      "@implementation": "./dist/id-property.js",
+      "getNamespace": {
+        "@type": "method"
+      },
+      "getName": {
+        "@type": "method"
+      },
+      "validate": {
+        "@type": "method",
+        "@parameters": {
+          "throwIfInvalid": true
+        }
+      }
     },
     "version": {
       "@type": "string",
       "@implementation": "./dist/version-property.js",
+      "validate": {
+        "@type": "method",
+        "@parameters": {
+          "throwIfInvalid": true
+        }
+      },
       "bump": {
         "@type": "method",
         "@parameters": {

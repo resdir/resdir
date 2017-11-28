@@ -1,8 +1,12 @@
-import Version from '@resdir/version';
+import Version, {validateVersion} from '@resdir/version';
 import {task, formatString, formatCode} from '@resdir/console';
 
 export default base =>
   class VersionProperty extends base {
+    async validate({throwIfInvalid}) {
+      return validateVersion(this.$value, {throwIfInvalid});
+    }
+
     async bump({major, minor, patch}, {verbose, quiet, debug}) {
       let part;
       if (major) {
