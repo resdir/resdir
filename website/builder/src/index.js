@@ -107,6 +107,7 @@ export default base =>
 
             const rollupConfig = {
               input: join(this.getSourceDirectory(), 'src', 'index.js'),
+              cache: global.resdirWebsiteBuilderRollupCache,
               external: ['react', 'react-dom', 'prop-types'],
               plugins: [
                 replace({
@@ -195,6 +196,8 @@ export default base =>
             await writeFileSync(join(this.getDestinationDirectory(), filename), result.code);
 
             codeLength = result.code.length;
+
+            global.resdirWebsiteBuilderRollupCache = bundle;
           } finally {
             if (this.optimize) {
               await remove(join(this.getSourceDirectory(), 'node_modules'));
