@@ -27,7 +27,7 @@ export function validateResourceSpecifier(specifier) {
   parseResourceSpecifier(specifier);
 }
 
-export function formatResourceSpecifier({identifier, versionRange, location}) {
+export function stringifyResourceSpecifier({identifier, versionRange, location}) {
   if (location) {
     return location;
   }

@@ -1,7 +1,7 @@
 {
   "@import": "js/npm-package",
   "name": "@resdir/resource-specifier",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Useful functions to handle Resource's specifiers",
   "files": [
     "./dist"
