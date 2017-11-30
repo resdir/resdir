@@ -529,7 +529,7 @@ export class RegistryClient {
     while (!namespace) {
       emptyLine();
       namespace = await prompt(
-        `Choose a name for your personal namespace: ${formatExample('ltorvalds')}`
+        `Choose a name for your personal namespace: ${formatExample('aturing')}`
       );
       emptyLine();
     }
