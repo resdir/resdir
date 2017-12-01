@@ -1,3 +1,4 @@
+import {resolve, relative} from 'path';
 import {cyan, yellow, green, red, bold, underline, dim} from 'chalk';
 import ora from 'ora';
 import windowSize from 'window-size';
@@ -113,21 +114,40 @@ export async function confirm(message, options = {}) {
   return false;
 }
 
-export function formatString(string) {
-  return yellow('\'' + String(string) + '\'');
+export function formatString(string, {addQuotes = true} = {}) {
+  string = String(string);
+  if (addQuotes) {
+    string = '\'' + string + '\'';
+  }
+  return yellow(string);
 }
 
 export function formatURL(url) {
   return cyan.underline(String(url));
 }
 
-export function formatPath(path) {
-  return yellow('\'' + String(path) + '\'');
+export function formatPath(path = './', {addQuotes = true, baseDirectory, relativize} = {}) {
+  if (baseDirectory) {
+    path = resolve(baseDirectory, path);
+  }
+
+  if (relativize) {
+    path = relative(baseDirectory, path);
+    if (!path.startsWith('.')) {
+      path = './' + path;
+    }
+  }
+
+  if (addQuotes) {
+    path = '\'' + path + '\'';
+  }
+
+  return yellow(path);
 }
 
-export function formatCode(code, {addBacktick = true}) {
+export function formatCode(code, {addBackticks = true} = {}) {
   code = String(code);
-  if (addBacktick) {
+  if (addBackticks) {
     code = '`' + code + '`';
   }
   return cyan(code);
