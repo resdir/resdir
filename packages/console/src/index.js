@@ -1,9 +1,10 @@
-import {cyan, yellow, green, red, bold, dim} from 'chalk';
+import {cyan, yellow, green, red, bold, underline, dim} from 'chalk';
 import ora from 'ora';
 import windowSize from 'window-size';
 import sliceANSI from 'slice-ansi';
 import read from 'read';
 import wrapANSI from 'wrap-ansi';
+import stringWidth from 'string-width';
 
 export function print(message, {output = 'log'} = {}) {
   console[output](message);
@@ -124,12 +125,20 @@ export function formatPath(path) {
   return yellow('\'' + String(path) + '\'');
 }
 
-export function formatCode(code) {
-  return cyan('`' + String(code) + '`');
+export function formatCode(code, {addBacktick = true}) {
+  code = String(code);
+  if (addBacktick) {
+    code = '`' + code + '`';
+  }
+  return cyan(code);
 }
 
 export function formatBold(str) {
   return bold(String(str));
+}
+
+export function formatUnderline(str) {
+  return underline(String(str));
 }
 
 export function formatDim(str) {
@@ -142,6 +151,68 @@ export function formatExample(example) {
 
 export function formatText(text, {width = 80} = {}) {
   return wrapANSI(text, width);
+}
+
+export function formatTable(data = [], {allData = data, columnGap = 0, margins = {}} = {}) {
+  const columnWidths = [];
+  for (let row = 0; row < allData.length; row++) {
+    const rowData = allData[row];
+    for (let column = 0; column < rowData.length; column++) {
+      if (columnWidths.length < column + 1) {
+        columnWidths.push(0);
+      }
+      const cellData = _formatCellData(rowData[column]);
+      const cellWidth = stringWidth(cellData);
+      if (columnWidths[column] < cellWidth) {
+        columnWidths[column] = cellWidth;
+      }
+    }
+  }
+
+  let output = '';
+  for (let row = 0; row < data.length; row++) {
+    if (row > 0) {
+      output += '\n';
+    }
+
+    let rowOutput = ' '.repeat(margins.left || 0);
+    const rowData = data[row];
+    for (let column = 0; column < rowData.length; column++) {
+      if (column > 0) {
+        rowOutput += ' '.repeat(columnGap);
+      }
+      const columnWidth = columnWidths[column];
+      const cellData = _formatCellData(rowData[column]);
+      const cellWidth = stringWidth(cellData);
+      rowOutput += cellData + ' '.repeat(columnWidth - cellWidth);
+    }
+    rowOutput = adjustToWindowWidth(rowOutput);
+
+    output += rowOutput;
+  }
+
+  return output;
+}
+
+function _formatCellData(data) {
+  if (data === undefined) {
+    data = '';
+  } else {
+    data = String(data);
+  }
+  return data;
+}
+
+export function normalizeParagraph(text) {
+  if (!text) {
+    return '';
+  }
+  text = text.trim();
+  const lastChar = text.substr(-1);
+  if (lastChar !== '.' && lastChar !== '!' && lastChar !== '?') {
+    text += '.';
+  }
+  return text;
 }
 
 export function formatMessage(message, {info, status} = {}) {
