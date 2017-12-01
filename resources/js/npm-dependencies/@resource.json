@@ -3,27 +3,19 @@
   "id": "js/npm-dependencies",
   "version": "0.1.30",
   "isPublic": true,
-  "files": [
-    "bundle.js"
-  ],
+  "files": ["bundle.js"],
   "@unpublishable": {
     "builder": {
       "@implementation": "./dist/builder.js",
       "run": {
         "@type": "method",
-        "@run": [
-          "transpiler run",
-          "bundle"
-        ],
+        "@run": ["transpiler run", "bundle"],
         "@listen": "@build"
       },
       "transpiler": {
         "@import": "1place/esnext-transpiler",
         "run": {
-          "@unlisten": [
-            "@build",
-            "@fileModified"
-          ]
+          "@unlisten": ["@build", "@fileModified"]
         }
       },
       "bundle": {
@@ -31,9 +23,7 @@
       },
       "fileWatcher": {
         "@import": "tool/file-watcher",
-        "files": [
-          "./src/**"
-        ],
+        "files": ["./src/**"],
         "onFileModified": {
           "@run": "@parent run"
         }
@@ -52,12 +42,8 @@
   },
   "@export": {
     "@type": "object",
-    "@aliases": [
-      "dependencies",
-      "dependency",
-      "deps",
-      "dep"
-    ],
+    "@description": "npm package dependencies",
+    "@aliases": ["dependencies", "dependency", "deps", "dep"],
     "@runtime": "node#>=6.10.0",
     "@implementation": "./bundle.js",
     "add": {
@@ -68,15 +54,11 @@
           "@position": 0
         },
         "production": {
-          "@aliases": [
-            "prod"
-          ],
+          "@aliases": ["prod"],
           "@value": false
         },
         "development": {
-          "@aliases": [
-            "dev"
-          ],
+          "@aliases": ["dev"],
           "@value": false
         },
         "peer": false,
@@ -85,9 +67,7 @@
     },
     "remove": {
       "@type": "method",
-      "@aliases": [
-        "rm"
-      ],
+      "@aliases": ["rm"],
       "@input": {
         "name": {
           "@type": "string",
@@ -113,9 +93,7 @@
     },
     "list": {
       "@type": "method",
-      "@aliases": [
-        "ls"
-      ]
+      "@aliases": ["ls"]
     },
     "updatePackageFile": {
       "@type": "method"

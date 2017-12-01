@@ -1,14 +1,9 @@
 {
-  "@import": [
-    "resdir/resource",
-    "js/resource"
-  ],
+  "@import": ["resdir/resource", "js/resource"],
   "id": "1place/jest",
   "version": "0.1.25",
   "isPublic": true,
-  "files": [
-    "./dist"
-  ],
+  "files": ["./dist"],
   "dependencies": {
     "@import": "js/npm-dependencies",
     "@value": {
@@ -24,6 +19,7 @@
     }
   },
   "@export": {
+    "@description": "Test suite (using Jest)",
     "@implementation": "./dist",
     "dependencies": {
       "@import": "js/npm-dependencies"

@@ -1,14 +1,9 @@
 {
-  "@import": [
-    "./",
-    "js/resource"
-  ],
+  "@import": ["./", "js/resource"],
   "id": "resdir/resource",
   "version": "0.1.22",
   "isPublic": true,
-  "files": [
-    "./dist"
-  ],
+  "files": ["./dist"],
   "dependencies": {
     "@import": "js/npm-dependencies",
     "@value": {
@@ -36,6 +31,8 @@
     "@implementation": "./dist",
     "id": {
       "@type": "string",
+      "@description": "Identifier of the resource",
+      "@example": "aturing/nice-tool",
       "@implementation": "./dist/id-property.js",
       "getNamespace": {
         "@type": "method"
@@ -52,6 +49,8 @@
     },
     "version": {
       "@type": "string",
+      "@description": "Version number",
+      "@example": "1.0.0",
       "@implementation": "./dist/version-property.js",
       "validate": {
         "@type": "method",
@@ -68,27 +67,42 @@
         }
       }
     },
-    "isPublic": false,
+    "isPublic": {
+      "@value": false,
+      "@description": "Whether or not the resource is publicly available"
+    },
     "name": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "Name of the resource",
+      "@example": "Nice Tool"
     },
     "description": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "Short description",
+      "@example": "A tool that is nice to you"
     },
     "keywords": {
-      "@type": "array"
+      "@type": "array",
+      "@description": "A list of keywords",
+      "@example": ["nice", "cli", "tool"]
     },
     "homepage": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "URL of the homepage"
     },
     "repository": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "URL of the repository",
+      "@example": "https://github.com/aturing/nice-tool.git"
     },
     "files": {
-      "@type": "array"
+      "@type": "array",
+      "@description": "List of files and directories to include when publishing",
+      "@example": ["./dist"]
     },
     "publish": {
       "@type": "method",
+      "@description": "Publish the resource to Resdir",
       "@input": {
         "major": false,
         "minor": false,
@@ -104,13 +118,12 @@
         },
         "version": {
           "@type": "string",
-          "@aliases": [
-            "v"
-          ]
+          "@aliases": ["v"]
         },
         "gitignore": true
       },
-      "@listen": "@created"
+      "@listen": "@created",
+      "@hidden": true
     }
   }
 }

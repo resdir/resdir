@@ -74,13 +74,13 @@ const ASIDE = `
 
 Once a @resource has been carefully crafted, you can publish it to Resdir and share it to everyone (or to a selected group of people if your @resource is private).
 
-@Resource's names are always prefixed with a namespace (e.g., \`"ltorvalds/nice-tool"\`) so that there is no name conflict. When you create a Resdir account, you automatically get a personal namespace. It is also possible to create organizations or communities with their own namespace.
+@Resource's names are always prefixed with a namespace (e.g., \`"aturing/nice-tool"\`) so that there is no name conflict. When you create a Resdir account, you automatically get a personal namespace. It is also possible to create organizations or communities with their own namespace.
 
 ---
 
 ##### Language agnostic
 
-For now, @resource's methods must be implemented in JavaScript because \`run\` (the first @resource runtime) knows only about this language. But more runtimes will soon be available, and with the \`"@runtime"\` property it will be possible to specify which runtime a @resource should use.
+For now, @resource's methods must be implemented in JavaScript because \`run\` (the first @resource runtime) knows only about this language. But more runtimes will soon be available, and with the \`"@runtime"\` attribute it will be possible to specify which runtime a @resource should use.
 
 This will open up exciting possibilities for composing @resources based on different languages. For example, it will be possible to implement a @resource in Ruby while inheriting another one written in Go.
 
@@ -100,7 +100,7 @@ Finally, multiple versions of the same @resource can be used concurrently, no mo
 
 Thanks to the object-oriented nature of @resources, everything is highly configurable and composable.
 
-You can add properties or overload methods, compose rich @resources by aggregating several sub-@resources together, create custom @resources by inheriting from existing ones, etc.
+You can add attributes or overload methods, compose rich @resources by aggregating several sub-@resources together, create custom @resources by inheriting from existing ones, etc.
 `;
 
 @withRadiumStarter

@@ -1,14 +1,9 @@
 {
-  "@import": [
-    "resdir/resource",
-    "js/resource"
-  ],
+  "@import": ["resdir/resource", "js/resource"],
   "id": "js/esnext-transpiler",
   "version": "0.1.32",
   "isPublic": true,
-  "files": [
-    "./dist"
-  ],
+  "files": ["./dist"],
   "dependencies": {
     "@import": "js/npm-dependencies",
     "@value": {
@@ -40,16 +35,12 @@
     }
   },
   "@export": {
+    "@description": "ESNext transpilation (using Babel)",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist",
     "source": "./src",
     "destination": "./dist",
-    "extensions": [
-      ".js",
-      ".jsx",
-      ".es6",
-      ".es"
-    ],
+    "extensions": [".js", ".jsx", ".es6", ".es"],
     "targets": {
       "@type": "object",
       "@value": {
@@ -69,10 +60,7 @@
           "@position": 0
         }
       },
-      "@listen": [
-        "@build",
-        "@fileModified"
-      ]
+      "@listen": ["@build", "@fileModified"]
     },
     "initialize": {
       "@type": "method",
