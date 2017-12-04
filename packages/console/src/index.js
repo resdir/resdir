@@ -1,18 +1,45 @@
 import {resolve, relative} from 'path';
-import {cyan, yellow, green, red, bold, underline, dim} from 'chalk';
+import entries from 'lodash/entries';
+import isPlainObject from 'lodash/isPlainObject';
+import {cyan, yellow, green, red, magenta, gray, bold, underline, dim} from 'chalk';
 import ora from 'ora';
 import windowSize from 'window-size';
 import sliceANSI from 'slice-ansi';
 import read from 'read';
 import wrapANSI from 'wrap-ansi';
 import stringWidth from 'string-width';
+import indentString from 'indent-string';
+
+if (global.resdirConsoleSessionsCount === undefined) {
+  global.resdirConsoleSessionsCount = 0;
+}
+
+if (global.resdirConsoleEmptyLinesCount === undefined) {
+  global.resdirConsoleEmptyLinesCount = 0;
+}
+
+export async function session(fn) {
+  global.resdirConsoleSessionsCount++;
+  if (global.resdirConsoleSessionsCount === 1) {
+    global.resdirConsoleSessionIsEmpty = true;
+  }
+  try {
+    return await fn();
+  } finally {
+    global.resdirConsoleSessionsCount--;
+  }
+}
 
 export function print(message, {output = 'log'} = {}) {
   console[output](message);
+  global.resdirConsoleSessionIsEmpty = false;
   resetEmptyLinesCount();
 }
 
 export function emptyLine(count = 1) {
+  if (global.resdirConsoleSessionIsEmpty) {
+    return;
+  }
   for (let i = 0; i < count; i++) {
     if (getEmptyLinesCount() < count) {
       console.log('');
@@ -22,7 +49,7 @@ export function emptyLine(count = 1) {
 }
 
 function getEmptyLinesCount() {
-  return global.resdirConsoleEmptyLinesCount || 0;
+  return global.resdirConsoleEmptyLinesCount;
 }
 
 function incrementEmptyLinesCount() {
@@ -83,6 +110,7 @@ export function printErrorAndExit(error, code = 1) {
 
 export function prompt(message, {type} = {}) {
   return new Promise((resolve, reject) => {
+    global.resdirConsoleSessionIsEmpty = false;
     resetEmptyLinesCount();
 
     const options = {prompt: `${dim('>>')} ${message}`};
@@ -114,12 +142,106 @@ export async function confirm(message, options = {}) {
   return false;
 }
 
+export function formatValue(value, {maxWidth = 80, offset = 0} = {}) {
+  if (value === undefined) {
+    return formatUndefined();
+  } else if (typeof value === 'boolean') {
+    return formatBoolean(value);
+  } else if (typeof value === 'number') {
+    return formatNumber(value);
+  } else if (typeof value === 'string') {
+    return formatString(value);
+  } else if (Array.isArray(value)) {
+    return formatArray(value, {maxWidth, offset});
+  } else if (isPlainObject(value)) {
+    return formatObject(value, {maxWidth});
+  }
+  throw new TypeError('\'value\' argument type is invalid');
+}
+
+export function formatBoolean(boolean) {
+  if (boolean === undefined) {
+    return formatUndefined();
+  }
+  if (typeof boolean !== 'boolean') {
+    throw new TypeError(`'boolean' argument should be a boolean`);
+  }
+  boolean = boolean ? 'true' : 'false';
+  return magenta(boolean);
+}
+
+export function formatNumber(number) {
+  if (number === undefined) {
+    return formatUndefined();
+  }
+  if (typeof number !== 'number') {
+    throw new TypeError(`'number' argument should be a number`);
+  }
+  return green(Number(number));
+}
+
 export function formatString(string, {addQuotes = true} = {}) {
+  if (string === undefined) {
+    return formatUndefined();
+  }
   string = String(string);
   if (addQuotes) {
     string = '\'' + string + '\'';
   }
   return yellow(string);
+}
+
+export function formatArray(array, {maxWidth = 80, offset = 0, direction = 'HORIZONTAL'} = {}) {
+  if (array === undefined) {
+    return formatUndefined();
+  }
+  if (!Array.isArray(array)) {
+    throw new TypeError(`'array' argument should be an array`);
+  }
+  let output = '';
+  for (let value of array) {
+    if (output) {
+      output += gray(',') + (direction === 'HORIZONTAL' ? ' ' : '\n');
+    }
+    value = formatValue(value, {maxWidth});
+    output += value;
+  }
+  if (direction === 'VERTICAL') {
+    output = '\n' + indentString(output, 2) + '\n';
+  }
+  output = gray('[') + output + gray(']');
+  if (
+    direction === 'HORIZONTAL' &&
+    (output.includes('\n') || stringWidth(output) > maxWidth - offset - 1)
+  ) {
+    return formatArray(array, {maxWidth: maxWidth - 2, direction: 'VERTICAL'});
+  }
+  return output;
+}
+
+export function formatObject(object, {maxWidth = 80} = {}) {
+  if (object === undefined) {
+    return formatUndefined();
+  }
+  if (!isPlainObject(object)) {
+    throw new TypeError(`'object' argument should be a plain object`);
+  }
+  let output = '';
+  for (let [key, value] of entries(object)) {
+    if (output) {
+      output += gray(',') + '\n';
+    }
+    key = formatKey(key);
+    value = formatValue(value, {maxWidth: maxWidth - 2, offset: stringWidth(`${key}: `)});
+    output += `${key}${gray(':')} ${value}`;
+  }
+  if (output) {
+    output = indentString(output, 2);
+    output = `${gray('{')}\n${output}\n${gray('}')}`;
+  } else {
+    output = gray('{}');
+  }
+  return output;
 }
 
 export function formatURL(url) {
@@ -143,6 +265,24 @@ export function formatPath(path = './', {addQuotes = true, baseDirectory, relati
   }
 
   return yellow(path);
+}
+
+export function formatKey(key, {addQuotes} = {}) {
+  if (typeof key !== 'string') {
+    throw new TypeError('\'key\' argument should be a string');
+  }
+
+  if (addQuotes === undefined) {
+    if (/^[^a-zA-Z_$]|[^0-9a-zA-Z_$]/.test(key)) {
+      addQuotes = true;
+    }
+  }
+
+  if (addQuotes) {
+    key = '\'' + key + '\'';
+  }
+
+  return cyan(key);
 }
 
 export function formatCode(code, {addBackticks = true} = {}) {
@@ -259,6 +399,10 @@ export function formatMessage(message, {info, status} = {}) {
   return `${status}${message}${info}`;
 }
 
+export function formatUndefined(qualifier) {
+  return dim(`<undefined${qualifier ? '-' + qualifier : ''}>`);
+}
+
 export function getSuccessSymbol() {
   return emojisAreSupported() ? '⚡' : green('✓');
 }
@@ -351,6 +495,7 @@ class AnimatedTaskView extends AbstractTaskView {
   start(message) {
     super.start(message);
     this.spinner.start();
+    global.resdirConsoleSessionIsEmpty = false;
     resetEmptyLinesCount();
   }
 

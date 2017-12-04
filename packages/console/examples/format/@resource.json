@@ -1,0 +1,5 @@
+{
+  "transpiler": {
+    "@import": "1place/esnext-transpiler"
+  }
+}

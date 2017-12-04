@@ -43,11 +43,16 @@
   "@export": {
     "@type": "object",
     "@description": "npm package dependencies",
+    "@example": {
+      "fs-extra": "^4.0.2",
+      "lodash": "^4.17.4"
+    },
     "@aliases": ["dependencies", "dependency", "deps", "dep"],
     "@runtime": "node#>=6.10.0",
     "@implementation": "./bundle.js",
     "add": {
       "@type": "method",
+      "@description": "Add a new dependency",
       "@input": {
         "specifier": {
           "@type": "string",
@@ -67,6 +72,7 @@
     },
     "remove": {
       "@type": "method",
+      "@description": "Remove an existing dependency",
       "@aliases": ["rm"],
       "@input": {
         "name": {
@@ -77,13 +83,16 @@
     },
     "install": {
       "@type": "method",
+      "@description": "Install all dependencies",
       "@listen": "@install"
     },
     "count": {
-      "@type": "method"
+      "@type": "method",
+      "@description": "Count the number of existing dependencies"
     },
     "includes": {
       "@type": "method",
+      "@description": "Determine whether a certain dependency is included",
       "@input": {
         "name": {
           "@type": "string",
@@ -93,10 +102,12 @@
     },
     "list": {
       "@type": "method",
+      "@description": "List existing dependencies",
       "@aliases": ["ls"]
     },
     "updatePackageFile": {
-      "@type": "method"
+      "@type": "method",
+      "@hidden": true
     }
   }
 }
