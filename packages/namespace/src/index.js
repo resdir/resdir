@@ -5,6 +5,9 @@ const reservedNamespaces = require('./reserved-namespaces.json');
 const demoCompanies = require('./demo-companies.json');
 import {windowsNames as reservedWindowsFilenames} from 'filename-reserved-regex';
 
+const MIN_LENGTH = 1;
+const MAX_LENGTH = 40;
+
 export function validateNamespace(namespace, {throwIfInvalid = true} = {}) {
   if (!validate(namespace)) {
     if (throwIfInvalid) {
@@ -21,7 +24,7 @@ function validate(namespace) {
     return false;
   }
 
-  if (namespace.length === 0) {
+  if (namespace.length < MIN_LENGTH || namespace.length > MAX_LENGTH) {
     return false;
   }
 
