@@ -1,9 +1,14 @@
 {
-  "@import": ["./", "js/resource"],
+  "@import": [
+    "./",
+    "js/resource"
+  ],
   "id": "resdir/resource",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "isPublic": true,
-  "files": ["./dist"],
+  "files": [
+    "./dist"
+  ],
   "dependencies": {
     "@import": "js/npm-dependencies",
     "@value": {
@@ -32,16 +37,22 @@
     "id": {
       "@type": "string",
       "@description": "Identifier of the resource",
-      "@example": "aturing/nice-tool",
+      "@examples": [
+        "js/example",
+        "aturing/nice-tool"
+      ],
       "@implementation": "./dist/id-property.js",
       "getNamespace": {
-        "@type": "method"
+        "@type": "method",
+        "@description": "Get the namespace part of the identifier"
       },
       "getName": {
-        "@type": "method"
+        "@type": "method",
+        "@description": "Get the name part of the identifier"
       },
       "validate": {
         "@type": "method",
+        "@description": "Validate the identifier",
         "@input": {
           "throwIfInvalid": true
         }
@@ -50,67 +61,129 @@
     "version": {
       "@type": "string",
       "@description": "Version number",
-      "@example": "1.0.0",
+      "@aliases": [
+        "ver",
+        "v"
+      ],
+      "@examples": [
+        "1.0.0",
+        "0.23.4",
+        "2.0.0-alpha.3"
+      ],
       "@implementation": "./dist/version-property.js",
       "validate": {
         "@type": "method",
+        "@description": "Validate the version number",
         "@input": {
           "throwIfInvalid": true
         }
       },
       "bump": {
         "@type": "method",
+        "@description": "Bump the version number",
+        "@examples": [
+          "version bump --patch"
+        ],
         "@input": {
-          "major": false,
-          "minor": false,
-          "patch": false
+          "major": {
+            "@type": "boolean",
+            "@description": "Bump major version"
+          },
+          "minor": {
+            "@type": "boolean",
+            "@description": "Bump minor version"
+          },
+          "patch": {
+            "@type": "boolean",
+            "@description": "Bump patch version"
+          }
         }
       }
     },
     "isPublic": {
-      "@value": false,
-      "@description": "Whether or not the resource is publicly available"
+      "@description": "Whether or not the resource is publicly available",
+      "@aliases": [
+        "public"
+      ],
+      "@value": false
     },
     "name": {
       "@type": "string",
       "@description": "Name of the resource",
-      "@example": "Nice Tool"
+      "@examples": [
+        "React"
+      ]
     },
     "description": {
       "@type": "string",
       "@description": "Short description",
-      "@example": "A tool that is nice to you"
+      "@aliases": [
+        "desc"
+      ],
+      "@examples": [
+        "A tool that is nice to you"
+      ]
     },
     "keywords": {
       "@type": "array",
       "@description": "A list of keywords",
-      "@example": ["nice", "cli", "tool"]
+      "@examples": [
+        [
+          "nice",
+          "cli-tool"
+        ]
+      ]
     },
     "homepage": {
       "@type": "string",
-      "@description": "URL of the homepage"
+      "@description": "URL of the homepage",
+      "@examples": [
+        "https://www.aturing.com/nice-tool"
+      ]
     },
     "repository": {
       "@type": "string",
       "@description": "URL of the repository",
-      "@example": "https://github.com/aturing/nice-tool.git"
+      "@aliases": [
+        "repo"
+      ],
+      "@examples": [
+        "https://github.com/aturing/nice-tool.git"
+      ]
     },
     "files": {
       "@type": "array",
       "@description": "List of files and directories to include when publishing",
-      "@example": ["./dist"]
+      "@examples": [
+        [
+          "./dist"
+        ]
+      ]
     },
     "publish": {
       "@type": "method",
       "@description": "Publish the resource to Resdir",
+      "@examples": [
+        "publish --patch"
+      ],
       "@input": {
-        "major": false,
-        "minor": false,
-        "patch": false
+        "major": {
+          "@type": "boolean",
+          "@description": "Bump major version before publishing"
+        },
+        "minor": {
+          "@type": "boolean",
+          "@description": "Bump minor version before publishing"
+        },
+        "patch": {
+          "@type": "boolean",
+          "@description": "Bump patch version before publishing"
+        }
       }
     },
     "initialize": {
       "@type": "method",
+      "@hidden": true,
       "@input": {
         "id": {
           "@type": "string",
@@ -118,12 +191,13 @@
         },
         "version": {
           "@type": "string",
-          "@aliases": ["v"]
+          "@aliases": [
+            "v"
+          ]
         },
         "gitignore": true
       },
-      "@listen": "@created",
-      "@hidden": true
+      "@listen": "@created"
     }
   }
 }

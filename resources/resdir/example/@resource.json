@@ -1,10 +1,15 @@
 {
-  "@import": ["resdir/resource", "js/resource"],
+  "@import": [
+    "resdir/resource",
+    "js/resource"
+  ],
   "@implementation": "./dist",
   "id": "resdir/example",
-  "version": "0.3.29",
+  "version": "0.3.33",
   "isPublic": true,
-  "files": ["./dist"],
+  "files": [
+    "./dist"
+  ],
   "dependencies": {
     "@import": "js/npm-dependencies",
     "@value": {
@@ -14,7 +19,13 @@
   "hello": {
     "@type": "method",
     "@description": "Print a nice greeting",
-    "@aliases": ["hi"],
+    "@aliases": [
+      "hi"
+    ],
+    "@examples": [
+      "hello",
+      "hi --color=red"
+    ],
     "@input": {
       "color": "green"
     },
