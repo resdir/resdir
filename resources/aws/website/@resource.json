@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "aws/website",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "isPublic": true,
   "files": [
     "./dist"
@@ -57,7 +57,8 @@
       }
     },
     "deploy": {
-      "@type": "method"
+      "@type": "method",
+      "@before": "@build"
     }
   }
 }

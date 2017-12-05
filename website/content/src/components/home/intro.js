@@ -60,13 +60,15 @@ export default base =>
   };
 \`\`\`
 
-Finally, we can use \`run\` (the @resource runtime) to interact with the @resource. Deploying the website to AWS is as simple as:
+Finally, we can use \`run\` (the @resource runtime) to interact with the @resource. Deploying our website to AWS is as simple as:
 
 \`\`\`
 $ run frontend deploy && run backend deploy
 \`\`\`
 
 Voilà! Our website is online. With minimal effort, the frontend is served by S3 and CloudFront, the backend runs in Lambda, domain names are managed by Route 53, and SSL certificates have been created by ACM.
+
+This example used two popular @resources, \`"aws/website"\` and \`"aws/hosted-resource"\`, but Resdir is not limited to that. A growing number of @resources are available, and if your favorite tools or services do not exist yet, it is up to you to implement your @resources and share them with everybody!
 `;
 
 const ASIDE = `
