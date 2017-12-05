@@ -1,16 +1,17 @@
 {
   "@import": "js/npm-package",
-  "name": "@resdir/resource-identifier",
-  "version": "0.1.11",
   "description": "Useful functions to handle Resource's identifiers",
-  "files": [
-    "./dist"
-  ],
   "main": "./dist/index.js",
+  "version": "0.1.11",
   "dependencies": {
+    "filename-reserved-regex": "^2.0.0",
     "@resdir/console": "^0.1.4",
     "@resdir/namespace": "^0.1.0"
   },
+  "name": "@resdir/resource-identifier",
+  "files": [
+    "./dist"
+  ],
   "@unpublishable": {
     "transpiler": {
       "@import": "1place/esnext-transpiler",

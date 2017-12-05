@@ -1,5 +1,6 @@
 import {validateNamespace as importedValidateNamespace} from '@resdir/namespace';
 import {formatString} from '@resdir/console';
+import {windowsNames as reservedWindowsFilenames} from 'filename-reserved-regex';
 
 export function parseResourceIdentifier(identifier, {throwIfMissing = true} = {}) {
   const parsedIdentifier = parse(identifier);
@@ -98,4 +99,8 @@ function validateName(name) {
   }
 
   return true;
+}
+
+export function isReservedWindowsFilename(name) {
+  return reservedWindowsFilenames().test(name);
 }

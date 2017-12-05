@@ -1,4 +1,9 @@
-import {getResourceNamespace, getResourceName, validateResourceIdentifier} from '../..';
+import {
+  getResourceNamespace,
+  getResourceName,
+  validateResourceIdentifier,
+  isReservedWindowsFilename
+} from '../..';
 
 describe('@resdir/resource-identifier', () => {
   test('getResourceNamespace()', () => {
@@ -31,5 +36,13 @@ describe('@resdir/resource-identifier', () => {
     expect(() => validateResourceIdentifier('resdir/')).toThrow();
     expect(() => validateResourceIdentifier('/hello')).toThrow();
     expect(() => validateResourceIdentifier('resdir/hello/hi')).toThrow();
+  });
+
+  test('isReservedWindowsFilename()', () => {
+    expect(isReservedWindowsFilename('hello')).toBe(false);
+    expect(isReservedWindowsFilename('nul')).toBe(true);
+    expect(isReservedWindowsFilename('NUL')).toBe(true);
+    expect(isReservedWindowsFilename('com1')).toBe(true);
+    expect(isReservedWindowsFilename('lpt9')).toBe(true);
   });
 });
