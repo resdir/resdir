@@ -22,7 +22,7 @@ function validate(key) {
     return false;
   }
 
-  if (/[^a-zA-Z0-9_$]/.test(key)) {
+  if (/[^a-zA-Z0-9_]/.test(key)) {
     return false;
   }
 
