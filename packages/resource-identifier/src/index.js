@@ -2,6 +2,9 @@ import {validateNamespace as importedValidateNamespace} from '@resdir/namespace'
 import {formatString} from '@resdir/console';
 import {windowsNames as reservedWindowsFilenames} from 'filename-reserved-regex';
 
+const MIN_NAME_LENGTH = 1;
+const MAX_NAME_LENGTH = 80;
+
 export function parseResourceIdentifier(identifier, {throwIfMissing = true} = {}) {
   const parsedIdentifier = parse(identifier);
   if (!parsedIdentifier) {
@@ -86,7 +89,7 @@ function validateName(name) {
     return false;
   }
 
-  if (name.length < 1) {
+  if (name.length < MIN_NAME_LENGTH || name.length > MAX_NAME_LENGTH) {
     return false;
   }
 

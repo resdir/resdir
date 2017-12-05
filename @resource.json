@@ -4,6 +4,7 @@
     "@listen": "@test",
     "@run": [
       "./packages/util @test",
+      "./packages/namespace @test",
       "./packages/resource-key @test",
       "./packages/resource-identifier @test",
       "./packages/resource-specifier @test",
