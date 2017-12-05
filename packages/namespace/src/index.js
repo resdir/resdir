@@ -3,6 +3,7 @@ import {formatString} from '@resdir/console';
 const genericNamespaces = require('./generic-namespaces.json');
 const reservedNamespaces = require('./reserved-namespaces.json');
 const demoCompanies = require('./demo-companies.json');
+import {windowsNames as reservedWindowsFilenames} from 'filename-reserved-regex';
 
 export function validateNamespace(namespace, {throwIfInvalid = true} = {}) {
   if (!validate(namespace)) {
@@ -41,6 +42,10 @@ export function isGenericNamespace(namespace) {
 
 export function isReservedNamespace(namespace) {
   return reservedNamespaces.includes(namespace);
+}
+
+export function isReservedWindowsFilename(namespace) {
+  return reservedWindowsFilenames().test(namespace);
 }
 
 export {demoCompanies};

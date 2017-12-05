@@ -1,16 +1,17 @@
 {
   "@import": "js/npm-package",
-  "name": "@resdir/namespace",
-  "version": "0.1.8",
   "description": "Useful functions to handle namespaces",
-  "files": [
-    "./dist"
-  ],
   "main": "./dist/index.js",
+  "version": "0.1.9",
   "dependencies": {
+    "filename-reserved-regex": "^2.0.0",
     "lodash.sortedindexof": "^4.1.0",
     "@resdir/console": "^0.1.7"
   },
+  "name": "@resdir/namespace",
+  "files": [
+    "./dist"
+  ],
   "@unpublishable": {
     "transpiler": {
       "@import": "1place/esnext-transpiler"
