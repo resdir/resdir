@@ -56,7 +56,7 @@ export class CloudFront {
   }
 
   waitFor(state, params) {
-    debug('waitFor(%o)', params);
+    debug('waitFor(%o, %o)', state, params);
     return this.client.waitFor(state, params).promise();
   }
 }

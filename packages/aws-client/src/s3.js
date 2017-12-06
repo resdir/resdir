@@ -70,6 +70,11 @@ export class S3 {
     debug('putObject(%o)', params);
     return this.client.putObject(params).promise();
   }
+
+  waitFor(state, params) {
+    debug('waitFor(%o, %o)', state, params);
+    return this.client.waitFor(state, params).promise();
+  }
 }
 
 export function getS3Endpoint(bucket) {

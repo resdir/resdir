@@ -46,7 +46,7 @@ export class Route53 {
   }
 
   waitFor(state, params) {
-    debug('waitFor(%o)', params);
+    debug('waitFor(%o, %o)', state, params);
     return this.client.waitFor(state, params).promise();
   }
 }
