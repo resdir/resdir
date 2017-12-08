@@ -1,0 +1,36 @@
+{
+  "@import": [
+    "resdir/resource",
+    "js/resource",
+    "./"
+  ],
+  "id": "tool/console",
+  "version": "0.1.0",
+  "isPublic": true,
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@import": "js/npm-dependencies#^0.1.26",
+    "@value": {
+      "@resdir/console": "^0.1.24"
+    }
+  },
+  "@unpublishable": {
+    "transpiler": {
+      "@import": "1place/esnext-transpiler#^0.1.9"
+    }
+  },
+  "@export": {
+    "@implementation": "./dist",
+    "print": {
+      "@type": "method",
+      "@input": {
+        "message": {
+          "@type": "string",
+          "@position": 0
+        }
+      }
+    }
+  }
+}

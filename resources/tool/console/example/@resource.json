@@ -1,0 +1,7 @@
+{
+  "@import": "../",
+  "hello": {
+    "@type": "method",
+    "@run": "print 'Hello, World!'"
+  }
+}
