@@ -40,24 +40,14 @@ export default base =>
           }
 
           if (!hasBeenCreated && !tags.some(tag => isEqual(tag, this.constructor.MANAGED_BY_TAG))) {
-            throw new Error(
-              `Can't use a S3 bucket not originally created by ${formatString(
-                this.constructor.RESOURCE_ID
-              )} (bucketName: ${formatString(bucketName)})`
-            );
+            throw new Error(`Can't use a S3 bucket not originally created by ${formatString(this.constructor.RESOURCE_ID)} (bucketName: ${formatString(bucketName)})`);
           }
 
           if (!hasBeenCreated) {
             const result = await s3.getBucketLocation({Bucket: bucketName});
             const locationConstraint = result.LocationConstraint || 'us-east-1';
             if (locationConstraint !== region) {
-              throw new Error(
-                `Sorry, it is currently not possible to change the region of the S3 bucket associated to your website. Please remove the bucket (${formatString(
-                  bucketName
-                )}) manually or set the region to its initial value (${formatString(
-                  locationConstraint
-                )}).`
-              );
+              throw new Error(`Sorry, it is currently not possible to change the region of the S3 bucket associated to your website. Please remove the bucket (${formatString(bucketName)}) manually or set the region to its initial value (${formatString(locationConstraint)}).`);
             }
           }
 
@@ -115,9 +105,7 @@ export default base =>
               const result = await s3.listObjectsV2({Bucket: bucketName});
 
               if (result.IsTruncated) {
-                throw new Error(
-                  'Wow, you have a lot of files on S3! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if you really need to handle so many files.'
-                );
+                throw new Error('Wow, you have a lot of files on S3! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if you really need to handle so many files.');
               }
 
               const files = [];
@@ -174,7 +162,7 @@ export default base =>
 
             await task(
               async () => {
-                const contentMD5 = new Buffer(md5, 'hex').toString('base64');
+                const contentMD5 = Buffer.from(md5, 'hex').toString('base64');
                 const mimeType = mime.lookup(path) || 'application/octet-stream';
                 const stream = createReadStream(contentFile);
                 const params = {
@@ -290,7 +278,8 @@ export default base =>
       } catch (err) {
         if (err.code === 'NoSuchKey') {
           return {};
-        } else if (err.code === 'NotModified') {
+        }
+        if (err.code === 'NotModified') {
           return currentConfig;
         }
         throw err;
@@ -305,7 +294,7 @@ export default base =>
       const bucketName = this.getS3BucketName();
       const body = JSON.stringify(currentConfig);
       const md5 = await hasha(body, {algorithm: 'md5'});
-      const contentMD5 = new Buffer(md5, 'hex').toString('base64');
+      const contentMD5 = Buffer.from(md5, 'hex').toString('base64');
       await s3.putObject({
         Bucket: bucketName,
         Key: CONFIG_FILE_S3_KEY,

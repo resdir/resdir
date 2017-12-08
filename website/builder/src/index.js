@@ -145,9 +145,7 @@ export default base =>
                 replace({
                   include: join(this.getSourceDirectory(), 'src', 'environment.js'),
                   delimiters: ['$', '$'],
-                  ...fromPairs(
-                    toPairs(replacements).map(([key, value]) => [key, JSON.stringify(value)])
-                  )
+                  ...fromPairs(toPairs(replacements).map(([key, value]) => [key, JSON.stringify(value)]))
                 }),
                 nodeResolve({browser: true}),
                 json(),
@@ -165,9 +163,7 @@ export default base =>
             };
 
             if (this.optimize) {
-              rollupConfig.plugins.unshift(
-                replace({'process.env.NODE_ENV': JSON.stringify('production')})
-              );
+              rollupConfig.plugins.unshift(replace({'process.env.NODE_ENV': JSON.stringify('production')}));
               rollupConfig.plugins.push(uglify());
             }
 
@@ -210,9 +206,7 @@ export default base =>
 
           const elapsedTime = Date.now() - startingTime;
 
-          progress.setOutro(
-            `Bundle generated ${formatDim('(' + bytes(codeLength) + ', ' + elapsedTime + 'ms)')}`
-          );
+          progress.setOutro(`Bundle generated ${formatDim('(' + bytes(codeLength) + ', ' + elapsedTime + 'ms)')}`);
 
           return filename;
         },

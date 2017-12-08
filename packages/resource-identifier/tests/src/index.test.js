@@ -26,11 +26,7 @@ describe('@resdir/resource-identifier', () => {
     expect(validateResourceIdentifier('resdir/hello')).toBe(true);
     expect(validateResourceIdentifier('resdir/hello-world')).toBe(true);
     expect(validateResourceIdentifier('resdir/123')).toBe(true);
-    expect(
-      validateResourceIdentifier(
-        'resdir/12345678901234567890123456789012345678901234567890123456789012345678901234567890'
-      )
-    ).toBe(true);
+    expect(validateResourceIdentifier('resdir/12345678901234567890123456789012345678901234567890123456789012345678901234567890')).toBe(true);
     expect(() => validateResourceIdentifier('')).toThrow();
     expect(() => validateResourceIdentifier('resdir/Hello')).toThrow();
     expect(() => validateResourceIdentifier('resdir/hello-')).toThrow();
@@ -42,10 +38,7 @@ describe('@resdir/resource-identifier', () => {
     expect(() => validateResourceIdentifier('/hello')).toThrow();
     expect(() => validateResourceIdentifier('resdir/hello/hi')).toThrow();
     expect(() =>
-      validateResourceIdentifier(
-        'resdir/123456789012345678901234567890123456789012345678901234567890123456789012345678901'
-      )
-    ).toThrow();
+      validateResourceIdentifier('resdir/123456789012345678901234567890123456789012345678901234567890123456789012345678901')).toThrow();
   });
 
   test('isReservedWindowsFilename()', () => {

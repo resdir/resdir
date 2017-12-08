@@ -147,9 +147,7 @@ async function findACMCertificate(acm, domainName, managedByTag, {verbose, quiet
       }
 
       if (result.NextToken) {
-        throw new Error(
-          'Wow, you have a lot of ACM certificates! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if this is a problem for you.'
-        );
+        throw new Error('Wow, you have a lot of ACM certificates! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if this is a problem for you.');
       }
 
       progress.setOutro('ACM certificate not found');

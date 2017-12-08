@@ -145,15 +145,20 @@ export async function confirm(message, options = {}) {
 export function formatValue(value, {maxWidth = 80, offset = 0} = {}) {
   if (value === undefined) {
     return formatUndefined();
-  } else if (typeof value === 'boolean') {
+  }
+  if (typeof value === 'boolean') {
     return formatBoolean(value);
-  } else if (typeof value === 'number') {
+  }
+  if (typeof value === 'number') {
     return formatNumber(value);
-  } else if (typeof value === 'string') {
+  }
+  if (typeof value === 'string') {
     return formatString(value);
-  } else if (Array.isArray(value)) {
+  }
+  if (Array.isArray(value)) {
     return formatArray(value, {maxWidth, offset});
-  } else if (isPlainObject(value)) {
+  }
+  if (isPlainObject(value)) {
     return formatObject(value, {maxWidth});
   }
   throw new TypeError('\'value\' argument type is invalid');

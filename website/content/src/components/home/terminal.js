@@ -12,6 +12,7 @@ export class Terminal extends React.Component {
   };
 
   shuffledCommands = shuffle(this.props.commands);
+
   commandIndex = 0;
 
   state = {typing: undefined};

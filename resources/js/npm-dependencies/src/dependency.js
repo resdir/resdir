@@ -57,11 +57,7 @@ export class Dependency {
       }
       const name = pkg.name;
       if (!name) {
-        throw new Error(
-          `Invalid ${formatPath('package.json')} file at ${formatPath(location)}: ${formatCode(
-            'name'
-          )} property is undefined`
-        );
+        throw new Error(`Invalid ${formatPath('package.json')} file at ${formatPath(location)}: ${formatCode('name')} property is undefined`);
       }
       location = 'file:' + location;
       return {name, location};
@@ -125,7 +121,8 @@ export class Dependency {
   static toDefinition(key, value) {
     if (typeof value === 'string') {
       return key + '@' + value;
-    } else if (isPlainObject(value)) {
+    }
+    if (isPlainObject(value)) {
       return {name: key, ...value};
     }
     throw new Error('Invalid dependency value');

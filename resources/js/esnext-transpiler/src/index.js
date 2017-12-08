@@ -58,11 +58,7 @@ export default base =>
         const relativeFile = relative(srcDirectory, srcFile);
         if (relativeFile.startsWith('..')) {
           if (!quiet) {
-            console.warn(
-              `Cannot build a file (${formatPath(
-                srcFile
-              )}) located outside of the source directory (${formatPath(srcDirectory)})`
-            );
+            console.warn(`Cannot build a file (${formatPath(srcFile)}) located outside of the source directory (${formatPath(srcDirectory)})`);
           }
           continue;
         }

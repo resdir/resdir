@@ -50,9 +50,7 @@ export default base =>
           await this.checkCloudFrontDistributionTags(distribution, {verbose, quiet, debug});
 
           if (!distribution.Enabled) {
-            throw new Error(
-              `The CloudFront distribution is disabled (ARN: ${formatString(distribution.ARN)})`
-            );
+            throw new Error(`The CloudFront distribution is disabled (ARN: ${formatString(distribution.ARN)})`);
           }
 
           if (await this.doesCloudFrontDistributionNeedUpdate(distribution)) {
@@ -301,11 +299,7 @@ export default base =>
         async () => {
           const result = await cloudFront.listTagsForResource({Resource: distribution.ARN});
           if (!result.Tags.Items.some(tag => isEqual(tag, this.constructor.MANAGED_BY_TAG))) {
-            throw new Error(
-              `Can't use a CloudFront distribution not originally created by ${formatString(
-                this.constructor.RESOURCE_ID
-              )} (ARN: ${formatString(distribution.ARN)})`
-            );
+            throw new Error(`Can't use a CloudFront distribution not originally created by ${formatString(this.constructor.RESOURCE_ID)} (ARN: ${formatString(distribution.ARN)})`);
           }
         },
         {
@@ -392,9 +386,7 @@ async function findCloudFrontDistribution(cloudFront, domainName, {verbose, quie
       }
 
       if (result.DistributionList.IsTruncated) {
-        throw new Error(
-          'Wow, you have a lot of CloudFront distributions! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if this is a problem for you.'
-        );
+        throw new Error('Wow, you have a lot of CloudFront distributions! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if this is a problem for you.');
       }
 
       progress.setOutro('CloudFront distribution not found');

@@ -182,9 +182,7 @@ export class RegistryClient {
     const user = await this.getUser();
 
     emptyLine();
-    const okay = await confirm(
-      `Are you sure you want to delete your account (${formatString(user.email)})?`
-    );
+    const okay = await confirm(`Are you sure you want to delete your account (${formatString(user.email)})?`);
     emptyLine();
 
     if (!okay) {
@@ -289,9 +287,7 @@ export class RegistryClient {
     const organization = await this.getOrganizationByNamespace(namespace);
 
     emptyLine();
-    const okay = await confirm(
-      `Are you sure you want to delete ${formatString(namespace)} organization?`
-    );
+    const okay = await confirm(`Are you sure you want to delete ${formatString(namespace)} organization?`);
     emptyLine();
 
     if (!okay) {
@@ -391,8 +387,7 @@ export class RegistryClient {
       async () => {
         const url = `${this.registryURL}/organizations/${organization.id}/members`;
         await this._userRequest(authorization =>
-          postJSON(url, {memberId: user.id}, {authorization})
-        );
+          postJSON(url, {memberId: user.id}, {authorization}));
       },
       {
         intro: `Adding member...`,
@@ -469,9 +464,7 @@ export class RegistryClient {
     const community = await this.getCommunityByNamespace(namespace);
 
     emptyLine();
-    const okay = await confirm(
-      `Are you sure you want to delete ${formatString(namespace)} community?`
-    );
+    const okay = await confirm(`Are you sure you want to delete ${formatString(namespace)} community?`);
     emptyLine();
 
     if (!okay) {
@@ -528,9 +521,7 @@ export class RegistryClient {
 
     while (!namespace) {
       emptyLine();
-      namespace = await prompt(
-        `Choose a name for your personal namespace: ${formatExample('aturing')}`
-      );
+      namespace = await prompt(`Choose a name for your personal namespace: ${formatExample('aturing')}`);
       emptyLine();
     }
 
@@ -584,8 +575,7 @@ export class RegistryClient {
       async () => {
         const url = `${this.registryURL}/namespaces/check-availability`;
         return await this._userRequest(authorization =>
-          postJSON(url, {namespace, type}, {authorization})
-        );
+          postJSON(url, {namespace, type}, {authorization}));
       },
       {
         intro: `Checking namespace...`,
@@ -600,9 +590,7 @@ export class RegistryClient {
     }
 
     if (reason === 'INVALID') {
-      throw new Error(
-        `Sorry, this namespace is invalid. A namespace must be composed of lowercase letters, numbers and dashes ("-").`
-      );
+      throw new Error(`Sorry, this namespace is invalid. A namespace must be composed of lowercase letters, numbers and dashes ("-").`);
     }
 
     if (reason === 'TOO_SHORT') {
@@ -643,11 +631,9 @@ export class RegistryClient {
     }
 
     if (reason === 'GENERIC') {
-      throw new Error(
-        `Sorry, this namespace is not available because it is a very generic term. ${
-          contactSupport
-        }`
-      );
+      throw new Error(`Sorry, this namespace is not available because it is a very generic term. ${
+        contactSupport
+      }`);
     }
 
     if (
@@ -677,25 +663,21 @@ export class RegistryClient {
       printText(message);
       emptyLine();
       if (type === 'USER') {
-        printText(
-          `If the GitHub account named ${
-            formattedNamespace
-          } is yours and you care about this name, you can get it by connecting your ${
-            SERVICE_NAME
-          } account to your GitHub account. Don't worry, ${
-            SERVICE_NAME
-          } will only have access to your GitHub public information.`
-        );
+        printText(`If the GitHub account named ${
+          formattedNamespace
+        } is yours and you care about this name, you can get it by connecting your ${
+          SERVICE_NAME
+        } account to your GitHub account. Don't worry, ${
+          SERVICE_NAME
+        } will only have access to your GitHub public information.`);
       } else if (type === 'ORGANIZATION') {
-        printText(
-          `If you are a public member of the GitHub organization ${
-            formattedNamespace
-          }, you can get this name for your ${SERVICE_NAME} organization by connecting your ${
-            SERVICE_NAME
-          } account to your GitHub account. Don't worry, ${
-            SERVICE_NAME
-          } will only have access to your GitHub public information.`
-        );
+        printText(`If you are a public member of the GitHub organization ${
+          formattedNamespace
+        }, you can get this name for your ${SERVICE_NAME} organization by connecting your ${
+          SERVICE_NAME
+        } account to your GitHub account. Don't worry, ${
+          SERVICE_NAME
+        } will only have access to your GitHub public information.`);
       }
       emptyLine();
       const okay = await confirm(`Do you want to continue?`, {default: true});
@@ -721,86 +703,67 @@ export class RegistryClient {
       await this.disconnectGitHubAccount();
 
       if (type === 'USER' && reason === 'IMPORTANT_GITHUB_USER') {
-        throw new Error(
-          `Sorry, the username of the GitHub account you connected to is not ${formattedNamespace}.`
-        );
+        throw new Error(`Sorry, the username of the GitHub account you connected to is not ${formattedNamespace}.`);
       }
 
       if (type === 'ORGANIZATION' && reason === 'IMPORTANT_GITHUB_ORGANIZATION') {
-        throw new Error(
-          `Sorry, the GitHub account you connected to is not a public member of ${
-            formattedNamespace
-          } organization.`
-        );
+        throw new Error(`Sorry, the GitHub account you connected to is not a public member of ${
+          formattedNamespace
+        } organization.`);
       }
 
       throw new Error(`Sorry, this namespace is not available.`);
     }
 
     if (reason === 'IMPORTANT_GITHUB_USER') {
-      throw new Error(
-        `Sorry, this namespace is not available because there is a popular GitHub user named ${
-          formattedNamespace
-        }. Although ${
-          SERVICE_NAME
-        } is not related to GitHub, most important GitHub usernames are reserved for future ${
-          SERVICE_NAME
-        } users. ${contactSupport}`
-      );
+      throw new Error(`Sorry, this namespace is not available because there is a popular GitHub user named ${
+        formattedNamespace
+      }. Although ${
+        SERVICE_NAME
+      } is not related to GitHub, most important GitHub usernames are reserved for future ${
+        SERVICE_NAME
+      } users. ${contactSupport}`);
     }
 
     if (reason === 'IMPORTANT_GITHUB_ORGANIZATION') {
-      throw new Error(
-        `Sorry, this namespace is not available because there is a popular GitHub organization named ${
-          formattedNamespace
-        }. Although ${
-          SERVICE_NAME
-        } is not related to GitHub, most important GitHub organizations are reserved for future ${
-          SERVICE_NAME
-        } organizations or communities. ${contactSupport}`
-      );
+      throw new Error(`Sorry, this namespace is not available because there is a popular GitHub organization named ${
+        formattedNamespace
+      }. Although ${
+        SERVICE_NAME
+      } is not related to GitHub, most important GitHub organizations are reserved for future ${
+        SERVICE_NAME
+      } organizations or communities. ${contactSupport}`);
     }
 
     if (reason === 'BIG_COMPANY' || reason === 'DEMO_COMPANY') {
-      throw new Error(
-        `Sorry, this namespace is not available because it matches the name of a big company (${formatString(
-          result.company
-        )}). ${contactSupport}`
-      );
+      throw new Error(`Sorry, this namespace is not available because it matches the name of a big company (${formatString(result.company)}). ${contactSupport}`);
     }
 
     if (reason === 'COMMON_NUMBER') {
-      throw new Error(
-        `Sorry, this namespace is not available because it is quite a common number. ${
-          contactSupport
-        }`
-      );
+      throw new Error(`Sorry, this namespace is not available because it is quite a common number. ${
+        contactSupport
+      }`);
     }
 
     if (reason === 'TOP_LEVEL_DOMAIN') {
-      throw new Error(
-        `Sorry, this namespace is not available because it is a Top Level Domain. ${contactSupport}`
-      );
+      throw new Error(`Sorry, this namespace is not available because it is a Top Level Domain. ${contactSupport}`);
     }
 
     if (reason === 'COMMON_FILE_EXTENSION') {
-      throw new Error(
-        `Sorry, this namespace is not available because it is a common file extension. ${
-          contactSupport
-        }`
-      );
+      throw new Error(`Sorry, this namespace is not available because it is a common file extension. ${
+        contactSupport
+      }`);
     }
 
     if (reason === 'COMMON_ENGLISH_WORD' || reason === 'COMMON_TAG') {
-      throw new Error(
-        `Sorry, this namespace is not available because it is quite a common term. ${
-          contactSupport
-        }`
-      );
+      throw new Error(`Sorry, this namespace is not available because it is quite a common term. ${
+        contactSupport
+      }`);
     }
 
     throw new Error(`Sorry, this namespace is not available. ${contactSupport}`);
   }
+
   /* eslint-enable complexity */
 
   // === GitHub account connections ===
@@ -812,8 +775,7 @@ export class RegistryClient {
       async () => {
         const url = `${this.registryURL}/user/start-connect-github-account`;
         return await this._userRequest(authorization =>
-          postJSON(url, {parentAction}, {authorization})
-        );
+          postJSON(url, {parentAction}, {authorization}));
       },
       {
         intro: `Fetching connection URL...`,
@@ -823,9 +785,7 @@ export class RegistryClient {
 
     printSuccess(`GitHub connection page opened in your browser`);
     emptyLine();
-    printText(
-      `If the GitHub connection page doesn't open automatically, please copy/paste the following URL in your browser:`
-    );
+    printText(`If the GitHub connection page doesn't open automatically, please copy/paste the following URL in your browser:`);
     emptyLine();
     print(formatURL(gitHubAccountConnectionURL));
 
@@ -868,8 +828,7 @@ export class RegistryClient {
       async () => {
         const url = `${this.registryURL}/user/check-github-connection`;
         const {body: {connected}} = await this._userRequest(authorization =>
-          postJSON(url, undefined, {authorization})
-        );
+          postJSON(url, undefined, {authorization}));
         if (!connected) {
           throw new Error('GitHub account connection failed');
         }
@@ -937,8 +896,7 @@ export class RegistryClient {
     }
 
     const {body: {unchanged, definition, filesURL}} = await this._userRequest(authorization =>
-      getJSON(url, {authorization})
-    );
+      getJSON(url, {authorization}));
 
     if (unchanged) {
       return {unchanged};
@@ -1137,8 +1095,7 @@ export class RegistryClient {
 
     const url = `${this.registryURL}/resources`;
     await this._userRequest(authorization =>
-      postJSON(url, {definition, temporaryFilesURL}, {authorization})
-    );
+      postJSON(url, {definition, temporaryFilesURL}, {authorization}));
 
     await this._invalidateResourceCache(identifier, version);
   }
@@ -1164,9 +1121,7 @@ export class RegistryClient {
       const resolvedFile = resolve(directory, file);
 
       if (!existsSync(resolvedFile)) {
-        throw new Error(
-          `File ${formatPath(file)} specified in ${formatCode('files')} property doesn't exist`
-        );
+        throw new Error(`File ${formatPath(file)} specified in ${formatCode('files')} property doesn't exist`);
       }
 
       if (isDirectory.sync(resolvedFile)) {

@@ -57,7 +57,7 @@ export async function fetch(url, options = {}) {
     if (result) {
       result = JSON.parse(result);
       if (result.body) {
-        result.body = new Buffer(result.body, 'base64');
+        result.body = Buffer.from(result.body, 'base64');
       }
     }
   }

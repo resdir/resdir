@@ -58,9 +58,7 @@ export async function catchError(promise) {
 export function avoidCommonMistakes(obj, mistakes) {
   for (const [wrong, correct] of entries(mistakes)) {
     if (wrong in obj) {
-      throw new Error(
-        `Wrong property name: ${formatCode(wrong)}. Did you mean ${formatCode(correct)}?`
-      );
+      throw new Error(`Wrong property name: ${formatCode(wrong)}. Did you mean ${formatCode(correct)}?`);
     }
   }
 }

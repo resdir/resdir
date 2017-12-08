@@ -25,7 +25,8 @@ export class VersionRange {
     if (type === 'AFTER') {
       const value = version.value;
       return value.slice(2);
-    } else if (type === 'BETWEEN') {
+    }
+    if (type === 'BETWEEN') {
       const value = version.value.split(',')[0];
       return value.slice(2);
     }
@@ -38,7 +39,8 @@ export class VersionRange {
     if (type === 'BEFORE') {
       const value = version.value;
       return value.slice(2);
-    } else if (type === 'BETWEEN') {
+    }
+    if (type === 'BETWEEN') {
       const value = version.value.split(',')[1];
       return value.slice(2);
     }

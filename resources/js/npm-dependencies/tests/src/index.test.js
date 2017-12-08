@@ -20,9 +20,7 @@ describe('js/npm-dependencies', () => {
   test('creation', async () => {
     expect(await (await Package.$extend()).$getChild('dependencies').count()).toBe(0);
 
-    expect(
-      await (await Package.$extend({dependencies: {}})).$getChild('dependencies').count()
-    ).toBe(0);
+    expect(await (await Package.$extend({dependencies: {}})).$getChild('dependencies').count()).toBe(0);
 
     const pkg = await Package.$extend({dependencies: {json5: '^1.0.0', lodash: '2.0.0'}});
     expect(await pkg.$getChild('dependencies').count()).toBe(2);
@@ -33,11 +31,9 @@ describe('js/npm-dependencies', () => {
 
   test('normalization and serialization', async () => {
     expect((await Package.$extend({dependencies: {}})).$serialize()).toEqual({dependencies: {}});
-    expect(
-      (await Package.$extend({
-        dependencies: {json5: '^1.0.0', lodash: '', babel: {version: '6.0.0', type: 'development'}}
-      })).$serialize()
-    ).toEqual({
+    expect((await Package.$extend({
+      dependencies: {json5: '^1.0.0', lodash: '', babel: {version: '6.0.0', type: 'development'}}
+    })).$serialize()).toEqual({
       dependencies: {json5: '^1.0.0', lodash: '', babel: {version: '6.0.0', type: 'development'}}
     });
   });

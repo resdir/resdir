@@ -10,11 +10,7 @@ export default base =>
   class ResdirResource extends base {
     async publish({major, minor, patch}, {verbose, quiet, debug}) {
       if (!(this.id && this.version)) {
-        throw new Error(
-          `Can't publish a resource without ${formatCode('id')} and ${formatCode(
-            'version'
-          )} properties`
-        );
+        throw new Error(`Can't publish a resource without ${formatCode('id')} and ${formatCode('version')} properties`);
       }
 
       await this['@build']();

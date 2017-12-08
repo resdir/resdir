@@ -182,8 +182,7 @@ export default base =>
     _getDependencies() {
       let dependencies = this.$value || {};
       dependencies = toPairs(dependencies).map(([key, value]) =>
-        Dependency.toDefinition(key, value)
-      );
+        Dependency.toDefinition(key, value));
       dependencies = dependencies.map(dependency => new Dependency(dependency));
       return dependencies;
     }
