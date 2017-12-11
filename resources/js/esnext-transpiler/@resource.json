@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.33",
+  "version": "0.1.35",
   "isPublic": true,
   "files": [
     "./dist"
@@ -77,6 +77,7 @@
     },
     "initialize": {
       "@type": "method",
+      "@hidden": true,
       "@input": {
         "gitignore": true
       },
