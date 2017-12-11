@@ -1,7 +1,7 @@
 import {join} from 'path';
 import {outputFileSync, pathExistsSync} from 'fs-extra';
 import {updatePackageFile, publishPackage, fetchNPMRegistry} from '@resdir/package-manager';
-import {task, formatString, formatCode} from '@resdir/console';
+import {task, prompt, formatString, formatCode} from '@resdir/console';
 import GitIgnore from '@resdir/gitignore-manager';
 
 const PACKAGE_CODE = `// Package implementation
@@ -92,8 +92,12 @@ export default base =>
     }
 
     async initialize({name, version, gitignore}) {
-      if (!name) {
-        throw new Error('\'name\' argument is missing');
+      while (!name) {
+        name = await prompt('Package name:');
+      }
+
+      while (!version) {
+        version = await prompt('Version number:', {default: '0.1.0'});
       }
 
       const directory = this.$getCurrentDirectory();
@@ -104,14 +108,7 @@ export default base =>
       const filesPropertyIsMissing = !this.files;
 
       this.name = name;
-
-      if (!version && !this.version) {
-        version = '0.1.0';
-      }
-
-      if (version) {
-        this.version = version;
-      }
+      this.version = version;
 
       if (gitignore) {
         GitIgnore.load(directory)
