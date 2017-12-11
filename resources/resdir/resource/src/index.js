@@ -1,4 +1,4 @@
-import {task, formatString, formatCode} from '@resdir/console';
+import {task, prompt, formatString, formatCode} from '@resdir/console';
 import RegistryClient from '@resdir/registry-client';
 import {validateResourceIdentifier} from '@resdir/resource-identifier';
 import {validateVersion} from '@resdir/version';
@@ -41,18 +41,17 @@ export default base =>
     }
 
     async initialize({id, version, gitignore}) {
-      if (id) {
-        validateResourceIdentifier(id);
-        this.id = id;
-        if (!version && !this.version) {
-          version = '0.1.0';
-        }
+      while (!id) {
+        id = await prompt('Resource identifier:');
       }
+      validateResourceIdentifier(id);
+      this.id = id;
 
-      if (version) {
-        validateVersion(version);
-        this.version = version;
+      while (!version) {
+        version = await prompt('Version number:', {default: '0.1.0'});
       }
+      validateVersion(version);
+      this.version = version;
 
       if (gitignore) {
         GitIgnore.load(this.$getCurrentDirectory())

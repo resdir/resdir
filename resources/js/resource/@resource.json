@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/resource",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "isPublic": true,
   "files": [
     "./dist"
@@ -23,6 +23,7 @@
     "@implementation": "./dist",
     "initialize": {
       "@type": "method",
+      "@hidden": true,
       "@input": {
         "gitignore": true
       },
