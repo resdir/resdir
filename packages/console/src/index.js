@@ -108,12 +108,17 @@ export function printErrorAndExit(error, code = 1) {
   process.exit(code);
 }
 
-export function prompt(message, {type} = {}) {
+export function prompt(message, {type, default: defaultValue} = {}) {
   return new Promise((resolve, reject) => {
     global.resdirConsoleSessionIsEmpty = false;
     resetEmptyLinesCount();
 
-    const options = {prompt: `${dim('>>')} ${message}`};
+    let prompt = `${dim('>>')} ${message}`;
+    if (defaultValue) {
+      prompt += ` ${dim(`[${defaultValue}]`)}`;
+    }
+
+    const options = {prompt};
 
     if (type === 'PASSWORD') {
       options.silent = true;
@@ -125,7 +130,7 @@ export function prompt(message, {type} = {}) {
       if (err) {
         return reject(err);
       }
-      resolve(response);
+      resolve(response || defaultValue);
     });
   });
 }
