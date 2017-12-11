@@ -1,9 +1,14 @@
 {
-  "@import": ["resdir/resource", "js/resource"],
+  "@import": [
+    "resdir/resource",
+    "js/resource"
+  ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.32",
+  "version": "0.1.33",
   "isPublic": true,
-  "files": ["./dist"],
+  "files": [
+    "./dist"
+  ],
   "dependencies": {
     "@import": "js/npm-dependencies",
     "@value": {
@@ -40,7 +45,12 @@
     "@implementation": "./dist",
     "source": "./src",
     "destination": "./dist",
-    "extensions": [".js", ".jsx", ".es6", ".es"],
+    "extensions": [
+      ".js",
+      ".jsx",
+      ".es6",
+      ".es"
+    ],
     "targets": {
       "@type": "object",
       "@value": {
@@ -60,7 +70,10 @@
           "@position": 0
         }
       },
-      "@listen": ["@build", "@fileModified"]
+      "@listen": [
+        "@build",
+        "@fileModified"
+      ]
     },
     "initialize": {
       "@type": "method",

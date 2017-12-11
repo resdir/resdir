@@ -145,8 +145,8 @@ export default base =>
         return;
       }
 
-      if (this.$unpublishable === undefined) {
-        this.$unpublishable = true;
+      if (this.$getIsUnpublishable() === undefined) {
+        this.$setIsUnpublishable(true);
       }
 
       const root = this.$getRoot();
