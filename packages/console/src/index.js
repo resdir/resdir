@@ -18,6 +18,10 @@ if (global.resdirConsoleEmptyLinesCount === undefined) {
   global.resdirConsoleEmptyLinesCount = 0;
 }
 
+if (global.resdirConsoleTaskStack === undefined) {
+  global.resdirConsoleTaskStack = [];
+}
+
 export async function session(fn) {
   global.resdirConsoleSessionsCount++;
   if (global.resdirConsoleSessionsCount === 1) {
@@ -31,9 +35,11 @@ export async function session(fn) {
 }
 
 export function print(message, {output = 'log'} = {}) {
+  pauseCurrentTasks();
   console[output](message);
   global.resdirConsoleSessionIsEmpty = false;
   resetEmptyLinesCount();
+  resumeCurrentTasks();
 }
 
 export function emptyLine(count = 1) {
@@ -108,31 +114,36 @@ export function printErrorAndExit(error, code = 1) {
   process.exit(code);
 }
 
-export function prompt(message, {type, default: defaultValue} = {}) {
-  return new Promise((resolve, reject) => {
-    global.resdirConsoleSessionIsEmpty = false;
-    resetEmptyLinesCount();
+export async function prompt(message, {type, default: defaultValue} = {}) {
+  try {
+    pauseCurrentTasks();
+    return await new Promise((resolve, reject) => {
+      global.resdirConsoleSessionIsEmpty = false;
+      resetEmptyLinesCount();
 
-    let prompt = `${dim('>>')} ${message}`;
-    if (defaultValue) {
-      prompt += ` ${dim(`[${defaultValue}]`)}`;
-    }
-
-    const options = {prompt};
-
-    if (type === 'PASSWORD') {
-      options.silent = true;
-      options.replace = '*';
-      incrementEmptyLinesCount(); // Turn around a bug in 'read' module
-    }
-
-    read(options, (err, response) => {
-      if (err) {
-        return reject(err);
+      let prompt = `${dim('>')} ${message}`;
+      if (defaultValue) {
+        prompt += ` ${dim(`[${defaultValue}]`)}`;
       }
-      resolve(response || defaultValue);
+
+      const options = {prompt};
+
+      if (type === 'PASSWORD') {
+        options.silent = true;
+        options.replace = '*';
+        incrementEmptyLinesCount(); // Turn around a bug in 'read' module
+      }
+
+      read(options, (err, response) => {
+        if (err) {
+          return reject(err);
+        }
+        resolve(response || defaultValue);
+      });
     });
-  });
+  } finally {
+    resumeCurrentTasks();
+  }
 }
 
 export async function confirm(message, options = {}) {
@@ -466,6 +477,10 @@ class AbstractTaskView {
     this.setMessage(message);
   }
 
+  pause() {}
+
+  resume() {}
+
   complete() {}
 
   fail() {}
@@ -506,6 +521,15 @@ class AnimatedTaskView extends AbstractTaskView {
     super.start(message);
     this.spinner.start();
     global.resdirConsoleSessionIsEmpty = false;
+    resetEmptyLinesCount();
+  }
+
+  pause() {
+    this.spinner.stop();
+  }
+
+  resume() {
+    this.spinner.start();
     resetEmptyLinesCount();
   }
 
@@ -550,10 +574,6 @@ export async function task(fn, {intro, outro, verbose, debug, quiet}) {
     throw new TypeError('\'fn\' must be a function');
   }
 
-  if (!global.resdirConsoleTaskStack) {
-    global.resdirConsoleTaskStack = [];
-  }
-
   const stack = global.resdirConsoleTaskStack;
 
   let ViewClass;
@@ -587,6 +607,18 @@ export async function task(fn, {intro, outro, verbose, debug, quiet}) {
     }
   } finally {
     stack.pop();
+  }
+}
+
+function pauseCurrentTasks() {
+  for (const view of global.resdirConsoleTaskStack) {
+    view.pause();
+  }
+}
+
+function resumeCurrentTasks() {
+  for (const view of global.resdirConsoleTaskStack) {
+    view.resume();
   }
 }
 
