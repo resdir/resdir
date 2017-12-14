@@ -1,9 +1,11 @@
 {
   "@import": "js/npm-package#^0.1.22",
   "name": "@resdir/method-arguments",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Useful functions to handle method arguments",
-  "files": ["./dist"],
+  "files": [
+    "./dist"
+  ],
   "main": "./dist/index.js",
   "dependencies": {
     "@resdir/util": "^0.1.3"

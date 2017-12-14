@@ -1,6 +1,7 @@
 import {takeProperty} from '@resdir/util';
 
 const POSITIONAL_ARGUMENT_PREFIX = '@$';
+const SUB_ARGUMENTS_KEY = '@$SUBARGS';
 
 export function takeArgument(args, key, aliases) {
   return takeProperty(args, key, aliases);
@@ -48,4 +49,16 @@ export function findPositionalArguments(args) {
 
 export function makePositionalArgumentKey(position) {
   return POSITIONAL_ARGUMENT_PREFIX + String(position);
+}
+
+export function getSubArguments(args) {
+  return args[SUB_ARGUMENTS_KEY];
+}
+
+export function setSubArguments(args, subArgs) {
+  args[SUB_ARGUMENTS_KEY] = subArgs;
+}
+
+export function getSubArgumentsKey() {
+  return SUB_ARGUMENTS_KEY;
 }
