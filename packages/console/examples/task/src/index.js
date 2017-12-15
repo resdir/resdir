@@ -1,7 +1,9 @@
 import sleep from 'sleep-promise';
 import {task} from '../../../dist';
 
-const verbose = process.argv.includes('--@verbose');
+const environment = {
+  '@verbose': process.argv.includes('--@verbose')
+};
 
 (async () => {
   await task(
@@ -28,6 +30,7 @@ const verbose = process.argv.includes('--@verbose');
       );
       await sleep(1000);
     },
-    {intro: 'Publishing resource...', outro: 'Resource published', verbose}
+    {intro: 'Publishing resource...', outro: 'Resource published'},
+    environment
   );
 })().catch(err => console.error(err));

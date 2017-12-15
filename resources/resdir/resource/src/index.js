@@ -8,7 +8,7 @@ const GIT_IGNORE = ['.DS_STORE', '*.log'];
 
 export default base =>
   class ResdirResource extends base {
-    async publish({major, minor, patch}, {verbose, quiet, debug}) {
+    async publish({major, minor, patch}, environment) {
       if (!(this.id && this.version)) {
         throw new Error(`Can't publish a resource without ${formatCode('id')} and ${formatCode('version')} properties`);
       }
@@ -19,7 +19,7 @@ export default base =>
       await this.$emit('publish');
 
       if (major || minor || patch) {
-        await this.$getChild('version').bump({major, minor, patch}, {verbose, quiet, debug});
+        await this.$getChild('version').bump({major, minor, patch}, environment);
       }
 
       await task(
@@ -30,11 +30,9 @@ export default base =>
         },
         {
           intro: `Publishing resource (${formatString(this.id)})...`,
-          outro: `Resource published (${formatString(this.id)})`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `Resource published (${formatString(this.id)})`
+        },
+        environment
       );
 
       await this.$emit('published');

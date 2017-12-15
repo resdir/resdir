@@ -12,42 +12,38 @@ export default base =>
   class CloudFrontMixin extends base {
     static CLOUD_FRONT_HOSTED_ZONE_ID = 'Z2FDTNDATAQYW2';
 
-    async configureCloudFrontDistribution({verbose, quiet, debug}) {
+    async configureCloudFrontDistribution(environment) {
       const cloudFront = this.getCloudFrontClient();
 
       let hasBeenCreated;
 
-      let {distribution, status} = await this.checkCloudFrontDistribution({verbose, quiet, debug});
+      let {distribution, status} = await this.checkCloudFrontDistribution(environment);
 
       if (status === 'NOT_FOUND') {
-        distribution = await this.createCloudFrontDistribution({verbose, quiet, debug});
+        distribution = await this.createCloudFrontDistribution(environment);
         hasBeenCreated = true;
         status = 'DEPLOYING';
       } else if (status === 'NEEDS_UPDATE') {
-        await this.updateCloudFrontDistribution(distribution.Id, {verbose, quiet, debug});
+        await this.updateCloudFrontDistribution(distribution.Id, environment);
         status = 'DEPLOYING';
       }
 
       if (status === 'DEPLOYING') {
-        await waitUntilCloudFrontDistributionIsDeployed(cloudFront, distribution.Id, {
-          verbose,
-          quiet,
-          debug
-        });
+        await waitUntilCloudFrontDistributionIsDeployed(cloudFront, distribution.Id, environment);
       }
 
       return hasBeenCreated;
     }
 
-    async checkCloudFrontDistribution({verbose, quiet, debug}) {
+    async checkCloudFrontDistribution(environment) {
       return await task(
         async () => {
-          const distribution = await this.findCloudFrontDistribution({verbose, quiet, debug});
+          const distribution = await this.findCloudFrontDistribution(environment);
           if (!distribution) {
             return {status: 'NOT_FOUND'};
           }
 
-          await this.checkCloudFrontDistributionTags(distribution, {verbose, quiet, debug});
+          await this.checkCloudFrontDistributionTags(distribution, environment);
 
           if (!distribution.Enabled) {
             throw new Error(`The CloudFront distribution is disabled (ARN: ${formatString(distribution.ARN)})`);
@@ -65,39 +61,33 @@ export default base =>
         },
         {
           intro: `Checking CloudFront distribution...`,
-          outro: `CloudFront distribution checked`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `CloudFront distribution checked`
+        },
+        environment
       );
     }
 
     _cloudFrontDistributions = {};
 
-    async findCloudFrontDistribution({verbose, quiet, debug}) {
+    async findCloudFrontDistribution(environment) {
       let distribution = this._cloudFrontDistributions[this.domainName];
       if (!distribution) {
         distribution = await findCloudFrontDistribution(
           this.getCloudFrontClient(),
           this.domainName,
-          {
-            verbose,
-            quiet,
-            debug
-          }
+          environment
         );
         this._cloudFrontDistributions[this.domainName] = distribution;
       }
       return distribution;
     }
 
-    async createCloudFrontDistribution({verbose, quiet, debug}) {
+    async createCloudFrontDistribution(environment) {
       const cloudFront = this.getCloudFrontClient();
 
-      let certificateARN = await this.findACMCertificate({verbose, quiet, debug});
+      let certificateARN = await this.findACMCertificate(environment);
       if (!certificateARN) {
-        certificateARN = await this.requestACMCertificate({verbose, quiet, debug});
+        certificateARN = await this.requestACMCertificate(environment);
       }
 
       return await task(
@@ -145,11 +135,9 @@ export default base =>
         },
         {
           intro: `Creating CloudFront distribution...`,
-          outro: `CloudFront distribution created`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `CloudFront distribution created`
+        },
+        environment
       );
     }
 
@@ -183,7 +171,7 @@ export default base =>
       return false;
     }
 
-    async updateCloudFrontDistribution(distributionId, {verbose, quiet, debug}) {
+    async updateCloudFrontDistribution(distributionId, environment) {
       const cloudFront = this.getCloudFrontClient();
 
       await task(
@@ -208,11 +196,9 @@ export default base =>
         },
         {
           intro: `Updating CloudFront distribution...`,
-          outro: `CloudFront distribution updated`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `CloudFront distribution updated`
+        },
+        environment
       );
     }
 
@@ -292,7 +278,7 @@ export default base =>
       };
     }
 
-    async checkCloudFrontDistributionTags(distribution, {verbose, quiet, debug}) {
+    async checkCloudFrontDistributionTags(distribution, environment) {
       const cloudFront = this.getCloudFrontClient();
 
       await task(
@@ -304,15 +290,13 @@ export default base =>
         },
         {
           intro: `Checking CloudFront distribution tags...`,
-          outro: `CloudFront distribution tags checked`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `CloudFront distribution tags checked`
+        },
+        environment
       );
     }
 
-    async runCloudFrontInvalidation(changes, {verbose, quiet, debug}) {
+    async runCloudFrontInvalidation(changes, environment) {
       if (changes.length === 0) {
         return;
       }
@@ -330,7 +314,7 @@ export default base =>
 
       await task(
         async () => {
-          const distribution = await this.findCloudFrontDistribution({verbose, quiet, debug});
+          const distribution = await this.findCloudFrontDistribution(environment);
           const {Invalidation: invalidation} = await cloudFront.createInvalidation({
             DistributionId: distribution.Id,
             InvalidationBatch: {
@@ -341,27 +325,24 @@ export default base =>
               }
             }
           });
+          const quietEnvironment = await environment.$extend({'@quiet': true});
           await waitUntilCloudFrontInvalidationIsCompleted(
             cloudFront,
             distribution.Id,
             invalidation.Id,
-            {
-              quiet: true
-            }
+            quietEnvironment
           );
         },
         {
           intro: `Running CloudFront invalidation...`,
-          outro: `CloudFront invalidation completed`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `CloudFront invalidation completed`
+        },
+        environment
       );
     }
 
-    async getCloudFrontDomainName({verbose, quiet, debug}) {
-      const distribution = await this.findCloudFrontDistribution({verbose, quiet, debug});
+    async getCloudFrontDomainName(environment) {
+      const distribution = await this.findCloudFrontDistribution(environment);
       return distribution && distribution.DomainName;
     }
 
@@ -373,7 +354,7 @@ export default base =>
     }
   };
 
-async function findCloudFrontDistribution(cloudFront, domainName, {verbose, quiet, debug}) {
+async function findCloudFrontDistribution(cloudFront, domainName, environment) {
   return await task(
     async progress => {
       const result = await cloudFront.listDistributions();
@@ -392,30 +373,22 @@ async function findCloudFrontDistribution(cloudFront, domainName, {verbose, quie
       progress.setOutro('CloudFront distribution not found');
     },
     {
-      intro: `Searching for an existing CloudFront distribution...`,
-      verbose,
-      quiet,
-      debug
-    }
+      intro: `Searching for an existing CloudFront distribution...`
+    },
+    environment
   );
 }
 
-async function waitUntilCloudFrontDistributionIsDeployed(
-  cloudFront,
-  distributionId,
-  {verbose, quiet, debug}
-) {
+async function waitUntilCloudFrontDistributionIsDeployed(cloudFront, distributionId, environment) {
   return await task(
     async () => {
       await cloudFront.waitFor('distributionDeployed', {Id: distributionId});
     },
     {
       intro: `Waiting for CloudFront deployment (be patient, it can take up to 15 minutes)...`,
-      outro: 'CloudFront distribution deployed',
-      verbose,
-      quiet,
-      debug
-    }
+      outro: 'CloudFront distribution deployed'
+    },
+    environment
   );
 }
 
@@ -423,7 +396,7 @@ async function waitUntilCloudFrontInvalidationIsCompleted(
   cloudFront,
   distributionId,
   invalidationId,
-  {verbose, quiet, debug}
+  environment
 ) {
   await task(
     async () => {
@@ -445,10 +418,8 @@ async function waitUntilCloudFrontInvalidationIsCompleted(
     },
     {
       intro: `Waiting for CloudFront invalidation completion...`,
-      outro: `CloudFront invalidation completed`,
-      verbose,
-      quiet,
-      debug
-    }
+      outro: `CloudFront invalidation completed`
+    },
+    environment
   );
 }

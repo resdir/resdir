@@ -14,7 +14,7 @@ const IMMUTABLE_FILES_MAX_AGE = 3153600000; // 100 years!
 
 export default base =>
   class S3Mixin extends base {
-    async configureS3Bucket({verbose, quiet, debug}) {
+    async configureS3Bucket(environment) {
       const s3 = this.getS3Client();
       const bucketName = this.getS3BucketName();
       const region = this.getS3BucketRegion();
@@ -76,15 +76,13 @@ export default base =>
         },
         {
           intro: `Checking S3 bucket...`,
-          outro: `S3 bucket checked`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `S3 bucket checked`
+        },
+        environment
       );
     }
 
-    async synchronizeFiles({verbose, quiet, debug}) {
+    async synchronizeFiles(environment) {
       const s3 = this.getS3Client();
       const bucketName = this.getS3BucketName();
 
@@ -129,11 +127,9 @@ export default base =>
             },
             {
               intro: `Listing existing files on S3...`,
-              outro: `Existing files on S3 listed`,
-              verbose,
-              quiet,
-              debug
-            }
+              outro: `Existing files on S3 listed`
+            },
+            environment
           );
 
           let addedFiles = 0;
@@ -182,11 +178,9 @@ export default base =>
                 intro: formatMessage(`Uploading ${formatPath(path)}...`, {
                   info: '(' + bytes(size) + ')'
                 }),
-                outro: `File uploaded`,
-                verbose,
-                quiet,
-                debug
-              }
+                outro: `File uploaded`
+              },
+              environment
             );
 
             if (!existingFile) {
@@ -207,11 +201,9 @@ export default base =>
               },
               {
                 intro: `Removing ${formatPath(file.path)}...`,
-                outro: `File removed`,
-                verbose,
-                quiet,
-                debug
-              }
+                outro: `File removed`
+              },
+              environment
             );
           }
 
@@ -255,11 +247,9 @@ export default base =>
         },
         {
           intro: `Synchronizing files...`,
-          outro: `Files synchronized`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `Files synchronized`
+        },
+        environment
       );
     }
 

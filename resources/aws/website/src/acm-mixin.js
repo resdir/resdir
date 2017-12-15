@@ -5,18 +5,14 @@ import sleep from 'sleep-promise';
 
 export default base =>
   class ACMMixin extends base {
-    async findACMCertificate({verbose, quiet, debug}) {
+    async findACMCertificate(environment) {
       const acm = this.getACMClient();
 
       const certificate = await findACMCertificate(
         acm,
         this.domainName,
         this.constructor.MANAGED_BY_TAG,
-        {
-          verbose,
-          quiet,
-          debug
-        }
+        environment
       );
 
       if (!certificate) {
@@ -24,17 +20,13 @@ export default base =>
       }
 
       if (certificate.Status === 'PENDING_VALIDATION') {
-        await waitUntilACMCertificateIsIssued(acm, certificate.CertificateArn, {
-          verbose,
-          quiet,
-          debug
-        });
+        await waitUntilACMCertificateIsIssued(acm, certificate.CertificateArn, environment);
       }
 
       return certificate.CertificateArn;
     }
 
-    async requestACMCertificate({verbose, quiet, debug}) {
+    async requestACMCertificate(environment) {
       const acm = this.getACMClient();
 
       const certificateARN = await task(
@@ -50,14 +42,12 @@ export default base =>
         },
         {
           intro: `Requesting ACM certificate for ${formatString(this.domainName)}...`,
-          outro: `ACM certificate requested for ${formatString(this.domainName)}`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `ACM certificate requested for ${formatString(this.domainName)}`
+        },
+        environment
       );
 
-      await waitUntilACMCertificateIsIssued(acm, certificateARN, {verbose, quiet, debug});
+      await waitUntilACMCertificateIsIssued(acm, certificateARN, environment);
 
       return certificateARN;
     }
@@ -70,7 +60,7 @@ export default base =>
     }
   };
 
-async function findACMCertificate(acm, domainName, managedByTag, {verbose, quiet, debug}) {
+async function findACMCertificate(acm, domainName, managedByTag, environment) {
   let rootDomainName;
   const parts = domainName.split('.');
   if (parts.length > 2) {
@@ -153,15 +143,13 @@ async function findACMCertificate(acm, domainName, managedByTag, {verbose, quiet
       progress.setOutro('ACM certificate not found');
     },
     {
-      intro: `Searching for the ACM certificate...`,
-      verbose,
-      quiet,
-      debug
-    }
+      intro: `Searching for the ACM certificate...`
+    },
+    environment
   );
 }
 
-async function waitUntilACMCertificateIsIssued(acm, certificateARN, {verbose, quiet, debug}) {
+async function waitUntilACMCertificateIsIssued(acm, certificateARN, environment) {
   await task(
     async () => {
       const sleepTime = 10000; // 10 seconds
@@ -181,10 +169,8 @@ async function waitUntilACMCertificateIsIssued(acm, certificateARN, {verbose, qu
     },
     {
       intro: `An email has been sent to the owner of the domain name, waiting for his approval...`,
-      outro: `ACM certificate approved`,
-      verbose,
-      quiet,
-      debug
-    }
+      outro: `ACM certificate approved`
+    },
+    environment
   );
 }

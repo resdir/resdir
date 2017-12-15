@@ -6,7 +6,7 @@ import Dependency from './dependency';
 
 export default base =>
   class Dependencies extends base {
-    async add({specifier, production, development, peer, optional}, {verbose, quiet, debug}) {
+    async add({specifier, production, development, peer, optional}, environment) {
       let type;
       if (production) {
         type = 'production';
@@ -30,21 +30,19 @@ export default base =>
         await task(
           async () => {
             await this._addDependency(dependency);
-            await this._installDependencies({debug});
+            await this._installDependencies(environment);
             await this.$getRoot().$save();
           },
           {
             intro: `Adding ${formatString(dependency.name)} dependency...`,
-            outro: `Dependency ${formatString(dependency.name)} added`,
-            verbose,
-            quiet,
-            debug
-          }
+            outro: `Dependency ${formatString(dependency.name)} added`
+          },
+          environment
         );
       }
     }
 
-    async remove({name}, {verbose, quiet, debug}) {
+    async remove({name}, environment) {
       const names = [];
       if (name) {
         names.push(name); // TODO: Handle multiple packages
@@ -54,16 +52,14 @@ export default base =>
         await task(
           async () => {
             this._removeDependency(name);
-            await this._installDependencies({debug});
+            await this._installDependencies(environment);
             await this.$getRoot().$save();
           },
           {
             intro: `Removing ${formatString(name)} dependency...`,
-            outro: `Dependency ${formatString(name)} removed`,
-            verbose,
-            quiet,
-            debug
-          }
+            outro: `Dependency ${formatString(name)} removed`
+          },
+          environment
         );
       }
     }
@@ -93,28 +89,26 @@ export default base =>
       this._setDependencies(dependencies);
     }
 
-    async install(_args, {verbose, quiet, debug}) {
+    async install(_args, environment) {
       await task(
         async () => {
           await this._installDependencies();
         },
         {
           intro: `Installing dependencies...`,
-          outro: `Dependencies installed`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `Dependencies installed`
+        },
+        environment
       );
     }
 
-    async _installDependencies({debug} = {}) {
+    async _installDependencies(environment) {
       const packageDirectory = this.$getParent().$getCurrentDirectory();
       let packageFileCreated;
       try {
         const {status} = this._updatePackageFile(packageDirectory);
         packageFileCreated = status === 'CREATED';
-        await installPackage(packageDirectory, {debug});
+        await installPackage(packageDirectory, undefined, environment);
       } finally {
         if (packageFileCreated) {
           removePackageFile(packageDirectory);
@@ -148,13 +142,14 @@ export default base =>
       this._getDependencies().forEach(fn);
     }
 
-    async updatePackageFile(_args, {verbose, quiet, debug}) {
+    async updatePackageFile(_args, environment) {
       await task(
         async () => {
           const directory = this.$getParent().$getCurrentDirectory();
           this._updatePackageFile(directory);
         },
-        {intro: `Updating package file...`, outro: `Package file updated`, verbose, quiet, debug}
+        {intro: `Updating package file...`, outro: `Package file updated`},
+        environment
       );
     }
 

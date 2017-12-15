@@ -7,7 +7,7 @@ export default base =>
       return validateVersion(this.$value, {throwIfInvalid});
     }
 
-    async bump({major, minor, patch}, {verbose, quiet, debug}) {
+    async bump({major, minor, patch}, environment) {
       let part;
       if (major) {
         part = 'major';
@@ -25,7 +25,8 @@ export default base =>
           await this.$getRoot().$save();
           progress.setOutro(`Version number bumped to ${formatString(this.$value)}`);
         },
-        {intro: 'Bumping version number...', verbose, quiet, debug}
+        {intro: 'Bumping version number...'},
+        environment
       );
     }
 

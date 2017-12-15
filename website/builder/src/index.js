@@ -17,37 +17,37 @@ import revHash from 'rev-hash';
 
 export default base =>
   class Builder extends base {
-    async run(_args, {verbose, quiet, debug}) {
+    async run(_args, environment) {
       await this.clearDestination();
 
-      const bundleFilename = await this.generateBundle({
-        replacements: {
-          RESDIR_REGISTRY_URL: this.environment.resdirRegistryURL
+      const bundleFilename = await this.generateBundle(
+        {
+          replacements: {
+            RESDIR_REGISTRY_URL: this.environment.resdirRegistryURL
+          }
         },
-        verbose,
-        quiet,
-        debug
-      });
+        environment
+      );
 
-      await this.generateIndexPage({
-        replacements: {
-          REACT_URL: this.environment.reactURL,
-          REACT_DOM_URL: this.environment.reactDOMURL,
-          BUNDLE_PATH: '/' + bundleFilename
+      await this.generateIndexPage(
+        {
+          replacements: {
+            REACT_URL: this.environment.reactURL,
+            REACT_DOM_URL: this.environment.reactDOMURL,
+            BUNDLE_PATH: '/' + bundleFilename
+          }
         },
-        verbose,
-        quiet,
-        debug
-      });
+        environment
+      );
 
-      await this.copyAssets({verbose, quiet, debug});
+      await this.copyAssets(environment);
     }
 
     async clearDestination() {
       await emptyDir(this.getDestinationDirectory());
     }
 
-    async generateIndexPage({replacements, verbose, quiet, debug}) {
+    async generateIndexPage({replacements}, environment) {
       await task(
         async () => {
           let html = readFileSync(join(this.getSourceDirectory(), 'index.html'), 'utf8');
@@ -59,15 +59,13 @@ export default base =>
         },
         {
           intro: 'Generating index page...',
-          outro: 'Index page generated',
-          verbose,
-          quiet,
-          debug
-        }
+          outro: 'Index page generated'
+        },
+        environment
       );
     }
 
-    async copyAssets({verbose, quiet, debug}) {
+    async copyAssets(environment) {
       await task(
         async () => {
           await copy(
@@ -77,15 +75,13 @@ export default base =>
         },
         {
           intro: 'Copying assets...',
-          outro: 'Assets copied',
-          verbose,
-          quiet,
-          debug
-        }
+          outro: 'Assets copied'
+        },
+        environment
       );
     }
 
-    async generateBundle({replacements, verbose, quiet, debug}) {
+    async generateBundle({replacements}, environment = {}) {
       return await task(
         async progress => {
           const startingTime = Date.now();
@@ -99,7 +95,7 @@ export default base =>
               join(this.getSourceDirectory(), 'node_modules.dev')
             );
             const contentResource = await this.constructor.$load(this.getSourceDirectory());
-            await contentResource.$getChild('dependencies').install({}, {verbose, quiet, debug});
+            await contentResource.$getChild('dependencies').install({}, environment);
           }
 
           try {
@@ -180,7 +176,7 @@ export default base =>
             });
 
             for (const warning of warnings) {
-              if (debug) {
+              if (environment['@debug']) {
                 console.dir(warning, {depth: null, colors: true});
               } else {
                 console.warn(warning.toString());
@@ -212,11 +208,9 @@ export default base =>
         },
         {
           intro: 'Generating bundle...',
-          outro: 'Bundle generated',
-          verbose,
-          quiet,
-          debug
-        }
+          outro: 'Bundle generated'
+        },
+        environment
       );
     }
 

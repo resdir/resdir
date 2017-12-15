@@ -3,11 +3,12 @@ import {task} from '@resdir/console';
 
 export default base =>
   class ExternalDNSMixin extends base {
-    async checkCNAME({verbose, quiet, debug}) {
+    async checkCNAME(environment) {
       return await task(
         async progress => {
           const values = await dnsResolve(this.domainName, 'CNAME');
-          const cloudFrontDomainName = await this.getCloudFrontDomainName({quiet: true});
+          const quietEnvironment = await environment.$extend({'@quiet': true});
+          const cloudFrontDomainName = await this.getCloudFrontDomainName(quietEnvironment);
           if (values && values.includes(cloudFrontDomainName)) {
             return true;
           }
@@ -15,11 +16,9 @@ export default base =>
         },
         {
           intro: `Checking domain name...`,
-          outro: `Domain name checked`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `Domain name checked`
+        },
+        environment
       );
     }
   };

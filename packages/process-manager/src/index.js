@@ -1,9 +1,9 @@
 import {execFile, spawn} from 'child-process-promise';
 import {formatCode, formatPath} from '@resdir/console';
 
-export async function execute(command, args, {directory, commandName, debug} = {}) {
+export async function execute(command, args, {directory, commandName} = {}, environment) {
   try {
-    if (debug) {
+    if (environment && environment['@debug']) {
       await spawn(command, args, {cwd: directory, stdio: 'inherit'});
     } else {
       await execFile(command, args, {cwd: directory});

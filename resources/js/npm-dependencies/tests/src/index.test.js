@@ -47,7 +47,7 @@ describe('js/npm-dependencies', () => {
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
 
-    await pkg.$getChild('dependencies').add({specifier: 'lodash'}, {quiet: true});
+    await pkg.$getChild('dependencies').add({specifier: 'lodash'}, {'@quiet': true});
 
     expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(true);
 
@@ -56,7 +56,7 @@ describe('js/npm-dependencies', () => {
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(true);
 
-    await pkg.$getChild('dependencies').remove({name: 'lodash'}, {quiet: true});
+    await pkg.$getChild('dependencies').remove({name: 'lodash'}, {'@quiet': true});
 
     expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(false);
 
@@ -77,7 +77,7 @@ describe('js/npm-dependencies', () => {
 
     await pkg
       .$getChild('dependencies')
-      .add({specifier: 'lodash@4.5.1', development: true}, {quiet: true});
+      .add({specifier: 'lodash@4.5.1', development: true}, {'@quiet': true});
 
     expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(true);
 
@@ -89,7 +89,7 @@ describe('js/npm-dependencies', () => {
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(true);
 
-    await pkg.$getChild('dependencies').remove({name: 'lodash'}, {quiet: true});
+    await pkg.$getChild('dependencies').remove({name: 'lodash'}, {'@quiet': true});
 
     expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(false);
 

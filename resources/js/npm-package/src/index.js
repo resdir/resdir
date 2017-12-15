@@ -11,13 +11,15 @@ const GIT_IGNORE = ['.DS_STORE', 'node_modules', '*.log', '/package.json'];
 
 export default base =>
   class Package extends base {
-    async updatePackageFile(_args, {verbose, quiet, debug}) {
+    async updatePackageFile(_args, environment) {
       await task(
         async () => {
           this._updatePackageFile();
-          await this.$getChild('dependencies').updatePackageFile(undefined, {quiet: true});
+          const quietEnvironment = await environment.$extend({'@quiet': true});
+          await this.$getChild('dependencies').updatePackageFile(undefined, quietEnvironment);
         },
-        {intro: `Updating package file...`, outro: `Package file updated`, verbose, quiet, debug}
+        {intro: `Updating package file...`, outro: `Package file updated`},
+        environment
       );
     }
 
@@ -49,7 +51,7 @@ export default base =>
       });
     }
 
-    async publish({major, minor, patch, access}, {verbose, quiet, debug}) {
+    async publish({major, minor, patch, access}, environment) {
       await this['@build']();
       await this['@test']();
 
@@ -59,19 +61,17 @@ export default base =>
 
       await task(
         async () => {
-          await this._publish({access, debug});
+          await this._publish({access}, environment);
         },
         {
           intro: `Publishing package...`,
-          outro: `Package published`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `Package published`
+        },
+        environment
       );
     }
 
-    async _publish({access, debug}) {
+    async _publish({access}, environment) {
       if (!this.name) {
         throw new Error(`${formatCode('name')} property is missing`);
       }
@@ -88,7 +88,7 @@ export default base =>
       }
 
       const directory = this.$getCurrentDirectory();
-      await publishPackage(directory, {access, debug});
+      await publishPackage(directory, {access}, environment);
     }
 
     async initialize({name, version, gitignore}) {

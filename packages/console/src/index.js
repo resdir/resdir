@@ -569,7 +569,7 @@ class SubAnimatedTaskView extends AbstractTaskView {
   }
 }
 
-export async function task(fn, {intro, outro, verbose, debug, quiet}) {
+export async function task(fn, {intro, outro}, environment = {}) {
   if (typeof fn !== 'function') {
     throw new TypeError('\'fn\' must be a function');
   }
@@ -577,14 +577,14 @@ export async function task(fn, {intro, outro, verbose, debug, quiet}) {
   const stack = global.resdirConsoleTaskStack;
 
   let ViewClass;
-  if (quiet) {
+  if (environment['@quiet']) {
     ViewClass = QuietTaskView;
   } else if (stack.length > 0) {
     ViewClass = stack[0].constructor;
     if (ViewClass.name === 'AnimatedTaskView') {
       ViewClass = SubAnimatedTaskView;
     }
-  } else if (verbose || debug || process.env.DEBUG) {
+  } else if (environment['@verbose'] || environment['@debug'] || process.env.DEBUG) {
     ViewClass = VerboseTaskView;
   } else {
     ViewClass = AnimatedTaskView;

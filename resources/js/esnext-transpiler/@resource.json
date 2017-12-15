@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.35",
+  "version": "0.1.36",
   "isPublic": true,
   "files": [
     "./dist"

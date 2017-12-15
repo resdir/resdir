@@ -4,16 +4,20 @@ import {execute} from '@resdir/process-manager';
 
 export default base =>
   class JestResource extends base {
-    async run({testPathPattern}, {verbose, quiet, debug}) {
+    async run({testPathPattern}, environment) {
+      const verboseEnvironment = await environment.$extend({'@verbose': true});
       await task(
         async () => {
-          await this._run({testPathPattern, verbose, quiet, debug});
+          await this._run({testPathPattern}, environment);
         },
-        {intro: `Testing resource...`, outro: `Resource tested`, verbose: true, quiet, debug}
+        {intro: `Testing resource...`, outro: `Resource tested`},
+        verboseEnvironment
       );
     }
 
-    async _run({testPathPattern}) {
+    async _run({testPathPattern}, environment) {
+      environment = await environment.$extend({'@debug': true});
+
       const directory = this.$getCurrentDirectory();
 
       let roots;
@@ -35,6 +39,6 @@ export default base =>
       if (testPathPattern) {
         args.push('--testPathPattern=' + testPathPattern);
       }
-      await execute(command, args, {directory, commandName: 'jest', debug: true});
+      await execute(command, args, {directory, commandName: 'jest'}, environment);
     }
   };

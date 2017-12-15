@@ -1,9 +1,14 @@
 {
-  "@import": ["resdir/resource", "js/resource"],
+  "@import": [
+    "resdir/resource",
+    "js/resource"
+  ],
   "id": "1place/jest",
-  "version": "0.1.25",
+  "version": "0.1.27",
   "isPublic": true,
-  "files": ["./dist"],
+  "files": [
+    "./dist"
+  ],
   "dependencies": {
     "@import": "js/npm-dependencies",
     "@value": {

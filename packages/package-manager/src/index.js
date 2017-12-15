@@ -70,7 +70,7 @@ export function removePackageFileIfFullyManaged(directory) {
   }
 }
 
-export async function installPackage(directory, {production, useLockfile, debug} = {}) {
+export async function installPackage(directory, {production, useLockfile} = {}, environment) {
   // TODO: try to use https://github.com/pnpm/pnpm
 
   const args = ['install'];
@@ -83,12 +83,13 @@ export async function installPackage(directory, {production, useLockfile, debug}
     args.push('--no-package-lock');
   }
 
-  await execNPM(args, {directory, debug});
+  await execNPM(args, {directory}, environment);
 }
 
 // export async function installPackage(
 //   directory,
-//   {production, useLockfile, modulesDirectory, debug} = {}
+//   {production, useLockfile, modulesDirectory} = {},
+//   environment
 // ) {
 //   const args = ['install'];
 //   if (production) {
@@ -101,29 +102,29 @@ export async function installPackage(directory, {production, useLockfile, debug}
 //     args.push('--modules-folder');
 //     args.push(modulesDirectory);
 //   }
-//   await execYarn(args, {directory, debug});
+//   await execYarn(args, {directory}, environment);
 // }
 
-export async function publishPackage(directory, {access, debug} = {}) {
+export async function publishPackage(directory, {access} = {}, environment) {
   const args = ['publish'];
   if (access) {
     args.push('--access');
     args.push(access);
   }
-  await execNPM(args, {directory, debug});
+  await execNPM(args, {directory}, environment);
 }
 
-// export async function execYarn(args, options) {
+// export async function execYarn(args, options, environment) {
 //   const command = require.resolve('yarn/bin/yarn.js');
 //   args = [...args, '--no-progress', '--no-emoji', '--non-interactive'];
-//   await execute(command, args, {...options, commandName: 'yarn'});
+//   await execute(command, args, {...options, commandName: 'yarn'}, environment);
 // }
 
-export async function execNPM(args, options) {
+export async function execNPM(args, options, environment) {
   // TODO: Include NPM has a dependency
   const command = 'npm'; // require.resolve('npm/bin/npm-cli.js');
   args = [...args];
-  await execute(command, args, {...options, commandName: 'npm'});
+  await execute(command, args, {...options, commandName: 'npm'}, environment);
 }
 
 export async function fetchNPMRegistry(name, {useCache, throwIfNotFound = true} = {}) {

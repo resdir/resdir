@@ -11,7 +11,7 @@ const GIT_IGNORE = ['/dist'];
 
 export default base =>
   class ESNextTranspiler extends base {
-    async run({file}, {verbose, quiet, debug}) {
+    async run({file}, environment) {
       const files = [];
 
       if (file) {
@@ -20,7 +20,7 @@ export default base =>
 
       const transpilationOccurred = await task(
         async progress => {
-          const transpilationOccurred = await this._transpileOrCopy(files, {verbose, quiet});
+          const transpilationOccurred = await this._transpileOrCopy(files, environment);
           if (!transpilationOccurred) {
             progress.setOutro(`Transpiler has not changed anything`);
           }
@@ -28,11 +28,9 @@ export default base =>
         },
         {
           intro: `Transpiling resource...`,
-          outro: `Resource transpiled`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `Resource transpiled`
+        },
+        environment
       );
 
       if (transpilationOccurred) {
@@ -40,7 +38,7 @@ export default base =>
       }
     }
 
-    async _transpileOrCopy(files, {verbose, quiet}) {
+    async _transpileOrCopy(files, environment = {}) {
       const directory = this.$getParent().$getCurrentDirectory();
       const srcDirectory = resolve(directory, this.source);
       const destDirectory = resolve(directory, this.destination);
@@ -57,7 +55,7 @@ export default base =>
       for (const srcFile of files) {
         const relativeFile = relative(srcDirectory, srcFile);
         if (relativeFile.startsWith('..')) {
-          if (!quiet) {
+          if (!environment['@quiet']) {
             console.warn(`Cannot build a file (${formatPath(srcFile)}) located outside of the source directory (${formatPath(srcDirectory)})`);
           }
           continue;
@@ -70,7 +68,7 @@ export default base =>
           filter: file => {
             const relativeFile = relative(srcDirectory, file);
             if (isDirectory.sync(file)) {
-              if (verbose) {
+              if (environment['@verbose']) {
                 console.log(`Cleaning ${formatPath(file)}...`);
               }
               const targetDir = join(destDirectory, relativeFile);
@@ -80,7 +78,7 @@ export default base =>
             }
             const extension = extname(file);
             if (!extensions.includes(extension)) {
-              if (verbose) {
+              if (environment['@verbose']) {
                 console.log(`Copying ${formatPath(file)}...`);
               }
               transpilationOccurred = true;
@@ -93,14 +91,14 @@ export default base =>
       }
 
       if (transpilableFiles.length > 0) {
-        await this._transpile(srcDirectory, destDirectory, transpilableFiles, {verbose});
+        await this._transpile(srcDirectory, destDirectory, transpilableFiles, environment);
         transpilationOccurred = true;
       }
 
       return transpilationOccurred;
     }
 
-    async _transpile(srcDirectory, destDirectory, files, {verbose}) {
+    async _transpile(srcDirectory, destDirectory, files, environment = {}) {
       const presets = [[require.resolve('babel-preset-env'), {targets: this.targets, loose: true}]];
 
       const plugins = [
@@ -125,7 +123,7 @@ export default base =>
         const srcFile = join(srcDirectory, file);
         const destFile = join(destDirectory, file);
 
-        if (verbose) {
+        if (environment['@verbose']) {
           console.log(`Transpiling ${formatPath(srcFile)}...`);
         }
 

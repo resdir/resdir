@@ -5,34 +5,22 @@ import sleep from 'sleep-promise';
 
 export default base =>
   class Route53Mixin extends base {
-    async configureRoute53HostedZone({verbose, quiet, debug}) {
+    async configureRoute53HostedZone(environment) {
       const route53 = this.getRoute53Client();
 
       return await task(
         async progress => {
-          const hostedZone = await findRoute53HostedZone(route53, this.domainName, {
-            verbose,
-            quiet,
-            debug
-          });
+          const hostedZone = await findRoute53HostedZone(route53, this.domainName, environment);
 
           if (!hostedZone) {
             return false;
           }
 
-          const cloudFrontDomainName = await this.getCloudFrontDomainName({
-            verbose,
-            quiet,
-            debug
-          });
+          const cloudFrontDomainName = await this.getCloudFrontDomainName(environment);
 
           const recordSet = await findRoute53RecordSet(
             {route53, hostedZoneId: hostedZone.Id, domainName: this.domainName},
-            {
-              verbose,
-              quiet,
-              debug
-            }
+            environment
           );
 
           let changeRequired;
@@ -70,22 +58,16 @@ export default base =>
               }
             });
 
-            await waitUntilRoute53RecordSetIsChanged(route53, changeInfo.Id, {
-              verbose,
-              quiet,
-              debug
-            });
+            await waitUntilRoute53RecordSetIsChanged(route53, changeInfo.Id, environment);
           }
 
           return true;
         },
         {
           intro: `Checking Route53 hosted zone...`,
-          outro: `Route53 hosted zone checked`,
-          verbose,
-          quiet,
-          debug
-        }
+          outro: `Route53 hosted zone checked`
+        },
+        environment
       );
     }
 
@@ -97,7 +79,7 @@ export default base =>
     }
   };
 
-async function findRoute53HostedZone(route53, domainName, {verbose, quiet, debug}) {
+async function findRoute53HostedZone(route53, domainName, environment) {
   return await task(
     async progress => {
       const dnsName = takeRight(domainName.split('.'), 2).join('.');
@@ -128,18 +110,13 @@ async function findRoute53HostedZone(route53, domainName, {verbose, quiet, debug
       progress.setOutro('Route 53 hosted zone not found');
     },
     {
-      intro: `Searching for the Route 53 hosted zone...`,
-      verbose,
-      quiet,
-      debug
-    }
+      intro: `Searching for the Route 53 hosted zone...`
+    },
+    environment
   );
 }
 
-async function findRoute53RecordSet(
-  {route53, hostedZoneId, domainName, type = 'A'},
-  {verbose, quiet, debug}
-) {
+async function findRoute53RecordSet({route53, hostedZoneId, domainName, type = 'A'}, environment) {
   const name = domainName + '.';
 
   return await task(
@@ -164,15 +141,13 @@ async function findRoute53RecordSet(
       progress.setOutro('Route 53 record set not found');
     },
     {
-      intro: `Searching for the Route 53 record set...`,
-      verbose,
-      quiet,
-      debug
-    }
+      intro: `Searching for the Route 53 record set...`
+    },
+    environment
   );
 }
 
-async function waitUntilRoute53RecordSetIsChanged(route53, changeId, {verbose, quiet, debug}) {
+async function waitUntilRoute53RecordSetIsChanged(route53, changeId, environment) {
   await task(
     async () => {
       const sleepTime = 5000; // 5 seconds
@@ -190,10 +165,8 @@ async function waitUntilRoute53RecordSetIsChanged(route53, changeId, {verbose, q
     },
     {
       intro: `Waiting for Route 53 record set change to complete...`,
-      outro: `Route 53 record set change completed`,
-      verbose,
-      quiet,
-      debug
-    }
+      outro: `Route 53 record set change completed`
+    },
+    environment
   );
 }

@@ -21,22 +21,22 @@ export default base =>
 
     static MANAGED_BY_TAG = {Key: 'managed-by', Value: 'aws-website-resource-v1'};
 
-    async deploy(_args, {verbose, quiet, debug}) {
+    async deploy(_args, environment) {
       this.validate();
 
-      await this.configureS3Bucket({verbose, quiet, debug});
+      await this.configureS3Bucket(environment);
 
-      const changes = await this.synchronizeFiles({verbose, quiet, debug});
+      const changes = await this.synchronizeFiles(environment);
 
-      const hasBeenCreated = await this.configureCloudFrontDistribution({verbose, quiet, debug});
+      const hasBeenCreated = await this.configureCloudFrontDistribution(environment);
 
       if (!hasBeenCreated && changes.length > 0) {
-        await this.runCloudFrontInvalidation(changes, {verbose, quiet, debug});
+        await this.runCloudFrontInvalidation(changes, environment);
       }
 
-      let domainNameConfigured = await this.configureRoute53HostedZone({verbose, quiet, debug});
+      let domainNameConfigured = await this.configureRoute53HostedZone(environment);
       if (!domainNameConfigured) {
-        domainNameConfigured = await this.checkCNAME({verbose, quiet, debug});
+        domainNameConfigured = await this.checkCNAME(environment);
       }
 
       if (hasBeenCreated) {
@@ -50,7 +50,8 @@ export default base =>
           print(`Your website is fully deployed at ${formatURL('https://' + this.domainName)}`);
           emptyLine();
         } else {
-          const cloudFrontDomainName = await this.getCloudFrontDomainName({quiet: true});
+          const quietEnvironment = environment.$extend({'@quiet': true});
+          const cloudFrontDomainName = await this.getCloudFrontDomainName(quietEnvironment);
           emptyLine();
           printText(`Your website is fully deployed, but since the name servers associated with your domain name don't seem to be managed by Route 53, you need to configure them manually by adding a CNAME record pointing to the CloudFront domain name:`);
           emptyLine();
