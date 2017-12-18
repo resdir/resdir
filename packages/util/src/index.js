@@ -2,40 +2,39 @@ import crypto from 'crypto';
 import {entries, cloneDeepWith} from 'lodash';
 import {formatCode} from '@resdir/console';
 
-export function getProperty(source, name, aliases) {
-  const result = getPropertyKeyAndValue(source, name, aliases);
+export function getProperty(source, key, aliases) {
+  const result = findProperty(source, key, aliases);
   return result && result.value;
 }
 
-export function setProperty(target, source, name, aliases) {
-  const result = getPropertyKeyAndValue(source, name, aliases);
+export function setProperty(target, source, key, aliases) {
+  const result = findProperty(source, key, aliases);
   if (result) {
-    target[name] = result.value;
+    target[key] = result.value;
   }
 }
 
-export function takeProperty(source, name, aliases) {
-  const result = getPropertyKeyAndValue(source, name, aliases);
+export function takeProperty(source, key, aliases) {
+  const result = findProperty(source, key, aliases);
   if (result) {
-    delete source[result.key];
+    delete source[result.foundKey];
     return result.value;
   }
 }
 
-export function getPropertyKeyAndValue(source, name, aliases = []) {
+export function findProperty(source, key, aliases = []) {
   if (source === undefined) {
     return;
   }
   let result;
-  const keys = [name, ...aliases];
   let foundKey;
-  for (const key of keys) {
-    if (key && key in source) {
+  for (const keyOrAlias of [key, ...aliases]) {
+    if (keyOrAlias && keyOrAlias in source) {
       if (foundKey) {
-        throw new Error(`Can't have both ${formatCode(foundKey)} and ${formatCode(key)}`);
+        throw new Error(`Can't have both ${formatCode(foundKey)} and ${formatCode(keyOrAlias)}`);
       }
-      result = {key, value: source[key]};
-      foundKey = key;
+      foundKey = keyOrAlias;
+      result = {foundKey, value: source[keyOrAlias]};
     }
   }
   return result;
@@ -58,7 +57,7 @@ export async function catchError(promise) {
 export function avoidCommonMistakes(obj, mistakes) {
   for (const [wrong, correct] of entries(mistakes)) {
     if (wrong in obj) {
-      throw new Error(`Wrong property name: ${formatCode(wrong)}. Did you mean ${formatCode(correct)}?`);
+      throw new Error(`Wrong property key: ${formatCode(wrong)}. Did you mean ${formatCode(correct)}?`);
     }
   }
 }
