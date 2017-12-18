@@ -6,7 +6,11 @@ import Dependency from './dependency';
 
 export default base =>
   class Dependencies extends base {
-    async add({specifier, production, development, peer, optional}, environment) {
+    async add({specifiers, production, development, peer, optional}, environment) {
+      if (!specifiers) {
+        throw new Error('\'specifiers\' argument is missing');
+      }
+
       let type;
       if (production) {
         type = 'production';
@@ -18,11 +22,6 @@ export default base =>
         type = 'optional';
       } else {
         type = 'production';
-      }
-
-      const specifiers = [];
-      if (specifier) {
-        specifiers.push(specifier); // TODO: Handle multiple packages
       }
 
       for (const specifier of specifiers) {
@@ -42,10 +41,9 @@ export default base =>
       }
     }
 
-    async remove({name}, environment) {
-      const names = [];
-      if (name) {
-        names.push(name); // TODO: Handle multiple packages
+    async remove({names}, environment) {
+      if (!names) {
+        throw new Error('\'names\' argument is missing');
       }
 
       for (const name of names) {

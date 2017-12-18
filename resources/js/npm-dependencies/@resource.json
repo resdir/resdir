@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.32",
+  "version": "0.1.33",
   "isPublic": true,
   "files": [
     "bundle.js"
@@ -73,17 +73,20 @@
       "@examples": [
         "dependencies add fs-extra",
         "deps add lodash@^4",
-        "deps add lodash@4.17.4"
+        "deps add lodash@4.17.4",
+        "deps add moment react"
       ],
       "@input": {
-        "specifier": {
-          "@type": "string",
-          "@description": "npm package specifier",
+        "specifiers": {
+          "@type": "array",
+          "@description": "npm package specifiers",
           "@position": 0,
+          "@isVariadic": true,
           "@examples": [
             "fs-extra",
             "lodash@^4",
-            "lodash@4.17.4"
+            "lodash@4.17.4",
+            "moment react"
           ]
         },
         "production": {
@@ -117,9 +120,10 @@
         "rm"
       ],
       "@input": {
-        "name": {
-          "@type": "string",
-          "@position": 0
+        "names": {
+          "@type": "array",
+          "@position": 0,
+          "@isVariadic": true
         }
       }
     },
