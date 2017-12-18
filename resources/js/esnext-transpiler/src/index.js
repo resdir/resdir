@@ -11,13 +11,7 @@ const GIT_IGNORE = ['/dist'];
 
 export default base =>
   class ESNextTranspiler extends base {
-    async run({file}, environment) {
-      const files = [];
-
-      if (file) {
-        files.push(file); // TODO: Handle multiple files
-      }
-
+    async run({files}, environment) {
       const transpilationOccurred = await task(
         async progress => {
           const transpilationOccurred = await this._transpileOrCopy(files, environment);
@@ -46,7 +40,7 @@ export default base =>
 
       let transpilationOccurred = false;
 
-      if (!files.length) {
+      if (!files) {
         files = [srcDirectory];
       }
 
