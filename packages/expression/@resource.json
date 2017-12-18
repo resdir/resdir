@@ -1,14 +1,16 @@
 {
   "@import": "js/npm-package#^0.1.22",
-  "name": "@resdir/method-arguments",
-  "version": "0.1.1",
-  "description": "Useful functions to handle method arguments",
+  "name": "@resdir/expression",
+  "version": "0.1.0",
+  "description": "Implement method expressions",
   "files": [
     "./dist"
   ],
   "main": "./dist/index.js",
   "dependencies": {
-    "@resdir/util": "^0.1.3"
+    "@resdir/console": "^0.1.27",
+    "@resdir/util": "^0.1.3",
+    "shell-quote": "^1.6.1"
   },
   "@unpublishable": {
     "transpiler": {
