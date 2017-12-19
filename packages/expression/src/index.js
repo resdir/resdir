@@ -1,6 +1,7 @@
+import entries from 'lodash/entries';
 import {parse} from 'shell-quote';
 import {takeProperty} from '@resdir/util';
-import {formatCode} from '@resdir/console';
+import {formatCode, formatNumber} from '@resdir/console';
 
 const PARSED_EXPRESSION_TAG = '@@PARSED_EXPRESSION';
 const POSITIONAL_ARGUMENT_PREFIX = '@@POSITIONAL_ARGUMENT_';
@@ -126,12 +127,91 @@ function _parseArgumentsAndOptions(argsAndOpts) {
   return result;
 }
 
-export function handleParsedExpression(expression) {
-  const isParsedExpression = PARSED_EXPRESSION_TAG in expression;
-  if (isParsedExpression) {
-    delete expression[PARSED_EXPRESSION_TAG];
+// schema:
+// [
+//   {key: 'files', aliases: ['f'], position: 0, isVariadic: true, isSubArguments: true}
+// ]
+export function matchExpression(expression, schema) {
+  const result = {};
+  const remainder = {};
+
+  for (const [key, value] of entries(expression)) {
+    if (key === PARSED_EXPRESSION_TAG) {
+      continue;
+    }
+
+    const matchedKey = _matchArgument(key, schema);
+
+    if (matchedKey === undefined) {
+      remainder[key] = value;
+      continue;
+    }
+
+    const previousValue = result[matchedKey];
+    if (previousValue !== undefined) {
+      if (Array.isArray(previousValue)) {
+        previousValue.push(value);
+      } else {
+        result[matchedKey] = [previousValue, value];
+      }
+    } else {
+      result[matchedKey] = value;
+    }
   }
-  return isParsedExpression;
+
+  return {result, remainder};
+}
+
+function _matchArgument(key, schema) {
+  if (isPositionalArgumentKey(key)) {
+    return _matchPosisionalArgument(key, schema);
+  }
+
+  if (isSubArgumentsKey(key)) {
+    return _matchSubArguments(schema);
+  }
+
+  return _matchNamedArgument(key, schema);
+}
+
+function _matchPosisionalArgument(key, schema) {
+  const position = parsePositionalArgumentKey(key);
+  for (const argument of schema) {
+    if (argument.position === undefined) {
+      continue;
+    }
+    if (argument.position === position) {
+      return argument.key;
+    }
+    if (argument.isVariadic && argument.position < position) {
+      return argument.key;
+    }
+  }
+  throw new Error(`Cannot match positional argument (position: ${formatNumber(position)})`);
+}
+
+function _matchSubArguments(schema) {
+  for (const argument of schema) {
+    if (argument.isSubArguments) {
+      return argument.key;
+    }
+  }
+  throw new Error(`Cannot match sub-arguments`);
+}
+
+function _matchNamedArgument(key, schema) {
+  for (const argument of schema) {
+    if (argument.key === key) {
+      return argument.key;
+    }
+    if (argument.aliases && Array.from(argument.aliases).includes(key)) {
+      return argument.key;
+    }
+  }
+}
+
+export function isParsedExpression(expression) {
+  return PARSED_EXPRESSION_TAG in expression;
 }
 
 export function takeArgument(expression, key, aliases) {
@@ -182,6 +262,17 @@ export function makePositionalArgumentKey(position) {
   return POSITIONAL_ARGUMENT_PREFIX + String(position);
 }
 
+export function parsePositionalArgumentKey(key) {
+  if (!isPositionalArgumentKey(key)) {
+    throw new Error(`${formatCode(key)} is not a positional argument key`);
+  }
+  return Number(key.slice(POSITIONAL_ARGUMENT_PREFIX.length));
+}
+
+export function isPositionalArgumentKey(key) {
+  return key.startsWith(POSITIONAL_ARGUMENT_PREFIX);
+}
+
 export function getSubArguments(args) {
   return args[SUB_ARGUMENTS_KEY];
 }
@@ -192,4 +283,8 @@ export function setSubArguments(args, subArgs) {
 
 export function getSubArgumentsKey() {
   return SUB_ARGUMENTS_KEY;
+}
+
+export function isSubArgumentsKey(key) {
+  return key === SUB_ARGUMENTS_KEY;
 }
