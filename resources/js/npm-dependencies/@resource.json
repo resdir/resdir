@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.33",
+  "version": "0.1.34",
   "isPublic": true,
   "files": [
     "bundle.js"
@@ -94,6 +94,7 @@
           "@aliases": [
             "prod"
           ],
+          "@isOptional": true,
           "@hidden": true
         },
         "development": {
@@ -101,14 +102,17 @@
           "@aliases": [
             "dev"
           ],
+          "@isOptional": true,
           "@hidden": true
         },
         "peer": {
           "@type": "boolean",
+          "@isOptional": true,
           "@hidden": true
         },
         "optional": {
           "@type": "boolean",
+          "@isOptional": true,
           "@hidden": true
         }
       }

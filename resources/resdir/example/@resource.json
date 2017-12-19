@@ -5,7 +5,7 @@
   ],
   "@implementation": "./dist",
   "id": "resdir/example",
-  "version": "0.3.34",
+  "version": "0.3.35",
   "isPublic": true,
   "files": [
     "./dist"
@@ -27,7 +27,9 @@
       "hi --color=red"
     ],
     "@input": {
-      "color": "green"
+      "color": {
+        "@default": "green"
+      }
     },
     "@listen": "hi"
   },

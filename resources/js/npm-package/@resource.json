@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.31",
+  "version": "0.1.32",
   "isPublic": true,
   "files": [
     "./dist"
@@ -47,9 +47,18 @@
       "bump": {
         "@type": "method",
         "@input": {
-          "major": false,
-          "minor": false,
-          "patch": false
+          "major": {
+            "@type": "boolean",
+            "@isOptional": true
+          },
+          "minor": {
+            "@type": "boolean",
+            "@isOptional": true
+          },
+          "patch": {
+            "@type": "boolean",
+            "@isOptional": true
+          }
         }
       }
     },
@@ -87,11 +96,21 @@
     "publish": {
       "@type": "method",
       "@input": {
-        "major": false,
-        "minor": false,
-        "patch": false,
+        "major": {
+          "@type": "boolean",
+          "@isOptional": true
+        },
+        "minor": {
+          "@type": "boolean",
+          "@isOptional": true
+        },
+        "patch": {
+          "@type": "boolean",
+          "@isOptional": true
+        },
         "access": {
-          "@type": "string"
+          "@type": "string",
+          "@isOptional": true
         }
       }
     },
@@ -108,15 +127,19 @@
       "@input": {
         "name": {
           "@type": "string",
-          "@position": 0
+          "@position": 0,
+          "@isOptional": true
         },
         "version": {
           "@type": "string",
           "@aliases": [
             "v"
-          ]
+          ],
+          "@isOptional": true
         },
-        "gitignore": true
+        "gitignore": {
+          "@default": true
+        }
       },
       "@listen": "@created"
     }

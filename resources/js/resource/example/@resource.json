@@ -6,7 +6,9 @@
   "hello": {
     "@type": "method",
     "@input": {
-      "color": "green"
+      "color": {
+        "@default": "green"
+      }
     }
   }
 }

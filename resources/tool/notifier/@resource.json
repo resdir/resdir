@@ -5,7 +5,7 @@
     "./"
   ],
   "id": "tool/notifier",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "isPublic": true,
   "files": [
     "./dist"
@@ -26,13 +26,16 @@
     "notify": {
       "@type": "method",
       "@input": {
-        "title": "⚡run",
+        "title": {
+          "@default": "⚡run"
+        },
         "message": {
           "@type": "string",
           "@position": 0
         },
         "icon": {
-          "@type": "string"
+          "@type": "string",
+          "@isOptional": true
         }
       }
     }

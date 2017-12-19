@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/registry",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "isPublic": true,
   "files": [
     "./dist"
@@ -28,7 +28,8 @@
       "@input": {
         "email": {
           "@type": "string",
-          "@position": 0
+          "@position": 0,
+          "@isOptional": true
         }
       }
     },
@@ -37,7 +38,8 @@
       "@input": {
         "email": {
           "@type": "string",
-          "@position": 0
+          "@position": 0,
+          "@isOptional": true
         }
       }
     },
@@ -79,7 +81,8 @@
               "@aliases": [
                 "ns"
               ],
-              "@position": 0
+              "@position": 0,
+              "@isOptional": true
             }
           }
         },
@@ -118,7 +121,8 @@
             "@aliases": [
               "ns"
             ],
-            "@position": 0
+            "@position": 0,
+            "@isOptional": true
           }
         }
       },
@@ -130,7 +134,8 @@
             "@aliases": [
               "ns"
             ],
-            "@position": 0
+            "@position": 0,
+            "@isOptional": true
           }
         }
       },
@@ -143,14 +148,16 @@
               "organization",
               "org"
             ],
-            "@position": 0
+            "@position": 0,
+            "@isOptional": true
           },
           "userNamespace": {
             "@type": "string",
             "@aliases": [
               "user"
             ],
-            "@position": 1
+            "@position": 1,
+            "@isOptional": true
           }
         }
       },
@@ -166,14 +173,16 @@
               "organization",
               "org"
             ],
-            "@position": 0
+            "@position": 0,
+            "@isOptional": true
           },
           "userNamespace": {
             "@type": "string",
             "@aliases": [
               "user"
             ],
-            "@position": 1
+            "@position": 1,
+            "@isOptional": true
           }
         }
       }
@@ -191,7 +200,8 @@
             "@aliases": [
               "ns"
             ],
-            "@position": 0
+            "@position": 0,
+            "@isOptional": true
           }
         }
       },
@@ -203,7 +213,8 @@
             "@aliases": [
               "ns"
             ],
-            "@position": 0
+            "@position": 0,
+            "@isOptional": true
           }
         }
       }

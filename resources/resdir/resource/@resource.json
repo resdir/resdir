@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/resource",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "isPublic": true,
   "files": [
     "./dist"
@@ -54,7 +54,9 @@
         "@type": "method",
         "@description": "Validate the identifier",
         "@input": {
-          "throwIfInvalid": true
+          "throwIfInvalid": {
+            "@default": true
+          }
         }
       }
     },
@@ -75,7 +77,9 @@
         "@type": "method",
         "@description": "Validate the version number",
         "@input": {
-          "throwIfInvalid": true
+          "throwIfInvalid": {
+            "@default": true
+          }
         }
       },
       "bump": {
@@ -87,15 +91,18 @@
         "@input": {
           "major": {
             "@type": "boolean",
-            "@description": "Bump major version"
+            "@description": "Bump major version",
+            "@isOptional": true
           },
           "minor": {
             "@type": "boolean",
-            "@description": "Bump minor version"
+            "@description": "Bump minor version",
+            "@isOptional": true
           },
           "patch": {
             "@type": "boolean",
-            "@description": "Bump patch version"
+            "@description": "Bump patch version",
+            "@isOptional": true
           }
         }
       }
@@ -169,15 +176,18 @@
       "@input": {
         "major": {
           "@type": "boolean",
-          "@description": "Bump major version before publishing"
+          "@description": "Bump major version before publishing",
+          "@isOptional": true
         },
         "minor": {
           "@type": "boolean",
-          "@description": "Bump minor version before publishing"
+          "@description": "Bump minor version before publishing",
+          "@isOptional": true
         },
         "patch": {
           "@type": "boolean",
-          "@description": "Bump patch version before publishing"
+          "@description": "Bump patch version before publishing",
+          "@isOptional": true
         }
       }
     },
@@ -187,15 +197,19 @@
       "@input": {
         "id": {
           "@type": "string",
-          "@position": 0
+          "@position": 0,
+          "@isOptional": true
         },
         "version": {
           "@type": "string",
           "@aliases": [
             "v"
-          ]
+          ],
+          "@isOptional": true
         },
-        "gitignore": true
+        "gitignore": {
+          "@default": true
+        }
       },
       "@listen": "@created"
     }
