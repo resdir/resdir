@@ -34,7 +34,10 @@ export async function session(fn) {
   }
 }
 
-export function print(message, {output = 'log'} = {}) {
+export function print(message, {output = 'log', environment} = {}) {
+  if (environment && environment['@quiet']) {
+    return;
+  }
   pauseCurrentTasks();
   console[output](message);
   global.resdirConsoleSessionIsEmpty = false;
@@ -42,7 +45,10 @@ export function print(message, {output = 'log'} = {}) {
   resumeCurrentTasks();
 }
 
-export function emptyLine(count = 1) {
+export function emptyLine(count = 1, {environment} = {}) {
+  if (environment && environment['@quiet']) {
+    return;
+  }
   if (global.resdirConsoleSessionIsEmpty) {
     return;
   }
@@ -66,29 +72,29 @@ function resetEmptyLinesCount() {
   global.resdirConsoleEmptyLinesCount = 0;
 }
 
-export function printProgress(message) {
-  print(formatMessage(message, {status: 'progress'}));
+export function printProgress(message, {environment} = {}) {
+  print(formatMessage(message, {status: 'progress'}), {environment});
 }
 
-export function printSuccess(message) {
-  print(formatMessage(message, {status: 'success'}));
+export function printSuccess(message, {environment} = {}) {
+  print(formatMessage(message, {status: 'success'}), {environment});
 }
 
-export function printText(text) {
-  print(formatText(text));
+export function printText(text, {environment} = {}) {
+  print(formatText(text), {environment});
 }
 
-export function printError(error) {
+export function printError(error, {environment} = {}) {
   let stdErr = error.capturedStandardError;
   if (stdErr) {
     stdErr = stdErr.trim();
     if (stdErr) {
-      print(stdErr, {output: 'error'});
+      print(stdErr, {output: 'error', environment});
     }
   }
 
-  if (process.env.DEBUG) {
-    print(error, {output: 'error'});
+  if ((environment && environment['@debug']) || process.env.DEBUG) {
+    print(error, {output: 'error', environment});
     return;
   }
 
@@ -96,7 +102,7 @@ export function printError(error) {
     return;
   }
 
-  print(error.message, {output: 'error'});
+  print(error.message, {output: 'error', environment});
 
   if (error.contextStack) {
     for (const context of error.contextStack) {
@@ -104,13 +110,13 @@ export function printError(error) {
       if (context.toIdentifier) {
         identifier += dim(': ') + formatString(context.toIdentifier());
       }
-      print('  ' + identifier, {output: 'error'});
+      print('  ' + identifier, {output: 'error', environment});
     }
   }
 }
 
-export function printErrorAndExit(error, code = 1) {
-  printError(error);
+export function printErrorAndExit(error, {code = 1, environment} = {}) {
+  printError(error, {environment});
   process.exit(code);
 }
 
