@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "1place/jest",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "isPublic": true,
   "files": [
     "./dist"
@@ -24,22 +24,35 @@
     }
   },
   "@export": {
-    "@description": "Test suite (using Jest)",
+    "@description": "Test suite runner (using Jest)",
     "@implementation": "./dist",
     "dependencies": {
       "@import": "js/npm-dependencies"
     },
     "roots": {
-      "@type": "array"
+      "@type": "array",
+      "@description": "Root diectories containing the test files"
     },
     "testEnvironment": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "The test environment that will be used for testing",
+      "@examples": [
+        "jsdom",
+        "node"
+      ],
+      "@default": "jsdom"
     },
     "run": {
       "@type": "method",
+      "@description": "Run the test suite",
+      "@examples": [
+        "run",
+        "run core"
+      ],
       "@input": {
         "testPathPattern": {
           "@type": "string",
+          "@description": "A regexp pattern that is matched against tests paths",
           "@position": 0,
           "@isOptional": true
         }
