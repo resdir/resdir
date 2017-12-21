@@ -168,7 +168,7 @@ export async function confirm(message, options = {}) {
   return false;
 }
 
-export function formatValue(value, {maxWidth = 80, offset = 0} = {}) {
+export function formatValue(value, {maxWidth = 80, offset = 0, multiline = true} = {}) {
   if (value === undefined) {
     return formatUndefined();
   }
@@ -182,10 +182,10 @@ export function formatValue(value, {maxWidth = 80, offset = 0} = {}) {
     return formatString(value);
   }
   if (Array.isArray(value)) {
-    return formatArray(value, {maxWidth, offset});
+    return formatArray(value, {maxWidth, offset, multiline});
   }
   if (isPlainObject(value)) {
-    return formatObject(value, {maxWidth});
+    return formatObject(value, {maxWidth, multiline});
   }
   throw new TypeError('\'value\' argument type is invalid');
 }
@@ -222,7 +222,10 @@ export function formatString(string, {addQuotes = true} = {}) {
   return yellow(string);
 }
 
-export function formatArray(array, {maxWidth = 80, offset = 0, direction = 'HORIZONTAL'} = {}) {
+export function formatArray(
+  array,
+  {maxWidth = 80, multiline = true, offset = 0, direction = 'HORIZONTAL'} = {}
+) {
   if (array === undefined) {
     return formatUndefined();
   }
@@ -234,7 +237,7 @@ export function formatArray(array, {maxWidth = 80, offset = 0, direction = 'HORI
     if (output) {
       output += gray(',') + (direction === 'HORIZONTAL' ? ' ' : '\n');
     }
-    value = formatValue(value, {maxWidth});
+    value = formatValue(value, {maxWidth, multiline});
     output += value;
   }
   if (direction === 'VERTICAL') {
@@ -243,14 +246,15 @@ export function formatArray(array, {maxWidth = 80, offset = 0, direction = 'HORI
   output = gray('[') + output + gray(']');
   if (
     direction === 'HORIZONTAL' &&
+    multiline &&
     (output.includes('\n') || stringWidth(output) > maxWidth - offset - 1)
   ) {
-    return formatArray(array, {maxWidth: maxWidth - 2, direction: 'VERTICAL'});
+    return formatArray(array, {maxWidth: maxWidth - 2, multiline, direction: 'VERTICAL'});
   }
   return output;
 }
 
-export function formatObject(object, {maxWidth = 80} = {}) {
+export function formatObject(object, {maxWidth = 80, multiline = true} = {}) {
   if (object === undefined) {
     return formatUndefined();
   }
@@ -260,15 +264,21 @@ export function formatObject(object, {maxWidth = 80} = {}) {
   let output = '';
   for (let [key, value] of entries(object)) {
     if (output) {
-      output += gray(',') + '\n';
+      output += gray(',') + (multiline ? '\n' : ' ');
     }
     key = formatKey(key);
-    value = formatValue(value, {maxWidth: maxWidth - 2, offset: stringWidth(`${key}: `)});
+    value = formatValue(value, {
+      maxWidth: maxWidth - 2,
+      multiline,
+      offset: stringWidth(`${key}: `)
+    });
     output += `${key}${gray(':')} ${value}`;
   }
   if (output) {
-    output = indentString(output, 2);
-    output = `${gray('{')}\n${output}\n${gray('}')}`;
+    if (multiline) {
+      output = indentString(output, 2);
+    }
+    output = `${gray('{')}${multiline ? '\n' : ''}${output}${multiline ? '\n' : ''}${gray('}')}`;
   } else {
     output = gray('{}');
   }

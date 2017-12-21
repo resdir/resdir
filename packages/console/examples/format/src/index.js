@@ -16,3 +16,27 @@ console.log(formatValue({
     }
   }
 }));
+
+console.log();
+
+console.log(formatValue(
+  [
+    'nice',
+    'guy',
+    'cool',
+    'awesome',
+    'peaceful',
+    'quiet',
+    'nice',
+    'guy',
+    'cool',
+    'awesome',
+    'peaceful',
+    'quiet'
+  ],
+  {multiline: false}
+));
+
+console.log();
+
+console.log(formatValue({name: 'Manu', age: 45}, {multiline: false}));
