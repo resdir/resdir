@@ -84,8 +84,8 @@ export function printSuccess(message, environment) {
   print(formatMessage(message, {status: 'success'}), environment);
 }
 
-export function printText(text, environment) {
-  print(formatText(text), environment);
+export function printText(text, options, environment) {
+  print(formatText(text, options), environment);
 }
 
 export function printError(error, environment) {
@@ -340,8 +340,26 @@ export function formatExample(example) {
   return dim('(e.g., "' + String(example) + '")');
 }
 
-export function formatText(text, {width = 80} = {}) {
-  return wrapANSI(text, width);
+export function formatText(text, {width, margins = {}, indentation} = {}) {
+  let result = text;
+
+  let leftMargin = margins.left || 0;
+  if (indentation) {
+    leftMargin += indentation;
+  }
+
+  if (width !== undefined) {
+    if (leftMargin) {
+      width -= leftMargin;
+    }
+    result = wrapANSI(text, width);
+  }
+
+  if (leftMargin) {
+    result = indentString(result, leftMargin);
+  }
+
+  return result;
 }
 
 export function formatTable(data = [], {allData = data, columnGap = 0, margins = {}} = {}) {
