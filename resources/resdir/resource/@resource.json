@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/resource",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "isPublic": true,
   "files": [
     "./dist"
@@ -205,7 +205,7 @@
     },
     "initialize": {
       "@type": "method",
-      "@hidden": true,
+      "@isHidden": true,
       "@input": {
         "id": {
           "@type": "string",

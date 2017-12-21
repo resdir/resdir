@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "isPublic": true,
   "files": [
     "bundle.js"
@@ -95,7 +95,7 @@
             "prod"
           ],
           "@isOptional": true,
-          "@hidden": true
+          "@isHidden": true
         },
         "development": {
           "@type": "boolean",
@@ -103,17 +103,17 @@
             "dev"
           ],
           "@isOptional": true,
-          "@hidden": true
+          "@isHidden": true
         },
         "peer": {
           "@type": "boolean",
           "@isOptional": true,
-          "@hidden": true
+          "@isHidden": true
         },
         "optional": {
           "@type": "boolean",
           "@isOptional": true,
-          "@hidden": true
+          "@isHidden": true
         }
       }
     },
@@ -165,7 +165,7 @@
     },
     "updatePackageFile": {
       "@type": "method",
-      "@hidden": true
+      "@isHidden": true
     }
   }
 }

@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.32",
+  "version": "0.1.33",
   "isPublic": true,
   "files": [
     "./dist"
@@ -123,7 +123,7 @@
     },
     "initialize": {
       "@type": "method",
-      "@hidden": true,
+      "@isHidden": true,
       "@input": {
         "name": {
           "@type": "string",
