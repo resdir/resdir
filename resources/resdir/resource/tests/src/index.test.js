@@ -8,17 +8,17 @@ describe('resdir/resource', () => {
     const res = await Resource.$import(RESOURCE_PATH);
     expect(res.$getChild('id')).toBeDefined();
     expect(res.id).toBeUndefined();
-    expect(await res.$getChild('id').getNamespace()).toBeUndefined();
-    expect(await res.$getChild('id').getName()).toBeUndefined();
+    expect((await res.$getChild('id').getNamespace()).$value).toBeUndefined();
+    expect((await res.$getChild('id').getName()).$value).toBeUndefined();
 
     res.id = 'resdir/hello';
     expect(res.id).toBe('resdir/hello');
-    expect(await res.$getChild('id').getNamespace()).toBe('resdir');
-    expect(await res.$getChild('id').getName()).toBe('hello');
-    expect(await res.$getChild('id').validate()).toBe(true);
+    expect((await res.$getChild('id').getNamespace()).$value).toBe('resdir');
+    expect((await res.$getChild('id').getName()).$value).toBe('hello');
+    expect((await res.$getChild('id').validate()).$value).toBe(true);
 
     res.id = 'resdir/-invalid-name-';
-    expect(await res.$getChild('id').validate({throwIfInvalid: false})).toBe(false);
+    expect((await res.$getChild('id').validate({throwIfInvalid: false})).$value).toBe(false);
     await expect(res.$getChild('id').validate()).rejects.toBeInstanceOf(Error);
   });
 
@@ -26,15 +26,15 @@ describe('resdir/resource', () => {
     const res = await Resource.$import(RESOURCE_PATH);
     expect(res.$getChild('version')).toBeDefined();
     expect(res.version).toBeUndefined();
-    expect(await res.$getChild('version').validate({throwIfInvalid: false})).toBe(false);
+    expect((await res.$getChild('version').validate({throwIfInvalid: false})).$value).toBe(false);
 
     res.version = '1.2.3';
     expect(res.version).toBe('1.2.3');
-    expect(await res.$getChild('version').validate()).toBe(true);
+    expect((await res.$getChild('version').validate()).$value).toBe(true);
 
     res.version = '1.2.3.4';
     expect(res.version).toBe('1.2.3.4');
-    expect(await res.$getChild('version').validate({throwIfInvalid: false})).toBe(false);
+    expect((await res.$getChild('version').validate({throwIfInvalid: false})).$value).toBe(false);
     await expect(res.$getChild('version').validate()).rejects.toBeInstanceOf(Error);
   });
 

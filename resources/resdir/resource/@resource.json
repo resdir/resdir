@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/resource",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "isPublic": true,
   "files": [
     "./dist"
@@ -44,11 +44,17 @@
       "@implementation": "./dist/id-property.js",
       "getNamespace": {
         "@type": "method",
-        "@description": "Get the namespace part of the identifier"
+        "@description": "Get the namespace part of the identifier",
+        "@output": {
+          "@type": "string"
+        }
       },
       "getName": {
         "@type": "method",
-        "@description": "Get the name part of the identifier"
+        "@description": "Get the name part of the identifier",
+        "@output": {
+          "@type": "string"
+        }
       },
       "validate": {
         "@type": "method",
@@ -57,6 +63,9 @@
           "throwIfInvalid": {
             "@default": true
           }
+        },
+        "@output": {
+          "@type": "boolean"
         }
       }
     },
@@ -80,6 +89,9 @@
           "throwIfInvalid": {
             "@default": true
           }
+        },
+        "@output": {
+          "@type": "boolean"
         }
       },
       "bump": {
