@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/resource",
-  "version": "0.1.29",
+  "version": "0.1.30",
   "isPublic": true,
   "files": [
     "./dist"
@@ -54,6 +54,25 @@
         "@description": "Get the name part of the identifier",
         "@output": {
           "@type": "string"
+        }
+      },
+      "parse": {
+        "@type": "method",
+        "@description": "Parse the identifier",
+        "@input": {
+          "throwIfMissing": {
+            "@default": true
+          }
+        },
+        "@output": {
+          "namespace": {
+            "@type": "string",
+            "@isOptional": true
+          },
+          "name": {
+            "@type": "string",
+            "@isOptional": true
+          }
         }
       },
       "validate": {

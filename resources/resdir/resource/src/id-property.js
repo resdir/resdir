@@ -1,6 +1,7 @@
 import {
   getResourceNamespace,
   getResourceName,
+  parseResourceIdentifier,
   validateResourceIdentifier
 } from '@resdir/resource-identifier';
 
@@ -12,6 +13,10 @@ export default base =>
 
     async getName() {
       return getResourceName(this.$value);
+    }
+
+    async parse({throwIfMissing}) {
+      return parseResourceIdentifier(this.$value, {throwIfMissing});
     }
 
     async validate({throwIfInvalid}) {
