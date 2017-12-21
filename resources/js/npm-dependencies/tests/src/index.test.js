@@ -18,15 +18,15 @@ describe('js/npm-dependencies', () => {
   });
 
   test('creation', async () => {
-    expect((await (await Package.$extend()).$getChild('dependencies').count()).$value).toBe(0);
+    expect(await (await Package.$extend()).$getChild('dependencies').count()).toBe(0);
 
-    expect((await (await Package.$extend({dependencies: {}})).$getChild('dependencies').count()).$value).toBe(0);
+    expect(await (await Package.$extend({dependencies: {}})).$getChild('dependencies').count()).toBe(0);
 
     const pkg = await Package.$extend({dependencies: {json5: '^1.0.0', lodash: '2.0.0'}});
-    expect((await pkg.$getChild('dependencies').count()).$value).toBe(2);
-    expect((await pkg.$getChild('dependencies').includes({name: 'json5'})).$value).toBe(true);
-    expect((await pkg.$getChild('dependencies').includes({name: 'lodash'})).$value).toBe(true);
-    expect((await pkg.$getChild('dependencies').includes({name: 'babel'})).$value).toBe(false);
+    expect(await pkg.$getChild('dependencies').count()).toBe(2);
+    expect(await pkg.$getChild('dependencies').includes({name: 'json5'})).toBe(true);
+    expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(true);
+    expect(await pkg.$getChild('dependencies').includes({name: 'babel'})).toBe(false);
   });
 
   test('normalization and serialization', async () => {
@@ -43,13 +43,13 @@ describe('js/npm-dependencies', () => {
     emptyDirSync(directory);
     const pkg = await Package.$extend({}, {directory});
 
-    expect((await pkg.$getChild('dependencies').includes({name: 'lodash'})).$value).toBe(false);
+    expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(false);
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
 
     await pkg.$getChild('dependencies').add({specifiers: ['lodash']}, {'@quiet': true});
 
-    expect((await pkg.$getChild('dependencies').includes({name: 'lodash'})).$value).toBe(true);
+    expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(true);
 
     let resourceDefinition = load(pkg.$getResourceFile());
     expect(Object.keys(resourceDefinition.dependencies)).toEqual(['lodash']);
@@ -58,7 +58,7 @@ describe('js/npm-dependencies', () => {
 
     await pkg.$getChild('dependencies').remove({names: ['lodash']}, {'@quiet': true});
 
-    expect((await pkg.$getChild('dependencies').includes({name: 'lodash'})).$value).toBe(false);
+    expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(false);
 
     resourceDefinition = load(pkg.$getResourceFile());
     expect(resourceDefinition.dependencies).toBeUndefined();
@@ -71,7 +71,7 @@ describe('js/npm-dependencies', () => {
     emptyDirSync(directory);
     const pkg = await Package.$extend({}, {directory});
 
-    expect((await pkg.$getChild('dependencies').includes({name: 'lodash'})).$value).toBe(false);
+    expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(false);
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
 
@@ -79,7 +79,7 @@ describe('js/npm-dependencies', () => {
       .$getChild('dependencies')
       .add({specifiers: ['lodash@4.5.1'], development: true}, {'@quiet': true});
 
-    expect((await pkg.$getChild('dependencies').includes({name: 'lodash'})).$value).toBe(true);
+    expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(true);
 
     let resourceDefinition = load(pkg.$getResourceFile());
     expect(resourceDefinition.dependencies.lodash).toEqual({
@@ -91,7 +91,7 @@ describe('js/npm-dependencies', () => {
 
     await pkg.$getChild('dependencies').remove({names: ['lodash']}, {'@quiet': true});
 
-    expect((await pkg.$getChild('dependencies').includes({name: 'lodash'})).$value).toBe(false);
+    expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(false);
 
     resourceDefinition = load(pkg.$getResourceFile());
     expect(resourceDefinition.dependencies).toBeUndefined();
