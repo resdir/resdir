@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "isPublic": true,
   "files": [
     "./dist"
@@ -43,22 +43,30 @@
     "@description": "ESNext transpilation (using Babel)",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist",
-    "source": "./src",
-    "destination": "./dist",
-    "extensions": [
-      ".js",
-      ".jsx",
-      ".es6",
-      ".es"
-    ],
+    "source": {
+      "@default": "./src"
+    },
+    "destination": {
+      "@default": "./dist"
+    },
+    "extensions": {
+      "@default": [
+        ".js",
+        ".jsx",
+        ".es6",
+        ".es"
+      ]
+    },
     "targets": {
       "@type": "object",
-      "@value": {
+      "@default": {
         "ie": 11,
         "node": 4
       }
     },
-    "transformJSX": false,
+    "transformJSX": {
+      "@default": false
+    },
     "jsxPragma": {
       "@type": "string"
     },
