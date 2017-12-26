@@ -124,7 +124,7 @@ export default base =>
         let code = await readFile(srcFile, 'utf8');
         const {mode} = statSync(srcFile);
 
-        ({code} = transform(code, transformOptions));
+        ({code} = transform(code, {...transformOptions, sourceFileName: srcFile}));
 
         await outputFile(destFile, code);
         chmodSync(destFile, mode);
