@@ -1,0 +1,118 @@
+{
+  "@import": "resdir/resource",
+  "id": "resource/helper",
+  "version": "0.1.0",
+  "isPublic": true,
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@import": "js/npm-dependencies#^0.1.26",
+    "@value": {
+      "indent-string": "^3.2.0",
+      "lodash": "^4.17.4",
+      "@resdir/console": "^0.1.31",
+      "@resdir/resource-specifier": "^0.1.10"
+    }
+  },
+  "@unpublishable": {
+    "transpiler": {
+      "@import": "1place/esnext-transpiler#^0.1.9"
+    }
+  },
+  "@export": {
+    "@description": "A set of methods to manage resources",
+    "@implementation": "./dist",
+    "create": {
+      "@type": "method",
+      "@description": "Create a resource in the current directory",
+      "@input": {
+        "typeOrSpecifier": {
+          "@type": "string",
+          "@description": "Type or resource specifier",
+          "@position": 0
+        }
+      }
+    },
+    "add": {
+      "@type": "method",
+      "@description": "Add a property to the specified resource",
+      "@input": {
+        "resourcePtr": {
+          "@type": "pointer",
+          "@description": "A pointer to a resource",
+          "@position": 0
+        },
+        "typeOrSpecifier": {
+          "@type": "string",
+          "@description": "Type or resource specifier to add",
+          "@position": 1
+        },
+        "key": {
+          "@type": "string",
+          "@description": "Key of the property to add",
+          "@position": 2
+        }
+      }
+    },
+    "remove": {
+      "@type": "method",
+      "@description": "Remove a property from the specified resource",
+      "@aliases": ["@rm"],
+      "@input": {
+        "resourcePtr": {
+          "@type": "pointer",
+          "@description": "A pointer to a resource",
+          "@position": 0
+        },
+        "key": {
+          "@type": "string",
+          "@description": "Key of the property to remove",
+          "@position": 1
+        }
+      }
+    },
+    "normalize": {
+      "@type": "method",
+      "@description": "Normalize the file of the specified resource",
+      "@input": {
+        "resourcePtr": {
+          "@type": "pointer",
+          "@description": "A pointer to a resource",
+          "@position": 0
+        },
+        "format": {
+          "@type": "string",
+          "@description": "Preferred format",
+          "@default": "JSON"
+        }
+      }
+    },
+    "help": {
+      "@type": "method",
+      "@description": "Show help for the specified resource",
+      "@input": {
+        "resourcePtr": {
+          "@type": "pointer",
+          "@description": "A pointer to the resource for which help is required",
+          "@position": 0
+        },
+        "keys": {
+          "@type": "array",
+          "@description": "Key path to sub-resources, attributes or methods",
+          "@position": 1,
+          "@isOptional": true,
+          "@isVariadic": true
+        },
+        "showNative": {
+          "@type": "boolean",
+          "@description": "Show help for native attributes and methods",
+          "@aliases": [
+            "native"
+          ],
+          "@isOptional": true
+        }
+      }
+    }
+  }
+}
