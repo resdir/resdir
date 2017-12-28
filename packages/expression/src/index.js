@@ -131,7 +131,7 @@ function _parseArgumentsAndOptions(argsAndOpts) {
 // [
 //   {key: 'files', aliases: ['f'], position: 0, isVariadic: true, isSubArguments: true}
 // ]
-export function matchExpression(expression, schema) {
+export function matchExpression(expression, schema = []) {
   const result = {};
   const remainder = {};
 

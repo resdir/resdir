@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/registry",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "isPublic": true,
   "files": [
     "./dist"
@@ -13,6 +13,7 @@
     "@import": "js/npm-dependencies",
     "@value": {
       "@resdir/console": "^0.1.0",
+      "@resdir/expression": "^0.1.2",
       "@resdir/registry-client": "^0.1.13"
     }
   },
@@ -123,6 +124,10 @@
             ],
             "@position": 0,
             "@isOptional": true
+          },
+          "permissionToken": {
+            "@type": "string",
+            "@isOptional": true
           }
         }
       },
@@ -202,6 +207,10 @@
             ],
             "@position": 0,
             "@isOptional": true
+          },
+          "permissionToken": {
+            "@type": "string",
+            "@isOptional": true
           }
         }
       },
@@ -215,6 +224,27 @@
             ],
             "@position": 0,
             "@isOptional": true
+          }
+        }
+      }
+    },
+    "admin": {
+      "@implementation": "./dist/admin",
+      "@isHidden": true,
+      "permissionTokens": {
+        "@implementation": "./dist/permission-tokens",
+        "create": {
+          "@type": "method",
+          "@input": {
+            "permission": {
+              "@type": "string",
+              "@position": 0
+            },
+            "parameters": {
+              "@type": "object",
+              "@isOptional": true,
+              "@isSubInput": true
+            }
           }
         }
       }

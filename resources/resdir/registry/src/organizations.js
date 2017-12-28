@@ -1,7 +1,7 @@
 export default base =>
   class Organizations extends base {
-    async create({namespace}) {
-      await this._getRegistry().createOrganization(namespace);
+    async create({namespace, permissionToken}) {
+      await this._getRegistry().createOrganization(namespace, {permissionToken});
     }
 
     async delete({namespace}) {

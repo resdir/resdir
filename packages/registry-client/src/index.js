@@ -250,7 +250,7 @@ export class RegistryClient {
 
   // === Organizations ===
 
-  async createOrganization(namespace) {
+  async createOrganization(namespace, {permissionToken}) {
     this._ensureSignedInUser();
 
     while (!namespace) {
@@ -260,13 +260,15 @@ export class RegistryClient {
     }
 
     await this.checkNamespaceAvailability(namespace, 'ORGANIZATION', {
+      permissionToken,
       parentAction: 'CREATE_ORGANIZATION'
     });
 
     await task(
       async () => {
         const url = `${this.registryURL}/organizations`;
-        await this._userRequest(authorization => postJSON(url, {namespace}, {authorization}));
+        await this._userRequest(authorization =>
+          postJSON(url, {namespace, permissionToken}, {authorization}));
       },
       {
         intro: `Creating organization...`,
@@ -427,7 +429,7 @@ export class RegistryClient {
 
   // === Communities ===
 
-  async createCommunity(namespace) {
+  async createCommunity(namespace, {permissionToken}) {
     this._ensureSignedInUser();
 
     while (!namespace) {
@@ -437,13 +439,15 @@ export class RegistryClient {
     }
 
     await this.checkNamespaceAvailability(namespace, 'COMMUNITY', {
+      permissionToken,
       parentAction: 'CREATE_COMMUNITY'
     });
 
     await task(
       async () => {
         const url = `${this.registryURL}/communities`;
-        await this._userRequest(authorization => postJSON(url, {namespace}, {authorization}));
+        await this._userRequest(authorization =>
+          postJSON(url, {namespace, permissionToken}, {authorization}));
       },
       {
         intro: `Creating community...`,
@@ -563,7 +567,7 @@ export class RegistryClient {
   async checkNamespaceAvailability(
     namespace,
     type,
-    {parentAction, throwIfUnavailable = true} = {}
+    {permissionToken, parentAction, throwIfUnavailable = true} = {}
   ) {
     if (!(type === 'USER' || type === 'ORGANIZATION' || type === 'COMMUNITY')) {
       throw new Error('Invalid \'type\'');
@@ -575,7 +579,7 @@ export class RegistryClient {
       async () => {
         const url = `${this.registryURL}/namespaces/check-availability`;
         return await this._userRequest(authorization =>
-          postJSON(url, {namespace, type}, {authorization}));
+          postJSON(url, {namespace, type, permissionToken}, {authorization}));
       },
       {
         intro: `Checking namespace...`,
@@ -1075,6 +1079,24 @@ export class RegistryClient {
     }
 
     return files;
+  }
+
+  // === Admin ===
+
+  async createPermissionToken(permission, parameters) {
+    this._ensureSignedInUser();
+
+    await task(
+      async progress => {
+        const url = `${this.registryURL}/admin/permission-tokens`;
+        const {body: {token}} = await this._userRequest(authorization =>
+          postJSON(url, {permission, parameters}, {authorization}));
+        progress.setOutro(`Permission token created: ${formatString(token)}`);
+      },
+      {
+        intro: `Creating permission token...`
+      }
+    );
   }
 
   // === User session ===
