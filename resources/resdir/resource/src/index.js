@@ -8,7 +8,7 @@ const GIT_IGNORE = ['.DS_STORE', '*.log'];
 
 export default base =>
   class ResdirResource extends base {
-    async publish({major, minor, patch}, environment) {
+    async publish({major, minor, patch, permissionToken}, environment) {
       if (!(this.id && this.version)) {
         throw new Error(`Can't publish a resource without ${formatCode('id')} and ${formatCode('version')} properties`);
       }
@@ -26,7 +26,7 @@ export default base =>
         async () => {
           const definition = this.$serialize({publishing: true});
           const directory = this.$getCurrentDirectory();
-          await this._getRegistry().publishResource(definition, directory);
+          await this._getRegistry().publishResource(definition, directory, {permissionToken});
         },
         {
           intro: `Publishing resource (${formatString(this.id)})...`,

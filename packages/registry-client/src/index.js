@@ -250,7 +250,7 @@ export class RegistryClient {
 
   // === Organizations ===
 
-  async createOrganization(namespace, {permissionToken}) {
+  async createOrganization(namespace, {permissionToken} = {}) {
     this._ensureSignedInUser();
 
     while (!namespace) {
@@ -429,7 +429,7 @@ export class RegistryClient {
 
   // === Communities ===
 
-  async createCommunity(namespace, {permissionToken}) {
+  async createCommunity(namespace, {permissionToken} = {}) {
     this._ensureSignedInUser();
 
     while (!namespace) {
@@ -1003,12 +1003,12 @@ export class RegistryClient {
     return new Date(Date.now() + milliseconds);
   }
 
-  async publishResource(definition, directory) {
-    await this._publishResource(definition, directory);
+  async publishResource(definition, directory, {permissionToken} = {}) {
+    await this._publishResource(definition, directory, {permissionToken});
     debug('publishResource(%o, %o)', definition, directory);
   }
 
-  async _publishResource(definition, directory) {
+  async _publishResource(definition, directory, {permissionToken}) {
     if (!(this.awsRegion && this.awsS3BucketName && this.awsS3ResourceUploadsPrefix)) {
       throw new Error('AWS configuration is missing or incomplete');
     }
@@ -1041,7 +1041,7 @@ export class RegistryClient {
 
     const url = `${this.registryURL}/resources`;
     await this._userRequest(authorization =>
-      postJSON(url, {definition, temporaryFilesURL}, {authorization}));
+      postJSON(url, {definition, temporaryFilesURL, permissionToken}, {authorization}));
 
     await this._invalidateResourceCache(identifier, version);
   }
