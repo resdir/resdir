@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "resource/helper",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "isPublic": true,
   "files": [
     "./dist"
@@ -58,7 +58,9 @@
     "remove": {
       "@type": "method",
       "@description": "Remove a property from the specified resource",
-      "@aliases": ["@rm"],
+      "@aliases": [
+        "rm"
+      ],
       "@input": {
         "resourcePtr": {
           "@type": "pointer",

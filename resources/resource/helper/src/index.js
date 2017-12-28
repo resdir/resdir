@@ -513,7 +513,6 @@ export default base =>
       if (aliases === undefined) {
         return '';
       }
-      aliases = Array.from(aliases);
       if (removeKey) {
         const key = resource.$getKey();
         if (key) {

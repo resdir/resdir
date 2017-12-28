@@ -204,7 +204,7 @@ function _matchNamedArgument(key, schema) {
     if (argument.key === key) {
       return argument.key;
     }
-    if (argument.aliases && Array.from(argument.aliases).includes(key)) {
+    if (argument.aliases && argument.aliases.includes(key)) {
       return argument.key;
     }
   }
