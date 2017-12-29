@@ -2,7 +2,6 @@ import sortedIndexOf from 'lodash.sortedindexof';
 import {formatString} from '@resdir/console';
 const genericNamespaces = require('./generic-namespaces.json');
 const reservedNamespaces = require('./reserved-namespaces.json');
-const demoCompanies = require('./demo-companies.json');
 import {windowsNames as reservedWindowsFilenames} from 'filename-reserved-regex';
 
 const MIN_LENGTH = 1;
@@ -50,5 +49,3 @@ export function isReservedNamespace(namespace) {
 export function isReservedWindowsFilename(namespace) {
   return reservedWindowsFilenames().test(namespace);
 }
-
-export {demoCompanies};

@@ -19,6 +19,7 @@
   "publish": {
     "@type": "method",
     "@run": [
+      "./resources/resource/helper publish --patch",
       "./resources/resdir/resource publish --patch",
       "./resources/resdir/registry publish --patch",
       "./resources/resdir/example publish --patch",
