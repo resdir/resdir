@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/registry",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "isPublic": true,
   "files": [
     "./dist"
@@ -30,6 +30,18 @@
         "email": {
           "@type": "string",
           "@position": 0,
+          "@isOptional": true
+        },
+        "namespace": {
+          "@type": "string",
+          "@aliases": [
+            "ns"
+          ],
+          "@position": 1,
+          "@isOptional": true
+        },
+        "permissionToken": {
+          "@type": "string",
           "@isOptional": true
         }
       }
@@ -74,7 +86,7 @@
           "ns"
         ],
         "@implementation": "./dist/user-namespace",
-        "add": {
+        "create": {
           "@type": "method",
           "@input": {
             "namespace": {
@@ -84,14 +96,15 @@
               ],
               "@position": 0,
               "@isOptional": true
+            },
+            "permissionToken": {
+              "@type": "string",
+              "@isOptional": true
             }
           }
         },
-        "remove": {
-          "@type": "method",
-          "@aliases": [
-            "rm"
-          ]
+        "delete": {
+          "@type": "method"
         }
       },
       "github": {

@@ -2,8 +2,8 @@ import RegistryClient from '@resdir/registry-client';
 
 export default base =>
   class ResdirRegistry extends base {
-    async signUp({email}) {
-      await this._getRegistry().signUp(email);
+    async signUp({email, namespace, permissionToken}) {
+      await this._getRegistry().signUp(email, {namespace, permissionToken});
     }
 
     async signIn({email}) {

@@ -90,15 +90,15 @@ export class RegistryClient {
 
   // === Users ===
 
-  async signUp(email) {
-    return await this._signUpOrSignIn('SIGN_UP', email);
+  async signUp(email, {namespace, permissionToken} = {}) {
+    return await this._signUpOrSignIn('SIGN_UP', email, {namespace, permissionToken});
   }
 
   async signIn(email) {
     return await this._signUpOrSignIn('SIGN_IN', email);
   }
 
-  async _signUpOrSignIn(action, email) {
+  async _signUpOrSignIn(action, email, {namespace, permissionToken} = {}) {
     if (this._hasSignedInUser()) {
       throw new Error('A user is already signed in');
     }
@@ -149,7 +149,7 @@ export class RegistryClient {
     }
 
     if (action === 'SIGN_UP') {
-      await this.addUserNamespace();
+      await this.createUserNamespace(namespace, {permissionToken});
     }
   }
 
@@ -516,7 +516,7 @@ export class RegistryClient {
 
   // === Namespaces ===
 
-  async addUserNamespace(namespace) {
+  async createUserNamespace(namespace, {permissionToken} = {}) {
     const user = await this.getUser();
 
     if (user.namespace) {
@@ -530,13 +530,15 @@ export class RegistryClient {
     }
 
     await this.checkNamespaceAvailability(namespace, 'USER', {
+      permissionToken,
       parentAction: 'CREATE_USER_NAMESPACE'
     });
 
     await task(
       async () => {
         const url = `${this.registryURL}/users/${user.id}/namespace`;
-        await this._userRequest(authorization => postJSON(url, {namespace}, {authorization}));
+        await this._userRequest(authorization =>
+          postJSON(url, {namespace, permissionToken}, {authorization}));
       },
       {
         intro: `Creating namespace ${formatString(namespace)}...`,
@@ -545,7 +547,7 @@ export class RegistryClient {
     );
   }
 
-  async removeUserNamespace() {
+  async deleteUserNamespace() {
     const user = await this.getUser();
     if (!user.namespace) {
       throw new Error(`You don't have a namespace`);
@@ -650,7 +652,7 @@ export class RegistryClient {
       emptyLine();
 
       if (!okay) {
-        return;
+        throw new Error('GitHub connection aborted');
       }
 
       await this.connectGitHubAccount({parentAction});

@@ -1,11 +1,11 @@
 export default base =>
   class UserNamespace extends base {
-    async add({namespace}) {
-      await this._getRegistry().addUserNamespace(namespace);
+    async create({namespace, permissionToken}) {
+      await this._getRegistry().createUserNamespace(namespace, {permissionToken});
     }
 
-    async remove() {
-      await this._getRegistry().removeUserNamespace();
+    async delete() {
+      await this._getRegistry().deleteUserNamespace();
     }
 
     _getRegistry() {
