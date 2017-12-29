@@ -28,6 +28,7 @@ import {compareVersions} from '@resdir/version';
 import VersionRange from '@resdir/version-range';
 import generateSecret from '@resdir/secret-generator';
 import {getJSON, postJSON, deleteJSON, get, put} from '@resdir/http-client';
+import {gzipSync, gunzipSync} from 'zlib';
 import {zip, unzip} from '@resdir/archive-manager';
 import {SERVICE_NAME, SUPPORT_EMAIL_ADDRESS, REGISTRY_URL} from '@resdir/information';
 
@@ -843,19 +844,28 @@ export class RegistryClient {
       url += `?cachedVersion=${cachedVersion}`;
     }
 
-    const {body: {unchanged, definition, filesURL}} = await this._userRequest(authorization =>
+    const {body: {unchanged, definitionURL, filesURL}} = await this._userRequest(authorization =>
       getJSON(url, {authorization}));
 
     if (unchanged) {
       return {unchanged};
     }
 
+    let downloads = [get(definitionURL)];
+    if (filesURL) {
+      downloads.push(get(filesURL));
+    }
+    downloads = await Promise.all(downloads);
+
+    const {body: compressedDefinition} = downloads[0];
+    const definition = JSON.parse(gunzipSync(compressedDefinition).toString());
+
     let directory;
     if (filesURL) {
       directory = tempy.directory();
       // TODO: Instead of a buffer, use a stream to download and unzip files
-      const {body: files} = await get(filesURL);
-      await unzip(directory, files);
+      const {body: compressedFiles} = downloads[1];
+      await unzip(directory, compressedFiles);
     }
 
     return {definition, directory};
@@ -1017,33 +1027,47 @@ export class RegistryClient {
 
     this._ensureSignedInUser();
 
-    const identifier = definition.id;
+    const {id: identifier, version, isPublic} = definition;
+
     if (!identifier) {
       throw new Error(`Can't publish a resource without a ${formatCode('id')} property`);
     }
 
-    const version = definition.version;
     if (!version) {
       throw new Error(`Can't publish a resource without a ${formatCode('version')} property`);
     }
 
-    let temporaryFilesURL;
+    const uploads = [];
 
-    let files = await this._getFiles(definition, directory);
+    const compressedDefinition = gzipSync(JSON.stringify(definition));
+    const definitionKey = this.awsS3ResourceUploadsPrefix + generateSecret() + '.json.gz';
+    uploads.push(this._uploadToS3({
+      bucket: this.awsS3BucketName,
+      key: definitionKey,
+      body: compressedDefinition
+    }));
+
+    const files = await this._getFiles(definition, directory);
     if (files.length > 0) {
       // TODO: Instead of a buffer, use a stream to zip and upload files
-      files = await zip(directory, files);
-      const key = this.awsS3ResourceUploadsPrefix + generateSecret() + '.zip';
-      temporaryFilesURL = await this._uploadToS3({
+      const compressedFiles = await zip(directory, files);
+      const filesKey = this.awsS3ResourceUploadsPrefix + generateSecret() + '.zip';
+      uploads.push(this._uploadToS3({
         bucket: this.awsS3BucketName,
-        key,
-        body: files
-      });
+        key: filesKey,
+        body: compressedFiles
+      }));
     }
+
+    const [temporaryDefinitionURL, temporaryFilesURL] = await Promise.all(uploads);
 
     const url = `${this.registryURL}/resources`;
     await this._userRequest(authorization =>
-      postJSON(url, {definition, temporaryFilesURL, permissionToken}, {authorization}));
+      postJSON(
+        url,
+        {identifier, version, isPublic, temporaryDefinitionURL, temporaryFilesURL, permissionToken},
+        {authorization}
+      ));
 
     await this._invalidateResourceCache(identifier, version);
   }

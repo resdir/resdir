@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "tool/file-watcher",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "isPublic": true,
   "files": [
     "./dist"
