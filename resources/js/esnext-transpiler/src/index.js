@@ -3,7 +3,7 @@ import {readFileSync, writeFileSync, existsSync, statSync, chmodSync} from 'fs';
 import {isEqual} from 'lodash';
 import {copy, readFile, outputFile, emptyDirSync} from 'fs-extra';
 import isDirectory from 'is-directory';
-import {transform} from 'babel-core';
+import {transform} from '@babel/core';
 import {task, formatPath} from '@resdir/console';
 import GitIgnore from '@resdir/gitignore-manager';
 
@@ -50,7 +50,11 @@ export default base =>
         const relativeFile = relative(srcDirectory, srcFile);
         if (relativeFile.startsWith('..')) {
           if (!environment['@quiet']) {
-            console.warn(`Cannot build a file (${formatPath(srcFile)}) located outside of the source directory (${formatPath(srcDirectory)})`);
+            console.warn(
+              `Cannot build a file (${formatPath(
+                srcFile
+              )}) located outside of the source directory (${formatPath(srcDirectory)})`
+            );
           }
           continue;
         }
@@ -93,23 +97,17 @@ export default base =>
     }
 
     async _transpile(srcDirectory, destDirectory, files, environment = {}) {
-      const presets = [[require.resolve('babel-preset-env'), {targets: this.targets, loose: true}]];
-
-      const plugins = [
-        require.resolve('babel-plugin-transform-class-properties'),
-        require.resolve('babel-plugin-transform-object-rest-spread')
+      const presets = [
+        [require.resolve('@babel/preset-env'), {targets: this.targets, loose: true}],
+        [require.resolve('@babel/preset-stage-3'), {loose: true}]
       ];
 
       if (this.transformJSX) {
-        plugins.push([
-          require.resolve('babel-plugin-transform-react-jsx'),
-          {pragma: this.jsxPragma}
-        ]);
+        presets.push([require.resolve('@babel/preset-react'), {pragma: this.jsxPragma}]);
       }
 
       const transformOptions = {
         presets,
-        plugins,
         sourceMaps: 'inline'
       };
 

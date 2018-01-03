@@ -1,10 +1,17 @@
 {
+  "dependencies": {
+    "@import": "js/npm-dependencies",
+    "@value": {
+      "regenerator-runtime": "^0.11.1",
+      "sleep-promise": "^2.0.0"
+    }
+  },
   "transpiler": {
     "@import": "..",
     "transpilationOccurred": {
       "@type": "method",
-      "@listen": "transpilationOccurred",
-      "@run": "@console print transpilationOccured"
+      "@run": "@console print transpilationOccured",
+      "@listen": "transpilationOccurred"
     }
   }
 }

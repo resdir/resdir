@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.43",
+  "version": "0.1.44",
   "isPublic": true,
   "files": [
     "./dist"
@@ -12,11 +12,10 @@
   "dependencies": {
     "@import": "js/npm-dependencies",
     "@value": {
-      "babel-core": "^6.25.0",
-      "babel-plugin-transform-class-properties": "^6.24.1",
-      "babel-plugin-transform-object-rest-spread": "^6.23.0",
-      "babel-plugin-transform-react-jsx": "^6.24.1",
-      "babel-preset-env": "^1.5.2",
+      "@babel/core": "^7.0.0-beta.36",
+      "@babel/preset-env": "^7.0.0-beta.36",
+      "@babel/preset-react": "^7.0.0-beta.36",
+      "@babel/preset-stage-3": "^7.0.0-beta.36",
       "fs-extra": "^3.0.1",
       "is-directory": "^0.3.1",
       "lodash": "^4.17.4",
