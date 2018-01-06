@@ -362,7 +362,7 @@ export function formatText(text, {width, margins = {}, indentation} = {}) {
     if (leftMargin) {
       width -= leftMargin;
     }
-    result = wrapANSI(text, width);
+    result = wrapANSI(text, width, {trim: false});
   }
 
   if (leftMargin) {
