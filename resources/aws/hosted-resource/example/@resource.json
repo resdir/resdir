@@ -1,0 +1,8 @@
+{
+  "@import": "../",
+  "domainName": "api2.example.resdir.com",
+  "@export": {
+    "@implementation": "./src",
+    "hello": {"@type": "method"}
+  }
+}

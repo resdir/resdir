@@ -40,14 +40,24 @@ export default base =>
           }
 
           if (!hasBeenCreated && !tags.some(tag => isEqual(tag, this.constructor.MANAGED_BY_TAG))) {
-            throw new Error(`Can't use a S3 bucket not originally created by ${formatString(this.constructor.RESOURCE_ID)} (bucketName: ${formatString(bucketName)})`);
+            throw new Error(
+              `Can't use a S3 bucket not originally created by ${formatString(
+                this.constructor.RESOURCE_ID
+              )} (bucketName: ${formatString(bucketName)})`
+            );
           }
 
           if (!hasBeenCreated) {
             const result = await s3.getBucketLocation({Bucket: bucketName});
             const locationConstraint = result.LocationConstraint || 'us-east-1';
             if (locationConstraint !== region) {
-              throw new Error(`Sorry, it is currently not possible to change the region of the S3 bucket associated to your website. Please remove the bucket (${formatString(bucketName)}) manually or set the region to its initial value (${formatString(locationConstraint)}).`);
+              throw new Error(
+                `Sorry, it is currently not possible to change the region of the S3 bucket associated to your website. Please remove the bucket (${formatString(
+                  bucketName
+                )}) manually or set the region to its initial value (${formatString(
+                  locationConstraint
+                )}).`
+              );
             }
           }
 
@@ -103,7 +113,9 @@ export default base =>
               const result = await s3.listObjectsV2({Bucket: bucketName});
 
               if (result.IsTruncated) {
-                throw new Error('Wow, you have a lot of files on S3! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if you really need to handle so many files.');
+                throw new Error(
+                  'Whoa, you have a lot of files on S3! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if you really need to handle so many files.'
+                );
               }
 
               const files = [];

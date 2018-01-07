@@ -1,0 +1,56 @@
+{
+  "@import": "resdir/resource",
+  "id": "aws/hosted-resource",
+  "version": "0.1.0",
+  "isPublic": true,
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@import": "js/npm-dependencies#^0.1.26",
+    "@value": {
+      "fs-extra": "^5.0.0",
+      "hasha": "^3.0.0",
+      "lodash": "^4.17.4",
+      "@resdir/archive-manager": "^0.1.4",
+      "@resdir/aws-client": "^0.1.1",
+      "@resdir/aws-helpers": "^0.1.0",
+      "@resdir/console": "^0.1.16",
+      "sleep-promise": "^2.0.0",
+      "tempy": "^0.2.1"
+    }
+  },
+  "@unpublishable": {
+    "transpiler": {
+      "@import": "1place/esnext-transpiler#^0.1.9"
+    }
+  },
+  "@export": {
+    "@implementation": "./dist",
+    "domainName": {
+      "@type": "string"
+    },
+    "memorySize": {
+      "@default": 128
+    },
+    "timeout": {
+      "@default": 3
+    },
+    "environment": {
+      "@type": "object"
+    },
+    "aws": {
+      "accessKeyId": {
+        "@type": "string"
+      },
+      "secretAccessKey": {
+        "@type": "string"
+      },
+      "region": "us-east-1"
+    },
+    "deploy": {
+      "@type": "method",
+      "@before": "@build"
+    }
+  }
+}

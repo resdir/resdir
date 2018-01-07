@@ -16,10 +16,12 @@ import Route53Mixin from './route-53-mixin';
 import ExternalDNSMixin from './external-dns-mixin';
 
 export default base =>
-  class AWSWebsite extends ExternalDNSMixin(Route53Mixin(CloudFrontMixin(ACMMixin(S3Mixin(base))))) {
+  class AWSWebsite extends ExternalDNSMixin(
+    Route53Mixin(CloudFrontMixin(ACMMixin(S3Mixin(base))))
+  ) {
     static RESOURCE_ID = 'aws/website';
 
-    static MANAGED_BY_TAG = {Key: 'managed-by', Value: 'aws-website-resource-v1'};
+    static MANAGED_BY_TAG = {Key: 'managed-by', Value: 'aws-website-v1'};
 
     async deploy(_args, environment) {
       this.validate();
@@ -58,9 +60,9 @@ export default base =>
             {width: 80}
           );
           emptyLine();
-          print(`   ${formatDim('Name:')} ${formatString(this.domainName + '.')}`);
+          print(`   ${formatDim('Name:')} ${formatString(this.domainName)}`);
           print(`   ${formatDim('Type:')} ${formatString('CNAME')}`);
-          print(`  ${formatDim('Value:')} ${formatString(cloudFrontDomainName + '.')}`);
+          print(`  ${formatDim('Value:')} ${formatString(cloudFrontDomainName)}`);
           emptyLine();
         }
       }
@@ -76,20 +78,30 @@ export default base =>
       }
 
       if (this.indexPage.startsWith('/') || this.indexPage.startsWith('.')) {
-        throw new Error(`${formatCode('indexPage')} can't start with ${formatString('/')} or ${formatString('.')}`);
+        throw new Error(
+          `${formatCode('indexPage')} can't start with ${formatString('/')} or ${formatString('.')}`
+        );
       }
 
       for (const {errorCode, responseCode, responsePage} of this.customErrors || []) {
         if (!errorCode) {
-          throw new Error(`${formatCode('errorCode')} is missing in ${formatCode('customErrors')} property`);
+          throw new Error(
+            `${formatCode('errorCode')} is missing in ${formatCode('customErrors')} property`
+          );
         }
 
         if (responseCode && !responsePage) {
-          throw new Error(`${formatCode('responsePage')} is missing in ${formatCode('customErrors')} property`);
+          throw new Error(
+            `${formatCode('responsePage')} is missing in ${formatCode('customErrors')} property`
+          );
         }
 
         if (responsePage && (responsePage.startsWith('/') || responsePage.startsWith('.'))) {
-          throw new Error(`${formatCode('responsePage')} in ${formatCode('customErrors')} property can't start with ${formatString('/')} or ${formatString('.')}`);
+          throw new Error(
+            `${formatCode('responsePage')} in ${formatCode(
+              'customErrors'
+            )} property can't start with ${formatString('/')} or ${formatString('.')}`
+          );
         }
       }
     }

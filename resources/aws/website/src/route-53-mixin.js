@@ -104,7 +104,9 @@ async function findRoute53HostedZone(route53, domainName, environment) {
       }
 
       if (result.IsTruncated) {
-        throw new Error('Wow, you have a lot of Route 53 hosted zones! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if this is a problem for you.');
+        throw new Error(
+          'Whoa, you have a lot of Route 53 hosted zones! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if this is a problem for you.'
+        );
       }
 
       progress.setOutro('Route 53 hosted zone not found');
@@ -127,7 +129,9 @@ async function findRoute53RecordSet({route53, hostedZoneId, domainName, type = '
         StartRecordType: type
       });
 
-      const recordSet = result.ResourceRecordSets.find(recordSet => recordSet.Name === name && recordSet.Type === type);
+      const recordSet = result.ResourceRecordSets.find(
+        recordSet => recordSet.Name === name && recordSet.Type === type
+      );
 
       if (recordSet) {
         progress.setOutro('Route 53 record set found');
@@ -135,7 +139,9 @@ async function findRoute53RecordSet({route53, hostedZoneId, domainName, type = '
       }
 
       if (result.IsTruncated) {
-        throw new Error('Wow, you have a lot of Route 53 record sets! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if this is a problem for you.');
+        throw new Error(
+          'Whoa, you have a lot of Route 53 record sets! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if this is a problem for you.'
+        );
       }
 
       progress.setOutro('Route 53 record set not found');
@@ -161,7 +167,9 @@ async function waitUntilRoute53RecordSetIsChanged(route53, changeId, environment
           return;
         }
       } while (totalSleepTime <= maxSleepTime);
-      throw new Error(`Route 53 record set change uncompleted after ${totalSleepTime / 1000} seconds`);
+      throw new Error(
+        `Route 53 record set change uncompleted after ${totalSleepTime / 1000} seconds`
+      );
     },
     {
       intro: `Waiting for Route 53 record set change to complete...`,
