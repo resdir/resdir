@@ -1,17 +1,16 @@
 {
   "@import": "js/npm-package#^0.1.26",
-  "name": "@resdir/aws-client",
-  "version": "0.1.5",
-  "description": "Convenience wrapper around AWS SDK",
+  "name": "@resdir/aws-helpers",
+  "version": "0.1.0",
+  "description": "Convenience helpers around @resdir/aws-client",
   "files": [
     "./dist"
   ],
   "main": "./dist/index.js",
   "dependencies": {
-    "aws-sdk": "^2.176.0",
-    "debug": "^3.1.0",
     "lodash": "^4.17.4",
-    "@resdir/console": "^0.1.16"
+    "@resdir/console": "^0.1.16",
+    "sleep-promise": "^2.0.0"
   },
   "@unpublishable": {
     "transpiler": {
