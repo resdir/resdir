@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "@import": "js/npm-dependencies",
+    "@value": {
+      "sleep-promise": "^2.0.0"
+    }
+  },
+  "bundler": {
+    "@import": "..",
+    "fileWatcher": {
+      "@import": "tool/file-watcher",
+      "files": [
+        "./src/**"
+      ],
+      "onFileModified": {
+        "@run": "@parent run"
+      }
+    }
+  }
+}

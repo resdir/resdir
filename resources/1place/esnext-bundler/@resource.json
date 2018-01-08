@@ -1,0 +1,51 @@
+{
+  "@import": "resdir/resource",
+  "id": "1place/esnext-bundler",
+  "version": "0.1.1",
+  "isPublic": true,
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@import": "js/npm-dependencies",
+    "@value": {
+      "@babel/core": "^7.0.0-beta.36",
+      "@babel/preset-env": "^7.0.0-beta.36",
+      "@babel/preset-stage-3": "^7.0.0-beta.36",
+      "bytes": "^3.0.0",
+      "fs-extra": "^3.0.1",
+      "@resdir/console": "^0.1.0",
+      "rollup": "^0.53.3",
+      "rollup-plugin-babel": "^4.0.0-beta",
+      "rollup-plugin-commonjs": "^8.2.6",
+      "rollup-plugin-json": "^2.3.0",
+      "rollup-plugin-node-resolve": "^3.0.0"
+    }
+  },
+  "@unpublishable": {
+    "transpiler": {
+      "@import": "1place/esnext-transpiler"
+    }
+  },
+  "@export": {
+    "@description": "ESNext module bundler (using Rollup and Babel)",
+    "@runtime": "node#>=6.10.0",
+    "@implementation": "./dist",
+    "entryFile": {
+      "@default": "./src/index.js"
+    },
+    "bundleFile": {
+      "@default": "./dist/bundle.js"
+    },
+    "targets": {
+      "@type": "object",
+      "@default": {
+        "node": "6.10"
+      }
+    },
+    "run": {
+      "@type": "method",
+      "@listen": "@build"
+    }
+  }
+}
