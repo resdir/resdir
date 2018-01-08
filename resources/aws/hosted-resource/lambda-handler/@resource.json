@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "@import": "js/npm-dependencies",
+    "@value": {
+      "easy-json-rpc": "^2.0.5"
+    }
+  },
+  "bundler": {
+    "@import": "1place/esnext-bundler",
+    "fileWatcher": {
+      "@import": "tool/file-watcher",
+      "files": [
+        "./src/**"
+      ],
+      "onFileModified": {
+        "@run": "@parent run"
+      }
+    }
+  }
+}

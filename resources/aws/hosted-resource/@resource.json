@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "isPublic": true,
   "files": [
-    "./dist"
+    "./dist",
+    "./lambda-handler/dist"
   ],
   "dependencies": {
     "@import": "js/npm-dependencies#^0.1.26",

@@ -1,4 +1,5 @@
 import {join} from 'path';
+import {statSync, utimesSync} from 'fs';
 import {isEqual} from 'lodash';
 import {formatString, task} from '@resdir/console';
 import {Lambda} from '@resdir/aws-client';
@@ -17,7 +18,7 @@ export default base =>
           if (!lambdaFunction) {
             progress.setMessage('Creating Lambda function...');
             progress.setOutro('Lambda function created');
-            await this.createLambdaFunction({iamLambdaRoleHasJustBeenCreated});
+            await this.createLambdaFunction({iamLambdaRoleHasJustBeenCreated}, environment);
             await this.setLambdaFunctionTags();
           } else {
             await this.checkLambdaFunctionTags();
@@ -26,10 +27,10 @@ export default base =>
               progress.setOutro('Lambda function configuration updated');
               await this.updateLambdaFunctionConfiguration();
             }
-            if (await this.checkIfLambdaFunctionCodeHasChanged()) {
+            if (await this.checkIfLambdaFunctionCodeHasChanged(environment)) {
               progress.setMessage('Updating Lambda function code...');
               progress.setOutro('Lambda function code updated');
-              await this.updateLambdaFunctionCode();
+              await this.updateLambdaFunctionCode(environment);
             }
           }
         },
@@ -69,10 +70,10 @@ export default base =>
       return this._lambdaFunction;
     }
 
-    async createLambdaFunction({iamLambdaRoleHasJustBeenCreated}) {
+    async createLambdaFunction({iamLambdaRoleHasJustBeenCreated}, environment) {
       const lambda = this.getLambdaClient();
       const role = await this.getIAMLambdaRole();
-      const zipArchive = await this.getZipArchive();
+      const zipArchive = await this.getZipArchive(environment);
 
       let errors = 0;
       while (!this._lambdaFunction) {
@@ -152,30 +153,50 @@ export default base =>
       });
     }
 
-    async checkIfLambdaFunctionCodeHasChanged() {
+    async checkIfLambdaFunctionCodeHasChanged(environment) {
       const lambdaFunction = await this.getLambdaFunction();
-      const zipArchive = await this.getZipArchive();
+      const zipArchive = await this.getZipArchive(environment);
       const zipArchiveSHA256 = hasha(zipArchive, {encoding: 'base64', algorithm: 'sha256'});
       return lambdaFunction.codeSHA256 !== zipArchiveSHA256;
     }
 
-    async updateLambdaFunctionCode() {
+    async updateLambdaFunctionCode(environment) {
       const lambda = this.getLambdaClient();
       await lambda.updateFunctionCode({
         FunctionName: this.getLambdaFunctionName(),
-        ZipFile: await this.getZipArchive()
+        ZipFile: await this.getZipArchive(environment)
       });
     }
 
-    async getZipArchive() {
+    async getZipArchive(environment) {
       if (!this._zipArchive) {
         const tempDirectory = tempy.directory();
-        await copy(join(__dirname, 'templates', 'handler.js'), join(tempDirectory, 'handler.js'));
-        await copy(this.getImplementationFile(), join(tempDirectory, 'implementation.js'));
-        this._zipArchive = await zip(tempDirectory, ['handler.js', 'implementation.js']);
+        await copy(
+          join(__dirname, '..', 'lambda-handler', 'dist', 'bundle.js'),
+          join(tempDirectory, 'handler.js')
+        );
+        await this.buildImplementationBundle(join(tempDirectory, 'builder.js'), environment);
+        this._zipArchive = await zip(tempDirectory, ['handler.js', 'builder.js']);
         await remove(tempDirectory);
       }
       return this._zipArchive;
+    }
+
+    async buildImplementationBundle(bundleFile, environment) {
+      const entryFile = this.getImplementationFile();
+
+      const bundler = await this.constructor.$create(
+        {
+          '@import': '1place/esnext-bundler',
+          entryFile,
+          bundleFile
+        },
+        {directory: this.$getCurrentDirectory()}
+      );
+      await bundler.run(undefined, environment);
+
+      const {atime, mtime} = statSync(entryFile);
+      utimesSync(bundleFile, atime, mtime);
     }
 
     async allowLambdaFunctionInvocationFromAPIGateway() {
