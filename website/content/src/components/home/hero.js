@@ -50,7 +50,7 @@ export class Hero extends React.Component {
       >
         <h1 style={{textAlign: 'center'}}>Make software development fun&nbsp;again! 🎉</h1>
         <h3 style={{...s.subheading, maxWidth: '800px', textAlign: 'center'}}>
-          Forget Grandpa{'\''}s shell commands, use{' '}
+          Forget Grandpa{'\''}s shell paradigms, use{' '}
           <Link
             to="/#intro"
             style={{
