@@ -180,7 +180,7 @@ async function waitUntilACMCertificateValidationCNAMEIsAdded(
 
   printText(
     `
-An SSL/TLS certificate has been requested for ${formatedDomainName}, but since this domain name don't seem to be managed by Route 53, you must validate the certificate manually by adding a CNAME record to the name servers.
+An SSL/TLS certificate has been requested for ${formatedDomainName}, but since this domain name doesn't seem to be managed by Route 53, you must validate the certificate manually by adding a CNAME record to the name servers.
 
 Please create a DNS record as follows:
 

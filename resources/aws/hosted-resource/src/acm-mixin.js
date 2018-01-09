@@ -7,12 +7,13 @@ export default base =>
     async ensureACMCertificate(environment) {
       await task(
         async progress => {
-          const certificate = await this.getACMCertificate({throwIfNotFound: false}, environment);
+          let certificate = await this.getACMCertificate({throwIfNotFound: false}, environment);
           if (!certificate) {
             progress.setMessage('Creating ACM Certificate...');
             progress.setOutro('ACM Certificate created');
-            await this.createACMCertificate(environment);
+            certificate = await this.createACMCertificate(environment);
           }
+          return certificate;
         },
         {
           intro: `Checking ACM Certificate...`,
@@ -43,7 +44,7 @@ export default base =>
     }
 
     async createACMCertificate(environment) {
-      this._acmCertificate = await requestACMCertificate(
+      const certificate = await requestACMCertificate(
         {
           domainName: this.domainName,
           cnameAdder: this.ensureRoute53CNAME.bind(this),
@@ -52,6 +53,10 @@ export default base =>
         },
         environment
       );
+
+      this._acmCertificate = certificate;
+
+      return certificate;
     }
 
     getACMClient() {

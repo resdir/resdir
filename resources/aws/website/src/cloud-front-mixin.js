@@ -87,10 +87,7 @@ export default base =>
     async createCloudFrontDistribution(environment) {
       const cloudFront = this.getCloudFrontClient();
 
-      let certificateARN = await this.findACMCertificate(environment);
-      if (!certificateARN) {
-        certificateARN = await this.requestACMCertificate(environment);
-      }
+      const certificate = await this.ensureACMCertificate(environment);
 
       return await task(
         async () => {
@@ -112,10 +109,10 @@ export default base =>
                 PriceClass: this.aws.cloudFront.priceClass,
                 Enabled: true,
                 ViewerCertificate: {
-                  ACMCertificateArn: certificateARN,
+                  ACMCertificateArn: certificate.arn,
                   SSLSupportMethod: 'sni-only',
                   MinimumProtocolVersion: 'TLSv1',
-                  Certificate: certificateARN,
+                  Certificate: certificate.arn,
                   CertificateSource: 'acm'
                 },
                 Restrictions: {GeoRestriction: {RestrictionType: 'none', Quantity: 0, Items: []}},
@@ -124,7 +121,7 @@ export default base =>
                 IsIPV6Enabled: true
               },
               Tags: {
-                Items: [this.constructor.MANAGED_BY_TAG]
+                Items: [{Key: 'managed-by', Value: this.constructor.MANAGER_IDENTIFIER}]
               }
             }
           };
@@ -286,7 +283,10 @@ export default base =>
       await task(
         async () => {
           const result = await cloudFront.listTagsForResource({Resource: distribution.ARN});
-          if (!result.Tags.Items.some(tag => isEqual(tag, this.constructor.MANAGED_BY_TAG))) {
+          if (
+            !result.Tags.Items.some(tag =>
+              isEqual(tag, {Key: 'managed-by', Value: this.constructor.MANAGER_IDENTIFIER}))
+          ) {
             throw new Error(
               `Can't use a CloudFront distribution not originally created by ${formatString(
                 this.constructor.RESOURCE_ID
@@ -374,7 +374,7 @@ async function findCloudFrontDistribution(cloudFront, domainName, environment) {
 
       if (result.DistributionList.IsTruncated) {
         throw new Error(
-          'Whoa, you have a lot of CloudFront distributions! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if this is a problem for you.'
+          `Whoa, you have a lot of CloudFront distributions! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`
         );
       }
 
@@ -393,7 +393,7 @@ async function waitUntilCloudFrontDistributionIsDeployed(cloudFront, distributio
       await cloudFront.waitFor('distributionDeployed', {Id: distributionId});
     },
     {
-      intro: `Waiting for CloudFront deployment (be patient, it can take up to 15 minutes)...`,
+      intro: `Waiting for CloudFront deployment (be patient, it can take up to 20 minutes)...`,
       outro: 'CloudFront distribution deployed'
     },
     environment

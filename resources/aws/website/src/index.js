@@ -13,15 +13,12 @@ import S3Mixin from './s3-mixin';
 import ACMMixin from './acm-mixin';
 import CloudFrontMixin from './cloud-front-mixin';
 import Route53Mixin from './route-53-mixin';
-import ExternalDNSMixin from './external-dns-mixin';
 
 export default base =>
-  class AWSWebsite extends ExternalDNSMixin(
-    Route53Mixin(CloudFrontMixin(ACMMixin(S3Mixin(base))))
-  ) {
+  class AWSWebsite extends Route53Mixin(CloudFrontMixin(ACMMixin(S3Mixin(base)))) {
     static RESOURCE_ID = 'aws/website';
 
-    static MANAGED_BY_TAG = {Key: 'managed-by', Value: 'aws-website-v1'};
+    static MANAGER_IDENTIFIER = 'aws-website-v1';
 
     async deploy(_args, environment) {
       this.validate();
@@ -36,10 +33,7 @@ export default base =>
         await this.runCloudFrontInvalidation(changes, environment);
       }
 
-      let domainNameConfigured = await this.configureRoute53HostedZone(environment);
-      if (!domainNameConfigured) {
-        domainNameConfigured = await this.checkCNAME(environment);
-      }
+      const domainNameConfigured = await this.configureDomainName(environment);
 
       if (hasBeenCreated) {
         emptyLine();

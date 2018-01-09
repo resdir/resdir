@@ -1,7 +1,7 @@
 {
   "@import": "js/npm-package#^0.1.26",
   "name": "@resdir/aws-helpers",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Convenience helpers around @resdir/aws-client",
   "files": [
     "./dist"

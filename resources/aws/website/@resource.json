@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "aws/website",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "isPublic": true,
   "files": [
     "./dist"
@@ -19,6 +19,7 @@
       "minimatch": "^3.0.4",
       "recursive-readdir": "^2.2.1",
       "@resdir/aws-client": "^0.1.1",
+      "@resdir/aws-helpers": "^0.1.0",
       "@resdir/console": "^0.1.16",
       "sleep-promise": "^2.0.0"
     }

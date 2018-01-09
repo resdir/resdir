@@ -34,12 +34,17 @@ export default base =>
             await s3.createBucket(params);
             await s3.putBucketTagging({
               Bucket: bucketName,
-              Tagging: {TagSet: [this.constructor.MANAGED_BY_TAG]}
+              Tagging: {TagSet: [{Key: 'managed-by', Value: this.constructor.MANAGER_IDENTIFIER}]}
             });
             hasBeenCreated = true;
           }
 
-          if (!hasBeenCreated && !tags.some(tag => isEqual(tag, this.constructor.MANAGED_BY_TAG))) {
+          if (
+            !hasBeenCreated &&
+            !tags.some(tag =>
+              isEqual(tag, {Key: 'managed-by', Value: this.constructor.MANAGER_IDENTIFIER})
+            )
+          ) {
             throw new Error(
               `Can't use a S3 bucket not originally created by ${formatString(
                 this.constructor.RESOURCE_ID
@@ -114,7 +119,7 @@ export default base =>
 
               if (result.IsTruncated) {
                 throw new Error(
-                  'Whoa, you have a lot of files on S3! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if you really need to handle so many files.'
+                  "Whoa, you have a lot of files on S3! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if you really need to handle so many files."
                 );
               }
 
