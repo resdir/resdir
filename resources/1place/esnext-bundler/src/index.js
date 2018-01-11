@@ -91,7 +91,7 @@ export default base =>
 
           const bundle = await rollup(rollupConfig);
 
-          const result = await bundle.generate({format: 'cjs', name: 'bundle'});
+          const result = await bundle.generate({format: this.format, name: 'bundle'});
 
           for (const warning of warnings) {
             if (environment['@debug']) {

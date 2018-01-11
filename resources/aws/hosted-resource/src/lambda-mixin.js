@@ -188,6 +188,7 @@ export default base =>
       const bundler = await this.constructor.$create(
         {
           '@import': '1place/esnext-bundler',
+          format: 'cjs',
           entryFile,
           bundleFile
         },

@@ -7,6 +7,7 @@
   },
   "bundler": {
     "@import": "1place/esnext-bundler",
+    "format": "cjs",
     "fileWatcher": {
       "@import": "tool/file-watcher",
       "files": [

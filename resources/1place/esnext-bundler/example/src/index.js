@@ -9,7 +9,7 @@ class Base {
   }
 }
 
-class Person extends Base {
+export class Person extends Base {
   async formatGreeting(target = 'World') {
     console.log('<Person>');
     await sleep(1000);
