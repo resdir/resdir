@@ -27,7 +27,7 @@
       "@import": "1place/esnext-jest",
       "@directory": "./tests",
       "dependencies": {
-        "run-core": "^0.10.0"
+        "run-core": "^0.11.0"
       }
     }
   },
