@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "1place/esnext-bundler",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "isPublic": true,
   "files": [
     "./dist"
@@ -45,6 +45,9 @@
     },
     "format": {
       "@default": "es"
+    },
+    "name": {
+      "@type": "string"
     },
     "run": {
       "@type": "method",
