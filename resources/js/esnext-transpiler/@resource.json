@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.44",
+  "version": "0.1.47",
   "isPublic": true,
   "files": [
     "./dist"
@@ -59,8 +59,11 @@
     "targets": {
       "@type": "object",
       "@default": {
-        "ie": 11,
-        "node": 4
+        "node": "6.10",
+        "chrome": "50",
+        "safari": "10",
+        "firefox": "53",
+        "edge": "14"
       }
     },
     "transformJSX": {

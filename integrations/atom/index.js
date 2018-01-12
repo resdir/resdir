@@ -2,7 +2,6 @@
 
 /* global atom */
 
-import 'regenerator-runtime/runtime';
 import {dirname} from 'path';
 import {execFile} from 'child_process';
 import {CompositeDisposable} from 'atom';
@@ -11,9 +10,11 @@ import {CompositeDisposable} from 'atom';
 export default {
   activate() {
     this.subscriptions = new CompositeDisposable();
-    this.subscriptions.add(atom.workspace.observeTextEditors(textEditor => {
-      this.subscriptions.add(textEditor.onDidSave(this.handleDidSave.bind(this)));
-    }));
+    this.subscriptions.add(
+      atom.workspace.observeTextEditors(textEditor => {
+        this.subscriptions.add(textEditor.onDidSave(this.handleDidSave.bind(this)));
+      })
+    );
   },
 
   consumeSignal(registry) {

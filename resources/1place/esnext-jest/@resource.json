@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "1place/esnext-jest",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "isPublic": true,
   "@export": {
     "@import": "1place/jest",

@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/resource",
-  "version": "0.1.32",
+  "version": "0.1.33",
   "isPublic": true,
   "files": [
     "./dist"

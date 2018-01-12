@@ -42,7 +42,7 @@ export async function deleteJSON(url, options) {
 /* eslint-disable complexity */
 export async function fetch(url, options = {}) {
   if (typeof url !== 'string') {
-    throw new TypeError('\'url\' must be a string');
+    throw new TypeError(`'url' must be a string`);
   }
 
   const method = (options.method && options.method.toUpperCase()) || 'GET';
@@ -113,7 +113,7 @@ export async function fetch(url, options = {}) {
       // TODO: Use a standard way to get headers
       result.headers = response.headers._headers;
       if (!result.headers) {
-        throw new Error('Can\'t get response headers');
+        throw new Error(`Can't get response headers`);
       }
       for (const key of Object.keys(result.headers)) {
         result.headers[key] = result.headers[key].join(',');
@@ -143,7 +143,7 @@ export async function fetch(url, options = {}) {
   } else if (typeof expectedStatus === 'number') {
     expectedStatus = [expectedStatus];
   } else if (!Array.isArray(expectedStatus)) {
-    throw new Error('\'expectedStatus\' option is invalid');
+    throw new Error(`'expectedStatus' option is invalid`);
   }
 
   let throwIfNotFound = options.throwIfNotFound;

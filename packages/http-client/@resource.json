@@ -1,7 +1,7 @@
 {
   "@import": "js/npm-package",
   "name": "@resdir/http-client",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Convenient wrapper over Fetch API",
   "files": [
     "./dist"
@@ -14,11 +14,7 @@
   },
   "@unpublishable": {
     "transpiler": {
-      "@import": "1place/esnext-transpiler",
-      "targets": {
-        "ie": 11,
-        "node": 4
-      }
+      "@import": "js/esnext-transpiler"
     }
   }
 }

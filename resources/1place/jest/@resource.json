@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "1place/jest",
-  "version": "0.1.31",
+  "version": "0.1.32",
   "isPublic": true,
   "files": [
     "./dist"
@@ -13,7 +13,6 @@
     "@import": "js/npm-dependencies",
     "@value": {
       "jest": "^22.0.4",
-      "regenerator-runtime": "^0.11.1",
       "@resdir/console": "^0.1.0",
       "@resdir/process-manager": "^0.1.0"
     }

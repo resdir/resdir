@@ -36,8 +36,8 @@ Here is the implementation of the frontend:
 <!DOCTYPE html>
 <html>
   <body>
-    <script type="module">
-      import Resource from 'https://unpkg.com/run-core@^0.11/umd/run-core.prod.min.js';
+    <script src="https://unpkg.com/run-core@^0.11/um/run-core.js"></script>
+    <script>
       (async () => {
         const backend = await Resource.$import('https://api.example.com');
         document.body.innerText = await backend.hello();
@@ -55,7 +55,7 @@ And here is the implementation of the backend which is pretty straightforward:
 export default base =>
   class Backend extends base {
     async hello() {
-      return 'Hello, @resources';
+      return 'Hello, @resources!';
     }
   };
 \`\`\`

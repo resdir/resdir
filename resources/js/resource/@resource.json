@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/resource",
-  "version": "0.1.27",
+  "version": "0.1.28",
   "isPublic": true,
   "files": [
     "./dist"

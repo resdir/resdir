@@ -29,7 +29,7 @@ export default base =>
 
       const config = {
         roots,
-        setupFiles: [require.resolve('regenerator-runtime/runtime')],
+        // setupFiles: [require.resolve('regenerator-runtime/runtime')],
         testEnvironment: this.testEnvironment,
         transform: {}
       };
