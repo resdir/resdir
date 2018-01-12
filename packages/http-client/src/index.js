@@ -107,7 +107,7 @@ export async function fetch(url, options = {}) {
     if (process.browser) {
       result.headers = {};
       for (const key of response.headers.keys()) {
-        result.headers[key] = response.headers.get(key);
+        result.headers[key.toLowerCase()] = response.headers.get(key);
       }
     } else {
       // TODO: Use a standard way to get headers
@@ -116,7 +116,7 @@ export async function fetch(url, options = {}) {
         throw new Error(`Can't get response headers`);
       }
       for (const key of Object.keys(result.headers)) {
-        result.headers[key] = result.headers[key].join(',');
+        result.headers[key.toLowerCase()] = result.headers[key].join(',');
       }
     }
 
