@@ -1,0 +1,14 @@
+{
+  "frontend": {
+    "@import": "aws/website",
+    "domainName": "www.hello.resdir.com",
+    "contentDirectory": "./frontend"
+  },
+  "backend": {
+    "@import": "aws/hosted-resource",
+    "domainName": "api.hello.resdir.com",
+    "@export": {
+      "hello": { "@type": "method" }
+    }
+  }
+}
