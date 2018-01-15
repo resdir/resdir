@@ -8,6 +8,7 @@
     "@import": "aws/hosted-resource",
     "domainName": "api.hello.resdir.com",
     "@export": {
+      "@implementation": "./backend",
       "hello": { "@type": "method" }
     }
   }

@@ -2,7 +2,7 @@
   "dependencies": {
     "@import": "js/npm-dependencies",
     "@value": {
-      "easy-json-rpc": "^2.0.5"
+      "@resdir/json-rpc": "^0.1.0"
     }
   },
   "bundler": {

@@ -1,4 +1,9 @@
-import rpc from 'easy-json-rpc';
+import {
+  validateJSONRPCRequest,
+  buildJSONRPCResult,
+  buildJSONRPCError,
+  createJSONRPCError
+} from '@resdir/json-rpc';
 
 class Base {
   __getMethods__() {
@@ -23,8 +28,27 @@ const resource = (() => {
   return new (require('./builder')(Base))();
 })();
 
+async function handleJSONRPCRequest(request) {
+  try {
+    validateJSONRPCRequest(request);
+
+    const fn = resource[request.method];
+    if (typeof fn !== 'function') {
+      throw createJSONRPCError(-32601);
+    }
+
+    const {input, environment} = request.params || {};
+
+    const result = await fn.call(resource, input, environment);
+
+    return buildJSONRPCResult(request.id, result);
+  } catch (err) {
+    return buildJSONRPCError(request.id, err);
+  }
+}
+
 export function handler(event, context, callback) {
-  Promise.resolve(rpc.handleRequestAndBuildResponse(event, resource))
+  handleJSONRPCRequest(event)
     .then(result => {
       callback(null, result);
     })
