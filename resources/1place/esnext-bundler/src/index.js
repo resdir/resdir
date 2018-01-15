@@ -6,6 +6,7 @@ import babel from 'rollup-plugin-babel';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
+import globals from 'rollup-plugin-node-globals';
 import bytes from 'bytes';
 
 const NODE_BUILT_IN_MODULES = [
@@ -54,31 +55,37 @@ export default base =>
           const entryFile = resolve(directory, this.entryFile);
           const bundleFile = resolve(directory, this.bundleFile);
 
+          const browserMode = !('node' in this.targets);
+
           const warnings = [];
+
+          const plugins = [
+            babel({
+              exclude: ['/**/node_modules/**', '/**/dist/**'],
+              presets: [
+                [
+                  require.resolve('@babel/preset-env'),
+                  {
+                    targets: this.targets,
+                    loose: true,
+                    modules: false
+                  }
+                ],
+                [require.resolve('@babel/preset-stage-3'), {loose: true}]
+              ]
+            }),
+            nodeResolve({browser: browserMode}),
+            commonjs(), // {include: '/**/node_modules/**'}
+            json()
+          ];
+
+          if (browserMode) {
+            plugins.push(globals());
+          }
 
           const rollupConfig = {
             input: entryFile,
-            plugins: [
-              babel({
-                exclude: '/**/node_modules/**',
-                presets: [
-                  [
-                    require.resolve('@babel/preset-env'),
-                    {
-                      targets: this.targets,
-                      loose: true,
-                      modules: false
-                    }
-                  ],
-                  [require.resolve('@babel/preset-stage-3'), {loose: true}]
-                ]
-              }),
-              nodeResolve(),
-              commonjs({
-                include: '/**/node_modules/**'
-              }),
-              json()
-            ],
+            plugins,
             onwarn(warning) {
               if (warning.code === 'UNRESOLVED_IMPORT') {
                 if (NODE_BUILT_IN_MODULES.includes(warning.source)) {

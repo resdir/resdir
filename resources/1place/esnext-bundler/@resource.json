@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "1place/esnext-bundler",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "isPublic": true,
   "files": [
     "./dist"
@@ -19,6 +19,7 @@
       "rollup-plugin-babel": "^4.0.0-beta",
       "rollup-plugin-commonjs": "^8.2.6",
       "rollup-plugin-json": "^2.3.0",
+      "rollup-plugin-node-globals": "^1.1.0",
       "rollup-plugin-node-resolve": "^3.0.0"
     }
   },
@@ -40,11 +41,7 @@
     "targets": {
       "@type": "object",
       "@default": {
-        "node": "6.10",
-        "chrome": "50",
-        "safari": "10",
-        "firefox": "53",
-        "edge": "14"
+        "node": "6.10"
       }
     },
     "format": {
