@@ -12,6 +12,7 @@ import globals from 'rollup-plugin-node-globals';
 import builtins from 'rollup-plugin-node-builtins';
 import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
+import {minify} from 'uglify-es';
 import bytes from 'bytes';
 import revHash from 'rev-hash';
 
@@ -115,22 +116,24 @@ export default base =>
                   include: [join(this.getSourceDirectory(), 'src/**')],
                   presets: [
                     [
-                      require.resolve('babel-preset-env'),
+                      require.resolve('@babel/preset-env'),
                       {
-                        targets: {ie: 11},
+                        targets: {
+                          chrome: '50',
+                          safari: '10',
+                          firefox: '53',
+                          edge: '14'
+                        },
                         loose: true,
                         modules: false,
-                        useBuiltIns: true
+                        useBuiltIns: false // 'usage'
                       }
-                    ]
+                    ],
+                    [require.resolve('@babel/preset-stage-3'), {loose: true}],
+                    [require.resolve('@babel/preset-react')]
                   ],
-                  plugins: [
-                    require.resolve('babel-plugin-external-helpers'),
-                    require.resolve('babel-plugin-transform-decorators-legacy'),
-                    require.resolve('babel-plugin-transform-class-properties'),
-                    require.resolve('babel-plugin-transform-object-rest-spread'),
-                    require.resolve('babel-plugin-transform-react-jsx')
-                  ]
+                  plugins: [require.resolve('@babel/plugin-proposal-decorators')]
+                  // plugins: [require.resolve('@babel/plugin-external-helpers')]
                 }),
                 commonjs({
                   namedExports: {
@@ -141,7 +144,9 @@ export default base =>
                 replace({
                   include: join(this.getSourceDirectory(), 'src', 'environment.js'),
                   delimiters: ['$', '$'],
-                  ...fromPairs(toPairs(replacements).map(([key, value]) => [key, JSON.stringify(value)]))
+                  ...fromPairs(
+                    toPairs(replacements).map(([key, value]) => [key, JSON.stringify(value)])
+                  )
                 }),
                 nodeResolve({browser: true}),
                 json(),
@@ -159,8 +164,10 @@ export default base =>
             };
 
             if (this.optimize) {
-              rollupConfig.plugins.unshift(replace({'process.env.NODE_ENV': JSON.stringify('production')}));
-              rollupConfig.plugins.push(uglify());
+              rollupConfig.plugins.unshift(
+                replace({'process.env.NODE_ENV': JSON.stringify('production')})
+              );
+              rollupConfig.plugins.push(uglify({}, minify));
             }
 
             const bundle = await rollup(rollupConfig);
@@ -202,7 +209,9 @@ export default base =>
 
           const elapsedTime = Date.now() - startingTime;
 
-          progress.setOutro(`Bundle generated ${formatDim('(' + bytes(codeLength) + ', ' + elapsedTime + 'ms)')}`);
+          progress.setOutro(
+            `Bundle generated ${formatDim('(' + bytes(codeLength) + ', ' + elapsedTime + 'ms)')}`
+          );
 
           return filename;
         },
