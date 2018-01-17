@@ -3,6 +3,7 @@
   "domainName": "api.example.resdir.com",
   "@export": {
     "@implementation": "./src",
-    "hello": {"@type": "method"}
+    "hello": {"@type": "method"},
+    "message": "Hello, World!"
   }
 }

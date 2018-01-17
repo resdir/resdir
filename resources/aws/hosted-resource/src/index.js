@@ -1,4 +1,4 @@
-import {formatCode} from '@resdir/console';
+import {printWarning, formatCode} from '@resdir/console';
 
 import IAMMixin from './iam-mixin';
 import LambdaMixin from './lambda-mixin';
@@ -23,17 +23,45 @@ export default base =>
       await this.createOrUpdateAPIGatewayDomainName(environment);
     }
 
-    getImplementationFile() {
-      const exportResource = this.$getExport();
+    getExportDefinition(environment) {
+      const exportResource = this.getExportResource();
+
+      const definition = {attributes: {}, methods: []};
+
+      exportResource.$forEachChild(child => {
+        const key = child.$getKey();
+        const type = child.$getType();
+        if (['boolean', 'number', 'string', 'array', 'object'].includes(type)) {
+          definition.attributes[key] = child.$value;
+        } else if (type === 'method') {
+          definition.methods.push(key);
+        } else {
+          printWarning(
+            `Attribute ${formatCode(
+              key
+            )} cannot be exported (only simple value attibutes and methods are currrently supported)`,
+            environment
+          );
+        }
+      });
+
+      return definition;
+    }
+
+    getExportResource() {
+      const exportResource = this.$getExport({considerBases: true});
       if (!exportResource) {
         throw new Error(`${formatCode('@export')} attribute not found`);
       }
+      return exportResource;
+    }
 
-      const implementationFile = exportResource.$getImplementationFile();
+    getImplementationFile() {
+      const exportResource = this.getExportResource();
+      const implementationFile = exportResource.$getImplementationFile({considerBases: true});
       if (!implementationFile) {
         throw new Error(`Implementation file not found`);
       }
-
       return implementationFile;
     }
 

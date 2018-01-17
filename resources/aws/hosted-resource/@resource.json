@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "aws/hosted-resource",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "isPublic": true,
   "files": [
     "./dist",
@@ -17,6 +17,7 @@
       "@resdir/aws-client": "^0.1.1",
       "@resdir/aws-helpers": "^0.1.0",
       "@resdir/console": "^0.1.16",
+      "@resdir/file-manager": "^0.1.4",
       "sleep-promise": "^2.0.0",
       "tempy": "^0.2.1"
     }

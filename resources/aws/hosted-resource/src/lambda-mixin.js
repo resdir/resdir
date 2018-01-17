@@ -5,6 +5,7 @@ import {formatString, task} from '@resdir/console';
 import {Lambda} from '@resdir/aws-client';
 import sleep from 'sleep-promise';
 import {zip} from '@resdir/archive-manager';
+import {save} from '@resdir/file-manager';
 import {copy, remove} from 'fs-extra';
 import tempy from 'tempy';
 import hasha from 'hasha';
@@ -175,11 +176,29 @@ export default base =>
           join(__dirname, '..', 'lambda-handler', 'dist', 'bundle.js'),
           join(tempDirectory, 'handler.js')
         );
+        await this.buildDefinitionFile(join(tempDirectory, 'definition.json'), environment);
         await this.buildImplementationBundle(join(tempDirectory, 'builder.js'), environment);
-        this._zipArchive = await zip(tempDirectory, ['handler.js', 'builder.js']);
+        this._zipArchive = await zip(tempDirectory, [
+          'handler.js',
+          'definition.json',
+          'builder.js'
+        ]);
         await remove(tempDirectory);
       }
       return this._zipArchive;
+    }
+
+    async buildDefinitionFile(definitionFile, environment) {
+      const definition = this.getExportDefinition(environment);
+
+      save(definitionFile, definition);
+
+      const resourceFile = this.$getResourceFile();
+      if (!resourceFile) {
+        throw new Error(`Resource file not found`);
+      }
+      const {atime, mtime} = statSync(resourceFile);
+      utimesSync(definitionFile, atime, mtime);
     }
 
     async buildImplementationBundle(bundleFile, environment) {
@@ -194,6 +213,7 @@ export default base =>
         },
         {directory: this.$getCurrentDirectory()}
       );
+
       await bundler.run(undefined, environment);
 
       const {atime, mtime} = statSync(entryFile);

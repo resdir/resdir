@@ -5,24 +5,24 @@ import {
   createJSONRPCError
 } from '@resdir/json-rpc';
 
-class Base {
-  __getMethods__() {
-    if (!this.__methods__) {
-      this.__methods__ = [];
-      const prototype = Object.getPrototypeOf(this);
-      for (const name of Object.getOwnPropertyNames(prototype)) {
-        if (name === 'constructor') {
-          continue;
-        }
-        if (typeof prototype[name] !== 'function') {
-          continue;
-        }
-        this.__methods__.push(name);
-      }
+const Base = (() => {
+  const definition = require('./definition.json');
+
+  class Base {
+    __getMethods__() {
+      return definition.methods;
     }
-    return this.__methods__;
   }
-}
+
+  for (const key of Object.keys(definition.attributes)) {
+    const value = definition.attributes[key];
+    if (value !== undefined) {
+      Base.prototype[key] = value;
+    }
+  }
+
+  return Base;
+})();
 
 const resource = (() => {
   return new (require('./builder')(Base))();
