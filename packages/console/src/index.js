@@ -124,6 +124,10 @@ export function printErrorAndExit(error, {code = 1} = {}, environment) {
   process.exit(code);
 }
 
+export function printWarning(message, environment) {
+  _print({message, output: 'warn'}, environment);
+}
+
 export async function prompt(message, {type, default: defaultValue} = {}) {
   try {
     pauseCurrentTasks();
