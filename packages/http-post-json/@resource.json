@@ -1,7 +1,7 @@
 {
   "@import": "js/npm-package#^0.1.26",
   "name": "@resdir/http-post-json",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Minimal HTTP POST (JSON) for both Node and browsers",
   "files": [
     "./dist"

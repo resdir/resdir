@@ -1,6 +1,6 @@
 export function postJSON(url, data, {timeout} = {}) {
   return new Promise((resolve, reject) => {
-    const {parse} = require('url');
+    const {parse} = require('u' + 'r' + 'l'); // eslint-disable-line no-useless-concat
 
     const parsedURL = parse(url);
 
@@ -19,7 +19,11 @@ export function postJSON(url, data, {timeout} = {}) {
     const options = {
       ...parsedURL,
       method: 'POST',
-      headers: {'Content-Type': 'application/json', 'Content-Length': requestBody.length},
+      headers: {
+        'Content-Type': 'application/json',
+        'Content-Length': requestBody.length,
+        Connection: 'keep-alive'
+      },
       timeout
     };
 
