@@ -3,7 +3,7 @@ import {validateResourceIdentifier} from '@resdir/resource-identifier';
 import VersionRange from '@resdir/version-range';
 
 export function parseResourceSpecifier(specifier) {
-  if (specifier.startsWith('.') || isAbsolute(specifier)) {
+  if (specifier.startsWith('.') || isAbsolute(specifier) || specifier.match(/^https?:\/\//i)) {
     return {location: specifier};
   }
 
