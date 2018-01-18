@@ -16,13 +16,13 @@ export function buildJSONRPCError(id = null, err) {
   }
 
   const error = {
-    code: err.code || 1,
+    code: err.jsonRPCErrorCode || 1,
     message: err.message,
-    data: {name: err.name}
+    data: {}
   };
 
   for (const key of Object.keys(err)) {
-    if (!(key === 'code' || key === 'message' || key === 'name')) {
+    if (!(key === 'jsonRPCErrorCode' || key === 'message' || key === 'expose')) {
       error.data[key] = err[key];
     }
   }
@@ -96,7 +96,7 @@ function validateJSONRPCIdAttribute(id) {
 
 const errors = {
   '-32700': 'Parse error',
-  '-32600': 'Invalid Request',
+  '-32600': 'Invalid request',
   '-32601': 'Method not found',
   '-32602': 'Invalid params',
   '-32603': 'Internal error'
@@ -112,8 +112,7 @@ export function createJSONRPCError(code, message) {
   }
 
   const err = new Error(message);
-  err.code = code;
-  err.jsonRPCError = true;
+  err.jsonRPCErrorCode = code;
 
   return err;
 }
