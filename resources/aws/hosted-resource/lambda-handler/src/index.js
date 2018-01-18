@@ -32,7 +32,9 @@ async function handleJSONRPCRequest(request) {
   try {
     validateJSONRPCRequest(request);
 
-    if (!resource.__getMethods__().includes(request.method)) {
+    if (
+      !(request.method === '__getMethods__' || resource.__getMethods__().includes(request.method))
+    ) {
       throw createJSONRPCError(-32601);
     }
 
