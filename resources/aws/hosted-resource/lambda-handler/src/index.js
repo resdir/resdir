@@ -45,7 +45,12 @@ async function handleJSONRPCRequest(request) {
 
     return buildJSONRPCResult(request.id, result);
   } catch (err) {
-    return buildJSONRPCError(request.id, err);
+    let exposedError = err;
+    if (!(err.jsonRPCErrorCode || err.expose)) {
+      console.log('[ERROR] ' + err.message);
+      exposedError = new Error('An error occurred while running a resource method remotely');
+    }
+    return buildJSONRPCError(request.id, exposedError);
   }
 }
 
