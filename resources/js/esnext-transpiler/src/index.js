@@ -1,5 +1,5 @@
 import {join, resolve, relative, extname} from 'path';
-import {readFileSync, writeFileSync, existsSync, statSync, chmodSync} from 'fs';
+import {readFileSync, writeFileSync, existsSync, statSync, utimesSync, chmodSync} from 'fs';
 import {isEqual} from 'lodash';
 import {copy, readFile, outputFile, emptyDirSync} from 'fs-extra';
 import isDirectory from 'is-directory';
@@ -120,11 +120,12 @@ export default base =>
         }
 
         let code = await readFile(srcFile, 'utf8');
-        const {mode} = statSync(srcFile);
+        const {atime, mtime, mode} = statSync(srcFile);
 
         ({code} = transform(code, {...transformOptions, sourceFileName: srcFile}));
 
         await outputFile(destFile, code);
+        utimesSync(destFile, atime, mtime);
         chmodSync(destFile, mode);
       }
     }
