@@ -32,13 +32,13 @@ async function handleJSONRPCRequest(request) {
   try {
     validateJSONRPCRequest(request);
 
-    const fn = resource[request.method];
-    if (typeof fn !== 'function') {
+    if (!resource.__getMethods__().includes(request.method)) {
       throw createJSONRPCError(-32601);
     }
 
     const {input, environment} = request.params || {};
 
+    const fn = resource[request.method];
     const result = await fn.call(resource, input, environment);
 
     return buildJSONRPCResult(request.id, result);
