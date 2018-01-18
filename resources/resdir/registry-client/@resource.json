@@ -1,0 +1,73 @@
+{
+  "@import": "resdir/resource",
+  "id": "resdir/registry-client",
+  "version": "0.1.0",
+  "isPublic": true,
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@import": "js/npm-dependencies",
+    "@value": {
+      "fs-extra": "^5.0.0",
+      "hasha": "^3.0.0",
+      "is-directory": "^0.3.1",
+      "lodash": "^4.17.4",
+      "opn": "^5.2.0",
+      "recursive-readdir": "^2.2.1",
+      "@resdir/archive-manager": "^0.1.4",
+      "@resdir/console": "^0.1.0",
+      "@resdir/expression": "^0.1.2",
+      "@resdir/file-manager": "^0.1.4",
+      "@resdir/http-client": "^0.2.8",
+      "@resdir/information": "^0.1.5",
+      "@resdir/secret-generator": "^1.0.4"
+    }
+  },
+  "@unpublishable": {
+    "transpiler": {
+      "@import": "1place/esnext-transpiler"
+    }
+  },
+  "@export": {
+    "@implementation": "./dist",
+    "hello": {
+      "@type": "method"
+    },
+    "signUp": {
+      "@type": "method",
+      "@input": {
+        "email": {
+          "@type": "string",
+          "@position": 0,
+          "@isOptional": true
+        },
+        "namespace": {
+          "@type": "string",
+          "@aliases": [
+            "ns"
+          ],
+          "@position": 1,
+          "@isOptional": true
+        },
+        "permissionToken": {
+          "@type": "string",
+          "@isOptional": true
+        }
+      }
+    },
+    "signIn": {
+      "@type": "method",
+      "@input": {
+        "email": {
+          "@type": "string",
+          "@position": 0,
+          "@isOptional": true
+        }
+      }
+    },
+    "signOut": {
+      "@type": "method"
+    }
+  }
+}
