@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.49",
+  "version": "0.1.50",
   "isPublic": true,
   "files": [
     "./dist"
@@ -69,7 +69,7 @@
     },
     "format": {
       "@type": "string",
-      "@default": "dual"
+      "@default": "cjs"
     },
     "transformJSX": {
       "@default": false

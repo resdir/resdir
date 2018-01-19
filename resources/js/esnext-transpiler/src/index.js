@@ -142,8 +142,10 @@ export default base =>
             sourceFileName: srcFile
           });
 
-          const extension = format === 'cjs' ? 'js' : 'mjs';
-          const destFile = setFileExtension(join(destDirectory, file), extension);
+          let destFile = join(destDirectory, file);
+          if (format === 'cjs' || formats.length > 1) {
+            destFile = setFileExtension(destFile, format === 'cjs' ? 'js' : 'mjs');
+          }
           await outputFile(destFile, transpiledCode);
           utimesSync(destFile, atime, mtime);
           chmodSync(destFile, mode);

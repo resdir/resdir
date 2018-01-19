@@ -7,6 +7,7 @@
   },
   "transpiler": {
     "@import": "..",
+    "format": "cjs",
     "transpilationOccurred": {
       "@type": "method",
       "@run": "@console print transpilationOccured",
