@@ -14,7 +14,8 @@
       "@default": "node"
     },
     "transpiler": {
-      "@import": "1place/esnext-transpiler"
+      "@import": "1place/esnext-transpiler",
+      "format": "cjs"
     }
   }
 }

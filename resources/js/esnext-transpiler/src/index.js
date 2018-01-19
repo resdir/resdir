@@ -4,10 +4,14 @@ import {isEqual} from 'lodash';
 import {copy, readFile, outputFile, emptyDirSync} from 'fs-extra';
 import isDirectory from 'is-directory';
 import {transform} from '@babel/core';
-import {task, formatPath} from '@resdir/console';
+import {task, formatString, formatCode, formatPath} from '@resdir/console';
 import GitIgnore from '@resdir/gitignore-manager';
 
-const GIT_IGNORE = ['/dist'];
+const babelPresetEnv = require.resolve('@babel/preset-env');
+const babelPresetStage3 = require.resolve('@babel/preset-stage-3');
+const babelPresetReact = require.resolve('@babel/preset-react');
+
+const GIT_IGNORE = ['/distoo'];
 
 export default base =>
   class ESNextTranspiler extends base {
@@ -97,36 +101,53 @@ export default base =>
     }
 
     async _transpile(srcDirectory, destDirectory, files, environment = {}) {
-      const presets = [
-        [require.resolve('@babel/preset-env'), {targets: this.targets, loose: true}],
-        [require.resolve('@babel/preset-stage-3'), {loose: true}]
-      ];
-
-      if (this.transformJSX) {
-        presets.push([require.resolve('@babel/preset-react'), {pragma: this.jsxPragma}]);
-      }
-
-      const transformOptions = {
-        presets,
-        sourceMaps: 'inline'
-      };
-
       for (const file of files) {
         const srcFile = join(srcDirectory, file);
-        const destFile = join(destDirectory, file);
 
         if (environment['@verbose']) {
           console.log(`Transpiling ${formatPath(srcFile)}...`);
         }
 
-        let code = await readFile(srcFile, 'utf8');
+        const code = await readFile(srcFile, 'utf8');
         const {atime, mtime, mode} = statSync(srcFile);
 
-        ({code} = transform(code, {...transformOptions, sourceFileName: srcFile}));
+        const formats = [];
+        if (this.format === 'cjs' || this.format === 'esm') {
+          formats.push(this.format);
+        } else if (this.format === 'dual') {
+          formats.push('cjs');
+          formats.push('esm');
+        } else {
+          throw new Error(`Invalid ${formatCode('format')} value (${formatString(this.format)})`);
+        }
 
-        await outputFile(destFile, code);
-        utimesSync(destFile, atime, mtime);
-        chmodSync(destFile, mode);
+        for (const format of formats) {
+          const modules = format === 'cjs' ? 'commonjs' : false;
+          const presets = [
+            [babelPresetEnv, {targets: this.targets, loose: true, modules}],
+            [babelPresetStage3, {loose: true}]
+          ];
+
+          if (this.transformJSX) {
+            presets.push([babelPresetReact, {pragma: this.jsxPragma}]);
+          }
+
+          const transformOptions = {
+            presets,
+            sourceMaps: 'inline'
+          };
+
+          const {code: transpiledCode} = transform(code, {
+            ...transformOptions,
+            sourceFileName: srcFile
+          });
+
+          const extension = format === 'cjs' ? 'js' : 'mjs';
+          const destFile = setFileExtension(join(destDirectory, file), extension);
+          await outputFile(destFile, transpiledCode);
+          utimesSync(destFile, atime, mtime);
+          chmodSync(destFile, mode);
+        }
       }
     }
 
@@ -175,3 +196,7 @@ export default base =>
       await root.$save();
     }
   };
+
+function setFileExtension(file, extension) {
+  return file.slice(0, -extname(file).length) + '.' + extension;
+}

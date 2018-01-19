@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.48",
+  "version": "0.1.49",
   "isPublic": true,
   "files": [
     "./dist"
@@ -51,6 +51,7 @@
     "extensions": {
       "@default": [
         ".js",
+        ".mjs",
         ".jsx",
         ".es6",
         ".es"
@@ -65,6 +66,10 @@
         "firefox": "53",
         "edge": "14"
       }
+    },
+    "format": {
+      "@type": "string",
+      "@default": "dual"
     },
     "transformJSX": {
       "@default": false
