@@ -3,7 +3,7 @@ import {join} from 'path';
 import {union} from 'lodash';
 
 function read(file) {
-  return readFileSync(join(__dirname, '..', 'data', file), 'utf8');
+  return readFileSync(join(__dirname, '..', '..', 'data', file), 'utf8');
 }
 
 function parse(data) {
@@ -45,7 +45,7 @@ for (const file of files) {
 
 allWords.sort();
 
-const js = 'module.exports = ' + JSON.stringify(allWords) + ';';
-writeFileSync(join(__dirname, '..', 'data.js'), js);
+const js = 'export default ' + JSON.stringify(allWords) + ';';
+writeFileSync(join(__dirname, '..', '..', 'src', 'data.js'), js);
 
 console.log(`${allWords.length} words written in data.js`);

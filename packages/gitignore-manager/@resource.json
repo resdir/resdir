@@ -1,18 +1,9 @@
 {
-  "@import": "js/npm-package",
+  "@import": "1place/npm-package",
   "name": "@resdir/gitignore-manager",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Help managing gitignore files",
-  "files": [
-    "./dist"
-  ],
-  "main": "./dist/index.js",
   "dependencies": {
     "lodash.union": "^4.6.0"
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
-    }
   }
 }

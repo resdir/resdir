@@ -1,6 +1,6 @@
 import {sortedIndexOf} from 'lodash';
 
-import tlds from '../data';
+import tlds from './data';
 
 export function getTopLevelDomains() {
   return tlds;

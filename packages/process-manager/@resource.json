@@ -1,19 +1,10 @@
 {
-  "@import": "js/npm-package#^0.1.26",
+  "@import": "1place/npm-package",
   "name": "@resdir/process-manager",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Node child_process wrapper",
-  "files": [
-    "./dist"
-  ],
-  "main": "./dist/index.js",
   "dependencies": {
     "child-process-promise": "^2.2.1",
     "@resdir/console": "^0.1.16"
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler#^0.1.9"
-    }
   }
 }

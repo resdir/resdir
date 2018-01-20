@@ -1,19 +1,12 @@
 {
-  "@import": "js/npm-package",
+  "@import": "1place/npm-package",
   "name": "@resdir/secret-generator",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Generate a secret",
-  "files": [
-    "./dist"
-  ],
-  "main": "./dist/index.js",
   "dependencies": {
     "nanoid": "^0.2.0"
   },
   "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
-    },
     "tests": {
       "@import": "1place/esnext-jest",
       "@directory": "./tests",

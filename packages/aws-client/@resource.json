@@ -1,21 +1,12 @@
 {
-  "@import": "js/npm-package#^0.1.26",
+  "@import": "1place/npm-package",
   "name": "@resdir/aws-client",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Convenience wrapper around AWS SDK",
-  "files": [
-    "./dist"
-  ],
-  "main": "./dist/index.js",
   "dependencies": {
     "aws-sdk": "^2.176.0",
     "debug": "^3.1.0",
     "lodash": "^4.17.4",
     "@resdir/console": "^0.1.16"
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler#^0.1.9"
-    }
   }
 }

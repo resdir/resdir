@@ -1,24 +1,17 @@
 {
-  "@import": "js/npm-package",
+  "@import": "1place/npm-package",
   "name": "@resdir/version-range",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "description": "VersionRange class used by Resdir",
   "author": "Manuel Vila <mvila@3base.com>",
   "repository": "https://github.com/resdir/resdir.git",
   "license": "MIT",
-  "files": [
-    "./dist"
-  ],
-  "main": "./dist/index.js",
   "dependencies": {
     "lodash": "^4.17.4",
     "@resdir/console": "^0.1.0",
     "semver": "^5.3.0"
   },
   "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
-    },
     "tests": {
       "@import": "1place/esnext-jest",
       "@directory": "./tests"

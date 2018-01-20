@@ -11,7 +11,7 @@ const TRIM_RATIO = 2 / 3; // Only keep 33% of the most popular tags
 
 export default base =>
   class extends base {
-    async build() {
+    async run() {
       function read(file) {
         return readFileSync(join(__dirname, '..', '..', 'data', 'stack-exchange', file), 'utf8');
       }
@@ -123,8 +123,8 @@ export default base =>
 
       assert(uniq(allTags).length === allTags.length, 'No duplicate tags');
 
-      const js = 'module.exports = ' + JSON.stringify(allTags) + ';';
-      writeFileSync(join(__dirname, '..', '..', 'data.js'), js);
+      const js = 'export default ' + JSON.stringify(allTags) + ';';
+      writeFileSync(join(__dirname, '..', '..', 'src', 'data.js'), js);
 
       console.log(`${allTags.length} tags written in data.js`);
     }

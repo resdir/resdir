@@ -1,20 +1,13 @@
 {
-  "@import": "js/npm-package",
+  "@import": "1place/npm-package",
   "name": "@resdir/resource-specifier",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Useful functions to handle Resource's specifiers",
-  "files": [
-    "./dist"
-  ],
-  "main": "./dist/index.js",
   "dependencies": {
     "@resdir/resource-identifier": "^0.1.0",
     "@resdir/version-range": "^0.1.2"
   },
   "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
-    },
     "tests": {
       "@import": "1place/esnext-jest",
       "@directory": "./tests"

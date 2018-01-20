@@ -1,19 +1,9 @@
 {
-  "@import": "js/npm-package",
+  "@import": "1place/npm-package",
   "name": "@resdir/common-english-words",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "More than a thousand common English words",
-  "files": [
-    "./dist",
-    "data.js"
-  ],
-  "main": "./dist/index.js",
   "dependencies": {
     "lodash": "^4.17.4"
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
-    }
   }
 }

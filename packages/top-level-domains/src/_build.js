@@ -2,7 +2,7 @@ import {readFileSync, writeFileSync} from 'fs';
 import {join} from 'path';
 
 function read(file) {
-  return readFileSync(join(__dirname, '..', 'data', file), 'utf8');
+  return readFileSync(join(__dirname, '..', '..', 'data', file), 'utf8');
 }
 
 function parse(data) {
@@ -27,7 +27,7 @@ const tlds = clean(parse(read('tlds-alpha-by-domain.txt'))); // http://data.iana
 
 tlds.sort();
 
-const js = 'module.exports = ' + JSON.stringify(tlds) + ';';
-writeFileSync(join(__dirname, '..', 'data.js'), js);
+const js = 'export default ' + JSON.stringify(tlds) + ';';
+writeFileSync(join(__dirname, '..', '..', 'src', 'data.js'), js);
 
 console.log(`${tlds.length} TLDs written in data.js`);

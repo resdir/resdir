@@ -1,6 +1,6 @@
 import {sortedIndexOf} from 'lodash';
 
-import tags from '../data';
+import tags from './data';
 
 export function getCommonTags() {
   return tags;

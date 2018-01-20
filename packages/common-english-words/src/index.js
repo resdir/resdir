@@ -1,6 +1,6 @@
 import {sortedIndexOf} from 'lodash';
 
-import words from '../data';
+import words from './data';
 
 export function getCommonEnglishWords() {
   return words;

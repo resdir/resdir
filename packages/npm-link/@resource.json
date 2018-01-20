@@ -1,22 +1,13 @@
 {
-  "@import": "js/npm-package",
+  "@import": "1place/npm-package",
   "name": "@resdir/npm-link",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "'npm link' easier",
-  "files": [
-    "./dist"
-  ],
-  "main": "./dist/index.js",
   "bin": {
     "npm-link": "dist/bin/index.js"
   },
   "dependencies": {
     "fs-extra": "^4.0.2",
     "@resdir/file-manager": "^0.1.1"
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
-    }
   }
 }

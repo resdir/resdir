@@ -12,7 +12,7 @@
     "transpiler": {
       "@import": "1place/esnext-transpiler"
     },
-    "build": {
+    "run": {
       "@type": "method"
     }
   }

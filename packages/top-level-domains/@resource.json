@@ -1,19 +1,9 @@
 {
-  "@import": "js/npm-package",
+  "@import": "1place/npm-package",
   "name": "@resdir/top-level-domains",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "description": "List of Top Level Domains",
-  "files": [
-    "./dist",
-    "data.js"
-  ],
-  "main": "./dist/index.js",
   "dependencies": {
     "lodash": "^4.17.4"
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
-    }
   }
 }

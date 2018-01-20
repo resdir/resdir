@@ -1,20 +1,11 @@
 {
-  "@import": "js/npm-package",
+  "@import": "1place/npm-package",
   "name": "@resdir/http-client",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Convenient wrapper over Fetch API",
-  "files": [
-    "./dist"
-  ],
-  "main": "./dist/index.js",
   "dependencies": {
     "fs-extra": "^4.0.0",
     "isomorphic-fetch": "^2.2.1",
     "strict-uri-encode": "^2.0.0"
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "js/esnext-transpiler"
-    }
   }
 }

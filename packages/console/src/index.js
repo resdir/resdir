@@ -1,7 +1,8 @@
-import {resolve, relative} from 'path';
-import entries from 'lodash/entries';
-import isPlainObject from 'lodash/isPlainObject';
-import {cyan, yellow, green, red, magenta, gray, bold, underline, dim} from 'chalk';
+import pathModule from 'path';
+const {resolve, relative} = pathModule;
+import {entries, isPlainObject} from 'lodash';
+import chalk from 'chalk';
+const {cyan, yellow, green, red, magenta, gray, bold, underline, dim} = chalk;
 import ora from 'ora';
 import windowSize from 'window-size';
 import sliceANSI from 'slice-ansi';

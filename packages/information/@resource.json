@@ -1,15 +1,6 @@
 {
-  "@import": "js/npm-package",
+  "@import": "1place/npm-package",
   "name": "@resdir/information",
-  "version": "0.1.5",
-  "description": "General information about Resdir service",
-  "files": [
-    "./dist"
-  ],
-  "main": "./dist/index.js",
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "js/esnext-transpiler"
-    }
-  }
+  "version": "0.1.6",
+  "description": "General information about Resdir service"
 }
