@@ -10,6 +10,7 @@ import GitIgnore from '@resdir/gitignore-manager';
 const babelPresetEnv = require.resolve('@babel/preset-env');
 const babelPresetStage3 = require.resolve('@babel/preset-stage-3');
 const babelPresetReact = require.resolve('@babel/preset-react');
+const babelPluginLodash = require.resolve('babel-plugin-lodash');
 
 const GIT_IGNORE = ['/distoo'];
 
@@ -127,13 +128,15 @@ export default base =>
             [babelPresetEnv, {targets: this.targets, loose: true, modules}],
             [babelPresetStage3, {loose: true}]
           ];
-
           if (this.transformJSX) {
             presets.push([babelPresetReact, {pragma: this.jsxPragma}]);
           }
 
+          const plugins = [babelPluginLodash];
+
           const transformOptions = {
             presets,
+            plugins,
             sourceMaps: 'inline'
           };
 
