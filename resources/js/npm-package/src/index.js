@@ -36,6 +36,11 @@ export default base =>
         main = main.slice(2);
       }
 
+      let module = this.module;
+      if (module && module.startsWith('./')) {
+        module = module.slice(2);
+      }
+
       updatePackageFile(directory, {
         name: this.name,
         version: this.version,
@@ -46,6 +51,7 @@ export default base =>
         repository: this.repository,
         files,
         main,
+        module,
         bin: this.bin,
         preferGlobal: this.preferGlobal
       });
