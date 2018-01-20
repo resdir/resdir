@@ -31,6 +31,7 @@
       "./resources/tool/file-watcher publish --patch",
       "./resources/tool/notifier publish --patch",
       "./resources/1place/esnext-transpiler publish --patch",
+      "./resources/1place/npm-package publish --patch",
       "./resources/1place/esnext-bundler publish --patch",
       "./resources/1place/jest publish --patch",
       "./resources/1place/esnext-jest publish --patch",

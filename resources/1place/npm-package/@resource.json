@@ -1,0 +1,22 @@
+{
+  "@import": "resdir/resource",
+  "id": "1place/npm-package",
+  "version": "0.1.0",
+  "isPublic": true,
+  "@export": {
+    "@import": "js/npm-package",
+    "files": ["./dist"],
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm/index.js",
+    "cjsTranspiler": {
+      "@import": "1place/esnext-transpiler",
+      "destination": "./dist/cjs",
+      "format": "cjs"
+    },
+    "esmTranspiler": {
+      "@import": "1place/esnext-transpiler",
+      "destination": "./dist/esm",
+      "format": "esm"
+    }
+  }
+}
