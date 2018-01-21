@@ -1,7 +1,7 @@
 import {join, resolve, dirname} from 'path';
 import {existsSync, readdirSync} from 'fs';
 import {upperFirst} from 'lodash';
-import {ensureDirSync, moveSync} from 'fs-extra';
+import {ensureDirSync, renameSync} from 'fs-extra';
 import hasha from 'hasha';
 import tempy from 'tempy';
 import isDirectory from 'is-directory';
@@ -183,9 +183,7 @@ export class RegistryClient {
     const user = await this.getUser();
 
     emptyLine();
-    const okay = await confirm(
-      `Are you sure you want to delete your account (${formatString(user.email)})?`
-    );
+    const okay = await confirm(`Are you sure you want to delete your account (${formatString(user.email)})?`);
     emptyLine();
 
     if (!okay) {
@@ -292,9 +290,7 @@ export class RegistryClient {
     const organization = await this.getOrganizationByNamespace(namespace);
 
     emptyLine();
-    const okay = await confirm(
-      `Are you sure you want to delete ${formatString(namespace)} organization?`
-    );
+    const okay = await confirm(`Are you sure you want to delete ${formatString(namespace)} organization?`);
     emptyLine();
 
     if (!okay) {
@@ -473,9 +469,7 @@ export class RegistryClient {
     const community = await this.getCommunityByNamespace(namespace);
 
     emptyLine();
-    const okay = await confirm(
-      `Are you sure you want to delete ${formatString(namespace)} community?`
-    );
+    const okay = await confirm(`Are you sure you want to delete ${formatString(namespace)} community?`);
     emptyLine();
 
     if (!okay) {
@@ -532,9 +526,7 @@ export class RegistryClient {
 
     while (!namespace) {
       emptyLine();
-      namespace = await prompt(
-        `Choose a name for your personal namespace: ${formatExample('aturing')}`
-      );
+      namespace = await prompt(`Choose a name for your personal namespace: ${formatExample('aturing')}`);
       emptyLine();
     }
 
@@ -605,9 +597,7 @@ export class RegistryClient {
     }
 
     if (reason === 'INVALID') {
-      throw new Error(
-        `Sorry, this namespace is invalid. A namespace must be composed of lowercase letters, numbers and dashes ("-").`
-      );
+      throw new Error(`Sorry, this namespace is invalid. A namespace must be composed of lowercase letters, numbers and dashes ("-").`);
     }
 
     if (reason === 'TOO_SHORT') {
@@ -624,23 +614,15 @@ export class RegistryClient {
 
     let contactSupport;
     if (type === 'USER') {
-      contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think your ${SERVICE_NAME} account should have the namespace ${formattedNamespace}, please contact ${SERVICE_NAME} at ${formatURL(
-        SUPPORT_EMAIL_ADDRESS
-      )}.`;
+      contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think your ${SERVICE_NAME} account should have the namespace ${formattedNamespace}, please contact ${SERVICE_NAME} at ${formatURL(SUPPORT_EMAIL_ADDRESS)}.`;
     } else if (type === 'ORGANIZATION') {
-      contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think your ${SERVICE_NAME} organization should have the namespace ${formattedNamespace}, please contact ${SERVICE_NAME} at ${formatURL(
-        SUPPORT_EMAIL_ADDRESS
-      )}.`;
+      contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think your ${SERVICE_NAME} organization should have the namespace ${formattedNamespace}, please contact ${SERVICE_NAME} at ${formatURL(SUPPORT_EMAIL_ADDRESS)}.`;
     } else if (type === 'COMMUNITY') {
-      contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think you should have the namespace ${formattedNamespace} for your community, please contact ${SERVICE_NAME} at ${formatURL(
-        SUPPORT_EMAIL_ADDRESS
-      )}.`;
+      contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think you should have the namespace ${formattedNamespace} for your community, please contact ${SERVICE_NAME} at ${formatURL(SUPPORT_EMAIL_ADDRESS)}.`;
     }
 
     if (reason === 'GENERIC') {
-      throw new Error(
-        `Sorry, this namespace is not available because it is a very generic term. ${contactSupport}`
-      );
+      throw new Error(`Sorry, this namespace is not available because it is a very generic term. ${contactSupport}`);
     }
 
     if (
@@ -662,13 +644,9 @@ export class RegistryClient {
       printText(message);
       emptyLine();
       if (type === 'USER') {
-        printText(
-          `If the GitHub account named ${formattedNamespace} is yours and you care about this name, you can get it by connecting your ${SERVICE_NAME} account to your GitHub account. Don't worry, ${SERVICE_NAME} will only have access to your GitHub public information.`
-        );
+        printText(`If the GitHub account named ${formattedNamespace} is yours and you care about this name, you can get it by connecting your ${SERVICE_NAME} account to your GitHub account. Don't worry, ${SERVICE_NAME} will only have access to your GitHub public information.`);
       } else if (type === 'ORGANIZATION') {
-        printText(
-          `If you are a public member of the GitHub organization ${formattedNamespace}, you can get this name for your ${SERVICE_NAME} organization by connecting your ${SERVICE_NAME} account to your GitHub account. Don't worry, ${SERVICE_NAME} will only have access to your GitHub public information.`
-        );
+        printText(`If you are a public member of the GitHub organization ${formattedNamespace}, you can get this name for your ${SERVICE_NAME} organization by connecting your ${SERVICE_NAME} account to your GitHub account. Don't worry, ${SERVICE_NAME} will only have access to your GitHub public information.`);
       }
       emptyLine();
       const okay = await confirm(`Do you want to continue?`, {default: true});
@@ -694,62 +672,42 @@ export class RegistryClient {
       await this.disconnectGitHubAccount();
 
       if (type === 'USER' && reason === 'IMPORTANT_GITHUB_USER') {
-        throw new Error(
-          `Sorry, the username of the GitHub account you connected to is not ${formattedNamespace}.`
-        );
+        throw new Error(`Sorry, the username of the GitHub account you connected to is not ${formattedNamespace}.`);
       }
 
       if (type === 'ORGANIZATION' && reason === 'IMPORTANT_GITHUB_ORGANIZATION') {
-        throw new Error(
-          `Sorry, the GitHub account you connected to is not a public member of ${formattedNamespace} organization.`
-        );
+        throw new Error(`Sorry, the GitHub account you connected to is not a public member of ${formattedNamespace} organization.`);
       }
 
       throw new Error(`Sorry, this namespace is not available.`);
     }
 
     if (reason === 'IMPORTANT_GITHUB_USER') {
-      throw new Error(
-        `Sorry, this namespace is not available because there is a popular GitHub user named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub usernames are reserved for future ${SERVICE_NAME} users. ${contactSupport}`
-      );
+      throw new Error(`Sorry, this namespace is not available because there is a popular GitHub user named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub usernames are reserved for future ${SERVICE_NAME} users. ${contactSupport}`);
     }
 
     if (reason === 'IMPORTANT_GITHUB_ORGANIZATION') {
-      throw new Error(
-        `Sorry, this namespace is not available because there is a popular GitHub organization named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub organizations are reserved for future ${SERVICE_NAME} organizations or communities. ${contactSupport}`
-      );
+      throw new Error(`Sorry, this namespace is not available because there is a popular GitHub organization named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub organizations are reserved for future ${SERVICE_NAME} organizations or communities. ${contactSupport}`);
     }
 
     if (reason === 'BIG_COMPANY') {
-      throw new Error(
-        `Sorry, this namespace is not available because it matches the name of a big company (${formatString(
-          result.company
-        )}). ${contactSupport}`
-      );
+      throw new Error(`Sorry, this namespace is not available because it matches the name of a big company (${formatString(result.company)}). ${contactSupport}`);
     }
 
     if (reason === 'COMMON_NUMBER') {
-      throw new Error(
-        `Sorry, this namespace is not available because it is quite a common number. ${contactSupport}`
-      );
+      throw new Error(`Sorry, this namespace is not available because it is quite a common number. ${contactSupport}`);
     }
 
     if (reason === 'TOP_LEVEL_DOMAIN') {
-      throw new Error(
-        `Sorry, this namespace is not available because it is a Top Level Domain. ${contactSupport}`
-      );
+      throw new Error(`Sorry, this namespace is not available because it is a Top Level Domain. ${contactSupport}`);
     }
 
     if (reason === 'COMMON_FILE_EXTENSION') {
-      throw new Error(
-        `Sorry, this namespace is not available because it is a common file extension. ${contactSupport}`
-      );
+      throw new Error(`Sorry, this namespace is not available because it is a common file extension. ${contactSupport}`);
     }
 
     if (reason === 'COMMON_ENGLISH_WORD' || reason === 'COMMON_TAG') {
-      throw new Error(
-        `Sorry, this namespace is not available because it is quite a common term. ${contactSupport}`
-      );
+      throw new Error(`Sorry, this namespace is not available because it is quite a common term. ${contactSupport}`);
     }
 
     throw new Error(`Sorry, this namespace is not available. ${contactSupport}`);
@@ -776,9 +734,7 @@ export class RegistryClient {
 
     printSuccess(`GitHub connection page opened in your browser`);
     emptyLine();
-    printText(
-      `If the GitHub connection page doesn't open automatically, please copy/paste the following URL in your browser:`
-    );
+    printText(`If the GitHub connection page doesn't open automatically, please copy/paste the following URL in your browser:`);
     emptyLine();
     print(formatURL(gitHubAccountConnectionURL));
 
@@ -1016,7 +972,7 @@ export class RegistryClient {
     }
     const directory = dirname(file);
     if (temporaryDirectory) {
-      moveSync(temporaryDirectory, directory);
+      renameSync(temporaryDirectory, directory);
     } else {
       // The resource doesn't include any files
       ensureDirSync(directory);
@@ -1084,26 +1040,22 @@ export class RegistryClient {
 
     const compressedDefinition = gzipSync(JSON.stringify(definition));
     const definitionKey = this.awsS3ResourceUploadsPrefix + generateSecret() + '.json.gz';
-    uploads.push(
-      this._uploadToS3({
-        bucket: this.awsS3BucketName,
-        key: definitionKey,
-        body: compressedDefinition
-      })
-    );
+    uploads.push(this._uploadToS3({
+      bucket: this.awsS3BucketName,
+      key: definitionKey,
+      body: compressedDefinition
+    }));
 
     const files = await this._getFiles(definition, directory);
     if (files.length > 0) {
       // TODO: Instead of a buffer, use a stream to zip and upload files
       const compressedFiles = await zip(directory, files);
       const filesKey = this.awsS3ResourceUploadsPrefix + generateSecret() + '.zip';
-      uploads.push(
-        this._uploadToS3({
-          bucket: this.awsS3BucketName,
-          key: filesKey,
-          body: compressedFiles
-        })
-      );
+      uploads.push(this._uploadToS3({
+        bucket: this.awsS3BucketName,
+        key: filesKey,
+        body: compressedFiles
+      }));
     }
 
     const [temporaryDefinitionURL, temporaryFilesURL] = await Promise.all(uploads);
@@ -1140,9 +1092,7 @@ export class RegistryClient {
       const resolvedFile = resolve(directory, file);
 
       if (!existsSync(resolvedFile)) {
-        throw new Error(
-          `File ${formatPath(file)} specified in ${formatCode('files')} property doesn't exist`
-        );
+        throw new Error(`File ${formatPath(file)} specified in ${formatCode('files')} property doesn't exist`);
       }
 
       if (isDirectory.sync(resolvedFile)) {

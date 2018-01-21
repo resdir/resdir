@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/registry-client",
-  "version": "0.1.30",
+  "version": "0.1.31",
   "description": "Resdir registry client",
   "dependencies": {
     "debug": "^3.0.0",
