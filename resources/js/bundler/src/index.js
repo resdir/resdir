@@ -90,7 +90,7 @@ export default base =>
             const warnings = [];
 
             const plugins = [
-              nodeResolve({browser}),
+              nodeResolve({browser, preferBuiltins: !browser}),
               commonjs(), // {include: '/**/node_modules/**'}
               json()
             ];

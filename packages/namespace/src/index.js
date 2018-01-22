@@ -1,7 +1,7 @@
 import sortedIndexOf from 'lodash.sortedindexof';
 import {formatString} from '@resdir/console';
-const genericNamespaces = require('./generic-namespaces.json');
-const reservedNamespaces = require('./reserved-namespaces.json');
+import genericNamespaces from './generic-namespaces.json';
+import reservedNamespaces from './reserved-namespaces.json';
 import {windowsNames as reservedWindowsFilenames} from 'filename-reserved-regex';
 
 const MIN_LENGTH = 1;

@@ -1,7 +1,7 @@
 import regexEmail from 'regex-email';
 import validateEmailHostname from 'validate-email-hostname';
-const disposableDomains = require('disposable-email-domains');
-const disposableWildcardDomains = require('disposable-email-domains/wildcard.json');
+import disposableDomains from 'disposable-email-domains';
+import disposableWildcardDomains from 'disposable-email-domains/wildcard.json';
 import {formatString} from '@resdir/console';
 
 export function validateEmailAddress(email, {throwIfInvalid = true} = {}) {
