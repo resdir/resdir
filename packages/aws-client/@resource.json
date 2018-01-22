@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/aws-client",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Convenience wrapper around AWS SDK",
   "dependencies": {
     "aws-sdk": "^2.176.0",

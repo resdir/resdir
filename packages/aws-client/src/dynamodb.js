@@ -1,5 +1,6 @@
 import {pick} from 'lodash';
-import {DocumentClient} from 'aws-sdk/clients/dynamodb';
+import DynamoDBClient from 'aws-sdk/clients/dynamodb';
+const {DocumentClient} = DynamoDBClient;
 import debugModule from 'debug';
 
 const debug = debugModule('resdir:aws-client:dynamodb');

@@ -26,8 +26,9 @@ import {getJSON, postJSON, deleteJSON, get, put} from '@resdir/http-client';
 import {gzipSync, gunzipSync} from 'zlib';
 import {zip, unzip} from '@resdir/archive-manager';
 import {SERVICE_NAME, SUPPORT_EMAIL_ADDRESS, REGISTRY_URL} from '@resdir/information';
+import debugModule from 'debug';
 
-const debug = require('debug')('resdir:registry-client');
+const debug = debugModule('resdir:registry-client');
 
 export default base =>
   class ResdirRegistryClient extends base {
@@ -52,9 +53,9 @@ export default base =>
     async _signUpOrSignIn({action, email, namespace, permissionToken}, environment) {
       const server = await this._getRegistryServer();
 
-      if (this._hasSignedInUser()) {
-        throw new Error('A user is already signed in');
-      }
+      // if (this._hasSignedInUser()) { <-------------------------------------
+      //   throw new Error('A user is already signed in');
+      // }
 
       while (!email) {
         emptyLine();
