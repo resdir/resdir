@@ -1,8 +1,13 @@
 {
   "@import": "../",
   "domainName": "api.example.resdir.com",
+  "transpiler": {
+    "@import": "1place/esnext-transpiler",
+    "destination": "./dist/cjs",
+    "format": "cjs"
+  },
   "@export": {
-    "@implementation": "./src",
+    "@implementation": "./dist/cjs",
     "hello": {"@type": "method"},
     "message": "Hello, World!"
   }

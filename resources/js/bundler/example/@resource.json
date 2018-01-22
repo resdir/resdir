@@ -7,6 +7,9 @@
   },
   "bundler": {
     "@import": "..",
+    "entryFile": "./src/index.js",
+    "bundleFile": "./dist/bundle.js",
+    "target": "node",
     "format": "cjs",
     "fileWatcher": {
       "@import": "tool/file-watcher",

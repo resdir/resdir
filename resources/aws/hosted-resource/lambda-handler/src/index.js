@@ -25,7 +25,11 @@ const Base = (() => {
 })();
 
 const resource = (() => {
-  return new (require('./builder')(Base))();
+  let builder = require('./builder');
+  if (builder.default) {
+    builder = builder.default;
+  }
+  return new (builder(Base))();
 })();
 
 async function handleJSONRPCRequest(request) {

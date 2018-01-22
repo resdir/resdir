@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "aws/hosted-resource",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "isPublic": true,
   "files": [
     "./dist",
@@ -24,7 +24,7 @@
   },
   "@unpublishable": {
     "transpiler": {
-      "@import": "1place/esnext-transpiler#^0.1.9"
+      "@import": "1place/esnext-transpiler"
     }
   },
   "@export": {

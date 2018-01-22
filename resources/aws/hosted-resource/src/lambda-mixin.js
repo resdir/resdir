@@ -109,11 +109,7 @@ export default base =>
       const lambdaFunction = await this.getLambdaFunction();
       const {Tags: tags} = await lambda.listTags({Resource: lambdaFunction.arn});
       if (!isEqual(tags, {'managed-by': this.constructor.MANAGER_IDENTIFIER})) {
-        throw new Error(
-          `Can't update a Lambda function not originally created by ${formatString(
-            this.constructor.RESOURCE_ID
-          )} (functionName: ${formatString(this.getLambdaFunctionName())})`
-        );
+        throw new Error(`Can't update a Lambda function not originally created by ${formatString(this.constructor.RESOURCE_ID)} (functionName: ${formatString(this.getLambdaFunctionName())})`);
       }
     }
 
@@ -177,7 +173,7 @@ export default base =>
           join(tempDirectory, 'handler.js')
         );
         await this.buildDefinitionFile(join(tempDirectory, 'definition.json'), environment);
-        await this.buildImplementationBundle(join(tempDirectory, 'builder.js'), environment);
+        await copy(this.getImplementationFile(), join(tempDirectory, 'builder.js'));
         this._zipArchive = await zip(tempDirectory, [
           'handler.js',
           'definition.json',
@@ -193,31 +189,12 @@ export default base =>
 
       save(definitionFile, definition);
 
-      const resourceFile = this.$getResourceFile();
+      const resourceFile = this.$getRoot().$getResourceFile();
       if (!resourceFile) {
         throw new Error(`Resource file not found`);
       }
       const {atime, mtime} = statSync(resourceFile);
       utimesSync(definitionFile, atime, mtime);
-    }
-
-    async buildImplementationBundle(bundleFile, environment) {
-      const entryFile = this.getImplementationFile();
-
-      const bundler = await this.constructor.$create(
-        {
-          '@import': '1place/esnext-bundler',
-          format: 'cjs',
-          entryFile,
-          bundleFile
-        },
-        {directory: this.$getCurrentDirectory()}
-      );
-
-      await bundler.run(undefined, environment);
-
-      const {atime, mtime} = statSync(entryFile);
-      utimesSync(bundleFile, atime, mtime);
     }
 
     async allowLambdaFunctionInvocationFromAPIGateway() {

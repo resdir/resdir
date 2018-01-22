@@ -5,17 +5,22 @@
       "@resdir/json-rpc": "^0.1.0"
     }
   },
-  "bundler": {
-    "@import": "1place/esnext-bundler",
-    "format": "cjs",
-    "fileWatcher": {
-      "@import": "tool/file-watcher",
-      "files": [
-        "./src/**"
-      ],
-      "onFileModified": {
-        "@run": "@parent run"
-      }
+  "transpiler": {
+    "@import": "1place/esnext-transpiler",
+    "destination": "./dist/esm",
+    "format": "esm",
+    "runBundler": {
+      "@type": "method",
+      "@run": "@parent bundler run",
+      "@listen": "transpilationOccurred"
     }
+  },
+  "bundler": {
+    "@import": "js/bundler",
+    "entryFile": "./dist/esm/index.js",
+    "bundleFile": "./dist/bundle.js",
+    "target": "node",
+    "format": "cjs",
+    "optimize": true
   }
 }

@@ -7,9 +7,7 @@ import ACMMixin from './acm-mixin';
 import APIGatewayMixin from './api-gateway-mixin';
 
 export default base =>
-  class AWSHostedResource extends APIGatewayMixin(
-    ACMMixin(Route53Mixin(LambdaMixin(IAMMixin(base))))
-  ) {
+  class AWSHostedResource extends APIGatewayMixin(ACMMixin(Route53Mixin(LambdaMixin(IAMMixin(base))))) {
     static RESOURCE_ID = 'aws/hosted-resource';
 
     static MANAGER_IDENTIFIER = 'aws-hosted-resource-v1';
@@ -37,9 +35,7 @@ export default base =>
           definition.methods.push(key);
         } else {
           printWarning(
-            `Attribute ${formatCode(
-              key
-            )} cannot be exported (only simple value attibutes and methods are currrently supported)`,
+            `Attribute ${formatCode(key)} cannot be exported (only simple value attibutes and methods are currrently supported)`,
             environment
           );
         }
