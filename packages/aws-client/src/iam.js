@@ -1,7 +1,8 @@
 import {pick} from 'lodash';
 import IAMClient from 'aws-sdk/clients/iam';
+import debugModule from 'debug';
 
-const debug = require('debug')('resdir:aws-client:iam');
+const debug = debugModule('resdir:aws-client:iam');
 
 export class IAM {
   constructor(config = {}) {

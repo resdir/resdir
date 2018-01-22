@@ -1,7 +1,8 @@
 import {pick} from 'lodash';
 import {DocumentClient} from 'aws-sdk/clients/dynamodb';
+import debugModule from 'debug';
 
-const debug = require('debug')('resdir:aws-client:dynamodb');
+const debug = debugModule('resdir:aws-client:dynamodb');
 
 export class DynamoDB {
   constructor(config = {}) {

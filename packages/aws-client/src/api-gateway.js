@@ -1,7 +1,8 @@
 import {pick} from 'lodash';
 import APIGatewayClient from 'aws-sdk/clients/apigateway';
+import debugModule from 'debug';
 
-const debug = require('debug')('resdir:aws-client:api-gateway');
+const debug = debugModule('resdir:aws-client:api-gateway');
 
 export class APIGateway {
   constructor(config = {}) {

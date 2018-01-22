@@ -1,7 +1,8 @@
 import {pick} from 'lodash';
 import CloudFrontClient from 'aws-sdk/clients/cloudfront';
+import debugModule from 'debug';
 
-const debug = require('debug')('resdir:aws-client:cloud-front');
+const debug = debugModule('resdir:aws-client:cloud-front');
 
 export class CloudFront {
   constructor(config = {}) {

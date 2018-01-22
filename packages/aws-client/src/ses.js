@@ -1,7 +1,8 @@
 import {pick} from 'lodash';
 import SESClient from 'aws-sdk/clients/ses';
+import debugModule from 'debug';
 
-const debug = require('debug')('resdir:aws-client:ses');
+const debug = debugModule('resdir:aws-client:ses');
 
 export class SES {
   constructor(config = {}) {

@@ -1,7 +1,8 @@
 import {pick} from 'lodash';
 import LambdaClient from 'aws-sdk/clients/lambda';
+import debugModule from 'debug';
 
-const debug = require('debug')('resdir:aws-client:lambda');
+const debug = debugModule('resdir:aws-client:lambda');
 
 export class Lambda {
   constructor(config = {}) {

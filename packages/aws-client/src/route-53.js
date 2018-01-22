@@ -1,7 +1,8 @@
 import {pick} from 'lodash';
 import Route53Client from 'aws-sdk/clients/route53';
+import debugModule from 'debug';
 
-const debug = require('debug')('resdir:aws-client:route-53');
+const debug = debugModule('resdir:aws-client:route-53');
 
 export class Route53 {
   constructor(config = {}) {

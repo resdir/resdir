@@ -31,8 +31,9 @@ import {getJSON, postJSON, deleteJSON, get, put} from '@resdir/http-client';
 import {gzipSync, gunzipSync} from 'zlib';
 import {zip, unzip} from '@resdir/archive-manager';
 import {SERVICE_NAME, SUPPORT_EMAIL_ADDRESS, REGISTRY_URL} from '@resdir/information';
+import debugModule from 'debug';
 
-const debug = require('debug')('resdir:registry:client');
+const debug = debugModule('resdir:registry:client');
 
 // TODO: Change this configuration when production is deployed
 const AWS_REGION = 'ap-northeast-1';

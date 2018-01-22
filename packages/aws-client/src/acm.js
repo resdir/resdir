@@ -1,7 +1,8 @@
 import {pick} from 'lodash';
 import ACMClient from 'aws-sdk/clients/acm';
+import debugModule from 'debug';
 
-const debug = require('debug')('resdir:aws-client:acm');
+const debug = debugModule('resdir:aws-client:acm');
 
 export class ACM {
   constructor(config = {}) {

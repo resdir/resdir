@@ -1,8 +1,9 @@
 import {pick} from 'lodash';
 import S3Client from 'aws-sdk/clients/s3';
 import {formatString} from '@resdir/console';
+import debugModule from 'debug';
 
-const debug = require('debug')('resdir:aws-client:s3');
+const debug = debugModule('resdir:aws-client:s3');
 
 export class S3 {
   constructor(config = {}) {
