@@ -1,4 +1,5 @@
-import {execFile, spawn} from 'child-process-promise';
+import childProcessPromise from 'child-process-promise';
+const {execFile, spawn} = childProcessPromise;
 import {formatCode, formatPath} from '@resdir/console';
 
 export async function execute(command, args, {directory, commandName} = {}, environment) {

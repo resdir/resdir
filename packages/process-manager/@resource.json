@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/process-manager",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Node child_process wrapper",
   "dependencies": {
     "child-process-promise": "^2.2.1",
