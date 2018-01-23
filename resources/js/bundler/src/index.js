@@ -1,6 +1,6 @@
 import {join, resolve} from 'path';
 import {readFile, outputFile, pathExists, rename, stat} from 'fs-extra';
-import {task, formatCode, formatDim} from '@resdir/console';
+import {task, print, formatCode, formatDim} from '@resdir/console';
 import {rollup} from 'rollup';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -87,8 +87,6 @@ export default base =>
 
             const browser = !(this.target === 'node' || this.target === 'aws-lambda');
 
-            const warnings = [];
-
             const plugins = [
               nodeResolve({browser, preferBuiltins: !browser}),
               commonjs(), // {include: '/**/node_modules/**'}
@@ -119,7 +117,14 @@ export default base =>
                     return; // Ignore Node built-in modules
                   }
                 }
-                warnings.push(warning);
+                if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
+                  return;
+                }
+                if (process.env.DEBUG || environment['@debug']) {
+                  console.dir(warning, {depth: null, colors: true});
+                } else {
+                  print(warning.toString());
+                }
               }
             };
 
@@ -130,14 +135,6 @@ export default base =>
               format = 'es';
             }
             const result = await bundle.generate({format, name: this.name});
-
-            for (const warning of warnings) {
-              if (environment['@debug']) {
-                console.dir(warning, {depth: null, colors: true});
-              } else {
-                console.warn(warning.toString());
-              }
-            }
 
             const isDifferent = !await isFileEqual(bundleFile, result.code);
             if (isDifferent) {
