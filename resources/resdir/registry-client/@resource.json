@@ -68,6 +68,73 @@
     },
     "signOut": {
       "@type": "method"
+    },
+    "user": {
+      "@implementation": "./dist/user",
+      "show": {
+        "@type": "method"
+      },
+      "delete": {
+        "@type": "method"
+      },
+      "organizations": {
+        "@aliases": [
+          "organization",
+          "orgs",
+          "org"
+        ],
+        "@implementation": "./dist/user-organizations",
+        "list": {
+          "@type": "method",
+          "@aliases": [
+            "ls"
+          ]
+        }
+      },
+      "namespace": {
+        "@aliases": [
+          "ns"
+        ],
+        "@implementation": "./dist/user-namespace",
+        "create": {
+          "@type": "method",
+          "@input": {
+            "namespace": {
+              "@type": "string",
+              "@aliases": [
+                "ns"
+              ],
+              "@position": 0,
+              "@isOptional": true
+            },
+            "permissionToken": {
+              "@type": "string",
+              "@isOptional": true
+            }
+          }
+        },
+        "delete": {
+          "@type": "method"
+        }
+      },
+      "github": {
+        "@aliases": [
+          "gh"
+        ],
+        "@implementation": "./dist/user-github-account",
+        "connect": {
+          "@type": "method",
+          "@input": {
+            "parentAction": {
+              "@type": "string",
+              "@isOptional": true
+            }
+          }
+        },
+        "disconnect": {
+          "@type": "method"
+        }
+      }
     }
   }
 }

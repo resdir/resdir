@@ -53,9 +53,9 @@ export default base =>
     async _signUpOrSignIn({action, email, namespace, permissionToken}, environment) {
       const server = await this._getRegistryServer();
 
-      // if (this._hasSignedInUser()) { <-------------------------------------
-      //   throw new Error('A user is already signed in');
-      // }
+      if (this._hasSignedInUser()) {
+        throw new Error('A user is already signed in');
+      }
 
       while (!email) {
         emptyLine();
@@ -158,18 +158,17 @@ export default base =>
 
     // === Authentication ===
 
-    async _userRequest(fn) {
-      let userAccessToken = await this._loadUserAccessToken();
-      const request = async () => {
-        const authorization = userAccessToken && `Bearer ${userAccessToken}`;
-        return await fn(authorization);
+    async _authenticatedCall(fn, environment) {
+      let userAccessToken = await this._loadUserAccessToken(environment);
+      const call = async () => {
+        return await fn(userAccessToken);
       };
       try {
-        return await request();
+        return await call();
       } catch (err) {
-        if (err.status === 401) {
-          userAccessToken = await this._refreshUserAccessToken();
-          return await request();
+        if (err.code === 'INVALID_ACCESS_TOKEN') {
+          userAccessToken = await this._refreshUserAccessToken(environment);
+          return await call();
         }
         throw err;
       }
@@ -187,7 +186,7 @@ export default base =>
       this._updateData({userRefreshToken});
     }
 
-    async _loadUserAccessToken() {
+    async _loadUserAccessToken(environment) {
       if (!this._userAccessTokenValue) {
         const data = this._loadData();
         this._userAccessTokenValue = data.userAccessTokenValue;
@@ -197,7 +196,7 @@ export default base =>
         }
       }
       if (!this._userAccessTokenValue) {
-        await this._refreshUserAccessToken();
+        await this._refreshUserAccessToken(environment);
       }
       if (!this._userAccessTokenValue) {
         return undefined;
@@ -207,12 +206,13 @@ export default base =>
         Date.now() > this._userAccessTokenExpiresOn - 3 * 60 * 1000
       ) {
         // Refresh access token 3 minutes before expiration
-        await this._refreshUserAccessToken();
+        await this._refreshUserAccessToken(environment);
       }
       return this._userAccessTokenValue;
     }
 
-    async _refreshUserAccessToken() {
+    async _refreshUserAccessToken(environment) {
+      const server = await this._getRegistryServer();
       debug('_refreshUserAccessToken()');
       let userAccessTokenValue;
       let userAccessTokenExpiresOn;
@@ -221,8 +221,10 @@ export default base =>
         if (!refreshToken) {
           return;
         }
-        const url = `${this.registryURL}/user/access-tokens`;
-        const {body: {accessToken: {value, expiresIn}}} = await postJSON(url, {refreshToken});
+        const {accessToken: {value, expiresIn}} = await server.generateAccessToken(
+          {refreshToken},
+          environment
+        );
         userAccessTokenValue = value;
         userAccessTokenExpiresOn = new Date(Date.now() + expiresIn);
         return value;
@@ -262,8 +264,7 @@ export default base =>
 
     async _getRegistryServer() {
       if (!this._registryServer) {
-        const specifier = '/Users/mvila/Projects/resdir/private/registry-server';
-        // const specifier = 'https://registry.test.resdir.com';
+        const specifier = process.env.RESDIR_REGISTRY_SERVER_SPECIFIER;
         this._registryServer = await this.constructor.$import(specifier);
       }
       return this._registryServer;
