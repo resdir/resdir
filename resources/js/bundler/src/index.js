@@ -1,5 +1,5 @@
 import {join, resolve} from 'path';
-import {outputFile, pathExists, rename} from 'fs-extra';
+import {readFile, outputFile, pathExists, rename, stat} from 'fs-extra';
 import {task, formatCode, formatDim} from '@resdir/console';
 import {rollup} from 'rollup';
 import nodeResolve from 'rollup-plugin-node-resolve';
@@ -139,11 +139,16 @@ export default base =>
               }
             }
 
-            await outputFile(bundleFile, result.code);
+            const isDifferent = !await isFileEqual(bundleFile, result.code);
+            if (isDifferent) {
+              await outputFile(bundleFile, result.code);
+            }
 
             const elapsedTime = Date.now() - startingTime;
 
-            progress.setOutro(`Bundle generated ${formatDim('(' + bytes(result.code.length) + ', ' + elapsedTime + 'ms)')}`);
+            const message = isDifferent ? 'Bundle generated' : 'Bundle unmodified';
+            const info = `(${bytes(result.code.length)}, ${elapsedTime}ms)`;
+            progress.setOutro(`${message} ${formatDim(info)}`);
           } finally {
             if (this.optimize) {
               if (await pathExists(join(directory, 'node_modules.original'))) {
@@ -167,3 +172,21 @@ export default base =>
       );
     }
   };
+
+async function isFileEqual(file, content) {
+  if (!pathExists(file)) {
+    return false;
+  }
+
+  const {size} = await stat(file);
+  if (size !== Buffer.byteLength(content, 'utf8')) {
+    return false;
+  }
+
+  const fileContent = await readFile(file, 'utf8');
+  if (fileContent !== content) {
+    return false;
+  }
+
+  return true;
+}
