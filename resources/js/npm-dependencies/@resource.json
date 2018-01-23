@@ -1,24 +1,38 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.39",
+  "version": "0.1.40",
   "isPublic": true,
   "files": [
-    "bundle.js"
+    "./dist/bundle.js"
   ],
   "@unpublishable": {
     "builder": {
-      "@implementation": "./dist/builder.js",
+      "@implementation": "./dist/cjs/builder.js",
       "run": {
         "@type": "method",
         "@run": [
-          "transpiler run",
+          "cjsTranspiler run",
+          "esmTranspiler run",
           "bundle"
         ],
         "@listen": "@build"
       },
-      "transpiler": {
+      "cjsTranspiler": {
         "@import": "1place/esnext-transpiler",
+        "destination": "./dist/cjs",
+        "format": "cjs",
+        "run": {
+          "@unlisten": [
+            "@build",
+            "@fileModified"
+          ]
+        }
+      },
+      "esmTranspiler": {
+        "@import": "1place/esnext-transpiler",
+        "destination": "./dist/esm",
+        "format": "esm",
         "run": {
           "@unlisten": [
             "@build",
@@ -66,7 +80,7 @@
       }
     ],
     "@runtime": "node#>=6.10.0",
-    "@implementation": "./bundle.js",
+    "@implementation": "./dist/bundle.js",
     "add": {
       "@type": "method",
       "@description": "Add a new dependency",

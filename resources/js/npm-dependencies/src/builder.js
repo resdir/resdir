@@ -9,7 +9,7 @@ export default base =>
   class Builder extends base {
     async bundle() {
       const bundle = await rollup({
-        input: join(__dirname, 'index.js'),
+        input: join(__dirname, '..', 'esm', 'index.js'),
         output: {
           file: join(__dirname, '..', 'bundle.js'),
           format: 'cjs'
