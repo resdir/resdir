@@ -3,6 +3,14 @@ import {validateResourceIdentifier} from '@resdir/resource-identifier';
 import VersionRange from '@resdir/version-range';
 
 export function parseResourceSpecifier(specifier) {
+  if (specifier === undefined) {
+    throw new Error('\'specifier\' argument is missing');
+  }
+
+  if (typeof specifier !== 'string') {
+    throw new Error('\'specifier\' argument must be a string');
+  }
+
   if (specifier.startsWith('.') || isAbsolute(specifier) || specifier.match(/^https?:\/\//i)) {
     return {location: specifier};
   }
