@@ -85,7 +85,7 @@ export default base =>
             const entryFile = resolve(directory, this.entryFile);
             const bundleFile = resolve(directory, this.bundleFile);
 
-            const browser = this.target !== 'node';
+            const browser = !(this.target === 'node' || this.target === 'aws-lambda');
 
             const warnings = [];
 
@@ -104,9 +104,15 @@ export default base =>
               plugins.push(uglify({}, minify));
             }
 
+            let external;
+            if (this.target === 'aws-lambda') {
+              external = id => id === 'aws-sdk' || id.startsWith('aws-sdk/');
+            }
+
             const rollupConfig = {
               input: entryFile,
               plugins,
+              external,
               onwarn(warning) {
                 if (warning.code === 'UNRESOLVED_IMPORT') {
                   if (NODE_BUILT_IN_MODULES.includes(warning.source)) {
