@@ -1,13 +1,15 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/npm-link",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "'npm link' easier",
   "bin": {
-    "npm-link": "dist/bin/index.js"
+    "npm-link": "dist/cjs/bin/index.js"
   },
   "dependencies": {
     "fs-extra": "^4.0.2",
+    "is-directory": "^0.3.1",
+    "minimist": "^1.2.0",
     "@resdir/file-manager": "^0.1.1"
   }
 }
