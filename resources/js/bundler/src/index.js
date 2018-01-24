@@ -99,7 +99,7 @@ export default base =>
 
             if (this.optimize) {
               plugins.unshift(replace({'process.env.NODE_ENV': JSON.stringify('production')}));
-              plugins.push(uglify({}, minify));
+              plugins.push(uglify({keep_fnames: true}, minify)); // eslint-disable-line camelcase
             }
 
             let external;
