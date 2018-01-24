@@ -5,13 +5,13 @@ export default base =>
   class UserGitHubAccount extends base {
     async connect({parentAction}, environment) {
       const root = this.$getRoot();
-      const server = await root._getRegistryServer();
+      const server = await root.getRegistryServer();
 
-      const user = await root.user._get();
+      const user = await root.user.get();
 
       const {gitHubAccountConnectionURL} = await task(
         async () => {
-          return await root._authenticatedCall(
+          return await root.authenticatedCall(
             accessToken =>
               server.startConnectGitHubAccount({parentAction, accessToken}, environment),
             environment
@@ -48,13 +48,13 @@ export default base =>
 
     async disconnect(_input, environment) {
       const root = this.$getRoot();
-      const server = await root._getRegistryServer();
+      const server = await root.getRegistryServer();
 
-      root._ensureSignedInUser();
+      root.ensureSignedInUser();
 
       await task(
         async () => {
-          await root._authenticatedCall(
+          await root.authenticatedCall(
             accessToken => server.disconnectGitHubAccount({accessToken}, environment),
             environment
           );
@@ -68,13 +68,13 @@ export default base =>
 
     async ensureConnection(environment) {
       const root = this.$getRoot();
-      const server = await root._getRegistryServer();
+      const server = await root.getRegistryServer();
 
-      root._ensureSignedInUser();
+      root.ensureSignedInUser();
 
       await task(
         async () => {
-          const {connected} = await root._authenticatedCall(
+          const {connected} = await root.authenticatedCall(
             accessToken => server.checkGitHubConnection({accessToken}, environment),
             environment
           );

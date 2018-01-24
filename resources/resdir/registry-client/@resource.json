@@ -117,8 +117,9 @@
           "@type": "method"
         }
       },
-      "github": {
+      "gitHub": {
         "@aliases": [
+          "github",
           "gh"
         ],
         "@implementation": "./dist/user-github-account",
@@ -133,6 +134,147 @@
         },
         "disconnect": {
           "@type": "method"
+        }
+      }
+    },
+    "organizations": {
+      "@aliases": [
+        "organization",
+        "orgs",
+        "org"
+      ],
+      "@implementation": "./dist/organizations",
+      "create": {
+        "@type": "method",
+        "@input": {
+          "namespace": {
+            "@type": "string",
+            "@aliases": [
+              "ns"
+            ],
+            "@position": 0,
+            "@isOptional": true
+          },
+          "permissionToken": {
+            "@type": "string",
+            "@isOptional": true
+          }
+        }
+      },
+      "delete": {
+        "@type": "method",
+        "@input": {
+          "namespace": {
+            "@type": "string",
+            "@aliases": [
+              "ns"
+            ],
+            "@position": 0,
+            "@isOptional": true
+          }
+        }
+      },
+      "addMember": {
+        "@type": "method",
+        "@input": {
+          "organizationNamespace": {
+            "@type": "string",
+            "@aliases": [
+              "organization",
+              "org"
+            ],
+            "@position": 0,
+            "@isOptional": true
+          },
+          "userNamespace": {
+            "@type": "string",
+            "@aliases": [
+              "user"
+            ],
+            "@position": 1,
+            "@isOptional": true
+          }
+        }
+      },
+      "removeMember": {
+        "@type": "method",
+        "@aliases": [
+          "rmMember"
+        ],
+        "@input": {
+          "organizationNamespace": {
+            "@type": "string",
+            "@aliases": [
+              "organization",
+              "org"
+            ],
+            "@position": 0,
+            "@isOptional": true
+          },
+          "userNamespace": {
+            "@type": "string",
+            "@aliases": [
+              "user"
+            ],
+            "@position": 1,
+            "@isOptional": true
+          }
+        }
+      }
+    },
+    "communities": {
+      "@aliases": [
+        "community"
+      ],
+      "@implementation": "./dist/communities",
+      "create": {
+        "@type": "method",
+        "@input": {
+          "namespace": {
+            "@type": "string",
+            "@aliases": [
+              "ns"
+            ],
+            "@position": 0,
+            "@isOptional": true
+          },
+          "permissionToken": {
+            "@type": "string",
+            "@isOptional": true
+          }
+        }
+      },
+      "delete": {
+        "@type": "method",
+        "@input": {
+          "namespace": {
+            "@type": "string",
+            "@aliases": [
+              "ns"
+            ],
+            "@position": 0,
+            "@isOptional": true
+          }
+        }
+      }
+    },
+    "admin": {
+      "@isHidden": true,
+      "permissionTokens": {
+        "@implementation": "./dist/admin-permission-tokens",
+        "create": {
+          "@type": "method",
+          "@input": {
+            "permission": {
+              "@type": "string",
+              "@position": 0
+            },
+            "parameters": {
+              "@type": "object",
+              "@isOptional": true,
+              "@isSubInput": true
+            }
+          }
         }
       }
     }

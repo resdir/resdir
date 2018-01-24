@@ -3,14 +3,14 @@ import {formatString, emptyLine, confirm, task} from '@resdir/console';
 export default base =>
   class User extends base {
     async show(_input, environment) {
-      console.dir(await this._get(environment), {depth: null, colors: true});
+      console.dir(await this.get(environment), {depth: null, colors: true});
     }
 
     async delete(_input, environment) {
       const root = this.$getRoot();
-      const server = await root._getRegistryServer();
+      const server = await root.getRegistryServer();
 
-      const user = await this._get(environment);
+      const user = await this.get(environment);
 
       emptyLine();
       const okay = await confirm(`Are you sure you want to delete your account (${formatString(user.email)})?`);
@@ -30,7 +30,7 @@ export default base =>
 
       await task(
         async () => {
-          await root._authenticatedCall(
+          await root.authenticatedCall(
             accessToken => server.deleteUser({userId: user.id, accessToken}, environment),
             environment
           );
@@ -44,16 +44,16 @@ export default base =>
       root._signOut();
     }
 
-    async _get(environment) {
+    async get(environment) {
       const root = this.$getRoot();
-      const server = await root._getRegistryServer();
+      const server = await root.getRegistryServer();
 
       if (!this._user) {
-        const userId = root._ensureSignedInUser();
+        const userId = root.ensureSignedInUser();
 
         const {user} = await task(
           async () => {
-            return await root._authenticatedCall(
+            return await root.authenticatedCall(
               accessToken => server.getUser({userId, accessToken}, environment),
               environment
             );
@@ -67,9 +67,9 @@ export default base =>
       return this._user;
     }
 
-    async _getByNamespace(namespace, environment) {
+    async getByNamespace(namespace, environment) {
       const root = this.$getRoot();
-      const server = await root._getRegistryServer();
+      const server = await root.getRegistryServer();
 
       if (!namespace) {
         throw new Error('\'namespace\' argument is missing');
@@ -77,7 +77,7 @@ export default base =>
 
       const {user} = await task(
         async () => {
-          return await root._authenticatedCall(
+          return await root.authenticatedCall(
             accessToken => server.getUserByNamespace({namespace, accessToken}, environment),
             environment
           );
