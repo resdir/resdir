@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/bundler",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "isPublic": true,
   "files": [
     "./dist"
@@ -45,6 +45,9 @@
     },
     "name": {
       "@type": "string"
+    },
+    "replacements": {
+      "@type": "object"
     },
     "optimize": {
       "@default": false

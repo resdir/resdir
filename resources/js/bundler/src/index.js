@@ -97,8 +97,11 @@ export default base =>
               plugins.push(globals());
             }
 
+            if (this.replacements) {
+              plugins.unshift(replace({values: {...this.replacements}, delimiters: ['', '']}));
+            }
+
             if (this.optimize) {
-              plugins.unshift(replace({'process.env.NODE_ENV': JSON.stringify('production')}));
               plugins.push(uglify({keep_fnames: true}, minify)); // eslint-disable-line camelcase
             }
 
