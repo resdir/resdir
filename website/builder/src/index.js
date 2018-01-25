@@ -24,7 +24,7 @@ export default base =>
       const bundleFilename = await this.generateBundle(
         {
           replacements: {
-            RESDIR_REGISTRY_SERVER_SPECIFIER: this.environment.resdirRegistryServerSpecifier
+            RESDIR_REGISTRY_SERVER: this.environment.resdirRegistryServer
           }
         },
         environment

@@ -1,5 +1,4 @@
-import {task, prompt, formatString, formatCode} from '@resdir/console';
-import RegistryClient from '@resdir/registry-client';
+import {prompt, formatCode} from '@resdir/console';
 import {validateResourceIdentifier} from '@resdir/resource-identifier';
 import {validateVersion} from '@resdir/version';
 import GitIgnore from '@resdir/gitignore-manager';
@@ -22,18 +21,9 @@ export default base =>
         await this.$getChild('version').bump({major, minor, patch}, environment);
       }
 
-      await task(
-        async () => {
-          const definition = this.$serialize({publishing: true});
-          const directory = this.$getCurrentDirectory();
-          await this._getRegistry().publishResource(definition, directory, {permissionToken});
-        },
-        {
-          intro: `Publishing resource (${formatString(this.id)})...`,
-          outro: `Resource published (${formatString(this.id)})`
-        },
-        environment
-      );
+      const registryClient = await this.constructor.$getRegistryClient();
+      const file = this.$getResourceFile();
+      await registryClient.resources.publish({file, permissionToken});
 
       await this.$emit('published');
     }
@@ -58,19 +48,5 @@ export default base =>
       }
 
       await this.$save();
-    }
-
-    _getRegistry() {
-      if (!this._registry) {
-        this._registry = new RegistryClient({
-          registryURL: process.env.RESDIR_REGISTRY_URL,
-          clientId: this.$getClientId(),
-          clientDirectory: this.$getClientDirectory(),
-          awsRegion: process.env.RESDIR_REGISTRY_AWS_REGION,
-          awsS3BucketName: process.env.RESDIR_REGISTRY_AWS_S3_BUCKET_NAME,
-          awsS3ResourceUploadsPrefix: process.env.RESDIR_REGISTRY_AWS_S3_RESOURCE_UPLOADS_PREFIX
-        });
-      }
-      return this._registry;
     }
   };

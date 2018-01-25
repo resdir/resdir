@@ -5,5 +5,3 @@ export const SUPPORT_NAME = 'Resdir support';
 export const SUPPORT_EMAIL_ADDRESS = 'support@resdir.com';
 export const NO_REPLY_NAME = 'Resdir';
 export const NO_REPLY_EMAIL_ADDRESS = 'no-reply@resdir.com';
-
-export const REGISTRY_URL = 'http://registry.dev.resdir.com'; // TODO: Change when production is deployed

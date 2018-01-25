@@ -1,10 +1,7 @@
 {
-  "@import": [
-    "./",
-    "js/resource"
-  ],
+  "@import": "./",
   "id": "resdir/resource",
-  "version": "0.1.33",
+  "version": "0.1.36",
   "isPublic": true,
   "files": [
     "./dist"
@@ -14,7 +11,6 @@
     "@value": {
       "@resdir/console": "^0.1.0",
       "@resdir/gitignore-manager": "^0.1.0",
-      "@resdir/registry-client": "^0.1.13",
       "@resdir/resource-identifier": "^0.1.0",
       "@resdir/version": "^0.1.0"
     }

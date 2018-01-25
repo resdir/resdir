@@ -1,31 +1,17 @@
-import {join, resolve, dirname} from 'path';
-import {existsSync, readdirSync} from 'fs';
+import {join, dirname} from 'path';
 import {upperFirst} from 'lodash';
-import {ensureDirSync, moveSync} from 'fs-extra';
-import hasha from 'hasha';
-import isDirectory from 'is-directory';
-import readDirectory from 'recursive-readdir';
-import opn from 'opn';
+import {ensureDirSync} from 'fs-extra';
 import {
   formatString,
-  formatPath,
-  formatCode,
   formatURL,
-  formatExample,
-  print,
   emptyLine,
-  printSuccess,
   printText as originalPrintText,
   prompt,
   confirm,
   task
 } from '@resdir/console';
 import {load, save} from '@resdir/file-manager';
-import generateSecret from '@resdir/secret-generator';
-import {getJSON, postJSON, deleteJSON, get, put} from '@resdir/http-client';
-import {gzipSync, gunzipSync} from 'zlib';
-import {zip, unzip} from '@resdir/archive-manager';
-import {SERVICE_NAME, SUPPORT_EMAIL_ADDRESS, REGISTRY_URL} from '@resdir/information';
+import {SERVICE_NAME, SUPPORT_EMAIL_ADDRESS} from '@resdir/information';
 import debugModule from 'debug';
 
 const debug = debugModule('resdir:registry-client');
@@ -428,7 +414,10 @@ export default base =>
 
     async getRegistryServer() {
       if (!this._registryServer) {
-        const specifier = process.env.RESDIR_REGISTRY_SERVER_SPECIFIER;
+        const specifier = this.registryServer;
+        if (!specifier) {
+          throw new Error(`'registryServer' attribute is missing`);
+        }
         this._registryServer = await this.constructor.$import(specifier);
       }
       return this._registryServer;

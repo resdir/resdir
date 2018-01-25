@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "resdir/registry-client",
-  "version": "0.1.0",
+  "version": "0.1.5",
   "isPublic": true,
   "files": [
     "./dist"
@@ -9,6 +9,7 @@
   "dependencies": {
     "@import": "js/npm-dependencies",
     "@value": {
+      "debug": "^3.1.0",
       "fs-extra": "^5.0.0",
       "hasha": "^3.0.0",
       "is-directory": "^0.3.1",
@@ -31,6 +32,14 @@
   },
   "@export": {
     "@implementation": "./dist",
+    "registryServer": {
+      "@type": "string",
+      "@isHidden": true
+    },
+    "uploadServer": {
+      "@type": "object",
+      "@isHidden": true
+    },
     "hello": {
       "@type": "method"
     },
@@ -253,6 +262,44 @@
               "ns"
             ],
             "@position": 0,
+            "@isOptional": true
+          }
+        }
+      }
+    },
+    "resources": {
+      "@aliases": [
+        "resource",
+        "res"
+      ],
+      "@implementation": "./dist/resources",
+      "@isHidden": true,
+      "fetch": {
+        "@type": "method",
+        "@input": {
+          "specifier": {
+            "@type": "string",
+            "@position": 0
+          }
+        },
+        "@output": {
+          "file": {
+            "@type": "string"
+          },
+          "cacheStatus": {
+            "@type": "string"
+          }
+        }
+      },
+      "publish": {
+        "@type": "method",
+        "@input": {
+          "file": {
+            "@type": "string",
+            "@position": 0
+          },
+          "permissionToken": {
+            "@type": "string",
             "@isOptional": true
           }
         }

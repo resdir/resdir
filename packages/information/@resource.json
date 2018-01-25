@@ -1,6 +1,6 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/information",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "General information about Resdir service"
 }
