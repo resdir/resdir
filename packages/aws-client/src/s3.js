@@ -5,6 +5,25 @@ import debugModule from 'debug';
 
 const debug = debugModule('resdir:aws-client:s3');
 
+const S3_REGIONS = {
+  'us-east-2': {websiteEndpoint: 's3-website.us-east-2.amazonaws.com'},
+  'us-east-1': {websiteEndpoint: 's3-website-us-east-1.amazonaws.com'},
+  'us-west-1': {websiteEndpoint: 's3-website-us-west-1.amazonaws.com'},
+  'us-west-2': {websiteEndpoint: 's3-website-us-west-2.amazonaws.com'},
+  'ca-central-1': {websiteEndpoint: 's3-website.ca-central-1.amazonaws.com'},
+  'ap-south-1': {websiteEndpoint: 's3-website.ap-south-1.amazonaws.com'},
+  'ap-northeast-2': {websiteEndpoint: 's3-website.ap-northeast-2.amazonaws.com'},
+  'ap-southeast-1': {websiteEndpoint: 's3-website-ap-southeast-1.amazonaws.com'},
+  'ap-southeast-2': {websiteEndpoint: 's3-website-ap-southeast-2.amazonaws.com'},
+  'ap-northeast-1': {websiteEndpoint: 's3-website-ap-northeast-1.amazonaws.com'},
+  'cn-northwest-1': {websiteEndpoint: 's3-website.cn-northwest-1.amazonaws.com.cn'},
+  'eu-central-1': {websiteEndpoint: 's3-website.eu-central-1.amazonaws.com'},
+  'eu-west-1': {websiteEndpoint: 's3-website-eu-west-1.amazonaws.com'},
+  'eu-west-2': {websiteEndpoint: 's3-website.eu-west-2.amazonaws.com'},
+  'eu-west-3': {websiteEndpoint: 's3-website.eu-west-3.amazonaws.com'},
+  'sa-east-1': {websiteEndpoint: 's3-website-sa-east-1.amazonaws.com'}
+};
+
 export class S3 {
   constructor(config = {}) {
     const keys = ['accessKeyId', 'secretAccessKey', 'region'];
@@ -82,8 +101,16 @@ export function getS3Endpoint(bucket) {
   return `${bucket}.s3.amazonaws.com`;
 }
 
-export function getS3WebsiteDomainName(bucket, region = 'us-east-1') {
-  return `${bucket}.s3-website-${region}.amazonaws.com`;
+export function getS3WebsiteEndpoint(regionName = 'us-east-1') {
+  const region = S3_REGIONS[regionName];
+  if (!region) {
+    throw new Error(`Sorry, AWS S3 region ${formatString(regionName)} is not supported yet`);
+  }
+  return region.websiteEndpoint;
+}
+
+export function getS3WebsiteDomainName(bucket, regionName) {
+  return `${bucket}.${getS3WebsiteEndpoint(regionName)}`;
 }
 
 export function formatS3URL({bucket, key}) {
