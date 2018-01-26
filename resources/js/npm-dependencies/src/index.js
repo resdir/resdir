@@ -1,6 +1,11 @@
 import {isEmpty, remove, sortBy, lowerCase, toPairs, fromPairs} from 'lodash';
 import {print, task, formatString} from '@resdir/console';
-import {updatePackageFile, removePackageFile, installPackage} from '@resdir/package-manager';
+import {
+  updatePackageFile,
+  removePackageFile,
+  installPackage,
+  updateDependencies
+} from '@resdir/package-manager';
 
 import Dependency from './dependency';
 
@@ -29,7 +34,7 @@ export default base =>
         await task(
           async () => {
             await this._addDependency(dependency);
-            await this._installDependencies(environment);
+            await this._installDependencies(undefined, environment);
             await this.$getRoot().$save();
           },
           {
@@ -50,7 +55,7 @@ export default base =>
         await task(
           async () => {
             this._removeDependency(name);
-            await this._installDependencies(environment);
+            await this._installDependencies(undefined, environment);
             await this.$getRoot().$save();
           },
           {
@@ -90,7 +95,7 @@ export default base =>
     async install(_args, environment) {
       await task(
         async () => {
-          await this._installDependencies();
+          await this._installDependencies(undefined, environment);
         },
         {
           intro: `Installing dependencies...`,
@@ -100,13 +105,30 @@ export default base =>
       );
     }
 
-    async _installDependencies(environment) {
+    async update(_args, environment) {
+      await task(
+        async () => {
+          await this._installDependencies({updateMode: true}, environment);
+        },
+        {
+          intro: `Updating dependencies...`,
+          outro: `Dependencies updated`
+        },
+        environment
+      );
+    }
+
+    async _installDependencies({updateMode} = {}, environment) {
       const packageDirectory = this.$getParent().$getCurrentDirectory();
       let packageFileCreated;
       try {
         const {status} = this._updatePackageFile(packageDirectory);
         packageFileCreated = status === 'CREATED';
-        await installPackage(packageDirectory, undefined, environment);
+        if (updateMode) {
+          await updateDependencies(packageDirectory, undefined, environment);
+        } else {
+          await installPackage(packageDirectory, undefined, environment);
+        }
       } finally {
         if (packageFileCreated) {
           removePackageFile(packageDirectory);
