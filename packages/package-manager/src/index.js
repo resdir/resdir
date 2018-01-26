@@ -105,6 +105,16 @@ export async function installPackage(directory, {production, useLockfile} = {}, 
 //   await execYarn(args, {directory}, environment);
 // }
 
+export async function updateDependencies(directory, {useLockfile} = {}, environment) {
+  const args = ['update', '--no-save'];
+
+  if (!useLockfile) {
+    args.push('--no-package-lock');
+  }
+
+  await execNPM(args, {directory}, environment);
+}
+
 export async function publishPackage(directory, {access} = {}, environment) {
   const args = ['publish'];
   if (access) {
