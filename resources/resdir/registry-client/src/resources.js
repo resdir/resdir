@@ -1,6 +1,7 @@
 import {resolve, dirname, isAbsolute} from 'path';
 import {existsSync} from 'fs';
 import {task, formatString, formatCode, formatPath} from '@resdir/console';
+import {stringifyResourceSpecifier} from '@resdir/resource-specifier';
 import {put} from '@resdir/http-client';
 import {gzipSync} from 'zlib';
 import {zip} from '@resdir/archive-manager';
@@ -11,6 +12,42 @@ import hasha from 'hasha';
 
 export default base =>
   class Resources extends base {
+    async get({specifier, throwIfNotFound}, environment) {
+      const root = this.$getRoot();
+      const server = await root.getRegistryServer();
+
+      return await task(
+        async progress => {
+          const {resource} = await root.authenticatedCall(
+            accessToken =>
+              server.getResource(
+                {
+                  specifier,
+                  throwIfNotFound,
+                  accessToken
+                },
+                environment
+              ),
+            environment
+          );
+          if (resource) {
+            const resourceSpecifier = stringifyResourceSpecifier({
+              identifier: resource.identifier,
+              versionRange: resource.version
+            });
+            progress.setOutro(`Resource found (${formatString(resourceSpecifier)})`);
+          } else {
+            progress.setOutro(`Resource not found (${formatString(specifier)})`);
+          }
+          return {resource};
+        },
+        {
+          intro: `Getting resource (${formatString(specifier)})...`
+        },
+        environment
+      );
+    }
+
     async fetch({specifier}, environment) {
       const root = this.$getRoot();
       const resourceFetcher = await root.constructor.$getResourceFetcher();
@@ -41,9 +78,12 @@ export default base =>
       if (!identifier) {
         throw new Error(`Can't publish a resource without a ${formatCode('id')} property`);
       }
+
       if (!version) {
         throw new Error(`Can't publish a resource without a ${formatCode('version')} property`);
       }
+
+      const specifier = stringifyResourceSpecifier({identifier, versionRange: version});
 
       const uploads = [];
 
@@ -95,8 +135,8 @@ export default base =>
           );
         },
         {
-          intro: `Publishing resource (${formatString(identifier)})...`,
-          outro: `Resource published (${formatString(identifier)})`
+          intro: `Publishing resource (${formatString(specifier)})...`,
+          outro: `Resource published (${formatString(specifier)})`
         },
         environment
       );

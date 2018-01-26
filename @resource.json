@@ -19,24 +19,24 @@
   "publish": {
     "@type": "method",
     "@run": [
-      "./resources/resource/helper publish",
-      "./resources/resdir/resource publish",
-      "./resources/resdir/registry-client publish",
-      "./resources/resdir/example publish",
-      "./resources/js/npm-dependencies publish",
-      "./resources/js/resource publish",
-      "./resources/js/npm-package publish",
-      "./resources/js/esnext-transpiler publish",
-      "./resources/js/bundler publish",
-      "./resources/tool/console publish",
-      "./resources/tool/file-watcher publish",
-      "./resources/tool/notifier publish",
-      "./resources/1place/esnext-transpiler publish",
-      "./resources/1place/npm-package publish",
-      "./resources/1place/jest publish",
-      "./resources/1place/esnext-jest publish",
-      "./resources/aws/hosted-resource publish",
-      "./resources/aws/website publish"
+      "./resources/resource/helper publish --throwIfAlreadyExists=false",
+      "./resources/resdir/resource publish --throwIfAlreadyExists=false",
+      "./resources/resdir/registry-client publish --throwIfAlreadyExists=false",
+      "./resources/resdir/example publish --throwIfAlreadyExists=false",
+      "./resources/js/npm-dependencies publish --throwIfAlreadyExists=false",
+      "./resources/js/resource publish --throwIfAlreadyExists=false",
+      "./resources/js/npm-package publish --throwIfAlreadyExists=false",
+      "./resources/js/esnext-transpiler publish --throwIfAlreadyExists=false",
+      "./resources/js/bundler publish --throwIfAlreadyExists=false",
+      "./resources/tool/console publish --throwIfAlreadyExists=false",
+      "./resources/tool/file-watcher publish --throwIfAlreadyExists=false",
+      "./resources/tool/notifier publish --throwIfAlreadyExists=false",
+      "./resources/1place/esnext-transpiler publish --throwIfAlreadyExists=false",
+      "./resources/1place/npm-package publish --throwIfAlreadyExists=false",
+      "./resources/1place/jest publish --throwIfAlreadyExists=false",
+      "./resources/1place/esnext-jest publish --throwIfAlreadyExists=false",
+      "./resources/aws/hosted-resource publish --throwIfAlreadyExists=false",
+      "./resources/aws/website publish --throwIfAlreadyExists=false"
     ]
   }
 }

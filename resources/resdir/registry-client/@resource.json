@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "resdir/registry-client",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "isPublic": true,
   "files": [
     "./dist"
@@ -22,6 +22,7 @@
       "@resdir/file-manager": "^0.1.4",
       "@resdir/http-client": "^0.2.8",
       "@resdir/information": "^0.1.5",
+      "@resdir/resource-specifier": "^0.1.14",
       "@resdir/secret-generator": "^1.0.4"
     }
   },
@@ -274,6 +275,24 @@
       ],
       "@implementation": "./dist/resources",
       "@isHidden": true,
+      "get": {
+        "@type": "method",
+        "@input": {
+          "specifier": {
+            "@type": "string",
+            "@position": 0
+          },
+          "throwIfNotFound": {
+            "@default": true
+          }
+        },
+        "@output": {
+          "resource": {
+            "@type": "object",
+            "@isOptional": true
+          }
+        }
+      },
       "fetch": {
         "@type": "method",
         "@input": {
