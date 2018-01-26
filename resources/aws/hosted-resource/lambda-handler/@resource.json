@@ -21,6 +21,7 @@
     "bundleFile": "./dist/bundle.js",
     "target": "node",
     "format": "cjs",
-    "optimize": true
+    "reinstallDependencies": true,
+    "minify": true
   }
 }

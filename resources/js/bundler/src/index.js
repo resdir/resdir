@@ -63,7 +63,7 @@ export default base =>
 
           const directory = this.$getCurrentDirectory();
 
-          if (this.optimize) {
+          if (this.reinstallDependencies) {
             if (await pathExists(join(directory, 'node_modules'))) {
               await rename(
                 join(directory, 'node_modules'),
@@ -77,7 +77,7 @@ export default base =>
               }
               await this.$getRoot()
                 .$getChild('dependencies')
-                .install({}, environment);
+                .update({}, environment);
             }
           }
 
@@ -101,7 +101,7 @@ export default base =>
               plugins.unshift(replace({values: {...this.replacements}, delimiters: ['', '']}));
             }
 
-            if (this.optimize) {
+            if (this.minify) {
               plugins.push(uglify({keep_fnames: true}, minify)); // eslint-disable-line camelcase
             }
 
@@ -150,7 +150,7 @@ export default base =>
             const info = `(${bytes(result.code.length)}, ${elapsedTime}ms)`;
             progress.setOutro(`${message} ${formatDim(info)}`);
           } finally {
-            if (this.optimize) {
+            if (this.reinstallDependencies) {
               if (await pathExists(join(directory, 'node_modules.original'))) {
                 await rename(
                   join(directory, 'node_modules'),
