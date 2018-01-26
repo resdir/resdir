@@ -1,7 +1,7 @@
 {
   "@import": "./",
   "id": "resdir/resource",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "isPublic": true,
   "files": [
     "./dist"
@@ -12,6 +12,7 @@
       "@resdir/console": "^0.1.0",
       "@resdir/gitignore-manager": "^0.1.0",
       "@resdir/resource-identifier": "^0.1.0",
+      "@resdir/resource-specifier": "^0.1.14",
       "@resdir/version": "^0.1.0"
     }
   },
@@ -215,6 +216,10 @@
           "@type": "boolean",
           "@description": "Bump patch version before publishing",
           "@isOptional": true
+        },
+        "throwIfAlreadyExists": {
+          "@description": "Throw an error if the version already exists",
+          "@default": true
         },
         "permissionToken": {
           "@type": "string",
