@@ -63,25 +63,25 @@ export default base =>
 
           const directory = this.$getCurrentDirectory();
 
-          if (this.reinstallDependencies) {
-            if (await pathExists(join(directory, 'node_modules'))) {
-              await rename(
-                join(directory, 'node_modules'),
-                join(directory, 'node_modules.original')
-              );
-              if (await pathExists(join(directory, 'node_modules.clean-install'))) {
-                await rename(
-                  join(directory, 'node_modules.clean-install'),
-                  join(directory, 'node_modules')
-                );
-              }
-              await this.$getRoot()
-                .$getChild('dependencies')
-                .update({}, environment);
-            }
-          }
-
           try {
+            if (this.reinstallDependencies) {
+              if (await pathExists(join(directory, 'node_modules'))) {
+                await rename(
+                  join(directory, 'node_modules'),
+                  join(directory, 'node_modules.original')
+                );
+                if (await pathExists(join(directory, 'node_modules.clean-install'))) {
+                  await rename(
+                    join(directory, 'node_modules.clean-install'),
+                    join(directory, 'node_modules')
+                  );
+                }
+                await this.$getRoot()
+                  .$getChild('dependencies')
+                  .update({}, environment);
+              }
+            }
+
             const entryFile = resolve(directory, this.entryFile);
             const bundleFile = resolve(directory, this.bundleFile);
 
@@ -152,10 +152,12 @@ export default base =>
           } finally {
             if (this.reinstallDependencies) {
               if (await pathExists(join(directory, 'node_modules.original'))) {
-                await rename(
-                  join(directory, 'node_modules'),
-                  join(directory, 'node_modules.clean-install')
-                );
+                if (await pathExists(join(directory, 'node_modules'))) {
+                  await rename(
+                    join(directory, 'node_modules'),
+                    join(directory, 'node_modules.clean-install')
+                  );
+                }
                 await rename(
                   join(directory, 'node_modules.original'),
                   join(directory, 'node_modules')

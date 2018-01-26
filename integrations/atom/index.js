@@ -10,11 +10,9 @@ import {CompositeDisposable} from 'atom';
 export default {
   activate() {
     this.subscriptions = new CompositeDisposable();
-    this.subscriptions.add(
-      atom.workspace.observeTextEditors(textEditor => {
-        this.subscriptions.add(textEditor.onDidSave(this.handleDidSave.bind(this)));
-      })
-    );
+    this.subscriptions.add(atom.workspace.observeTextEditors(textEditor => {
+      this.subscriptions.add(textEditor.onDidSave(this.handleDidSave.bind(this)));
+    }));
   },
 
   consumeSignal(registry) {
@@ -56,7 +54,7 @@ export default {
     const directory = dirname(file);
 
     return new Promise((resolve, reject) => {
-      const command = 'run'; // /Users/mvila/Projects/run/cli/dist/bin/index.js
+      const command = '/Users/mvila/Projects/run/cli/dist/cjs/bin/index.js'; // /Users/mvila/Projects/run/cli/dist/cjs/bin/index.js
       const args = ['@broadcast', '--event=@fileModified', '--', `--file=${file}`, '--@quiet'];
       const options = {cwd: directory, timeout: 60 * 1000};
       execFile(command, args, options, (err, stdout, stderr) => {
