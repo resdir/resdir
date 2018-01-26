@@ -19,24 +19,24 @@
   "publish": {
     "@type": "method",
     "@run": [
-      "./resources/resource/helper publish --patch",
-      "./resources/resdir/resource publish --patch",
-      "./resources/resdir/registry publish --patch",
-      "./resources/resdir/example publish --patch",
-      "./resources/js/npm-dependencies publish --patch",
-      "./resources/js/resource publish --patch",
-      "./resources/js/npm-package publish --patch",
-      "./resources/js/esnext-transpiler publish --patch",
-      "./resources/js/bundler publish --patch",
-      "./resources/tool/console publish --patch",
-      "./resources/tool/file-watcher publish --patch",
-      "./resources/tool/notifier publish --patch",
-      "./resources/1place/esnext-transpiler publish --patch",
-      "./resources/1place/npm-package publish --patch",
-      "./resources/1place/jest publish --patch",
-      "./resources/1place/esnext-jest publish --patch",
-      "./resources/aws/hosted-resource publish --patch",
-      "./resources/aws/website publish --patch"
+      "./resources/resource/helper publish",
+      "./resources/resdir/resource publish",
+      "./resources/resdir/registry-client publish",
+      "./resources/resdir/example publish",
+      "./resources/js/npm-dependencies publish",
+      "./resources/js/resource publish",
+      "./resources/js/npm-package publish",
+      "./resources/js/esnext-transpiler publish",
+      "./resources/js/bundler publish",
+      "./resources/tool/console publish",
+      "./resources/tool/file-watcher publish",
+      "./resources/tool/notifier publish",
+      "./resources/1place/esnext-transpiler publish",
+      "./resources/1place/npm-package publish",
+      "./resources/1place/jest publish",
+      "./resources/1place/esnext-jest publish",
+      "./resources/aws/hosted-resource publish",
+      "./resources/aws/website publish"
     ]
   }
 }

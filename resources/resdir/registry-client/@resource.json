@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "resdir/registry-client",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "isPublic": true,
   "files": [
     "./dist"
@@ -306,7 +306,25 @@
       }
     },
     "admin": {
+      "@implementation": "./dist/admin",
       "@isHidden": true,
+      "invokeMethod": {
+        "@type": "method",
+        "@aliases": [
+          "invoke"
+        ],
+        "@input": {
+          "name": {
+            "@type": "string",
+            "@position": 0
+          },
+          "arguments": {
+            "@type": "object",
+            "@isOptional": true,
+            "@isSubInput": true
+          }
+        }
+      },
       "permissionTokens": {
         "@implementation": "./dist/admin-permission-tokens",
         "create": {
