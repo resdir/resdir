@@ -156,7 +156,8 @@ export async function fetch(url, options = {}) {
 
   if (!expectedStatus.includes(result.status)) {
     const message =
-      (result.body && result.body.message) || `Unexpected ${result.status} HTTP status`;
+      (result.body && result.body.message) ||
+      `Unexpected ${result.status} HTTP status (method: '${method}', url: '${url}')`;
     const error = new Error(message);
     error.status = result.status;
     if (result.body && result.body.code) {
