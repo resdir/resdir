@@ -5,6 +5,7 @@
 export default base =>
   class Example extends base {
     hello() {
+      // throw new Error('Something went wrong');
       return this.message;
     }
   };

@@ -50,7 +50,8 @@ export class ConnectGitHubAccount extends React.Component {
     this.setState({message: 'Completing GitHub connection...'});
 
     const registryServer = await getRegistryServer();
-    const {parentAction} = await registryServer.completeConnectGitHubAccount({token, gitHubCode});
+    const result = await registryServer.completeConnectGitHubAccount({token, gitHubCode});
+    const parentAction = result && result.parentAction;
 
     let info;
     if (parentAction === 'CREATE_USER_NAMESPACE') {

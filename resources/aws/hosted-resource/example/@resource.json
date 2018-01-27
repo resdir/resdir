@@ -8,7 +8,12 @@
   },
   "@export": {
     "@implementation": "./dist/cjs",
-    "hello": {"@type": "method"},
+    "hello": {
+      "@type": "method",
+      "@output": {
+        "@type": "string"
+      }
+    },
     "message": "Hello, World!"
   }
 }
