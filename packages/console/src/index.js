@@ -240,7 +240,7 @@ export function formatArray(
   let output = '';
   for (let value of array) {
     if (output) {
-      output += gray(',') + (direction === 'HORIZONTAL' ? ' ' : '\n');
+      output += formatPunctuation(',') + (direction === 'HORIZONTAL' ? ' ' : '\n');
     }
     value = formatValue(value, {maxWidth, multiline});
     output += value;
@@ -248,7 +248,7 @@ export function formatArray(
   if (direction === 'VERTICAL') {
     output = '\n' + indentString(output, 2) + '\n';
   }
-  output = gray('[') + output + gray(']');
+  output = formatPunctuation('[') + output + formatPunctuation(']');
   if (
     direction === 'HORIZONTAL' &&
     multiline &&
@@ -269,7 +269,7 @@ export function formatObject(object, {maxWidth = 80, multiline = true} = {}) {
   let output = '';
   for (let [key, value] of entries(object)) {
     if (output) {
-      output += gray(',') + (multiline ? '\n' : ' ');
+      output += formatPunctuation(',') + (multiline ? '\n' : ' ');
     }
     key = formatKey(key);
     value = formatValue(value, {
@@ -277,15 +277,17 @@ export function formatObject(object, {maxWidth = 80, multiline = true} = {}) {
       multiline,
       offset: stringWidth(`${key}: `)
     });
-    output += `${key}${gray(':')} ${value}`;
+    output += `${key}${formatPunctuation(':')} ${value}`;
   }
   if (output) {
     if (multiline) {
       output = indentString(output, 2);
     }
-    output = `${gray('{')}${multiline ? '\n' : ''}${output}${multiline ? '\n' : ''}${gray('}')}`;
+    output = `${formatPunctuation('{')}${multiline ? '\n' : ''}${output}${
+      multiline ? '\n' : ''
+    }${formatPunctuation('}')}`;
   } else {
-    output = gray('{}');
+    output = formatPunctuation('{}');
   }
   return output;
 }
@@ -347,8 +349,16 @@ export function formatUnderline(str) {
   return underline(String(str));
 }
 
+export function formatDanger(str) {
+  return red(String(str));
+}
+
 export function formatDim(str) {
   return dim(String(str));
+}
+
+export function formatPunctuation(str) {
+  return gray(String(str));
 }
 
 export function formatExample(example) {
