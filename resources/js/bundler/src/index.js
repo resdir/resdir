@@ -7,6 +7,7 @@ import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
 import globals from 'rollup-plugin-node-globals';
 import replace from 'rollup-plugin-replace';
+import builtins from 'rollup-plugin-node-builtins';
 import uglify from 'rollup-plugin-uglify';
 import {minify} from 'uglify-es';
 import bytes from 'bytes';
@@ -80,6 +81,7 @@ export default base =>
 
             if (browser) {
               plugins.push(globals());
+              plugins.push(builtins());
             }
 
             if (this.replacements) {
@@ -101,7 +103,7 @@ export default base =>
               external,
               onwarn(warning) {
                 if (warning.code === 'UNRESOLVED_IMPORT') {
-                  if (NODE_BUILT_IN_MODULES.includes(warning.source)) {
+                  if (!browser && NODE_BUILT_IN_MODULES.includes(warning.source)) {
                     return; // Ignore Node built-in modules
                   }
                 }
