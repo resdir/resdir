@@ -1,5 +1,5 @@
 import {join, resolve} from 'path';
-import {readFile, outputFile, pathExists, rename, stat} from 'fs-extra';
+import {readFile, outputFile, ensureDir, pathExists, rename, stat} from 'fs-extra';
 import {task, print, formatCode, formatDim} from '@resdir/console';
 import {rollup} from 'rollup';
 import nodeResolve from 'rollup-plugin-node-resolve';
@@ -47,7 +47,7 @@ const NODE_BUILT_IN_MODULES = [
 ];
 
 export default base =>
-  class ESNextBundler extends base {
+  class JSBundler extends base {
     async run(_input, environment) {
       if (!this.entryFile) {
         throw new Error(`${formatCode('entryFile')} attribute is missing`);
@@ -60,26 +60,11 @@ export default base =>
       await task(
         async progress => {
           const startingTime = Date.now();
-
           const directory = this.$getCurrentDirectory();
 
           try {
             if (this.reinstallDependencies) {
-              if (await pathExists(join(directory, 'node_modules'))) {
-                await rename(
-                  join(directory, 'node_modules'),
-                  join(directory, 'node_modules.original')
-                );
-                if (await pathExists(join(directory, 'node_modules.clean-install'))) {
-                  await rename(
-                    join(directory, 'node_modules.clean-install'),
-                    join(directory, 'node_modules')
-                  );
-                }
-                await this.$getRoot()
-                  .$getChild('dependencies')
-                  .update({}, environment);
-              }
+              await this._startReinstallDependencies(environment);
             }
 
             const entryFile = resolve(directory, this.entryFile);
@@ -89,7 +74,7 @@ export default base =>
 
             const plugins = [
               nodeResolve({browser, preferBuiltins: !browser}),
-              commonjs(), // {include: '/**/node_modules/**'}
+              commonjs({ignore: ['spawn-sync']}),
               json()
             ];
 
@@ -147,22 +132,12 @@ export default base =>
             const elapsedTime = Date.now() - startingTime;
 
             const message = isDifferent ? 'Bundle generated' : 'Bundle unmodified';
-            const info = `(${bytes(result.code.length)}, ${elapsedTime}ms)`;
+            const size = Buffer.byteLength(result.code, 'utf8');
+            const info = `(${bytes(size)}, ${elapsedTime}ms)`;
             progress.setOutro(`${message} ${formatDim(info)}`);
           } finally {
             if (this.reinstallDependencies) {
-              if (await pathExists(join(directory, 'node_modules.original'))) {
-                if (await pathExists(join(directory, 'node_modules'))) {
-                  await rename(
-                    join(directory, 'node_modules'),
-                    join(directory, 'node_modules.clean-install')
-                  );
-                }
-                await rename(
-                  join(directory, 'node_modules.original'),
-                  join(directory, 'node_modules')
-                );
-              }
+              await this._completeReinstallDependencies(environment);
             }
           }
         },
@@ -172,6 +147,45 @@ export default base =>
         },
         environment
       );
+    }
+
+    async _startReinstallDependencies(environment) {
+      const directory = this.$getCurrentDirectory();
+
+      const dependencies = this.$getRoot().$getChild('dependencies');
+      if (!dependencies) {
+        return;
+      }
+
+      await ensureDir(join(directory, 'node_modules'));
+
+      await rename(join(directory, 'node_modules'), join(directory, 'node_modules.original'));
+
+      if (await pathExists(join(directory, 'node_modules.clean-install'))) {
+        await rename(
+          join(directory, 'node_modules.clean-install'),
+          join(directory, 'node_modules')
+        );
+      }
+
+      await dependencies.update({}, environment);
+    }
+
+    async _completeReinstallDependencies(_environment) {
+      const directory = this.$getCurrentDirectory();
+
+      if (!await pathExists(join(directory, 'node_modules.original'))) {
+        return;
+      }
+
+      if (await pathExists(join(directory, 'node_modules'))) {
+        await rename(
+          join(directory, 'node_modules'),
+          join(directory, 'node_modules.clean-install')
+        );
+      }
+
+      await rename(join(directory, 'node_modules.original'), join(directory, 'node_modules'));
     }
   };
 
