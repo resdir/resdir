@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/remote-resource-json-rpc-handler",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "Handle remote resources (using JSON-RPC 2.0)",
   "dependencies": {
     "@resdir/error": "^0.1.0",
