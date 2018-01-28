@@ -92,16 +92,37 @@ export default base =>
               plugins.push(uglify({keep_fnames: true}, minify)); // eslint-disable-line camelcase
             }
 
-            let external;
-            if (this.target === 'aws-lambda') {
-              external = id => id === 'aws-sdk' || id.startsWith('aws-sdk/');
+            const external = this.external || [];
+
+            if (this.globals) {
+              external.push(...Object.keys(this.globals));
             }
+
+            if (this.target === 'aws-lambda') {
+              external.push(id => id === 'aws-sdk' || id.startsWith('aws-sdk/'));
+            }
+
+            const actualExternal = id => {
+              for (const ext of external) {
+                if (typeof ext === 'function') {
+                  const result = ext(id);
+                  if (result) {
+                    return true;
+                  }
+                } else if (id === ext) {
+                  return true;
+                }
+              }
+            };
 
             const rollupConfig = {
               input: entryFile,
               plugins,
-              external,
+              external: actualExternal,
               onwarn(warning) {
+                if (warning.code === 'THIS_IS_UNDEFINED') {
+                  return;
+                }
                 if (warning.code === 'UNRESOLVED_IMPORT') {
                   if (!browser && NODE_BUILT_IN_MODULES.includes(warning.source)) {
                     return; // Ignore Node built-in modules
@@ -124,7 +145,7 @@ export default base =>
             if (format === 'esm') {
               format = 'es';
             }
-            const result = await bundle.generate({format, name: this.name});
+            const result = await bundle.generate({format, name: this.name, globals: this.globals});
 
             const isDifferent = !await isFileEqual(bundleFile, result.code);
             if (isDifferent) {
