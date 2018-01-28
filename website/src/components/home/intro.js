@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {Style} from 'radium';
+import Radium from 'radium';
+const {Style} = Radium;
 import {withRadiumStarter} from 'radium-starter';
 
 import Markdown from '../markdown';

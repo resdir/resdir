@@ -1,219 +1,50 @@
 import {join, resolve} from 'path';
-import {readFileSync, writeFileSync} from 'fs';
-import {fromPairs, toPairs} from 'lodash';
-import {emptyDir, copy, move, remove} from 'fs-extra';
-import {task, formatDim} from '@resdir/console';
-import {rollup} from 'rollup';
-import babel from 'rollup-plugin-babel';
-import nodeResolve from 'rollup-plugin-node-resolve';
-import commonjs from 'rollup-plugin-commonjs';
-import json from 'rollup-plugin-json';
-import globals from 'rollup-plugin-node-globals';
-import builtins from 'rollup-plugin-node-builtins';
-import replace from 'rollup-plugin-replace';
-import uglify from 'rollup-plugin-uglify';
-import {minify} from 'uglify-es';
-import bytes from 'bytes';
+import {entries} from 'lodash';
+import {readFile, outputFile, emptyDir, copy} from 'fs-extra';
+import {task} from '@resdir/console';
 import revHash from 'rev-hash';
 
 export default base =>
   class Builder extends base {
-    async run(_args, environment) {
-      await this.clearDestination();
-
-      const bundleFilename = await this.generateBundle(
+    async run(_input, environment) {
+      await task(
+        async () => {
+          await this.clearDestination();
+          const bundleFilename = await this.copyBundle();
+          await this.copyIndexPage({bundleFilename});
+          await this.copyAssets();
+        },
         {
-          replacements: {
-            RESDIR_REGISTRY_SERVER: this.environment.resdirRegistryServer
-          }
+          intro: 'Building website...',
+          outro: 'Website built'
         },
         environment
       );
-
-      await this.generateIndexPage(
-        {
-          replacements: {
-            REACT_URL: this.environment.reactURL,
-            REACT_DOM_URL: this.environment.reactDOMURL,
-            BUNDLE_PATH: '/' + bundleFilename
-          }
-        },
-        environment
-      );
-
-      await this.copyAssets(environment);
     }
 
     async clearDestination() {
       await emptyDir(this.getDestinationDirectory());
     }
 
-    async generateIndexPage({replacements}, environment) {
-      await task(
-        async () => {
-          let html = readFileSync(join(this.getSourceDirectory(), 'index.html'), 'utf8');
-          for (const [key, value] of toPairs(replacements)) {
-            // TODO: handle replacement of multiple occurences
-            html = html.replace('$' + key + '$', JSON.stringify(value));
-          }
-          writeFileSync(join(this.getDestinationDirectory(), 'index.html'), html);
-        },
-        {
-          intro: 'Generating index page...',
-          outro: 'Index page generated'
-        },
-        environment
-      );
+    async copyBundle() {
+      let data = await readFile(join(this.getSourceDirectory(), this.bundleFile), 'utf8');
+      data = replace(data, this.replacements);
+      const hash = revHash(data);
+      const bundleFilename = `bundle.${hash}.immutable.js`;
+      await outputFile(join(this.getDestinationDirectory(), bundleFilename), data);
+      return bundleFilename;
     }
 
-    async copyAssets(environment) {
-      await task(
-        async () => {
-          await copy(
-            join(this.getSourceDirectory(), 'images'),
-            join(this.getDestinationDirectory(), 'images')
-          );
-        },
-        {
-          intro: 'Copying assets...',
-          outro: 'Assets copied'
-        },
-        environment
-      );
+    async copyIndexPage({bundleFilename}) {
+      let data = await readFile(join(this.getSourceDirectory(), 'index.html'), 'utf8');
+      data = replace(data, {...this.replacements, $BUNDLE_PATH$: '/' + bundleFilename});
+      await outputFile(join(this.getDestinationDirectory(), 'index.html'), data);
     }
 
-    async generateBundle({replacements}, environment = {}) {
-      return await task(
-        async progress => {
-          const startingTime = Date.now();
-
-          let filename;
-          let codeLength;
-
-          if (this.optimize) {
-            await move(
-              join(this.getSourceDirectory(), 'node_modules'),
-              join(this.getSourceDirectory(), 'node_modules.dev')
-            );
-            const contentResource = await this.constructor.$load(this.getSourceDirectory());
-            await contentResource.$getChild('dependencies').install({}, environment);
-          }
-
-          try {
-            const warnings = [];
-
-            const rollupConfig = {
-              input: join(this.getSourceDirectory(), 'src', 'index.js'),
-              cache: global.resdirWebsiteBuilderRollupCache,
-              external: ['react', 'react-dom', 'prop-types'],
-              plugins: [
-                replace({
-                  include: '/**/reduce-css-calc/dist/parser.js',
-                  delimiters: ['', ''],
-                  '_token_stack:': '' // Fix https://github.com/zaach/jison/issues/351
-                }),
-                babel({
-                  include: [join(this.getSourceDirectory(), 'src/**')],
-                  presets: [
-                    [
-                      require.resolve('@babel/preset-env'),
-                      {
-                        targets: {
-                          chrome: '50',
-                          safari: '10',
-                          firefox: '53',
-                          edge: '14'
-                        },
-                        loose: true,
-                        modules: false,
-                        useBuiltIns: false // 'usage'
-                      }
-                    ],
-                    [require.resolve('@babel/preset-stage-3'), {loose: true}],
-                    [require.resolve('@babel/preset-react')]
-                  ],
-                  plugins: [require.resolve('@babel/plugin-proposal-decorators')]
-                  // plugins: [require.resolve('@babel/plugin-external-helpers')]
-                }),
-                commonjs({
-                  namedExports: {
-                    [join(this.getSourceDirectory(), 'node_modules/radium/lib/index.js')]: ['Style']
-                  }
-                }),
-                globals(),
-                replace({
-                  include: join(this.getSourceDirectory(), 'src', 'environment.js'),
-                  delimiters: ['$', '$'],
-                  ...fromPairs(toPairs(replacements).map(([key, value]) => [key, JSON.stringify(value)]))
-                }),
-                nodeResolve({browser: true}),
-                json(),
-                builtins()
-              ],
-              onwarn(warning) {
-                if (
-                  (warning.code === 'THIS_IS_UNDEFINED' || warning.code === 'MISSING_EXPORT') &&
-                  warning.id.includes('whatwg-fetch')
-                ) {
-                  return;
-                }
-                warnings.push(warning);
-              }
-            };
-
-            if (this.optimize) {
-              rollupConfig.plugins.unshift(replace({'process.env.NODE_ENV': JSON.stringify('production')}));
-              rollupConfig.plugins.push(uglify({}, minify));
-            }
-
-            const bundle = await rollup(rollupConfig);
-
-            const result = await bundle.generate({
-              format: 'iife',
-              name: 'bundle',
-              globals: {
-                react: 'React',
-                'react-dom': 'ReactDOM',
-                'prop-types': 'PropTypes'
-              }
-            });
-
-            for (const warning of warnings) {
-              if (environment['@debug']) {
-                console.dir(warning, {depth: null, colors: true});
-              } else {
-                console.warn(warning.toString());
-              }
-            }
-
-            const hash = revHash(result.code);
-            filename = `bundle.${hash}.immutable.js`;
-            await writeFileSync(join(this.getDestinationDirectory(), filename), result.code);
-
-            codeLength = result.code.length;
-
-            global.resdirWebsiteBuilderRollupCache = bundle;
-          } finally {
-            if (this.optimize) {
-              await remove(join(this.getSourceDirectory(), 'node_modules'));
-              await move(
-                join(this.getSourceDirectory(), 'node_modules.dev'),
-                join(this.getSourceDirectory(), 'node_modules')
-              );
-            }
-          }
-
-          const elapsedTime = Date.now() - startingTime;
-
-          progress.setOutro(`Bundle generated ${formatDim('(' + bytes(codeLength) + ', ' + elapsedTime + 'ms)')}`);
-
-          return filename;
-        },
-        {
-          intro: 'Generating bundle...',
-          outro: 'Bundle generated'
-        },
-        environment
+    async copyAssets() {
+      await copy(
+        join(this.getSourceDirectory(), 'images'),
+        join(this.getDestinationDirectory(), 'images')
       );
     }
 
@@ -225,3 +56,11 @@ export default base =>
       return resolve(this.$getCurrentDirectory(), this.destinationDirectory);
     }
   };
+
+function replace(data, replacements = {}) {
+  for (const [key, value] of entries(replacements)) {
+    // TODO: handle replacement of multiple occurences
+    data = data.replace(key, value);
+  }
+  return data;
+}

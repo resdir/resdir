@@ -2,7 +2,8 @@
 
 /* global atom */
 
-import {dirname} from 'path';
+import {join, dirname} from 'path';
+import {readdirSync} from 'fs';
 import {execFile} from 'child_process';
 import {CompositeDisposable} from 'atom';
 // import {Resource} from 'run-core';
@@ -30,7 +31,19 @@ export default {
     this.signalProvider.add(`Resdir integration 'handleDidSave'`);
 
     try {
-      await this.broadcastFileModifiedEvent(event.path);
+      const file = event.path;
+      let directory = dirname(file);
+      while (true) {
+        const files = readdirSync(directory);
+        if (files.some(file => file.startsWith('@resource.'))) {
+          await this.broadcastFileModifiedEvent(directory, file);
+        }
+        const parentDirectory = join(directory, '..');
+        if (parentDirectory === directory) {
+          break;
+        }
+        directory = parentDirectory;
+      }
     } catch (err) {
       console.error(err);
       const message = `resdir: An error occurred while broadcasting '@fileModified' event`;
@@ -53,9 +66,8 @@ export default {
   //   }
   // }
 
-  broadcastFileModifiedEvent(file) {
-    const directory = dirname(file);
-
+  broadcastFileModifiedEvent(directory, file) {
+    console.log(directory);
     return new Promise((resolve, reject) => {
       let command = 'run';
       let env;
