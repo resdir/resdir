@@ -10,9 +10,10 @@ import GitIgnore from '@resdir/gitignore-manager';
 const babelPresetEnv = require.resolve('@babel/preset-env');
 const babelPresetStage3 = require.resolve('@babel/preset-stage-3');
 const babelPresetReact = require.resolve('@babel/preset-react');
+const babelPluginDecorators = require.resolve('@babel/plugin-proposal-decorators');
 const babelPluginLodash = require.resolve('babel-plugin-lodash');
 
-const GIT_IGNORE = ['/distoo'];
+const GIT_IGNORE = ['/dist'];
 
 export default base =>
   class ESNextTranspiler extends base {
@@ -55,11 +56,7 @@ export default base =>
         const relativeFile = relative(srcDirectory, srcFile);
         if (relativeFile.startsWith('..')) {
           if (!environment['@quiet']) {
-            console.warn(
-              `Cannot build a file (${formatPath(
-                srcFile
-              )}) located outside of the source directory (${formatPath(srcDirectory)})`
-            );
+            console.warn(`Cannot build a file (${formatPath(srcFile)}) located outside of the source directory (${formatPath(srcDirectory)})`);
           }
           continue;
         }
@@ -132,7 +129,7 @@ export default base =>
             presets.push([babelPresetReact, {pragma: this.jsxPragma}]);
           }
 
-          const plugins = [babelPluginLodash];
+          const plugins = [babelPluginDecorators, babelPluginLodash];
 
           const transformOptions = {
             presets,
