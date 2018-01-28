@@ -190,7 +190,7 @@ export default base =>
   };
 
 async function isFileEqual(file, content) {
-  if (!pathExists(file)) {
+  if (!await pathExists(file)) {
     return false;
   }
 
