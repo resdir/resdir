@@ -1,57 +1,40 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.41",
+  "version": "0.1.42",
   "isPublic": true,
   "files": [
     "./dist/bundle.js"
   ],
   "@unpublishable": {
-    "builder": {
-      "@implementation": "./dist/cjs/builder.js",
-      "run": {
-        "@type": "method",
-        "@run": [
-          "cjsTranspiler run",
-          "esmTranspiler run",
-          "bundle"
-        ],
-        "@listen": "@build"
-      },
-      "cjsTranspiler": {
-        "@import": "1place/esnext-transpiler",
-        "destination": "./dist/cjs",
-        "format": "cjs",
-        "run": {
-          "@unlisten": [
-            "@build",
-            "@fileModified"
-          ]
-        }
-      },
-      "esmTranspiler": {
-        "@import": "1place/esnext-transpiler",
-        "destination": "./dist/esm",
-        "format": "esm",
-        "run": {
-          "@unlisten": [
-            "@build",
-            "@fileModified"
-          ]
-        }
-      },
-      "bundle": {
-        "@type": "method"
-      },
-      "fileWatcher": {
-        "@import": "tool/file-watcher",
-        "files": [
-          "./src/**"
-        ],
-        "onFileModified": {
-          "@run": "@parent run"
-        }
+    "dependencies": {
+      "@import": "js/npm-dependencies",
+      "@value": {
+        "@resdir/console": "^0.1.0",
+        "@resdir/file-manager": "^0.1.0",
+        "@resdir/package-manager": "^0.1.0",
+        "@resdir/version-range": "^0.1.0",
+        "lodash": "^4.17.4"
       }
+    },
+    "transpiler": {
+      "@import": "1place/esnext-transpiler",
+      "destination": "./dist/esm",
+      "format": "esm",
+      "runBundler": {
+        "@type": "method",
+        "@run": "@parent bundler run",
+        "@listen": "transpilationOccurred"
+      }
+    },
+    "bundler": {
+      "@import": "js/bundler",
+      "entryFile": "./dist/esm/index.js",
+      "bundleFile": "./dist/bundle.js",
+      "target": "node",
+      "format": "cjs",
+      "reinstallDependencies": true,
+      "minify": true
     },
     "tests": {
       "@import": "1place/esnext-jest",
