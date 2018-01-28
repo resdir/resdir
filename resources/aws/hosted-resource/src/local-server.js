@@ -38,7 +38,7 @@ export default base =>
 
         const jsonRPCHandler = await this.getJSONRPCHandler(environment);
 
-        if (request.method === 'invokeMethod') {
+        if (request.method === 'invoke') {
           const name = formatBold(formatCode(request.params.name, {addBackticks: false}));
           const input = formatValue(request.params.input, {multiline: false});
           const env = formatValue(request.params.environment, {multiline: false});
@@ -54,8 +54,9 @@ export default base =>
 
         const startTime = Date.now();
         const response = await jsonRPCHandler.handleRequest(request);
+        const elapsedTime = formatDim(`(${Date.now() - startTime}ms)`);
 
-        if (request.method === 'invokeMethod') {
+        if (request.method === 'invoke') {
           let message;
           if (response.error) {
             message = formatDanger('[ERROR] ') + response.error.message;
@@ -66,7 +67,6 @@ export default base =>
             const output = response.result && response.result.output;
             message = formatValue(output, {multiline: false});
           }
-          const elapsedTime = formatDim(`(${Date.now() - startTime}ms)`);
           message += ' ' + elapsedTime;
           console.log(message);
         }
