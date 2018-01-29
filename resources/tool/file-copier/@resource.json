@@ -1,0 +1,41 @@
+{
+  "@import": "resdir/resource",
+  "id": "tool/file-copier",
+  "version": "0.1.1",
+  "isPublic": true,
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "@import": "js/npm-dependencies#^0.1.26",
+    "@value": {
+      "fs-extra": "^5.0.0",
+      "is-directory": "^0.3.1",
+      "lodash": "^4.17.4",
+      "@resdir/console": "^0.1.35"
+    }
+  },
+  "@unpublishable": {
+    "transpiler": {
+      "@import": "1place/esnext-transpiler#^0.1.9"
+    }
+  },
+  "@export": {
+    "@implementation": "./dist",
+    "sourceDirectory": {
+      "@default": "./"
+    },
+    "destinationDirectory": {
+      "@type": "string"
+    },
+    "clearDestination": {
+      "@default": false
+    },
+    "files": {
+      "@type": "array"
+    },
+    "run": {
+      "@type": "method"
+    }
+  }
+}

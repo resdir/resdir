@@ -1,0 +1,5 @@
+{
+  "@import": "../",
+  "sourceDirectory": "./source",
+  "destinationDirectory": "./destination"
+}

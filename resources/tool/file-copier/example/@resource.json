@@ -1,0 +1,23 @@
+{
+  "@import": "../",
+  "sourceDirectory": "./",
+  "destinationDirectory": "./builds/prod",
+  "clearDestination": true,
+  "files": [
+    {
+      "source": "./index.html",
+      "replacements": {
+        "$REACT_URL$": "https://unpkg.com/react@16.2.0/umd/react.production.min.js",
+        "$REACT_DOM_URL$": "https://unpkg.com/react-dom@16.2.0/umd/react-dom.production.min.js"
+      }
+    },
+    {
+      "source": "./dist/bundle.prod.js",
+      "destination": "./bundle.js",
+      "replacements": {
+        "$BACKEND_SERVER$": "https://api.example.com"
+      }
+    },
+    "./images"
+  ]
+}
