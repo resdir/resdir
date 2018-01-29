@@ -64,38 +64,32 @@ export default base =>
 
     validate() {
       if (!this.domainName) {
-        throw new Error(`${formatCode('domainName')} property is missing`);
+        throw new Error(`${formatCode('domainName')} attribute is missing`);
+      }
+
+      if (!this.contentDirectory) {
+        throw new Error(`${formatCode('contentDirectory')} attribute is missing`);
       }
 
       if (!this.indexPage) {
-        throw new Error(`${formatCode('indexPage')} property is missing`);
+        throw new Error(`${formatCode('indexPage')} attribute is missing`);
       }
 
       if (this.indexPage.startsWith('/') || this.indexPage.startsWith('.')) {
-        throw new Error(
-          `${formatCode('indexPage')} can't start with ${formatString('/')} or ${formatString('.')}`
-        );
+        throw new Error(`${formatCode('indexPage')} can't start with ${formatString('/')} or ${formatString('.')}`);
       }
 
       for (const {errorCode, responseCode, responsePage} of this.customErrors || []) {
         if (!errorCode) {
-          throw new Error(
-            `${formatCode('errorCode')} is missing in ${formatCode('customErrors')} property`
-          );
+          throw new Error(`${formatCode('errorCode')} is missing in ${formatCode('customErrors')} attribute`);
         }
 
         if (responseCode && !responsePage) {
-          throw new Error(
-            `${formatCode('responsePage')} is missing in ${formatCode('customErrors')} property`
-          );
+          throw new Error(`${formatCode('responsePage')} is missing in ${formatCode('customErrors')} attribute`);
         }
 
         if (responsePage && (responsePage.startsWith('/') || responsePage.startsWith('.'))) {
-          throw new Error(
-            `${formatCode('responsePage')} in ${formatCode(
-              'customErrors'
-            )} property can't start with ${formatString('/')} or ${formatString('.')}`
-          );
+          throw new Error(`${formatCode('responsePage')} in ${formatCode('customErrors')} attribute can't start with ${formatString('/')} or ${formatString('.')}`);
         }
       }
     }

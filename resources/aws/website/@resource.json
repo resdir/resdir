@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "aws/website",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "isPublic": true,
   "files": [
     "./dist"
@@ -34,7 +34,9 @@
     "domainName": {
       "@type": "string"
     },
-    "contentDirectory": "./content",
+    "contentDirectory": {
+      "@type": "string"
+    },
     "indexPage": "index.html",
     "customErrors": {
       "@type": "array"
