@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "aws/website",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "isPublic": true,
   "files": [
     "./dist"
@@ -14,6 +14,10 @@
     "@value": {
       "bytes": "^3.0.0",
       "hasha": "^3.0.0",
+      "http-errors": "^1.6.2",
+      "is-directory": "^0.3.1",
+      "koa": "^2.4.1",
+      "koa-send": "^4.1.2",
       "lodash": "^4.17.4",
       "mime-types": "^2.1.17",
       "minimatch": "^3.0.4",
@@ -62,6 +66,18 @@
     "deploy": {
       "@type": "method",
       "@before": "@build"
+    },
+    "localServer": {
+      "@aliases": [
+        "server"
+      ],
+      "@implementation": "./dist/local-server",
+      "port": {
+        "@default": 5678
+      },
+      "start": {
+        "@type": "method"
+      }
     }
   }
 }

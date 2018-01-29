@@ -13,7 +13,6 @@ import Koa from 'koa';
 import jsonError from 'koa-json-error';
 import cors from '@koa/cors';
 import body from 'koa-json-body';
-// import createError from 'http-errors';
 
 export default base =>
   class LocalServer extends base {
