@@ -29,11 +29,15 @@
     }
   },
   "builder": {
-    "@import": "./builder",
-    "sourceDirectory": "./",
     "run": {
-      "@before": ["@parent transpiler run", "@parent bundler run"],
-      "@after": "tool/notifier notify 'Build completed'",
+      "@type": "method",
+      "@run": [
+        "@parent transpiler run",
+        "@parent bundler run",
+        "@parent copier run",
+        "@parent freezer run",
+        "tool/notifier notify 'Build completed'"
+      ],
       "@listen": "@build"
     },
     "fileWatcher": {
@@ -69,5 +73,12 @@
       "react": "React",
       "react-dom": "ReactDOM"
     }
+  },
+  "copier": {
+    "@import": "tool/file-copier",
+    "sourceDirectory": "./"
+  },
+  "freezer": {
+    "@import": "website/freezer"
   }
 }
