@@ -1,6 +1,7 @@
 import {resolve, join} from 'path';
 import {existsSync} from 'fs';
-import {print, printSuccess, formatDanger, formatDim, formatCode} from '@resdir/console';
+import {trim} from 'lodash';
+import {print, printSuccess, formatDanger, formatDim, formatCode, formatURL} from '@resdir/console';
 import Koa from 'koa';
 import send from 'koa-send';
 import createError from 'http-errors';
@@ -10,11 +11,6 @@ export default base =>
   class LocalServer extends base {
     createServer(environment) {
       const website = this.$getParent();
-
-      if (!website.contentDirectory) {
-        throw new Error(`${formatCode('contentDirectory')} attribute is missing`);
-      }
-
       const contentDirectory = resolve(website.$getCurrentDirectory(), website.contentDirectory);
       const indexPage = website.indexPage;
       const customErrors = website.customErrors || [];
@@ -29,16 +25,8 @@ export default base =>
             throw createError(405);
           }
 
-          let path = ctx.path;
+          let path = trim(ctx.path, '/');
           let status = 200;
-
-          if (path.startsWith('/')) {
-            path = path.slice(1);
-          }
-
-          if (path.endsWith('/')) {
-            path = path.slice(0, -1);
-          }
 
           let file = join(contentDirectory, path);
           if (isDirectory.sync(file)) {
@@ -73,6 +61,7 @@ export default base =>
           message +=
             formatDim(` (`) + formatDanger(`${err.status} ${err.message}`) + formatDim(`)`);
           print(message, environment);
+          throw err;
         }
       });
 
@@ -82,6 +71,9 @@ export default base =>
     async start(_input, environment) {
       const server = this.createServer(environment);
       server.listen(this.port);
-      printSuccess(`Local server started (port: ${this.port})`, environment);
+      printSuccess(
+        `Local server started ${formatDim(`(`)}${formatURL(`http://localhost:${this.port}`)}${formatDim(`)`)}`,
+        environment
+      );
     }
   };

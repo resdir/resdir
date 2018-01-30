@@ -6,7 +6,8 @@ import {
   formatBold,
   formatDanger,
   formatDim,
-  formatPunctuation
+  formatPunctuation,
+  formatURL
 } from '@resdir/console';
 import RemoteResourceJSONRPCHandler from '@resdir/remote-resource-json-rpc-handler';
 import Koa from 'koa';
@@ -33,7 +34,7 @@ export default base =>
       server.use(body());
 
       server.use(async ctx => {
-        const request = ctx.request.body;
+        const request = ctx.request.body || {};
 
         const jsonRPCHandler = await this.getJSONRPCHandler(environment);
 
@@ -55,20 +56,18 @@ export default base =>
         const response = await jsonRPCHandler.handleRequest(request);
         const elapsedTime = formatDim(`(${Date.now() - startTime}ms)`);
 
-        if (request.method === 'invoke') {
-          let message;
-          if (response.error) {
-            message = formatDanger('[ERROR] ') + response.error.message;
-            if (!isEmpty(response.error.data)) {
-              message += ' ' + formatValue(response.error.data, {multiline: false});
-            }
-          } else {
-            const output = response.result && response.result.output;
-            message = formatValue(output, {multiline: false});
+        let message = '';
+        if (response.error) {
+          message += formatDanger('[ERROR] ') + response.error.message;
+          if (!isEmpty(response.error.data)) {
+            message += ' ' + formatValue(response.error.data, {multiline: false});
           }
-          message += ' ' + elapsedTime;
-          console.log(message);
+        } else if (request.method === 'invoke') {
+          const output = response.result && response.result.output;
+          message += formatValue(output, {multiline: false});
         }
+        message += ' ' + elapsedTime;
+        console.log(message.trim());
 
         ctx.body = response;
       });
@@ -91,6 +90,9 @@ export default base =>
     async start(_input, environment) {
       const server = this.createServer(environment);
       server.listen(this.port);
-      printSuccess(`Local server started (port: ${this.port})`, environment);
+      printSuccess(
+        `Local server started ${formatDim(`(`)}${formatURL(`http://localhost:${this.port}`)}${formatDim(`)`)}`,
+        environment
+      );
     }
   };

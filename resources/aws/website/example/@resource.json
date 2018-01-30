@@ -4,8 +4,7 @@
   "customErrors": [
     {
       "errorCode": 404,
-      "responseCode": 200,
-      "responsePage": "index.html"
+      "responsePage": "404.html"
     }
   ],
   "immutableFiles": ["**/*.immutable.*"]
