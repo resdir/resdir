@@ -1,10 +1,10 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/http-client",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "Convenient wrapper over Fetch API",
   "dependencies": {
-    "fs-extra": "^4.0.0",
+    "fs-extra": "^5.0.0",
     "isomorphic-fetch": "^2.2.1",
     "strict-uri-encode": "^2.0.0"
   }

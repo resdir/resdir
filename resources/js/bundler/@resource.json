@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/bundler",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "isPublic": true,
   "files": [
     "./dist"
@@ -10,7 +10,7 @@
     "@import": "js/npm-dependencies",
     "@value": {
       "bytes": "^3.0.0",
-      "fs-extra": "^3.0.1",
+      "fs-extra": "^5.0.0",
       "@resdir/console": "^0.1.0",
       "rollup": "^0.55.1",
       "rollup-plugin-commonjs": "^8.2.6",

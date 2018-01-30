@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "js/esnext-transpiler",
-  "version": "0.1.52",
+  "version": "0.1.53",
   "isPublic": true,
   "files": [
     "./dist"
@@ -18,7 +18,7 @@
       "@babel/preset-env": "^7.0.0-beta.36",
       "@babel/preset-react": "^7.0.0-beta.36",
       "@babel/preset-stage-3": "^7.0.0-beta.36",
-      "fs-extra": "^3.0.1",
+      "fs-extra": "^5.0.0",
       "is-directory": "^0.3.1",
       "lodash": "^4.17.4",
       "@resdir/console": "^0.1.0",
@@ -33,7 +33,7 @@
       "@import": "1place/esnext-jest",
       "@directory": "./tests",
       "dependencies": {
-        "fs-extra": "^3.0.1",
+        "fs-extra": "^5.0.0",
         "@resdir/file-manager": "^0.1.0",
         "run-core": "^0.11.0",
         "temp-dir": "^1.0.0"
