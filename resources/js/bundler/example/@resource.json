@@ -7,8 +7,8 @@
   },
   "bundler": {
     "@import": "..",
-    "entryFile": "./src/index.js",
-    "bundleFile": "./dist/bundle.js",
+    "entry": "./src/index.js",
+    "output": "./dist/bundle.js",
     "target": "node",
     "format": "cjs",
     "fileWatcher": {

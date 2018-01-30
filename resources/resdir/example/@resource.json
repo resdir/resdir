@@ -1,11 +1,8 @@
 {
-  "@import": [
-    "resdir/resource",
-    "js/resource"
-  ],
+  "@import": "resdir/resource",
   "@implementation": "./dist",
   "id": "resdir/example",
-  "version": "0.3.44",
+  "version": "0.3.45",
   "isPublic": true,
   "files": [
     "./dist"
@@ -13,7 +10,8 @@
   "dependencies": {
     "@import": "js/npm-dependencies",
     "@value": {
-      "chalk": "^2.1.0"
+      "chalk": "^2.1.0",
+      "@resdir/console": "^0.1.35"
     }
   },
   "hello": {
@@ -30,16 +28,11 @@
       "color": {
         "@default": "green"
       }
-    },
-    "@listen": "hi"
+    }
   },
   "@unpublishable": {
     "transpiler": {
       "@import": "1place/esnext-transpiler"
-    },
-    "tests": {
-      "@import": "1place/esnext-jest",
-      "@directory": "./tests"
     }
   }
 }

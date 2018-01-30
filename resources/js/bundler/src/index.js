@@ -1,5 +1,5 @@
 import {join, resolve} from 'path';
-import {readFile, outputFile, ensureDir, pathExists, rename, stat} from 'fs-extra';
+import {readFile, outputFile as writeFile, ensureDir, pathExists, rename, stat} from 'fs-extra';
 import {task, print, formatCode, formatDim} from '@resdir/console';
 import {rollup} from 'rollup';
 import nodeResolve from 'rollup-plugin-node-resolve';
@@ -50,12 +50,12 @@ const NODE_BUILT_IN_MODULES = [
 export default base =>
   class JSBundler extends base {
     async run(_input, environment) {
-      if (!this.entryFile) {
-        throw new Error(`${formatCode('entryFile')} attribute is missing`);
+      if (!this.entry) {
+        throw new Error(`${formatCode('entry')} attribute is missing`);
       }
 
-      if (!this.bundleFile) {
-        throw new Error(`${formatCode('bundleFile')} attribute is missing`);
+      if (!this.output) {
+        throw new Error(`${formatCode('output')} attribute is missing`);
       }
 
       await task(
@@ -68,8 +68,10 @@ export default base =>
               await this._startReinstallDependencies(environment);
             }
 
-            const entryFile = resolve(directory, this.entryFile);
-            const bundleFile = resolve(directory, this.bundleFile);
+            const entryFile = resolve(directory, this.entry);
+
+            const output = this.output.replace('${format}', this.format); // eslint-disable-line no-template-curly-in-string
+            const outputFile = resolve(directory, output);
 
             const browser = !(this.target === 'node' || this.target === 'aws-lambda');
 
@@ -147,9 +149,9 @@ export default base =>
             }
             const result = await bundle.generate({format, name: this.name, globals: this.globals});
 
-            const isDifferent = !await isFileEqual(bundleFile, result.code);
+            const isDifferent = !await isFileEqual(outputFile, result.code);
             if (isDifferent) {
-              await outputFile(bundleFile, result.code);
+              await writeFile(outputFile, result.code);
             }
 
             const elapsedTime = Date.now() - startingTime;

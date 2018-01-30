@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.42",
+  "version": "0.1.44",
   "isPublic": true,
   "files": [
     "./dist/bundle.js"
@@ -29,8 +29,8 @@
     },
     "bundler": {
       "@import": "js/bundler",
-      "entryFile": "./dist/esm/index.js",
-      "bundleFile": "./dist/bundle.js",
+      "entry": "./dist/esm/index.js",
+      "output": "./dist/bundle.js",
       "target": "node",
       "format": "cjs",
       "reinstallDependencies": true,

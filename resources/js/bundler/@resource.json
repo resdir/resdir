@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/bundler",
-  "version": "0.1.15",
+  "version": "0.1.17",
   "isPublic": true,
   "files": [
     "./dist"
@@ -32,11 +32,11 @@
     "@description": "JavaScript module bundler (using Rollup)",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist",
-    "entryFile": {
-      "@type": "string"
+    "entry": {
+      "@default": "./src/index.js"
     },
-    "bundleFile": {
-      "@type": "string"
+    "output": {
+      "@default": "./dist/bundle.js"
     },
     "target": {
       "@default": "node"

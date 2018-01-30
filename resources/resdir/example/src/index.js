@@ -1,16 +1,13 @@
 import chalk from 'chalk';
+import {print} from '@resdir/console';
 
-export default base =>
-  class Simple extends base {
-    hello({color}, environment) {
-      console.log(chalk[color](formatHello(undefined, environment)));
+export default {
+  hello({color}, environment) {
+    let message = `Hello, World!`;
+    if (environment['@verbose']) {
+      message = message.toUpperCase();
     }
-  };
-
-export function formatHello(target = 'World', environment) {
-  let message = `Hello, ${target}!`;
-  if (environment && environment['@verbose']) {
-    message = message.toUpperCase();
+    message = chalk[color](message);
+    print(message, environment);
   }
-  return message;
-}
+};
