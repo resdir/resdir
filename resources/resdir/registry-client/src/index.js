@@ -4,6 +4,9 @@ import {ensureDirSync} from 'fs-extra';
 import {
   formatString,
   formatURL,
+  formatDim,
+  formatValue,
+  print,
   emptyLine,
   printText as originalPrintText,
   prompt,
@@ -18,11 +21,13 @@ const debug = debugModule('resdir:registry-client');
 
 export default base =>
   class ResdirRegistryClient extends base {
-    async hello(_input, environment) {
+    async ping(_input, environment) {
       const server = await this.getRegistryServer();
-      console.time('remoteCall');
-      console.log(await server.hello(undefined, environment));
-      console.timeEnd('remoteCall');
+      const startTime = Date.now();
+      const result = await server.ping(undefined, environment);
+      const elapsedTime = Date.now() - startTime;
+      const message = `${formatDim('=>')} ${formatValue(result)} ${formatDim(`(${elapsedTime}ms)`)}`;
+      print(message, environment);
     }
 
     // === Registration and authentication ===

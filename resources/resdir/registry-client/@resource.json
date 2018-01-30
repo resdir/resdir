@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "resdir/registry-client",
-  "version": "0.1.7",
+  "version": "0.1.10",
   "isPublic": true,
   "files": [
     "./dist"
@@ -41,7 +41,7 @@
       "@type": "object",
       "@isHidden": true
     },
-    "hello": {
+    "ping": {
       "@type": "method"
     },
     "signUp": {
