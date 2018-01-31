@@ -169,7 +169,7 @@ export default base =>
       if (!this._zipArchive) {
         const tempDirectory = tempy.directory();
         await copy(
-          join(__dirname, '..', 'lambda-handler', 'dist', 'bundle.js'),
+          join(__dirname, '..', '..', 'lambda-handler', 'dist', 'bundle.js'),
           join(tempDirectory, 'handler.js')
         );
         await this.buildDefinitionFile(join(tempDirectory, 'definition.json'), environment);
