@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "js/bundler",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "isPublic": true,
   "files": [
     "./dist"
@@ -26,7 +26,7 @@
   "@export": {
     "@description": "JavaScript module bundler (using Rollup)",
     "@runtime": "node#>=6.10.0",
-    "@implementation": "./dist",
+    "@implementation": "./dist/cjs",
     "entry": {
       "@default": "./src/index.js"
     },

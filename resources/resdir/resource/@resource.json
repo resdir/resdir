@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/resource",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "isPublic": true,
   "files": [
     "./dist"
@@ -36,7 +36,7 @@
   },
   "@export": {
     "@runtime": "node#>=6.10.0",
-    "@implementation": "./dist",
+    "@implementation": "./dist/cjs",
     "id": {
       "@type": "string",
       "@description": "Identifier of the resource",
@@ -44,7 +44,7 @@
         "js/example",
         "aturing/nice-tool"
       ],
-      "@implementation": "./dist/id-property.js",
+      "@implementation": "./dist/cjs/id-property.js",
       "getNamespace": {
         "@type": "method",
         "@description": "Get the namespace part of the identifier",
@@ -103,7 +103,7 @@
         "0.23.4",
         "2.0.0-alpha.3"
       ],
-      "@implementation": "./dist/version-property.js",
+      "@implementation": "./dist/cjs/version-property.js",
       "validate": {
         "@type": "method",
         "@description": "Validate the version number",

@@ -4,7 +4,7 @@
     "./"
   ],
   "id": "js/resource",
-  "version": "0.1.32",
+  "version": "0.1.33",
   "isPublic": true,
   "files": [
     "./dist"
@@ -26,7 +26,7 @@
   },
   "@export": {
     "@runtime": "node#>=6.10.0",
-    "@implementation": "./dist",
+    "@implementation": "./dist/cjs",
     "dependencies": {
       "@import": "js/npm-dependencies"
     },

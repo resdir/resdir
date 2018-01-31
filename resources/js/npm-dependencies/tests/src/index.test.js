@@ -12,7 +12,10 @@ describe('js/npm-dependencies', () => {
   let tempDirectory;
 
   beforeAll(async () => {
-    Package = await Resource.$create({dependencies: {'@import': '../..'}}, {directory: __dirname});
+    Package = await Resource.$create(
+      {dependencies: {'@import': '../../..'}},
+      {directory: __dirname}
+    );
     tempDirectory = join(tempDir, 'js-dependencies-test');
     emptyDirSync(tempDirectory);
   });

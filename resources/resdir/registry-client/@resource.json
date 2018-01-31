@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/registry-client",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "isPublic": true,
   "files": [
     "./dist"
@@ -38,7 +38,7 @@
     }
   },
   "@export": {
-    "@implementation": "./dist",
+    "@implementation": "./dist/cjs",
     "registryServer": {
       "@type": "string",
       "@isHidden": true
@@ -86,7 +86,7 @@
       "@type": "method"
     },
     "user": {
-      "@implementation": "./dist/user",
+      "@implementation": "./dist/cjs/user",
       "show": {
         "@type": "method"
       },
@@ -99,7 +99,7 @@
           "orgs",
           "org"
         ],
-        "@implementation": "./dist/user-organizations",
+        "@implementation": "./dist/cjs/user-organizations",
         "list": {
           "@type": "method",
           "@aliases": [
@@ -111,7 +111,7 @@
         "@aliases": [
           "ns"
         ],
-        "@implementation": "./dist/user-namespace",
+        "@implementation": "./dist/cjs/user-namespace",
         "create": {
           "@type": "method",
           "@input": {
@@ -138,7 +138,7 @@
           "github",
           "gh"
         ],
-        "@implementation": "./dist/user-github-account",
+        "@implementation": "./dist/cjs/user-github-account",
         "connect": {
           "@type": "method",
           "@input": {
@@ -159,7 +159,7 @@
         "orgs",
         "org"
       ],
-      "@implementation": "./dist/organizations",
+      "@implementation": "./dist/cjs/organizations",
       "create": {
         "@type": "method",
         "@input": {
@@ -242,7 +242,7 @@
       "@aliases": [
         "community"
       ],
-      "@implementation": "./dist/communities",
+      "@implementation": "./dist/cjs/communities",
       "create": {
         "@type": "method",
         "@input": {
@@ -279,7 +279,7 @@
         "resource",
         "res"
       ],
-      "@implementation": "./dist/resources",
+      "@implementation": "./dist/cjs/resources",
       "@isHidden": true,
       "get": {
         "@type": "method",
@@ -331,7 +331,7 @@
       }
     },
     "admin": {
-      "@implementation": "./dist/admin",
+      "@implementation": "./dist/cjs/admin",
       "@isHidden": true,
       "invokeMethod": {
         "@type": "method",
@@ -351,7 +351,7 @@
         }
       },
       "permissionTokens": {
-        "@implementation": "./dist/admin-permission-tokens",
+        "@implementation": "./dist/cjs/admin-permission-tokens",
         "create": {
           "@type": "method",
           "@input": {

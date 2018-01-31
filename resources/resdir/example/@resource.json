@@ -3,9 +3,9 @@
     "resdir/resource",
     "1place/js-resource"
   ],
-  "@implementation": "./dist",
+  "@implementation": "./dist/cjs",
   "id": "resdir/example",
-  "version": "0.3.48",
+  "version": "0.3.49",
   "isPublic": true,
   "files": [
     "./dist"

@@ -27,8 +27,8 @@ export default base =>
           return transpilationOccurred;
         },
         {
-          intro: `Transpiling resource...`,
-          outro: `Resource transpiled`
+          intro: `Transpiling files...`,
+          outro: `Files transpiled`
         },
         environment
       );

@@ -1,4 +1,4 @@
-import * as util from '../..';
+import * as util from '../../..';
 
 describe('@resdir/util', () => {
   test('compactObject()', () => {

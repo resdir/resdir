@@ -3,7 +3,7 @@ import {
   getResourceName,
   validateResourceIdentifier,
   isReservedWindowsFilename
-} from '../..';
+} from '../../..';
 
 describe('@resdir/resource-identifier', () => {
   test('getResourceNamespace()', () => {

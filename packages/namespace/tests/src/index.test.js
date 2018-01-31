@@ -1,4 +1,4 @@
-import {validateNamespace, isGenericNamespace, isReservedNamespace} from '../..';
+import {validateNamespace, isGenericNamespace, isReservedNamespace} from '../../..';
 
 describe('@resdir/namespace', () => {
   test('validateNamespace()', () => {

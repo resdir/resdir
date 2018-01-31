@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "isPublic": true,
   "files": [
     "./dist"
@@ -31,13 +31,13 @@
   },
   "@export": {
     "@runtime": "node#>=6.10.0",
-    "@implementation": "./dist",
+    "@implementation": "./dist/cjs",
     "name": {
       "@type": "string"
     },
     "version": {
       "@type": "string",
-      "@implementation": "./dist/version-property",
+      "@implementation": "./dist/cjs/version-property",
       "bump": {
         "@type": "method",
         "@input": {

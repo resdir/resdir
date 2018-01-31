@@ -26,14 +26,14 @@ describe('js/transpiler', () => {
     const directory = join(tempDirectory, 'person');
     emptyDirSync(directory);
 
-    const srcCodeFile = join(directory, 'src', 'index.js');
-    await outputFile(srcCodeFile, CODE);
+    const sourceCodeFile = join(directory, 'src', 'index.js');
+    await outputFile(sourceCodeFile, CODE);
 
     const resourceFile = join(directory, '@resource.json');
     const definition = {
       id: 'resdir/js-esnext-transpiler-person-test',
       transpiler: {
-        '@import': resolve(__dirname, '../..')
+        '@import': resolve(__dirname, '../../..')
       }
     };
     save(resourceFile, definition);
@@ -41,13 +41,13 @@ describe('js/transpiler', () => {
     const Person = await Resource.$load(directory);
     await Person.transpiler.run(undefined, {'@quiet': true});
 
-    const distDirectory = join(directory, 'dist');
-    expect(pathExistsSync(distDirectory)).toBe(true);
+    const destinationDirectory = join(directory, 'dist', 'cjs');
+    expect(pathExistsSync(destinationDirectory)).toBe(true);
 
-    const distCodeFile = join(directory, 'dist', 'index.js');
-    const distCode = load(distCodeFile, {parse: false});
+    const destinationCodeFile = join(destinationDirectory, 'index.js');
+    const destinationCode = load(destinationCodeFile, {parse: false});
 
     // After transpilation there should be no more 'import' statement
-    expect(distCode).not.toContain('import');
+    expect(destinationCode).not.toContain('import');
   });
 });

@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "tool/file-copier",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "isPublic": true,
   "files": [
     "./dist"
@@ -16,7 +16,7 @@
     "@resdir/console": "^0.1.35"
   },
   "@export": {
-    "@implementation": "./dist",
+    "@implementation": "./dist/cjs",
     "sourceDirectory": {
       "@default": "./"
     },

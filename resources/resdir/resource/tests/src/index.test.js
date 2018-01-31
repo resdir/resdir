@@ -1,7 +1,7 @@
 import {join} from 'path';
 import {Resource} from 'run-core';
 
-const RESOURCE_PATH = join(__dirname, '..', '..');
+const RESOURCE_PATH = join(__dirname, '..', '..', '..');
 
 describe('resdir/resource', () => {
   test('id', async () => {

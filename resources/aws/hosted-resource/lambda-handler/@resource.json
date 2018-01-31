@@ -4,7 +4,6 @@
     "@resdir/remote-resource-json-rpc-handler": "^0.1.0"
   },
   "transpiler": {
-    "destination": "./dist/esm",
     "format": "esm",
     "runBundler": {
       "@type": "method",

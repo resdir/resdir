@@ -9,7 +9,7 @@ describe('js/npm-package', () => {
   let tempDirectory;
 
   beforeAll(async () => {
-    Package = await Resource.$import('../..', {directory: __dirname});
+    Package = await Resource.$import('../../..', {directory: __dirname});
     tempDirectory = join(tempDir, 'js-package-test');
     emptyDirSync(tempDirectory);
   });

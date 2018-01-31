@@ -1,4 +1,4 @@
-import VersionRange from '../..';
+import VersionRange from '../../..';
 
 describe('VersionRange', () => {
   test('validation', () => {

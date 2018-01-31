@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "tool/console",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "isPublic": true,
   "files": [
     "./dist"
@@ -13,7 +13,7 @@
     "@resdir/console": "^0.1.24"
   },
   "@export": {
-    "@implementation": "./dist",
+    "@implementation": "./dist/cjs",
     "print": {
       "@type": "method",
       "@input": {

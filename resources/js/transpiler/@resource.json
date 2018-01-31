@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "js/transpiler",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "isPublic": true,
   "files": [
     "./dist"
@@ -37,12 +37,12 @@
   "@export": {
     "@description": "ESNext transpilation (using Babel)",
     "@runtime": "node#>=6.10.0",
-    "@implementation": "./dist",
+    "@implementation": "./dist/cjs",
     "source": {
       "@default": "./src"
     },
     "destination": {
-      "@default": "./dist"
+      "@default": "./dist/${format}"
     },
     "extensions": {
       "@default": [

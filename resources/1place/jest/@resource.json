@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "1place/jest",
-  "version": "0.1.35",
+  "version": "0.1.36",
   "isPublic": true,
   "files": [
     "./dist"
@@ -17,12 +17,12 @@
   "@export": {
     "@import": "1place/js-resource",
     "@description": "Test suite runner (using Jest)",
-    "@implementation": "./dist",
+    "@implementation": "./dist/cjs",
     "roots": {
       "@type": "array",
       "@description": "Root diectories containing the test files",
       "@default": [
-        "./dist"
+        "./dist/cjs"
       ]
     },
     "testEnvironment": {

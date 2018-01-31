@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.48",
+  "version": "0.1.49",
   "isPublic": true,
   "files": [
     "./dist/bundle.js"
@@ -29,7 +29,6 @@
     },
     "transpiler": {
       "@import": "js/transpiler",
-      "destination": "./dist/esm",
       "format": "esm"
     },
     "bundler": {

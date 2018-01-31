@@ -1,4 +1,4 @@
-import {Version, compareVersions} from '../..';
+import {Version, compareVersions} from '../../..';
 
 describe('Version', () => {
   test('emptiness', () => {

@@ -1,4 +1,4 @@
-import {parseResourceSpecifier} from '../..';
+import {parseResourceSpecifier} from '../../..';
 
 describe('@resdir/resource-specifier', () => {
   test('parseResourceSpecifier()', () => {
@@ -9,12 +9,8 @@ describe('@resdir/resource-specifier', () => {
     expect(parseResourceSpecifier('resdir/hello#^1.0.0').versionRange.toString()).toBe('^1.0.0');
 
     expect(parseResourceSpecifier('./example').location).toBe('./example');
-    expect(parseResourceSpecifier('/Users/bob/dev/example').location).toBe(
-      '/Users/bob/dev/example'
-    );
-    expect(parseResourceSpecifier('https://registry.resdir.com').location).toBe(
-      'https://registry.resdir.com'
-    );
+    expect(parseResourceSpecifier('/Users/bob/dev/example').location).toBe('/Users/bob/dev/example');
+    expect(parseResourceSpecifier('https://registry.resdir.com').location).toBe('https://registry.resdir.com');
 
     expect(() => parseResourceSpecifier('resdir')).toThrow();
     expect(() => parseResourceSpecifier('resdir/-hello-')).toThrow();

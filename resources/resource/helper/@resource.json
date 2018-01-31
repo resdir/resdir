@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "resource/helper",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "isPublic": true,
   "files": [
     "./dist"
@@ -17,7 +17,7 @@
   },
   "@export": {
     "@description": "A set of methods to manage resources",
-    "@implementation": "./dist",
+    "@implementation": "./dist/cjs",
     "create": {
       "@type": "method",
       "@description": "Create a resource in the current directory",

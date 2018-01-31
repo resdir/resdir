@@ -18,18 +18,12 @@ export default base =>
 
       return await task(
         async progress => {
-          const {resource} = await root.authenticatedCall(
+          const result = await root.authenticatedCall(
             accessToken =>
-              server.getResource(
-                {
-                  specifier,
-                  throwIfNotFound,
-                  accessToken
-                },
-                environment
-              ),
+              server.getResource({specifier, throwIfNotFound, accessToken}, environment),
             environment
           );
+          const resource = result && result.resource;
           if (resource) {
             const resourceSpecifier = stringifyResourceSpecifier({
               identifier: resource.identifier,

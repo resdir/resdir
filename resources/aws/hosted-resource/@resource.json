@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "aws/hosted-resource",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "isPublic": true,
   "files": [
     "./dist",
@@ -28,7 +28,7 @@
     "tempy": "^0.2.1"
   },
   "@export": {
-    "@implementation": "./dist",
+    "@implementation": "./dist/cjs",
     "domainName": {
       "@type": "string"
     },
@@ -58,7 +58,7 @@
       "@aliases": [
         "server"
       ],
-      "@implementation": "./dist/local-server",
+      "@implementation": "./dist/cjs/local-server",
       "port": {
         "@default": 6789
       },

@@ -47,8 +47,6 @@
   },
   "transpiler": {
     "@import": "js/transpiler",
-    "source": "./src",
-    "destination": "./dist/esm",
     "targets": {
       "chrome": "50",
       "safari": "10",

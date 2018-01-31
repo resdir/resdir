@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "tool/file-watcher",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "isPublic": true,
   "files": [
     "./dist"
@@ -13,7 +13,7 @@
     "minimatch": "^3.0.4"
   },
   "@export": {
-    "@implementation": "./dist",
+    "@implementation": "./dist/cjs",
     "files": {
       "@type": "array"
     },

@@ -1,4 +1,4 @@
-import {validateResourceKey} from '../..';
+import {validateResourceKey} from '../../..';
 
 describe('@resdir/resource-key', () => {
   test('validateResourceKey()', () => {
