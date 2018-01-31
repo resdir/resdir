@@ -1,0 +1,18 @@
+{
+  "@import": "resdir/resource",
+  "id": "1place/js-resource",
+  "version": "0.1.2",
+  "isPublic": true,
+  "@export": {
+    "@import": "js/resource",
+    "transpiler": {
+      "@import": "js/transpiler",
+      "run": {
+        "@listen": [
+          "@build",
+          "@fileModified"
+        ]
+      }
+    }
+  }
+}

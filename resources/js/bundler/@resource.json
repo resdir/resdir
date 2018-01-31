@@ -1,32 +1,27 @@
 {
-  "@import": "resdir/resource",
+  "@import": [
+    "resdir/resource",
+    "1place/js-resource"
+  ],
   "id": "js/bundler",
-  "version": "0.1.18",
+  "version": "0.1.20",
   "isPublic": true,
   "files": [
     "./dist"
   ],
   "dependencies": {
-    "@import": "js/npm-dependencies",
-    "@value": {
-      "bytes": "^3.0.0",
-      "fs-extra": "^5.0.0",
-      "@resdir/console": "^0.1.0",
-      "rollup": "^0.55.1",
-      "rollup-plugin-commonjs": "^8.2.6",
-      "rollup-plugin-json": "^2.3.0",
-      "rollup-plugin-node-builtins": "^2.1.2",
-      "rollup-plugin-node-globals": "^1.1.0",
-      "rollup-plugin-node-resolve": "^3.0.0",
-      "rollup-plugin-replace": "^2.0.0",
-      "rollup-plugin-uglify": "^3.0.0",
-      "uglify-es": "^3.3.7"
-    }
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
-    }
+    "bytes": "^3.0.0",
+    "fs-extra": "^5.0.0",
+    "@resdir/console": "^0.1.0",
+    "rollup": "^0.55.1",
+    "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-json": "^2.3.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.1.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^2.0.0",
+    "rollup-plugin-uglify": "^3.0.0",
+    "uglify-es": "^3.3.7"
   },
   "@export": {
     "@description": "JavaScript module bundler (using Rollup)",

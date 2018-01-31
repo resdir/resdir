@@ -6,7 +6,6 @@ vendor
 old
 _drafts
 builds
-resources/js/npm-dependencies/bundle.js
 packages/common-english-words/data.js
 packages/common-tags/data.js
 packages/top-level-domains/data.js

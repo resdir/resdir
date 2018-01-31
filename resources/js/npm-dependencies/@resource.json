@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.45",
+  "version": "0.1.47",
   "isPublic": true,
   "files": [
     "./dist/bundle.js"
@@ -17,15 +17,20 @@
         "lodash": "^4.17.4"
       }
     },
-    "transpiler": {
-      "@import": "1place/esnext-transpiler",
-      "destination": "./dist/esm",
-      "format": "esm",
-      "runBundler": {
+    "builder": {
+      "run": {
         "@type": "method",
-        "@run": "@parent bundler run",
-        "@listen": "transpilationOccurred"
+        "@run": [
+          "@parent transpiler run",
+          "@parent bundler run"
+        ],
+        "@listen": "@build"
       }
+    },
+    "transpiler": {
+      "@import": "js/transpiler",
+      "destination": "./dist/esm",
+      "format": "esm"
     },
     "bundler": {
       "@import": "js/bundler",

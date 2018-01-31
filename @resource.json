@@ -13,7 +13,7 @@
       "./resources/resdir/resource @test",
       "./resources/js/npm-dependencies @test",
       "./resources/js/npm-package @test",
-      "./resources/js/esnext-transpiler @test"
+      "./resources/js/transpiler @test"
     ]
   },
   "publish": {
@@ -26,14 +26,14 @@
       "./resources/js/npm-dependencies publish --throwIfAlreadyExists=false",
       "./resources/js/resource publish --throwIfAlreadyExists=false",
       "./resources/js/npm-package publish --throwIfAlreadyExists=false",
-      "./resources/js/esnext-transpiler publish --throwIfAlreadyExists=false",
+      "./resources/js/transpiler publish --throwIfAlreadyExists=false",
       "./resources/js/bundler publish --throwIfAlreadyExists=false",
       "./resources/tool/console publish --throwIfAlreadyExists=false",
       "./resources/tool/file-copier publish --throwIfAlreadyExists=false",
       "./resources/tool/file-watcher publish --throwIfAlreadyExists=false",
       "./resources/tool/notifier publish --throwIfAlreadyExists=false",
       "./resources/website/freezer publish --throwIfAlreadyExists=false",
-      "./resources/1place/esnext-transpiler publish --throwIfAlreadyExists=false",
+      "./resources/1place/js-resource publish --throwIfAlreadyExists=false",
       "./resources/1place/npm-package publish --throwIfAlreadyExists=false",
       "./resources/1place/jest publish --throwIfAlreadyExists=false",
       "./resources/1place/esnext-jest publish --throwIfAlreadyExists=false",

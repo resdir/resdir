@@ -1,37 +1,29 @@
 {
   "@import": [
     "resdir/resource",
-    "js/resource"
+    "1place/js-resource"
   ],
   "id": "aws/website",
-  "version": "0.1.21",
+  "version": "0.1.23",
   "isPublic": true,
   "files": [
     "./dist"
   ],
   "dependencies": {
-    "@import": "js/npm-dependencies#^0.1.26",
-    "@value": {
-      "bytes": "^3.0.0",
-      "hasha": "^3.0.0",
-      "http-errors": "^1.6.2",
-      "is-directory": "^0.3.1",
-      "koa": "^2.4.1",
-      "koa-send": "^4.1.2",
-      "lodash": "^4.17.4",
-      "mime-types": "^2.1.17",
-      "minimatch": "^3.0.4",
-      "recursive-readdir": "^2.2.1",
-      "@resdir/aws-client": "^0.1.1",
-      "@resdir/aws-helpers": "^0.1.0",
-      "@resdir/console": "^0.1.16",
-      "sleep-promise": "^2.0.0"
-    }
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler#^0.1.9"
-    }
+    "bytes": "^3.0.0",
+    "hasha": "^3.0.0",
+    "http-errors": "^1.6.2",
+    "is-directory": "^0.3.1",
+    "koa": "^2.4.1",
+    "koa-send": "^4.1.2",
+    "lodash": "^4.17.4",
+    "mime-types": "^2.1.17",
+    "minimatch": "^3.0.4",
+    "recursive-readdir": "^2.2.1",
+    "@resdir/aws-client": "^0.1.1",
+    "@resdir/aws-helpers": "^0.1.0",
+    "@resdir/console": "^0.1.16",
+    "sleep-promise": "^2.0.0"
   },
   "@export": {
     "@implementation": "./dist",

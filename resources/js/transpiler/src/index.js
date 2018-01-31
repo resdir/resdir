@@ -41,7 +41,8 @@ export default base =>
     async _transpileOrCopy(files, environment = {}) {
       const directory = this.$getParent().$getCurrentDirectory();
       const srcDirectory = resolve(directory, this.source);
-      const destDirectory = resolve(directory, this.destination);
+      const destination = this.destination.replace('${format}', this.format); // eslint-disable-line no-template-curly-in-string
+      const destDirectory = resolve(directory, destination);
       const extensions = this.extensions;
 
       let transpilationOccurred = false;

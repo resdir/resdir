@@ -1,22 +1,36 @@
 {
   "@import": "resdir/resource",
   "id": "1place/npm-package",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "isPublic": true,
   "@export": {
     "@import": "js/npm-package",
-    "files": ["./dist"],
+    "files": [
+      "./dist"
+    ],
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
     "cjsTranspiler": {
-      "@import": "1place/esnext-transpiler",
+      "@import": "js/transpiler",
       "destination": "./dist/cjs",
-      "format": "cjs"
+      "format": "cjs",
+      "run": {
+        "@listen": [
+          "@build",
+          "@fileModified"
+        ]
+      }
     },
     "esmTranspiler": {
-      "@import": "1place/esnext-transpiler",
+      "@import": "js/transpiler",
       "destination": "./dist/esm",
-      "format": "esm"
+      "format": "esm",
+      "run": {
+        "@listen": [
+          "@build",
+          "@fileModified"
+        ]
+      }
     }
   }
 }

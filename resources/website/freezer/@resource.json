@@ -1,23 +1,18 @@
 {
-  "@import": "resdir/resource",
+  "@import": [
+    "resdir/resource",
+    "1place/js-resource"
+  ],
   "id": "website/freezer",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "isPublic": true,
   "files": [
     "./dist"
   ],
   "dependencies": {
-    "@import": "js/npm-dependencies#^0.1.26",
-    "@value": {
-      "fs-extra": "^5.0.0",
-      "@resdir/console": "^0.1.35",
-      "rev-hash": "^2.0.0"
-    }
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler#^0.1.9"
-    }
+    "fs-extra": "^5.0.0",
+    "@resdir/console": "^0.1.35",
+    "rev-hash": "^2.0.0"
   },
   "@export": {
     "@implementation": "./dist",

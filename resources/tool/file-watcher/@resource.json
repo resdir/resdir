@@ -1,24 +1,16 @@
 {
   "@import": [
     "resdir/resource",
-    "js/resource"
+    "1place/js-resource"
   ],
   "id": "tool/file-watcher",
-  "version": "0.1.8",
+  "version": "0.1.10",
   "isPublic": true,
   "files": [
     "./dist"
   ],
   "dependencies": {
-    "@import": "js/npm-dependencies#^0.1.26",
-    "@value": {
-      "minimatch": "^3.0.4"
-    }
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler#^0.1.9"
-    }
+    "minimatch": "^3.0.4"
   },
   "@export": {
     "@implementation": "./dist",

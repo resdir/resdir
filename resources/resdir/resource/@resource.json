@@ -1,24 +1,30 @@
 {
-  "@import": "./",
+  "@import": [
+    "./",
+    "js/resource"
+  ],
   "id": "resdir/resource",
-  "version": "0.1.37",
+  "version": "0.1.39",
   "isPublic": true,
   "files": [
     "./dist"
   ],
   "dependencies": {
-    "@import": "js/npm-dependencies",
-    "@value": {
-      "@resdir/console": "^0.1.0",
-      "@resdir/gitignore-manager": "^0.1.0",
-      "@resdir/resource-identifier": "^0.1.0",
-      "@resdir/resource-specifier": "^0.1.14",
-      "@resdir/version": "^0.1.0"
-    }
+    "@resdir/console": "^0.1.0",
+    "@resdir/gitignore-manager": "^0.1.0",
+    "@resdir/resource-identifier": "^0.1.0",
+    "@resdir/resource-specifier": "^0.1.14",
+    "@resdir/version": "^0.1.0"
   },
   "@unpublishable": {
     "transpiler": {
-      "@import": "1place/esnext-transpiler"
+      "@import": "js/transpiler",
+      "run": {
+        "@listen": [
+          "@build",
+          "@fileModified"
+        ]
+      }
     },
     "tests": {
       "@import": "1place/esnext-jest",

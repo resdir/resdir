@@ -1,26 +1,18 @@
 {
   "@import": [
     "resdir/resource",
-    "js/resource"
+    "1place/js-resource"
   ],
   "id": "1place/jest",
-  "version": "0.1.32",
+  "version": "0.1.34",
   "isPublic": true,
   "files": [
     "./dist"
   ],
   "dependencies": {
-    "@import": "js/npm-dependencies",
-    "@value": {
-      "jest": "^22.0.4",
-      "@resdir/console": "^0.1.0",
-      "@resdir/process-manager": "^0.1.0"
-    }
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
-    }
+    "jest": "^22.0.4",
+    "@resdir/console": "^0.1.0",
+    "@resdir/process-manager": "^0.1.0"
   },
   "@export": {
     "@description": "Test suite runner (using Jest)",

@@ -1,19 +1,11 @@
 {
-  "@import": "js/resource",
+  "@import": "1place/js-resource",
   "@implementation": "./dist",
   "dependencies": {
-    "@import": "js/npm-dependencies",
-    "@value": {
-      "lodash": "^4.17.4",
-      "xml2js": "^0.4.19"
-    }
+    "lodash": "^4.17.4",
+    "xml2js": "^0.4.19"
   },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
-    },
-    "run": {
-      "@type": "method"
-    }
+  "run": {
+    "@type": "method"
   }
 }

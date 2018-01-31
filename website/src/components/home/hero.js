@@ -16,7 +16,7 @@ const COMMAND_EXAMPLES = [
   'run @create js/resource',
   'run @create js/npm-package',
   'run @create aws/website',
-  'run @add js/esnext-transpiler',
+  'run @add js/transpiler',
   'run @add aws/hosted-resource',
   'run @add aws/dynamodb-table',
   'run @add web/builder',

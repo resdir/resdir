@@ -1,25 +1,16 @@
 {
   "@import": [
     "resdir/resource",
-    "js/resource",
-    "./"
+    "1place/js-resource"
   ],
   "id": "tool/console",
-  "version": "0.1.6",
+  "version": "0.1.8",
   "isPublic": true,
   "files": [
     "./dist"
   ],
   "dependencies": {
-    "@import": "js/npm-dependencies#^0.1.26",
-    "@value": {
-      "@resdir/console": "^0.1.24"
-    }
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler#^0.1.9"
-    }
+    "@resdir/console": "^0.1.24"
   },
   "@export": {
     "@implementation": "./dist",

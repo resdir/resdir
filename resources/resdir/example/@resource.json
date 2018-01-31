@@ -1,18 +1,18 @@
 {
-  "@import": "resdir/resource",
+  "@import": [
+    "resdir/resource",
+    "1place/js-resource"
+  ],
   "@implementation": "./dist",
   "id": "resdir/example",
-  "version": "0.3.45",
+  "version": "0.3.47",
   "isPublic": true,
   "files": [
     "./dist"
   ],
   "dependencies": {
-    "@import": "js/npm-dependencies",
-    "@value": {
-      "chalk": "^2.1.0",
-      "@resdir/console": "^0.1.35"
-    }
+    "chalk": "^2.1.0",
+    "@resdir/console": "^0.1.35"
   },
   "hello": {
     "@type": "method",
@@ -28,11 +28,6 @@
       "color": {
         "@default": "green"
       }
-    }
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
     }
   }
 }

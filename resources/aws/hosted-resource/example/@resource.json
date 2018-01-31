@@ -1,11 +1,6 @@
 {
-  "@import": "../",
+  "@import": ["../", "1place/js-resource"],
   "domainName": "api.example.resdir.com",
-  "transpiler": {
-    "@import": "1place/esnext-transpiler",
-    "destination": "./dist/cjs",
-    "format": "cjs"
-  },
   "@export": {
     "@implementation": "./dist/cjs",
     "hello": {

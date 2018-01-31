@@ -1,5 +1,5 @@
 {
-  "@import": "aws/website",
+  "@import": ["aws/website", "js/resource"],
   "customErrors": [
     {
       "errorCode": 404,
@@ -9,24 +9,21 @@
   ],
   "immutableFiles": ["**/*.immutable.*"],
   "dependencies": {
-    "@import": "js/npm-dependencies",
-    "@value": {
-      "color": "^2.0.1",
-      "hast-util-sanitize": "^1.1.2",
-      "highlight.js": "^9.12.0",
-      "lodash": "^4.17.4",
-      "prop-types": "^15.6.0",
-      "radium": "^0.19.6",
-      "radium-starter": "^0.9.13",
-      "react-lowlight": "^1.1.1",
-      "react-md-spinner": "^0.2.5",
-      "react-router-dom": "^4.2.2",
-      "remark": "^8.0.0",
-      "remark-react": "^4.0.1",
-      "@resdir/http-client": "^0.2.0",
-      "sleep-promise": "^2.0.0",
-      "url-search-params": "^0.10.0"
-    }
+    "color": "^2.0.1",
+    "hast-util-sanitize": "^1.1.2",
+    "highlight.js": "^9.12.0",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.6.0",
+    "radium": "^0.19.6",
+    "radium-starter": "^0.9.13",
+    "react-lowlight": "^1.1.1",
+    "react-md-spinner": "^0.2.5",
+    "react-router-dom": "^4.2.2",
+    "remark": "^8.0.0",
+    "remark-react": "^4.0.1",
+    "@resdir/http-client": "^0.2.0",
+    "sleep-promise": "^2.0.0",
+    "url-search-params": "^0.10.0"
   },
   "builder": {
     "run": {
@@ -49,7 +46,7 @@
     }
   },
   "transpiler": {
-    "@import": "1place/esnext-transpiler",
+    "@import": "js/transpiler",
     "source": "./src",
     "destination": "./dist/esm",
     "targets": {
@@ -59,10 +56,7 @@
       "edge": "14"
     },
     "format": "esm",
-    "transformJSX": true,
-    "run": {
-      "@unlisten": ["@build", "@fileModified"]
-    }
+    "transformJSX": true
   },
   "bundler": {
     "@import": "js/bundler",

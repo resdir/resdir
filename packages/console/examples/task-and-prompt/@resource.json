@@ -1,12 +1,6 @@
 {
-  "@import": "js/resource",
+  "@import": "1place/js-resource",
   "dependencies": {
-    "@import": "js/npm-dependencies",
-    "@value": {
-      "sleep-promise": "^2.0.0"
-    }
-  },
-  "transpiler": {
-    "@import": "1place/esnext-transpiler"
+    "sleep-promise": "^2.0.0"
   }
 }

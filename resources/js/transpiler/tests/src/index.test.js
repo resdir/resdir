@@ -14,7 +14,7 @@ export class Person {
 }
 `;
 
-describe('js/esnext-transpiler', () => {
+describe('js/transpiler', () => {
   let tempDirectory;
 
   beforeAll(() => {

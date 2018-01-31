@@ -1,36 +1,31 @@
 {
-  "@import": "resdir/resource",
+  "@import": [
+    "resdir/resource",
+    "1place/js-resource"
+  ],
   "id": "aws/hosted-resource",
-  "version": "0.1.18",
+  "version": "0.1.20",
   "isPublic": true,
   "files": [
     "./dist",
     "./lambda-handler/dist"
   ],
   "dependencies": {
-    "@import": "js/npm-dependencies#^0.1.26",
-    "@value": {
-      "fs-extra": "^5.0.0",
-      "hasha": "^3.0.0",
-      "koa": "^2.4.1",
-      "@koa/cors": "^2.2.1",
-      "koa-json-body": "^5.3.0",
-      "koa-json-error": "^3.1.2",
-      "lodash": "^4.17.4",
-      "@resdir/archive-manager": "^0.1.4",
-      "@resdir/aws-client": "^0.1.1",
-      "@resdir/aws-helpers": "^0.1.0",
-      "@resdir/console": "^0.1.16",
-      "@resdir/file-manager": "^0.1.4",
-      "@resdir/remote-resource-json-rpc-handler": "^0.1.0",
-      "sleep-promise": "^2.0.0",
-      "tempy": "^0.2.1"
-    }
-  },
-  "@unpublishable": {
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
-    }
+    "fs-extra": "^5.0.0",
+    "hasha": "^3.0.0",
+    "koa": "^2.4.1",
+    "@koa/cors": "^2.2.1",
+    "koa-json-body": "^5.3.0",
+    "koa-json-error": "^3.1.2",
+    "lodash": "^4.17.4",
+    "@resdir/archive-manager": "^0.1.4",
+    "@resdir/aws-client": "^0.1.1",
+    "@resdir/aws-helpers": "^0.1.0",
+    "@resdir/console": "^0.1.16",
+    "@resdir/file-manager": "^0.1.4",
+    "@resdir/remote-resource-json-rpc-handler": "^0.1.0",
+    "sleep-promise": "^2.0.0",
+    "tempy": "^0.2.1"
   },
   "@export": {
     "@implementation": "./dist",

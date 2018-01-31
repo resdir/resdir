@@ -1,9 +1,7 @@
 {
+  "@import": "js/resource",
   "dependencies": {
-    "@import": "js/npm-dependencies",
-    "@value": {
-      "sleep-promise": "^2.0.0"
-    }
+    "sleep-promise": "^2.0.0"
   },
   "bundler": {
     "@import": "..",

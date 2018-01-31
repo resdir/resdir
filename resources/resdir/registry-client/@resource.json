@@ -1,34 +1,40 @@
 {
-  "@import": "resdir/resource",
+  "@import": [
+    "resdir/resource",
+    "js/resource"
+  ],
   "id": "resdir/registry-client",
-  "version": "0.1.10",
+  "version": "0.1.13",
   "isPublic": true,
   "files": [
     "./dist"
   ],
   "dependencies": {
-    "@import": "js/npm-dependencies",
-    "@value": {
-      "debug": "^3.1.0",
-      "fs-extra": "^5.0.0",
-      "hasha": "^3.0.0",
-      "is-directory": "^0.3.1",
-      "lodash": "^4.17.4",
-      "opn": "^5.2.0",
-      "recursive-readdir": "^2.2.1",
-      "@resdir/archive-manager": "^0.1.4",
-      "@resdir/console": "^0.1.0",
-      "@resdir/expression": "^0.1.2",
-      "@resdir/file-manager": "^0.1.4",
-      "@resdir/http-client": "^0.2.8",
-      "@resdir/information": "^0.1.5",
-      "@resdir/resource-specifier": "^0.1.14",
-      "@resdir/secret-generator": "^1.0.4"
-    }
+    "debug": "^3.1.0",
+    "fs-extra": "^5.0.0",
+    "hasha": "^3.0.0",
+    "is-directory": "^0.3.1",
+    "lodash": "^4.17.4",
+    "opn": "^5.2.0",
+    "recursive-readdir": "^2.2.1",
+    "@resdir/archive-manager": "^0.1.4",
+    "@resdir/console": "^0.1.0",
+    "@resdir/expression": "^0.1.2",
+    "@resdir/file-manager": "^0.1.4",
+    "@resdir/http-client": "^0.2.8",
+    "@resdir/information": "^0.1.5",
+    "@resdir/resource-specifier": "^0.1.14",
+    "@resdir/secret-generator": "^1.0.4"
   },
   "@unpublishable": {
     "transpiler": {
-      "@import": "1place/esnext-transpiler"
+      "@import": "js/transpiler",
+      "run": {
+        "@listen": [
+          "@build",
+          "@fileModified"
+        ]
+      }
     }
   },
   "@export": {

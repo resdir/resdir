@@ -1,10 +1,13 @@
 {
   "@import": "resdir/resource",
   "id": "1place/esnext-jest",
-  "version": "0.1.16",
+  "version": "0.1.18",
   "isPublic": true,
   "@export": {
-    "@import": "1place/jest",
+    "@import": [
+      "1place/js-resource",
+      "1place/jest"
+    ],
     "roots": {
       "@default": [
         "./dist"
@@ -12,9 +15,6 @@
     },
     "testEnvironment": {
       "@default": "node"
-    },
-    "transpiler": {
-      "@import": "1place/esnext-transpiler"
     }
   }
 }
