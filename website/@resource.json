@@ -7,7 +7,6 @@
       "responsePage": "index.html"
     }
   ],
-  "immutableFiles": ["**/*.immutable.*"],
   "dependencies": {
     "color": "^2.0.1",
     "hast-util-sanitize": "^1.1.2",

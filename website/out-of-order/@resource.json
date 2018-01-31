@@ -1,5 +1,4 @@
 {
   "@import": "aws/website",
-  "contentDirectory": "./content",
-  "immutableFiles": ["**/*.immutable.*"]
+  "contentDirectory": "./content"
 }

@@ -6,6 +6,5 @@
       "errorCode": 404,
       "responsePage": "404.html"
     }
-  ],
-  "immutableFiles": ["**/*.immutable.*"]
+  ]
 }

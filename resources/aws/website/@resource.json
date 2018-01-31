@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "aws/website",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "isPublic": true,
   "files": [
     "./dist"
@@ -38,7 +38,9 @@
       "@type": "array"
     },
     "immutableFiles": {
-      "@type": "array"
+      "@default": [
+        "**/*.immutable.*"
+      ]
     },
     "aws": {
       "accessKeyId": {
