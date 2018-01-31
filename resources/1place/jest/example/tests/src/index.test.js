@@ -1,4 +1,4 @@
-const Person = require('..');
+import Person from '../..';
 
 describe('Person', () => {
   test('formatGreeting()', () => {

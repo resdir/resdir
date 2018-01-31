@@ -8,7 +8,7 @@
   },
   "@unpublishable": {
     "tests": {
-      "@import": "1place/esnext-jest",
+      "@import": "1place/jest",
       "@directory": "./tests",
       "dependencies": {
         "lodash": "^4.17.4"

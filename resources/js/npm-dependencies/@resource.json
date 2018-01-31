@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.47",
+  "version": "0.1.48",
   "isPublic": true,
   "files": [
     "./dist/bundle.js"
@@ -42,7 +42,7 @@
       "minify": true
     },
     "tests": {
-      "@import": "1place/esnext-jest",
+      "@import": "1place/jest",
       "@directory": "./tests",
       "dependencies": {
         "fs-extra": "^5.0.0",

@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.39",
+  "version": "0.1.40",
   "isPublic": true,
   "files": [
     "./dist"
@@ -19,7 +19,7 @@
   },
   "@unpublishable": {
     "tests": {
-      "@import": "1place/esnext-jest",
+      "@import": "1place/jest",
       "@directory": "./tests",
       "dependencies": {
         "fs-extra": "^5.0.0",
