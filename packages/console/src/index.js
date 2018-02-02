@@ -10,6 +10,7 @@ import read from 'read';
 import wrapANSI from 'wrap-ansi';
 import stringWidth from 'string-width';
 import indentString from 'indent-string';
+import {isClientError} from '@resdir/error';
 
 if (global.resdirConsoleSessionsCount === undefined) {
   global.resdirConsoleSessionsCount = 0;
@@ -90,6 +91,13 @@ export function printText(text, options, environment) {
 }
 
 export function printError(error, environment) {
+  const debug = (environment && environment['@debug']) || process.env.DEBUG;
+
+  if (isClientError(error) && !debug) {
+    _print({message: error.message, output: 'error'}, environment);
+    return;
+  }
+
   let stdErr = error.capturedStandardError;
   if (stdErr) {
     stdErr = stdErr.trim();
@@ -98,26 +106,28 @@ export function printError(error, environment) {
     }
   }
 
-  if ((environment && environment['@debug']) || process.env.DEBUG) {
-    _print({message: error, output: 'error'}, environment);
-    return;
-  }
+  _print({message: error, output: 'error'}, environment);
 
-  if (error.hidden) {
-    return;
-  }
-
-  _print({message: error.message, output: 'error'}, environment);
-
-  if (error.contextStack) {
-    for (const context of error.contextStack) {
-      let identifier = dim((context.constructor && context.constructor.name) || 'Object');
-      if (context.toIdentifier) {
-        identifier += dim(': ') + formatString(context.toIdentifier());
-      }
-      _print({message: '  ' + identifier, output: 'error'}, environment);
-    }
-  }
+  // if (debug) {
+  //   _print({message: error, output: 'error'}, environment);
+  //   return;
+  // }
+  //
+  // if (error.hidden) {
+  //   return;
+  // }
+  //
+  // _print({message: error.message, output: 'error'}, environment);
+  //
+  // if (error.contextStack) {
+  //   for (const context of error.contextStack) {
+  //     let identifier = dim((context.constructor && context.constructor.name) || 'Object');
+  //     if (context.toIdentifier) {
+  //       identifier += dim(': ') + formatString(context.toIdentifier());
+  //     }
+  //     _print({message: '  ' + identifier, output: 'error'}, environment);
+  //   }
+  // }
 }
 
 export function printErrorAndExit(error, {code = 1} = {}, environment) {
