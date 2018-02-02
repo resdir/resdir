@@ -5,7 +5,7 @@
   ],
   "@implementation": "./dist/cjs",
   "id": "resdir/example",
-  "version": "0.3.49",
+  "version": "0.3.50",
   "isPublic": true,
   "files": [
     "./dist"

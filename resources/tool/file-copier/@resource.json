@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "tool/file-copier",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "isPublic": true,
   "files": [
     "./dist"

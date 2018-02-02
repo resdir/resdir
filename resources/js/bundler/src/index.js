@@ -47,172 +47,165 @@ const NODE_BUILT_IN_MODULES = [
   'crypto'
 ];
 
-export default base =>
-  class JSBundler extends base {
-    async run(_input, environment) {
-      if (!this.entry) {
-        throw new Error(`${formatCode('entry')} attribute is missing`);
-      }
+export default () => ({
+  async run(_input, environment) {
+    if (!this.entry) {
+      throw new Error(`${formatCode('entry')} attribute is missing`);
+    }
 
-      if (!this.output) {
-        throw new Error(`${formatCode('output')} attribute is missing`);
-      }
+    if (!this.output) {
+      throw new Error(`${formatCode('output')} attribute is missing`);
+    }
 
-      await task(
-        async progress => {
-          const startingTime = Date.now();
-          const directory = this.$getCurrentDirectory();
+    await task(
+      async progress => {
+        const startingTime = Date.now();
+        const directory = this.$getCurrentDirectory();
 
-          try {
-            if (this.reinstallDependencies) {
-              await this._startReinstallDependencies(environment);
-            }
+        try {
+          if (this.reinstallDependencies) {
+            await this._startReinstallDependencies(environment);
+          }
 
-            const entryFile = resolve(directory, this.entry);
+          const entryFile = resolve(directory, this.entry);
 
-            const output = this.output.replace('${format}', this.format); // eslint-disable-line no-template-curly-in-string
-            const outputFile = resolve(directory, output);
+          const output = this.output.replace('${format}', this.format); // eslint-disable-line no-template-curly-in-string
+          const outputFile = resolve(directory, output);
 
-            const browser = !(this.target === 'node' || this.target === 'aws-lambda');
+          const browser = !(this.target === 'node' || this.target === 'aws-lambda');
 
-            const plugins = [
-              nodeResolve({browser, preferBuiltins: !browser}),
-              commonjs({ignore: ['spawn-sync']}),
-              json()
-            ];
+          const plugins = [
+            nodeResolve({browser, preferBuiltins: !browser}),
+            commonjs({ignore: ['spawn-sync']}),
+            json()
+          ];
 
-            if (browser) {
-              plugins.push(globals());
-              plugins.push(builtins());
-            }
+          if (browser) {
+            plugins.push(globals());
+            plugins.push(builtins());
+          }
 
-            if (this.replacements) {
-              plugins.unshift(replace({values: {...this.replacements}, delimiters: ['', '']}));
-            }
+          if (this.replacements) {
+            plugins.unshift(replace({values: {...this.replacements}, delimiters: ['', '']}));
+          }
 
-            if (this.minify) {
-              plugins.push(uglify({keep_fnames: true}, minify)); // eslint-disable-line camelcase
-            }
+          if (this.minify) {
+            plugins.push(uglify({keep_fnames: true}, minify)); // eslint-disable-line camelcase
+          }
 
-            const external = this.external || [];
+          const external = this.external || [];
 
-            if (this.globals) {
-              external.push(...Object.keys(this.globals));
-            }
+          if (this.globals) {
+            external.push(...Object.keys(this.globals));
+          }
 
-            if (this.target === 'aws-lambda') {
-              external.push(id => id === 'aws-sdk' || id.startsWith('aws-sdk/'));
-            }
+          if (this.target === 'aws-lambda') {
+            external.push(id => id === 'aws-sdk' || id.startsWith('aws-sdk/'));
+          }
 
-            const actualExternal = id => {
-              for (const ext of external) {
-                if (typeof ext === 'function') {
-                  const result = ext(id);
-                  if (result) {
-                    return true;
-                  }
-                } else if (id === ext) {
+          const actualExternal = id => {
+            for (const ext of external) {
+              if (typeof ext === 'function') {
+                const result = ext(id);
+                if (result) {
                   return true;
                 }
+              } else if (id === ext) {
+                return true;
               }
-            };
+            }
+          };
 
-            const rollupConfig = {
-              input: entryFile,
-              plugins,
-              external: actualExternal,
-              onwarn(warning) {
-                if (warning.code === 'THIS_IS_UNDEFINED') {
-                  return;
-                }
-                if (warning.code === 'UNRESOLVED_IMPORT') {
-                  if (!browser && NODE_BUILT_IN_MODULES.includes(warning.source)) {
-                    return; // Ignore Node built-in modules
-                  }
-                }
-                if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
-                  return;
-                }
-                if (process.env.DEBUG || environment['@debug']) {
-                  console.dir(warning, {depth: null, colors: true});
-                } else {
-                  print(warning.toString());
+          const rollupConfig = {
+            input: entryFile,
+            plugins,
+            external: actualExternal,
+            onwarn(warning) {
+              if (warning.code === 'THIS_IS_UNDEFINED') {
+                return;
+              }
+              if (warning.code === 'UNRESOLVED_IMPORT') {
+                if (!browser && NODE_BUILT_IN_MODULES.includes(warning.source)) {
+                  return; // Ignore Node built-in modules
                 }
               }
-            };
-
-            const bundle = await rollup(rollupConfig);
-
-            let format = this.format;
-            if (format === 'esm') {
-              format = 'es';
+              if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
+                return;
+              }
+              if (process.env.DEBUG || environment['@debug']) {
+                console.dir(warning, {depth: null, colors: true});
+              } else {
+                print(warning.toString());
+              }
             }
-            const result = await bundle.generate({format, name: this.name, globals: this.globals});
+          };
 
-            const isDifferent = !await isFileEqual(outputFile, result.code);
-            if (isDifferent) {
-              await writeFile(outputFile, result.code);
-            }
+          const bundle = await rollup(rollupConfig);
 
-            const elapsedTime = Date.now() - startingTime;
-
-            const message = isDifferent ? 'Bundle generated' : 'Bundle unmodified';
-            const size = Buffer.byteLength(result.code, 'utf8');
-            const info = `(${bytes(size)}, ${elapsedTime}ms)`;
-            progress.setOutro(`${message} ${formatDim(info)}`);
-          } finally {
-            if (this.reinstallDependencies) {
-              await this._completeReinstallDependencies(environment);
-            }
+          let format = this.format;
+          if (format === 'esm') {
+            format = 'es';
           }
-        },
-        {
-          intro: 'Generating bundle...',
-          outro: 'Bundle generated'
-        },
-        environment
-      );
+          const result = await bundle.generate({format, name: this.name, globals: this.globals});
+
+          const isDifferent = !await isFileEqual(outputFile, result.code);
+          if (isDifferent) {
+            await writeFile(outputFile, result.code);
+          }
+
+          const elapsedTime = Date.now() - startingTime;
+
+          const message = isDifferent ? 'Bundle generated' : 'Bundle unmodified';
+          const size = Buffer.byteLength(result.code, 'utf8');
+          const info = `(${bytes(size)}, ${elapsedTime}ms)`;
+          progress.setOutro(`${message} ${formatDim(info)}`);
+        } finally {
+          if (this.reinstallDependencies) {
+            await this._completeReinstallDependencies(environment);
+          }
+        }
+      },
+      {
+        intro: 'Generating bundle...',
+        outro: 'Bundle generated'
+      },
+      environment
+    );
+  },
+
+  async _startReinstallDependencies(environment) {
+    const directory = this.$getCurrentDirectory();
+
+    const dependencies = this.$getRoot().$getChild('dependencies');
+    if (!dependencies) {
+      return;
     }
 
-    async _startReinstallDependencies(environment) {
-      const directory = this.$getCurrentDirectory();
+    await ensureDir(join(directory, 'node_modules'));
 
-      const dependencies = this.$getRoot().$getChild('dependencies');
-      if (!dependencies) {
-        return;
-      }
+    await rename(join(directory, 'node_modules'), join(directory, 'node_modules.original'));
 
-      await ensureDir(join(directory, 'node_modules'));
-
-      await rename(join(directory, 'node_modules'), join(directory, 'node_modules.original'));
-
-      if (await pathExists(join(directory, 'node_modules.clean-install'))) {
-        await rename(
-          join(directory, 'node_modules.clean-install'),
-          join(directory, 'node_modules')
-        );
-      }
-
-      await dependencies.update({}, environment);
+    if (await pathExists(join(directory, 'node_modules.clean-install'))) {
+      await rename(join(directory, 'node_modules.clean-install'), join(directory, 'node_modules'));
     }
 
-    async _completeReinstallDependencies(_environment) {
-      const directory = this.$getCurrentDirectory();
+    await dependencies.update({}, environment);
+  },
 
-      if (!await pathExists(join(directory, 'node_modules.original'))) {
-        return;
-      }
+  async _completeReinstallDependencies(_environment) {
+    const directory = this.$getCurrentDirectory();
 
-      if (await pathExists(join(directory, 'node_modules'))) {
-        await rename(
-          join(directory, 'node_modules'),
-          join(directory, 'node_modules.clean-install')
-        );
-      }
-
-      await rename(join(directory, 'node_modules.original'), join(directory, 'node_modules'));
+    if (!await pathExists(join(directory, 'node_modules.original'))) {
+      return;
     }
-  };
+
+    if (await pathExists(join(directory, 'node_modules'))) {
+      await rename(join(directory, 'node_modules'), join(directory, 'node_modules.clean-install'));
+    }
+
+    await rename(join(directory, 'node_modules.original'), join(directory, 'node_modules'));
+  }
+});
 
 async function isFileEqual(file, content) {
   if (!await pathExists(file)) {

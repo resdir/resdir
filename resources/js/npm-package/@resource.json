@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.41",
+  "version": "0.1.42",
   "isPublic": true,
   "files": [
     "./dist"

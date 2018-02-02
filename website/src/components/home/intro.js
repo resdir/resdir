@@ -53,12 +53,11 @@ Once the backend has been imported with \`Resource.$import()\`, the \`hello()\` 
 And here is the implementation of the backend which is pretty straightforward:
 
 \`\`\`
-export default base =>
-  class Backend extends base {
-    async hello() {
-      return 'Hello, @resources!';
-    }
-  };
+export default () => ({
+  async hello() {
+    return 'Hello, @resources!';
+  }
+});
 \`\`\`
 
 Finally, we can use \`run\` (the @resource runtime) to interact with the @resource. Deploying our website to AWS is as simple as:

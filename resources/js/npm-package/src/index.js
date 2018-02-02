@@ -9,130 +9,129 @@ const PACKAGE_CODE = `// Package implementation
 
 const GIT_IGNORE = ['.DS_STORE', 'node_modules', '*.log', '/package.json'];
 
-export default base =>
-  class Package extends base {
-    async updatePackageFile(_args, environment) {
-      await task(
-        async () => {
-          this._updatePackageFile();
-          const quietEnvironment = await environment.$extend({'@quiet': true});
-          await this.$getChild('dependencies').updatePackageFile(undefined, quietEnvironment);
-        },
-        {intro: `Updating package file...`, outro: `Package file updated`},
-        environment
-      );
+export default () => ({
+  async updatePackageFile(_args, environment) {
+    await task(
+      async () => {
+        this._updatePackageFile();
+        const quietEnvironment = await environment.$extend({'@quiet': true});
+        await this.$getChild('dependencies').updatePackageFile(undefined, quietEnvironment);
+      },
+      {intro: `Updating package file...`, outro: `Package file updated`},
+      environment
+    );
+  },
+
+  _updatePackageFile() {
+    const directory = this.$getCurrentDirectory();
+
+    let files = this.files;
+    if (files) {
+      files = files.map(file => (file.startsWith('./') ? file.slice(2) : file));
     }
 
-    _updatePackageFile() {
-      const directory = this.$getCurrentDirectory();
-
-      let files = this.files;
-      if (files) {
-        files = files.map(file => (file.startsWith('./') ? file.slice(2) : file));
-      }
-
-      let main = this.main;
-      if (main && main.startsWith('./')) {
-        main = main.slice(2);
-      }
-
-      let module = this.module;
-      if (module && module.startsWith('./')) {
-        module = module.slice(2);
-      }
-
-      updatePackageFile(directory, {
-        name: this.name,
-        version: this.version,
-        description: this.description,
-        author: this.author,
-        contributors: this.contributors,
-        license: this.license,
-        repository: this.repository,
-        files,
-        main,
-        module,
-        bin: this.bin,
-        preferGlobal: this.preferGlobal
-      });
+    let main = this.main;
+    if (main && main.startsWith('./')) {
+      main = main.slice(2);
     }
 
-    async publish({major, minor, patch, access}, environment) {
-      await this['@build']();
-      await this['@test']();
-
-      if (major || minor || patch) {
-        await this.$getChild('version').bump({major, minor, patch});
-      }
-
-      await task(
-        async () => {
-          await this._publish({access}, environment);
-        },
-        {
-          intro: `Publishing package...`,
-          outro: `Package published`
-        },
-        environment
-      );
+    let module = this.module;
+    if (module && module.startsWith('./')) {
+      module = module.slice(2);
     }
 
-    async _publish({access}, environment) {
-      if (!this.name) {
-        throw new Error(`${formatCode('name')} property is missing`);
-      }
-      if (!this.version) {
-        throw new Error(`${formatCode('version')} property is missing`);
-      }
-      if (!this.description) {
-        throw new Error(`${formatCode('description')} property is missing`);
-      }
+    updatePackageFile(directory, {
+      name: this.name,
+      version: this.version,
+      description: this.description,
+      author: this.author,
+      contributors: this.contributors,
+      license: this.license,
+      repository: this.repository,
+      files,
+      main,
+      module,
+      bin: this.bin,
+      preferGlobal: this.preferGlobal
+    });
+  },
 
-      const pkg = await fetchNPMRegistry(this.name, {throwIfNotFound: false});
-      if (pkg && this.version in pkg.versions) {
-        throw new Error(`Can't publish over the previously published version ${formatString(this.version)}. Before publishing, use ${formatCode('version bump')} to increment the version number.`);
-      }
+  async publish({major, minor, patch, access}, environment) {
+    await this['@build']();
+    await this['@test']();
 
-      const directory = this.$getCurrentDirectory();
-      await publishPackage(directory, {access}, environment);
+    if (major || minor || patch) {
+      await this.$getChild('version').bump({major, minor, patch});
     }
 
-    async initialize({name, version, gitignore}) {
-      while (!name) {
-        name = await prompt('Package name:');
-      }
+    await task(
+      async () => {
+        await this._publish({access}, environment);
+      },
+      {
+        intro: `Publishing package...`,
+        outro: `Package published`
+      },
+      environment
+    );
+  },
 
-      while (!version) {
-        version = await prompt('Version number:', {default: '0.1.0'});
-      }
-
-      const directory = this.$getCurrentDirectory();
-
-      const mainPropertyIsMissing = !this.main;
-      const codeFile = join(directory, 'src', 'index.js');
-      const codeFileIsMissing = !pathExistsSync(codeFile);
-      const filesPropertyIsMissing = !this.files;
-
-      this.name = name;
-      this.version = version;
-
-      if (gitignore) {
-        GitIgnore.load(directory)
-          .add(GIT_IGNORE)
-          .save();
-      }
-
-      if (mainPropertyIsMissing) {
-        this.main = './src/index.js';
-        if (codeFileIsMissing) {
-          outputFileSync(codeFile, PACKAGE_CODE);
-        }
-      }
-
-      if (filesPropertyIsMissing) {
-        this.files = ['./src'];
-      }
-
-      await this.$save();
+  async _publish({access}, environment) {
+    if (!this.name) {
+      throw new Error(`${formatCode('name')} property is missing`);
     }
-  };
+    if (!this.version) {
+      throw new Error(`${formatCode('version')} property is missing`);
+    }
+    if (!this.description) {
+      throw new Error(`${formatCode('description')} property is missing`);
+    }
+
+    const pkg = await fetchNPMRegistry(this.name, {throwIfNotFound: false});
+    if (pkg && this.version in pkg.versions) {
+      throw new Error(`Can't publish over the previously published version ${formatString(this.version)}. Before publishing, use ${formatCode('version bump')} to increment the version number.`);
+    }
+
+    const directory = this.$getCurrentDirectory();
+    await publishPackage(directory, {access}, environment);
+  },
+
+  async initialize({name, version, gitignore}) {
+    while (!name) {
+      name = await prompt('Package name:');
+    }
+
+    while (!version) {
+      version = await prompt('Version number:', {default: '0.1.0'});
+    }
+
+    const directory = this.$getCurrentDirectory();
+
+    const mainPropertyIsMissing = !this.main;
+    const codeFile = join(directory, 'src', 'index.js');
+    const codeFileIsMissing = !pathExistsSync(codeFile);
+    const filesPropertyIsMissing = !this.files;
+
+    this.name = name;
+    this.version = version;
+
+    if (gitignore) {
+      GitIgnore.load(directory)
+        .add(GIT_IGNORE)
+        .save();
+    }
+
+    if (mainPropertyIsMissing) {
+      this.main = './src/index.js';
+      if (codeFileIsMissing) {
+        outputFileSync(codeFile, PACKAGE_CODE);
+      }
+    }
+
+    if (filesPropertyIsMissing) {
+      this.files = ['./src'];
+    }
+
+    await this.$save();
+  }
+});

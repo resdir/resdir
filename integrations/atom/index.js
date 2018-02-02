@@ -8,7 +8,7 @@ import {execFile} from 'child_process';
 import {CompositeDisposable} from 'atom';
 // import {Resource} from 'run-core';
 
-const STAGE = 'test'; // 'dev', 'test', or 'prod'
+const STAGE = 'dev'; // 'dev', 'test', or 'prod'
 
 export default {
   activate() {

@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.49",
+  "version": "0.1.50",
   "isPublic": true,
   "files": [
     "./dist/bundle.js"
@@ -25,6 +25,15 @@
           "@parent bundler run"
         ],
         "@listen": "@build"
+      },
+      "fileWatcher": {
+        "@import": "tool/file-watcher",
+        "files": [
+          "./src/**"
+        ],
+        "onFileModified": {
+          "@run": "@parent run"
+        }
       }
     },
     "transpiler": {

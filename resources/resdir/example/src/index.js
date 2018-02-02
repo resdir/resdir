@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 import {print} from '@resdir/console';
 
-export default {
+export default () => ({
   hello({color}, environment) {
     let message = `Hello, World!`;
     if (environment['@verbose']) {
@@ -10,4 +10,4 @@ export default {
     message = chalk[color](message);
     print(message, environment);
   }
-};
+});

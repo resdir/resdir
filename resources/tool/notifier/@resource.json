@@ -5,7 +5,7 @@
     "./"
   ],
   "id": "tool/notifier",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "isPublic": true,
   "files": [
     "./dist"

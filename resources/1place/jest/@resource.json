@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "1place/jest",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "isPublic": true,
   "files": [
     "./dist"

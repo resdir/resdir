@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "tool/file-watcher",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "isPublic": true,
   "files": [
     "./dist"
