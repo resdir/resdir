@@ -1,6 +1,6 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/json-rpc",
-  "version": "0.1.4",
+  "version": "0.1.6",
   "description": "Build and validate JSON-RPC 2.0 requests and responses"
 }

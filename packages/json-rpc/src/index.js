@@ -22,7 +22,7 @@ export function buildJSONRPCError(id = null, err) {
   };
 
   for (const key of Object.keys(err)) {
-    if (!(key === 'jsonRPCErrorCode' || key === 'message' || key === 'expose')) {
+    if (!(key === 'jsonRPCErrorCode' || key === 'message')) {
       error.data[key] = err[key];
     }
   }
