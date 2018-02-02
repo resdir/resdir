@@ -22,8 +22,7 @@ const COMMAND_EXAMPLES = [
   'run @add web/builder',
   'run @add web/server',
   'run @add method completeTask',
-  'run @registry organization create',
-  'run @registry community create'
+  'run @registry organization create'
 ];
 
 @withRadiumStarter

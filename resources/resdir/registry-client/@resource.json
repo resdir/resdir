@@ -48,7 +48,8 @@
       "@isHidden": true
     },
     "ping": {
-      "@type": "method"
+      "@type": "method",
+      "@isHidden": true
     },
     "signUp": {
       "@type": "method",
@@ -85,8 +86,9 @@
     "signOut": {
       "@type": "method"
     },
-    "user": {
-      "@implementation": "./dist/cjs/user",
+    "currentUser": {
+      "@aliases": ["me"],
+      "@implementation": "./dist/cjs/current-user",
       "show": {
         "@type": "method"
       },
@@ -99,7 +101,7 @@
           "orgs",
           "org"
         ],
-        "@implementation": "./dist/cjs/user-organizations",
+        "@implementation": "./dist/cjs/current-user-organizations",
         "list": {
           "@type": "method",
           "@aliases": [
@@ -111,7 +113,7 @@
         "@aliases": [
           "ns"
         ],
-        "@implementation": "./dist/cjs/user-namespace",
+        "@implementation": "./dist/cjs/current-user-namespace",
         "create": {
           "@type": "method",
           "@input": {
@@ -138,7 +140,7 @@
           "github",
           "gh"
         ],
-        "@implementation": "./dist/cjs/user-github-account",
+        "@implementation": "./dist/cjs/current-user-github-account",
         "connect": {
           "@type": "method",
           "@input": {
@@ -233,42 +235,6 @@
               "user"
             ],
             "@position": 1,
-            "@isOptional": true
-          }
-        }
-      }
-    },
-    "communities": {
-      "@aliases": [
-        "community"
-      ],
-      "@implementation": "./dist/cjs/communities",
-      "create": {
-        "@type": "method",
-        "@input": {
-          "namespace": {
-            "@type": "string",
-            "@aliases": [
-              "ns"
-            ],
-            "@position": 0,
-            "@isOptional": true
-          },
-          "permissionToken": {
-            "@type": "string",
-            "@isOptional": true
-          }
-        }
-      },
-      "delete": {
-        "@type": "method",
-        "@input": {
-          "namespace": {
-            "@type": "string",
-            "@aliases": [
-              "ns"
-            ],
-            "@position": 0,
             "@isOptional": true
           }
         }

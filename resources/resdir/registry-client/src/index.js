@@ -145,7 +145,7 @@ export default Resource => {
       {namespace, type, permissionToken, parentAction, throwIfUnavailable = true},
       environment
     ) {
-      if (!(type === 'USER' || type === 'ORGANIZATION' || type === 'COMMUNITY')) {
+      if (!(type === 'USER' || type === 'ORGANIZATION')) {
         throw new Error('Invalid \'type\'');
       }
 
@@ -197,8 +197,6 @@ export default Resource => {
         contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think your ${SERVICE_NAME} account should have the namespace ${formattedNamespace}, please contact ${SERVICE_NAME} at ${formatURL(SUPPORT_EMAIL_ADDRESS)}.`;
       } else if (type === 'ORGANIZATION') {
         contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think your ${SERVICE_NAME} organization should have the namespace ${formattedNamespace}, please contact ${SERVICE_NAME} at ${formatURL(SUPPORT_EMAIL_ADDRESS)}.`;
-      } else if (type === 'COMMUNITY') {
-        contactSupport = `Namespaces are precious resources, and ${SERVICE_NAME} wants to build a quality directory of organizations and communities. If you think you should have the namespace ${formattedNamespace} for your community, please contact ${SERVICE_NAME} at ${formatURL(SUPPORT_EMAIL_ADDRESS)}.`;
       }
 
       if (reason === 'GENERIC') {
