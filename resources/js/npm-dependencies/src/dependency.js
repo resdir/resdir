@@ -3,6 +3,7 @@ import {isEqual, isPlainObject} from 'lodash';
 import {formatString, formatPath, formatCode} from '@resdir/console';
 import {VersionRange} from '@resdir/version-range';
 import {load} from '@resdir/file-manager';
+import parseGitHubURL from 'github-url-to-object';
 
 import {fetchNPMRegistry} from '@resdir/package-manager';
 
@@ -130,11 +131,14 @@ export class Dependency {
 
   async fetchLatestVersion() {
     const pkg = await fetchNPMRegistry(this.name);
+    const name = pkg.name;
     const latestVersion = pkg['dist-tags'] && pkg['dist-tags'].latest;
     if (!latestVersion) {
       throw new Error(`Latest version not found for npm package ${formatString(this.name)}`);
     }
-    return latestVersion;
+    const parsedGitHubURL = parseGitHubURL(pkg.repository);
+    const gitHubURL = parsedGitHubURL && parsedGitHubURL.https_url;
+    return {name, latestVersion, gitHubURL};
   }
 }
 

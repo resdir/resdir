@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.50",
+  "version": "0.1.51",
   "isPublic": true,
   "files": [
     "./dist/bundle.js"
@@ -10,11 +10,13 @@
     "dependencies": {
       "@import": "js/npm-dependencies",
       "@value": {
+        "github-url-to-object": "^4.0.2",
+        "lodash": "^4.17.4",
         "@resdir/console": "^0.1.0",
+        "@resdir/error": "^0.1.0",
         "@resdir/file-manager": "^0.1.0",
         "@resdir/package-manager": "^0.1.0",
-        "@resdir/version-range": "^0.1.0",
-        "lodash": "^4.17.4"
+        "@resdir/version-range": "^0.1.0"
       }
     },
     "builder": {
@@ -148,7 +150,19 @@
     },
     "update": {
       "@type": "method",
-      "@description": "Update dependencies to their last semantically compatible version"
+      "@description": "Update dependencies to their latest semantically compatible version"
+    },
+    "upgrade": {
+      "@type": "method",
+      "@description": "Upgrade dependencies to their latest version (disregarding semver)",
+      "@input": {
+        "names": {
+          "@type": "array",
+          "@position": 0,
+          "@isOptional": true,
+          "@isVariadic": true
+        }
+      }
     },
     "count": {
       "@type": "method",

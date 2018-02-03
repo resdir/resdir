@@ -1,10 +1,23 @@
 import {isEmpty, remove, sortBy, lowerCase, toPairs, fromPairs} from 'lodash';
-import {print, task, formatString} from '@resdir/console';
+import {
+  print,
+  printText,
+  task,
+  confirm,
+  formatString,
+  formatBold,
+  formatPunctuation,
+  formatURL,
+  formatDanger,
+  emptyLine
+} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 import {
   updatePackageFile,
   removePackageFile,
   installPackage,
-  updateDependencies
+  updateDependencies,
+  getCurrentDependencyVersion
 } from '@resdir/package-manager';
 
 import Dependency from './dependency';
@@ -68,7 +81,7 @@ export default () => ({
 
   async _addDependency(dependency) {
     if (!(dependency.version || dependency.location)) {
-      const latestVersion = await dependency.fetchLatestVersion();
+      const {latestVersion} = await dependency.fetchLatestVersion();
       dependency.version = '^' + latestVersion;
     }
 
@@ -84,7 +97,7 @@ export default () => ({
     const removed = remove(dependencies, dep => dep.name === name);
     if (removed.length === 0) {
       if (throwIfNotFound) {
-        throw new Error(`Dependency not found: ${formatString(name)}`);
+        throw createClientError(`Dependency not found: ${formatString(name)}`);
       }
       return;
     }
@@ -117,11 +130,96 @@ export default () => ({
     );
   },
 
+  async upgrade({names}, environment) {
+    if (names) {
+      for (const name of names) {
+        if (!await this.includes({name}, environment)) {
+          throw createClientError(`No such dependency: ${formatString(name)}`);
+        }
+      }
+    }
+
+    const directory = this.$getParent().$getCurrentDirectory();
+
+    const outdatedDependencies = [];
+
+    await task(
+      async progress => {
+        await this.forEach(async dependency => {
+          const {name, type} = dependency;
+          if (names && !names.includes(name)) {
+            return;
+          }
+          if (dependency.location) {
+            return;
+          }
+          const {latestVersion, gitHubURL} = await dependency.fetchLatestVersion();
+          if (!dependency.version.includes(latestVersion)) {
+            const currentVersion = await getCurrentDependencyVersion(directory, name, {
+              throwIfNotFound: false
+            });
+            outdatedDependencies.push({name, currentVersion, latestVersion, gitHubURL, type});
+          }
+        });
+
+        if (!outdatedDependencies.length) {
+          progress.setOutro('No upgrade is necessary');
+        }
+      },
+      {
+        intro: `Checking dependencies...`,
+        outro: `Dependencies checked`
+      },
+      environment
+    );
+
+    if (!outdatedDependencies.length) {
+      return;
+    }
+
+    emptyLine();
+    print('The following upgrades are available:');
+    emptyLine();
+    for (const {name, currentVersion, latestVersion, gitHubURL} of outdatedDependencies) {
+      let line = `- ${formatString(name, {addQuotes: false})}${formatPunctuation(':')} ${currentVersion} ${formatPunctuation('=>')} ${formatBold(latestVersion)}`;
+      if (gitHubURL) {
+        line += ` ${formatPunctuation('(')}${formatURL(gitHubURL)}${formatPunctuation(')')}`;
+      }
+      print(line);
+    }
+
+    emptyLine();
+    printText(`Some of these upgrades may contain ${formatDanger('breaking changes')}, you should check the changelogs before upgrading.`);
+    emptyLine();
+    const ready = await confirm(`Ready to upgrade?`, {default: true});
+    emptyLine();
+    if (!ready) {
+      throw createClientError('Upgrade aborted');
+    }
+
+    for (const {name, latestVersion, type} of outdatedDependencies) {
+      const specifier = `${name}@^${latestVersion}`;
+      const dependency = new Dependency(specifier, {type});
+      await task(
+        async () => {
+          await this._addDependency(dependency);
+          await this._installDependencies(undefined, environment);
+          await this.$getRoot().$save();
+        },
+        {
+          intro: `Upgrading ${formatString(dependency.name)} dependency...`,
+          outro: `Dependency ${formatString(dependency.name)} upgraded`
+        },
+        environment
+      );
+    }
+  },
+
   async _installDependencies({updateMode} = {}, environment) {
     const packageDirectory = this.$getParent().$getCurrentDirectory();
     let packageFileCreated;
     try {
-      const {status} = this._updatePackageFile(packageDirectory);
+      const {status} = await this._updatePackageFile(packageDirectory);
       packageFileCreated = status === 'CREATED';
       if (updateMode) {
         await updateDependencies(packageDirectory, undefined, environment);
@@ -139,14 +237,14 @@ export default () => ({
     return this._getDependencies().length;
   },
 
-  async includes({name}) {
+  async includes({name}, _environment) {
     const found = this._getDependencies().find(dependency => dependency.name === name);
     return Boolean(found);
   },
 
   async list() {
     const dependencies = [];
-    this.forEach(dependency => dependencies.push(dependency.toString()));
+    await this.forEach(dependency => dependencies.push(dependency.toString()));
     if (dependencies.length > 0) {
       print('Dependencies:');
       for (const dependency of dependencies) {
@@ -157,25 +255,28 @@ export default () => ({
     }
   },
 
-  forEach(fn) {
-    this._getDependencies().forEach(fn);
+  async forEach(fn) {
+    const dependencies = this._getDependencies();
+    for (const dependency of dependencies) {
+      await fn(dependency);
+    }
   },
 
   async updatePackageFile(_args, environment) {
     await task(
       async () => {
         const directory = this.$getParent().$getCurrentDirectory();
-        this._updatePackageFile(directory);
+        await this._updatePackageFile(directory);
       },
       {intro: `Updating package file...`, outro: `Package file updated`},
       environment
     );
   },
 
-  _updatePackageFile(directory) {
-    const getDependencies = type => {
+  async _updatePackageFile(directory) {
+    const getDependencies = async type => {
       const dependencies = {};
-      this.forEach(dependency => {
+      await this.forEach(dependency => {
         if (dependency.type === type) {
           dependencies[dependency.name] = dependency.version || dependency.location || '*';
         }
@@ -186,10 +287,10 @@ export default () => ({
     };
 
     return updatePackageFile(directory, {
-      dependencies: getDependencies('production'),
-      peerDependencies: getDependencies('peer'),
-      optionalDependencies: getDependencies('optional'),
-      devDependencies: getDependencies('development')
+      dependencies: await getDependencies('production'),
+      peerDependencies: await getDependencies('peer'),
+      optionalDependencies: await getDependencies('optional'),
+      devDependencies: await getDependencies('development')
     });
   },
 
