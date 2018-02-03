@@ -100,8 +100,7 @@ export class App extends React.Component {
 @withRadiumStarter
 class Main extends React.Component {
   static propTypes = {
-    theme: PropTypes.object.isRequired,
-    children: PropTypes.node.isRequired
+    theme: PropTypes.object.isRequired
   };
 
   render() {

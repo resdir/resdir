@@ -1,14 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Sorry from './sorry';
 
 export function withErrorBoundary(WrappedComponent) {
   return class ErrorBoundary extends React.Component {
-    static propTypes = {
-      children: PropTypes.node.isRequired
-    };
-
     state = {
       caughtError: undefined
     };
