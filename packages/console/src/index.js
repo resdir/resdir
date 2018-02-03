@@ -375,7 +375,7 @@ export function formatExample(example) {
   return dim('(e.g., "' + String(example) + '")');
 }
 
-export function formatText(text, {width, margins = {}, indentation} = {}) {
+export function formatText(text, {width = 80, margins = {}, indentation} = {}) {
   let result = text;
 
   let leftMargin = margins.left || 0;
@@ -383,7 +383,7 @@ export function formatText(text, {width, margins = {}, indentation} = {}) {
     leftMargin += indentation;
   }
 
-  if (width !== undefined) {
+  if (width) {
     if (leftMargin) {
       width -= leftMargin;
     }

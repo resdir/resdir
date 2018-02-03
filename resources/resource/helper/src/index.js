@@ -254,7 +254,7 @@ export default Resource => ({
       emptyLine();
       printText(
         formatBold(formatCode(key, {addBackticks: false}) + ' ' + formatDim(`(${formattedType})`)),
-        {indentation}
+        {width: null, indentation}
       );
     }
   },
@@ -262,7 +262,7 @@ export default Resource => ({
   _printDescription(resource, {indentation}) {
     const description = resource.$description;
     if (description) {
-      printText(description, {indentation});
+      printText(description, {width: null, indentation});
     }
   },
 
@@ -270,7 +270,7 @@ export default Resource => ({
     const defaultValue = this._formatDefault(resource);
     if (defaultValue) {
       emptyLine();
-      printText(upperFirst(defaultValue), {indentation});
+      printText(upperFirst(defaultValue), {width: null, indentation});
     }
   },
 
@@ -278,7 +278,7 @@ export default Resource => ({
     const aliases = this._formatAliases(resource, {removeKey: true});
     if (aliases) {
       emptyLine();
-      printText(upperFirst(aliases), {indentation});
+      printText(upperFirst(aliases), {width: null, indentation});
     }
   },
 
@@ -286,7 +286,7 @@ export default Resource => ({
     const position = this._formatPosition(resource);
     if (position) {
       emptyLine();
-      printText(upperFirst(position), {indentation});
+      printText(upperFirst(position), {width: null, indentation});
     }
   },
 
@@ -294,7 +294,7 @@ export default Resource => ({
     const isOptional = this._formatIsOptional(resource);
     if (isOptional) {
       emptyLine();
-      printText(upperFirst(isOptional), {indentation});
+      printText(upperFirst(isOptional), {width: null, indentation});
     }
   },
 
@@ -302,7 +302,7 @@ export default Resource => ({
     const isVariadic = this._formatIsVariadic(resource);
     if (isVariadic) {
       emptyLine();
-      printText(upperFirst(isVariadic), {indentation});
+      printText(upperFirst(isVariadic), {width: null, indentation});
     }
   },
 
@@ -310,7 +310,7 @@ export default Resource => ({
     const isSubInput = this._formatIsSubInput(resource);
     if (isSubInput) {
       emptyLine();
-      printText(upperFirst(isSubInput), {indentation});
+      printText(upperFirst(isSubInput), {width: null, indentation});
     }
   },
 
@@ -336,7 +336,7 @@ export default Resource => ({
 
     if (formattedExamples !== undefined) {
       emptyLine();
-      printText(formattedExamples, {indentation});
+      printText(formattedExamples, {width: null, indentation});
     }
   },
 
@@ -344,7 +344,7 @@ export default Resource => ({
     const listens = this._formatMethodListens(resource);
     if (listens) {
       emptyLine();
-      printText(upperFirst(listens), {indentation});
+      printText(upperFirst(listens), {width: null, indentation});
     }
   },
 
@@ -366,11 +366,14 @@ export default Resource => ({
     const type = resource.$getType();
 
     emptyLine();
-    printText(formatUnderline(attribute === 'INPUT' ? 'Input' : 'Output'), {indentation});
+    printText(formatUnderline(attribute === 'INPUT' ? 'Input' : 'Output'), {
+      width: null,
+      indentation
+    });
 
     if (type !== 'resource' || !resource.$hasChildren({includeHiddenChildren: false})) {
       emptyLine();
-      printText(this._formatType(resource), {indentation});
+      printText(this._formatType(resource), {width: null, indentation});
     }
 
     this._print(resource, {indentation: indentation + 2});
@@ -411,12 +414,12 @@ export default Resource => ({
         this._formatResourceSpecifier(section.creator, {directory: process.cwd()});
       if (title) {
         emptyLine();
-        printText(formatBold(title), {indentation});
+        printText(formatBold(title), {width: null, indentation});
       }
 
       if (section.attributes.length) {
         emptyLine();
-        printText('Attributes:', {indentation});
+        printText('Attributes:', {width: null, indentation});
         print(formatTable(section.attributes, {
           allData,
           columnGap: 2,
@@ -426,7 +429,7 @@ export default Resource => ({
 
       if (section.methods.length) {
         emptyLine();
-        printText('Methods:', {indentation});
+        printText('Methods:', {width: null, indentation});
         print(formatTable(section.methods, {allData, columnGap: 2, margins: {left: indentation + 2}}));
       }
     }

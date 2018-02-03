@@ -8,7 +8,7 @@ import {
   formatValue,
   print,
   emptyLine,
-  printText as originalPrintText,
+  printText,
   prompt,
   confirm,
   task
@@ -429,7 +429,3 @@ export default Resource => {
     }
   };
 };
-
-function printText(text) {
-  originalPrintText(text, {width: 80});
-}

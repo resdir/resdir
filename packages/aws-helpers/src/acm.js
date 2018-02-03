@@ -102,9 +102,7 @@ async function _findACMCertificate({domainName, managerIdentifier, acm}, _enviro
   }
 
   if (result.NextToken) {
-    throw new Error(
-      `Whoa, you have a lot of ACM Certificates! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`
-    );
+    throw new Error(`Whoa, you have a lot of ACM Certificates! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`);
   }
 }
 
@@ -150,9 +148,7 @@ async function getACMCertificateValidationCNAME({arn, acm}, environment) {
           return {name: record.Name, value: record.Value};
         }
       } while (totalSleepTime <= maxSleepTime);
-      throw new Error(
-        `Couldn't get ACM Certificate DNS Validation record after ${totalSleepTime / 1000} seconds`
-      );
+      throw new Error(`Couldn't get ACM Certificate DNS Validation record after ${totalSleepTime / 1000} seconds`);
     },
     {
       intro: `Getting ACM Certificate DNS Validation record...`,
@@ -178,8 +174,7 @@ async function waitUntilACMCertificateValidationCNAMEIsAdded(
 
   const formatedDomainName = formatString(domainName);
 
-  printText(
-    `
+  printText(`
 An SSL/TLS certificate has been requested for ${formatedDomainName}, but since this domain name doesn't seem to be managed by Route 53, you must validate the certificate manually by adding a CNAME record to the name servers.
 
 Please create a DNS record as follows:
@@ -187,9 +182,7 @@ Please create a DNS record as follows:
    ${formatDim('Name:')} ${formatString(validationCNAME.name)}
    ${formatDim('Type:')} ${formatString('CNAME')}
    ${formatDim('Value:')} ${formatString(validationCNAME.value)}
-`,
-    {width: 80}
-  );
+`);
 
   await task(
     async () => {
@@ -229,9 +222,7 @@ async function waitUntilACMCertificateIsValidated({arn, acm}, environment) {
           return;
         }
       } while (totalSleepTime <= maxSleepTime);
-      throw new Error(
-        `ACM Certificate has not been validated after ${totalSleepTime / 1000} seconds`
-      );
+      throw new Error(`ACM Certificate has not been validated after ${totalSleepTime / 1000} seconds`);
     },
     {
       intro: `Waiting for ACM Certificate validation...`,
