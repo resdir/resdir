@@ -1,7 +1,7 @@
 import {join} from 'path';
 import {existsSync, unlinkSync} from 'fs';
 import {entries, difference} from 'lodash';
-import {formatString} from '@resdir/console';
+import {formatString, formatPath} from '@resdir/console';
 import {load, save} from '@resdir/file-manager';
 import {getJSON} from '@resdir/http-client';
 import {execute} from '@resdir/process-manager';
@@ -10,6 +10,7 @@ import LocalCache from '@resdir/local-cache';
 const NPM_REGISTRY_URL = 'https://registry.npmjs.org';
 const NPM_REGISTRY_CACHE_TIME = 60 * 1000; // 1 minute
 export const PACKAGE_FILENAME = 'package.json';
+const DEPENDENCIES_DIRECTORY = 'node_modules';
 
 export function updatePackageFile(directory, definition) {
   let status;
@@ -122,6 +123,21 @@ export async function publishPackage(directory, {access} = {}, environment) {
     args.push(access);
   }
   await execNPM(args, {directory}, environment);
+}
+
+export async function getCurrentDependencyVersion(directory, name, {throwIfNotFound = true}) {
+  const version = await _getCurrentDependencyVersion(directory, name);
+  if (!version && throwIfNotFound) {
+    throw new Error(`Dependency ${formatString(name)} not found (directory: ${formatPath(directory)})`);
+  }
+  return version;
+}
+
+async function _getCurrentDependencyVersion(directory, name) {
+  const dependencyDirectory = join(...[directory, DEPENDENCIES_DIRECTORY, ...name.split('/')]);
+  const file = join(dependencyDirectory, PACKAGE_FILENAME);
+  const pkg = load(file, {throwIfNotFound: false});
+  return pkg && pkg.version;
 }
 
 // export async function execYarn(args, options, environment) {
