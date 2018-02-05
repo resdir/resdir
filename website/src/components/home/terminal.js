@@ -90,7 +90,7 @@ export class Terminal extends React.Component {
             display: 'flex',
             alignItems: 'center',
             padding: '15px',
-            backgroundColor: t.bodyColor,
+            backgroundColor: t.backgroundColor,
             [`@media (max-width: ${t.smallBreakpoint})`]: {
               padding: '7px'
             }

@@ -14,7 +14,7 @@
     "lodash": "^4.17.4",
     "prop-types": "^15.6.0",
     "radium": "^0.21.2",
-    "radium-starter": "^0.9.13",
+    "radium-starter": "^0.10.0",
     "react-lowlight": "^1.1.1",
     "react-md-spinner": "^0.2.5",
     "react-router-dom": "^4.2.2",

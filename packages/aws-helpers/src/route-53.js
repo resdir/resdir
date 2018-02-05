@@ -1,8 +1,11 @@
-import {takeRight} from 'lodash';
+import {trimEnd, takeRight} from 'lodash';
 import {task} from '@resdir/console';
 import sleep from 'sleep-promise';
 
 export async function ensureRoute53CNAME({name, value, route53}, environment) {
+  name = trimEnd(name, '.');
+  value = trimEnd(value, '.');
+
   return await task(
     async progress => {
       const hostedZone = await findRoute53HostedZone({domainName: name, route53}, environment);
@@ -68,6 +71,9 @@ export async function ensureRoute53Alias(
   {name, targetDomainName, targetHostedZoneId, route53},
   environment
 ) {
+  name = trimEnd(name, '.');
+  targetDomainName = trimEnd(targetDomainName, '.');
+
   return await task(
     async progress => {
       const hostedZone = await findRoute53HostedZone({domainName: name, route53}, environment);
@@ -153,9 +159,7 @@ async function findRoute53HostedZone({domainName, route53}, environment) {
       }
 
       if (result.IsTruncated) {
-        throw new Error(
-          `Whoa, you have a lot of Route 53 hosted zones! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`
-        );
+        throw new Error(`Whoa, you have a lot of Route 53 hosted zones! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`);
       }
 
       progress.setOutro('Route 53 hosted zone not found');
@@ -178,9 +182,7 @@ async function findRoute53RecordSet({hostedZoneId, name, type, route53}, environ
         StartRecordType: type
       });
 
-      const recordSet = result.ResourceRecordSets.find(
-        recordSet => recordSet.Name === name && recordSet.Type === type
-      );
+      const recordSet = result.ResourceRecordSets.find(recordSet => recordSet.Name === name && recordSet.Type === type);
 
       if (recordSet) {
         progress.setOutro('Route 53 record set found');
@@ -188,9 +190,7 @@ async function findRoute53RecordSet({hostedZoneId, name, type, route53}, environ
       }
 
       if (result.IsTruncated) {
-        throw new Error(
-          `Whoa, you have a lot of Route 53 record sets! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`
-        );
+        throw new Error(`Whoa, you have a lot of Route 53 record sets! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`);
       }
 
       progress.setOutro('Route 53 record set not found');
@@ -216,9 +216,7 @@ async function waitUntilRoute53RecordSetIsChanged({changeId, route53}, environme
           return;
         }
       } while (totalSleepTime <= maxSleepTime);
-      throw new Error(
-        `Route 53 record set change uncompleted after ${totalSleepTime / 1000} seconds`
-      );
+      throw new Error(`Route 53 record set change uncompleted after ${totalSleepTime / 1000} seconds`);
     },
     {
       intro: `Waiting for Route 53 record set change to complete...`,

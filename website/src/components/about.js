@@ -29,7 +29,7 @@ export class About extends React.Component {
             Whether it was installation, customization or composition, the developer experience was
             not good. Manuel has then dug, dug and dug to finally come up with the idea of{' '}
             <Link to="/#intro">@resources</Link>. It was so exciting that he put aside his initial
-            plan to make this @resource concept a reality. This is how Resdir was born.
+            plan, and then make this @resource concept a reality. This is how Resdir was born.
           </p>
         </div>
       </Layout>

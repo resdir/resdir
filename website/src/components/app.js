@@ -14,10 +14,10 @@ function theme() {
   return {
     primaryColor: '#8A8A8A', // Resdir's gray
     accentColor: '#FF358B', // Resdir's magenta
-    bodyColor: '#171717',
+    backgroundColor: '#171717',
     borderColor: 'rgba(255,255,255,.2)',
     baseTextColor: '#CCCCCC',
-    baseInverseTextColor: t => t.bodyColor,
+    baseInverseTextColor: t => t.backgroundColor,
     mutedTextColor: t => t.primaryColor,
     headingsColor: t => t.lightPrimaryColor,
     headingsFontWeight: '500',
