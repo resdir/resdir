@@ -377,12 +377,25 @@ async function findCloudFrontDistribution(cloudFront, domainName, environment) {
 }
 
 async function waitUntilCloudFrontDistributionIsDeployed(cloudFront, distributionId, environment) {
-  return await task(
+  await task(
     async () => {
-      await cloudFront.waitFor('distributionDeployed', {Id: distributionId});
+      const sleepTime = 60 * 1000; // 1 minute
+      const maxSleepTime = 60 * 60 * 1000; // 1 hour
+      let totalSleepTime = 0;
+      do {
+        await sleep(sleepTime);
+        totalSleepTime += sleepTime;
+        const {Distribution: distribution} = await cloudFront.getDistribution({
+          Id: distributionId
+        });
+        if (distribution.Status === 'Deployed') {
+          return;
+        }
+      } while (totalSleepTime <= maxSleepTime);
+      throw new Error(`CloudFront deployment uncompleted after ${totalSleepTime / 1000} seconds`);
     },
     {
-      intro: `Waiting for CloudFront deployment (be patient, it can take up to 20 minutes)...`,
+      intro: `Waiting for CloudFront deployment (be very patient, it can take up to 40 minutes)...`,
       outro: 'CloudFront distribution deployed'
     },
     environment
