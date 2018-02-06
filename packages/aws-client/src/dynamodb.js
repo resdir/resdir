@@ -70,9 +70,36 @@ export class DynamoDB {
     const data = await this.client.query(params).promise();
 
     if (data.LastEvaluatedKey) {
-      // TODO: Implement query pagination
+      // TODO: Implement pagination
       // http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.html#Query.Pagination
       throw new Error('UNIMPLEMENTED: DynamoDB query pagination');
+    }
+
+    for (const item of data.Items) {
+      const result = await fn(item);
+      if (result === false) {
+        return false;
+      }
+    }
+  }
+
+  async forAll(params, fn) {
+    if (!params) {
+      throw new Error('\'params\' argument is missing');
+    }
+
+    if (!fn) {
+      throw new Error('\'fn\' argument is missing');
+    }
+
+    debug('forAll(%o)', params);
+
+    const data = await this.client.scan(params).promise();
+
+    if (data.LastEvaluatedKey) {
+      // TODO: Implement pagination
+      // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Scan.html#Scan.Pagination
+      throw new Error('UNIMPLEMENTED: DynamoDB scan pagination');
     }
 
     for (const item of data.Items) {

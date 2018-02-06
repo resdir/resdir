@@ -185,7 +185,11 @@ export default Resource => {
       }
 
       if (reason === 'ALREADY_TAKEN') {
-        throw new Error(`Sorry, this namespace is alrady taken`);
+        let message = `Sorry, this namespace is alrady taken`;
+        if (result.existingNamespace !== namespace) {
+          message += ` (existing namespace: ${formatString(result.existingNamespace)})`;
+        }
+        throw new Error(message);
       }
 
       if (reason === 'RESERVED') {
