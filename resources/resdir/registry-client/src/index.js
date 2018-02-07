@@ -170,9 +170,9 @@ export default Resource => {
         }
       );
 
-      let {available, reason} = result;
+      let {isAvailable, reason} = result;
 
-      if (available || throwIfUnavailable === false) {
+      if (isAvailable || throwIfUnavailable === false) {
         return result;
       }
 
@@ -250,9 +250,9 @@ export default Resource => {
           environment
         );
 
-        ({available, reason} = result);
+        ({isAvailable, reason} = result);
 
-        if (available) {
+        if (isAvailable) {
           return result;
         }
 

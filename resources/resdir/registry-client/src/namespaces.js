@@ -5,7 +5,7 @@ export default () => ({
     const root = this.$getRoot();
     const server = await root.getRegistryServer();
 
-    const {available, reason} = await task(
+    const {isAvailable, reason} = await task(
       async () => {
         return await root.authenticatedCall(
           accessToken => server.checkNamespaceAvailability({namespace, accessToken}, environment),
@@ -18,7 +18,7 @@ export default () => ({
       }
     );
 
-    if (available) {
+    if (isAvailable) {
       print(`The namespace ${formatString(namespace)} is available.`);
     } else {
       print(`The namespace ${formatString(namespace)} is not available (reason: ${formatString(reason)}).`);
