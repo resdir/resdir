@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/registry-client",
-  "version": "0.1.19",
+  "version": "0.1.20",
   "isPublic": true,
   "files": [
     "./dist"
@@ -294,6 +294,28 @@
           "permissionToken": {
             "@type": "string",
             "@isOptional": true
+          }
+        }
+      }
+    },
+    "namespaces": {
+      "@aliases": [
+        "namespace",
+        "ns"
+      ],
+      "@implementation": "./dist/cjs/namespaces",
+      "checkAvailability": {
+        "@type": "method",
+        "@aliases": [
+          "check"
+        ],
+        "@input": {
+          "namespace": {
+            "@type": "string",
+            "@aliases": [
+              "ns"
+            ],
+            "@position": 0
           }
         }
       }
