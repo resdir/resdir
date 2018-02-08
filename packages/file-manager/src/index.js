@@ -3,6 +3,7 @@ import {readFileSync, writeFileSync} from 'fs';
 import JSON5 from 'json5';
 import YAML from 'js-yaml';
 import {formatPath} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 
 export function load(file, {throwIfNotFound = true, parse = true} = {}) {
   if (typeof file !== 'string') {
@@ -15,7 +16,7 @@ export function load(file, {throwIfNotFound = true, parse = true} = {}) {
     data = readFileSync(file, 'utf8');
   } catch (_) {
     if (throwIfNotFound) {
-      throw new Error(`File not found: ${formatPath(file)}`);
+      throw createClientError(`File not found: ${formatPath(file)}`);
     }
     return undefined;
   }
@@ -30,13 +31,13 @@ export function load(file, {throwIfNotFound = true, parse = true} = {}) {
     } else if (ext === '.yaml' || ext === '.yml') {
       parser = data => YAML.safeLoad(data);
     } else {
-      throw new Error(`Unsupported file format: ${formatPath(file)}`);
+      throw createClientError(`Unsupported file format: ${formatPath(file)}`);
     }
 
     try {
       data = parser(data);
     } catch (err) {
-      throw new Error(`Invalid file: ${formatPath(file)} (${err.message})`);
+      throw createClientError(`Invalid file: ${formatPath(file)} (${err.message})`);
     }
   }
 
@@ -57,7 +58,7 @@ export function save(file, data, {stringify = true} = {}) {
     } else if (ext === '.yaml' || ext === '.yml') {
       data = YAML.safeDump(data);
     } else {
-      throw new Error(`Unsupported file format: ${formatPath(file)}`);
+      throw createClientError(`Unsupported file format: ${formatPath(file)}`);
     }
 
     if (!data.endsWith('\n')) {

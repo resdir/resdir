@@ -6,6 +6,7 @@ import isDirectory from 'is-directory';
 import {transform} from '@babel/core';
 import {task, formatString, formatCode, formatPath} from '@resdir/console';
 import GitIgnore from '@resdir/gitignore-manager';
+import {createClientError} from '@resdir/error';
 
 const babelPresetEnv = require.resolve('@babel/preset-env');
 const babelPresetStage3 = require.resolve('@babel/preset-stage-3');
@@ -114,7 +115,7 @@ export default () => ({
         formats.push('cjs');
         formats.push('esm');
       } else {
-        throw new Error(`Invalid ${formatCode('format')} value (${formatString(this.format)})`);
+        throw createClientError(`Invalid ${formatCode('format')} value (${formatString(this.format)})`);
       }
 
       for (const format of formats) {

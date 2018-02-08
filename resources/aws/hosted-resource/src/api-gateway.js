@@ -1,6 +1,7 @@
 import {isEqual} from 'lodash';
 import {task, formatString} from '@resdir/console';
 import {APIGateway} from '@resdir/aws-client';
+import {createClientError} from '@resdir/error';
 
 const STAGE_NAME = 'main';
 
@@ -33,7 +34,7 @@ export default () => ({
       const limit = 500;
       const {items} = await apiGateway.getRestApis({limit});
       if (items.length === limit) {
-        throw new Error(`Whoa, you have a lot of API Gateways! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`);
+        throw createClientError(`Whoa, you have a lot of API Gateways! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`);
       }
 
       const name = this.getAPIGatewayName();
@@ -44,7 +45,7 @@ export default () => ({
     }
 
     if (!this._apiGateway && throwIfNotFound) {
-      throw new Error('API Gateway not found');
+      throw createClientError('API Gateway not found');
     }
 
     return this._apiGateway;
@@ -167,7 +168,7 @@ export default () => ({
     const stage = await this.getAPIGatewayStage({throwIfNotFound: false});
     const tags = stage && stage.tags;
     if (!isEqual(tags, {'managed-by': this.MANAGER_IDENTIFIER})) {
-      throw new Error(`Can't manage an API Gateway not originally created by ${formatString(this.RESOURCE_ID)} (name: ${formatString(this.getAPIGatewayName())})`);
+      throw createClientError(`Can't manage an API Gateway not originally created by ${formatString(this.RESOURCE_ID)} (name: ${formatString(this.getAPIGatewayName())})`);
     }
   },
 
@@ -181,7 +182,7 @@ export default () => ({
         if (!throwIfNotFound) {
           return;
         }
-        throw new Error('API Gateway stage not found');
+        throw createClientError('API Gateway stage not found');
       }
       throw err;
     }
@@ -235,7 +236,7 @@ export default () => ({
     }
 
     if (!this._apiGatewayDomainName && throwIfNotFound) {
-      throw new Error('API Gateway custom domain name not found');
+      throw createClientError('API Gateway custom domain name not found');
     }
 
     return this._apiGatewayDomainName;

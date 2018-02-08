@@ -1,12 +1,13 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/namespace",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "Useful functions to handle namespaces",
   "dependencies": {
     "filename-reserved-regex": "^2.0.0",
     "lodash.sortedindexof": "^4.1.0",
-    "@resdir/console": "^0.1.7"
+    "@resdir/console": "^0.1.7",
+    "@resdir/error": "^0.1.0"
   },
   "@unpublishable": {
     "tests": {

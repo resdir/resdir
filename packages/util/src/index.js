@@ -1,6 +1,7 @@
 import crypto from 'crypto';
 import {entries, cloneDeepWith} from 'lodash';
 import {formatCode} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 
 export function getProperty(source, key, aliases) {
   const result = findProperty(source, key, aliases);
@@ -31,7 +32,7 @@ export function findProperty(source, key, aliases = []) {
   for (const keyOrAlias of [key, ...aliases]) {
     if (keyOrAlias && keyOrAlias in source) {
       if (foundKey) {
-        throw new Error(`Can't have both ${formatCode(foundKey)} and ${formatCode(keyOrAlias)}`);
+        throw createClientError(`Can't have both ${formatCode(foundKey)} and ${formatCode(keyOrAlias)}`);
       }
       foundKey = keyOrAlias;
       result = {foundKey, value: source[keyOrAlias]};
@@ -57,7 +58,7 @@ export async function catchError(promise) {
 export function avoidCommonMistakes(obj, mistakes) {
   for (const [wrong, correct] of entries(mistakes)) {
     if (wrong in obj) {
-      throw new Error(`Wrong property key: ${formatCode(wrong)}. Did you mean ${formatCode(correct)}?`);
+      throw createClientError(`Wrong property key: ${formatCode(wrong)}. Did you mean ${formatCode(correct)}?`);
     }
   }
 }

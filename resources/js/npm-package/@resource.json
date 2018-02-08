@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.43",
+  "version": "0.1.44",
   "isPublic": true,
   "files": [
     "./dist"
@@ -13,6 +13,7 @@
     "fs-extra": "^5.0.0",
     "lodash": "^4.17.4",
     "@resdir/console": "^0.1.0",
+    "@resdir/error": "^0.1.0",
     "@resdir/gitignore-manager": "^0.1.0",
     "@resdir/package-manager": "^0.1.0",
     "@resdir/version": "^0.1.1"

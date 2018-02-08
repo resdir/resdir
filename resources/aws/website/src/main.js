@@ -8,6 +8,7 @@ import {
   formatBold,
   formatDim
 } from '@resdir/console';
+import {createClientError} from '@resdir/error';
 
 export default () => ({
   RESOURCE_ID: 'aws/website',
@@ -55,32 +56,32 @@ export default () => ({
 
   validate() {
     if (!this.domainName) {
-      throw new Error(`${formatCode('domainName')} attribute is missing`);
+      throw createClientError(`${formatCode('domainName')} attribute is missing`);
     }
 
     if (!this.contentDirectory) {
-      throw new Error(`${formatCode('contentDirectory')} attribute is missing`);
+      throw createClientError(`${formatCode('contentDirectory')} attribute is missing`);
     }
 
     if (!this.indexPage) {
-      throw new Error(`${formatCode('indexPage')} attribute is missing`);
+      throw createClientError(`${formatCode('indexPage')} attribute is missing`);
     }
 
     if (this.indexPage.startsWith('/') || this.indexPage.startsWith('.')) {
-      throw new Error(`${formatCode('indexPage')} can't start with ${formatString('/')} or ${formatString('.')}`);
+      throw createClientError(`${formatCode('indexPage')} can't start with ${formatString('/')} or ${formatString('.')}`);
     }
 
     for (const {errorCode, responseCode, responsePage} of this.customErrors || []) {
       if (!errorCode) {
-        throw new Error(`${formatCode('errorCode')} is missing in ${formatCode('customErrors')} attribute`);
+        throw createClientError(`${formatCode('errorCode')} is missing in ${formatCode('customErrors')} attribute`);
       }
 
       if (responseCode && !responsePage) {
-        throw new Error(`${formatCode('responsePage')} is missing in ${formatCode('customErrors')} attribute`);
+        throw createClientError(`${formatCode('responsePage')} is missing in ${formatCode('customErrors')} attribute`);
       }
 
       if (responsePage && (responsePage.startsWith('/') || responsePage.startsWith('.'))) {
-        throw new Error(`${formatCode('responsePage')} in ${formatCode('customErrors')} attribute can't start with ${formatString('/')} or ${formatString('.')}`);
+        throw createClientError(`${formatCode('responsePage')} in ${formatCode('customErrors')} attribute can't start with ${formatString('/')} or ${formatString('.')}`);
       }
     }
   }

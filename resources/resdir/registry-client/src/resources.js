@@ -1,6 +1,7 @@
 import {resolve, dirname, isAbsolute} from 'path';
 import {existsSync} from 'fs';
 import {task, formatString, formatCode, formatPath} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 import {stringifyResourceSpecifier} from '@resdir/resource-specifier';
 import {put} from '@resdir/http-client';
 import {gzipSync} from 'zlib';
@@ -68,11 +69,11 @@ export default Resource => ({
     const {id: identifier, version, isPublic} = definition;
 
     if (!identifier) {
-      throw new Error(`Can't publish a resource without a ${formatCode('id')} property`);
+      throw createClientError(`Can't publish a resource without a ${formatCode('id')} property`);
     }
 
     if (!version) {
-      throw new Error(`Can't publish a resource without a ${formatCode('version')} property`);
+      throw createClientError(`Can't publish a resource without a ${formatCode('version')} property`);
     }
 
     const specifier = stringifyResourceSpecifier({identifier, versionRange: version});
@@ -158,7 +159,7 @@ export default Resource => ({
       const resolvedFile = resolve(directory, file);
 
       if (!existsSync(resolvedFile)) {
-        throw new Error(`File ${formatPath(file)} specified in ${formatCode('files')} property doesn't exist`);
+        throw createClientError(`File ${formatPath(file)} specified in ${formatCode('files')} property doesn't exist`);
       }
 
       if (isDirectory.sync(resolvedFile)) {

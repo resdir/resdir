@@ -13,6 +13,7 @@ import {
   confirm,
   task
 } from '@resdir/console';
+import {createClientError} from '@resdir/error';
 import {load, save} from '@resdir/file-manager';
 import {SERVICE_NAME, SUPPORT_EMAIL_ADDRESS} from '@resdir/information';
 import debugModule from 'debug';
@@ -49,7 +50,7 @@ export default Resource => {
       const server = await this.getRegistryServer();
 
       if (this.hasSignedInUser()) {
-        throw new Error('A user is already signed in');
+        throw createClientError('A user is already signed in');
       }
 
       while (!email) {
@@ -177,11 +178,11 @@ export default Resource => {
       }
 
       if (reason === 'INVALID') {
-        throw new Error(`Sorry, this namespace is invalid. A namespace must be composed of lowercase letters, numbers and dashes ("-").`);
+        throw createClientError(`Sorry, this namespace is invalid. A namespace must be composed of lowercase letters, numbers and dashes ("-").`);
       }
 
       if (reason === 'TOO_SHORT') {
-        throw new Error(`Sorry, a namespace must have a minimum of 2 characters`);
+        throw createClientError(`Sorry, a namespace must have a minimum of 2 characters`);
       }
 
       if (reason === 'ALREADY_TAKEN') {
@@ -189,11 +190,11 @@ export default Resource => {
         if (result.existingNamespace !== namespace) {
           message += ` (existing namespace: ${formatString(result.existingNamespace)})`;
         }
-        throw new Error(message);
+        throw createClientError(message);
       }
 
       if (reason === 'RESERVED') {
-        throw new Error(`Sorry, this namespace is reserved`);
+        throw createClientError(`Sorry, this namespace is reserved`);
       }
 
       let contactSupport;
@@ -204,7 +205,7 @@ export default Resource => {
       }
 
       if (reason === 'GENERIC') {
-        throw new Error(`Sorry, this namespace is not available because it is a very generic term. ${contactSupport}`);
+        throw createClientError(`Sorry, this namespace is not available because it is a very generic term. ${contactSupport}`);
       }
 
       if (
@@ -219,7 +220,7 @@ export default Resource => {
         }
 
         if (result.userHasGitHubAccountConnection) {
-          throw new Error(message);
+          throw createClientError(message);
         }
 
         emptyLine();
@@ -235,7 +236,7 @@ export default Resource => {
         emptyLine();
 
         if (!okay) {
-          throw new Error('GitHub connection aborted');
+          throw createClientError('GitHub connection aborted');
         }
 
         await this.user.gitHub.connect({parentAction});
@@ -259,45 +260,45 @@ export default Resource => {
         await this.user.gitHub.disconnect();
 
         if (type === 'USER' && reason === 'IMPORTANT_GITHUB_USER') {
-          throw new Error(`Sorry, the username of the GitHub account you connected to is not ${formattedNamespace}.`);
+          throw createClientError(`Sorry, the username of the GitHub account you connected to is not ${formattedNamespace}.`);
         }
 
         if (type === 'ORGANIZATION' && reason === 'IMPORTANT_GITHUB_ORGANIZATION') {
-          throw new Error(`Sorry, the GitHub account you connected to is not a public member of ${formattedNamespace} organization.`);
+          throw createClientError(`Sorry, the GitHub account you connected to is not a public member of ${formattedNamespace} organization.`);
         }
 
-        throw new Error(`Sorry, this namespace is not available.`);
+        throw createClientError(`Sorry, this namespace is not available.`);
       }
 
       if (reason === 'IMPORTANT_GITHUB_USER') {
-        throw new Error(`Sorry, this namespace is not available because there is a popular GitHub user named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub usernames are reserved for future ${SERVICE_NAME} users. ${contactSupport}`);
+        throw createClientError(`Sorry, this namespace is not available because there is a popular GitHub user named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub usernames are reserved for future ${SERVICE_NAME} users. ${contactSupport}`);
       }
 
       if (reason === 'IMPORTANT_GITHUB_ORGANIZATION') {
-        throw new Error(`Sorry, this namespace is not available because there is a popular GitHub organization named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub organizations are reserved for future ${SERVICE_NAME} organizations or communities. ${contactSupport}`);
+        throw createClientError(`Sorry, this namespace is not available because there is a popular GitHub organization named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most important GitHub organizations are reserved for future ${SERVICE_NAME} organizations or communities. ${contactSupport}`);
       }
 
       if (reason === 'BIG_COMPANY') {
-        throw new Error(`Sorry, this namespace is not available because it matches the name of a big company (${formatString(result.company)}). ${contactSupport}`);
+        throw createClientError(`Sorry, this namespace is not available because it matches the name of a big company (${formatString(result.company)}). ${contactSupport}`);
       }
 
       if (reason === 'COMMON_NUMBER') {
-        throw new Error(`Sorry, this namespace is not available because it is quite a common number. ${contactSupport}`);
+        throw createClientError(`Sorry, this namespace is not available because it is quite a common number. ${contactSupport}`);
       }
 
       if (reason === 'TOP_LEVEL_DOMAIN') {
-        throw new Error(`Sorry, this namespace is not available because it is a Top Level Domain. ${contactSupport}`);
+        throw createClientError(`Sorry, this namespace is not available because it is a Top Level Domain. ${contactSupport}`);
       }
 
       if (reason === 'COMMON_FILE_EXTENSION') {
-        throw new Error(`Sorry, this namespace is not available because it is a common file extension. ${contactSupport}`);
+        throw createClientError(`Sorry, this namespace is not available because it is a common file extension. ${contactSupport}`);
       }
 
       if (reason === 'COMMON_ENGLISH_WORD' || reason === 'COMMON_TAG') {
-        throw new Error(`Sorry, this namespace is not available because it is quite a common term. ${contactSupport}`);
+        throw createClientError(`Sorry, this namespace is not available because it is quite a common term. ${contactSupport}`);
       }
 
-      throw new Error(`Sorry, this namespace is not available. ${contactSupport}`);
+      throw createClientError(`Sorry, this namespace is not available. ${contactSupport}`);
     },
 
     /* eslint-enable complexity */
@@ -308,7 +309,7 @@ export default Resource => {
       const userId = this._loadUserId();
       if (!userId) {
         if (throwIfNoSignedInUser) {
-          throw new Error('No user is signed in');
+          throw createClientError('No user is signed in');
         }
         return undefined;
       }

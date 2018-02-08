@@ -1,6 +1,7 @@
 import {task} from '@resdir/console';
 import {ACM} from '@resdir/aws-client';
 import {findACMCertificate, requestACMCertificate} from '@resdir/aws-helpers';
+import {createClientError} from '@resdir/error';
 
 export default () => ({
   async ensureACMCertificate(environment) {
@@ -36,7 +37,7 @@ export default () => ({
     }
 
     if (!this._acmCertificate && throwIfNotFound) {
-      throw new Error('ACM Certificate not found');
+      throw createClientError('ACM Certificate not found');
     }
 
     return this._acmCertificate;

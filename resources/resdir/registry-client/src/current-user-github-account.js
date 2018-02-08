@@ -1,4 +1,5 @@
 import {print, printText, printSuccess, emptyLine, formatURL, confirm, task} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 import opn from 'opn';
 
 export default () => ({
@@ -38,7 +39,7 @@ export default () => ({
     emptyLine();
 
     if (!okay) {
-      throw new Error('GitHub account connection aborted');
+      throw createClientError('GitHub account connection aborted');
     }
 
     await this.ensureConnection(environment);
@@ -77,7 +78,7 @@ export default () => ({
           environment
         );
         if (!connected) {
-          throw new Error('GitHub account connection failed');
+          throw createClientError('GitHub account connection failed');
         }
       },
       {

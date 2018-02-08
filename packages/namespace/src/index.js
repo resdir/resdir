@@ -1,5 +1,6 @@
 import sortedIndexOf from 'lodash.sortedindexof';
 import {formatString} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 import genericNamespaces from './generic-namespaces.json';
 import reservedNamespaces from './reserved-namespaces.json';
 import {windowsNames as reservedWindowsFilenames} from 'filename-reserved-regex';
@@ -10,7 +11,7 @@ const MAX_LENGTH = 40;
 export function validateNamespace(namespace, {throwIfInvalid = true} = {}) {
   if (!validate(namespace)) {
     if (throwIfInvalid) {
-      throw new Error(`Namespace ${formatString(namespace)} is invalid`);
+      throw createClientError(`Namespace ${formatString(namespace)} is invalid`);
     }
     return false;
   }

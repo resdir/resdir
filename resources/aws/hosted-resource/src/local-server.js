@@ -10,6 +10,7 @@ import {
   formatURL
 } from '@resdir/console';
 import RemoteResourceJSONRPCHandler from '@resdir/remote-resource-json-rpc-handler';
+import {isClientError, isServerError} from '@resdir/error';
 import Koa from 'koa';
 import jsonError from 'koa-json-error';
 import cors from '@koa/cors';
@@ -20,8 +21,8 @@ export default Resource => ({
     const server = new Koa();
 
     server.use(jsonError(err => {
-      const status = err.status || 500;
-      const expose = err.expose !== undefined ? err.expose : status < 500;
+      const status = isClientError(err) ? 400 : 500;
+      const expose = isClientError(err) || isServerError(err);
       const name = expose ? err.name : 'InternalServerError';
       const message = expose ? err.message : 'The server encountered an error';
       const code = expose ? err.code : undefined;

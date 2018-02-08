@@ -2,6 +2,7 @@ import {join, resolve, isAbsolute} from 'path';
 import {readFile, outputFile as writeFile, ensureDir, pathExists, rename, stat} from 'fs-extra';
 import {task, print, formatCode, formatDim} from '@resdir/console';
 import GitIgnore from '@resdir/gitignore-manager';
+import {createClientError} from '@resdir/error';
 import {rollup} from 'rollup';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -53,11 +54,11 @@ const NODE_BUILT_IN_MODULES = [
 export default () => ({
   async run(_input, environment) {
     if (!this.entry) {
-      throw new Error(`${formatCode('entry')} attribute is missing`);
+      throw createClientError(`${formatCode('entry')} attribute is missing`);
     }
 
     if (!this.output) {
-      throw new Error(`${formatCode('output')} attribute is missing`);
+      throw createClientError(`${formatCode('output')} attribute is missing`);
     }
 
     await task(

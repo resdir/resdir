@@ -18,6 +18,7 @@ import {
   emptyLine,
   formatTable
 } from '@resdir/console';
+import {createClientError} from '@resdir/error';
 import indentString from 'indent-string';
 import {parseResourceSpecifier, stringifyResourceSpecifier} from '@resdir/resource-specifier';
 
@@ -39,7 +40,7 @@ export default Resource => ({
           throwIfNotFound: false
         });
         if (existingResource) {
-          throw new Error(`A resource already exists in the current directory`);
+          throw createClientError(`A resource already exists in the current directory`);
         }
 
         const definition = {};
@@ -75,12 +76,12 @@ export default Resource => ({
     }
 
     if (!key) {
-      throw new Error(`${formatCode('key')} input attribute is missing`);
+      throw createClientError(`${formatCode('key')} input attribute is missing`);
     }
 
     let child = resource.$getChild(key);
     if (child) {
-      throw new Error(`A property with the same key (${formatCode(key)}) already exists`);
+      throw createClientError(`A property with the same key (${formatCode(key)}) already exists`);
     }
 
     child = await task(
@@ -111,7 +112,7 @@ export default Resource => ({
 
     const child = resource.$getChild(key);
     if (!child) {
-      throw new Error(`Property not found (key: ${formatCode(key)})`);
+      throw createClientError(`Property not found (key: ${formatCode(key)})`);
     }
 
     await task(
@@ -152,7 +153,7 @@ export default Resource => ({
 
     const file = resource.$getResourceFile();
     if (!file) {
-      throw new Error('Resource file is undefined');
+      throw createClientError('Resource file is undefined');
     }
 
     let newFile;
@@ -205,13 +206,13 @@ export default Resource => ({
           const output = resource.$getOutput();
           child = output && output.$findChild(key);
           if (!child) {
-            throw new Error(`No method input or output attribute found with this key: ${formatCode(key)}`);
+            throw createClientError(`No method input or output attribute found with this key: ${formatCode(key)}`);
           }
         }
       } else {
         child = resource.$findChild(key, {includeNativeChildren: true});
         if (!child) {
-          throw new Error(`No attribute or method found with this key: ${formatCode(key)}`);
+          throw createClientError(`No attribute or method found with this key: ${formatCode(key)}`);
         }
         child = await child.$resolveGetter({parent: resource});
       }

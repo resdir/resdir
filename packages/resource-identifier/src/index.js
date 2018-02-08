@@ -1,5 +1,6 @@
 import {validateNamespace as importedValidateNamespace} from '@resdir/namespace';
 import {formatString} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 import {windowsNames as reservedWindowsFilenames} from 'filename-reserved-regex';
 
 const MIN_NAME_LENGTH = 1;
@@ -9,12 +10,12 @@ export function parseResourceIdentifier(identifier, {throwIfMissing = true} = {}
   const parsedIdentifier = parse(identifier);
   if (!parsedIdentifier) {
     if (throwIfMissing) {
-      throw new Error(`Resource identifier is missing`);
+      throw createClientError(`Resource identifier is missing`);
     }
     return undefined;
   }
   if (!parsedIdentifier.namespace) {
-    throw new Error(`Namespace is missing in resource identifier '${formatString(identifier)}'`);
+    throw createClientError(`Namespace is missing in resource identifier '${formatString(identifier)}'`);
   }
   return parsedIdentifier;
 }
@@ -34,7 +35,7 @@ export function validateResourceIdentifier(identifier, {throwIfInvalid = true} =
 
   if (!isValid) {
     if (throwIfInvalid) {
-      throw new Error(`Resource identifier ${formatString(identifier)} is invalid`);
+      throw createClientError(`Resource identifier ${formatString(identifier)} is invalid`);
     }
     return false;
   }

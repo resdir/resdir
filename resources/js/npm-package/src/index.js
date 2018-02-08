@@ -3,6 +3,7 @@ import {outputFileSync, pathExistsSync} from 'fs-extra';
 import {updatePackageFile, publishPackage, fetchNPMRegistry} from '@resdir/package-manager';
 import {task, prompt, formatString, formatCode} from '@resdir/console';
 import GitIgnore from '@resdir/gitignore-manager';
+import {createClientError} from '@resdir/error';
 
 const PACKAGE_CODE = `// Package implementation
 `;
@@ -78,18 +79,18 @@ export default () => ({
 
   async _publish({access}, environment) {
     if (!this.name) {
-      throw new Error(`${formatCode('name')} property is missing`);
+      throw createClientError(`${formatCode('name')} property is missing`);
     }
     if (!this.version) {
-      throw new Error(`${formatCode('version')} property is missing`);
+      throw createClientError(`${formatCode('version')} property is missing`);
     }
     if (!this.description) {
-      throw new Error(`${formatCode('description')} property is missing`);
+      throw createClientError(`${formatCode('description')} property is missing`);
     }
 
     const pkg = await fetchNPMRegistry(this.name, {throwIfNotFound: false});
     if (pkg && this.version in pkg.versions) {
-      throw new Error(`Can't publish over the previously published version ${formatString(this.version)}. Before publishing, use ${formatCode('version bump')} to increment the version number.`);
+      throw createClientError(`Can't publish over the previously published version ${formatString(this.version)}. Before publishing, use ${formatCode('version bump')} to increment the version number.`);
     }
 
     const directory = this.$getCurrentDirectory();

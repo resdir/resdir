@@ -1,6 +1,7 @@
 import assert from 'assert';
 import {sortBy, isEqual} from 'lodash';
 import {task, printText, formatString, formatDim} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 import sleep from 'sleep-promise';
 
 import {checkCNAME} from './external-dns';
@@ -102,7 +103,7 @@ async function _findACMCertificate({domainName, managerIdentifier, acm}, _enviro
   }
 
   if (result.NextToken) {
-    throw new Error(`Whoa, you have a lot of ACM Certificates! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`);
+    throw createClientError(`Whoa, you have a lot of ACM Certificates! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`);
   }
 }
 
@@ -148,7 +149,7 @@ async function getACMCertificateValidationCNAME({arn, acm}, environment) {
           return {name: record.Name, value: record.Value};
         }
       } while (totalSleepTime <= maxSleepTime);
-      throw new Error(`Couldn't get ACM Certificate DNS Validation record after ${totalSleepTime / 1000} seconds`);
+      throw createClientError(`Couldn't get ACM Certificate DNS Validation record after ${totalSleepTime / 1000} seconds`);
     },
     {
       intro: `Getting ACM Certificate DNS Validation record...`,
@@ -196,7 +197,7 @@ Please create a DNS record as follows:
           return;
         }
       } while (totalSleepTime <= maxSleepTime);
-      throw new Error(`The CNAME has not been created after ${totalSleepTime / 1000} seconds`);
+      throw createClientError(`The CNAME has not been created after ${totalSleepTime / 1000} seconds`);
     },
     {
       intro: `Waiting for you to manually create the CNAME...`,
@@ -222,7 +223,7 @@ async function waitUntilACMCertificateIsValidated({arn, acm}, environment) {
           return;
         }
       } while (totalSleepTime <= maxSleepTime);
-      throw new Error(`ACM Certificate has not been validated after ${totalSleepTime / 1000} seconds`);
+      throw createClientError(`ACM Certificate has not been validated after ${totalSleepTime / 1000} seconds`);
     },
     {
       intro: `Waiting for ACM Certificate validation...`,

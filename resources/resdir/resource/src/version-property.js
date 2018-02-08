@@ -1,5 +1,6 @@
 import Version, {validateVersion} from '@resdir/version';
 import {task, formatString, formatCode} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 
 export default () => ({
   async validate({throwIfInvalid}) {
@@ -32,7 +33,7 @@ export default () => ({
   _bump(part) {
     let version = this.$value;
     if (!version) {
-      throw new Error(`${formatCode('version')} property is undefined`);
+      throw createClientError(`${formatCode('version')} attribute is undefined`);
     }
     version = new Version(version);
     version.bump(part);

@@ -1,6 +1,7 @@
 import childProcessPromise from 'child-process-promise';
 const {execFile, spawn} = childProcessPromise;
 import {formatCode, formatPath} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 
 export async function execute(command, args, {directory, commandName} = {}, environment) {
   try {
@@ -10,10 +11,11 @@ export async function execute(command, args, {directory, commandName} = {}, envi
       await execFile(command, args, {cwd: directory});
     }
   } catch (err) {
-    const error = new Error(`An error occured while executing ${
-      commandName ? formatCode(commandName) : formatPath(command)
-    }`);
-    error.capturedStandardError = err.stderr;
-    throw error;
+    throw createClientError(
+      `An error occured while executing ${
+        commandName ? formatCode(commandName) : formatPath(command)
+      }`,
+      {capturedStandardError: err.stderr}
+    );
   }
 }

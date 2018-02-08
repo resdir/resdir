@@ -1,6 +1,7 @@
 import {task} from '@resdir/console';
 import {IAM} from '@resdir/aws-client';
 import sleep from 'sleep-promise';
+import {createClientError} from '@resdir/error';
 
 const IAM_ROLE_NAME = 'aws-hosted-resource-lambda-role-v1';
 const IAM_POLICY_NAME = 'basic-lambda-policy';
@@ -65,7 +66,7 @@ export default () => ({
     }
 
     if (!this._iamLambdaRole && throwIfNotFound) {
-      throw new Error('IAM Lambda role not found');
+      throw createClientError('IAM Lambda role not found');
     }
 
     return this._iamLambdaRole;

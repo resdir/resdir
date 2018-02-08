@@ -1,5 +1,6 @@
 import semver from 'semver';
 import {formatString} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 
 export class Version {
   constructor(str) {
@@ -89,7 +90,7 @@ export function validateVersion(version, {throwIfInvalid = true} = {}) {
 
   if (!isValid) {
     if (throwIfInvalid) {
-      throw new Error(`Version ${formatString(version)} is invalid`);
+      throw createClientError(`Version ${formatString(version)} is invalid`);
     }
     return false;
   }

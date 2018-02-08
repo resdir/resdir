@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/registry-client",
-  "version": "0.1.21",
+  "version": "0.1.22",
   "isPublic": true,
   "files": [
     "./dist"
@@ -19,6 +19,7 @@
     "recursive-readdir": "^2.2.1",
     "@resdir/archive-manager": "^0.1.4",
     "@resdir/console": "^0.1.0",
+    "@resdir/error": "^0.1.0",
     "@resdir/expression": "^0.1.2",
     "@resdir/file-manager": "^0.1.4",
     "@resdir/http-client": "^0.2.8",

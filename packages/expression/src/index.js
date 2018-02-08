@@ -2,6 +2,7 @@ import entries from 'lodash/entries';
 import {parse} from 'shell-quote';
 import {takeProperty} from '@resdir/util';
 import {formatCode, formatNumber} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 
 const PARSED_EXPRESSION_TAG = '@@PARSED_EXPRESSION';
 const POSITIONAL_ARGUMENT_PREFIX = '@@POSITIONAL_ARGUMENT_';
@@ -9,7 +10,7 @@ const SUB_ARGUMENTS_KEY = '@@SUB_ARGUMENTS';
 
 export function parseExpression(expression) {
   if (typeof expression !== 'string') {
-    throw new TypeError('\'expression\' must be a string');
+    throw createClientError('\'expression\' must be a string');
   }
 
   // TODO: Replace 'shell-quote' with something more suitable
@@ -113,7 +114,7 @@ function _parseArgumentsAndOptions(argsAndOpts) {
       for (let i = 0; i < opts.length; i++) {
         const opt = opts[i];
         if (!/[\w\d]/.test(opt)) {
-          throw new Error(`Invalid command line option: ${formatCode(argOrOpt)}`);
+          throw createClientError(`Invalid command line option: ${formatCode(argOrOpt)}`);
         }
         result[opt] = 'true';
       }
@@ -187,7 +188,7 @@ function _matchPosisionalArgument(key, schema) {
       return argument.key;
     }
   }
-  throw new Error(`Cannot match positional argument (position: ${formatNumber(position)})`);
+  throw createClientError(`Cannot match positional argument (position: ${formatNumber(position)})`);
 }
 
 function _matchSubArguments(schema) {
@@ -196,7 +197,7 @@ function _matchSubArguments(schema) {
       return argument.key;
     }
   }
-  throw new Error(`Cannot match sub-arguments`);
+  throw createClientError(`Cannot match sub-arguments`);
 }
 
 function _matchNamedArgument(key, schema) {

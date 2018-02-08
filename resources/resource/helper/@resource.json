@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "resource/helper",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "isPublic": true,
   "files": [
     "./dist"
@@ -13,6 +13,7 @@
     "indent-string": "^3.2.0",
     "lodash": "^4.17.4",
     "@resdir/console": "^0.1.31",
+    "@resdir/error": "^0.1.0",
     "@resdir/resource-specifier": "^0.1.10"
   },
   "@export": {

@@ -10,7 +10,7 @@ import read from 'read';
 import wrapANSI from 'wrap-ansi';
 import stringWidth from 'string-width';
 import indentString from 'indent-string';
-import {isClientError} from '@resdir/error';
+import {isClientError, isServerError, isRemoteError} from '@resdir/error';
 
 if (global.resdirConsoleSessionsCount === undefined) {
   global.resdirConsoleSessionsCount = 0;
@@ -93,7 +93,7 @@ export function printText(text, options, environment) {
 export function printError(error, environment) {
   const debug = (environment && environment['@debug']) || process.env.DEBUG;
 
-  if (isClientError(error) && !debug) {
+  if (!debug && (isClientError(error) || isServerError(error) || isRemoteError(error))) {
     _print({message: error.message, output: 'error'}, environment);
     return;
   }

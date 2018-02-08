@@ -6,6 +6,7 @@ import {Lambda} from '@resdir/aws-client';
 import sleep from 'sleep-promise';
 import {zip} from '@resdir/archive-manager';
 import {save} from '@resdir/file-manager';
+import {createClientError} from '@resdir/error';
 import {copy, remove} from 'fs-extra';
 import tempy from 'tempy';
 import hasha from 'hasha';
@@ -64,7 +65,7 @@ export default () => ({
     }
 
     if (!this._lambdaFunction && throwIfNotFound) {
-      throw new Error('Lambda function not found');
+      throw createClientError('Lambda function not found');
     }
 
     return this._lambdaFunction;
@@ -108,7 +109,7 @@ export default () => ({
     const lambdaFunction = await this.getLambdaFunction();
     const {Tags: tags} = await lambda.listTags({Resource: lambdaFunction.arn});
     if (!isEqual(tags, {'managed-by': this.MANAGER_IDENTIFIER})) {
-      throw new Error(`Can't update a Lambda function not originally created by ${formatString(this.RESOURCE_ID)} (functionName: ${formatString(this.getLambdaFunctionName())})`);
+      throw createClientError(`Can't update a Lambda function not originally created by ${formatString(this.RESOURCE_ID)} (functionName: ${formatString(this.getLambdaFunctionName())})`);
     }
   },
 
@@ -186,7 +187,7 @@ export default () => ({
 
     const resourceFile = this.$getRoot().$getResourceFile();
     if (!resourceFile) {
-      throw new Error(`Resource file not found`);
+      throw createClientError(`Resource file not found`);
     }
     const {atime, mtime} = statSync(resourceFile);
     utimesSync(definitionFile, atime, mtime);

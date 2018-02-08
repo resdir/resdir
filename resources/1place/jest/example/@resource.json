@@ -1,0 +1,6 @@
+{
+  "tests": {
+    "@import": "../..",
+    "@directory": "./tests"
+  }
+}

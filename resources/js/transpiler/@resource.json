@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "js/transpiler",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "isPublic": true,
   "files": [
     "./dist"
@@ -20,6 +20,7 @@
     "is-directory": "^0.3.1",
     "lodash": "^4.17.4",
     "@resdir/console": "^0.1.0",
+    "@resdir/error": "^0.1.0",
     "@resdir/gitignore-manager": "^0.1.1"
   },
   "@unpublishable": {

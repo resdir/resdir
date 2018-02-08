@@ -1,4 +1,5 @@
 import {emptyLine, prompt, task, formatString, formatExample} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 
 export default () => ({
   async create({namespace, permissionToken}, environment) {
@@ -8,7 +9,7 @@ export default () => ({
     const user = await root.user.get();
 
     if (user.namespace) {
-      throw new Error(`You already have a namespace (${formatString(user.namespace)})`);
+      throw createClientError(`You already have a namespace (${formatString(user.namespace)})`);
     }
 
     while (!namespace) {
@@ -52,7 +53,7 @@ export default () => ({
     const user = await root.user.get();
 
     if (!user.namespace) {
-      throw new Error(`You don't have a namespace`);
+      throw createClientError(`You don't have a namespace`);
     }
 
     await task(

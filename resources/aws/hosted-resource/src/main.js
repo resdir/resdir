@@ -1,4 +1,5 @@
 import {printWarning, formatCode} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 
 export default () => ({
   RESOURCE_ID: 'aws/hosted-resource',
@@ -40,7 +41,7 @@ export default () => ({
   getExportResource() {
     const exportResource = this.$getExport({considerBases: true});
     if (!exportResource) {
-      throw new Error(`${formatCode('@export')} attribute not found`);
+      throw createClientError(`${formatCode('@export')} attribute not found`);
     }
     return exportResource;
   },
@@ -49,14 +50,14 @@ export default () => ({
     const exportResource = this.getExportResource();
     const implementationFile = exportResource.$getImplementationFile({considerBases: true});
     if (!implementationFile) {
-      throw new Error(`Implementation file not found`);
+      throw createClientError(`Implementation file not found`);
     }
     return implementationFile;
   },
 
   validate() {
     if (!this.domainName) {
-      throw new Error(`${formatCode('domainName')} property is missing`);
+      throw createClientError(`${formatCode('domainName')} property is missing`);
     }
   }
 });

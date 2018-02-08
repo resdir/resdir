@@ -4,7 +4,7 @@ import {
   buildJSONRPCError,
   createJSONRPCError
 } from '@resdir/json-rpc';
-import {createClientError, isClientError} from '@resdir/error';
+import {createClientError, isClientError, isServerError} from '@resdir/error';
 
 const INVOKE_METHOD_VERSION = 1;
 
@@ -50,7 +50,7 @@ export class RemoteResourceJSONRPCHandler {
     } catch (err) {
       let exposedError = err;
 
-      if (!(err.jsonRPCErrorCode || isClientError(err))) {
+      if (!(err.jsonRPCErrorCode || isClientError(err) || isServerError(err))) {
         if (awsRequestId) {
           let message = err.stack || err.message;
           message = message.replace(/\s+/g, ' ');

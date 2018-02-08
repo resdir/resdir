@@ -2,12 +2,13 @@ import {resolve} from 'path';
 import {parse as parseURL} from 'url';
 import {readFile, outputFile, copy, rename, emptyDir, pathExists} from 'fs-extra';
 import {task, formatCode} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 import revHash from 'rev-hash';
 
 export default () => ({
   async run(_input, environment) {
     if (!this.sourceDirectory) {
-      throw new Error(`${formatCode('sourceDirectory')} attribute is missing`);
+      throw createClientError(`${formatCode('sourceDirectory')} attribute is missing`);
     }
 
     await task(
@@ -48,7 +49,7 @@ export default () => ({
 
     for (let page of this.entryPages) {
       if (!(page.endsWith('.html') || page.endsWith('.htm'))) {
-        throw new Error(`Sorry, only HTML entry pages are supported`);
+        throw createClientError(`Sorry, only HTML entry pages are supported`);
       }
 
       if (page.startsWith('/')) {
@@ -57,7 +58,7 @@ export default () => ({
 
       const file = resolve(directory, page);
       if (!await pathExists(file)) {
-        throw new Error(`Entry page not found: ${file}`);
+        throw createClientError(`Entry page not found: ${file}`);
       }
 
       let html = await readFile(file, 'utf8');
@@ -83,18 +84,18 @@ export default () => ({
         }
 
         if (!url.endsWith('.js')) {
-          throw new Error('Sorry, for now only .js script files are supported');
+          throw createClientError('Sorry, for now only .js script files are supported');
         }
 
         if (!url.startsWith('/')) {
-          throw new Error('Sorry, relative URL are not supported yet');
+          throw createClientError('Sorry, relative URL are not supported yet');
         }
 
         const relativeURL = url.slice(1);
 
         const scriptFile = resolve(directory, relativeURL);
         if (!await pathExists(scriptFile)) {
-          throw new Error(`Script file not found: ${scriptFile}`);
+          throw createClientError(`Script file not found: ${scriptFile}`);
         }
 
         const script = await readFile(scriptFile, 'utf8');

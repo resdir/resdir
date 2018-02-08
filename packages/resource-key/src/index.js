@@ -1,11 +1,12 @@
 import {formatString} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 
 export function validateResourceKey(key, {throwIfInvalid = true} = {}) {
   const isValid = validate(key);
 
   if (!isValid) {
     if (throwIfInvalid) {
-      throw new Error(`Resource key ${formatString(key)} is invalid`);
+      throw createClientError(`Resource key ${formatString(key)} is invalid`);
     }
     return false;
   }

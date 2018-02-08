@@ -1,7 +1,7 @@
 import {compact} from 'lodash';
 import semver from 'semver';
-
 import {formatString} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 
 const MAXIMUM_NUMBER = 999999999;
 
@@ -66,7 +66,7 @@ export class VersionRange {
   includes(version) {
     version = semver.clean(version);
     if (!version) {
-      throw new Error(`Version ${formatString(version)} is invalid`);
+      throw createClientError(`Version ${formatString(version)} is invalid`);
     }
 
     if (this.exclusions.includes(version)) {
@@ -210,7 +210,7 @@ function parse(str) {
     return {type: 'EXACT', value: exactVersion};
   }
 
-  const error = new Error(`Version range ${formatString(str)} is invalid`);
+  const error = createClientError(`Version range ${formatString(str)} is invalid`);
 
   let type;
   let value;
@@ -288,7 +288,7 @@ function decrement(version) {
     minor = MAXIMUM_NUMBER;
     patch = MAXIMUM_NUMBER;
   } else {
-    throw new Error('Can\'t decrement a version equal to 0.0.0');
+    throw createClientError('Can\'t decrement a version equal to 0.0.0');
   }
   return `${major}.${minor}.${patch}`;
 }

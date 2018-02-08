@@ -1,9 +1,6 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/error",
-  "version": "0.1.0",
-  "description": "Convenient functions to create errors",
-  "dependencies": {
-    "lodash": "^4.17.4"
-  }
+  "version": "0.1.1",
+  "description": "Convenient functions to create errors"
 }

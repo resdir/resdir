@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "website/freezer",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "isPublic": true,
   "files": [
     "./dist"
@@ -12,6 +12,7 @@
   "dependencies": {
     "fs-extra": "^5.0.0",
     "@resdir/console": "^0.1.35",
+    "@resdir/error": "^0.1.0",
     "rev-hash": "^2.0.0"
   },
   "@export": {

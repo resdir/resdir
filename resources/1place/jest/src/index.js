@@ -1,6 +1,7 @@
 import {resolve} from 'path';
 import {task} from '@resdir/console';
 import {execute} from '@resdir/process-manager';
+import {createClientError} from '@resdir/error';
 
 export default () => ({
   async run({testPathPattern}, environment) {
@@ -30,7 +31,11 @@ export default () => ({
         if (testPathPattern) {
           args.push('--testPathPattern=' + testPathPattern);
         }
-        await execute(command, args, {directory, commandName: 'jest'}, environment);
+        try {
+          await execute(command, args, {directory, commandName: 'jest'}, environment);
+        } catch (err) {
+          throw createClientError('Resource test failed');
+        }
       },
       {intro: `Testing resource...`, outro: `Resource tested`},
       verboseEnvironment

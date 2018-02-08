@@ -3,6 +3,7 @@ import {statSync, createReadStream} from 'fs';
 import {pick, isEqual} from 'lodash';
 import {task, formatString, formatPath, formatMessage} from '@resdir/console';
 import {S3, getS3WebsiteDomainName} from '@resdir/aws-client';
+import {createClientError} from '@resdir/error';
 import readDir from 'recursive-readdir';
 import hasha from 'hasha';
 import mime from 'mime-types';
@@ -42,14 +43,14 @@ export default () => ({
           !hasBeenCreated &&
           !tags.some(tag => isEqual(tag, {Key: 'managed-by', Value: this.MANAGER_IDENTIFIER}))
         ) {
-          throw new Error(`Can't use a S3 bucket not originally created by ${formatString(this.RESOURCE_ID)} (bucketName: ${formatString(bucketName)})`);
+          throw createClientError(`Can't use a S3 bucket not originally created by ${formatString(this.RESOURCE_ID)} (bucketName: ${formatString(bucketName)})`);
         }
 
         if (!hasBeenCreated) {
           const result = await s3.getBucketLocation({Bucket: bucketName});
           const locationConstraint = result.LocationConstraint || 'us-east-1';
           if (locationConstraint !== region) {
-            throw new Error(`Sorry, it is currently not possible to change the region of the S3 bucket associated to your website. Please remove the bucket (${formatString(bucketName)}) manually or set the region to its initial value (${formatString(locationConstraint)}).`);
+            throw createClientError(`Sorry, it is currently not possible to change the region of the S3 bucket associated to your website. Please remove the bucket (${formatString(bucketName)}) manually or set the region to its initial value (${formatString(locationConstraint)}).`);
           }
         }
 
@@ -105,7 +106,7 @@ export default () => ({
             const result = await s3.listObjectsV2({Bucket: bucketName});
 
             if (result.IsTruncated) {
-              throw new Error('Whoa, you have a lot of files on S3! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if you really need to handle so many files.');
+              throw createClientError('Whoa, you have a lot of files on S3! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if you really need to handle so many files.');
             }
 
             const files = [];
@@ -340,7 +341,7 @@ async function getS3BucketTags(s3, bucketName) {
       return undefined;
     }
     if (err.code === 'AccessDenied') {
-      throw new Error(`Access denied to S3 bucket (${formatString(bucketName)})`);
+      throw createClientError(`Access denied to S3 bucket (${formatString(bucketName)})`);
     }
     throw err;
   }

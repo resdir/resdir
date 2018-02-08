@@ -1,12 +1,13 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/email-address",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Strong email address validation",
   "dependencies": {
     "disposable-email-domains": "^1.0.21",
     "regex-email": "^1.0.2",
     "@resdir/console": "^0.1.7",
+    "@resdir/error": "^0.1.0",
     "validate-email-hostname": "^1.0.9"
   }
 }

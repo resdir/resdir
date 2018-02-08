@@ -1,4 +1,4 @@
-import Person from '../..';
+import Person from '../../..';
 
 describe('Person', () => {
   test('formatGreeting()', () => {

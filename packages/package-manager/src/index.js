@@ -2,6 +2,7 @@ import {join} from 'path';
 import {existsSync, unlinkSync} from 'fs';
 import {entries, difference} from 'lodash';
 import {formatString, formatPath} from '@resdir/console';
+import {createClientError} from '@resdir/error';
 import {load, save} from '@resdir/file-manager';
 import {getJSON} from '@resdir/http-client';
 import {execute} from '@resdir/process-manager';
@@ -128,7 +129,7 @@ export async function publishPackage(directory, {access} = {}, environment) {
 export async function getCurrentDependencyVersion(directory, name, {throwIfNotFound = true}) {
   const version = await _getCurrentDependencyVersion(directory, name);
   if (!version && throwIfNotFound) {
-    throw new Error(`Dependency ${formatString(name)} not found (directory: ${formatPath(directory)})`);
+    throw createClientError(`Dependency ${formatString(name)} not found (directory: ${formatPath(directory)})`);
   }
   return version;
 }
@@ -165,7 +166,7 @@ export async function fetchNPMRegistry(name, {useCache, throwIfNotFound = true} 
   } catch (err) {
     if (err.status === 404) {
       if (throwIfNotFound) {
-        throw new Error(`Package not found in npm registry: ${formatString(name)}`);
+        throw createClientError(`Package not found in npm registry: ${formatString(name)}`);
       }
       return undefined;
     }

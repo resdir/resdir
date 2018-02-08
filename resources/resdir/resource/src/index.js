@@ -3,20 +3,21 @@ import {validateResourceIdentifier} from '@resdir/resource-identifier';
 import {validateVersion} from '@resdir/version';
 import {stringifyResourceSpecifier} from '@resdir/resource-specifier';
 import GitIgnore from '@resdir/gitignore-manager';
+import {createClientError} from '@resdir/error';
 
 const GIT_IGNORE = ['.DS_STORE', '/*.log'];
 
 export default Resource => ({
   async publish({major, minor, patch, throwIfAlreadyExists, permissionToken}, environment) {
     if (!(this.id && this.version)) {
-      throw new Error(`Can't publish a resource without ${formatCode('id')} and ${formatCode('version')} properties`);
+      throw createClientError(`Can't publish a resource without ${formatCode('id')} and ${formatCode('version')} properties`);
     }
 
     const registryClient = await Resource.$getRegistryClient();
 
     if (!throwIfAlreadyExists) {
       if (major || minor || patch) {
-        throw new Error(`Can't disable ${formatCode('throwIfAlreadyExists')} with ${formatCode('major')} or ${formatCode('minor')} or ${formatCode('patch')} options`);
+        throw createClientError(`Can't disable ${formatCode('throwIfAlreadyExists')} with ${formatCode('major')} or ${formatCode('minor')} or ${formatCode('patch')} options`);
       }
       const specifier = stringifyResourceSpecifier({
         identifier: this.id,
