@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "js/transpiler",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "isPublic": true,
   "files": [
     "./dist"
@@ -85,15 +85,15 @@
         }
       }
     },
-    "initialize": {
+    "onCreated": {
       "@type": "method",
       "@isHidden": true,
       "@input": {
-        "gitignore": {
+        "generateGitignore": {
           "@default": true
         }
       },
-      "@listen": "@added"
+      "@listen": "@created"
     }
   }
 }

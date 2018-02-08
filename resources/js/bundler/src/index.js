@@ -1,6 +1,7 @@
-import {join, resolve} from 'path';
+import {join, resolve, isAbsolute} from 'path';
 import {readFile, outputFile as writeFile, ensureDir, pathExists, rename, stat} from 'fs-extra';
 import {task, print, formatCode, formatDim} from '@resdir/console';
+import GitIgnore from '@resdir/gitignore-manager';
 import {rollup} from 'rollup';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
@@ -11,6 +12,8 @@ import builtins from 'rollup-plugin-node-builtins';
 import uglify from 'rollup-plugin-uglify';
 import {minify} from 'uglify-es';
 import bytes from 'bytes';
+
+const GIT_IGNORE = ['/node_modules.*'];
 
 const NODE_BUILT_IN_MODULES = [
   'process',
@@ -204,6 +207,33 @@ export default () => ({
     }
 
     await rename(join(directory, 'node_modules.original'), join(directory, 'node_modules'));
+  },
+
+  async onCreated({generateGitignore}) {
+    if (this.$isRoot()) {
+      // This creation method works only with child properties
+      return;
+    }
+
+    const root = this.$getRoot();
+    const directory = root.$getCurrentDirectory();
+
+    if (generateGitignore) {
+      const gitIgnore = [...GIT_IGNORE];
+      let output = this.output;
+      if (!isAbsolute(output) && !output.startsWith('..')) {
+        if (!output.startsWith('./')) {
+          output = './' + output;
+        }
+        if (output.startsWith('./')) {
+          output = output.slice(1);
+        }
+        gitIgnore.push(output);
+      }
+      GitIgnore.load(directory)
+        .add(gitIgnore)
+        .save();
+    }
   }
 });
 

@@ -4,7 +4,7 @@ import {validateVersion} from '@resdir/version';
 import {stringifyResourceSpecifier} from '@resdir/resource-specifier';
 import GitIgnore from '@resdir/gitignore-manager';
 
-const GIT_IGNORE = ['.DS_STORE', '*.log'];
+const GIT_IGNORE = ['.DS_STORE', '/*.log'];
 
 export default Resource => ({
   async publish({major, minor, patch, throwIfAlreadyExists, permissionToken}, environment) {
@@ -44,7 +44,7 @@ export default Resource => ({
     await this.$emit('published');
   },
 
-  async initialize({id, version, gitignore}) {
+  async onCreated({id, version, generateGitignore}) {
     while (!id) {
       id = await prompt('Resource identifier:');
     }
@@ -57,7 +57,7 @@ export default Resource => ({
     validateVersion(version);
     this.version = version;
 
-    if (gitignore) {
+    if (generateGitignore) {
       GitIgnore.load(this.$getCurrentDirectory())
         .add(GIT_IGNORE)
         .save();

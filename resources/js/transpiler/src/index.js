@@ -1,4 +1,4 @@
-import {join, resolve, relative, extname} from 'path';
+import {join, resolve, relative, extname, isAbsolute} from 'path';
 import {readFileSync, writeFileSync, existsSync, statSync, utimesSync, chmodSync} from 'fs';
 import {isEqual} from 'lodash';
 import {copy, readFile, outputFile, emptyDirSync} from 'fs-extra';
@@ -12,8 +12,6 @@ const babelPresetStage3 = require.resolve('@babel/preset-stage-3');
 const babelPresetReact = require.resolve('@babel/preset-react');
 const babelPluginDecorators = require.resolve('@babel/plugin-proposal-decorators');
 const babelPluginLodash = require.resolve('babel-plugin-lodash');
-
-const GIT_IGNORE = ['/dist'];
 
 export default () => ({
   async run({files}, environment) {
@@ -40,7 +38,7 @@ export default () => ({
   async _transpileOrCopy(files, environment = {}) {
     const directory = this.$getParent().$getCurrentDirectory();
     const srcDirectory = resolve(directory, this.source);
-    const destination = this.destination.replace('${format}', this.format); // eslint-disable-line no-template-curly-in-string
+    const destination = this.getResolvedDestination();
     const destDirectory = resolve(directory, destination);
     const extensions = this.extensions;
 
@@ -153,9 +151,13 @@ export default () => ({
     }
   },
 
-  async initialize({gitignore}) {
+  getResolvedDestination() {
+    return this.destination.replace('${format}', this.format); // eslint-disable-line no-template-curly-in-string
+  },
+
+  async onCreated({generateGitignore}, environment) {
     if (this.$isRoot()) {
-      // This initialization method works only with child properties
+      // This creation method works only with child properties
       return;
     }
 
@@ -165,35 +167,54 @@ export default () => ({
 
     const root = this.$getRoot();
     const directory = root.$getCurrentDirectory();
+    const resolvedDestination = this.getResolvedDestination();
 
     if (root.$implementation === './src') {
-      root.$implementation = './dist';
+      root.$implementation = resolvedDestination;
       const implementationFile = join(directory, 'src', 'index.js');
       if (existsSync(implementationFile)) {
         let code = readFileSync(implementationFile, 'utf8');
-        if (code.startsWith('module.exports = base =>\n')) {
-          code = 'export default base =>\n' + code.slice('module.exports = base =>\n'.length);
+        if (code.startsWith('module.exports = Resource =>')) {
+          code = 'export default Resource =>' + code.slice('module.exports = Resource =>'.length);
           writeFileSync(implementationFile, code);
         }
       }
     }
 
     if (root.isJSNPMPackageResource) {
-      if (root.main === './src/index.js') {
-        root.main = './dist/index.js';
-      }
-      if (isEqual(root.files, ['./src'])) {
-        root.files = ['./dist'];
+      if (this.format === 'cjs') {
+        if (root.main === './src') {
+          root.main = resolvedDestination;
+        }
+        if (isEqual(root.files, ['./src'])) {
+          root.files = [resolvedDestination];
+        }
+      } else if (this.format === 'esm') {
+        if (!root.module) {
+          root.module = resolvedDestination;
+        }
+        if (isEqual(root.files, ['./dist/cjs'])) {
+          root.files = ['./dist/cjs', resolvedDestination];
+        }
       }
     }
 
-    if (gitignore) {
-      GitIgnore.load(directory)
-        .add(GIT_IGNORE)
-        .save();
+    if (generateGitignore) {
+      let destination = resolvedDestination;
+      if (!isAbsolute(destination) && !destination.startsWith('..')) {
+        if (!destination.startsWith('./')) {
+          destination = './' + destination;
+        }
+        if (destination.startsWith('./')) {
+          destination = destination.slice(1);
+        }
+        GitIgnore.load(directory)
+          .add([destination])
+          .save();
+      }
     }
 
-    await root['@build']();
+    await this.run(undefined, environment);
 
     await root.$save();
   }

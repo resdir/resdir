@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.51",
+  "version": "0.1.52",
   "isPublic": true,
   "files": [
     "./dist/bundle.js"
@@ -15,6 +15,7 @@
         "@resdir/console": "^0.1.0",
         "@resdir/error": "^0.1.0",
         "@resdir/file-manager": "^0.1.0",
+        "@resdir/gitignore-manager": "^0.1.0",
         "@resdir/package-manager": "^0.1.0",
         "@resdir/version-range": "^0.1.0"
       }
@@ -194,6 +195,16 @@
     "updatePackageFile": {
       "@type": "method",
       "@isHidden": true
+    },
+    "onCreated": {
+      "@type": "method",
+      "@isHidden": true,
+      "@input": {
+        "generateGitignore": {
+          "@default": true
+        }
+      },
+      "@listen": "@created"
     }
   }
 }

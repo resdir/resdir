@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.42",
+  "version": "0.1.43",
   "isPublic": true,
   "files": [
     "./dist"
@@ -118,7 +118,7 @@
         "@saved"
       ]
     },
-    "initialize": {
+    "onCreated": {
       "@type": "method",
       "@isHidden": true,
       "@input": {
@@ -134,7 +134,7 @@
           ],
           "@isOptional": true
         },
-        "gitignore": {
+        "generateGitignore": {
           "@default": true
         }
       },

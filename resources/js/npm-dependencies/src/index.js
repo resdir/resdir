@@ -19,8 +19,11 @@ import {
   updateDependencies,
   getCurrentDependencyVersion
 } from '@resdir/package-manager';
+import GitIgnore from '@resdir/gitignore-manager';
 
 import Dependency from './dependency';
+
+const GIT_IGNORE = ['/node_modules'];
 
 export default () => ({
   async add({specifiers, production, development, peer, optional}, environment) {
@@ -308,5 +311,21 @@ export default () => ({
       return;
     }
     this.$value = fromPairs(dependencies.map(dependency => dependency.toPair()));
+  },
+
+  async onCreated({generateGitignore}) {
+    if (this.$isRoot()) {
+      // This creation method works only with child properties
+      return;
+    }
+
+    const root = this.$getRoot();
+    const directory = root.$getCurrentDirectory();
+
+    if (generateGitignore) {
+      GitIgnore.load(directory)
+        .add(GIT_IGNORE)
+        .save();
+    }
   }
 });

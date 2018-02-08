@@ -7,7 +7,7 @@ import GitIgnore from '@resdir/gitignore-manager';
 const PACKAGE_CODE = `// Package implementation
 `;
 
-const GIT_IGNORE = ['.DS_STORE', 'node_modules', '*.log', '/package.json'];
+const GIT_IGNORE = ['.DS_STORE', '/*.log', '/package.json'];
 
 export default () => ({
   async updatePackageFile(_args, environment) {
@@ -96,7 +96,7 @@ export default () => ({
     await publishPackage(directory, {access}, environment);
   },
 
-  async initialize({name, version, gitignore}) {
+  async onCreated({name, version, gitignore}) {
     while (!name) {
       name = await prompt('Package name:');
     }
@@ -107,11 +107,6 @@ export default () => ({
 
     const directory = this.$getCurrentDirectory();
 
-    const mainPropertyIsMissing = !this.main;
-    const codeFile = join(directory, 'src', 'index.js');
-    const codeFileIsMissing = !pathExistsSync(codeFile);
-    const filesPropertyIsMissing = !this.files;
-
     this.name = name;
     this.version = version;
 
@@ -121,14 +116,15 @@ export default () => ({
         .save();
     }
 
-    if (mainPropertyIsMissing) {
-      this.main = './src/index.js';
-      if (codeFileIsMissing) {
+    if (!this.main) {
+      this.main = './src';
+      const codeFile = join(directory, 'src', 'index.js');
+      if (!pathExistsSync(codeFile)) {
         outputFileSync(codeFile, PACKAGE_CODE);
       }
     }
 
-    if (filesPropertyIsMissing) {
+    if (!this.files) {
       this.files = ['./src'];
     }
 

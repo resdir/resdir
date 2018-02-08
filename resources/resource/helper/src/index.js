@@ -52,7 +52,7 @@ export default Resource => ({
         }
 
         const resource = await Resource.$create(definition, {directory});
-        await resource.$emit('@created');
+        await resource.$broadcast('@created');
         await resource.$save();
       },
       {
@@ -95,7 +95,7 @@ export default Resource => ({
         }
 
         child = await resource.$setChild(key, definition);
-        await child.$emit('@added');
+        await child.$broadcast('@created');
         await resource.$save();
       },
       {
