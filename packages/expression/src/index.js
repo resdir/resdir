@@ -1,4 +1,4 @@
-import entries from 'lodash/entries';
+import {entries} from 'lodash';
 import {parse} from 'shell-quote';
 import {takeProperty} from '@resdir/util';
 import {formatCode, formatNumber} from '@resdir/console';
@@ -10,7 +10,7 @@ const SUB_ARGUMENTS_KEY = '@@SUB_ARGUMENTS';
 
 export function parseExpression(expression) {
   if (typeof expression !== 'string') {
-    throw createClientError('\'expression\' must be a string');
+    throw new Error('\'expression\' must be a string');
   }
 
   // TODO: Replace 'shell-quote' with something more suitable
@@ -23,20 +23,55 @@ export function parseExpression(expression) {
   //   );
   // }
 
-  let parsedExpression = parse(expression, _variable => {
+  expression = parse(expression, _variable => {
     throw new Error('Expression variables are not yet implemented');
   });
 
-  parsedExpression = parsedExpression.map(arg => {
-    if (typeof arg === 'string') {
-      return arg;
+  expression = findSubexpressions(expression);
+
+  expression = parseArgumentsAndOptions(expression);
+
+  return expression;
+}
+
+function findSubexpressions(expression, {isSubexpression} = {}) {
+  if (!Array.isArray(expression)) {
+    throw new TypeError('\'expression\' must be an array');
+  }
+
+  const result = [];
+
+  while (expression.length) {
+    const part = expression.shift();
+
+    if (typeof part === 'string') {
+      result.push(part);
+      continue;
     }
-    throw new Error(`Expression parsing failed (arg: ${JSON.stringify(arg)})`);
-  });
 
-  parsedExpression = parseArgumentsAndOptions(parsedExpression);
+    const op = part.op;
 
-  return parsedExpression;
+    if (op === '(') {
+      const subexpression = findSubexpressions(expression, {isSubexpression: true});
+      result.push(subexpression);
+      continue;
+    }
+
+    if (op === ')') {
+      if (!isSubexpression) {
+        throw createClientError(`Unexpected ${formatCode(')')} found while parsing an expression`);
+      }
+      return result;
+    }
+
+    throw createClientError(`Expression parsing failed (part: ${JSON.stringify(part)})`);
+  }
+
+  if (isSubexpression) {
+    throw createClientError(`Expected ${formatCode(')')} not found while parsing an expression`);
+  }
+
+  return result;
 }
 
 function parseArgumentsAndOptions(argsAndOpts) {
@@ -65,7 +100,11 @@ function _parseArgumentsAndOptions(argsAndOpts) {
   const result = {[PARSED_EXPRESSION_TAG]: true};
 
   for (let i = 0, position = 0; i < argsAndOpts.length; i++) {
-    const argOrOpt = argsAndOpts[i];
+    let argOrOpt = argsAndOpts[i];
+
+    if (Array.isArray(argOrOpt)) {
+      argOrOpt = _parseArgumentsAndOptions(argOrOpt);
+    }
 
     if (typeof argOrOpt === 'string' && argOrOpt.startsWith('--')) {
       let opt = argOrOpt.slice(2);
@@ -212,7 +251,10 @@ function _matchNamedArgument(key, schema) {
 }
 
 export function isParsedExpression(expression) {
-  return PARSED_EXPRESSION_TAG in expression;
+  return (
+    typeof expression === 'object' &&
+    Object.prototype.hasOwnProperty.call(expression, PARSED_EXPRESSION_TAG)
+  );
 }
 
 export function takeArgument(expression, key, aliases) {
