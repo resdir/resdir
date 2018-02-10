@@ -90,7 +90,11 @@ export function validateVersion(version, {throwIfInvalid = true} = {}) {
 
   if (!isValid) {
     if (throwIfInvalid) {
-      throw createClientError(`Version ${formatString(version)} is invalid`);
+      if (version) {
+        throw createClientError(`Version number ${formatString(version)} is invalid`);
+      } else {
+        throw createClientError(`Version number is missing`);
+      }
     }
     return false;
   }
