@@ -35,7 +35,11 @@ export function validateResourceIdentifier(identifier, {throwIfInvalid = true} =
 
   if (!isValid) {
     if (throwIfInvalid) {
-      throw createClientError(`Resource identifier ${formatString(identifier)} is invalid`);
+      if (identifier) {
+        throw createClientError(`Resource identifier ${formatString(identifier)} is invalid`);
+      } else {
+        throw createClientError(`Resource identifier is missing`);
+      }
     }
     return false;
   }
