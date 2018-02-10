@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "resource/helper",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "isPublic": true,
   "files": [
     "./dist"
@@ -17,94 +17,77 @@
     "@resdir/resource-specifier": "^0.1.10"
   },
   "@export": {
-    "@description": "A set of methods to manage resources",
     "@implementation": "./dist/cjs",
     "create": {
       "@type": "method",
-      "@description": "Create a resource in the current directory",
       "@input": {
         "typeOrSpecifier": {
           "@type": "string",
-          "@description": "Type or resource specifier",
           "@position": 0
         }
       }
     },
     "add": {
       "@type": "method",
-      "@description": "Add a property to the specified resource",
       "@input": {
         "resourcePtr": {
           "@type": "pointer",
-          "@description": "A pointer to a resource",
           "@position": 0
         },
         "typeOrSpecifier": {
           "@type": "string",
-          "@description": "Type or resource specifier to add",
           "@position": 1
         },
         "key": {
           "@type": "string",
-          "@description": "Key of the property to add",
           "@position": 2
         }
       }
     },
     "remove": {
       "@type": "method",
-      "@description": "Remove a property from the specified resource",
       "@aliases": [
         "rm"
       ],
       "@input": {
         "resourcePtr": {
           "@type": "pointer",
-          "@description": "A pointer to a resource",
           "@position": 0
         },
         "key": {
           "@type": "string",
-          "@description": "Key of the property to remove",
           "@position": 1
         }
       }
     },
     "normalize": {
       "@type": "method",
-      "@description": "Normalize the file of the specified resource",
       "@input": {
         "resourcePtr": {
           "@type": "pointer",
-          "@description": "A pointer to a resource",
           "@position": 0
         },
         "format": {
           "@type": "string",
-          "@description": "Preferred format",
           "@default": "JSON"
         }
       }
     },
     "help": {
       "@type": "method",
-      "@description": "Show help for the specified resource",
       "@input": {
         "resourcePtr": {
           "@type": "pointer",
-          "@description": "A pointer to the resource for which help is required",
           "@position": 0
         },
         "keys": {
           "@type": "array",
-          "@description": "Key path to sub-resources, attributes or methods",
           "@position": 1,
           "@isOptional": true,
           "@isVariadic": true
         },
         "showNative": {
           "@type": "boolean",
-          "@description": "Show help for native attributes and methods",
           "@aliases": [
             "native"
           ],

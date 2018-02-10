@@ -4,7 +4,7 @@
     "./"
   ],
   "id": "js/resource",
-  "version": "0.1.35",
+  "version": "0.1.36",
   "isPublic": true,
   "files": [
     "./dist"
@@ -25,6 +25,7 @@
     }
   },
   "@export": {
+    "@description": "A starting point for resources implemented in JavaScript",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist/cjs",
     "dependencies": {

@@ -4,8 +4,9 @@
     "1place/js-resource"
   ],
   "@implementation": "./dist/cjs",
+  "@description": "A simple 'Hello, World!' example",
   "id": "resdir/example",
-  "version": "0.3.50",
+  "version": "0.3.51",
   "isPublic": true,
   "files": [
     "./dist"
@@ -26,7 +27,8 @@
     ],
     "@input": {
       "color": {
-        "@default": "green"
+        "@default": "green",
+        "@description": "The color of the printed message (using 'chalk')"
       }
     }
   }

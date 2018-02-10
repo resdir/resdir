@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/resource",
-  "version": "0.1.45",
+  "version": "0.1.46",
   "isPublic": true,
   "files": [
     "./dist"
@@ -36,16 +36,17 @@
     }
   },
   "@export": {
+    "@description": "The base resource for all resources published on Resdir",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist/cjs",
     "id": {
       "@type": "string",
-      "@description": "Identifier of the resource",
+      "@description": "The identifier of the resource",
       "@examples": [
         "js/example",
         "aturing/nice-tool"
       ],
-      "@implementation": "./dist/cjs/id-property.js",
+      "@implementation": "./dist/cjs/id-attribute.js",
       "getNamespace": {
         "@type": "method",
         "@description": "Get the namespace part of the identifier",
@@ -94,7 +95,7 @@
     },
     "version": {
       "@type": "string",
-      "@description": "Version number",
+      "@description": "The version number of the resource (follows the SemVer specification)",
       "@aliases": [
         "ver",
         "v"
@@ -104,7 +105,7 @@
         "0.23.4",
         "2.0.0-alpha.3"
       ],
-      "@implementation": "./dist/cjs/version-property.js",
+      "@implementation": "./dist/cjs/version-attribute.js",
       "validate": {
         "@type": "method",
         "@description": "Validate the version number",
@@ -126,45 +127,68 @@
         "@input": {
           "major": {
             "@type": "boolean",
-            "@description": "Bump major version",
+            "@description": "Bump the major part of the version",
             "@isOptional": true
           },
           "minor": {
             "@type": "boolean",
-            "@description": "Bump minor version",
+            "@description": "Bump the minor part of the version",
             "@isOptional": true
           },
           "patch": {
             "@type": "boolean",
-            "@description": "Bump patch version",
+            "@description": "Bump the patch part of the version (default)",
             "@isOptional": true
           }
         }
       }
     },
     "isPublic": {
-      "@description": "Whether or not the resource is publicly available",
+      "@description": "Whether or not the resource should be made publicly available",
       "@aliases": [
         "public"
       ],
-      "@value": false
+      "@default": false
     },
     "name": {
       "@type": "string",
-      "@description": "Name of the resource",
+      "@description": "A (human) name for the resource",
       "@examples": [
         "React"
-      ]
+      ],
+      "@implementation": "./dist/cjs/name-attribute.js",
+      "validate": {
+        "@type": "method",
+        "@description": "Validate the name",
+        "@input": {
+          "throwIfInvalid": {
+            "@default": true
+          }
+        },
+        "@output": {
+          "@type": "boolean"
+        }
+      }
     },
     "description": {
       "@type": "string",
-      "@description": "Short description",
-      "@aliases": [
-        "desc"
-      ],
+      "@description": "A short description",
       "@examples": [
         "A tool that is nice to you"
-      ]
+      ],
+      "@implementation": "./dist/cjs/description-attribute.js",
+      "validate": {
+        "@type": "method",
+        "@description": "Validate the description",
+        "@input": {
+          "throwIfInvalid": {
+            "@default": true
+          }
+        },
+        "@output": {
+          "@type": "boolean"
+        }
+      }
     },
     "keywords": {
       "@type": "array",
@@ -174,18 +198,62 @@
           "nice",
           "cli-tool"
         ]
-      ]
+      ],
+      "@implementation": "./dist/cjs/keywords-attribute.js",
+      "validate": {
+        "@type": "method",
+        "@description": "Validate the keywords",
+        "@input": {
+          "throwIfInvalid": {
+            "@default": true
+          }
+        },
+        "@output": {
+          "@type": "boolean"
+        }
+      }
     },
     "homepage": {
       "@type": "string",
-      "@description": "URL of the homepage",
+      "@description": "The URL of the homepage",
       "@examples": [
         "https://www.aturing.com/nice-tool"
       ]
     },
+    "authors": {
+      "@type": "array",
+      "@description": "The authors of the resource",
+      "@examples": [
+        [
+          "Barney Rubble <b@rubble.com>",
+          "alfred@awesome.fr",
+          "Linus Torvalds"
+        ]
+      ]
+    },
+    "contributors": {
+      "@type": "array",
+      "@description": "A list of contributors to the resource",
+      "@examples": [
+        [
+          "Barney Rubble <b@rubble.com>",
+          "alfred@awesome.fr",
+          "Linus Torvalds"
+        ]
+      ]
+    },
+    "license": {
+      "@type": "string",
+      "@description": "The license attached to the resource (typically, a SPDX identifier)",
+      "@examples": [
+        "MIT",
+        "Apache-2.0",
+        "BSD-3-Clause"
+      ]
+    },
     "repository": {
       "@type": "string",
-      "@description": "URL of the repository",
+      "@description": "The URL of the resource's repository",
       "@aliases": [
         "repo"
       ],
@@ -211,17 +279,17 @@
       "@input": {
         "major": {
           "@type": "boolean",
-          "@description": "Bump major version before publishing",
+          "@description": "Bump the major part of the version before publishing",
           "@isOptional": true
         },
         "minor": {
           "@type": "boolean",
-          "@description": "Bump minor version before publishing",
+          "@description": "Bump the minor part of the version before publishing",
           "@isOptional": true
         },
         "patch": {
           "@type": "boolean",
-          "@description": "Bump patch version before publishing",
+          "@description": "Bump the patch part of the version before publishing",
           "@isOptional": true
         },
         "throwIfAlreadyExists": {
@@ -232,6 +300,18 @@
           "@type": "string",
           "@isOptional": true
         }
+      }
+    },
+    "validate": {
+      "@type": "method",
+      "@description": "Validate the resource definition",
+      "@input": {
+        "throwIfInvalid": {
+          "@default": true
+        }
+      },
+      "@output": {
+        "@type": "boolean"
       }
     },
     "onCreated": {

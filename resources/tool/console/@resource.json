@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "tool/console",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "isPublic": true,
   "files": [
     "./dist"
@@ -13,12 +13,15 @@
     "@resdir/console": "^0.1.24"
   },
   "@export": {
+    "@description": "Manage the console (in development)",
     "@implementation": "./dist/cjs",
     "print": {
       "@type": "method",
+      "@description": "Print a message to the console",
       "@input": {
         "message": {
           "@type": "string",
+          "@description": "The message to print",
           "@position": 0,
           "@isOptional": true
         }

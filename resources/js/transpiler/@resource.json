@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "js/transpiler",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "isPublic": true,
   "files": [
     "./dist"
@@ -36,23 +36,24 @@
     }
   },
   "@export": {
-    "@description": "ESNext transpilation (using Babel)",
+    "@description": "JavaScript transpiler (using Babel)",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist/cjs",
     "source": {
-      "@default": "./src"
+      "@default": "./src",
+      "@description": "Source directory of the files to be transpiled"
     },
     "destination": {
-      "@default": "./dist/${format}"
+      "@default": "./dist/${format}",
+      "@description": "Destination directory of the transpiled files"
     },
     "extensions": {
       "@default": [
         ".js",
         ".mjs",
-        ".jsx",
-        ".es6",
-        ".es"
-      ]
+        ".jsx"
+      ],
+      "@description": "Extensions of files that should be transpiled (other files are simply copied)"
     },
     "targets": {
       "@default": {
@@ -61,22 +62,32 @@
         "safari": "10",
         "firefox": "53",
         "edge": "14"
-      }
+      },
+      "@description": "Expected targets of the transpiled files (uses @babel/preset-env)"
     },
     "format": {
-      "@default": "cjs"
+      "@default": "cjs",
+      "@description": "Module format ('cjs' or 'esm') to use for the transpiled files",
+      "@examples": [
+        "cjs",
+        "esm"
+      ]
     },
     "transformJSX": {
-      "@default": false
+      "@default": false,
+      "@description": "Enable JSX support (using @babel/preset-react)"
     },
     "jsxPragma": {
-      "@type": "string"
+      "@type": "string",
+      "@isHidden": true
     },
     "run": {
       "@type": "method",
+      "@description": "Run the transpiler",
       "@input": {
         "files": {
           "@type": "array",
+          "@description": "When specified, selects the files to be transpiled",
           "@aliases": [
             "file"
           ],

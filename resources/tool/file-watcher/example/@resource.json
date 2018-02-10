@@ -2,6 +2,8 @@
   "@import": "../",
   "files": ["./src/**"],
   "onFileModified": {
-    "@run": "@console print \"A file has been modified\""
+    "@type": "method",
+    "@run": "@console print \"A file has been modified\"",
+    "@listen": "fileModified"
   }
 }

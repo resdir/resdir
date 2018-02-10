@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.44",
+  "version": "0.1.45",
   "isPublic": true,
   "files": [
     "./dist"
@@ -31,89 +31,165 @@
     }
   },
   "@export": {
+    "@description": "Base resource to create and publish npm packages",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist/cjs",
     "name": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "The name of the package",
+      "@examples": ["lodash", "react-dom", "@babel/core"]
     },
     "version": {
       "@type": "string",
-      "@implementation": "./dist/cjs/version-property",
+      "@description": "The version number of the package",
+      "@examples": ["0.1.0", "1.12.5", "2.0.0-beta.1"],
+      "@implementation": "./dist/cjs/version-attribute",
       "bump": {
         "@type": "method",
+        "@description": "Bump the version number",
         "@input": {
           "major": {
             "@type": "boolean",
+            "@description": "Bump the major part of the version",
             "@isOptional": true
           },
           "minor": {
             "@type": "boolean",
+            "@description": "Bump the minor part of the version",
             "@isOptional": true
           },
           "patch": {
             "@type": "boolean",
+            "@description": "Bump the patch part of the version (default)",
             "@isOptional": true
           }
         }
       }
     },
     "description": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "A short description",
+      "@examples": [
+        "Declarative routing for React"
+      ]
+    },
+    "keywords": {
+      "@type": "array",
+      "@description": "A list of keywords",
+      "@examples": [
+        [
+          "react",
+          "generator",
+          "cli-tool"
+        ]
+      ]
+    },
+    "homepage": {
+      "@type": "string",
+      "@description": "The URL of the homepage",
+      "@examples": [
+        "https://www.aturing.com/nice-tool"
+      ]
     },
     "author": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "The author of the package",
+      "@examples": [
+        "Barney Rubble <b@rubble.com>",
+        "alfred@awesome.fr",
+        "Linus Torvalds"
+      ]
     },
     "contributors": {
-      "@type": "array"
+      "@type": "array",
+      "@description": "A list of contributors"
     },
     "repository": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "The URL of the repository",
+      "@examples": [
+        "https://github.com/aturing/nice-tool.git"
+      ]
     },
     "license": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "The license attached to the package",
+      "@examples": [
+        "MIT",
+        "Apache-2.0",
+        "BSD-3-Clause"
+      ]
     },
     "files": {
-      "@type": "array"
+      "@type": "array",
+      "@description": "List of files and directories to include when publishing",
+      "@examples": [
+        [
+          "./dist",
+          "./docs"
+        ]
+      ]
     },
     "main": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "The entry point to your package",
+      "@examples": [
+        [
+          "./dist/cjs/index.js",
+          "./lib/main.js"
+        ]
+      ]
     },
     "module": {
-      "@type": "string"
+      "@type": "string",
+      "@isHidden": true
     },
     "bin": {
-      "@type": "object"
-    },
-    "preferGlobal": {
-      "@type": "boolean"
+      "@type": "object",
+      "@description": "A map of command name to local file name",
+      "@examples": [
+        {"myapp": "./dist/cli.js"}
+      ]
     },
     "dependencies": {
       "@import": "js/npm-dependencies"
     },
-    "isJSNPMPackageResource": true,
+    "isJSNPMPackageResource": {
+      "@value": true,
+      "@isHidden": true
+    },
     "publish": {
       "@type": "method",
+      "@description": "Publish your package to npm",
+      "@examples": [
+        "publish --patch"
+      ],
       "@input": {
         "major": {
           "@type": "boolean",
+          "@description": "Bump the major part of the version before publishing",
           "@isOptional": true
         },
         "minor": {
           "@type": "boolean",
+          "@description": "Bump the minor part of the version before publishing",
           "@isOptional": true
         },
         "patch": {
           "@type": "boolean",
+          "@description": "Bump the patch part of the version before publishing",
           "@isOptional": true
         },
         "access": {
           "@type": "string",
+          "@description": "Specify whether your package should be published as 'public' or 'restricted'",
           "@isOptional": true
         }
       }
     },
     "updatePackageFile": {
       "@type": "method",
+      "@isHidden": true,
       "@listen": [
         "@build",
         "@saved"

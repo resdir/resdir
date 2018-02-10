@@ -9,7 +9,7 @@ export default () => ({
 
     while (!namespace) {
       emptyLine();
-      namespace = await prompt(`Organization namespace: ${formatExample('twitter')}`);
+      namespace = await prompt(`Choose a namespace for your organization: ${formatExample('twitter')}`);
       emptyLine();
     }
 
@@ -125,7 +125,7 @@ export default () => ({
       emptyLine();
     }
 
-    const user = await root.user.getByNamespace(userNamespace);
+    const user = await root.users.getByNamespace(userNamespace);
 
     await task(
       async () => {
@@ -163,7 +163,7 @@ export default () => ({
       emptyLine();
     }
 
-    const user = await root.user.getByNamespace(userNamespace);
+    const user = await root.users.getByNamespace(userNamespace);
 
     await task(
       async () => {

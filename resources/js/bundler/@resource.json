@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "js/bundler",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "isPublic": true,
   "files": [
     "./dist"
@@ -30,37 +30,62 @@
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist/cjs",
     "entry": {
-      "@default": "./src/index.js"
+      "@default": "./src/index.js",
+      "@description": "The bundle's entry point"
     },
     "output": {
-      "@default": "./dist/bundle.js"
+      "@default": "./dist/bundle.js",
+      "@description": "The file to write to"
     },
     "target": {
-      "@default": "node"
+      "@default": "node",
+      "@description": "The target of your bundle: 'node', 'browser' or 'aws-lambda'"
     },
     "format": {
-      "@default": "cjs"
+      "@default": "cjs",
+      "@description": "The format of the generated bundle: 'cjs', 'esm' or 'iife'"
     },
     "name": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "The variable name representing your bundle (for 'iife' format)"
     },
     "external": {
-      "@type": "array"
+      "@type": "array",
+      "@description": "An array of module IDs that should remain external to the bundle",
+      "@examples": [
+        ["react", "react-dom"]
+      ]
     },
     "globals": {
-      "@type": "object"
+      "@type": "object",
+      "@description": "Object of id/name pairs, used for 'iife' bundles",
+      "@examples": [
+        {
+          "react": "React",
+          "react-dom": "ReactDOM"
+        }
+      ]
     },
     "replacements": {
-      "@type": "object"
+      "@type": "object",
+      "@description": "Object of key/value pairs, specifying content replacements",
+      "@examples": [
+        {
+          "process.env.NODE_ENV": "\"production\""
+        }
+      ]
     },
     "reinstallDependencies": {
-      "@default": false
+      "@default": false,
+      "@description": "Reinstall npm dependencies before bundling (helps deduping symlinked deps)"
     },
     "minify": {
-      "@default": false
+      "@default": false,
+      "@description": "Minify the generated bundle (using 'uglify-es')"
     },
     "run": {
-      "@type": "method"
+      "@type": "method",
+      "@description": "Run the bundler"
     },
     "onCreated": {
       "@type": "method",

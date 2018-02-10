@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource",
   "id": "js/npm-dependencies",
-  "version": "0.1.52",
+  "version": "0.1.53",
   "isPublic": true,
   "files": [
     "./dist/bundle.js"
@@ -35,7 +35,9 @@
           "./src/**"
         ],
         "onFileModified": {
-          "@run": "@parent run"
+          "@type": "method",
+          "@run": "@parent run",
+          "@listen": "fileModified"
         }
       }
     },
@@ -65,7 +67,7 @@
   },
   "@export": {
     "@type": "object",
-    "@description": "npm package dependencies",
+    "@description": "Manage npm package dependencies",
     "@aliases": [
       "dependencies",
       "dependency",
@@ -139,10 +141,18 @@
       "@input": {
         "names": {
           "@type": "array",
+          "@description": "Name of the npm packages to remove",
           "@position": 0,
           "@isVariadic": true
         }
       }
+    },
+    "list": {
+      "@type": "method",
+      "@description": "List existing dependencies",
+      "@aliases": [
+        "ls"
+      ]
     },
     "install": {
       "@type": "method",
@@ -155,10 +165,11 @@
     },
     "upgrade": {
       "@type": "method",
-      "@description": "Upgrade dependencies to their latest version (disregarding semver)",
+      "@description": "Interactively upgrade dependencies to their latest version",
       "@input": {
         "names": {
           "@type": "array",
+          "@description": "If specified, select the packages to upgrade, otherwise all packages are upgraded",
           "@position": 0,
           "@isOptional": true,
           "@isVariadic": true
@@ -174,7 +185,7 @@
     },
     "includes": {
       "@type": "method",
-      "@description": "Determine whether a certain dependency is included",
+      "@description": "Determine whether a certain dependency is present",
       "@input": {
         "name": {
           "@type": "string",
@@ -184,13 +195,6 @@
       "@output": {
         "@type": "boolean"
       }
-    },
-    "list": {
-      "@type": "method",
-      "@description": "List existing dependencies",
-      "@aliases": [
-        "ls"
-      ]
     },
     "updatePackageFile": {
       "@type": "method",

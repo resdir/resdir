@@ -9,9 +9,7 @@ const GIT_IGNORE = ['.DS_STORE', '/*.log'];
 
 export default Resource => ({
   async publish({major, minor, patch, throwIfAlreadyExists, permissionToken}, environment) {
-    if (!(this.id && this.version)) {
-      throw createClientError(`Can't publish a resource without ${formatCode('id')} and ${formatCode('version')} properties`);
-    }
+    await this.validate();
 
     const registryClient = await Resource.$getRegistryClient();
 
@@ -43,6 +41,16 @@ export default Resource => ({
     await registryClient.resources.publish({file, permissionToken}, environment);
 
     await this.$emit('published');
+  },
+
+  async validate({throwIfInvalid}) {
+    return (
+      (await this.$getChild('id').validate({throwIfInvalid})) &&
+      (await this.$getChild('version').validate({throwIfInvalid})) &&
+      (await this.$getChild('name').validate({throwIfInvalid})) &&
+      (await this.$getChild('description').validate({throwIfInvalid})) &&
+      (await this.$getChild('keywords').validate({throwIfInvalid}))
+    );
   },
 
   async onCreated({id, version, generateGitignore}) {

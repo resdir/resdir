@@ -74,7 +74,7 @@ export default Resource => {
       while (!completed) {
         emptyLine();
         const verificationToken = await prompt(
-          'Check your mailbox and copy/paste the received token:',
+          'Check your mailbox, and copy/paste the received token:',
           {type: 'PASSWORD'}
         );
         emptyLine();
@@ -97,7 +97,7 @@ export default Resource => {
       }
 
       if (action === 'SIGN_UP') {
-        await this.createUserNamespace({namespace, permissionToken}, environment);
+        await this.currentUser.namespace.create({namespace, permissionToken}, environment);
       }
     },
 
@@ -227,7 +227,7 @@ export default Resource => {
         printText(message);
         emptyLine();
         if (type === 'USER') {
-          printText(`If the GitHub account named ${formattedNamespace} is yours and you care about this name, you can get it by connecting your ${SERVICE_NAME} account to your GitHub account. Don't worry, ${SERVICE_NAME} will only have access to your GitHub public information.`);
+          printText(`If the GitHub account named ${formattedNamespace} is yours, and you care about this name, you can get it by connecting your ${SERVICE_NAME} account to your GitHub account. Don't worry, ${SERVICE_NAME} will only have access to your GitHub public information.`);
         } else if (type === 'ORGANIZATION') {
           printText(`If you are a public member of the GitHub organization ${formattedNamespace}, you can get this name for your ${SERVICE_NAME} organization by connecting your ${SERVICE_NAME} account to your GitHub account. Don't worry, ${SERVICE_NAME} will only have access to your GitHub public information.`);
         }
@@ -239,7 +239,7 @@ export default Resource => {
           throw createClientError('GitHub connection aborted');
         }
 
-        await this.user.gitHub.connect({parentAction});
+        await this.currentUser.gitHub.connect({parentAction});
 
         result = await this.checkNamespaceAvailability(
           {
@@ -257,7 +257,7 @@ export default Resource => {
           return result;
         }
 
-        await this.user.gitHub.disconnect();
+        await this.currentUser.gitHub.disconnect();
 
         if (type === 'USER' && reason === 'IMPORTANT_GITHUB_USER') {
           throw createClientError(`Sorry, the username of the GitHub account you connected to is not ${formattedNamespace}.`);

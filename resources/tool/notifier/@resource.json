@@ -5,7 +5,7 @@
     "./"
   ],
   "id": "tool/notifier",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "isPublic": true,
   "files": [
     "./dist"
@@ -14,19 +14,24 @@
     "node-notifier": "^5.1.2"
   },
   "@export": {
+    "@description": "Display native Desktop notifications (uses 'node-notifier')",
     "@implementation": "./dist/cjs",
     "notify": {
       "@type": "method",
+      "@description": "Display a notification",
       "@input": {
         "title": {
-          "@default": "⚡run"
+          "@default": "⚡run",
+          "@description": "The title of the notification"
         },
         "message": {
           "@type": "string",
+          "@description": "The message of the notification",
           "@position": 0
         },
         "icon": {
           "@type": "string",
+          "@description": "A path to an icon file",
           "@isOptional": true
         }
       }

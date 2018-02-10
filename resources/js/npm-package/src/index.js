@@ -45,6 +45,8 @@ export default () => ({
       name: this.name,
       version: this.version,
       description: this.description,
+      keywords: this.keywords,
+      homepage: this.homepage,
       author: this.author,
       contributors: this.contributors,
       license: this.license,
@@ -52,8 +54,7 @@ export default () => ({
       files,
       main,
       module,
-      bin: this.bin,
-      preferGlobal: this.preferGlobal
+      bin: this.bin
     });
   },
 

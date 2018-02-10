@@ -1,10 +1,11 @@
 {
   "@import": "resdir/resource",
   "id": "1place/npm-package",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "isPublic": true,
   "@export": {
     "@import": "js/npm-package",
+    "@description": "1Place's starting point for implementing npm packages",
     "files": [
       "./dist"
     ],

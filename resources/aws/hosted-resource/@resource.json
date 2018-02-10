@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "aws/hosted-resource",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "isPublic": true,
   "files": [
     "./dist",
@@ -30,41 +30,58 @@
   },
   "@export": {
     "@implementation": "./dist/cjs",
+    "@description": "Host resources on AWS (using Lambda, API Gateway, Route 53 and ACM)",
     "domainName": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "The domain name of your hosted resource",
+      "@examples": ["api.mydomain.com"]
     },
     "memorySize": {
-      "@default": 128
+      "@default": 128,
+      "@description": "The maximum amount of memory, in MB, allocated to your resource"
     },
     "timeout": {
-      "@default": 3
+      "@default": 3,
+      "@description": "The maximum execution time, in seconds, of the resource methods"
     },
     "environment": {
-      "@type": "object"
+      "@type": "object",
+      "@isHidden": true
     },
     "aws": {
+      "@description": "Your AWS configuration",
       "accessKeyId": {
-        "@type": "string"
+        "@type": "string",
+        "@description": "Your AWS access key ID"
       },
       "secretAccessKey": {
-        "@type": "string"
+        "@type": "string",
+        "@description": "Your AWS secret access key"
       },
-      "region": "us-east-1"
+      "region": {
+        "@default": "us-east-1",
+        "@description": "The AWS region in which your resource must be hosted",
+        "@examples": ["us-west-1", "eu-west-3", "ap-northeast-1"]
+      }
     },
     "deploy": {
       "@type": "method",
+      "@description": "Deploy your resource to AWS",
       "@before": "@build"
     },
-    "localServer": {
+    "testServer": {
+      "@description": "A simple HTTP server to help you test your resource locally",
       "@aliases": [
         "server"
       ],
-      "@implementation": "./dist/cjs/local-server",
+      "@implementation": "./dist/cjs/test-server",
       "port": {
-        "@default": 6789
+        "@default": 6789,
+        "@description": "The TCP port the test server should use"
       },
       "start": {
-        "@type": "method"
+        "@type": "method",
+        "@description": "Start the test server"
       }
     }
   }

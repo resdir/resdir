@@ -91,7 +91,7 @@ export default Resource => ({
     const server = this.createServer(environment);
     server.listen(this.port);
     printSuccess(
-      `Local server started ${formatDim(`(`)}${formatURL(`http://localhost:${this.port}`)}${formatDim(`)`)}`,
+      `Test server started ${formatDim(`(`)}${formatURL(`http://localhost:${this.port}`)}${formatDim(`)`)}`,
       environment
     );
   }

@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "website/freezer",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "isPublic": true,
   "files": [
     "./dist"
@@ -16,23 +16,29 @@
     "rev-hash": "^2.0.0"
   },
   "@export": {
+    "@description": "Rename static website files to make them more cacheable (experimental)",
     "@implementation": "./dist/cjs",
     "sourceDirectory": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "The directory containing all the website's files"
     },
     "destinationDirectory": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "The destination directory"
     },
     "entryPages": {
       "@default": [
         "index.html"
-      ]
+      ],
+      "@description": "A list of the entry pages to the website"
     },
     "hashSuffix": {
-      "@default": ".immutable"
+      "@default": ".immutable",
+      "@description": "Suffix added to the renamed files"
     },
     "run": {
-      "@type": "method"
+      "@type": "method",
+      "@description": "Run the operation"
     }
   }
 }

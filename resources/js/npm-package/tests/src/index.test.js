@@ -29,13 +29,14 @@ describe('js/npm-package', () => {
       name: 'my-package',
       version: '1.0.0',
       description: 'My awesome package',
+      keywords: ['nice', 'cli-tool'],
+      homepage: 'https://mvila.me',
       author: 'mvila@me.com',
       license: 'MIT',
       main: './index.js',
       bin: {
         run: 'dist/bin/index.js'
-      },
-      preferGlobal: true
+      }
     });
 
     expect(pkg.$getResourceFile()).toBeUndefined();
@@ -48,13 +49,14 @@ describe('js/npm-package', () => {
       name: 'my-package',
       version: '1.0.0',
       description: 'My awesome package',
+      keywords: ['nice', 'cli-tool'],
+      homepage: 'https://mvila.me',
       author: 'mvila@me.com',
       license: 'MIT',
       main: './index.js',
       bin: {
         run: 'dist/bin/index.js'
-      },
-      preferGlobal: true
+      }
     });
 
     const packageDefinition = load(join(directory, 'package.json'));
@@ -67,13 +69,14 @@ describe('js/npm-package', () => {
       name: 'my-package',
       version: '1.0.0',
       description: 'My awesome package',
+      keywords: ['nice', 'cli-tool'],
+      homepage: 'https://mvila.me',
       author: 'mvila@me.com',
       license: 'MIT',
       main: 'index.js',
       bin: {
         run: 'dist/bin/index.js'
-      },
-      preferGlobal: true
+      }
     });
   });
 });

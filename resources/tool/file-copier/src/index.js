@@ -4,6 +4,7 @@ import {readFile, outputFile, copy, emptyDir, pathExists} from 'fs-extra';
 import isDirectory from 'is-directory';
 import {task, formatCode} from '@resdir/console';
 import {createClientError} from '@resdir/error';
+import replaceString from 'replace-string';
 
 export default () => ({
   async run(_input, environment) {
@@ -94,8 +95,7 @@ export default () => ({
 
 function _replace(data, replacements = {}) {
   for (const [key, value] of entries(replacements)) {
-    // TODO: handle replacement of multiple occurences
-    data = data.replace(key, value);
+    data = replaceString(data, key, value);
   }
   return data;
 }

@@ -2,9 +2,9 @@ import {resolve} from 'path';
 import minimatch from 'minimatch';
 
 export default () => ({
-  async _handleFileModifiedEvent({file}) {
+  async _onFileModified({file}) {
     if (this.match(file)) {
-      await this.onFileModified({file});
+      await this.$emit('fileModified', {file});
     }
   },
 

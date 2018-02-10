@@ -4,7 +4,7 @@
     "1place/js-resource"
   ],
   "id": "tool/file-copier",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "isPublic": true,
   "files": [
     "./dist"
@@ -13,25 +13,45 @@
     "fs-extra": "^5.0.0",
     "is-directory": "^0.3.1",
     "lodash": "^4.17.4",
+    "replace-string": "^1.1.0",
     "@resdir/console": "^0.1.35",
     "@resdir/error": "^0.1.0"
   },
   "@export": {
+    "@description": "A simple tool to copy a list of files",
     "@implementation": "./dist/cjs",
     "sourceDirectory": {
-      "@default": "./"
+      "@default": "./",
+      "@description": "The source directory"
     },
     "destinationDirectory": {
-      "@type": "string"
+      "@type": "string",
+      "@description": "The destination directory"
     },
     "clearDestination": {
-      "@default": false
+      "@default": false,
+      "@description": "Whether or not the destination should be cleared before copying the files"
     },
     "files": {
-      "@type": "array"
+      "@type": "array",
+      "@description": "An array of object specifying the files to be copied",
+      "@examples": [
+        [
+          "./index.html",
+          "./images",
+          {
+            "source": "./dist/bundle.prod.js",
+            "destination": "./bundle.js",
+            "replacements": {
+              "$BACKEND_SERVER$": "https://api.example.com"
+            }
+          }
+        ]
+      ]
     },
     "run": {
-      "@type": "method"
+      "@type": "method",
+      "@description": "Execute the copy"
     }
   }
 }

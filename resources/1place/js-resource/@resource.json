@@ -1,10 +1,11 @@
 {
   "@import": "resdir/resource",
   "id": "1place/js-resource",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "isPublic": true,
   "@export": {
     "@import": "js/resource",
+    "@description": "1Place's starting point for resources implemented in JavaScript",
     "transpiler": {
       "@import": "js/transpiler",
       "run": {

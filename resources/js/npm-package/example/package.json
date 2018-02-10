@@ -9,7 +9,8 @@
     "lodash": "^4.17.4"
   },
   "@managed": {
-    "warning": "This file contains properties managed by a Resource. You should not modify them directly or use a command such as `npm install <name>`.",
+    "warning":
+      "This file contains properties managed by a Resource. You should not modify them directly or use a command such as `npm install <name>`.",
     "properties": [
       "name",
       "version",
@@ -21,7 +22,6 @@
       "files",
       "main",
       "bin",
-      "preferGlobal",
       "dependencies",
       "peerDependencies",
       "optionalDependencies",

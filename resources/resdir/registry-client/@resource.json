@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/registry-client",
-  "version": "0.1.22",
+  "version": "0.1.23",
   "isPublic": true,
   "files": [
     "./dist"
@@ -39,6 +39,12 @@
     }
   },
   "@export": {
+    "@description": "Resdir registry client to publish and manage your resources",
+    "@examples": [
+      "run @registry signUp",
+      "run @registry my orgs ls",
+      "run @registry orgs create"
+    ],
     "@implementation": "./dist/cjs",
     "registryServer": {
       "@type": "string",
@@ -54,14 +60,17 @@
     },
     "signUp": {
       "@type": "method",
+      "@description": "Sign up for Resdir",
       "@input": {
         "email": {
           "@type": "string",
+          "@description": "Your email address",
           "@position": 0,
           "@isOptional": true
         },
         "namespace": {
           "@type": "string",
+          "@description": "Choose a name for your personal namespace",
           "@aliases": [
             "ns"
           ],
@@ -70,35 +79,45 @@
         },
         "permissionToken": {
           "@type": "string",
-          "@isOptional": true
+          "@isOptional": true,
+          "@isHidden": true
         }
       }
     },
     "signIn": {
       "@type": "method",
+      "@description": "Sign in to Resdir",
       "@input": {
         "email": {
           "@type": "string",
+          "@description": "Your email address",
           "@position": 0,
           "@isOptional": true
         }
       }
     },
     "signOut": {
-      "@type": "method"
+      "@type": "method",
+      "@description": "Sign out from Resdir"
     },
     "currentUser": {
+      "@description": "It's all about you",
       "@aliases": [
-        "me"
+        "me",
+        "my"
       ],
       "@implementation": "./dist/cjs/current-user",
       "show": {
-        "@type": "method"
+        "@type": "method",
+        "@description": "Display some information about your Resdir account"
       },
       "delete": {
-        "@type": "method"
+        "@type": "method",
+        "@description": "Delete your Resdir account",
+        "@isHidden": true
       },
       "organizations": {
+        "@description": "Manage the organizations you belong to",
         "@aliases": [
           "organization",
           "orgs",
@@ -107,21 +126,30 @@
         "@implementation": "./dist/cjs/current-user-organizations",
         "list": {
           "@type": "method",
+          "@description": "List the organizations you belong to",
           "@aliases": [
             "ls"
           ]
         }
       },
       "namespace": {
+        "@description": "Manage your personal namespace",
         "@aliases": [
           "ns"
         ],
         "@implementation": "./dist/cjs/current-user-namespace",
         "create": {
           "@type": "method",
+          "@description": "Create a personal namespace (if you don't have one yet)",
           "@input": {
             "namespace": {
               "@type": "string",
+              "@description": "Choose a name for your personal namespace",
+              "@examples": [
+                "aturing",
+                "sjobs",
+                "torvalds"
+              ],
               "@aliases": [
                 "ns"
               ],
@@ -130,15 +158,18 @@
             },
             "permissionToken": {
               "@type": "string",
-              "@isOptional": true
+              "@isOptional": true,
+              "@isHidden": true
             }
           }
         },
         "delete": {
-          "@type": "method"
+          "@type": "method",
+          "@description": "Delete your personal namespace (useful if you want to create a new one)"
         }
       },
       "gitHub": {
+        "@description": "Manage the connection to your GitHub account",
         "@aliases": [
           "github",
           "gh"
@@ -146,19 +177,30 @@
         "@implementation": "./dist/cjs/current-user-github-account",
         "connect": {
           "@type": "method",
+          "@description": "Connect your Resdir account to your GitHub account",
           "@input": {
             "parentAction": {
               "@type": "string",
-              "@isOptional": true
+              "@isOptional": true,
+              "@isHidden": true
             }
           }
         },
         "disconnect": {
-          "@type": "method"
+          "@type": "method",
+          "@description": "Disconnect your Resdir account from your GitHub account"
         }
       }
     },
+    "users": {
+      "@aliases": [
+        "user"
+      ],
+      "@isHidden": true,
+      "@implementation": "./dist/cjs/users"
+    },
     "organizations": {
+      "@description": "Manage Resdir organizations",
       "@aliases": [
         "organization",
         "orgs",
@@ -167,9 +209,16 @@
       "@implementation": "./dist/cjs/organizations",
       "create": {
         "@type": "method",
+        "@description": "Create a new Resdir organization",
         "@input": {
           "namespace": {
             "@type": "string",
+            "@description": "The namespace you wish for your organization",
+            "@examples": [
+              "twitter",
+              "js",
+              "eff"
+            ],
             "@aliases": [
               "ns"
             ],
@@ -178,15 +227,18 @@
           },
           "permissionToken": {
             "@type": "string",
-            "@isOptional": true
+            "@isOptional": true,
+            "@isHidden": true
           }
         }
       },
       "delete": {
         "@type": "method",
+        "@description": "Delete an organization (you must be the owner)",
         "@input": {
           "namespace": {
             "@type": "string",
+            "@description": "The namespace of the organization you want to delete",
             "@aliases": [
               "ns"
             ],
@@ -197,9 +249,11 @@
       },
       "addMember": {
         "@type": "method",
+        "@description": "Add a member to an organization",
         "@input": {
           "organizationNamespace": {
             "@type": "string",
+            "@description": "The namespace of the organization",
             "@aliases": [
               "organization",
               "org"
@@ -209,6 +263,7 @@
           },
           "userNamespace": {
             "@type": "string",
+            "@description": "The namespace of the user",
             "@aliases": [
               "user"
             ],
@@ -219,12 +274,11 @@
       },
       "removeMember": {
         "@type": "method",
-        "@aliases": [
-          "rmMember"
-        ],
+        "@description": "Remove a member from an organization",
         "@input": {
           "organizationNamespace": {
             "@type": "string",
+            "@description": "The namespace of the organization",
             "@aliases": [
               "organization",
               "org"
@@ -234,6 +288,7 @@
           },
           "userNamespace": {
             "@type": "string",
+            "@description": "The namespace of the user",
             "@aliases": [
               "user"
             ],
@@ -300,6 +355,7 @@
       }
     },
     "namespaces": {
+      "@description": "Manage Resdir namespaces",
       "@aliases": [
         "namespace",
         "ns"
@@ -307,12 +363,14 @@
       "@implementation": "./dist/cjs/namespaces",
       "checkAvailability": {
         "@type": "method",
+        "@description": "Check the availability of a namespace",
         "@aliases": [
           "check"
         ],
         "@input": {
           "namespace": {
             "@type": "string",
+            "@description": "The namespace you want to check",
             "@aliases": [
               "ns"
             ],

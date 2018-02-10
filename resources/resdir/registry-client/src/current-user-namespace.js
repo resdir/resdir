@@ -6,7 +6,7 @@ export default () => ({
     const root = this.$getRoot();
     const server = await root.getRegistryServer();
 
-    const user = await root.user.get();
+    const user = await root.currentUser.get();
 
     if (user.namespace) {
       throw createClientError(`You already have a namespace (${formatString(user.namespace)})`);
@@ -50,7 +50,7 @@ export default () => ({
     const root = this.$getRoot();
     const server = await root.getRegistryServer();
 
-    const user = await root.user.get();
+    const user = await root.currentUser.get();
 
     if (!user.namespace) {
       throw createClientError(`You don't have a namespace`);

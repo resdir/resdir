@@ -7,7 +7,7 @@ export default () => ({
     const root = this.$getRoot();
     const server = await root.getRegistryServer();
 
-    const user = await root.user.get();
+    const user = await root.currentUser.get();
 
     const {gitHubAccountConnectionURL} = await task(
       async () => {

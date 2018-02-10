@@ -15,7 +15,9 @@
         "./src/**"
       ],
       "onFileModified": {
-        "@run": "@parent run"
+        "@type": "method",
+        "@run": "@parent run",
+        "@listen": "fileModified"
       }
     }
   }
