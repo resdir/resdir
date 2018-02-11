@@ -47,8 +47,6 @@ export default Resource => ({
     return (
       (await this.$getChild('id').validate({throwIfInvalid})) &&
       (await this.$getChild('version').validate({throwIfInvalid})) &&
-      (await this.$getChild('name').validate({throwIfInvalid})) &&
-      (await this.$getChild('description').validate({throwIfInvalid})) &&
       (await this.$getChild('keywords').validate({throwIfInvalid}))
     );
   },

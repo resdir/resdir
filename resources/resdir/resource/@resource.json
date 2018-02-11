@@ -4,8 +4,13 @@
     "js/resource"
   ],
   "id": "resdir/resource",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -13,10 +18,13 @@
     "@resdir/console": "^0.1.0",
     "@resdir/error": "^0.1.0",
     "@resdir/gitignore-manager": "^0.1.0",
+    "@resdir/resource-description": "^0.1.0",
     "@resdir/resource-identifier": "^0.1.0",
+    "@resdir/resource-name": "^0.1.0",
     "@resdir/resource-specifier": "^0.1.14",
     "@resdir/version": "^0.1.0"
   },
+  "name": "Resdir Resource",
   "@unpublishable": {
     "transpiler": {
       "@import": "js/transpiler",
@@ -150,46 +158,6 @@
       ],
       "@default": false
     },
-    "name": {
-      "@type": "string",
-      "@description": "A (human) name for the resource",
-      "@examples": [
-        "React"
-      ],
-      "@implementation": "./dist/cjs/name-attribute.js",
-      "validate": {
-        "@type": "method",
-        "@description": "Validate the name",
-        "@input": {
-          "throwIfInvalid": {
-            "@default": true
-          }
-        },
-        "@output": {
-          "@type": "boolean"
-        }
-      }
-    },
-    "description": {
-      "@type": "string",
-      "@description": "A short description",
-      "@examples": [
-        "A tool that is nice to you"
-      ],
-      "@implementation": "./dist/cjs/description-attribute.js",
-      "validate": {
-        "@type": "method",
-        "@description": "Validate the description",
-        "@input": {
-          "throwIfInvalid": {
-            "@default": true
-          }
-        },
-        "@output": {
-          "@type": "boolean"
-        }
-      }
-    },
     "keywords": {
       "@type": "array",
       "@description": "A list of keywords",
@@ -212,13 +180,6 @@
           "@type": "boolean"
         }
       }
-    },
-    "homepage": {
-      "@type": "string",
-      "@description": "The URL of the homepage",
-      "@examples": [
-        "https://www.aturing.com/nice-tool"
-      ]
     },
     "authors": {
       "@type": "array",
@@ -249,6 +210,13 @@
         "MIT",
         "Apache-2.0",
         "BSD-3-Clause"
+      ]
+    },
+    "homepage": {
+      "@type": "string",
+      "@description": "The URL of the homepage",
+      "@examples": [
+        "https://www.aturing.com/nice-tool"
       ]
     },
     "repository": {
@@ -298,7 +266,8 @@
         },
         "permissionToken": {
           "@type": "string",
-          "@isOptional": true
+          "@isOptional": true,
+          "@isHidden": true
         }
       }
     },
