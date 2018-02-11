@@ -1,0 +1,43 @@
+{
+  "@import": ["1place/js-resource", "aws/hosted-resource"],
+  "timeout": 10,
+  "dependencies": {
+    "big-companies": "^1.0.5",
+    "@resdir/common-english-words": "^0.1.0",
+    "@resdir/common-file-extensions": "^0.1.0",
+    "@resdir/common-numbers": "^0.1.0",
+    "@resdir/common-tags": "^0.1.0",
+    "@resdir/error": "^0.1.0",
+    "@resdir/top-level-domains": "^0.1.0"
+  },
+  "@export": {
+    "ping": {
+      "@type": "method",
+      "@output": {
+        "@type": "string"
+      }
+    },
+    "isCommonName": {
+      "@type": "method",
+      "@input": {
+        "name": {
+          "@type": "string",
+          "@position": 0
+        }
+      },
+      "@output": {
+        "isCommonName": {
+          "@type": "boolean"
+        },
+        "reason": {
+          "@type": "string",
+          "@isOptional": true
+        },
+        "info": {
+          "@type": "object",
+          "@isOptional": true
+        }
+      }
+    }
+  }
+}
