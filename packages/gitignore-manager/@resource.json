@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/gitignore-manager",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Help managing gitignore files",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "lodash.union": "^4.6.0"
   }

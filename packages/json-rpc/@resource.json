@@ -1,6 +1,9 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/json-rpc",
-  "version": "0.1.6",
-  "description": "Build and validate JSON-RPC 2.0 requests and responses"
+  "version": "0.1.7",
+  "description": "Build and validate JSON-RPC 2.0 requests and responses",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git"
 }

@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/aws-helpers",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Convenience helpers around @resdir/aws-client",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "lodash": "^4.17.4",
     "@resdir/console": "^0.1.16",

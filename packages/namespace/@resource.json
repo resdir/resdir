@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/namespace",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "Useful functions to handle namespaces",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "filename-reserved-regex": "^2.0.0",
     "lodash.sortedindexof": "^4.1.0",

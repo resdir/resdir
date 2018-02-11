@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/console",
-  "version": "0.1.38",
+  "version": "0.1.39",
   "description": "Miscellaneous functions used by Resdir to manage console",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "chalk": "^2.3.0",
     "indent-string": "^3.2.0",

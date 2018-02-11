@@ -1,6 +1,6 @@
 import {sortedIndex} from 'lodash';
 
-import {generateSecret, CHARACTERS} from '../..';
+import {generateSecret, CHARACTERS} from '../../..';
 
 describe('@resdir/secret-generator', () => {
   test('generate secrets of different size', () => {

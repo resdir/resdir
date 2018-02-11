@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/file-manager",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Help managing files in most common formats (JSON, JSON5, YAML)",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "js-yaml": "^3.9.0",
     "json5": "^0.5.1",

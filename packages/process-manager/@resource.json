@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/process-manager",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Node child_process wrapper",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "child-process-promise": "^2.2.1",
     "@resdir/console": "^0.1.16",

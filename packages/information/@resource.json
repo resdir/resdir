@@ -1,6 +1,9 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/information",
-  "version": "0.1.7",
-  "description": "General information about Resdir service"
+  "version": "0.1.8",
+  "description": "General information about Resdir service",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git"
 }

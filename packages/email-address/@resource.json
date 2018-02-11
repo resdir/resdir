@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/email-address",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Strong email address validation",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "disposable-email-domains": "^1.0.21",
     "regex-email": "^1.0.2",

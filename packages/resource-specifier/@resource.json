@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/resource-specifier",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "description": "Useful functions to handle Resource's specifiers",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "@resdir/resource-identifier": "^0.1.0",
     "@resdir/version-range": "^0.1.2"

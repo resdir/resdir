@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/top-level-domains",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "List of Top Level Domains",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "lodash": "^4.17.4"
   }

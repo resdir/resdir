@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/common-tags",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Huge list of tags (source: Stack Exchange)",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "lodash": "^4.17.4"
   }

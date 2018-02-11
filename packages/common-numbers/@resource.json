@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/common-numbers",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "List of common numbers (ex.: 3.14, 666, 911,...)",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "node-status-codes": "^2.0.1"
   }

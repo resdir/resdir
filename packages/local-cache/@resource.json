@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/local-cache",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Simple cache using files to persist data",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "strict-uri-encode": "^2.0.0"
   }

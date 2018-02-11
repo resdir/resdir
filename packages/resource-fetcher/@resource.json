@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/resource-fetcher",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Resdir resource fetcher",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "debug": "^3.0.0",
     "fs-extra": "^5.0.0",

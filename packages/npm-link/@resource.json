@@ -1,8 +1,11 @@
 {
   "@import": "1place/npm-package",
   "name": "@resdir/npm-link",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "'npm link' easier",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "bin": {
     "npm-link": "dist/cjs/bin/index.js"
   },
