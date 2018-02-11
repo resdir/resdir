@@ -1,3 +1,4 @@
+import {RemoteResource} from 'run-core/dist/esm/resource/remote';
 import RemoteResourceJSONRPCHandler from '@resdir/remote-resource-json-rpc-handler';
 
 let jsonRPCHandler;
@@ -10,7 +11,7 @@ let jsonRPCHandler;
     builder = builder.default;
   }
 
-  const implementation = builder();
+  const implementation = builder(RemoteResource);
 
   const resource = {...definition.attributes, ...implementation};
 
