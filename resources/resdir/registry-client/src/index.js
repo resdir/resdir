@@ -171,7 +171,7 @@ export default Resource => {
         }
       );
 
-      let {isAvailable, reason} = result;
+      let {isAvailable, reason, info} = result;
 
       if (isAvailable || throwIfUnavailable === false) {
         return result;
@@ -187,8 +187,8 @@ export default Resource => {
 
       if (reason === 'ALREADY_TAKEN') {
         let message = `Sorry, this namespace is alrady taken`;
-        if (result.existingNamespace !== namespace) {
-          message += ` (existing namespace: ${formatString(result.existingNamespace)})`;
+        if (info.existingNamespace !== namespace) {
+          message += ` (existing namespace: ${formatString(info.existingNamespace)})`;
         }
         throw createClientError(message);
       }
@@ -219,7 +219,7 @@ export default Resource => {
           message = `There is a popular GitHub organization named ${formattedNamespace}. Although ${SERVICE_NAME} is not related to GitHub, most popular GitHub identifiers are reserved for future ${SERVICE_NAME} namespaces.`;
         }
 
-        if (result.userHasGitHubAccountConnection) {
+        if (info.userHasGitHubAccountConnection) {
           throw createClientError(message);
         }
 
@@ -279,7 +279,7 @@ export default Resource => {
       }
 
       if (reason === 'BIG_COMPANY') {
-        throw createClientError(`Sorry, this namespace is not available because it matches the name of a big company (${formatString(result.company)}). ${contactSupport}`);
+        throw createClientError(`Sorry, this namespace is not available because it matches the name of a big company (${formatString(info.company)}). ${contactSupport}`);
       }
 
       if (reason === 'COMMON_NUMBER') {
