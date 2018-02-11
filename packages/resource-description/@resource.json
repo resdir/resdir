@@ -1,0 +1,19 @@
+{
+  "@import": "1place/npm-package",
+  "name": "@resdir/resource-description",
+  "version": "0.1.0",
+  "description": "Manage Resource's descriptions",
+  "author": "Manuel Vila <hi@mvila.me>",
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
+  "dependencies": {
+    "@resdir/console": "^0.1.20",
+    "@resdir/error": "^0.1.0"
+  },
+  "@unpublishable": {
+    "tests": {
+      "@import": "1place/jest",
+      "@directory": "./tests"
+    }
+  }
+}
