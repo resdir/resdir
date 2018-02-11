@@ -4,8 +4,13 @@
     "1place/js-resource"
   ],
   "id": "js/bundler",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -26,24 +31,25 @@
     "uglify-es": "^3.3.7"
   },
   "@export": {
+    "@name": "JavaScript Bundler",
     "@description": "JavaScript module bundler (using Rollup)",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist/cjs",
     "entry": {
-      "@default": "./src/index.js",
-      "@description": "The bundle's entry point"
+      "@description": "The bundle's entry point",
+      "@default": "./src/index.js"
     },
     "output": {
-      "@default": "./dist/bundle.js",
-      "@description": "The file to write to"
+      "@description": "The file to write to",
+      "@default": "./dist/bundle.js"
     },
     "target": {
-      "@default": "node",
-      "@description": "The target of your bundle: 'node', 'browser' or 'aws-lambda'"
+      "@description": "The target of your bundle: 'node', 'browser' or 'aws-lambda'",
+      "@default": "node"
     },
     "format": {
-      "@default": "cjs",
-      "@description": "The format of the generated bundle: 'cjs', 'esm' or 'iife'"
+      "@description": "The format of the generated bundle: 'cjs', 'esm' or 'iife'",
+      "@default": "cjs"
     },
     "name": {
       "@type": "string",
@@ -53,7 +59,10 @@
       "@type": "array",
       "@description": "An array of module IDs that should remain external to the bundle",
       "@examples": [
-        ["react", "react-dom"]
+        [
+          "react",
+          "react-dom"
+        ]
       ]
     },
     "globals": {
@@ -76,12 +85,12 @@
       ]
     },
     "reinstallDependencies": {
-      "@default": false,
-      "@description": "Reinstall npm dependencies before bundling (helps deduping symlinked deps)"
+      "@description": "Reinstall npm dependencies before bundling (helps deduping symlinked deps)",
+      "@default": false
     },
     "minify": {
-      "@default": false,
-      "@description": "Minify the generated bundle (using 'uglify-es')"
+      "@description": "Minify the generated bundle (using 'uglify-es')",
+      "@default": false
     },
     "run": {
       "@type": "method",

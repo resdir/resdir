@@ -1,10 +1,16 @@
 {
   "@import": "resdir/resource",
   "id": "1place/js-resource",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "@export": {
     "@import": "js/resource",
+    "@name": "1Place's JavaScript Resource",
     "@description": "1Place's starting point for resources implemented in JavaScript",
     "transpiler": {
       "@import": "js/transpiler",

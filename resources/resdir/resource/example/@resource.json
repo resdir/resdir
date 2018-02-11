@@ -1,8 +1,8 @@
 {
   "@import": "..",
+  "@name": "NiceTool",
+  "@description": "A tool that is nice to you",
   "id": "resdir/resdir-resource-example",
   "version": "1.0.3",
-  "name": "NiceTool",
-  "keywords": ["nice-tool", "awesome"],
-  "description": "A tool that is nice to you"
+  "keywords": ["nice-tool", "awesome"]
 }

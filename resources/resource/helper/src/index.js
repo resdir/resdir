@@ -229,7 +229,11 @@ export default Resource => ({
 
   _print(resource, {indentation = 0, showNative} = {}) {
     const type = resource.$getType();
-    this._printKeyAndType(resource, {indentation});
+    if (resource.$isRoot()) {
+      this._printName(resource, {indentation});
+    } else {
+      this._printKeyAndType(resource, {indentation});
+    }
     this._printDescription(resource, {indentation});
     if (!showNative) {
       this._printDefault(resource, {indentation});
@@ -246,6 +250,14 @@ export default Resource => ({
       }
     }
     this._printChildren(resource, {indentation, showNative});
+  },
+
+  _printName(resource, {indentation}) {
+    const name = resource.$name;
+    if (name) {
+      emptyLine();
+      printText(formatBold(name), {width: null, indentation});
+    }
   },
 
   _printKeyAndType(resource, {indentation}) {
@@ -447,8 +459,7 @@ export default Resource => ({
       formattedKey += ' ' + formattedType;
     }
 
-    const description = child.$description;
-    let formattedDescription = description || '';
+    let formattedDescription = child.$description || '';
     let attributes = [
       this._formatDefault(child),
       this._formatAliases(child, {removeKey: true}),
@@ -501,6 +512,46 @@ export default Resource => ({
     }
 
     return formatString(specifier, {addQuotes: false});
+  },
+
+  _formatName(resource) {
+    // Super ugly: before getting resdir/resource's 'name' attribute,
+    // we should ensure that the resource is actually a resdir/resource
+
+    let name = resource.$name;
+    if (name) {
+      return name;
+    }
+
+    if (!resource.$isRoot()) {
+      const exporterDefinition = resource.$getExporterDefinition();
+      name = exporterDefinition && exporterDefinition.name;
+      if (name) {
+        return name;
+      }
+    }
+
+    return '';
+  },
+
+  _formatDescription(resource) {
+    // Super ugly: before getting resdir/resource's 'description' attribute,
+    // we should ensure that the resource is actually a resdir/resource
+
+    let description = resource.$description;
+    if (description) {
+      return description;
+    }
+
+    if (!resource.$isRoot()) {
+      const exporterDefinition = resource.$getExporterDefinition();
+      description = exporterDefinition && exporterDefinition.description;
+      if (description) {
+        return description;
+      }
+    }
+
+    return '';
   },
 
   _formatDefault(resource) {

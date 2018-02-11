@@ -4,8 +4,13 @@
     "./"
   ],
   "id": "js/resource",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -25,6 +30,7 @@
     }
   },
   "@export": {
+    "@name": "JavaScript Resource",
     "@description": "A starting point for resources implemented in JavaScript",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist/cjs",

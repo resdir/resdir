@@ -5,8 +5,13 @@
     "./"
   ],
   "id": "tool/notifier",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -14,6 +19,7 @@
     "node-notifier": "^5.1.2"
   },
   "@export": {
+    "@name": "Notifier",
     "@description": "Display native Desktop notifications (uses 'node-notifier')",
     "@implementation": "./dist/cjs",
     "notify": {
@@ -21,8 +27,8 @@
       "@description": "Display a notification",
       "@input": {
         "title": {
-          "@default": "⚡run",
-          "@description": "The title of the notification"
+          "@description": "The title of the notification",
+          "@default": "⚡run"
         },
         "message": {
           "@type": "string",

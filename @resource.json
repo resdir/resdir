@@ -3,17 +3,20 @@
     "@type": "method",
     "@listen": "@test",
     "@run": [
-      "./packages/util @test",
       "./packages/namespace @test",
       "./packages/resource-key @test",
+      "./packages/resource-description @test",
       "./packages/resource-identifier @test",
+      "./packages/resource-name @test",
       "./packages/resource-specifier @test",
+      "./packages/secret-generator @test",
+      "./packages/util @test",
       "./packages/version @test",
       "./packages/version-range @test",
-      "./resources/resdir/resource @test",
       "./resources/js/npm-dependencies @test",
       "./resources/js/npm-package @test",
-      "./resources/js/transpiler @test"
+      "./resources/js/transpiler @test",
+      "./resources/resdir/resource @test"
     ]
   },
   "bump": {

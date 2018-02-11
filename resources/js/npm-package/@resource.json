@@ -4,8 +4,13 @@
     "1place/js-resource"
   ],
   "id": "js/npm-package",
-  "version": "0.1.45",
+  "version": "0.1.46",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -31,18 +36,27 @@
     }
   },
   "@export": {
+    "@name": "npm Package",
     "@description": "Base resource to create and publish npm packages",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist/cjs",
     "name": {
       "@type": "string",
       "@description": "The name of the package",
-      "@examples": ["lodash", "react-dom", "@babel/core"]
+      "@examples": [
+        "lodash",
+        "react-dom",
+        "@babel/core"
+      ]
     },
     "version": {
       "@type": "string",
       "@description": "The version number of the package",
-      "@examples": ["0.1.0", "1.12.5", "2.0.0-beta.1"],
+      "@examples": [
+        "0.1.0",
+        "1.12.5",
+        "2.0.0-beta.1"
+      ],
       "@implementation": "./dist/cjs/version-attribute",
       "bump": {
         "@type": "method",
@@ -84,13 +98,6 @@
         ]
       ]
     },
-    "homepage": {
-      "@type": "string",
-      "@description": "The URL of the homepage",
-      "@examples": [
-        "https://www.aturing.com/nice-tool"
-      ]
-    },
     "author": {
       "@type": "string",
       "@description": "The author of the package",
@@ -104,13 +111,6 @@
       "@type": "array",
       "@description": "A list of contributors"
     },
-    "repository": {
-      "@type": "string",
-      "@description": "The URL of the repository",
-      "@examples": [
-        "https://github.com/aturing/nice-tool.git"
-      ]
-    },
     "license": {
       "@type": "string",
       "@description": "The license attached to the package",
@@ -118,6 +118,20 @@
         "MIT",
         "Apache-2.0",
         "BSD-3-Clause"
+      ]
+    },
+    "homepage": {
+      "@type": "string",
+      "@description": "The URL of the homepage",
+      "@examples": [
+        "https://www.aturing.com/nice-tool"
+      ]
+    },
+    "repository": {
+      "@type": "string",
+      "@description": "The URL of the repository",
+      "@examples": [
+        "https://github.com/aturing/nice-tool.git"
       ]
     },
     "files": {
@@ -148,15 +162,17 @@
       "@type": "object",
       "@description": "A map of command name to local file name",
       "@examples": [
-        {"myapp": "./dist/cli.js"}
+        {
+          "myapp": "./dist/cli.js"
+        }
       ]
     },
     "dependencies": {
       "@import": "js/npm-dependencies"
     },
     "isJSNPMPackageResource": {
-      "@value": true,
-      "@isHidden": true
+      "@isHidden": true,
+      "@value": true
     },
     "publish": {
       "@type": "method",

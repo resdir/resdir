@@ -4,8 +4,13 @@
     "1place/js-resource"
   ],
   "id": "website/freezer",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -16,6 +21,7 @@
     "rev-hash": "^2.0.0"
   },
   "@export": {
+    "@name": "Website Freezer",
     "@description": "Rename static website files to make them more cacheable (experimental)",
     "@implementation": "./dist/cjs",
     "sourceDirectory": {
@@ -27,14 +33,14 @@
       "@description": "The destination directory"
     },
     "entryPages": {
+      "@description": "A list of the entry pages to the website",
       "@default": [
         "index.html"
-      ],
-      "@description": "A list of the entry pages to the website"
+      ]
     },
     "hashSuffix": {
-      "@default": ".immutable",
-      "@description": "Suffix added to the renamed files"
+      "@description": "Suffix added to the renamed files",
+      "@default": ".immutable"
     },
     "run": {
       "@type": "method",

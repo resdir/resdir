@@ -4,8 +4,13 @@
     "1place/js-resource"
   ],
   "id": "1place/jest",
-  "version": "0.1.38",
+  "version": "0.1.39",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -16,7 +21,7 @@
     "@resdir/process-manager": "^0.1.0"
   },
   "@export": {
-    "@import": "1place/js-resource",
+    "@name": "1Place's Jest",
     "@description": "Test suite runner (using Jest)",
     "@implementation": "./dist/cjs",
     "roots": {
@@ -34,6 +39,9 @@
         "node"
       ],
       "@default": "node"
+    },
+    "dependencies": {
+      "@import": "js/npm-dependencies"
     },
     "run": {
       "@type": "method",

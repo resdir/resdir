@@ -4,8 +4,13 @@
     "1place/js-resource"
   ],
   "id": "aws/hosted-resource",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist",
     "./lambda-handler/dist"
@@ -29,20 +34,23 @@
     "tempy": "^0.2.1"
   },
   "@export": {
-    "@implementation": "./dist/cjs",
+    "@name": "AWS Hosted Resource",
     "@description": "Host resources on AWS (using Lambda, API Gateway, Route 53 and ACM)",
+    "@implementation": "./dist/cjs",
     "domainName": {
       "@type": "string",
       "@description": "The domain name of your hosted resource",
-      "@examples": ["api.mydomain.com"]
+      "@examples": [
+        "api.mydomain.com"
+      ]
     },
     "memorySize": {
-      "@default": 128,
-      "@description": "The maximum amount of memory, in MB, allocated to your resource"
+      "@description": "The maximum amount of memory, in MB, allocated to your resource",
+      "@default": 128
     },
     "timeout": {
-      "@default": 3,
-      "@description": "The maximum execution time, in seconds, of the resource methods"
+      "@description": "The maximum execution time, in seconds, of the resource methods",
+      "@default": 3
     },
     "environment": {
       "@type": "object",
@@ -59,9 +67,13 @@
         "@description": "Your AWS secret access key"
       },
       "region": {
-        "@default": "us-east-1",
         "@description": "The AWS region in which your resource must be hosted",
-        "@examples": ["us-west-1", "eu-west-3", "ap-northeast-1"]
+        "@examples": [
+          "us-west-1",
+          "eu-west-3",
+          "ap-northeast-1"
+        ],
+        "@default": "us-east-1"
       }
     },
     "deploy": {
@@ -76,8 +88,8 @@
       ],
       "@implementation": "./dist/cjs/test-server",
       "port": {
-        "@default": 6789,
-        "@description": "The TCP port the test server should use"
+        "@description": "The TCP port the test server should use",
+        "@default": 6789
       },
       "start": {
         "@type": "method",

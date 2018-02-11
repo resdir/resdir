@@ -4,8 +4,13 @@
     "1place/js-resource"
   ],
   "id": "tool/file-watcher",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -13,6 +18,7 @@
     "minimatch": "^3.0.4"
   },
   "@export": {
+    "@name": "File Watcher",
     "@description": "Listens '@fileModified' event, and emits 'fileModified' when a file matches a list of globs",
     "@implementation": "./dist/cjs",
     "files": {

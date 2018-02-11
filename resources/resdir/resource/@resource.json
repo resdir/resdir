@@ -4,7 +4,7 @@
     "js/resource"
   ],
   "id": "resdir/resource",
-  "version": "0.1.47",
+  "version": "0.1.48",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -24,7 +24,6 @@
     "@resdir/resource-specifier": "^0.1.14",
     "@resdir/version": "^0.1.0"
   },
-  "name": "Resdir Resource",
   "@unpublishable": {
     "transpiler": {
       "@import": "js/transpiler",
@@ -44,6 +43,7 @@
     }
   },
   "@export": {
+    "@name": "Resdir Resource",
     "@description": "The base resource for all resources published on Resdir",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist/cjs",

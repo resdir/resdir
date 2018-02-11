@@ -4,8 +4,13 @@
     "1place/js-resource"
   ],
   "id": "tool/console",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -13,6 +18,7 @@
     "@resdir/console": "^0.1.24"
   },
   "@export": {
+    "@name": "Console",
     "@description": "Manage the console (in development)",
     "@implementation": "./dist/cjs",
     "print": {

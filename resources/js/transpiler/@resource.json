@@ -4,8 +4,13 @@
     "1place/js-resource"
   ],
   "id": "js/transpiler",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -36,46 +41,47 @@
     }
   },
   "@export": {
+    "@name": "JavaScript Transpiler",
     "@description": "JavaScript transpiler (using Babel)",
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist/cjs",
     "source": {
-      "@default": "./src",
-      "@description": "Source directory of the files to be transpiled"
+      "@description": "Source directory of the files to be transpiled",
+      "@default": "./src"
     },
     "destination": {
-      "@default": "./dist/${format}",
-      "@description": "Destination directory of the transpiled files"
+      "@description": "Destination directory of the transpiled files",
+      "@default": "./dist/${format}"
     },
     "extensions": {
+      "@description": "Extensions of files that should be transpiled (other files are simply copied)",
       "@default": [
         ".js",
         ".mjs",
         ".jsx"
-      ],
-      "@description": "Extensions of files that should be transpiled (other files are simply copied)"
+      ]
     },
     "targets": {
+      "@description": "Expected targets of the transpiled files (uses @babel/preset-env)",
       "@default": {
         "node": "6.10",
         "chrome": "50",
         "safari": "10",
         "firefox": "53",
         "edge": "14"
-      },
-      "@description": "Expected targets of the transpiled files (uses @babel/preset-env)"
+      }
     },
     "format": {
-      "@default": "cjs",
       "@description": "Module format ('cjs' or 'esm') to use for the transpiled files",
       "@examples": [
         "cjs",
         "esm"
-      ]
+      ],
+      "@default": "cjs"
     },
     "transformJSX": {
-      "@default": false,
-      "@description": "Enable JSX support (using @babel/preset-react)"
+      "@description": "Enable JSX support (using @babel/preset-react)",
+      "@default": false
     },
     "jsxPragma": {
       "@type": "string",

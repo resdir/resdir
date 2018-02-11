@@ -4,8 +4,13 @@
     "1place/js-resource"
   ],
   "id": "aws/website",
-  "version": "0.1.31",
+  "version": "0.1.32",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -27,20 +32,24 @@
     "sleep-promise": "^2.0.0"
   },
   "@export": {
-    "@implementation": "./dist/cjs",
+    "@name": "AWS Website",
     "@description": "Host a static website on AWS (using S3, CloudFront, Route 53 and ACM)",
+    "@implementation": "./dist/cjs",
     "domainName": {
       "@type": "string",
       "@description": "The domain name of your website",
-      "@examples": ["www.mywebsite.com", "awesome.com"]
+      "@examples": [
+        "www.mywebsite.com",
+        "awesome.com"
+      ]
     },
     "contentDirectory": {
-      "@default": "./content",
-      "@description": "The directory containing the content of your website"
+      "@description": "The directory containing the content of your website",
+      "@default": "./content"
     },
     "indexPage": {
-      "@default": "index.html",
-      "@description": "The page returned at the root of your website (and subdirectories)"
+      "@description": "The page returned at the root of your website (and subdirectories)",
+      "@default": "index.html"
     },
     "customErrors": {
       "@type": "array",
@@ -72,23 +81,31 @@
         "@description": "Your AWS secret access key"
       },
       "region": {
-        "@default": "us-east-1",
         "@description": "The AWS region in which your website must be hosted",
-        "@examples": ["us-west-1", "eu-west-3", "ap-northeast-1"]
+        "@examples": [
+          "us-west-1",
+          "eu-west-3",
+          "ap-northeast-1"
+        ],
+        "@default": "us-east-1"
       },
       "cloudFront": {
         "@description": "Amazon CloudFront configuration",
         "priceClass": {
           "@description": "The price class you want to use for Amazon CloudFront",
-          "@default": "PriceClass_All",
-          "@examples": ["PriceClass_100", "PriceClass_200", "PriceClass_All"]
+          "@examples": [
+            "PriceClass_100",
+            "PriceClass_200",
+            "PriceClass_All"
+          ],
+          "@default": "PriceClass_All"
         }
       },
       "acm": {
         "@description": "AWS Certificate Manager configuration",
         "@isHidden": true,
         "region": {
-          "@description": "The AWS region in which the certificate must be hosted (For CloudFront to work, it should always be 'us-east-1')",
+          "@description": "The AWS region in which the certificate should be hosted (should always be 'us-east-1')",
           "@default": "us-east-1"
         }
       }
@@ -105,8 +122,8 @@
       ],
       "@implementation": "./dist/cjs/test-server",
       "port": {
-        "@default": 5678,
-        "@description": "The TCP port the test server should use"
+        "@description": "The TCP port the test server should use",
+        "@default": 5678
       },
       "start": {
         "@type": "method",

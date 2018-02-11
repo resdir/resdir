@@ -4,8 +4,13 @@
     "1place/js-resource"
   ],
   "id": "tool/file-copier",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -18,19 +23,20 @@
     "@resdir/error": "^0.1.0"
   },
   "@export": {
+    "@name": "File Copier",
     "@description": "A simple tool to copy a list of files",
     "@implementation": "./dist/cjs",
     "sourceDirectory": {
-      "@default": "./",
-      "@description": "The source directory"
+      "@description": "The source directory",
+      "@default": "./"
     },
     "destinationDirectory": {
       "@type": "string",
       "@description": "The destination directory"
     },
     "clearDestination": {
-      "@default": false,
-      "@description": "Whether or not the destination should be cleared before copying the files"
+      "@description": "Whether or not the destination should be cleared before copying the files",
+      "@default": false
     },
     "files": {
       "@type": "array",

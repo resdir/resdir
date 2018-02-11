@@ -4,8 +4,13 @@
     "js/resource"
   ],
   "id": "resdir/registry-client",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
   "files": [
     "./dist"
   ],
@@ -39,6 +44,7 @@
     }
   },
   "@export": {
+    "@name": "Resdir Registry Client",
     "@description": "Resdir registry client to publish and manage your resources",
     "@examples": [
       "run @registry signUp",
@@ -145,16 +151,16 @@
             "namespace": {
               "@type": "string",
               "@description": "Choose a name for your personal namespace",
-              "@examples": [
-                "aturing",
-                "sjobs",
-                "torvalds"
-              ],
               "@aliases": [
                 "ns"
               ],
               "@position": 0,
-              "@isOptional": true
+              "@isOptional": true,
+              "@examples": [
+                "aturing",
+                "sjobs",
+                "torvalds"
+              ]
             },
             "permissionToken": {
               "@type": "string",
@@ -196,8 +202,8 @@
       "@aliases": [
         "user"
       ],
-      "@isHidden": true,
-      "@implementation": "./dist/cjs/users"
+      "@implementation": "./dist/cjs/users",
+      "@isHidden": true
     },
     "organizations": {
       "@description": "Manage Resdir organizations",
@@ -214,16 +220,16 @@
           "namespace": {
             "@type": "string",
             "@description": "The namespace you wish for your organization",
-            "@examples": [
-              "twitter",
-              "js",
-              "eff"
-            ],
             "@aliases": [
               "ns"
             ],
             "@position": 0,
-            "@isOptional": true
+            "@isOptional": true,
+            "@examples": [
+              "twitter",
+              "js",
+              "eff"
+            ]
           },
           "permissionToken": {
             "@type": "string",
