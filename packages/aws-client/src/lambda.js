@@ -36,6 +36,11 @@ export class Lambda {
     return this.client.getFunctionConfiguration(params).promise();
   }
 
+  invoke(params) {
+    debug('invoke(%o)', params);
+    return this.client.invoke(params).promise();
+  }
+
   listTags(params) {
     debug('listTags(%o)', params);
     return this.client.listTags(params).promise();
