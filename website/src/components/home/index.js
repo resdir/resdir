@@ -2,17 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withRadiumStarter} from 'radium-starter';
 
-import Header from '../header';
-import Hero from './hero';
-import Intro from './intro';
-import Demo from './demo';
-import Action from './action';
-import Footer from '../footer';
-import Link from '../link';
-import FullHeight from '../full-height';
-import withErrorBoundary from '../error-boundary';
+import Layout from '../layout';
+import FirstSteps from './first-steps';
 
-@withErrorBoundary
 @withRadiumStarter
 export class Home extends React.Component {
   static propTypes = {
@@ -24,25 +16,32 @@ export class Home extends React.Component {
     const {theme: t, styles: s} = this.props;
 
     return (
-      <div>
-        <FullHeight style={{backgroundColor: t.screenColor}}>
-          <Header />
-          <Hero style={{flexGrow: 1}} />
-          <div style={[s.minimumLineHeight, {alignSelf: 'center', padding: '1.5rem 0'}]}>
-            <Link to="/#intro" style={[s.primaryColor, {':hover': {textDecoration: 'none'}}]}>
-              ▼
-            </Link>
-          </div>
-        </FullHeight>
-        <div style={s.centeredPage}>
-          <Intro />
-          <hr style={{marginTop: 0, marginBottom: 0}} />
-          <Demo />
-          <hr style={{marginTop: 0, marginBottom: 0}} />
-          <Action />
+      <Layout
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          padding: '5rem 1.5rem 10rem 1.5rem'
+        }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <h1 style={{textAlign: 'center'}}>Just born! 🐣</h1>
+          <h3 style={{...s.subheading, maxWidth: '800px', textAlign: 'center'}}>
+            Resdir is still in an early stage of development, and for now it is only available
+            through{' '}
+            <a href="https://run.tools" style={{color: t.accentColor}}>
+              Run
+            </a>'s command line interface.
+          </h3>
+          <FirstSteps style={{marginTop: '3rem'}} />
         </div>
-        <Footer />
-      </div>
+      </Layout>
     );
   }
 }
