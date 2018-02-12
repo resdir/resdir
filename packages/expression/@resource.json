@@ -1,5 +1,5 @@
 {
-  "@import": "1place/npm-package",
+  "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/expression",
   "version": "0.1.8",
   "description": "Implement method expressions",

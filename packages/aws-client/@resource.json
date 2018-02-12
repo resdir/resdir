@@ -1,5 +1,5 @@
 {
-  "@import": "1place/npm-package",
+  "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/aws-client",
   "version": "0.1.13",
   "description": "Convenience wrapper around AWS SDK",

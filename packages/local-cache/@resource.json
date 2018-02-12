@@ -1,5 +1,5 @@
 {
-  "@import": "1place/npm-package",
+  "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/local-cache",
   "version": "0.1.5",
   "description": "Simple cache using files to persist data",

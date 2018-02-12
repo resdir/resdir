@@ -1,7 +1,7 @@
 {
-  "@import": "resdir/resource",
+  "@import": "resdir/resource#^0.1.0",
   "id": "1place/npm-package",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -9,7 +9,7 @@
   "license": "MIT",
   "repository": "https://github.com/resdir/resdir.git",
   "@export": {
-    "@import": "js/npm-package",
+    "@import": "js/npm-package#^0.1.0",
     "@name": "1Place's npm Package",
     "@description": "1Place's starting point for implementing npm packages",
     "files": [
@@ -18,7 +18,7 @@
     "main": "./dist/cjs",
     "module": "./dist/esm",
     "cjsTranspiler": {
-      "@import": "js/transpiler",
+      "@import": "js/transpiler#^0.1.0",
       "format": "cjs",
       "run": {
         "@listen": [
@@ -28,7 +28,7 @@
       }
     },
     "esmTranspiler": {
-      "@import": "js/transpiler",
+      "@import": "js/transpiler#^0.1.0",
       "format": "esm",
       "run": {
         "@listen": [

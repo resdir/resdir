@@ -1,5 +1,5 @@
 {
-  "@import": "1place/npm-package",
+  "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/resource-identifier",
   "version": "0.1.16",
   "description": "Useful functions to handle Resource's identifiers",
@@ -14,7 +14,7 @@
   },
   "@unpublishable": {
     "tests": {
-      "@import": "1place/jest",
+      "@import": "1place/jest#^0.1.0",
       "@directory": "./tests"
     }
   }

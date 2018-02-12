@@ -1,10 +1,10 @@
 {
   "@import": [
-    "resdir/resource",
-    "js/resource"
+    "resdir/resource#^0.1.0",
+    "js/resource#^0.1.0"
   ],
   "id": "resdir/registry-client",
-  "version": "0.1.25",
+  "version": "0.1.26",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -34,7 +34,7 @@
   },
   "@unpublishable": {
     "transpiler": {
-      "@import": "js/transpiler",
+      "@import": "js/transpiler#^0.1.0",
       "run": {
         "@listen": [
           "@build",

@@ -1,5 +1,5 @@
 {
-  "@import": "1place/npm-package",
+  "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/secret-generator",
   "version": "1.0.6",
   "description": "Generate a secret",
@@ -11,7 +11,7 @@
   },
   "@unpublishable": {
     "tests": {
-      "@import": "1place/jest",
+      "@import": "1place/jest#^0.1.0",
       "@directory": "./tests",
       "dependencies": {
         "lodash": "^4.17.4"

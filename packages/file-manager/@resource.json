@@ -1,5 +1,5 @@
 {
-  "@import": "1place/npm-package",
+  "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/file-manager",
   "version": "0.1.7",
   "description": "Help managing files in most common formats (JSON, JSON5, YAML)",

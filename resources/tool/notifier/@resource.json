@@ -1,11 +1,10 @@
 {
   "@import": [
-    "resdir/resource",
-    "1place/js-resource",
-    "./"
+    "resdir/resource#^0.1.0",
+    "1place/js-resource#^0.1.0"
   ],
   "id": "tool/notifier",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"

@@ -1,5 +1,5 @@
 {
-  "@import": "js/resource",
+  "@import": "js/resource#^0.1.0",
   "dependencies": {
     "sleep-promise": "^2.0.0"
   },

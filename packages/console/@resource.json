@@ -1,5 +1,5 @@
 {
-  "@import": "1place/npm-package",
+  "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/console",
   "version": "0.1.39",
   "description": "Miscellaneous functions used by Resdir to manage console",

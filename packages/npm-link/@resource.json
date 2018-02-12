@@ -1,5 +1,5 @@
 {
-  "@import": "1place/npm-package",
+  "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/npm-link",
   "version": "1.0.5",
   "description": "'npm link' easier",

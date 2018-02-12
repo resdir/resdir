@@ -1,10 +1,10 @@
 {
   "@import": [
-    "resdir/resource",
+    "resdir/resource#^0.1.0",
     "./"
   ],
   "id": "js/resource",
-  "version": "0.1.37",
+  "version": "0.1.38",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -20,7 +20,7 @@
   },
   "@unpublishable": {
     "transpiler": {
-      "@import": "js/transpiler",
+      "@import": "js/transpiler#^0.1.0",
       "run": {
         "@listen": [
           "@build",
@@ -35,7 +35,7 @@
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist/cjs",
     "dependencies": {
-      "@import": "js/npm-dependencies"
+      "@import": "js/npm-dependencies#^0.1.0"
     },
     "onCreated": {
       "@type": "method",

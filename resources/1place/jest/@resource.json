@@ -1,10 +1,10 @@
 {
   "@import": [
-    "resdir/resource",
-    "1place/js-resource"
+    "resdir/resource#^0.1.0",
+    "1place/js-resource#^0.1.0"
   ],
   "id": "1place/jest",
-  "version": "0.1.39",
+  "version": "0.1.40",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -41,7 +41,7 @@
       "@default": "node"
     },
     "dependencies": {
-      "@import": "js/npm-dependencies"
+      "@import": "js/npm-dependencies#^0.1.0"
     },
     "run": {
       "@type": "method",

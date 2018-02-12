@@ -1,5 +1,5 @@
 {
-  "@import": ["1place/js-resource", "aws/lambda-hosted-resource"],
+  "@import": ["1place/js-resource#^0.1.0", "aws/lambda-hosted-resource#^0.1.0"],
   "timeout": 10,
   "dependencies": {
     "big-companies": "^1.0.5",

@@ -1,4 +1,4 @@
 {
-  "@import": "aws/s3-hosted-website",
+  "@import": "aws/s3-hosted-website#^0.1.0",
   "contentDirectory": "./content"
 }

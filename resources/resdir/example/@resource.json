@@ -1,13 +1,13 @@
 {
   "@import": [
-    "resdir/resource",
-    "1place/js-resource"
+    "resdir/resource#^0.1.0",
+    "1place/js-resource#^0.1.0"
   ],
   "@name": "Resource Example",
   "@description": "A simple 'Hello, World!' example",
   "@implementation": "./dist/cjs",
   "id": "resdir/example",
-  "version": "0.3.52",
+  "version": "0.3.53",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"

@@ -1,10 +1,10 @@
 {
   "@import": [
     "./",
-    "js/resource"
+    "js/resource#^0.1.0"
   ],
   "id": "resdir/resource",
-  "version": "0.1.48",
+  "version": "0.1.49",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -26,7 +26,7 @@
   },
   "@unpublishable": {
     "transpiler": {
-      "@import": "js/transpiler",
+      "@import": "js/transpiler#^0.1.0",
       "run": {
         "@listen": [
           "@build",
@@ -35,7 +35,7 @@
       }
     },
     "tests": {
-      "@import": "1place/jest",
+      "@import": "1place/jest#^0.1.0",
       "@directory": "./tests",
       "dependencies": {
         "run-core": "^0.11.0"

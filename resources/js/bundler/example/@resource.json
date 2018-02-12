@@ -1,5 +1,5 @@
 {
-  "@import": "js/resource",
+  "@import": "js/resource#^0.1.0",
   "dependencies": {
     "sleep-promise": "^2.0.0"
   },
@@ -10,7 +10,7 @@
     "target": "node",
     "format": "cjs",
     "fileWatcher": {
-      "@import": "tool/file-watcher",
+      "@import": "tool/file-watcher#^0.1.0",
       "files": [
         "./src/**"
       ],

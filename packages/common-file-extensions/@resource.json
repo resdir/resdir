@@ -1,5 +1,5 @@
 {
-  "@import": "1place/npm-package",
+  "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/common-file-extensions",
   "version": "0.1.4",
   "description": "List of common file extensions (ex.: 'doc', 'mp3', 'js',...)",

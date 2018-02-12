@@ -1,10 +1,10 @@
 {
   "@import": [
-    "resdir/resource",
-    "1place/js-resource"
+    "resdir/resource#^0.1.0",
+    "1place/js-resource#^0.1.0"
   ],
   "id": "js/bundler",
-  "version": "0.1.27",
+  "version": "0.1.28",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"

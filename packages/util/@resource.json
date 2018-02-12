@@ -1,5 +1,5 @@
 {
-  "@import": "1place/npm-package",
+  "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/util",
   "version": "0.1.7",
   "description": "Miscellaneous functions used by Resdir",
@@ -13,7 +13,7 @@
   },
   "@unpublishable": {
     "tests": {
-      "@import": "1place/jest",
+      "@import": "1place/jest#^0.1.0",
       "@directory": "./tests"
     }
   }

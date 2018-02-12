@@ -1,10 +1,10 @@
 {
   "@import": [
-    "resdir/resource",
-    "1place/js-resource"
+    "resdir/resource#^0.1.0",
+    "1place/js-resource#^0.1.0"
   ],
   "id": "aws/lambda-hosted-resource",
-  "version": "0.1.29",
+  "version": "0.1.30",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -29,10 +29,14 @@
     "tempy": "^0.2.1"
   },
   "@export": {
-    "@import": "resource/hosted-resource",
+    "@import": "resource/hosted-resource#^0.1.0",
     "@name": "AWS Lambda Hosted Resource",
     "@description": "Host resources on AWS using Lambda, API Gateway, Route 53 and ACM",
     "@implementation": "./dist/cjs",
+    "deploy": {
+      "@type": "method",
+      "@description": "Deploy your resource to AWS Lambda"
+    },
     "memorySize": {
       "@description": "The maximum amount of memory, in MB, allocated to your resource",
       "@default": 128
@@ -64,10 +68,6 @@
         ],
         "@default": "us-east-1"
       }
-    },
-    "deploy": {
-      "@type": "method",
-      "@description": "Deploy your resource to AWS Lambda"
     }
   }
 }

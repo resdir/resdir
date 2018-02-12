@@ -1,7 +1,7 @@
 import {formatValue} from '../../../dist';
 
 console.log(formatValue({
-  '@import': 'resdir/resource',
+  '@import': 'resdir/resource#^0.1.0',
   company: {
     boss: {
       name: 'John',

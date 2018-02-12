@@ -1,7 +1,7 @@
 {
-  "@import": "resdir/resource",
+  "@import": "resdir/resource#^0.1.0",
   "id": "js/npm-dependencies",
-  "version": "0.1.54",
+  "version": "0.1.55",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -13,7 +13,7 @@
   ],
   "@unpublishable": {
     "dependencies": {
-      "@import": "js/npm-dependencies",
+      "@import": "js/npm-dependencies#^0.1.0",
       "@value": {
         "github-url-to-object": "^4.0.2",
         "lodash": "^4.17.4",
@@ -35,7 +35,7 @@
         "@listen": "@build"
       },
       "fileWatcher": {
-        "@import": "tool/file-watcher",
+        "@import": "tool/file-watcher#^0.1.0",
         "files": [
           "./src/**"
         ],
@@ -47,11 +47,11 @@
       }
     },
     "transpiler": {
-      "@import": "js/transpiler",
+      "@import": "js/transpiler#^0.1.0",
       "format": "esm"
     },
     "bundler": {
-      "@import": "js/bundler",
+      "@import": "js/bundler#^0.1.0",
       "entry": "./dist/esm/index.js",
       "output": "./dist/bundle.js",
       "target": "node",
@@ -60,7 +60,7 @@
       "minify": true
     },
     "tests": {
-      "@import": "1place/jest",
+      "@import": "1place/jest#^0.1.0",
       "@directory": "./tests",
       "dependencies": {
         "fs-extra": "^5.0.0",

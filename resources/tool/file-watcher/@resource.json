@@ -1,10 +1,10 @@
 {
   "@import": [
-    "resdir/resource",
-    "1place/js-resource"
+    "resdir/resource#^0.1.0",
+    "1place/js-resource#^0.1.0"
   ],
   "id": "tool/file-watcher",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"

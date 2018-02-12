@@ -1,10 +1,10 @@
 {
   "@import": [
-    "resdir/resource",
-    "1place/js-resource"
+    "resdir/resource#^0.1.0",
+    "1place/js-resource#^0.1.0"
   ],
   "id": "js/npm-package",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -25,7 +25,7 @@
   },
   "@unpublishable": {
     "tests": {
-      "@import": "1place/jest",
+      "@import": "1place/jest#^0.1.0",
       "@directory": "./tests",
       "dependencies": {
         "fs-extra": "^5.0.0",
@@ -168,7 +168,7 @@
       ]
     },
     "dependencies": {
-      "@import": "js/npm-dependencies"
+      "@import": "js/npm-dependencies#^0.1.0"
     },
     "isJSNPMPackageResource": {
       "@isHidden": true,

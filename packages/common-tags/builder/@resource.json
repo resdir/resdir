@@ -1,5 +1,5 @@
 {
-  "@import": "1place/js-resource",
+  "@import": "1place/js-resource#^0.1.0",
   "@implementation": "./dist/cjs",
   "dependencies": {
     "lodash": "^4.17.4",
