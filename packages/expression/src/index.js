@@ -15,13 +15,10 @@ export function parseExpression(expression) {
 
   // TODO: Replace 'shell-quote' with something more suitable
 
-  // // Prevent 'shell-quote' from interpreting operators:
-  // for (const operator of '|&;()<>') {
-  //   expression = expression.replace(
-  //     new RegExp('\\' + operator, 'g'),
-  //     '\\' + operator
-  //   );
-  // }
+  // Prevent 'shell-quote' from interpreting some operators:
+  for (const operator of '|&;<>#') {
+    expression = expression.replace(new RegExp('\\' + operator, 'g'), '\\' + operator);
+  }
 
   expression = parse(expression, _variable => {
     throw new Error('Expression variables are not yet implemented');
@@ -29,27 +26,24 @@ export function parseExpression(expression) {
 
   expression = findSubexpressions(expression);
 
+  for (const part of expression) {
+    if (!(typeof part === 'string' || Array.isArray(part))) {
+      throw createClientError(`Expression parsing failed (part: ${JSON.stringify(part)})`);
+    }
+  }
+
   expression = parseArgumentsAndOptions(expression);
 
   return expression;
 }
 
 function findSubexpressions(expression, {isSubexpression} = {}) {
-  if (!Array.isArray(expression)) {
-    throw new TypeError('\'expression\' must be an array');
-  }
-
   const result = [];
 
   while (expression.length) {
     const part = expression.shift();
 
-    if (typeof part === 'string') {
-      result.push(part);
-      continue;
-    }
-
-    const op = part.op;
+    const op = typeof part === 'object' && part.op;
 
     if (op === '(') {
       const subexpression = findSubexpressions(expression, {isSubexpression: true});
@@ -64,7 +58,7 @@ function findSubexpressions(expression, {isSubexpression} = {}) {
       return result;
     }
 
-    throw createClientError(`Expression parsing failed (part: ${JSON.stringify(part)})`);
+    result.push(part);
   }
 
   if (isSubexpression) {
@@ -75,10 +69,6 @@ function findSubexpressions(expression, {isSubexpression} = {}) {
 }
 
 function parseArgumentsAndOptions(argsAndOpts) {
-  if (!Array.isArray(argsAndOpts)) {
-    throw new TypeError('\'argsAndOpts\' must be an array');
-  }
-
   let subArgsAndOpts;
   const index = argsAndOpts.indexOf('--');
   if (index !== -1) {
