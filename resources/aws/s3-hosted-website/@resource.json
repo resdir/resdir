@@ -17,10 +17,6 @@
   "dependencies": {
     "bytes": "^3.0.0",
     "hasha": "^3.0.0",
-    "http-errors": "^1.6.2",
-    "is-directory": "^0.3.1",
-    "koa": "^2.4.1",
-    "koa-send": "^4.1.2",
     "lodash": "^4.17.4",
     "mime-types": "^2.1.17",
     "minimatch": "^3.0.4",
@@ -32,44 +28,10 @@
     "sleep-promise": "^2.0.0"
   },
   "@export": {
+    "@import": "website/hosted-website",
     "@name": "AWS S3 Hosted Website",
     "@description": "Host a static website on AWS (using S3, CloudFront, Route 53 and ACM)",
     "@implementation": "./dist/cjs",
-    "domainName": {
-      "@type": "string",
-      "@description": "The domain name of your website",
-      "@examples": [
-        "www.mywebsite.com",
-        "awesome.com"
-      ]
-    },
-    "contentDirectory": {
-      "@description": "The directory containing the content of your website",
-      "@default": "./content"
-    },
-    "indexPage": {
-      "@description": "The page returned at the root of your website (and subdirectories)",
-      "@default": "index.html"
-    },
-    "customErrors": {
-      "@type": "array",
-      "@description": "Allows you to customize server errors",
-      "@examples": [
-        [
-          {
-            "errorCode": 404,
-            "responseCode": 200,
-            "responsePage": "index.html"
-          }
-        ]
-      ]
-    },
-    "immutableFiles": {
-      "@description": "An array of globs allowing you to specify the files that should be cached indefinitely",
-      "@default": [
-        "**/*.immutable.*"
-      ]
-    },
     "aws": {
       "@description": "Your AWS configuration",
       "accessKeyId": {
@@ -112,23 +74,7 @@
     },
     "deploy": {
       "@type": "method",
-      "@description": "Deploy your website to AWS",
-      "@before": "@build"
-    },
-    "testServer": {
-      "@description": "A simple HTTP server to help you test your website locally",
-      "@aliases": [
-        "server"
-      ],
-      "@implementation": "./dist/cjs/test-server",
-      "port": {
-        "@description": "The TCP port the test server should use",
-        "@default": 5678
-      },
-      "start": {
-        "@type": "method",
-        "@description": "Start the test server"
-      }
+      "@description": "Deploy your website to AWS"
     }
   }
 }

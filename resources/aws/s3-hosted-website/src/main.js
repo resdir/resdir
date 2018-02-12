@@ -3,12 +3,10 @@ import {
   emptyLine,
   printText,
   formatString,
-  formatCode,
   formatURL,
   formatBold,
   formatDim
 } from '@resdir/console';
-import {createClientError} from '@resdir/error';
 
 export default () => ({
   RESOURCE_ID: 'aws/s3-hosted-website',
@@ -16,8 +14,6 @@ export default () => ({
   MANAGER_IDENTIFIER: 'aws-s3-hosted-website-v1',
 
   async deploy(_args, environment) {
-    this.validate();
-
     await this.configureS3Bucket(environment);
 
     const changes = await this.synchronizeFiles(environment);
@@ -50,38 +46,6 @@ export default () => ({
         print(`   ${formatDim('Type:')} ${formatString('CNAME')}`);
         print(`  ${formatDim('Value:')} ${formatString(cloudFrontDomainName)}`);
         emptyLine();
-      }
-    }
-  },
-
-  validate() {
-    if (!this.domainName) {
-      throw createClientError(`${formatCode('domainName')} attribute is missing`);
-    }
-
-    if (!this.contentDirectory) {
-      throw createClientError(`${formatCode('contentDirectory')} attribute is missing`);
-    }
-
-    if (!this.indexPage) {
-      throw createClientError(`${formatCode('indexPage')} attribute is missing`);
-    }
-
-    if (this.indexPage.startsWith('/') || this.indexPage.startsWith('.')) {
-      throw createClientError(`${formatCode('indexPage')} can't start with ${formatString('/')} or ${formatString('.')}`);
-    }
-
-    for (const {errorCode, responseCode, responsePage} of this.customErrors || []) {
-      if (!errorCode) {
-        throw createClientError(`${formatCode('errorCode')} is missing in ${formatCode('customErrors')} attribute`);
-      }
-
-      if (responseCode && !responsePage) {
-        throw createClientError(`${formatCode('responsePage')} is missing in ${formatCode('customErrors')} attribute`);
-      }
-
-      if (responsePage && (responsePage.startsWith('/') || responsePage.startsWith('.'))) {
-        throw createClientError(`${formatCode('responsePage')} in ${formatCode('customErrors')} attribute can't start with ${formatString('/')} or ${formatString('.')}`);
       }
     }
   }

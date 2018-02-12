@@ -1,0 +1,90 @@
+{
+  "@import": [
+    "resdir/resource",
+    "1place/js-resource"
+  ],
+  "id": "website/hosted-website",
+  "version": "0.1.0",
+  "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "http-errors": "^1.6.2",
+    "is-directory": "^0.3.1",
+    "koa": "^2.4.1",
+    "koa-send": "^4.1.2",
+    "lodash": "^4.17.4",
+    "@resdir/console": "^0.1.16",
+    "@resdir/error": "^0.1.0"
+  },
+  "@export": {
+    "@name": "Hosted Website",
+    "@description": "Base resource for actual hosted website implementations (e.g., aws/s3-hosted-website)",
+    "@implementation": "./dist/cjs",
+    "domainName": {
+      "@type": "string",
+      "@description": "The domain name of your website",
+      "@examples": [
+        "www.mywebsite.com",
+        "awesome.com"
+      ]
+    },
+    "contentDirectory": {
+      "@description": "The directory containing the content of your website",
+      "@default": "./content"
+    },
+    "indexPage": {
+      "@description": "The page returned at the root of your website (and subdirectories)",
+      "@default": "index.html"
+    },
+    "customErrors": {
+      "@type": "array",
+      "@description": "Allows you to customize server errors",
+      "@examples": [
+        [
+          {
+            "errorCode": 404,
+            "responseCode": 200,
+            "responsePage": "index.html"
+          }
+        ]
+      ]
+    },
+    "immutableFiles": {
+      "@description": "An array of globs allowing you to specify the files that should be cached indefinitely",
+      "@default": [
+        "**/*.immutable.*"
+      ]
+    },
+    "deploy": {
+      "@type": "method",
+      "@description": "Deploy your website",
+      "@before": ["@build", "validate"]
+    },
+    "validate": {
+      "@type": "method",
+      "@description": "Validate the resource definition"
+    },
+    "testServer": {
+      "@description": "A simple HTTP server to help you test your website locally",
+      "@aliases": [
+        "server"
+      ],
+      "@implementation": "./dist/cjs/test-server",
+      "port": {
+        "@description": "The TCP port the test server should use",
+        "@default": 5678
+      },
+      "start": {
+        "@type": "method",
+        "@description": "Start the test server"
+      }
+    }
+  }
+}

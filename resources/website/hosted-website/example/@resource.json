@@ -1,0 +1,10 @@
+{
+  "@import": "../",
+  "domainName": "website-example.resdir.com",
+  "customErrors": [
+    {
+      "errorCode": 404,
+      "responsePage": "not-found.html"
+    }
+  ]
+}
