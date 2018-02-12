@@ -1,0 +1,14 @@
+{
+  "@import": ["../", "1place/js-resource"],
+  "domainName": "api.example.resdir.com",
+  "@export": {
+    "@implementation": "./dist/cjs",
+    "hello": {
+      "@type": "method",
+      "@output": {
+        "@type": "string"
+      }
+    },
+    "message": "Hello, World!"
+  }
+}
