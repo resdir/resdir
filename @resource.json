@@ -39,8 +39,8 @@
       "./resources/1place/js-resource version bump",
       "./resources/1place/npm-package version bump",
       "./resources/1place/jest version bump",
-      "./resources/aws/hosted-resource version bump",
-      "./resources/aws/website version bump"
+      "./resources/aws/lambda-hosted-resource version bump",
+      "./resources/aws/s3-hosted-website version bump"
     ]
   },
   "publish": {
@@ -63,8 +63,8 @@
       "./resources/1place/js-resource publish --throwIfAlreadyExists=false",
       "./resources/1place/npm-package publish --throwIfAlreadyExists=false",
       "./resources/1place/jest publish --throwIfAlreadyExists=false",
-      "./resources/aws/hosted-resource publish --throwIfAlreadyExists=false",
-      "./resources/aws/website publish --throwIfAlreadyExists=false"
+      "./resources/aws/lambda-hosted-resource publish --throwIfAlreadyExists=false",
+      "./resources/aws/s3-hosted-website publish --throwIfAlreadyExists=false"
     ]
   }
 }

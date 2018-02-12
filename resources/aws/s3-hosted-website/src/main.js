@@ -11,9 +11,9 @@ import {
 import {createClientError} from '@resdir/error';
 
 export default () => ({
-  RESOURCE_ID: 'aws/website',
+  RESOURCE_ID: 'aws/s3-hosted-website',
 
-  MANAGER_IDENTIFIER: 'aws-website-v1',
+  MANAGER_IDENTIFIER: 'aws-s3-hosted-website-v1',
 
   async deploy(_args, environment) {
     this.validate();

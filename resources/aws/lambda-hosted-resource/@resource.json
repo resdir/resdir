@@ -3,8 +3,8 @@
     "resdir/resource",
     "1place/js-resource"
   ],
-  "id": "aws/hosted-resource",
-  "version": "0.1.28",
+  "id": "aws/lambda-hosted-resource",
+  "version": "0.1.29",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -34,8 +34,8 @@
     "tempy": "^0.2.1"
   },
   "@export": {
-    "@name": "AWS Hosted Resource",
-    "@description": "Host resources on AWS (using Lambda, API Gateway, Route 53 and ACM)",
+    "@name": "AWS Lambda Hosted Resource",
+    "@description": "Host resources on AWS using Lambda, API Gateway, Route 53 and ACM",
     "@implementation": "./dist/cjs",
     "domainName": {
       "@type": "string",

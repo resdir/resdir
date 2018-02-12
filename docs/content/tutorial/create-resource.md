@@ -7,11 +7,11 @@ For example, here is a @resource describing a website hosted by AWS:
 ```
 {
   "frontend": {
-    "@import": "aws/website",
+    "@import": "aws/s3-hosted-website",
     "domainName": "www.example.com"
   },
   "backend": {
-    "@import": "aws/hosted-resource",
+    "@import": "aws/lambda-hosted-resource",
     "domainName": "api.example.com",
     "@export": {
       "hello": { "@type": "method" }
@@ -20,7 +20,7 @@ For example, here is a @resource describing a website hosted by AWS:
 }
 ```
 
-Our @resource is composed of two sub-@resources: `"frontend"` which inherits from `"aws/website"`, and `"backend"` which inherits from `"aws/hosted-resource"`. An exciting feature of @resources is that they can be invoked remotely. By inheriting from `"aws/hosted-resource"`, the backend will run on AWS Lambda.
+Our @resource is composed of two sub-@resources: `"frontend"` which inherits from `"aws/s3-hosted-website"`, and `"backend"` which inherits from `"aws/lambda-hosted-resource"`. An exciting feature of @resources is that they can be invoked remotely. By inheriting from `"aws/lambda-hosted-resource"`, the backend will run on AWS Lambda.
 
 Here is the implementation of the frontend:
 

@@ -3,8 +3,8 @@
     "resdir/resource",
     "1place/js-resource"
   ],
-  "id": "aws/website",
-  "version": "0.1.32",
+  "id": "aws/s3-hosted-website",
+  "version": "0.1.33",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -32,7 +32,7 @@
     "sleep-promise": "^2.0.0"
   },
   "@export": {
-    "@name": "AWS Website",
+    "@name": "AWS S3 Hosted Website",
     "@description": "Host a static website on AWS (using S3, CloudFront, Route 53 and ACM)",
     "@implementation": "./dist/cjs",
     "domainName": {

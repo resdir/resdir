@@ -2,9 +2,9 @@ import {printWarning, formatCode} from '@resdir/console';
 import {createClientError} from '@resdir/error';
 
 export default () => ({
-  RESOURCE_ID: 'aws/hosted-resource',
+  RESOURCE_ID: 'aws/lambda-hosted-resource',
 
-  MANAGER_IDENTIFIER: 'aws-hosted-resource-v1',
+  MANAGER_IDENTIFIER: 'aws-lambda-hosted-resource-v1',
 
   async deploy(_input, environment) {
     this.validate();

@@ -16,11 +16,11 @@ For example, here is a @resource describing a website hosted by AWS:
 \`\`\`
 {
   "frontend": {
-    "@import": "aws/website",
+    "@import": "aws/s3-hosted-website",
     "domainName": "www.example.com"
   },
   "backend": {
-    "@import": "aws/hosted-resource",
+    "@import": "aws/lambda-hosted-resource",
     "domainName": "api.example.com",
     "@export": {
       "hello": { "@type": "method" }
@@ -29,7 +29,7 @@ For example, here is a @resource describing a website hosted by AWS:
 }
 \`\`\`
 
-Our @resource is composed of two sub-@resources: \`"frontend"\` which inherits from \`"aws/website"\`, and \`"backend"\` which inherits from \`"aws/hosted-resource"\`. An exciting feature of @resources is that they can be invoked remotely. By inheriting from \`"aws/hosted-resource"\`, the backend will run on AWS Lambda.
+Our @resource is composed of two sub-@resources: \`"frontend"\` which inherits from \`"aws/s3-hosted-website"\`, and \`"backend"\` which inherits from \`"aws/lambda-hosted-resource"\`. An exciting feature of @resources is that they can be invoked remotely. By inheriting from \`"aws/lambda-hosted-resource"\`, the backend will run on AWS Lambda.
 
 Here is the implementation of the frontend:
 
@@ -68,7 +68,7 @@ $ run frontend deploy && run backend deploy
 
 Voilà! Our website is online. With minimal effort, the frontend is served by S3 and CloudFront, the backend runs in Lambda, domain names are managed by Route 53, and SSL certificates have been created by ACM.
 
-This example used two popular @resources, \`"aws/website"\` and \`"aws/hosted-resource"\`, but Resdir is not limited to that. A growing number of @resources are available, and if your favorite tools or services do not exist yet, it is up to you to implement your @resources and share them with everybody!
+This example used two popular @resources, \`"aws/s3-hosted-website"\` and \`"aws/lambda-hosted-resource"\`, but Resdir is not limited to that. A growing number of @resources are available, and if your favorite tools or services do not exist yet, it is up to you to implement your @resources and share them with everybody!
 `;
 
 const ASIDE = `

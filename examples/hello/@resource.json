@@ -1,11 +1,11 @@
 {
   "frontend": {
-    "@import": "aws/website",
+    "@import": "aws/s3-hosted-website",
     "domainName": "www.hello.resdir.com",
     "contentDirectory": "./frontend"
   },
   "backend": {
-    "@import": "aws/hosted-resource",
+    "@import": "aws/lambda-hosted-resource",
     "domainName": "api.hello.resdir.com",
     "@export": {
       "@implementation": "./backend/index.js",

@@ -10,7 +10,7 @@ import mime from 'mime-types';
 import bytes from 'bytes';
 import minimatch from 'minimatch';
 
-const CONFIG_FILE_S3_KEY = '.aws-website-config.json';
+const CONFIG_FILE_S3_KEY = '.aws-s3-hosted-website-config.json';
 const IMMUTABLE_FILES_MAX_AGE = 3153600000; // 100 years!
 
 export default () => ({
