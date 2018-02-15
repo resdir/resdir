@@ -1,5 +1,6 @@
 import {isEmpty} from 'lodash';
 import {
+  print,
   printSuccess,
   formatValue,
   formatCode,
@@ -48,20 +49,21 @@ export default Resource => ({
         const input = formatValue(request.params.input, {multiline: false});
         const env = formatValue(request.params.environment, {multiline: false});
         const message =
+          formatBold('→ ') +
           name +
           formatPunctuation('(') +
           input +
           formatPunctuation(', ') +
           env +
-          formatPunctuation(') => ');
-        process.stdout.write(message);
+          formatPunctuation(')');
+        print(message);
       }
 
       const startTime = Date.now();
       const response = await jsonRPCHandler.handleRequest(request);
       const elapsedTime = formatDim(`(${Date.now() - startTime}ms)`);
 
-      let message = '';
+      let message = formatBold('← ');
       if (response.error) {
         message += formatDanger('[ERROR] ') + response.error.message;
         if (!isEmpty(response.error.data)) {
@@ -72,7 +74,7 @@ export default Resource => ({
         message += formatValue(output, {multiline: false});
       }
       message += ' ' + elapsedTime;
-      console.log(message.trim());
+      print(message.trim());
 
       ctx.body = response;
     });
@@ -96,7 +98,7 @@ export default Resource => ({
     const server = this.createServer(environment);
     server.listen(this.port);
     printSuccess(
-      `Test server started ${formatDim(`(`)}${formatURL(`http://localhost:${this.port}`)}${formatDim(`)`)}`,
+      `Test server started ${formatPunctuation(`(`)}${formatURL(`http://localhost:${this.port}`)}${formatPunctuation(`)`)}`,
       environment
     );
   }

@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "website/hosted-website",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"

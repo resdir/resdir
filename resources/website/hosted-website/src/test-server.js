@@ -1,7 +1,14 @@
 import {resolve, join} from 'path';
 import {existsSync} from 'fs';
 import {trim} from 'lodash';
-import {print, printSuccess, formatDanger, formatDim, formatCode, formatURL} from '@resdir/console';
+import {
+  print,
+  printSuccess,
+  formatDanger,
+  formatPunctuation,
+  formatCode,
+  formatURL
+} from '@resdir/console';
 import Koa from 'koa';
 import send from 'koa-send';
 import createError from 'http-errors';
@@ -44,12 +51,12 @@ export default () => ({
 
         const servedPath = '/' + path;
         if (ctx.path !== servedPath) {
-          message += formatDim(` (`);
+          message += formatPunctuation(` (`);
           if (status !== 200) {
             const err = createError(status);
             message += formatDanger(`${err.status} ${err.message} `);
           }
-          message += formatDim(`=> ${servedPath})`);
+          message += formatPunctuation('=> ') + servedPath + formatPunctuation(')');
         }
 
         print(message, environment);
@@ -57,7 +64,10 @@ export default () => ({
         ctx.status = status;
         await send(ctx, path, {root: contentDirectory});
       } catch (err) {
-        message += formatDim(` (`) + formatDanger(`${err.status} ${err.message}`) + formatDim(`)`);
+        message +=
+          formatPunctuation(` (`) +
+          formatDanger(`${err.status} ${err.message}`) +
+          formatPunctuation(`)`);
         print(message, environment);
         throw err;
       }
@@ -70,7 +80,7 @@ export default () => ({
     const server = this.createServer(environment);
     server.listen(this.port);
     printSuccess(
-      `Test server started ${formatDim(`(`)}${formatURL(`http://localhost:${this.port}`)}${formatDim(`)`)}`,
+      `Test server started ${formatPunctuation(`(`)}${formatURL(`http://localhost:${this.port}`)}${formatPunctuation(`)`)}`,
       environment
     );
   }
