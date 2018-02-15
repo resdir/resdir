@@ -15,6 +15,7 @@ import Koa from 'koa';
 import jsonError from 'koa-json-error';
 import cors from '@koa/cors';
 import body from 'koa-json-body';
+import sleep from 'sleep-promise';
 
 export default Resource => ({
   createServer(environment) {
@@ -35,6 +36,10 @@ export default Resource => ({
 
     server.use(async ctx => {
       const request = ctx.request.body || {};
+
+      if (this.delay) {
+        await sleep(this.delay);
+      }
 
       const jsonRPCHandler = await this.getJSONRPCHandler(environment);
 
