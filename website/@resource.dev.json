@@ -4,6 +4,24 @@
   "testServer": {
     "port": 9012
   },
+  "dependencies": {
+    "color": "^3.0.0",
+    "hast-util-sanitize": "^1.1.2",
+    "highlight.js": "^9.12.0",
+    "lodash": "^4.17.4",
+    "prop-types": "^15.6.0",
+    "radium": "^0.21.2",
+    "radium-starter": "^0.10.0",
+    "react-lowlight": "^1.1.1",
+    "react-md-spinner": "^0.2.5",
+    "react-router-dom": "^4.2.2",
+    "remark": "^9.0.0",
+    "remark-react": "^4.0.1",
+    "@resdir/http-client": "^0.2.0",
+    "@resdir/react-modal": "^0.1.0",
+    "sleep-promise": "^2.0.0",
+    "url-search-params": "^0.10.0"
+  },
   "bundler": {
     "output": "./dist/bundle.dev.js"
   },
@@ -22,7 +40,8 @@
         "source": "./dist/bundle.dev.js",
         "destination": "./bundle.js",
         "replacements": {
-          "$RESDIR_REGISTRY_SERVER$": "http://registry.dev.resdir.com"
+          "$RESDIR_REGISTRY_SERVER$": "http://registry.dev.resdir.com",
+          "$RUN_WEBSITE_URL$": "http://dev.run.tools"
         }
       },
       "./images"

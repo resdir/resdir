@@ -25,7 +25,8 @@
         "source": "./dist/bundle.test.js",
         "destination": "./bundle.js",
         "replacements": {
-          "$RESDIR_REGISTRY_SERVER$": "http://registry.test.resdir.com"
+          "$RESDIR_REGISTRY_SERVER$": "https://registry.test.resdir.com",
+          "$RUN_WEBSITE_URL$": "https://test.run.tools"
         }
       },
       "./images"

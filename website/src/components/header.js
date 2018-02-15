@@ -15,14 +15,8 @@ export class Header extends React.Component {
   render() {
     const {theme: t, styles: s} = this.props;
 
-    const menuStyle = [s.unstyledList, s.noMargins];
-    const menuItemStyle = [s.inlineBlock, {marginLeft: '1.3rem'}];
-    const menuItemLinkStyle = [
-      {
-        color: t.accentColor,
-        ':hover': {color: t.lightPrimaryColor, textDecoration: 'none'}
-      }
-    ];
+    const menuStyle = {...s.unstyledList, ...s.noMargins};
+    const menuItemStyle = {...s.inlineBlock, marginLeft: '1.3rem'};
 
     return (
       <header
@@ -41,9 +35,9 @@ export class Header extends React.Component {
           <small style={{color: t.mutedTextColor, letterSpacing: '0.04rem'}}>alpha</small>
         </div>
         <div style={{flexGrow: 1}} />
-        <ul style={[menuStyle]}>
+        <ul style={menuStyle}>
           <li style={menuItemStyle}>
-            <Link key="header-docs" to="/docs" style={menuItemLinkStyle}>
+            <Link key="header-docs" to="/docs" style={s.primaryLink}>
               Docs
             </Link>
           </li>
@@ -51,7 +45,7 @@ export class Header extends React.Component {
             <a
               key="header-support"
               href="https://github.com/resdir/resdir/issues"
-              style={menuItemLinkStyle}
+              style={s.primaryLink}
             >
               Support
             </a>

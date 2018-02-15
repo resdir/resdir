@@ -24,7 +24,7 @@ export class Footer extends React.Component {
     const menuItemLinkStyle = [{':hover': {textDecoration: 'none'}}];
 
     return (
-      <footer style={{padding: '3rem 0', backgroundColor: t.screenColor}}>
+      <footer style={{padding: '3rem 0', backgroundColor: t.altBackgroundColor}}>
         <div
           style={{
             display: 'flex',

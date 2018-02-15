@@ -39,10 +39,10 @@ class Spinner extends React.Component {
     return (
       <MDSpinner
         size={size}
-        color1={t.extraColor1}
+        color1={t.primaryColor}
         color2={t.accentColor}
-        color3={t.extraColor2}
-        color4={t.primaryColor}
+        color3={t.extraColor1}
+        color4={t.baseTextColor}
       />
     );
   }

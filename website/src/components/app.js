@@ -8,41 +8,50 @@ import Color from 'color';
 import {highlightJSStyles} from './code';
 
 import Root from './root';
+import {getModal} from '../modal';
 
 function theme() {
   // Color source: https://color.adobe.com/oddend-color-theme-2181/
   return {
-    primaryColor: '#8A8A8A', // Resdir's gray
-    accentColor: '#FF358B', // Resdir's magenta
+    primaryColor: '#FF358B', // Resdir logo's magenta
+    lightPrimaryColor: t =>
+      Color(t.primaryColor)
+        .lighten(0.2)
+        .string(),
+    accentColor: '#01B0F0', // Cyan
     backgroundColor: '#171717',
-    borderColor: 'rgba(255,255,255,.2)',
+    borderColor: '#444444',
     baseTextColor: '#CCCCCC',
     baseInverseTextColor: t => t.backgroundColor,
-    mutedTextColor: t => t.primaryColor,
-    headingsColor: t => t.lightPrimaryColor,
+    secondaryTextColor: '#8A8A8A', // Resdir logo's gray
+    mutedTextColor: t => t.secondaryTextColor,
+    headingsColor: '#ECF0F1', // Almost white,
     headingsFontWeight: '500',
     headingsLineHeight: t => t.baseLineHeight,
-    linkColor: t => t.extraColor1,
+    linkColor: t => t.accentColor,
     hoveredLinkColor: t =>
       Color(t.linkColor)
         .lighten(0.4)
         .string(),
-    codeColor: t => t.lightPrimaryColor,
-    codeBackgroundColor: t => t.screenColor,
+    codeColor: t => t.baseTextColor,
+    codeBackgroundColor: t => t.altBackgroundColor,
     preColor: t => t.codeColor,
     preBackgroundColor: t => t.codeBackgroundColor,
     modularScaleRatio: 1.25,
     // Custom variables
-    screenColor: '#1B2836',
-    extraColor1: '#01B0F0', // Cyan
-    extraColor2: '#AEEE00' // Flashy green
+    altBackgroundColor: '#1B2836',
+    extraColor1: '#AEEE00' // Flashy green
   };
 }
 
 function styles(t, _s) {
   return {
     centeredPage: {maxWidth: '1280px', margin: '0 auto'},
-    subheading: {fontWeight: '300', color: t.primaryColor}
+    subheading: {fontWeight: '300', color: t.secondaryTextColor},
+    primaryLink: {
+      color: t.primaryColor,
+      ':hover': {color: t.lightPrimaryColor, textDecoration: 'none'}
+    }
   };
 }
 
@@ -92,6 +101,7 @@ export class App extends React.Component {
     return (
       <RadiumStarterRoot theme={theme} styles={styles}>
         <Main />
+        {getModal().createElement()}
       </RadiumStarterRoot>
     );
   }
