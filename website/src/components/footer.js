@@ -24,7 +24,13 @@ export class Footer extends React.Component {
     const menuItemLinkStyle = [{':hover': {textDecoration: 'none'}}];
 
     return (
-      <footer style={{padding: '3rem 0', backgroundColor: t.altBackgroundColor}}>
+      <footer
+        style={{
+          padding: '3rem 0',
+          backgroundColor: t.altBackgroundColor,
+          [`@media (max-width: ${t.smallBreakpoint})`]: {padding: '1.5rem 0'}
+        }}
+      >
         <div
           style={{
             display: 'flex',
@@ -109,7 +115,13 @@ export class Footer extends React.Component {
             </ul>
           </div>
         </div>
-        <div style={{marginTop: '3rem', textAlign: 'center'}}>
+        <div
+          style={{
+            marginTop: '3rem',
+            textAlign: 'center',
+            [`@media (max-width: ${t.smallBreakpoint})`]: {marginTop: '1.5rem'}
+          }}
+        >
           <small style={{color: t.mutedTextColor}}>
             © {new Date().getFullYear()}{' '}
             <a href="https://1place.io/" style={{color: t.primaryTextColor}}>

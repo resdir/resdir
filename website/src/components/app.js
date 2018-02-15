@@ -5,8 +5,6 @@ const {Style} = Radium;
 import {RadiumStarterRoot, withRadiumStarter} from 'radium-starter';
 import Color from 'color';
 
-import {highlightJSStyles} from './code';
-
 import Root from './root';
 import {getModal} from '../modal';
 
@@ -116,9 +114,7 @@ class Main extends React.Component {
   render() {
     return (
       <div>
-        <Style
-          rules={{...highlightJSStyles(this.props.theme), ...globalStyles(this.props.theme)}}
-        />
+        <Style rules={globalStyles(this.props.theme)} />
         <Root />
       </div>
     );

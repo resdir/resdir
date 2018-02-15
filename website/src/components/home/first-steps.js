@@ -13,11 +13,23 @@ export class FirstSteps extends React.Component {
   render() {
     const {style, theme: t, styles: s} = this.props;
 
-    const number = {
+    const numberStyle = {
       marginRight: '6px',
       fontSize: '1.8rem',
       verticalAlign: '-0.17rem',
-      color: t.accentColor
+      color: t.accentColor,
+      [`@media (max-width: ${t.smallBreakpoint})`]: {
+        marginRight: '4px',
+        fontSize: '1.5rem',
+        verticalAlign: '-0.1rem'
+      }
+    };
+
+    const preStyle = {
+      fontSize: t.h6FontSize,
+      [`@media (max-width: ${t.smallBreakpoint})`]: {
+        fontSize: '.75rem'
+      }
     };
 
     return (
@@ -29,27 +41,33 @@ export class FirstSteps extends React.Component {
           borderWidth: 0,
           borderRadius: '15px',
           fontSize: t.h5FontSize,
+          [`@media (max-width: ${t.smallBreakpoint})`]: {
+            width: '300px',
+            padding: '8px 12px',
+            borderRadius: '10px',
+            fontSize: '1rem'
+          },
           ...style
         }}
       >
         <p>
-          <span style={number}>①</span> Install Run:
+          <span style={numberStyle}>①</span> Install Run:
         </p>
 
-        <pre style={{fontSize: t.h6FontSize}}>
+        <pre style={preStyle}>
           <span style={{color: t.mutedTextColor}}>></span> npm install run-cli -g
         </pre>
 
         <p>
-          <span style={number}>②</span> Look what Resdir can do for you:
+          <span style={numberStyle}>②</span> Look what Resdir can do for you:
         </p>
 
-        <pre style={{fontSize: t.h6FontSize}}>
+        <pre style={preStyle}>
           <span style={{color: t.mutedTextColor}}>></span> run @registry
         </pre>
 
         <p style={{...s.noMargins}}>
-          <span style={number}>③</span> Enjoy{' '}
+          <span style={numberStyle}>③</span> Enjoy{' '}
           <a href={process.env.RUN_WEBSITE_URL} style={s.primaryLink}>
             resources
           </a>! 😊

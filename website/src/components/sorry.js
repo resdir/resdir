@@ -7,7 +7,7 @@ import Layout from './layout';
 @withRadiumStarter
 export class Sorry extends React.Component {
   static propTypes = {
-    message: PropTypes.string.isRequired,
+    message: PropTypes.node.isRequired,
     styles: PropTypes.object.isRequired
   };
 

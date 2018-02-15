@@ -13,6 +13,7 @@ export class StayUpdated extends React.Component {
   static propTypes = {
     id: PropTypes.string,
     style: PropTypes.object,
+    theme: PropTypes.object.isRequired,
     styles: PropTypes.object.isRequired
   };
 
@@ -44,7 +45,7 @@ export class StayUpdated extends React.Component {
   }
 
   render() {
-    const {id, style, styles: s} = this.props;
+    const {id, style, theme: t, styles: s} = this.props;
 
     const containerStyle = {
       display: 'flex',
@@ -52,6 +53,9 @@ export class StayUpdated extends React.Component {
       justifyContent: 'center',
       alignItems: 'center',
       padding: '1.5rem',
+      [`@media (max-width: ${t.smallBreakpoint})`]: {
+        padding: '10px'
+      },
       ...style
     };
 
@@ -76,20 +80,22 @@ export class StayUpdated extends React.Component {
 
     return (
       <div id={id} style={containerStyle}>
-        <h2>Stay updated</h2>
+        <h2 style={{marginTop: '-5px'}}>Stay updated</h2>
         <h4 style={{...s.subheading, marginBottom: '2rem', textAlign: 'center'}}>
           Know when Resdir is ready for production – and everything else.
         </h4>
-        {/* eslint-disable no-script-url */}
         <Form
           onSubmit={e => {
             e.preventDefault();
             this.submit();
           }}
-          action="javascript:void(0)"
-          style={{display: 'flex', alignItems: 'center'}}
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexWrap: 'wrap'
+          }}
         >
-          {/* eslint-enable no-script-url */}
           <Input
             type="email"
             onChange={e => {
@@ -99,9 +105,25 @@ export class StayUpdated extends React.Component {
             required
             rsLarge
             placeholder="Your email address"
-            style={{width: '300px', marginRight: '0.75rem'}}
+            style={{
+              width: '300px',
+              marginRight: '0.75rem',
+              [`@media (max-width: ${t.smallBreakpoint})`]: {
+                marginRight: 0,
+                marginBottom: '0.75rem'
+              }
+            }}
           />
-          <Button type="submit" rsPrimary rsLarge>
+          <Button
+            type="submit"
+            rsPrimary
+            rsLarge
+            style={{
+              [`@media (max-width: ${t.smallBreakpoint})`]: {
+                flexBasis: '300px'
+              }
+            }}
+          >
             I'm in!
           </Button>
         </Form>
