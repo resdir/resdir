@@ -14,6 +14,7 @@ import cors from '@koa/cors';
 import send from 'koa-send';
 import createError from 'http-errors';
 import isDirectory from 'is-directory';
+import sleep from 'sleep-promise';
 
 export default () => ({
   createServer(environment) {
@@ -27,6 +28,10 @@ export default () => ({
     server.use(cors());
 
     server.use(async ctx => {
+      if (this.delay) {
+        await sleep(this.delay);
+      }
+
       let message = `${formatCode('GET', {addBackticks: false})} ${ctx.path}`;
 
       try {

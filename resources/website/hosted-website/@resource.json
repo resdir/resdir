@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "website/hosted-website",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -22,7 +22,8 @@
     "koa-send": "^4.1.2",
     "lodash": "^4.17.4",
     "@resdir/console": "^0.1.16",
-    "@resdir/error": "^0.1.0"
+    "@resdir/error": "^0.1.0",
+    "sleep-promise": "^2.0.0"
   },
   "@export": {
     "@name": "Hosted Website",
@@ -84,6 +85,10 @@
       "port": {
         "@description": "The TCP port the test server should use",
         "@default": 5678
+      },
+      "delay": {
+        "@description": "Delay (in millisecond) before responding (helps to simulate slow network)",
+        "@default": 0
       },
       "start": {
         "@type": "method",
