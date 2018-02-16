@@ -45,15 +45,15 @@ function findSubexpressions(expression, {isSubexpression} = {}) {
 
     const op = typeof part === 'object' && part.op;
 
-    if (op === '(') {
+    if (op === '(' || part === '{') {
       const subexpression = findSubexpressions(expression, {isSubexpression: true});
       result.push(subexpression);
       continue;
     }
 
-    if (op === ')') {
+    if (op === ')' || part === '}') {
       if (!isSubexpression) {
-        throw createClientError(`Unexpected ${formatCode(')')} found while parsing an expression`);
+        throw createClientError(`Unexpected ${formatCode(op || part)} found while parsing an expression`);
       }
       return result;
     }
@@ -62,7 +62,7 @@ function findSubexpressions(expression, {isSubexpression} = {}) {
   }
 
   if (isSubexpression) {
-    throw createClientError(`Expected ${formatCode(')')} not found while parsing an expression`);
+    throw createClientError(`Expected ${formatCode(')')} (or ${formatCode('}')}) couldn't be found while parsing an expression`);
   }
 
   return result;
