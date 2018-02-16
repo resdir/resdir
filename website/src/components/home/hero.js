@@ -30,7 +30,7 @@ export class Hero extends React.Component {
         <h3
           style={{
             ...s.subheading,
-            maxWidth: '890px',
+            maxWidth: '720px',
             textAlign: 'center',
             marginBottom: '2rem',
             [`@media (max-width: ${t.smallBreakpoint})`]: {
@@ -38,8 +38,7 @@ export class Hero extends React.Component {
             }
           }}
         >
-          Resdir – the resource directory – is still in development, and&nbsp;for&nbsp;now,
-          it&nbsp;is only available through{' '}
+          For now, Resdir – the resource directory – is&nbsp;only accessible through{' '}
           <a href={process.env.RUN_WEBSITE_URL} style={{...s.primaryLink}}>
             Run
           </a>'s command line interface.
