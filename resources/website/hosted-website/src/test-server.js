@@ -10,6 +10,7 @@ import {
   formatURL
 } from '@resdir/console';
 import Koa from 'koa';
+import cors from '@koa/cors';
 import send from 'koa-send';
 import createError from 'http-errors';
 import isDirectory from 'is-directory';
@@ -22,6 +23,8 @@ export default () => ({
     const customErrors = website.customErrors || [];
 
     const server = new Koa();
+
+    server.use(cors());
 
     server.use(async ctx => {
       let message = `${formatCode('GET', {addBackticks: false})} ${ctx.path}`;

@@ -18,6 +18,7 @@
     "http-errors": "^1.6.2",
     "is-directory": "^0.3.1",
     "koa": "^2.4.1",
+    "@koa/cors": "^2.2.1",
     "koa-send": "^4.1.2",
     "lodash": "^4.17.4",
     "@resdir/console": "^0.1.16",
