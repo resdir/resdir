@@ -25,6 +25,8 @@ describe('@resdir/namespace', () => {
 
   test('isReservedNamespace()', () => {
     expect(isReservedNamespace('connect-github-account')).toBe(true);
+    expect(isReservedNamespace('my-namespace')).toBe(true);
+    expect(isReservedNamespace('aturing')).toBe(true);
     expect(isReservedNamespace('chic')).toBe(false);
   });
 });

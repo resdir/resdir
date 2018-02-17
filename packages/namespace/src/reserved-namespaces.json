@@ -1,1 +1,13 @@
-["connect-github-account"]
+[
+  "connect-github-account",
+  "my-namespace",
+  "mynamespace",
+  "your-namespace",
+  "yournamespace",
+  "my-name",
+  "myname",
+  "your-name",
+  "yourname",
+  "aturing",
+  "a-turing"
+]
