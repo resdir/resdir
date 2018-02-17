@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withRadiumStarter} from 'radium-starter';
 
+import constants from '../../constants';
+
 @withRadiumStarter
 export class FirstSteps extends React.Component {
   static propTypes = {
@@ -68,7 +70,7 @@ export class FirstSteps extends React.Component {
 
         <p style={{...s.noMargins}}>
           <span style={numberStyle}>③</span> Enjoy{' '}
-          <a href={process.env.RUN_WEBSITE_URL} style={s.primaryLink}>
+          <a href={constants.RUN_WEBSITE_URL} style={s.primaryLink}>
             resources
           </a>! 😊
         </p>

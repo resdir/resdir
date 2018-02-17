@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withRadiumStarter} from 'radium-starter';
 
+import constants from '../../constants';
 import FirstSteps from './first-steps';
 
 @withRadiumStarter
@@ -39,7 +40,7 @@ export class Hero extends React.Component {
           }}
         >
           For now, Resdir – the resource directory – is&nbsp;only accessible through{' '}
-          <a href={process.env.RUN_WEBSITE_URL} style={{...s.primaryLink}}>
+          <a href={constants.RUN_WEBSITE_URL} style={{...s.primaryLink}}>
             Run
           </a>'s command line interface.
         </h3>

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {withRadiumStarter} from 'radium-starter';
 
+import constants from '../constants';
 import Layout from './layout';
 import withErrorBoundary from './error-boundary';
 
@@ -27,9 +28,9 @@ export class About extends React.Component {
             Unfortunately, no tool was satisfying, Manuel felt like something was going wrong.
             Whether it was installation, customization or composition, the developer experience was
             not good. Manuel has then dug, dug and dug to finally come up with the idea of{' '}
-            <a href={process.env.RUN_WEBSITE_URL}>resources</a>. It was so exciting that he put
-            aside his initial plan, and then make this resource concept a reality. This is how
-            Resdir was born.
+            <a href={constants.RUN_WEBSITE_URL}>resources</a>. It was so exciting that he put aside
+            his initial plan, and then make this resource concept a reality. This is how Resdir was
+            born.
           </p>
         </div>
       </Layout>

@@ -1,5 +1,5 @@
 // [...]
 
-process.env.BACKEND_SERVER = '$BACKEND_SERVER$';
+process.env.BACKEND_SERVER = '${BACKEND_SERVER}';
 
 // [...]

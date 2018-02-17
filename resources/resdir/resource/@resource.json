@@ -4,7 +4,7 @@
     "js/resource#^0.1.0"
   ],
   "id": "resdir/resource",
-  "version": "0.1.49",
+  "version": "0.1.50",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -167,6 +167,7 @@
           "cli-tool"
         ]
       ],
+      "@isOptional": true,
       "@implementation": "./dist/cjs/keywords-attribute.js",
       "validate": {
         "@type": "method",
@@ -190,7 +191,8 @@
           "alfred@awesome.fr",
           "Linus Torvalds"
         ]
-      ]
+      ],
+      "@isOptional": true
     },
     "contributors": {
       "@type": "array",
@@ -201,7 +203,8 @@
           "alfred@awesome.fr",
           "Linus Torvalds"
         ]
-      ]
+      ],
+      "@isOptional": true
     },
     "license": {
       "@type": "string",
@@ -210,14 +213,16 @@
         "MIT",
         "Apache-2.0",
         "BSD-3-Clause"
-      ]
+      ],
+      "@isOptional": true
     },
     "homepage": {
       "@type": "string",
       "@description": "The URL of the homepage",
       "@examples": [
         "https://www.aturing.com/nice-tool"
-      ]
+      ],
+      "@isOptional": true
     },
     "repository": {
       "@type": "string",
@@ -227,7 +232,8 @@
       ],
       "@examples": [
         "https://github.com/aturing/nice-tool.git"
-      ]
+      ],
+      "@isOptional": true
     },
     "files": {
       "@type": "array",
@@ -236,7 +242,8 @@
         [
           "./dist"
         ]
-      ]
+      ],
+      "@isOptional": true
     },
     "publish": {
       "@type": "method",

@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "tool/file-copier",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -49,7 +49,7 @@
             "source": "./dist/bundle.prod.js",
             "destination": "./bundle.js",
             "replacements": {
-              "$BACKEND_SERVER$": "https://api.example.com"
+              "${BACKEND_SERVER}": "https://api.example.com"
             }
           }
         ]
