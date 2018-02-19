@@ -187,12 +187,12 @@ export default Resource => ({
     printSuccess('Resource file normalized', environment);
   },
 
-  async help({resourcePtr, keys, showNative}) {
+  async help({resourcePtr, keys, showBuiltIn}) {
     const resource = resourcePtr.$target;
-    await this._help(resource, {keys, showNative});
+    await this._help(resource, {keys, showBuiltIn});
   },
 
-  async _help(resource, {keys, showNative}) {
+  async _help(resource, {keys, showBuiltIn}) {
     const type = resource.$getType();
 
     keys = keys ? [...keys] : [];
@@ -216,18 +216,18 @@ export default Resource => ({
         }
         child = await child.$resolveGetter({parent: resource});
       }
-      return await this._help(child, {keys, showNative});
+      return await this._help(child, {keys, showBuiltIn});
     }
 
-    this._print(resource, {showNative});
+    this._print(resource, {showBuiltIn});
 
-    if (!showNative) {
+    if (!showBuiltIn) {
       emptyLine();
-      print(formatDim(`(use ${formatCode('@@help')} to display native attributes and methods)`));
+      print(formatDim(`(use ${formatCode('@@help')} to display the built-in methods)`));
     }
   },
 
-  _print(resource, {indentation = 0, showNative} = {}) {
+  _print(resource, {indentation = 0, showBuiltIn} = {}) {
     const type = resource.$getType();
     if (resource.$isRoot()) {
       this._printName(resource, {indentation});
@@ -235,7 +235,7 @@ export default Resource => ({
       this._printKeyAndType(resource, {indentation});
     }
     this._printDescription(resource, {indentation});
-    if (!showNative) {
+    if (!showBuiltIn) {
       this._printDefault(resource, {indentation});
       this._printAliases(resource, {indentation});
       this._printPosition(resource, {indentation});
@@ -249,7 +249,7 @@ export default Resource => ({
         this._printMethodOutput(resource, {indentation});
       }
     }
-    this._printChildren(resource, {indentation, showNative});
+    this._printChildren(resource, {indentation, showBuiltIn});
   },
 
   _printName(resource, {indentation}) {
@@ -392,7 +392,7 @@ export default Resource => ({
     this._print(resource, {indentation: indentation + 2});
   },
 
-  _printChildren(resource, {indentation, showNative}) {
+  _printChildren(resource, {indentation, showBuiltIn}) {
     const sections = [];
     const allData = [];
 
@@ -416,13 +416,13 @@ export default Resource => ({
         section[type === 'method' ? 'methods' : 'attributes'].push(formattedChild);
         allData.push(formattedChild);
       },
-      {includeResourceChildren: !showNative, includeNativeChildren: showNative}
+      {includeResourceChildren: !showBuiltIn, includeNativeChildren: showBuiltIn}
     );
 
     for (let i = 0; i < sections.length; i++) {
       const section = sections[i];
 
-      const title = showNative ?
+      const title = showBuiltIn ?
         this._formatType(section.creator) :
         this._formatResourceSpecifier(section.creator, {directory: process.cwd()});
       if (title) {

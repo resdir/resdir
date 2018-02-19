@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "resource/helper",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -23,7 +23,7 @@
   },
   "@export": {
     "@name": "Resource Helper",
-    "@description": "Implement native Resource's methods such as @create, @add, @help,...",
+    "@description": "Implement built-in Resource's methods such as @create, @add, @help,...",
     "@implementation": "./dist/cjs",
     "create": {
       "@type": "method",
@@ -53,9 +53,6 @@
     },
     "remove": {
       "@type": "method",
-      "@aliases": [
-        "rm"
-      ],
       "@input": {
         "resourcePtr": {
           "@type": "pointer",
@@ -93,11 +90,8 @@
           "@isOptional": true,
           "@isVariadic": true
         },
-        "showNative": {
+        "showBuiltIn": {
           "@type": "boolean",
-          "@aliases": [
-            "native"
-          ],
           "@isOptional": true
         }
       }
