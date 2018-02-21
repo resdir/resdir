@@ -212,7 +212,7 @@ export default Resource => ({
       } else {
         child = resource.$findChild(key, {includeNativeChildren: true});
         if (!child) {
-          throw createClientError(`No attribute or method found with this key: ${formatCode(key)}`);
+          throw createClientError(`No attribute, subresource or method found with this key: ${formatCode(key)}`);
         }
         child = await child.$resolveGetter({parent: resource});
       }
@@ -407,13 +407,21 @@ export default Resource => ({
 
         let section = sections.find(section => section.creator === creator);
         if (!section) {
-          section = {creator, attributes: [], methods: []};
+          section = {creator, attributes: [], subresources: [], methods: []};
           sections.push(section);
         }
 
         const formattedChild = this._formatChild(child);
         const type = child.$getType();
-        section[type === 'method' ? 'methods' : 'attributes'].push(formattedChild);
+        let category;
+        if (type === 'resource') {
+          category = 'subresources';
+        } else if (type === 'method') {
+          category = 'methods';
+        } else {
+          category = 'attributes';
+        }
+        section[category].push(formattedChild);
         allData.push(formattedChild);
       },
       {includeResourceChildren: !showBuiltIn, includeNativeChildren: showBuiltIn}
@@ -440,6 +448,16 @@ export default Resource => ({
         }));
       }
 
+      if (section.subresources.length) {
+        emptyLine();
+        printText('Subresources:', {width: null, indentation});
+        print(formatTable(section.subresources, {
+          allData,
+          columnGap: 2,
+          margins: {left: indentation + 2}
+        }));
+      }
+
       if (section.methods.length) {
         emptyLine();
         printText('Methods:', {width: null, indentation});
@@ -453,7 +471,7 @@ export default Resource => ({
 
     const key = child.$getKey();
     let formattedKey = formatCode(key, {addBackticks: false});
-    if (type !== 'method') {
+    if (!(type === 'resource' || type === 'method')) {
       let formattedType = this._formatType(child);
       formattedType = formatDim(`(${formattedType})`);
       formattedKey += ' ' + formattedType;

@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "resource/helper",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
