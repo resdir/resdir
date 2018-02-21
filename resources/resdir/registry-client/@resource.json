@@ -4,7 +4,7 @@
     "js/resource#^0.1.0"
   ],
   "id": "resdir/registry-client",
-  "version": "0.1.26",
+  "version": "0.1.27",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -305,14 +305,31 @@
       }
     },
     "resources": {
+      "@description": "Search and manage published resources",
       "@aliases": [
         "resource",
         "res"
       ],
       "@implementation": "./dist/cjs/resources",
-      "@isHidden": true,
+      "search": {
+        "@type": "method",
+        "@description": "Search for resources (not yet implemented)",
+        "@aliases": [
+          "find"
+        ],
+        "@input": {
+          "query": {
+            "@type": "string",
+            "@description": "The search query",
+            "@position": 0,
+            "@isOptional": true
+          }
+        },
+        "@run": "@console print 'Sorry, this method is not yet implemented.'"
+      },
       "get": {
         "@type": "method",
+        "@isHidden": true,
         "@input": {
           "specifier": {
             "@type": "string",
@@ -331,6 +348,7 @@
       },
       "fetch": {
         "@type": "method",
+        "@isHidden": true,
         "@input": {
           "specifier": {
             "@type": "string",
@@ -348,6 +366,7 @@
       },
       "publish": {
         "@type": "method",
+        "@isHidden": true,
         "@input": {
           "file": {
             "@type": "string",
