@@ -26,7 +26,8 @@
         "destination": "./bundle.js",
         "replacements": {
           "${RESDIR_REGISTRY_SERVER}": "https://registry.resdir.com",
-          "${RUN_WEBSITE_URL}": "https://run.tools"
+          "${RUN_WEBSITE_URL}": "https://run.tools",
+          "${GOOGLE_ANALYTICS_TRACKING_ID}": "UA-54535670-4"
         }
       },
       "./images"

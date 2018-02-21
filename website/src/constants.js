@@ -2,7 +2,8 @@
 
 export const constants = {
   RESDIR_REGISTRY_SERVER: '${RESDIR_REGISTRY_SERVER}',
-  RUN_WEBSITE_URL: '${RUN_WEBSITE_URL}'
+  RUN_WEBSITE_URL: '${RUN_WEBSITE_URL}',
+  GOOGLE_ANALYTICS_TRACKING_ID: '${GOOGLE_ANALYTICS_TRACKING_ID}'
 };
 
 export function resolveConstants(text) {

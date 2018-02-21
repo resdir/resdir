@@ -72,7 +72,7 @@ export class StayUpdated extends React.Component {
         <div id={id} style={containerStyle}>
           <h2>Thank you</h2>
           <h4 style={{...s.subheading, marginBottom: '2rem', textAlign: 'center'}}>
-            We'll keep you informed.
+            We'll keep you updated.
           </h4>
         </div>
       );

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {BrowserRouter as Router, Route, Switch, withRouter} from 'react-router-dom';
+import Analytics from 'react-router-ga';
 
+import constants from '../constants';
 import Home from './home';
 import Docs from './docs';
 import About from './about';
@@ -15,18 +17,20 @@ export class Root extends React.Component {
   render() {
     return (
       <Router>
-        <ScrollToTop>
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/docs" component={Docs} />
-            <Route path="/about" component={About} />
-            <Route path="/terms" component={Terms} />
-            <Route path="/privacy" component={Privacy} />
-            <Route path="/contact" component={Contact} />
-            <Route path="/connect-github-account/:token" component={ConnectGitHubAccount} />
-            <Route component={NotFound} />
-          </Switch>
-        </ScrollToTop>
+        <Analytics id={constants.GOOGLE_ANALYTICS_TRACKING_ID}>
+          <ScrollToTop>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route path="/docs" component={Docs} />
+              <Route path="/about" component={About} />
+              <Route path="/terms" component={Terms} />
+              <Route path="/privacy" component={Privacy} />
+              <Route path="/contact" component={Contact} />
+              <Route path="/connect-github-account/:token" component={ConnectGitHubAccount} />
+              <Route component={NotFound} />
+            </Switch>
+          </ScrollToTop>
+        </Analytics>
       </Router>
     );
   }

@@ -61,7 +61,7 @@ export class FirstSteps extends React.Component {
         </pre>
 
         <p>
-          <span style={numberStyle}>②</span> Look what Resdir can do for you:
+          <span style={numberStyle}>②</span> See what Resdir can do for you:
         </p>
 
         <pre style={preStyle}>
@@ -70,7 +70,7 @@ export class FirstSteps extends React.Component {
 
         <p style={{...s.noMargins}}>
           <span style={numberStyle}>③</span> Enjoy{' '}
-          <a href={constants.RUN_WEBSITE_URL} style={s.primaryLink}>
+          <a href={constants.RUN_WEBSITE_URL + '/docs'} style={s.primaryLink}>
             resources
           </a>! 😊
         </p>

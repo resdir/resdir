@@ -1,5 +1,8 @@
 {
-  "@import": ["aws/s3-hosted-website#^0.1.0", "js/resource#^0.1.0"],
+  "@import": [
+    "aws/s3-hosted-website#^0.1.0",
+    "js/resource#^0.1.0"
+  ],
   "customErrors": [
     {
       "errorCode": 404,
@@ -18,9 +21,11 @@
     "react-lowlight": "^1.1.1",
     "react-md-spinner": "^0.2.5",
     "react-router-dom": "^4.2.2",
+    "react-router-ga": "^1.0.0",
     "remark": "^9.0.0",
     "remark-react": "^4.0.1",
     "@resdir/http-client": "^0.2.0",
+    "@resdir/react-modal": "^0.1.0",
     "sleep-promise": "^2.0.0",
     "url-search-params": "^0.10.0"
   },
@@ -38,7 +43,11 @@
     },
     "fileWatcher": {
       "@import": "tool/file-watcher#^0.1.0",
-      "files": ["./index.html", "./src/**", "./images/**"],
+      "files": [
+        "./index.html",
+        "./src/**",
+        "./images/**"
+      ],
       "onFileModified": {
         "@type": "method",
         "@run": "@parent run",
