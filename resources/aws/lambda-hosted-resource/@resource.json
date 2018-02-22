@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "aws/lambda-hosted-resource",
-  "version": "0.1.30",
+  "version": "0.1.31",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -44,6 +44,10 @@
     "timeout": {
       "@description": "The maximum execution time, in seconds, of the resource methods",
       "@default": 3
+    },
+    "reservedConcurrentExecutions": {
+      "@type": "number",
+      "@description": "The number of concurrent executions reserved for this function"
     },
     "environment": {
       "@type": "object",

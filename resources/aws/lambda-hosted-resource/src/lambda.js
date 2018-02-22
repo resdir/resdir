@@ -25,12 +25,17 @@ export default () => ({
           await this.checkLambdaFunctionTags();
           if (await this.checkIfLambdaFunctionConfigurationHasChanged()) {
             progress.setMessage('Updating Lambda function configuration...');
-            progress.setOutro('Lambda function configuration updated');
+            progress.setOutro('Lambda function updated');
             await this.updateLambdaFunctionConfiguration();
+          }
+          if (await this.checkIfLambdaFunctionConcurrencyHasChanged()) {
+            progress.setMessage('Updating Lambda function concurrency...');
+            progress.setOutro('Lambda function updated');
+            await this.updateLambdaFunctionConcurrency();
           }
           if (await this.checkIfLambdaFunctionCodeHasChanged(environment)) {
             progress.setMessage('Updating Lambda function code...');
-            progress.setOutro('Lambda function code updated');
+            progress.setOutro('Lambda function updated');
             await this.updateLambdaFunctionCode(environment);
           }
         }
@@ -47,15 +52,19 @@ export default () => ({
     if (!this._lambdaFunction) {
       const lambda = this.getLambdaClient();
       try {
-        const result = await lambda.getFunctionConfiguration({
+        const result = await lambda.getFunction({
           FunctionName: this.getLambdaFunctionName()
         });
+        const config = result.Configuration;
         this._lambdaFunction = {
-          arn: result.FunctionArn,
-          memorySize: result.MemorySize,
-          timeout: result.Timeout,
-          environment: (result.Environment && result.Environment.Variables) || {},
-          codeSHA256: result.CodeSha256
+          arn: config.FunctionArn,
+          memorySize: config.MemorySize,
+          timeout: config.Timeout,
+          reservedConcurrentExecutions:
+            result.Concurrency && result.Concurrency.ReservedConcurrentExecutions,
+          environment: (config.Environment && config.Environment.Variables) || {},
+          codeSHA256: config.CodeSha256,
+          tags: result.Tags
         };
       } catch (err) {
         if (err.code !== 'ResourceNotFoundException') {
@@ -102,13 +111,15 @@ export default () => ({
         await sleep(3000);
       }
     }
+
+    if (this.reservedConcurrentExecutions !== undefined) {
+      await this.updateLambdaFunctionConcurrency();
+    }
   },
 
   async checkLambdaFunctionTags() {
-    const lambda = this.getLambdaClient();
     const lambdaFunction = await this.getLambdaFunction();
-    const {Tags: tags} = await lambda.listTags({Resource: lambdaFunction.arn});
-    if (!isEqual(tags, {'managed-by': this.MANAGER_IDENTIFIER})) {
+    if (!isEqual(lambdaFunction.tags, {'managed-by': this.MANAGER_IDENTIFIER})) {
       throw createClientError(`Can't update a Lambda function not originally created by ${formatString(this.RESOURCE_ID)} (functionName: ${formatString(this.getLambdaFunctionName())})`);
     }
   },
@@ -133,6 +144,10 @@ export default () => ({
       return true;
     }
 
+    if (lambdaFunction.reservedConcurrentExecutions !== this.reservedConcurrentExecutions) {
+      return true;
+    }
+
     if (!isEqual(lambdaFunction.environment, this.environment || {})) {
       return true;
     }
@@ -148,6 +163,23 @@ export default () => ({
       Timeout: this.timeout,
       Environment: {Variables: this.environment || {}}
     });
+  },
+
+  async checkIfLambdaFunctionConcurrencyHasChanged() {
+    const lambdaFunction = await this.getLambdaFunction();
+    return lambdaFunction.reservedConcurrentExecutions !== this.reservedConcurrentExecutions;
+  },
+
+  async updateLambdaFunctionConcurrency() {
+    const lambda = this.getLambdaClient();
+    if (this.reservedConcurrentExecutions === undefined) {
+      await lambda.deleteFunctionConcurrency({FunctionName: this.getLambdaFunctionName()});
+    } else {
+      await lambda.putFunctionConcurrency({
+        FunctionName: this.getLambdaFunctionName(),
+        ReservedConcurrentExecutions: this.reservedConcurrentExecutions
+      });
+    }
   },
 
   async checkIfLambdaFunctionCodeHasChanged(environment) {
