@@ -26,6 +26,11 @@ export class Lambda {
     return this.client.deleteFunction(params).promise();
   }
 
+  deleteFunctionConcurrency(params) {
+    debug('deleteFunctionConcurrency(%o)', params);
+    return this.client.deleteFunctionConcurrency(params).promise();
+  }
+
   getFunction(params) {
     debug('getFunction(%o)', params);
     return this.client.getFunction(params).promise();
@@ -44,6 +49,11 @@ export class Lambda {
   listTags(params) {
     debug('listTags(%o)', params);
     return this.client.listTags(params).promise();
+  }
+
+  putFunctionConcurrency(params) {
+    debug('putFunctionConcurrency(%o)', params);
+    return this.client.putFunctionConcurrency(params).promise();
   }
 
   removePermission(params) {
