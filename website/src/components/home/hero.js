@@ -39,10 +39,10 @@ export class Hero extends React.Component {
             }
           }}
         >
-          For now, Resdir – the resource directory – is&nbsp;only accessible through{' '}
+          For now, Resdir is only accessible through{' '}
           <a href={constants.RUN_WEBSITE_URL} style={{...s.primaryLink}}>
             Run
-          </a>'s command line interface.
+          </a>'s&nbsp;command line interface.
         </h3>
         <FirstSteps />
       </div>

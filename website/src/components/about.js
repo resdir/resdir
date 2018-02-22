@@ -25,13 +25,12 @@ export class About extends React.Component {
             founded in July&nbsp;2016 in Fukuoka, Japan. The initial plan had nothing to do with
             Resdir, and before starting the actual work, Manuel Vila (founder and presently the only
             member of the company) took great care in choosing his development tools. Unfortunately,
-            nothing was satisfying, Manuel felt like something was going wrong. Whether it was
+            nothing was satisfying, and Manuel felt like something was going wrong. Whether it was
             installation or configuration, the developer experience was not good. Manuel has then
-            dug, dug and dug to come up with the idea of{' '}
+            dug, dug, and dug to finally come up with the idea of{' '}
             <a href={constants.RUN_WEBSITE_URL + '/docs/introduction/what-is-a-resource'}>
               resources
-            </a>{' '}
-            finally. It was so exciting that he put aside his initial plan to make this resource
+            </a>. It was so exciting that he put aside his initial plan to make this resource
             concept a reality. That is how Resdir was born.
           </p>
         </div>

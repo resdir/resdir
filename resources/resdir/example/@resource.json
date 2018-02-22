@@ -7,7 +7,7 @@
   "@description": "A simple 'Hello, World!' example",
   "@implementation": "./dist/cjs",
   "id": "resdir/example",
-  "version": "0.3.53",
+  "version": "0.3.56",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
