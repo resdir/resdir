@@ -38,7 +38,19 @@ async function _findACMCertificate({domainName, managerIdentifier, acm}, _enviro
   }
 
   const result = await acm.listCertificates({
-    CertificateStatuses: ['ISSUED', 'PENDING_VALIDATION']
+    CertificateStatuses: ['ISSUED', 'PENDING_VALIDATION'],
+    Includes: {
+      // We need this because it seems that 'RSA_4096' is excluded by default
+      keyTypes: [
+        'RSA_2048',
+        'RSA_1024',
+        'RSA_4096',
+        'EC_prime256v1',
+        'EC_secp384r1',
+        'EC_secp521r1'
+      ]
+    },
+    MaxItems: 1000
   });
 
   const certificates = result.CertificateSummaryList.filter(certificate => {
@@ -61,10 +73,6 @@ async function _findACMCertificate({domainName, managerIdentifier, acm}, _enviro
   for (let certificate of certificates) {
     certificate = await acm.describeCertificate({CertificateArn: certificate.CertificateArn});
     certificate = certificate.Certificate;
-
-    if (certificate.Type !== 'AMAZON_ISSUED') {
-      continue;
-    }
 
     let bestName;
     for (const name of certificate.SubjectAlternativeNames) {
