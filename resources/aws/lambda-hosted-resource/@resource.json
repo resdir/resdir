@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "aws/lambda-hosted-resource",
-  "version": "0.1.31",
+  "version": "0.1.32",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -48,6 +48,10 @@
     "reservedConcurrentExecutions": {
       "@type": "number",
       "@description": "The number of concurrent executions reserved for this function"
+    },
+    "endpointType": {
+      "@description": "Type of the API Gateway endpoint (either 'regional' or 'edge')",
+      "@default": "regional"
     },
     "environment": {
       "@type": "object",

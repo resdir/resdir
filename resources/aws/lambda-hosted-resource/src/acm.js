@@ -59,9 +59,17 @@ export default () => ({
     return certificate;
   },
 
+  getACMRegion() {
+    return this.getNormalizedEndpointType() === 'REGIONAL' ? this.aws.region : 'us-east-1';
+  },
+
   getACMClient() {
     if (!this._acmClient) {
-      this._acmClient = new ACM(this.aws);
+      this._acmClient = new ACM({
+        accessKeyId: this.aws.accessKeyId,
+        secretAccessKey: this.aws.secretAccessKey,
+        region: this.getACMRegion()
+      });
     }
     return this._acmClient;
   }

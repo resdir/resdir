@@ -1,5 +1,5 @@
 import {isEqual} from 'lodash';
-import {task, formatString} from '@resdir/console';
+import {task, print, formatString} from '@resdir/console';
 import {APIGateway} from '@resdir/aws-client';
 import {createClientError} from '@resdir/error';
 
@@ -17,6 +17,7 @@ export default () => ({
           await this.allowLambdaFunctionInvocationFromAPIGateway();
         } else {
           await this.checkAPIGatewayTags();
+          await this.checkAPIGatewayEndpointType();
         }
       },
       {
@@ -40,7 +41,7 @@ export default () => ({
       const name = this.getAPIGatewayName();
       const item = items.find(item => item.name === name);
       if (item) {
-        this._apiGateway = {id: item.id};
+        this._apiGateway = {id: item.id, endpointType: item.endpointConfiguration.types[0]};
       }
     }
 
@@ -56,7 +57,7 @@ export default () => ({
 
     const {id: restApiId} = await apiGateway.createRestApi({
       name: this.getAPIGatewayName(),
-      endpointConfiguration: {types: ['REGIONAL']}
+      endpointConfiguration: {types: [this.getNormalizedEndpointType()]}
     });
 
     const result = await apiGateway.getResources({restApiId});
@@ -172,6 +173,13 @@ export default () => ({
     }
   },
 
+  async checkAPIGatewayEndpointType() {
+    const api = await this.getAPIGateway();
+    if (api.endpointType !== this.getNormalizedEndpointType()) {
+      throw createClientError('Sorry, it is currently not possible to change the endpoint type once the resource has been deployed.');
+    }
+  },
+
   async getAPIGatewayStage({throwIfNotFound = true} = {}) {
     const apiGateway = this.getAPIGatewayClient();
     const api = await this.getAPIGateway();
@@ -189,6 +197,8 @@ export default () => ({
   },
 
   async createOrUpdateAPIGatewayDomainName(environment) {
+    let hasBeenCreated;
+
     await task(
       async progress => {
         let domainName = await this.getAPIGatewayDomainName({throwIfNotFound: false}, environment);
@@ -197,18 +207,24 @@ export default () => ({
           progress.setMessage('Configuring custom domain name...');
           progress.setOutro('Custom domain name configured');
           domainName = await this.createAPIGatewayDomainName(environment);
+          hasBeenCreated = true;
         } else if (await this.checkIfAPIGatewayDomainNameBasePathMappingsHasChanged()) {
           progress.setMessage('Updating custom domain name...');
           progress.setOutro('Custom domain name updated');
           await this.updateAPIGatewayDomainNameBasePathMappings();
         }
 
+        let targetDomainName;
+        let targetHostedZoneId;
+        if (this.getNormalizedEndpointType() === 'REGIONAL') {
+          targetDomainName = domainName.regionalDomainName;
+          targetHostedZoneId = domainName.regionalHostedZoneId;
+        } else {
+          targetDomainName = domainName.distributionDomainName;
+          targetHostedZoneId = domainName.distributionHostedZoneId;
+        }
         await this.ensureRoute53Alias(
-          {
-            name: this.domainName,
-            targetDomainName: domainName.regionalDomainName,
-            targetHostedZoneId: domainName.regionalHostedZoneId
-          },
+          {name: this.domainName, targetDomainName, targetHostedZoneId},
           environment
         );
       },
@@ -218,6 +234,12 @@ export default () => ({
       },
       environment
     );
+
+    if (hasBeenCreated && this.getNormalizedEndpointType() !== 'REGIONAL') {
+      print(`Your domain name (${
+        this.domainName
+      }) has been configured, but since you use an edge-optimized endpoint, you have to wait (up to 40 minutes) for the deployment of the CloudFront distribution.`);
+    }
   },
 
   async getAPIGatewayDomainName({throwIfNotFound = true} = {}, _environment) {
@@ -248,11 +270,17 @@ export default () => ({
     const certificate = await this.getACMCertificate(undefined, environment);
     const api = await this.getAPIGateway();
 
-    const domainName = await apiGateway.createDomainName({
+    const endpointType = this.getNormalizedEndpointType();
+    const params = {
       domainName: this.domainName,
-      regionalCertificateArn: certificate.arn,
-      endpointConfiguration: {types: ['REGIONAL']}
-    });
+      endpointConfiguration: {types: [endpointType]}
+    };
+    if (endpointType === 'REGIONAL') {
+      params.regionalCertificateArn = certificate.arn;
+    } else {
+      params.certificateArn = certificate.arn;
+    }
+    const domainName = await apiGateway.createDomainName(params);
 
     await apiGateway.createBasePathMapping({
       domainName: this.domainName,
@@ -307,6 +335,11 @@ export default () => ({
 
   getAPIGatewayRegion() {
     return this.aws && ((this.aws.apiGateway && this.aws.apiGateway.region) || this.aws.region);
+  },
+
+  getNormalizedEndpointType() {
+    const type = this.endpointType && this.endpointType.toLowerCase();
+    return type === 'edge' ? 'EDGE' : 'REGIONAL';
   },
 
   getAPIGatewayClient() {

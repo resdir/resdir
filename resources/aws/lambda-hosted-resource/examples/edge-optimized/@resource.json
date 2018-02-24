@@ -1,9 +1,10 @@
 {
-  "@import": ["../", "1place/js-resource"],
+  "@import": ["../../", "1place/js-resource"],
   "domainName": "api.example.resdir.com",
   "memorySize": 128,
   "timeout": 3,
   "reservedConcurrentExecutions": 1,
+  "endpointType": "edge",
   "@export": {
     "@implementation": "./dist/cjs",
     "hello": {
