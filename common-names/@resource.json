@@ -1,6 +1,8 @@
 {
   "@import": ["1place/js-resource#^0.1.0", "aws/lambda-hosted-resource#^0.1.0"],
   "timeout": 10,
+  "memorySize": 128,
+  "endpointType": "regional",
   "dependencies": {
     "big-companies": "^1.0.5",
     "@resdir/common-english-words": "^0.1.0",

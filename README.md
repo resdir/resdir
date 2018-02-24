@@ -1,5 +1,11 @@
-# Resdir public monorepo
+# Resdir
 
-```javascript
-// TODO: documentation!
-```
+This is [Resdir](https://resdir.com)'s public monorepo.
+
+More to come soon.
+
+Stay tuned.
+
+## License
+
+MIT

@@ -25,8 +25,6 @@
       "./resources/1place/jest version bump",
       "./resources/1place/js-resource version bump",
       "./resources/1place/npm-package version bump",
-      "./resources/aws/lambda-hosted-resource version bump",
-      "./resources/aws/s3-hosted-website version bump",
       "./resources/js/bundler version bump",
       "./resources/js/npm-dependencies version bump",
       "./resources/js/npm-package version bump",
@@ -42,7 +40,9 @@
       "./resources/tool/file-watcher version bump",
       "./resources/tool/notifier version bump",
       "./resources/website/freezer version bump",
-      "./resources/website/hosted-website version bump"
+      "./resources/website/hosted-website version bump",
+      "./resources/aws/lambda-hosted-resource version bump",
+      "./resources/aws/s3-hosted-website version bump"
     ]
   },
   "publish": {
@@ -51,8 +51,6 @@
       "./resources/1place/jest publish --throwIfAlreadyExists=false",
       "./resources/1place/js-resource publish --throwIfAlreadyExists=false",
       "./resources/1place/npm-package publish --throwIfAlreadyExists=false",
-      "./resources/aws/lambda-hosted-resource publish --throwIfAlreadyExists=false",
-      "./resources/aws/s3-hosted-website publish --throwIfAlreadyExists=false",
       "./resources/js/bundler publish --throwIfAlreadyExists=false",
       "./resources/js/npm-dependencies publish --throwIfAlreadyExists=false",
       "./resources/js/npm-package publish --throwIfAlreadyExists=false",
@@ -68,7 +66,9 @@
       "./resources/tool/file-watcher publish --throwIfAlreadyExists=false",
       "./resources/tool/notifier publish --throwIfAlreadyExists=false",
       "./resources/website/freezer publish --throwIfAlreadyExists=false",
-      "./resources/website/hosted-website publish --throwIfAlreadyExists=false"
+      "./resources/website/hosted-website publish --throwIfAlreadyExists=false",
+      "./resources/aws/lambda-hosted-resource publish --throwIfAlreadyExists=false",
+      "./resources/aws/s3-hosted-website publish --throwIfAlreadyExists=false"
     ]
   }
 }
