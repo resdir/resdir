@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/transpiler",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -69,7 +69,7 @@
         "node": "6.10",
         "chrome": "50",
         "safari": "10",
-        "firefox": "53",
+        "firefox": "50",
         "edge": "14"
       }
     },
