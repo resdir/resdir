@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/react-modal",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Modal dialog component for React (using Radium and Radium Starter)",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",
@@ -10,9 +10,11 @@
     "lodash": "^4.17.5"
   },
   "cjsTranspiler": {
+    "transformClasses": true,
     "transformJSX": true
   },
   "esmTranspiler": {
+    "transformClasses": true,
     "transformJSX": true
   }
 }
