@@ -11,6 +11,8 @@ import {createClientError} from '@resdir/error';
 const babelPresetEnv = require.resolve('@babel/preset-env');
 const babelPresetStage3 = require.resolve('@babel/preset-stage-3');
 const babelPresetReact = require.resolve('@babel/preset-react');
+const babelPluginClassProperties = require.resolve('@babel/plugin-proposal-class-properties');
+const babelPluginClasses = require.resolve('@babel/plugin-transform-classes');
 const babelPluginDecorators = require.resolve('@babel/plugin-proposal-decorators');
 const babelPluginLodash = require.resolve('babel-plugin-lodash');
 
@@ -119,20 +121,38 @@ export default () => ({
       }
 
       for (const format of formats) {
-        const modules = format === 'cjs' ? 'commonjs' : false;
-        const presets = [
-          [babelPresetEnv, {targets: this.targets, loose: true, modules}],
-          [babelPresetStage3, {loose: true}]
+        const plugins = [
+          babelPluginDecorators,
+          [
+            babelPluginClassProperties,
+            {
+              loose: true
+            }
+          ],
+          babelPluginLodash
         ];
-        if (this.transformJSX) {
-          presets.push([babelPresetReact, {pragma: this.jsxPragma}]);
+
+        if (this.transformClasses) {
+          plugins.push([
+            babelPluginClasses,
+            {
+              loose: true
+            }
+          ]);
         }
 
-        const plugins = [babelPluginDecorators, babelPluginLodash];
+        const modules = format === 'cjs' ? 'commonjs' : false;
+        const presets = [
+          [babelPresetStage3, {loose: true}],
+          [babelPresetEnv, {targets: this.targets, loose: true, modules}]
+        ];
+        if (this.transformJSX) {
+          presets.unshift([babelPresetReact, {pragma: this.jsxPragma}]);
+        }
 
         const transformOptions = {
-          presets,
           plugins,
+          presets,
           sourceMaps: 'inline'
         };
 
