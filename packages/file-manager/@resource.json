@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/file-manager",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Help managing files in most common formats (JSON, JSON5, YAML)",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",

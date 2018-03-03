@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource#^0.1.0",
   "id": "1place/npm-package",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -15,10 +15,12 @@
     "files": [
       "./dist"
     ],
-    "main": "./dist/cjs",
-    "module": "./dist/esm",
+    "main": "./dist/node/cjs",
+    "module": "./dist/node/esm",
+    "browser": "./dist/browser/esm",
     "cjsTranspiler": {
       "@import": "js/transpiler#^0.1.0",
+      "destination": "./dist/node/cjs",
       "format": "cjs",
       "run": {
         "@listen": [
@@ -29,7 +31,25 @@
     },
     "esmTranspiler": {
       "@import": "js/transpiler#^0.1.0",
+      "destination": "./dist/node/esm",
       "format": "esm",
+      "run": {
+        "@listen": [
+          "@build",
+          "@fileModified"
+        ]
+      }
+    },
+    "browserTranspiler": {
+      "@import": "js/transpiler#^0.1.0",
+      "destination": "./dist/browser/esm",
+      "format": "esm",
+      "targets": {
+        "chrome": "41",
+        "safari": "10",
+        "firefox": "50",
+        "edge": "14"
+      },
       "run": {
         "@listen": [
           "@build",

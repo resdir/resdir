@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/common-tags",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Huge list of tags (source: Stack Exchange)",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",

@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/resource-identifier",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "Useful functions to handle Resource's identifiers",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",

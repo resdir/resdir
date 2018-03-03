@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/version",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "Version class used by Resdir",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",

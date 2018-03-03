@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/util",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Miscellaneous functions used by Resdir",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",

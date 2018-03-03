@@ -1,4 +1,4 @@
-import {RemoteResource} from 'run-core/dist/esm/resource/remote';
+import {RemoteResource} from 'run-core/dist/node/esm/resource/remote';
 import RemoteResourceJSONRPCHandler from '@resdir/remote-resource-json-rpc-handler';
 
 let jsonRPCHandler;

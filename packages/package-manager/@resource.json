@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/package-manager",
-  "version": "0.1.28",
+  "version": "0.1.29",
   "description": "Abstract Node package managers",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",

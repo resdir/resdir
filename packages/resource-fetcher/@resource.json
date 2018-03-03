@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/resource-fetcher",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Resdir resource fetcher",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",

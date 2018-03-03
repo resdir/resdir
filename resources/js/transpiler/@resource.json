@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/transpiler",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -66,11 +66,7 @@
     "targets": {
       "@description": "Expected targets of the transpiled files (uses @babel/preset-env)",
       "@default": {
-        "node": "6.10",
-        "chrome": "50",
-        "safari": "10",
-        "firefox": "50",
-        "edge": "14"
+        "node": "6.10"
       }
     },
     "format": {
@@ -83,7 +79,8 @@
     },
     "transformClasses": {
       "@description": "Transform ES6 classes to ES5",
-      "@default": false
+      "@default": false,
+      "@isHidden": true
     },
     "transformJSX": {
       "@description": "Enable JSX support (using @babel/preset-react)",

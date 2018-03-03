@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/top-level-domains",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "List of Top Level Domains",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",

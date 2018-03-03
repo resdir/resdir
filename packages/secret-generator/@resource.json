@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/secret-generator",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Generate a secret",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",

@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "1place/jest",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -21,6 +21,7 @@
     "@resdir/process-manager": "^0.1.0"
   },
   "@export": {
+    "@import": "1place/js-resource#^0.1.0",
     "@name": "1Place's Jest",
     "@description": "Test suite runner (using Jest)",
     "@implementation": "./dist/cjs",

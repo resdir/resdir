@@ -41,6 +41,11 @@ export default () => ({
       module = module.slice(2);
     }
 
+    let browser = this.browser;
+    if (browser && browser.startsWith('./')) {
+      browser = browser.slice(2);
+    }
+
     updatePackageFile(directory, {
       name: this.name,
       version: this.version,
@@ -54,6 +59,7 @@ export default () => ({
       files,
       main,
       module,
+      browser,
       bin: this.bin
     });
   },

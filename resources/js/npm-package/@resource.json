@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/npm-package",
-  "version": "0.1.47",
+  "version": "0.1.48",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -149,12 +149,16 @@
       "@description": "The entry point to your package",
       "@examples": [
         [
-          "./dist/cjs/index.js",
+          "./dist/node/cjs/index.js",
           "./lib/main.js"
         ]
       ]
     },
     "module": {
+      "@type": "string",
+      "@isHidden": true
+    },
+    "browser": {
       "@type": "string",
       "@isHidden": true
     },

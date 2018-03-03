@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/common-file-extensions",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "List of common file extensions (ex.: 'doc', 'mp3', 'js',...)",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",

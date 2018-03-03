@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/resource-name",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Manage Resource's names",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",
