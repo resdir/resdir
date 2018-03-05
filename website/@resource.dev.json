@@ -22,6 +22,7 @@
         "source": "./dist/bundle.dev.js",
         "destination": "./bundle.js",
         "replacements": {
+          "${STAGE}": "development",
           "${RESDIR_REGISTRY_SERVER}": "http://registry.dev.resdir.com",
           "${RUN_WEBSITE_URL}": "http://dev.run.tools"
         }
