@@ -1,3 +1,4 @@
+import './fix';
 import isomorphicFetch from 'isomorphic-fetch';
 
 export async function get(url, options) {
