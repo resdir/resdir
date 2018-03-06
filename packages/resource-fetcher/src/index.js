@@ -1,7 +1,6 @@
 import {join, dirname} from 'path';
 import {existsSync, readdirSync} from 'fs';
-import {ensureDirSync, renameSync} from 'fs-extra';
-import tempy from 'tempy';
+import {ensureDirSync, renameSync, removeSync} from 'fs-extra';
 import {formatString} from '@resdir/console';
 import {load, save} from '@resdir/file-manager';
 import {parseResourceIdentifier} from '@resdir/resource-identifier';
@@ -9,6 +8,7 @@ import {parseResourceSpecifier, validateResourceSpecifier} from '@resdir/resourc
 import {compareVersions} from '@resdir/version';
 import VersionRange from '@resdir/version-range';
 import {get} from '@resdir/http-client';
+import uniqueString from 'unique-string';
 import {gunzipSync} from 'zlib';
 import {unzip} from '@resdir/archive-manager';
 import debugModule from 'debug';
@@ -17,6 +17,7 @@ const debug = debugModule('resdir:resource-fetcher');
 
 const RESDIR_REGISTRY_DIRECTORY_NAME = 'resdir-registry';
 const RESOURCE_CACHE_DIRECTORY_NAME = 'resource-cache';
+const TEMPORARY_DIRECTORY_NAME = 'temporary';
 const RESOURCE_REQUESTS_DIRECTORY_NAME = 'requests';
 const RESOURCE_VERSIONS_DIRECTORY_NAME = 'versions';
 const RESOURCE_FILE_NAME = '@resource.json';
@@ -54,6 +55,7 @@ export class ResourceFetcher {
       RESDIR_REGISTRY_DIRECTORY_NAME,
       RESOURCE_CACHE_DIRECTORY_NAME
     );
+    this.temporaryDirectory = join(clientDirectory, TEMPORARY_DIRECTORY_NAME);
   }
 
   async fetch({specifier, accessToken}, environment) {
@@ -77,17 +79,25 @@ export class ResourceFetcher {
       environment
     );
 
-    if (cachedVersionIsLatest) {
-      await this._saveCachedResourceRequest(identifier, versionRange, cachedVersion);
-      file = this._getCachedResourceFile(identifier, cachedVersion);
-      return {file, cacheStatus};
+    try {
+      if (cachedVersionIsLatest) {
+        await this._saveCachedResourceRequest(identifier, versionRange, cachedVersion);
+        file = this._getCachedResourceFile(identifier, cachedVersion);
+        return {file, cacheStatus};
+      }
+
+      const version = definition.version;
+
+      await this._saveCachedResourceRequest(identifier, versionRange, version);
+
+      file = await this._saveCachedResourceVersion(identifier, version, definition, directory);
+    } catch (err) {
+      if (directory && existsSync(directory)) {
+        // In case of error, remove the temporary directory created by _fetchFromRegistry()
+        removeSync(directory);
+      }
+      throw err;
     }
-
-    const version = definition.version;
-
-    await this._saveCachedResourceRequest(identifier, versionRange, version);
-
-    file = await this._saveCachedResourceVersion(identifier, version, definition, directory);
 
     return {file, cacheStatus};
   }
@@ -119,10 +129,16 @@ export class ResourceFetcher {
 
     let directory;
     if (filesURL) {
-      directory = tempy.directory();
-      // TODO: Instead of a buffer, use a stream to download and unzip files
-      const {body: compressedFiles} = downloads[1];
-      await unzip(directory, compressedFiles);
+      directory = join(this.temporaryDirectory, uniqueString());
+      ensureDirSync(directory);
+      try {
+        // TODO: Instead of a buffer, use a stream to download and unzip files
+        const {body: compressedFiles} = downloads[1];
+        await unzip(directory, compressedFiles);
+      } catch (err) {
+        removeSync(directory);
+        throw err;
+      }
     }
 
     return {definition, directory};
