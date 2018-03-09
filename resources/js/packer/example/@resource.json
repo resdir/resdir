@@ -1,0 +1,16 @@
+{
+  "@import": "js/resource#^0.1.0",
+  "dependencies": {
+    "chalk": "^2.3.2"
+  },
+  "packer": {
+    "@import": "..",
+    "entry": "./src/index.js",
+    "output": "./builds/example-macos",
+    "nodeVersion": "latest",
+    "platform": "macos",
+    "architecture": "x64",
+    "isPublic": true,
+    "reinstallDependencies": true
+  }
+}
