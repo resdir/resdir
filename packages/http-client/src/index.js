@@ -131,10 +131,15 @@ export async function fetch(url, options = {}) {
     }
   }
 
-  if (options.json && result.body) {
-    const contentType = result.headers['content-type'];
-    if (contentType.startsWith('application/json')) {
+  if (result.body !== undefined) {
+    const contentType = (result.headers['content-type'] || '').toLowerCase();
+    if (
+      options.json &&
+      (contentType === 'application/json' || contentType === 'application/json; charset=utf-8')
+    ) {
       result.body = JSON.parse(result.body.toString());
+    } else if (contentType === 'text/plain' || contentType === 'text/plain; charset=utf-8') {
+      result.body = result.body.toString();
     }
   }
 

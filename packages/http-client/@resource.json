@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/http-client",
-  "version": "0.2.17",
+  "version": "0.2.18",
   "description": "Convenient wrapper over Fetch API",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",
