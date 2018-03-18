@@ -193,7 +193,7 @@ export default () => ({
       await rename(join(directory, 'node_modules.clean-install'), join(directory, 'node_modules'));
     }
 
-    await dependencies.update({}, environment);
+    await dependencies.update({optimizeDiskSpace: false}, environment);
   },
 
   async _completeReinstallDependencies(_environment) {
