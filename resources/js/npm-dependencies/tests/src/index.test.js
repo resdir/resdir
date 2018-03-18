@@ -50,7 +50,9 @@ describe('js/npm-dependencies', () => {
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(false);
 
-    await pkg.$getChild('dependencies').add({specifiers: ['lodash']}, {'@quiet': true});
+    await pkg
+      .$getChild('dependencies')
+      .add({specifiers: ['lodash'], optimizeDiskSpace: false}, {'@quiet': true});
 
     expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(true);
 
@@ -59,7 +61,9 @@ describe('js/npm-dependencies', () => {
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(true);
 
-    await pkg.$getChild('dependencies').remove({names: ['lodash']}, {'@quiet': true});
+    await pkg
+      .$getChild('dependencies')
+      .remove({names: ['lodash'], optimizeDiskSpace: false}, {'@quiet': true});
 
     expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(false);
 
@@ -80,7 +84,10 @@ describe('js/npm-dependencies', () => {
 
     await pkg
       .$getChild('dependencies')
-      .add({specifiers: ['lodash@4.5.1'], development: true}, {'@quiet': true});
+      .add(
+        {specifiers: ['lodash@4.5.1'], development: true, optimizeDiskSpace: false},
+        {'@quiet': true}
+      );
 
     expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(true);
 
@@ -92,7 +99,9 @@ describe('js/npm-dependencies', () => {
 
     expect(pathExistsSync(join(directory, 'node_modules', 'lodash'))).toBe(true);
 
-    await pkg.$getChild('dependencies').remove({names: ['lodash']}, {'@quiet': true});
+    await pkg
+      .$getChild('dependencies')
+      .remove({names: ['lodash'], optimizeDiskSpace: false}, {'@quiet': true});
 
     expect(await pkg.$getChild('dependencies').includes({name: 'lodash'})).toBe(false);
 

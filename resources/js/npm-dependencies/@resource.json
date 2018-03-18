@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource#^0.1.0",
   "id": "js/npm-dependencies",
-  "version": "0.1.55",
+  "version": "0.1.60",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -9,8 +9,10 @@
   "license": "MIT",
   "repository": "https://github.com/resdir/resdir.git",
   "files": [
-    "./dist/bundle.js"
+    "./dist",
+    "node_modules"
   ],
+  "reinstallDependenciesWhilePublishing": true,
   "@unpublishable": {
     "dependencies": {
       "@import": "js/npm-dependencies#^0.1.0",
@@ -21,43 +23,18 @@
         "@resdir/error": "^0.1.0",
         "@resdir/file-manager": "^0.1.0",
         "@resdir/gitignore-manager": "^0.1.0",
-        "@resdir/package-manager": "^0.1.0",
+        "@resdir/package-manager": "^0.1.30",
         "@resdir/version-range": "^0.1.0"
-      }
-    },
-    "builder": {
-      "run": {
-        "@type": "method",
-        "@run": [
-          "@parent transpiler run",
-          "@parent bundler run"
-        ],
-        "@listen": "@build"
-      },
-      "fileWatcher": {
-        "@import": "tool/file-watcher#^0.1.0",
-        "files": [
-          "./src/**"
-        ],
-        "onFileModified": {
-          "@type": "method",
-          "@run": "@parent run",
-          "@listen": "fileModified"
-        }
       }
     },
     "transpiler": {
       "@import": "js/transpiler#^0.1.0",
-      "format": "esm"
-    },
-    "bundler": {
-      "@import": "js/bundler#^0.1.0",
-      "entry": "./dist/esm/index.js",
-      "output": "./dist/bundle.js",
-      "target": "node",
-      "format": "cjs",
-      "reinstallDependencies": true,
-      "minify": true
+      "run": {
+        "@listen": [
+          "@build",
+          "@fileModified"
+        ]
+      }
     },
     "tests": {
       "@import": "1place/jest#^0.1.0",
@@ -87,7 +64,7 @@
       }
     ],
     "@runtime": "node#>=6.10.0",
-    "@implementation": "./dist/bundle.js",
+    "@implementation": "./dist/cjs",
     "add": {
       "@type": "method",
       "@description": "Add a new dependency",
@@ -135,6 +112,11 @@
           "@type": "boolean",
           "@isOptional": true,
           "@isHidden": true
+        },
+        "optimizeDiskSpace": {
+          "@type": "boolean",
+          "@description": "Use pnpm instead of npm to optimize disk space",
+          "@default": true
         }
       }
     },
@@ -150,6 +132,11 @@
           "@description": "Name of the npm packages to remove",
           "@position": 0,
           "@isVariadic": true
+        },
+        "optimizeDiskSpace": {
+          "@type": "boolean",
+          "@description": "Use pnpm instead of npm to optimize disk space",
+          "@default": true
         }
       }
     },
@@ -163,11 +150,25 @@
     "install": {
       "@type": "method",
       "@description": "Install all dependencies",
+      "@input": {
+        "optimizeDiskSpace": {
+          "@type": "boolean",
+          "@description": "Use pnpm instead of npm to optimize disk space",
+          "@default": true
+        }
+      },
       "@listen": "@install"
     },
     "update": {
       "@type": "method",
-      "@description": "Update dependencies to their latest semantically compatible version"
+      "@description": "Update dependencies to their latest semantically compatible version",
+      "@input": {
+        "optimizeDiskSpace": {
+          "@type": "boolean",
+          "@description": "Use pnpm instead of npm to optimize disk space",
+          "@default": true
+        }
+      }
     },
     "upgrade": {
       "@type": "method",
@@ -179,6 +180,11 @@
           "@position": 0,
           "@isOptional": true,
           "@isVariadic": true
+        },
+        "optimizeDiskSpace": {
+          "@type": "boolean",
+          "@description": "Use pnpm instead of npm to optimize disk space",
+          "@default": true
         }
       }
     },

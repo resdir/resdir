@@ -26,7 +26,7 @@ import Dependency from './dependency';
 const GIT_IGNORE = ['/node_modules'];
 
 export default () => ({
-  async add({specifiers, production, development, peer, optional}, environment) {
+  async add({specifiers, production, development, peer, optional, optimizeDiskSpace}, environment) {
     if (!specifiers) {
       throw new Error('\'specifiers\' argument is missing');
     }
@@ -49,7 +49,7 @@ export default () => ({
       await task(
         async () => {
           await this._addDependency(dependency);
-          await this._installDependencies(undefined, environment);
+          await this._installDependencies({optimizeDiskSpace}, environment);
           await this.$getRoot().$save();
         },
         {
@@ -61,7 +61,7 @@ export default () => ({
     }
   },
 
-  async remove({names}, environment) {
+  async remove({names, optimizeDiskSpace}, environment) {
     if (!names) {
       throw new Error('\'names\' argument is missing');
     }
@@ -70,7 +70,7 @@ export default () => ({
       await task(
         async () => {
           this._removeDependency(name);
-          await this._installDependencies(undefined, environment);
+          await this._installDependencies({optimizeDiskSpace}, environment);
           await this.$getRoot().$save();
         },
         {
@@ -107,10 +107,10 @@ export default () => ({
     this._setDependencies(dependencies);
   },
 
-  async install(_args, environment) {
+  async install({optimizeDiskSpace}, environment) {
     await task(
       async () => {
-        await this._installDependencies(undefined, environment);
+        await this._installDependencies({optimizeDiskSpace}, environment);
       },
       {
         intro: `Installing dependencies...`,
@@ -120,10 +120,10 @@ export default () => ({
     );
   },
 
-  async update(_args, environment) {
+  async update({optimizeDiskSpace}, environment) {
     await task(
       async () => {
-        await this._installDependencies({updateMode: true}, environment);
+        await this._installDependencies({updateMode: true, optimizeDiskSpace}, environment);
       },
       {
         intro: `Updating dependencies...`,
@@ -133,7 +133,7 @@ export default () => ({
     );
   },
 
-  async upgrade({names}, environment) {
+  async upgrade({names, optimizeDiskSpace}, environment) {
     if (names) {
       for (const name of names) {
         if (!await this.includes({name}, environment)) {
@@ -206,7 +206,7 @@ export default () => ({
       await task(
         async () => {
           await this._addDependency(dependency);
-          await this._installDependencies(undefined, environment);
+          await this._installDependencies({optimizeDiskSpace}, environment);
           await this.$getRoot().$save();
         },
         {
@@ -218,16 +218,21 @@ export default () => ({
     }
   },
 
-  async _installDependencies({updateMode} = {}, environment) {
+  async _installDependencies({updateMode, optimizeDiskSpace} = {}, environment) {
     const packageDirectory = this.$getParent().$getCurrentDirectory();
     let packageFileCreated;
     try {
       const {status} = await this._updatePackageFile(packageDirectory);
       packageFileCreated = status === 'CREATED';
+      const clientDirectory = this.$getClientDirectory();
       if (updateMode) {
-        await updateDependencies(packageDirectory, undefined, environment);
+        await updateDependencies(
+          packageDirectory,
+          {optimizeDiskSpace, clientDirectory},
+          environment
+        );
       } else {
-        await installPackage(packageDirectory, undefined, environment);
+        await installPackage(packageDirectory, {optimizeDiskSpace, clientDirectory}, environment);
       }
     } finally {
       if (packageFileCreated) {
