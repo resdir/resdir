@@ -56,17 +56,13 @@ export class FirstSteps extends React.Component {
           <span style={numberStyle}>①</span> Install Run:
         </p>
 
-        <pre style={preStyle}>
-          <span style={{color: t.mutedTextColor}}>></span> npm install run-cli -g
-        </pre>
+        <pre style={preStyle}>curl https://install.run.tools | bash</pre>
 
         <p>
           <span style={numberStyle}>②</span> See what Resdir can do for you:
         </p>
 
-        <pre style={preStyle}>
-          <span style={{color: t.mutedTextColor}}>></span> run @registry
-        </pre>
+        <pre style={preStyle}>run @registry</pre>
 
         <p style={{...s.noMargins}}>
           <span style={numberStyle}>③</span> Enjoy{' '}
