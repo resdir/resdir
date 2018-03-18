@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "chalk": "^2.3.2",
+    "lodash": "^4.17.4"
+  },
+  "@managed": {
+    "warning": "This file contains properties managed by a Resource. You should not modify them directly or use a command such as `npm install <name>`.",
+    "properties": [
+      "dependencies",
+      "peerDependencies",
+      "optionalDependencies",
+      "devDependencies"
+    ]
+  }
+}

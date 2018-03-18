@@ -7,6 +7,11 @@ import {load, save} from '@resdir/file-manager';
 import {getJSON} from '@resdir/http-client';
 import {execute} from '@resdir/process-manager';
 import LocalCache from '@resdir/local-cache';
+import resolvePNPMStorePath from '@pnpm/store-path';
+import createPNPMFetcher from '@pnpm/default-fetcher';
+import createPNPMResolver from '@pnpm/default-resolver';
+import createPNPMStore from 'package-store';
+import {install as pnpmInstall} from 'supi';
 
 const NPM_REGISTRY_URL = 'https://registry.npmjs.org';
 const NPM_REGISTRY_CACHE_TIME = 60 * 1000; // 1 minute
@@ -72,49 +77,32 @@ export function removePackageFileIfFullyManaged(directory) {
   }
 }
 
-export async function installPackage(directory, {production, useLockfile} = {}, environment) {
-  // TODO: try to use https://github.com/pnpm/pnpm
-
-  const args = ['install'];
-
-  if (production) {
-    args.push('--production');
+export async function installPackage(
+  directory,
+  {production, useLockfile, optimizeDiskSpace, clientDirectory} = {},
+  environment
+) {
+  if (optimizeDiskSpace) {
+    await installPackageUsingPNPM(
+      directory,
+      {production, useLockfile, clientDirectory},
+      environment
+    );
+  } else {
+    await installPackageUsingNPM(directory, {production, useLockfile}, environment);
   }
-
-  if (!useLockfile) {
-    args.push('--no-package-lock');
-  }
-
-  await execNPM(args, {directory}, environment);
 }
 
-// export async function installPackage(
-//   directory,
-//   {production, useLockfile, modulesDirectory} = {},
-//   environment
-// ) {
-//   const args = ['install'];
-//   if (production) {
-//     args.push('--production');
-//   }
-//   if (!useLockfile) {
-//     args.push('--no-lockfile');
-//   }
-//   if (modulesDirectory) {
-//     args.push('--modules-folder');
-//     args.push(modulesDirectory);
-//   }
-//   await execYarn(args, {directory}, environment);
-// }
-
-export async function updateDependencies(directory, {useLockfile} = {}, environment) {
-  const args = ['update', '--no-save'];
-
-  if (!useLockfile) {
-    args.push('--no-package-lock');
+export async function updateDependencies(
+  directory,
+  {useLockfile, optimizeDiskSpace, clientDirectory} = {},
+  environment
+) {
+  if (optimizeDiskSpace) {
+    await updateDependenciesUsingPNPM(directory, {useLockfile, clientDirectory}, environment);
+  } else {
+    await updateDependenciesUsingNPM(directory, {useLockfile}, environment);
   }
-
-  await execNPM(args, {directory}, environment);
 }
 
 export async function publishPackage(directory, {access} = {}, environment) {
@@ -141,18 +129,7 @@ async function _getCurrentDependencyVersion(directory, name) {
   return pkg && pkg.version;
 }
 
-// export async function execYarn(args, options, environment) {
-//   const command = require.resolve('yarn/bin/yarn.js');
-//   args = [...args, '--no-progress', '--no-emoji', '--non-interactive'];
-//   await execute(command, args, {...options, commandName: 'yarn'}, environment);
-// }
-
-export async function execNPM(args, options, environment) {
-  // TODO: Include NPM has a dependency
-  const command = 'npm'; // require.resolve('npm/bin/npm-cli.js');
-  args = [...args];
-  await execute(command, args, {...options, commandName: 'npm'}, environment);
-}
+// ### npm registry ###
 
 export async function fetchNPMRegistry(name, {useCache, throwIfNotFound = true} = {}) {
   const url = NPM_REGISTRY_URL + '/' + name.replace('/', '%2F');
@@ -181,3 +158,132 @@ function getNPMRegistryCache() {
   }
   return npmRegistryCache;
 }
+
+// ### npm ###
+
+async function installPackageUsingNPM(directory, {production, useLockfile}, environment) {
+  const args = ['install'];
+
+  if (production) {
+    args.push('--production');
+  }
+
+  if (!useLockfile) {
+    args.push('--no-package-lock');
+  }
+
+  await execNPM(args, {directory}, environment);
+}
+
+export async function updateDependenciesUsingNPM(directory, {useLockfile} = {}, environment) {
+  const args = ['update', '--no-save'];
+
+  if (!useLockfile) {
+    args.push('--no-package-lock');
+  }
+
+  await execNPM(args, {directory}, environment);
+}
+
+export async function execNPM(args, options, environment) {
+  // TODO: Include NPM has a dependency
+  const command = 'npm'; // require.resolve('npm/bin/npm-cli.js');
+  args = [...args];
+  await execute(command, args, {...options, commandName: 'npm'}, environment);
+}
+
+// ### pnpm ###
+
+async function installPackageUsingPNPM(
+  directory,
+  {production, useLockfile, clientDirectory},
+  environment
+) {
+  const options = await buildPNPMInstallOptions(
+    directory,
+    {production, useLockfile, clientDirectory},
+    environment
+  );
+  return await pnpmInstall(options);
+}
+
+async function updateDependenciesUsingPNPM(directory, {useLockfile, clientDirectory}, environment) {
+  const options = await buildPNPMInstallOptions(
+    directory,
+    {updateMode: true, useLockfile, clientDirectory},
+    environment
+  );
+  return await pnpmInstall(options);
+}
+
+async function buildPNPMInstallOptions(
+  directory,
+  {updateMode, production, useLockfile, clientDirectory},
+  _environment
+) {
+  if (!directory) {
+    throw new Error('\'directory\' is missing');
+  }
+
+  if (!clientDirectory) {
+    throw new Error('\'clientDirectory\' is missing');
+  }
+
+  const storePath = await resolvePNPMStorePath(directory, join(clientDirectory, 'pnpm-store'));
+
+  // I am not sure about the following options
+  // I just tried to guess them from pnpm code
+  const options = {
+    prefix: directory,
+    store: storePath,
+    production: true,
+    development: !production,
+    optional: true,
+    shrinkwrap: Boolean(useLockfile),
+    update: updateMode,
+    progress: true,
+    registry: NPM_REGISTRY_URL,
+    fetchRetries: 2,
+    fetchRetryFactor: 10,
+    fetchRetryMintimeout: 10000,
+    fetchRetryMaxtimeout: 60000,
+    strictSsl: true,
+    tag: 'latest',
+    unicode: true,
+    metaCache: new Map(),
+    rawNpmConfig: {registry: NPM_REGISTRY_URL}
+  };
+
+  const resolve = createPNPMResolver(options);
+  const fetchers = createPNPMFetcher(options);
+  const storeController = await createPNPMStore(resolve, fetchers, {store: storePath});
+
+  return {...options, storeController};
+}
+
+// ### Yarn ###
+
+// export async function _installPackageUsingYarn(
+//   directory,
+//   {production, useLockfile, modulesDirectory} = {},
+//   environment
+// ) {
+//   const args = ['install'];
+//   if (production) {
+//     args.push('--production');
+//   }
+//   if (!useLockfile) {
+//     args.push('--no-lockfile');
+//   }
+//   if (modulesDirectory) {
+//     args.push('--modules-folder');
+//     args.push(modulesDirectory);
+//   }
+//   await execYarn(args, {directory}, environment);
+// }
+
+// export async function execYarn(args, options, environment) {
+//   const command = require.resolve('yarn/bin/yarn.js');
+//   args = [...args, '--no-progress', '--no-emoji', '--non-interactive'];
+//   await execute(command, args, {...options, commandName: 'yarn'}, environment);
+// }
