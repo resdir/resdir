@@ -4,7 +4,7 @@
     "js/resource#^0.1.0"
   ],
   "id": "resdir/resource",
-  "version": "0.1.50",
+  "version": "0.1.51",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -15,6 +15,7 @@
     "./dist"
   ],
   "dependencies": {
+    "fs-extra": "^5.0.0",
     "@resdir/console": "^0.1.0",
     "@resdir/error": "^0.1.0",
     "@resdir/gitignore-manager": "^0.1.0",
@@ -161,13 +162,13 @@
     "keywords": {
       "@type": "array",
       "@description": "A list of keywords",
+      "@isOptional": true,
       "@examples": [
         [
           "nice",
           "cli-tool"
         ]
       ],
-      "@isOptional": true,
       "@implementation": "./dist/cjs/keywords-attribute.js",
       "validate": {
         "@type": "method",
@@ -185,44 +186,44 @@
     "authors": {
       "@type": "array",
       "@description": "The authors of the resource",
+      "@isOptional": true,
       "@examples": [
         [
           "Barney Rubble <b@rubble.com>",
           "alfred@awesome.fr",
           "Linus Torvalds"
         ]
-      ],
-      "@isOptional": true
+      ]
     },
     "contributors": {
       "@type": "array",
       "@description": "A list of contributors to the resource",
+      "@isOptional": true,
       "@examples": [
         [
           "Barney Rubble <b@rubble.com>",
           "alfred@awesome.fr",
           "Linus Torvalds"
         ]
-      ],
-      "@isOptional": true
+      ]
     },
     "license": {
       "@type": "string",
       "@description": "The license attached to the resource (typically, a SPDX identifier)",
+      "@isOptional": true,
       "@examples": [
         "MIT",
         "Apache-2.0",
         "BSD-3-Clause"
-      ],
-      "@isOptional": true
+      ]
     },
     "homepage": {
       "@type": "string",
       "@description": "The URL of the homepage",
+      "@isOptional": true,
       "@examples": [
         "https://www.aturing.com/nice-tool"
-      ],
-      "@isOptional": true
+      ]
     },
     "repository": {
       "@type": "string",
@@ -230,20 +231,24 @@
       "@aliases": [
         "repo"
       ],
+      "@isOptional": true,
       "@examples": [
         "https://github.com/aturing/nice-tool.git"
-      ],
-      "@isOptional": true
+      ]
     },
     "files": {
       "@type": "array",
       "@description": "List of files and directories to include when publishing",
+      "@isOptional": true,
       "@examples": [
         [
           "./dist"
         ]
-      ],
-      "@isOptional": true
+      ]
+    },
+    "reinstallDependenciesWhilePublishing": {
+      "@type": "boolean",
+      "@isHidden": true
     },
     "publish": {
       "@type": "method",

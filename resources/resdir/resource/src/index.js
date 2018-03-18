@@ -1,3 +1,5 @@
+import {join} from 'path';
+import {ensureDir, pathExists, rename} from 'fs-extra';
 import {prompt, formatCode, printSuccess} from '@resdir/console';
 import {validateResourceIdentifier} from '@resdir/resource-identifier';
 import {validateVersion} from '@resdir/version';
@@ -37,10 +39,52 @@ export default Resource => ({
       await this.$getChild('version').bump({major, minor, patch}, environment);
     }
 
-    const file = this.$getResourceFile();
-    await registryClient.resources.publish({file, permissionToken}, environment);
+    try {
+      if (this.reinstallDependenciesWhilePublishing) {
+        await this._startReinstallDependencies(environment);
+      }
+      const file = this.$getResourceFile();
+      await registryClient.resources.publish({file, permissionToken}, environment);
+    } finally {
+      if (this.reinstallDependenciesWhilePublishing) {
+        await this._completeReinstallDependencies(environment);
+      }
+    }
 
     await this.$emit('published');
+  },
+
+  async _startReinstallDependencies(environment) {
+    const directory = this.$getCurrentDirectory();
+
+    const dependencies = this.$getRoot().$getChild('dependencies');
+    if (!dependencies) {
+      return;
+    }
+
+    await ensureDir(join(directory, 'node_modules'));
+
+    await rename(join(directory, 'node_modules'), join(directory, 'node_modules.original'));
+
+    if (await pathExists(join(directory, 'node_modules.clean-install'))) {
+      await rename(join(directory, 'node_modules.clean-install'), join(directory, 'node_modules'));
+    }
+
+    await dependencies.update({optimizeDiskSpace: false}, environment);
+  },
+
+  async _completeReinstallDependencies(_environment) {
+    const directory = this.$getCurrentDirectory();
+
+    if (!await pathExists(join(directory, 'node_modules.original'))) {
+      return;
+    }
+
+    if (await pathExists(join(directory, 'node_modules'))) {
+      await rename(join(directory, 'node_modules'), join(directory, 'node_modules.clean-install'));
+    }
+
+    await rename(join(directory, 'node_modules.original'), join(directory, 'node_modules'));
   },
 
   async validate({throwIfInvalid}) {
