@@ -79,8 +79,8 @@ export default () => ({
           const browser = !(this.target === 'node' || this.target === 'aws-lambda');
 
           const plugins = [
-            nodeResolve({browser, preferBuiltins: !browser}),
-            commonjs({ignore: ['spawn-sync']}),
+            nodeResolve({browser, preferBuiltins: !browser, extensions: ['.js', '.json']}),
+            commonjs({ignore: ['spawn-sync']}), // TODO: remove the `ignore: ['spawn-sync']`
             json()
           ];
 
