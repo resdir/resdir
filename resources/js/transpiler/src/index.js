@@ -20,7 +20,7 @@ export default () => ({
   async run({files}, environment) {
     const transpilationOccurred = await task(
       async progress => {
-        const transpilationOccurred = await this._transpileOrCopy(files, environment);
+        const transpilationOccurred = await this._run(files, environment);
         if (!transpilationOccurred) {
           progress.setOutro(`Transpiler has not changed anything`);
         }
@@ -38,13 +38,21 @@ export default () => ({
     }
   },
 
-  async _transpileOrCopy(files, environment = {}) {
+  async _run(files, environment = {}) {
     const directory = this.$getParent().$getCurrentDirectory();
-    const srcDirectory = resolve(directory, this.source);
-    const destination = this.getResolvedDestination();
-    const destDirectory = resolve(directory, destination);
-    const extensions = this.extensions;
+    const source = resolve(directory, this.source);
+    const destination = resolve(directory, this.getResolvedDestination());
 
+    if (isDirectory.sync(source)) {
+      return await this._transpileOrCopy(source, destination, files, environment);
+    }
+
+    await this._transpile(source, destination, environment);
+
+    return true;
+  },
+
+  async _transpileOrCopy(srcDirectory, destDirectory, files, environment) {
     let transpilationOccurred = false;
 
     if (!files) {
@@ -78,7 +86,7 @@ export default () => ({
             return true;
           }
           const extension = extname(file);
-          if (!extensions.includes(extension)) {
+          if (!this.extensions.includes(extension)) {
             if (environment['@verbose']) {
               console.log(`Copying ${formatPath(file)}...`);
             }
@@ -91,85 +99,66 @@ export default () => ({
       });
     }
 
-    if (transpilableFiles.length > 0) {
-      await this._transpile(srcDirectory, destDirectory, transpilableFiles, environment);
+    for (const file of transpilableFiles) {
+      const srcFile = join(srcDirectory, file);
+      const destFile = join(destDirectory, file);
+      await this._transpile(srcFile, destFile, environment);
       transpilationOccurred = true;
     }
 
     return transpilationOccurred;
   },
 
-  async _transpile(srcDirectory, destDirectory, files, environment = {}) {
-    for (const file of files) {
-      const srcFile = join(srcDirectory, file);
-
-      if (environment['@verbose']) {
-        console.log(`Transpiling ${formatPath(srcFile)}...`);
-      }
-
-      const code = await readFile(srcFile, 'utf8');
-      const {atime, mtime, mode} = statSync(srcFile);
-
-      const formats = [];
-      if (this.format === 'cjs' || this.format === 'esm') {
-        formats.push(this.format);
-      } else if (this.format === 'dual') {
-        formats.push('cjs');
-        formats.push('esm');
-      } else {
-        throw createClientError(`Invalid ${formatCode('format')} value (${formatString(this.format)})`);
-      }
-
-      for (const format of formats) {
-        const plugins = [
-          babelPluginDecorators,
-          [
-            babelPluginClassProperties,
-            {
-              loose: true
-            }
-          ],
-          babelPluginLodash
-        ];
-
-        if (this.transformClasses) {
-          plugins.push([
-            babelPluginClasses,
-            {
-              loose: true
-            }
-          ]);
-        }
-
-        const modules = format === 'cjs' ? 'commonjs' : false;
-        const presets = [
-          [babelPresetStage3, {loose: true}],
-          [babelPresetEnv, {targets: this.targets, loose: true, modules}]
-        ];
-        if (this.transformJSX) {
-          presets.unshift([babelPresetReact, {pragma: this.jsxPragma}]);
-        }
-
-        const transformOptions = {
-          plugins,
-          presets,
-          sourceMaps: 'inline'
-        };
-
-        const {code: transpiledCode} = transform(code, {
-          ...transformOptions,
-          sourceFileName: srcFile
-        });
-
-        let destFile = join(destDirectory, file);
-        if (format === 'cjs' || formats.length > 1) {
-          destFile = setFileExtension(destFile, format === 'cjs' ? 'js' : 'mjs');
-        }
-        await outputFile(destFile, transpiledCode);
-        utimesSync(destFile, atime, mtime);
-        chmodSync(destFile, mode);
-      }
+  async _transpile(srcFile, destFile, environment = {}) {
+    if (environment['@verbose']) {
+      console.log(`Transpiling ${formatPath(srcFile)}...`);
     }
+
+    const code = await readFile(srcFile, 'utf8');
+    const {atime, mtime, mode} = statSync(srcFile);
+
+    if (!(this.format === 'cjs' || this.format === 'esm')) {
+      throw createClientError(`Invalid ${formatCode('format')} value (${formatString(this.format)})`);
+    }
+
+    const plugins = [
+      [babelPluginDecorators, {legacy: true}],
+      [babelPluginClassProperties, {loose: true}],
+      babelPluginLodash
+    ];
+
+    if (this.transformClasses) {
+      plugins.push([
+        babelPluginClasses,
+        {
+          loose: true
+        }
+      ]);
+    }
+
+    const modules = this.format === 'cjs' ? 'commonjs' : false;
+    const presets = [
+      [babelPresetStage3, {loose: true}],
+      [babelPresetEnv, {targets: this.targets, loose: true, modules}]
+    ];
+    if (this.transformJSX) {
+      presets.unshift([babelPresetReact, {pragma: this.jsxPragma}]);
+    }
+
+    const transformOptions = {plugins, presets};
+
+    if (this.generateInlineSourceMaps) {
+      transformOptions.sourceMaps = 'inline';
+    }
+
+    const {code: transpiledCode} = transform(code, {
+      ...transformOptions,
+      sourceFileName: srcFile
+    });
+
+    await outputFile(destFile, transpiledCode);
+    utimesSync(destFile, atime, mtime);
+    chmodSync(destFile, mode);
   },
 
   getResolvedDestination() {
@@ -240,7 +229,3 @@ export default () => ({
     await root.$save();
   }
 });
-
-function setFileExtension(file, extension) {
-  return file.slice(0, -extname(file).length) + '.' + extension;
-}

@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "1place/jest",
-  "version": "0.1.41",
+  "version": "0.1.42",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -19,6 +19,9 @@
     "@resdir/console": "^0.1.0",
     "@resdir/error": "^0.1.0",
     "@resdir/process-manager": "^0.1.0"
+  },
+  "transpiler": {
+    "generateInlineSourceMaps": true
   },
   "@export": {
     "@import": "1place/js-resource#^0.1.0",

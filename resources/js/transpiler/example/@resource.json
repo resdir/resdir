@@ -3,8 +3,22 @@
   "dependencies": {
     "sleep-promise": "^2.0.0"
   },
-  "transpiler": {
+  "directoryTranspiler": {
     "@import": "..",
+    "source": "./src",
+    "destination": "./dist",
+    "generateInlineSourceMaps": false,
+    "transpilationOccurred": {
+      "@type": "method",
+      "@run": "@console print transpilationOccured",
+      "@listen": "transpilationOccurred"
+    }
+  },
+  "fileTranspiler": {
+    "@import": "..",
+    "source": "./src/index.js",
+    "destination": "./dist/index.js",
+    "generateInlineSourceMaps": false,
     "transpilationOccurred": {
       "@type": "method",
       "@run": "@console print transpilationOccured",

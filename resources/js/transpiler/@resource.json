@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/transpiler",
-  "version": "0.1.16",
+  "version": "0.1.18",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -48,11 +48,11 @@
     "@runtime": "node#>=6.10.0",
     "@implementation": "./dist/cjs",
     "source": {
-      "@description": "Source directory of the files to be transpiled",
+      "@description": "Source file or directory",
       "@default": "./src"
     },
     "destination": {
-      "@description": "Destination directory of the transpiled files",
+      "@description": "Destination file or directory",
       "@default": "./dist/${format}"
     },
     "extensions": {
@@ -89,6 +89,10 @@
     "jsxPragma": {
       "@type": "string",
       "@isHidden": true
+    },
+    "generateInlineSourceMaps": {
+      "@description": "Generate inline sourcemaps",
+      "@default": false
     },
     "run": {
       "@type": "method",
