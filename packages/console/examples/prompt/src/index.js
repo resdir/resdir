@@ -1,4 +1,4 @@
-import {prompt, formatString, formatMessage} from '../../../dist';
+import {prompt, formatString, formatMessage} from '../../../..';
 
 (async () => {
   const email = await prompt('Enter your email address:', {default: 'user@domain.xyz'});

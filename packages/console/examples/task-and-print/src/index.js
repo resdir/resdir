@@ -1,5 +1,5 @@
 import sleep from 'sleep-promise';
-import {task, print} from '../../../dist';
+import {task, print} from '../../../..';
 
 const environment = {
   '@verbose': process.argv.includes('--@verbose')

@@ -1,4 +1,4 @@
-import {formatValue} from '../../../dist';
+import {formatValue} from '../../../..';
 
 console.log(formatValue({
   '@import': 'resdir/resource#^0.1.0',
@@ -12,7 +12,8 @@ console.log(formatValue({
       colors: [],
       location: [{x: 123, y: 456}],
       customInfo: {},
-      parent: undefined
+      parent: undefined,
+      specialInfo: null
     }
   }
 }));

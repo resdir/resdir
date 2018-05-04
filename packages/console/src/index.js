@@ -187,6 +187,9 @@ export function formatValue(value, {maxWidth = 80, offset = 0, multiline = true}
   if (value === undefined) {
     return formatUndefined();
   }
+  if (value === null) {
+    return formatNull();
+  }
   if (typeof value === 'boolean') {
     return formatBoolean(value);
   }
@@ -485,6 +488,10 @@ export function formatMessage(message, {info, status} = {}) {
 
 export function formatUndefined(qualifier) {
   return dim(`<undefined${qualifier ? '-' + qualifier : ''}>`);
+}
+
+export function formatNull(qualifier) {
+  return dim(`<null${qualifier ? '-' + qualifier : ''}>`);
 }
 
 export function getSuccessSymbol() {
