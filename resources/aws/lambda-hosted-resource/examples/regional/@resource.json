@@ -1,6 +1,6 @@
 {
   "@import": ["../../", "1place/js-resource"],
-  "domainName": "api2.example.resdir.com",
+  "domainName": "us-east-2.example.resdir.com",
   "memorySize": 128,
   "timeout": 3,
   "reservedConcurrentExecutions": 1,

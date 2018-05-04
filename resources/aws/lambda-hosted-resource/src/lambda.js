@@ -91,7 +91,7 @@ export default () => ({
         const lambdaFunction = await lambda.createFunction({
           FunctionName: this.getLambdaFunctionName(),
           Handler: 'handler.handler',
-          Runtime: 'nodejs6.10',
+          Runtime: 'nodejs8.10',
           Role: role.arn,
           MemorySize: this.memorySize,
           Timeout: this.timeout,
