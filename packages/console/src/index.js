@@ -208,7 +208,7 @@ export function formatValue(value, {maxWidth = 80, offset = 0, multiline = true}
   if (value instanceof Date) {
     return formatDate(value);
   }
-  throw new TypeError('\'value\' argument type is invalid');
+  return formatUnknown();
 }
 
 export function formatBoolean(boolean) {
@@ -499,6 +499,10 @@ export function formatUndefined(qualifier) {
 
 export function formatNull(qualifier) {
   return dim(`<null${qualifier ? '-' + qualifier : ''}>`);
+}
+
+export function formatUnknown(qualifier) {
+  return dim(`<unknown${qualifier ? '-' + qualifier : ''}>`);
 }
 
 export function getSuccessSymbol() {

@@ -14,7 +14,8 @@ console.log(formatValue({
       customInfo: {},
       currentDate: new Date(),
       parent: undefined,
-      specialInfo: null
+      specialInfo: null,
+      customObject: new class {}()
     }
   }
 }));
