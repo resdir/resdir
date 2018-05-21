@@ -12,6 +12,7 @@ console.log(formatValue({
       colors: [],
       location: [{x: 123, y: 456}],
       customInfo: {},
+      currentDate: new Date(),
       parent: undefined,
       specialInfo: null
     }

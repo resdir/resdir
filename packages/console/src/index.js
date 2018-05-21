@@ -205,6 +205,9 @@ export function formatValue(value, {maxWidth = 80, offset = 0, multiline = true}
   if (isPlainObject(value)) {
     return formatObject(value, {maxWidth, multiline});
   }
+  if (value instanceof Date) {
+    return formatDate(value);
+  }
   throw new TypeError('\'value\' argument type is invalid');
 }
 
@@ -303,6 +306,10 @@ export function formatObject(object, {maxWidth = 80, multiline = true} = {}) {
     output = formatPunctuation('{}');
   }
   return output;
+}
+
+export function formatDate(date) {
+  return magenta(date.toISOString());
 }
 
 export function formatURL(url) {
