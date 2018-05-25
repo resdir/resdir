@@ -24,6 +24,7 @@ export class Modal {
       };
       this._stack.push(attributes);
       this.emitChange();
+
       document.activeElement.blur();
     });
   }
@@ -133,7 +134,8 @@ class ModalComponent extends React.Component {
     ];
 
     const overlayStyle = {
-      backgroundColor: 'rgba(0,0,0,.75)',
+      backgroundColor: t.backgroundColor,
+      opacity: 0.75,
       position: 'fixed',
       top: 0,
       left: 0,
