@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Radium from 'radium';
 const {Style} = Radium;
-import {RadiumStarterRoot, withRadiumStarter} from 'radium-starter';
+import RadiumStarter, {RadiumStarterRoot} from 'radium-starter';
 import Color from 'color';
 
 import Root from './root';
@@ -105,18 +104,19 @@ export class App extends React.Component {
   }
 }
 
-@withRadiumStarter
 class Main extends React.Component {
-  static propTypes = {
-    theme: PropTypes.object.isRequired
-  };
-
   render() {
     return (
-      <div>
-        <Style rules={globalStyles(this.props.theme)} />
-        <Root />
-      </div>
+      <RadiumStarter>
+        {t => {
+          return (
+            <div>
+              <Style rules={globalStyles(t)} />
+              <Root />
+            </div>
+          );
+        }}
+      </RadiumStarter>
     );
   }
 }

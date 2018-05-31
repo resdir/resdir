@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {withRadiumStarter} from 'radium-starter';
+import RadiumStarter from 'radium-starter';
 import URLSearchParams from 'url-search-params';
 
 import {getRegistryServer} from '../registry-server';
@@ -9,12 +9,10 @@ import FullHeight from './full-height';
 import {withErrorBoundary, catchErrors} from './error-boundary';
 
 @withErrorBoundary
-@withRadiumStarter
 export class ConnectGitHubAccount extends React.Component {
   static propTypes = {
     match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    styles: PropTypes.object.isRequired
+    location: PropTypes.object.isRequired
   };
 
   state = {
@@ -63,30 +61,34 @@ export class ConnectGitHubAccount extends React.Component {
   }
 
   render() {
-    const {styles: s} = this.props;
-
-    const {message, info} = this.state;
-
-    if (!message) {
-      return null;
-    }
-
     return (
-      <FullHeight>
-        <div
-          style={{
-            flexGrow: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <Logo width={150} />
-          <h3 style={[{marginTop: '1.5rem'}]}>{message}</h3>
-          {info && <h4 style={s.subheading}>{info}</h4>}
-        </div>
-      </FullHeight>
+      <RadiumStarter>
+        {(_t, s) => {
+          const {message, info} = this.state;
+
+          if (!message) {
+            return null;
+          }
+
+          return (
+            <FullHeight>
+              <div
+                style={{
+                  flexGrow: 1,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <Logo width={150} />
+                <h3 style={[{marginTop: '1.5rem'}]}>{message}</h3>
+                {info && <h4 style={s.subheading}>{info}</h4>}
+              </div>
+            </FullHeight>
+          );
+        }}
+      </RadiumStarter>
     );
   }
 }
