@@ -15,7 +15,7 @@
     "./dist"
   ],
   "dependencies": {
-    "jest": "^22.0.4",
+    "jest": "^23.1.0",
     "@resdir/console": "^0.1.0",
     "@resdir/error": "^0.1.0",
     "@resdir/process-manager": "^0.1.0"
@@ -28,6 +28,9 @@
     "@name": "1Place's Jest",
     "@description": "Test suite runner (using Jest)",
     "@implementation": "./dist/cjs",
+    "dependencies": {
+      "@import": "js/npm-dependencies#^0.1.0"
+    },
     "roots": {
       "@type": "array",
       "@description": "Root diectories containing the test files",
@@ -43,9 +46,6 @@
         "node"
       ],
       "@default": "node"
-    },
-    "dependencies": {
-      "@import": "js/npm-dependencies#^0.1.0"
     },
     "run": {
       "@type": "method",
