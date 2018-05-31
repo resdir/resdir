@@ -1,13 +1,15 @@
-import {join} from 'path';
-import {statSync, utimesSync} from 'fs';
+import {join, resolve, relative} from 'path';
+import {existsSync, writeFileSync, statSync, utimesSync} from 'fs';
 import {isEqual} from 'lodash';
-import {formatString, task} from '@resdir/console';
+import {formatString, formatPath, formatCode, task} from '@resdir/console';
 import {Lambda} from '@resdir/aws-client';
 import sleep from 'sleep-promise';
 import {zip} from '@resdir/archive-manager';
 import {save} from '@resdir/file-manager';
 import {createClientError} from '@resdir/error';
 import {copy, remove} from 'fs-extra';
+import isDirectory from 'is-directory';
+import readDirectory from 'recursive-readdir';
 import tempy from 'tempy';
 import hasha from 'hasha';
 
@@ -199,17 +201,83 @@ export default () => ({
 
   async getZipArchive(environment) {
     if (!this._zipArchive) {
-      const tempDirectory = tempy.directory();
-      await copy(
-        join(__dirname, '..', '..', 'lambda-handler', 'dist', 'bundle.js'),
-        join(tempDirectory, 'handler.js')
+      await task(
+        async () => {
+          const directory = this.$getCurrentDirectory();
+
+          const tempDirectory = tempy.directory();
+
+          const allFiles = [];
+
+          await copy(
+            join(__dirname, '..', '..', 'lambda-handler', 'dist', 'bundle.js'),
+            join(tempDirectory, 'handler.js')
+          );
+          allFiles.push('handler.js');
+
+          await this.buildDefinitionFile(join(tempDirectory, 'definition.json'), environment);
+          allFiles.push('definition.json');
+
+          const implementationFile = this.getImplementationFile();
+
+          const relativeImplementationFile = relative(directory, implementationFile);
+          const builderCode = `module.exports = require('./${relativeImplementationFile}');\n`;
+          const builderFile = join(tempDirectory, 'builder.js');
+          writeFileSync(builderFile, builderCode);
+          const {atime, mtime} = statSync(implementationFile);
+          utimesSync(builderFile, atime, mtime);
+          allFiles.push('builder.js');
+
+          const files = await this._getFiles();
+
+          if (!files.includes(implementationFile)) {
+            files.push(implementationFile);
+          }
+
+          for (const file of files) {
+            const relativeFile = relative(directory, file);
+            await copy(file, join(tempDirectory, relativeFile));
+            allFiles.push(relativeFile);
+          }
+
+          this._zipArchive = await zip(tempDirectory, allFiles);
+
+          await remove(tempDirectory);
+        },
+        {
+          intro: `Building ZIP archive...`,
+          outro: `ZIP archive built`
+        },
+        environment
       );
-      await this.buildDefinitionFile(join(tempDirectory, 'definition.json'), environment);
-      await copy(this.getImplementationFile(), join(tempDirectory, 'builder.js'));
-      this._zipArchive = await zip(tempDirectory, ['handler.js', 'definition.json', 'builder.js']);
-      await remove(tempDirectory);
     }
+
     return this._zipArchive;
+  },
+
+  async _getFiles() {
+    const directory = this.$getCurrentDirectory();
+
+    const files = [];
+
+    const filesProperty = this.files || [];
+    for (const file of filesProperty) {
+      const resolvedFile = resolve(directory, file);
+
+      if (!existsSync(resolvedFile)) {
+        throw createClientError(`File ${formatPath(file)} specified in ${formatCode('files')} property doesn't exist`);
+      }
+
+      if (isDirectory.sync(resolvedFile)) {
+        const newFiles = await readDirectory(resolvedFile);
+        newFiles.sort(); // Make readDirectory() more deterministic
+        files.push(...newFiles);
+      } else {
+        files.push(resolvedFile);
+      }
+    }
+
+    return files;
   },
 
   async buildDefinitionFile(definitionFile, environment) {

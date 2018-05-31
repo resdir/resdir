@@ -1,0 +1,29 @@
+{
+  "@import": [
+    "../../",
+    "1place/js-resource"
+  ],
+  "domainName": "with-deps.example.resdir.com",
+  "files": [
+    "./dist/cjs",
+    "node_modules"
+  ],
+  "reinstallDependenciesWhileDeploying": true,
+  "memorySize": 128,
+  "timeout": 3,
+  "reservedConcurrentExecutions": 1,
+  "endpointType": "regional",
+  "dependencies": {
+    "upper-case": "^1.1.3"
+  },
+  "@export": {
+    "@implementation": "./dist/cjs",
+    "hello": {
+      "@type": "method",
+      "@output": {
+        "@type": "string"
+      }
+    },
+    "message": "Hello, World!"
+  }
+}

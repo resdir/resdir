@@ -18,9 +18,10 @@ let jsonRPCHandler;
   jsonRPCHandler = new RemoteResourceJSONRPCHandler({resource, publicMethods: definition.methods});
 })();
 
-export function handler(event, {awsRequestId}, callback) {
+export function handler(event, context, callback) {
+  context.callbackWaitsForEmptyEventLoop = false;
   jsonRPCHandler
-    .handleRequest(event, {awsRequestId})
+    .handleRequest(event, {awsRequestId: context.awsRequestId})
     .then(result => {
       callback(null, result);
     })
