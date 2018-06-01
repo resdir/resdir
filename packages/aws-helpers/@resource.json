@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/aws-helpers",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Convenience helpers around @resdir/aws-client",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",

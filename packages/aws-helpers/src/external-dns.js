@@ -1,3 +1,4 @@
+import {trimEnd} from 'lodash';
 import {Resolver} from 'dns';
 import {task} from '@resdir/console';
 
@@ -7,6 +8,8 @@ const googleResolver = new Resolver();
 googleResolver.setServers(['8.8.8.8']);
 
 export async function checkCNAME({name, value}, environment) {
+  value = trimEnd(value, '.');
+
   return await task(
     async progress => {
       let values;
