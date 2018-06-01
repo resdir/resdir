@@ -101,39 +101,7 @@ export default () => ({
         const config = {immutableFiles};
         const previousConfig = await this.loadConfigFromS3(config);
 
-        const existingFiles = await task(
-          async () => {
-            const result = await s3.listObjectsV2({Bucket: bucketName});
-
-            if (result.IsTruncated) {
-              throw createClientError('Whoa, you have a lot of files on S3! Unfortunately, this tool can\'t list them all. Please post an issue on Resdir\'s GitHub if you really need to handle so many files.');
-            }
-
-            const files = [];
-
-            for (const item of result.Contents) {
-              const path = item.Key;
-              if (path === CONFIG_FILE_S3_KEY) {
-                continue;
-              }
-
-              const size = item.Size;
-
-              let md5 = item.ETag;
-              md5 = md5.slice(1);
-              md5 = md5.slice(0, -1);
-
-              files.push({path, size, md5});
-            }
-
-            return files;
-          },
-          {
-            intro: `Listing existing files on S3...`,
-            outro: `Existing files on S3 listed`
-          },
-          environment
-        );
+        const existingFiles = await this.listExistingFiles(environment);
 
         let addedFiles = 0;
         let updatedFiles = 0;
@@ -251,6 +219,49 @@ export default () => ({
       {
         intro: `Synchronizing files...`,
         outro: `Files synchronized`
+      },
+      environment
+    );
+  },
+
+  async listExistingFiles(environment) {
+    const s3 = this.getS3Client();
+    const bucketName = this.getS3BucketName();
+
+    return await task(
+      async () => {
+        const files = [];
+
+        let nextContinuationToken;
+        do {
+          const result = await s3.listObjectsV2({
+            Bucket: bucketName,
+            ContinuationToken: nextContinuationToken
+          });
+
+          for (const item of result.Contents) {
+            const path = item.Key;
+            if (path === CONFIG_FILE_S3_KEY) {
+              continue;
+            }
+
+            const size = item.Size;
+
+            let md5 = item.ETag;
+            md5 = md5.slice(1);
+            md5 = md5.slice(0, -1);
+
+            files.push({path, size, md5});
+          }
+
+          nextContinuationToken = result.NextContinuationToken;
+        } while (nextContinuationToken);
+
+        return files;
+      },
+      {
+        intro: `Listing existing files on S3...`,
+        outro: `Existing files on S3 listed`
       },
       environment
     );

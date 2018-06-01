@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "aws/s3-hosted-website",
-  "version": "0.1.35",
+  "version": "0.1.36",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
