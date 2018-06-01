@@ -66,6 +66,19 @@ export class S3 {
     return this.client.getObject(params).promise();
   }
 
+  getSignedUrl(operation, params) {
+    debug('getSignedUrl(%o, %o)', operation, params);
+    return new Promise((resolve, reject) => {
+      this.client.getSignedUrl(operation, params, (err, url) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(url);
+        }
+      });
+    });
+  }
+
   headBucket(params) {
     debug('headBucket(%o)', params);
     return this.client.headBucket(params).promise();
