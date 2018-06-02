@@ -1,13 +1,13 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/secret-generator",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Generate a secret",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",
   "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
-    "nanoid": "^0.2.0"
+    "nanoid": "^1.0.2"
   },
   "@unpublishable": {
     "tests": {
