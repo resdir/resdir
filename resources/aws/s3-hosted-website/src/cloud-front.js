@@ -240,7 +240,8 @@ export default () => ({
       DefaultTTL: CACHING_DEFAULT_TTL,
       MaxTTL: CACHING_MAX_TTL,
       Compress: true,
-      LambdaFunctionAssociations: {Quantity: 0, Items: []}
+      LambdaFunctionAssociations: {Quantity: 0, Items: []},
+      FieldLevelEncryptionId: ''
     };
   },
 
