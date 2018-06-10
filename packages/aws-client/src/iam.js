@@ -7,7 +7,12 @@ const debug = debugModule('resdir:aws-client:iam');
 export class IAM {
   constructor(config = {}) {
     const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {...pick(config, keys), ...pick(config.iam, keys), apiVersion: '2010-05-08'};
+    config = {
+      ...pick(config, keys),
+      ...pick(config.iam, keys),
+      apiVersion: '2010-05-08',
+      signatureVersion: 'v4'
+    };
     this.client = new IAMClient(config);
   }
 

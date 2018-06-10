@@ -7,7 +7,12 @@ const debug = debugModule('resdir:aws-client:route-53');
 export class Route53 {
   constructor(config = {}) {
     const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {...pick(config, keys), ...pick(config.route53, keys), apiVersion: '2013-04-01'};
+    config = {
+      ...pick(config, keys),
+      ...pick(config.route53, keys),
+      apiVersion: '2013-04-01',
+      signatureVersion: 'v4'
+    };
     this.client = new Route53Client(config);
   }
 

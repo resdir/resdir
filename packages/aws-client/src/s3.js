@@ -27,7 +27,12 @@ const S3_REGIONS = {
 export class S3 {
   constructor(config = {}) {
     const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {...pick(config, keys), ...pick(config.s3, keys), apiVersion: '2006-03-01'};
+    config = {
+      ...pick(config, keys),
+      ...pick(config.s3, keys),
+      apiVersion: '2006-03-01',
+      signatureVersion: 'v4'
+    };
     this.client = new S3Client(config);
   }
 

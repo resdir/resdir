@@ -8,7 +8,12 @@ const debug = debugModule('resdir:aws-client:dynamodb');
 export class DynamoDB {
   constructor(config = {}) {
     const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {...pick(config, keys), ...pick(config.dynamoDB, keys), apiVersion: '2012-08-10'};
+    config = {
+      ...pick(config, keys),
+      ...pick(config.dynamoDB, keys),
+      apiVersion: '2012-08-10',
+      signatureVersion: 'v4'
+    };
     this.client = new DocumentClient(config);
   }
 

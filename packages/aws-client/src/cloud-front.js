@@ -7,7 +7,12 @@ const debug = debugModule('resdir:aws-client:cloud-front');
 export class CloudFront {
   constructor(config = {}) {
     const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {...pick(config, keys), ...pick(config.cloudFront, keys), apiVersion: '2017-03-25'};
+    config = {
+      ...pick(config, keys),
+      ...pick(config.cloudFront, keys),
+      apiVersion: '2017-03-25',
+      signatureVersion: 'v4'
+    };
     this.client = new CloudFrontClient(config);
   }
 

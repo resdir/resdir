@@ -7,7 +7,12 @@ const debug = debugModule('resdir:aws-client:ses');
 export class SES {
   constructor(config = {}) {
     const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {...pick(config, keys), ...pick(config.ses, keys), apiVersion: '2010-12-01'};
+    config = {
+      ...pick(config, keys),
+      ...pick(config.ses, keys),
+      apiVersion: '2010-12-01',
+      signatureVersion: 'v4'
+    };
     this.client = new SESClient(config);
   }
 

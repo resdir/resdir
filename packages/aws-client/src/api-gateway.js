@@ -7,7 +7,12 @@ const debug = debugModule('resdir:aws-client:api-gateway');
 export class APIGateway {
   constructor(config = {}) {
     const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {...pick(config, keys), ...pick(config.apiGateway, keys), apiVersion: '2015-07-09'};
+    config = {
+      ...pick(config, keys),
+      ...pick(config.apiGateway, keys),
+      apiVersion: '2015-07-09',
+      signatureVersion: 'v4'
+    };
     this.client = new APIGatewayClient(config);
   }
 

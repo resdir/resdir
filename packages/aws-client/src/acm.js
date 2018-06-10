@@ -7,7 +7,12 @@ const debug = debugModule('resdir:aws-client:acm');
 export class ACM {
   constructor(config = {}) {
     const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {...pick(config, keys), ...pick(config.acm, keys), apiVersion: '2015-12-08'};
+    config = {
+      ...pick(config, keys),
+      ...pick(config.acm, keys),
+      apiVersion: '2015-12-08',
+      signatureVersion: 'v4'
+    };
     this.client = new ACMClient(config);
   }
 
