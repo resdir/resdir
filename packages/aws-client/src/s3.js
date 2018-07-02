@@ -51,6 +51,11 @@ export class S3 {
     return this.client.deleteObject(params).promise();
   }
 
+  deleteObjects(params) {
+    debug('deleteObjects(%o)', params);
+    return this.client.deleteObjects(params).promise();
+  }
+
   getBucketLocation(params) {
     debug('getBucketLocation(%o)', params);
     return this.client.getBucketLocation(params).promise();
