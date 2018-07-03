@@ -7,3 +7,4 @@ export * from './lambda';
 export * from './route-53';
 export * from './s3';
 export * from './ses';
+export * from './sqs';
