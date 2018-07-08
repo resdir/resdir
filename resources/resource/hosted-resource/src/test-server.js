@@ -18,6 +18,8 @@ import cors from '@koa/cors';
 import body from 'koa-json-body';
 import sleep from 'sleep-promise';
 
+const CACHE_RESOURCE = true;
+
 export default Resource => ({
   createServer(environment) {
     const server = new Koa();
@@ -31,7 +33,7 @@ export default Resource => ({
       return {name, message, code, status};
     }));
 
-    server.use(cors());
+    server.use(cors({maxAge: 300})); // 5 minutes
 
     server.use(body());
 
@@ -83,18 +85,23 @@ export default Resource => ({
   },
 
   async getJSONRPCHandler(environment) {
-    const root = this.$getRoot();
-    const resourceFile = root.$getResourceFile();
-    const resource = await Resource.$import(resourceFile, {disableCache: true});
-    const definition = root.getExportDefinition(environment);
-    const jsonRPCHandler = new RemoteResourceJSONRPCHandler({
-      resource,
-      publicMethods: definition.methods
-    });
-    return jsonRPCHandler;
+    if (!CACHE_RESOURCE || !this._jsonRPCHandler) {
+      const root = this.$getRoot();
+      const resourceFile = root.$getResourceFile();
+      const resource = await Resource.$import(resourceFile, {disableCache: true});
+      const definition = root.getExportDefinition(environment);
+      this._jsonRPCHandler = new RemoteResourceJSONRPCHandler({
+        resource,
+        publicMethods: definition.methods
+      });
+    }
+    return this._jsonRPCHandler;
   },
 
   async start(_input, environment) {
+    if (CACHE_RESOURCE) {
+      process.env.RESOURCE_IS_CACHED = '1'; // TODO: Remove this ugliness
+    }
     const server = this.createServer(environment);
     server.listen(this.port);
     printSuccess(
