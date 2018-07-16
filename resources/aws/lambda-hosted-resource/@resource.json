@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "aws/lambda-hosted-resource",
-  "version": "0.1.36",
+  "version": "0.1.37",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"

@@ -122,7 +122,8 @@ export default () => ({
       responseParameters: {
         'method.response.header.Access-Control-Allow-Origin': true,
         'method.response.header.Access-Control-Allow-Headers': true,
-        'method.response.header.Access-Control-Allow-Methods': true
+        'method.response.header.Access-Control-Allow-Methods': true,
+        'method.response.header.Access-Control-Max-Age': true
       }
     });
 
@@ -144,7 +145,8 @@ export default () => ({
       responseParameters: {
         'method.response.header.Access-Control-Allow-Origin': `'*'`,
         'method.response.header.Access-Control-Allow-Headers': `'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'`,
-        'method.response.header.Access-Control-Allow-Methods': `'POST,OPTIONS'`
+        'method.response.header.Access-Control-Allow-Methods': `'POST,OPTIONS'`,
+        'method.response.header.Access-Control-Max-Age': `'300'`
       },
       responseTemplates: {
         'application/json': ''
