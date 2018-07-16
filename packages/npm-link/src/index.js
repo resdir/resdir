@@ -18,33 +18,77 @@ export function run() {
     currentDirectory = resolve(currentDirectory, argv.directory);
   }
 
-  const packageName = process.argv[2];
-
-  if (!packageName) {
-    throw new Error('\'packageName\' is missing');
-  }
-
   const config = loadConfig(currentDirectory);
 
-  const packageDirectory = findPackage(config.directories, packageName);
-
-  if (!packageDirectory) {
-    throw new Error(`Package '${packageName}' not found`);
-  }
-
   const modulesDirectory = join(currentDirectory, 'node_modules');
-
   if (!existsSync(modulesDirectory)) {
     throw new Error('\'node_modules\' directory not found in the current directory');
   }
 
-  const linkFile = join(modulesDirectory, packageName);
+  let packageNames;
+  const packageName = process.argv[2];
+  if (packageName) {
+    packageNames = [packageName];
+  } else {
+    packageNames = loadPackageNames(currentDirectory);
+  }
 
-  removeSync(linkFile);
+  for (const packageName of packageNames) {
+    const packageDirectory = findPackage(config.directories, packageName);
+    if (!packageDirectory) {
+      continue;
+    }
 
-  ensureSymlinkSync(relative(dirname(linkFile), packageDirectory), linkFile);
+    const linkFile = join(modulesDirectory, packageName);
+    removeSync(linkFile);
+    ensureSymlinkSync(relative(dirname(linkFile), packageDirectory), linkFile);
 
-  console.log(`'${packageName}' linked`);
+    console.log(`'${packageName}' linked`);
+  }
+}
+
+function loadConfig(directory) {
+  const file = join(directory, '.npm-link.json');
+  if (existsSync(file)) {
+    const config = load(file);
+    const configDirectory = dirname(file);
+    config.directories = config.directories.map(directory => resolve(configDirectory, directory));
+    return config;
+  }
+
+  const parentDirectory = join(directory, '..');
+  if (parentDirectory !== directory) {
+    return loadConfig(parentDirectory);
+  }
+
+  throw new Error('Config file not found');
+}
+
+function loadPackageNames(directory) {
+  const file = findResourceFile(directory);
+  const resource = load(file);
+  let dependencies =
+    resource.dependencies ||
+    (resource['@unpublishable'] && resource['@unpublishable'].dependencies);
+  if (typeof dependencies !== 'object') {
+    return [];
+  }
+  if ('@value' in dependencies) {
+    dependencies = dependencies['@value'];
+  }
+  return Object.keys(dependencies);
+}
+
+function findResourceFile(directory) {
+  let file = join(directory, '@resource.json');
+  if (existsSync(file)) {
+    return file;
+  }
+  file = join(directory, 'package.json');
+  if (existsSync(file)) {
+    return file;
+  }
+  throw new Error('Resource file not found');
 }
 
 function findPackage(directories, name) {
@@ -66,21 +110,4 @@ function findPackage(directories, name) {
       }
     }
   }
-}
-
-function loadConfig(directory) {
-  const file = join(directory, '.npm-link.json');
-  if (existsSync(file)) {
-    const config = load(file);
-    const configDirectory = dirname(file);
-    config.directories = config.directories.map(directory => resolve(configDirectory, directory));
-    return config;
-  }
-
-  const parentDirectory = join(directory, '..');
-  if (parentDirectory !== directory) {
-    return loadConfig(parentDirectory);
-  }
-
-  throw new Error('Config file not found');
 }
