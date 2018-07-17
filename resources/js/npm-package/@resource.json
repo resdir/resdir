@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/npm-package",
-  "version": "0.1.49",
+  "version": "0.1.50",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -28,7 +28,7 @@
       "@import": "1place/jest#^0.1.0",
       "@directory": "./tests",
       "dependencies": {
-        "fs-extra": "^5.0.0",
+        "fs-extra": "^7.0.0",
         "@resdir/file-manager": "^0.1.0",
         "run-core": "^0.11.0",
         "temp-dir": "^1.0.0"
