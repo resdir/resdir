@@ -74,17 +74,22 @@ export default () => ({
 
       await copy(srcFile, destFile, {
         preserveTimestamps: true,
+
         filter: file => {
           const relativeFile = relative(srcDirectory, file);
+
           if (isDirectory.sync(file)) {
-            if (environment['@verbose']) {
-              console.log(`Cleaning ${formatPath(file)}...`);
-            }
             const targetDir = join(destDirectory, relativeFile);
-            emptyDirSync(targetDir);
+            if (isDirectory.sync(targetDir)) {
+              if (environment['@verbose']) {
+                console.log(`Cleaning ${formatPath(targetDir)}...`);
+              }
+              emptyDirSync(targetDir);
+            }
             transpilationOccurred = true;
             return true;
           }
+
           const extension = extname(file);
           if (!this.extensions.includes(extension)) {
             if (environment['@verbose']) {
@@ -93,6 +98,7 @@ export default () => ({
             transpilationOccurred = true;
             return true;
           }
+
           transpilableFiles.push(relativeFile);
           return false;
         }

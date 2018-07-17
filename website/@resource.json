@@ -19,15 +19,15 @@
     "radium": "^0.24.0",
     "radium-starter": "^0.11.4",
     "react-lowlight": "^2.0.0",
-    "react-md-spinner": "^0.2.5",
+    "react-md-spinner": "^0.3.0",
     "react-router-dom": "^4.2.2",
     "react-router-ga": "^1.0.0",
     "remark": "^9.0.0",
     "remark-react": "^4.0.1",
     "@resdir/http-client": "^0.2.0",
     "@resdir/react-modal": "^0.1.0",
-    "sleep-promise": "^6.0.0",
-    "url-search-params": "^0.10.0"
+    "sleep-promise": "^8.0.1",
+    "url-search-params": "^1.0.2"
   },
   "builder": {
     "run": {

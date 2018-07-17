@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource#^0.1.0",
   "id": "1place/js-resource",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"

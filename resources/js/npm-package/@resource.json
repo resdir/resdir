@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/npm-package",
-  "version": "0.1.48",
+  "version": "0.1.49",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -15,7 +15,7 @@
     "./dist"
   ],
   "dependencies": {
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^6.0.1",
     "lodash": "^4.17.4",
     "@resdir/console": "^0.1.0",
     "@resdir/error": "^0.1.0",

@@ -4,8 +4,7 @@ import tempDir from 'temp-dir';
 import {Resource} from 'run-core';
 import {load} from '@resdir/file-manager';
 
-// TODO: replace with jest.setTimeout() when Jest 21 is available
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 10 * 1000; // eslint-disable-line
+jest.setTimeout(10 * 1000);
 
 describe('js/npm-dependencies', () => {
   let Package;

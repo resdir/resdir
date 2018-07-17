@@ -162,16 +162,19 @@ function getNPMRegistryCache() {
 // ### npm ###
 
 async function installPackageUsingNPM(directory, {production, useLockfile}, environment) {
-  const args = ['install'];
-
+  let args = ['prune'];
   if (production) {
     args.push('--production');
   }
+  await execNPM(args, {directory}, environment);
 
+  args = ['install'];
+  if (production) {
+    args.push('--production');
+  }
   if (!useLockfile) {
     args.push('--no-package-lock');
   }
-
   await execNPM(args, {directory}, environment);
 }
 

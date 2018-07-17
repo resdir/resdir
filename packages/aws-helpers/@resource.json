@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/aws-helpers",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Convenience helpers around @resdir/aws-client",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",
@@ -10,6 +10,6 @@
     "lodash": "^4.17.4",
     "@resdir/console": "^0.1.16",
     "@resdir/error": "^0.1.0",
-    "sleep-promise": "^2.0.0"
+    "sleep-promise": "^8.0.1"
   }
 }

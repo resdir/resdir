@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/bundler",
-  "version": "0.1.31",
+  "version": "0.1.32",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -20,7 +20,7 @@
     "@resdir/console": "^0.1.0",
     "@resdir/error": "^0.1.0",
     "@resdir/gitignore-manager": "^0.1.3",
-    "rollup": "^0.59.4",
+    "rollup": "^0.62.0",
     "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-json": "^3.0.0",
     "rollup-plugin-node-builtins": "^2.1.2",

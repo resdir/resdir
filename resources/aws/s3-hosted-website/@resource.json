@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "aws/s3-hosted-website",
-  "version": "0.1.37",
+  "version": "0.1.38",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -25,7 +25,7 @@
     "@resdir/aws-helpers": "^0.1.0",
     "@resdir/console": "^0.1.16",
     "@resdir/error": "^0.1.0",
-    "sleep-promise": "^2.0.0"
+    "sleep-promise": "^8.0.1"
   },
   "@export": {
     "@import": "website/hosted-website#^0.1.0",

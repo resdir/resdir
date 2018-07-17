@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "tool/file-copier",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -15,7 +15,7 @@
     "./dist"
   ],
   "dependencies": {
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^6.0.1",
     "is-directory": "^0.3.1",
     "lodash": "^4.17.4",
     "replace-string": "^1.1.0",

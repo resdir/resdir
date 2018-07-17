@@ -4,7 +4,7 @@
     "js/resource#^0.1.0"
   ],
   "id": "resdir/registry-client",
-  "version": "0.1.27",
+  "version": "0.1.28",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -16,7 +16,7 @@
   ],
   "dependencies": {
     "debug": "^3.1.0",
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^6.0.1",
     "hasha": "^3.0.0",
     "is-directory": "^0.3.1",
     "lodash": "^4.17.4",

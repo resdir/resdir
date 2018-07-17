@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/transpiler",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -23,7 +23,7 @@
     "@babel/preset-env": "^7.0.0-beta",
     "@babel/preset-react": "^7.0.0-beta",
     "@babel/preset-stage-3": "^7.0.0-beta",
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^6.0.1",
     "is-directory": "^0.3.1",
     "lodash": "^4.17.4",
     "@resdir/console": "^0.1.0",
@@ -35,7 +35,7 @@
       "@import": "1place/jest#^0.1.0",
       "@directory": "./tests",
       "dependencies": {
-        "fs-extra": "^5.0.0",
+        "fs-extra": "^6.0.1",
         "@resdir/file-manager": "^0.1.0",
         "run-core": "^0.11.0",
         "temp-dir": "^1.0.0"
@@ -79,8 +79,8 @@
     },
     "transformClasses": {
       "@description": "Transform ES6 classes to ES5",
-      "@default": false,
-      "@isHidden": true
+      "@isHidden": true,
+      "@default": false
     },
     "transformJSX": {
       "@description": "Enable JSX support (using @babel/preset-react)",

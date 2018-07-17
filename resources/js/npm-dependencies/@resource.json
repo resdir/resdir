@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource#^0.1.0",
   "id": "js/npm-dependencies",
-  "version": "0.1.60",
+  "version": "0.1.61",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"

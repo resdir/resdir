@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "website/freezer",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -15,7 +15,7 @@
     "./dist"
   ],
   "dependencies": {
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^6.0.1",
     "@resdir/console": "^0.1.35",
     "@resdir/error": "^0.1.0",
     "rev-hash": "^2.0.0"

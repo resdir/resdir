@@ -4,6 +4,8 @@ import tempDir from 'temp-dir';
 import {Resource} from 'run-core';
 import {load, save} from '@resdir/file-manager';
 
+jest.setTimeout(10 * 1000);
+
 const CODE = `
 import {format} from 'util';
 
@@ -31,7 +33,6 @@ describe('js/transpiler', () => {
 
     const resourceFile = join(directory, '@resource.json');
     const definition = {
-      id: 'resdir/js-esnext-transpiler-person-test',
       transpiler: {
         '@import': resolve(__dirname, '../../..')
       }

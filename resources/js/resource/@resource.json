@@ -4,7 +4,7 @@
     "./"
   ],
   "id": "js/resource",
-  "version": "0.1.38",
+  "version": "0.1.39",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -15,7 +15,7 @@
     "./dist"
   ],
   "dependencies": {
-    "fs-extra": "^5.0.0",
+    "fs-extra": "^6.0.1",
     "@resdir/gitignore-manager": "^0.1.0"
   },
   "@unpublishable": {
