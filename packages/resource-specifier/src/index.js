@@ -51,3 +51,7 @@ export function stringifyResourceSpecifier({identifier, versionRange, location})
 
   return specifier;
 }
+
+export function isResourceSpecifier(string) {
+  return string.startsWith('.') || string.includes('/') || isAbsolute(string);
+}
