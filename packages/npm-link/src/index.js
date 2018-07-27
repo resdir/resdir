@@ -26,7 +26,7 @@ export function run() {
   }
 
   let packageNames;
-  const packageName = process.argv[2];
+  const packageName = argv._[2];
   if (packageName) {
     packageNames = [packageName];
   } else {
