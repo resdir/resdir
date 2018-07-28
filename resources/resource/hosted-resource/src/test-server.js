@@ -46,7 +46,11 @@ export default Resource => ({
 
       const jsonRPCHandler = await this.getJSONRPCHandler(environment);
 
-      if (request.method === 'invoke') {
+      if (request.method === 'getMethods') {
+        const message =
+          formatBold('→ ') + formatBold(formatCode('<getMethods>', {addBackticks: false}));
+        print(message);
+      } else if (request.method === 'invoke') {
         const name = formatBold(formatCode(request.params.name, {addBackticks: false}));
         const input = formatValue(request.params.input, {multiline: false});
         const env = formatValue(request.params.environment, {multiline: false});
@@ -71,6 +75,8 @@ export default Resource => ({
         if (!isEmpty(response.error.data)) {
           message += ' ' + formatValue(response.error.data, {multiline: false});
         }
+      } else if (request.method === 'getMethods') {
+        message += formatValue(response.result, {multiline: false});
       } else if (request.method === 'invoke') {
         const output = response.result && response.result.output;
         message += formatValue(output, {multiline: false});
