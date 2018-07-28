@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/remote-resource-json-rpc-handler",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "Handle remote resources (using JSON-RPC 2.0)",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",
