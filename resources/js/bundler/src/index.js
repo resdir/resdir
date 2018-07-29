@@ -97,7 +97,11 @@ export default () => ({
             plugins.push(uglify({keep_fnames: true}, minify)); // eslint-disable-line camelcase
           }
 
-          const external = this.external || [];
+          const external = [];
+
+          if (this.external) {
+            external.push(...this.external);
+          }
 
           if (this.globals) {
             external.push(...Object.keys(this.globals));
@@ -152,7 +156,7 @@ export default () => ({
           }
           const result = await bundle.generate({format, name: this.name, globals: this.globals});
 
-          const isDifferent = !await isFileEqual(outputFile, result.code);
+          const isDifferent = !(await isFileEqual(outputFile, result.code));
           if (isDifferent) {
             await writeFile(outputFile, result.code);
           }
@@ -199,7 +203,7 @@ export default () => ({
   async _completeReinstallDependencies(_environment) {
     const directory = this.$getCurrentDirectory();
 
-    if (!await pathExists(join(directory, 'node_modules.original'))) {
+    if (!(await pathExists(join(directory, 'node_modules.original')))) {
       return;
     }
 
@@ -239,7 +243,7 @@ export default () => ({
 });
 
 async function isFileEqual(file, content) {
-  if (!await pathExists(file)) {
+  if (!(await pathExists(file))) {
     return false;
   }
 
