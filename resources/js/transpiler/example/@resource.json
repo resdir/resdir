@@ -1,12 +1,14 @@
 {
   "@import": "js/resource#^0.1.0",
   "dependencies": {
+    "lodash": "^4.17.10",
     "sleep-promise": "^2.0.0"
   },
   "directoryTranspiler": {
     "@import": "..",
     "source": "./src",
     "destination": "./dist",
+    "format": "esm",
     "generateInlineSourceMaps": false,
     "transpilationOccurred": {
       "@type": "method",

@@ -1,11 +1,12 @@
 import {format} from 'util';
+import {upperFirst} from 'lodash';
 import sleep from 'sleep-promise';
 
 class Base {
   async formatGreeting(target = 'Universe') {
     console.log('<Base>');
     await sleep(1000);
-    return format('Hello, %s!', target);
+    return format('Hello, %s!', upperFirst(target));
   }
 }
 

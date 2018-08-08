@@ -7,7 +7,11 @@
   "license": "MIT",
   "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
-    "lodash": "^4.17.5"
+    "lodash": "^4.17.5",
+    "radium-starter": {
+      "version": "^0.11.4",
+      "type": "development"
+    }
   },
   "cjsTranspiler": {
     "transformJSX": true

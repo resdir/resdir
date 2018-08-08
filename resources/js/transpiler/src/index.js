@@ -9,7 +9,6 @@ import GitIgnore from '@resdir/gitignore-manager';
 import {createClientError} from '@resdir/error';
 
 const babelPresetEnv = require.resolve('@babel/preset-env');
-const babelPresetStage3 = require.resolve('@babel/preset-stage-3');
 const babelPresetReact = require.resolve('@babel/preset-react');
 const babelPluginClassProperties = require.resolve('@babel/plugin-proposal-class-properties');
 const babelPluginClasses = require.resolve('@babel/plugin-transform-classes');
@@ -143,10 +142,7 @@ export default () => ({
     }
 
     const modules = this.format === 'cjs' ? 'commonjs' : false;
-    const presets = [
-      [babelPresetStage3, {loose: true}],
-      [babelPresetEnv, {targets: this.targets, loose: true, modules}]
-    ];
+    const presets = [[babelPresetEnv, {targets: this.targets, loose: true, modules}]];
     if (this.transformJSX) {
       presets.unshift([babelPresetReact, {pragma: this.jsxPragma}]);
     }
