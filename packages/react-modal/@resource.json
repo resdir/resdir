@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/react-modal",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Modal dialog component for React (using Radium and Radium Starter)",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",

@@ -139,6 +139,8 @@ class ModalComponent extends React.Component {
         {(t, s) => {
           const {modal} = this.props;
 
+          const attrs = modal.getAttributes();
+
           const modalStyle = [
             s.showIf(modal.getIsVisible()),
             {
@@ -158,14 +160,17 @@ class ModalComponent extends React.Component {
             zIndex: 20000
           };
 
+          const width = attrs.width || 512;
+          const padding = attrs.padding || '2rem';
+
           const dialogStyle = [
             {
-              width: '512px',
+              width: width + 'px',
               position: 'fixed',
               left: '50%',
               top: '128px',
-              marginLeft: '-256px',
-              padding: '2rem',
+              marginLeft: -width / 2 + 'px',
+              padding,
               backgroundColor: t.backgroundColor,
               overflow: 'hidden',
               zIndex: 20001,
@@ -187,54 +192,59 @@ class ModalComponent extends React.Component {
             setTimeout(() => this.forceUpdate(), 50);
           }
 
-          const attrs = modal.getAttributes();
-          const children = [];
+          let children;
 
-          if (attrs.title) {
-            children.push(<h2
-              key="title"
-              style={[
-                s.regular,
-                s.secondaryTextColor,
-                s.minimumLineHeight,
-                {marginTop: '-0.25rem', marginBottom: '2rem'}
-              ]}
-            >
-              {attrs.title}
-            </h2>);
-          }
+          if (attrs.render) {
+            children = attrs.render({close: attrs._onClose});
+          } else {
+            children = [];
 
-          if (attrs.message) {
-            let element;
-            if (Object.prototype.hasOwnProperty.call(attrs.message, '__html')) {
-              element = <div key="message" dangerouslySetInnerHTML={attrs.message} />; // eslint-disable-line react/no-danger
-            } else {
-              element = (
-                <div key="message" style={{whiteSpace: 'pre-line'}}>
-                  {attrs.message}
-                </div>
-              );
+            if (attrs.title) {
+              children.push(<h2
+                key="title"
+                style={[
+                  s.regular,
+                  s.secondaryTextColor,
+                  s.minimumLineHeight,
+                  {marginTop: '-0.25rem', marginBottom: '2rem'}
+                ]}
+              >
+                {attrs.title}
+              </h2>);
             }
-            children.push(element);
-          }
 
-          if (attrs.buttons && attrs.buttons.length) {
-            const buttons = [];
-            for (let i = 0; i < attrs.buttons.length; i++) {
-              const button = attrs.buttons[i];
-              const props = {key: i};
-              if (button.default) {
-                props.rsAccent = true;
+            if (attrs.message) {
+              let element;
+              if (Object.prototype.hasOwnProperty.call(attrs.message, '__html')) {
+                element = <div key="message" dangerouslySetInnerHTML={attrs.message} />; // eslint-disable-line react/no-danger
+              } else {
+                element = (
+                  <div key="message" style={{whiteSpace: 'pre-line'}}>
+                    {attrs.message}
+                  </div>
+                );
               }
-              props.onClick = () => attrs._onClose(button.value);
-              if (i > 0) {
-                props.style = {marginLeft: '.5rem'};
-              }
-              buttons.push(<Button {...props}>{button.title}</Button>);
+              children.push(element);
             }
-            children.push(<div key="buttons" style={{marginTop: '2rem'}}>
-              {buttons}
-            </div>);
+
+            if (attrs.buttons && attrs.buttons.length) {
+              const buttons = [];
+              for (let i = 0; i < attrs.buttons.length; i++) {
+                const button = attrs.buttons[i];
+                const props = {key: i};
+                if (button.default) {
+                  props.rsAccent = true;
+                }
+                props.onClick = () => attrs._onClose(button.value);
+                if (i > 0) {
+                  props.style = {marginLeft: '.5rem'};
+                }
+                buttons.push(<Button {...props}>{button.title}</Button>);
+              }
+              children.push(<div key="buttons" style={{marginTop: '2rem'}}>
+                {buttons}
+              </div>);
+            }
           }
 
           return (
