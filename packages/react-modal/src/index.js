@@ -150,39 +150,60 @@ class ModalComponent extends React.Component {
           ];
 
           const overlayStyle = {
-            backgroundColor: t.overlayBackgroundColor,
-            opacity: 0.66,
             position: 'fixed',
             top: 0,
             left: 0,
             bottom: 0,
             right: 0,
-            zIndex: 20000
+            zIndex: 20000,
+            backgroundColor: t.overlayBackgroundColor,
+            opacity: 0.66
           };
 
-          const width = attrs.width || 512;
-          const padding = attrs.padding || '2rem';
+          const wrapperStyle =
+            attrs.position === 'center' ?
+              {
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                bottom: 0,
+                right: 0,
+                zIndex: 20001,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingTop: '1.5rem',
+                paddingBottom: '1.5rem'
+              } :
+              {
+                position: 'fixed',
+                top: '125px',
+                left: 0,
+                bottom: 0,
+                right: 0,
+                zIndex: 20001,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center'
+              };
 
-          const dialogStyle = [
-            {
-              width: width + 'px',
-              position: 'fixed',
-              left: '50%',
-              top: '128px',
-              marginLeft: -width / 2 + 'px',
-              padding,
-              backgroundColor: t.backgroundColor,
-              overflow: 'hidden',
-              zIndex: 20001,
-              [`@media (max-width: ${t.smallBreakpoint})`]: {
-                width: '300px',
-                marginLeft: '-150px',
-                padding: '1rem'
-              }
-            },
-            s.border,
-            s.rounded
-          ];
+          const dialogStyle = {
+            flex: attrs.maxHeight ? '1' : undefined,
+            display: 'flex',
+            flexDirection: 'column',
+            width: attrs.width || '512px',
+            maxHeight: attrs.maxHeight || undefined,
+            padding: attrs.padding || '1.5rem',
+            backgroundColor: t.backgroundColor,
+            opacity: 1,
+            ...s.border,
+            ...s.rounded,
+            [`@media (max-width: ${t.smallBreakpoint})`]: {
+              width: '300px',
+              padding: '1rem'
+            }
+          };
 
           const nextStyle = {
             opacity: modal.getIsVisible() ? 1 : 0
@@ -200,17 +221,17 @@ class ModalComponent extends React.Component {
             children = [];
 
             if (attrs.title) {
-              children.push(<h2
+              children.push(<h3
                 key="title"
                 style={[
                   s.regular,
                   s.secondaryTextColor,
                   s.minimumLineHeight,
-                  {marginTop: '-0.25rem', marginBottom: '2rem'}
+                  {marginTop: '-0.25rem', marginBottom: '1.5rem'}
                 ]}
               >
                 {attrs.title}
-              </h2>);
+              </h3>);
             }
 
             if (attrs.message) {
@@ -233,7 +254,7 @@ class ModalComponent extends React.Component {
                 const button = attrs.buttons[i];
                 const props = {key: i};
                 if (button.default) {
-                  props.rsAccent = true;
+                  props.rsPrimary = true;
                 }
                 props.onClick = () => attrs._onClose(button.value);
                 if (i > 0) {
@@ -241,7 +262,10 @@ class ModalComponent extends React.Component {
                 }
                 buttons.push(<Button {...props}>{button.title}</Button>);
               }
-              children.push(<div key="buttons" style={{marginTop: '2rem'}}>
+              children.push(<div
+                key="buttons"
+                style={{display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem'}}
+              >
                 {buttons}
               </div>);
             }
@@ -250,7 +274,9 @@ class ModalComponent extends React.Component {
           return (
             <div style={modalStyle}>
               <div style={overlayStyle} />
-              <div style={dialogStyle}>{children}</div>
+              <div style={wrapperStyle}>
+                <div style={dialogStyle}>{children}</div>
+              </div>
             </div>
           );
         }}
