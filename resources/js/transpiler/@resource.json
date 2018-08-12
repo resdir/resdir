@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/transpiler",
-  "version": "0.1.20",
+  "version": "0.1.21",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -19,6 +19,7 @@
     "babel-plugin-lodash": "^3.3.2",
     "@babel/plugin-proposal-class-properties": "^7.0.0-beta",
     "@babel/plugin-proposal-decorators": "^7.0.0-beta",
+    "@babel/plugin-proposal-optional-chaining": "^7.0.0-rc.1",
     "@babel/plugin-transform-classes": "^7.0.0-beta",
     "@babel/preset-env": "^7.0.0-beta",
     "@babel/preset-react": "^7.0.0-beta",

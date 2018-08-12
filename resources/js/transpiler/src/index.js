@@ -13,6 +13,7 @@ const babelPresetReact = require.resolve('@babel/preset-react');
 const babelPluginClassProperties = require.resolve('@babel/plugin-proposal-class-properties');
 const babelPluginClasses = require.resolve('@babel/plugin-transform-classes');
 const babelPluginDecorators = require.resolve('@babel/plugin-proposal-decorators');
+const babelPluginOptionalChaining = require.resolve('@babel/plugin-proposal-optional-chaining');
 const babelPluginLodash = require.resolve('babel-plugin-lodash');
 
 export default () => ({
@@ -129,6 +130,7 @@ export default () => ({
     const plugins = [
       [babelPluginDecorators, {legacy: true}],
       [babelPluginClassProperties, {loose: true}],
+      babelPluginOptionalChaining,
       babelPluginLodash
     ];
 
