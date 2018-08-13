@@ -258,13 +258,17 @@ class ModalComponent extends React.Component {
                 }
                 props.onClick = () => attrs._onClose(button.value);
                 if (i > 0) {
-                  props.style = {marginLeft: '.5rem'};
+                  props.style = {marginRight: '.75rem'};
                 }
                 buttons.push(<Button {...props}>{button.title}</Button>);
               }
               children.push(<div
                 key="buttons"
-                style={{display: 'flex', justifyContent: 'flex-end', marginTop: '1.5rem'}}
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row-reverse',
+                  marginTop: '1.5rem'
+                }}
               >
                 {buttons}
               </div>);
