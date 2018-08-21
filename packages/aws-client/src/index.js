@@ -1,5 +1,6 @@
 export * from './acm';
 export * from './api-gateway';
+export * from './batch';
 export * from './cloud-front';
 export * from './dynamodb';
 export * from './iam';
