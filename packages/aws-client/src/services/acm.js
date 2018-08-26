@@ -1,19 +1,14 @@
-import {pick} from 'lodash';
 import ACMClient from 'aws-sdk/clients/acm';
 import debugModule from 'debug';
+
+import buildAWSConfig from '../config';
 
 const debug = debugModule('resdir:aws-client:acm');
 
 export class ACM {
-  constructor(config = {}) {
-    const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {
-      ...pick(config, keys),
-      ...pick(config.acm, keys),
-      apiVersion: '2015-12-08',
-      signatureVersion: 'v4'
-    };
-    this.client = new ACMClient(config);
+  constructor(config) {
+    const awsConfig = buildAWSConfig(config, {service: 'acm', apiVersion: '2015-12-08'});
+    this.client = new ACMClient(awsConfig);
   }
 
   addTagsToCertificate(params) {

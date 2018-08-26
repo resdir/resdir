@@ -1,19 +1,14 @@
-import {pick} from 'lodash';
 import Route53Client from 'aws-sdk/clients/route53';
 import debugModule from 'debug';
+
+import buildAWSConfig from '../config';
 
 const debug = debugModule('resdir:aws-client:route-53');
 
 export class Route53 {
-  constructor(config = {}) {
-    const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {
-      ...pick(config, keys),
-      ...pick(config.route53, keys),
-      apiVersion: '2013-04-01',
-      signatureVersion: 'v4'
-    };
-    this.client = new Route53Client(config);
+  constructor(config) {
+    const awsConfig = buildAWSConfig(config, {service: 'route53', apiVersion: '2013-04-01'});
+    this.client = new Route53Client(awsConfig);
   }
 
   changeResourceRecordSets(params) {

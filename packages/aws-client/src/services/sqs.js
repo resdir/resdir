@@ -1,19 +1,14 @@
-import {pick} from 'lodash';
 import SQSClient from 'aws-sdk/clients/sqs';
 import debugModule from 'debug';
+
+import buildAWSConfig from '../config';
 
 const debug = debugModule('resdir:aws-client:sqs');
 
 export class SQS {
-  constructor(config = {}) {
-    const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {
-      ...pick(config, keys),
-      ...pick(config.sqs, keys),
-      apiVersion: '2012-11-05',
-      signatureVersion: 'v4'
-    };
-    this.client = new SQSClient(config);
+  constructor(config) {
+    const awsConfig = buildAWSConfig(config, {service: 'sqs', apiVersion: '2012-11-05'});
+    this.client = new SQSClient(awsConfig);
   }
 }
 

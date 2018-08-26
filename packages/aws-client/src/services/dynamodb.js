@@ -1,20 +1,15 @@
-import {pick} from 'lodash';
 import DynamoDBClient from 'aws-sdk/clients/dynamodb';
 const {DocumentClient} = DynamoDBClient;
 import debugModule from 'debug';
 
+import buildAWSConfig from '../config';
+
 const debug = debugModule('resdir:aws-client:dynamodb');
 
 export class DynamoDB {
-  constructor(config = {}) {
-    const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {
-      ...pick(config, keys),
-      ...pick(config.dynamoDB, keys),
-      apiVersion: '2012-08-10',
-      signatureVersion: 'v4'
-    };
-    this.client = new DocumentClient(config);
+  constructor(config) {
+    const awsConfig = buildAWSConfig(config, {service: 'dynamoDB', apiVersion: '2012-08-10'});
+    this.client = new DocumentClient(awsConfig);
   }
 
   batchGet(params) {

@@ -1,19 +1,14 @@
-import {pick} from 'lodash';
 import BatchClient from 'aws-sdk/clients/batch';
 import debugModule from 'debug';
+
+import buildAWSConfig from '../config';
 
 const debug = debugModule('resdir:aws-client:batch');
 
 export class Batch {
-  constructor(config = {}) {
-    const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {
-      ...pick(config, keys),
-      ...pick(config.batch, keys),
-      apiVersion: '2016-08-10',
-      signatureVersion: 'v4'
-    };
-    this.client = new BatchClient(config);
+  constructor(config) {
+    const awsConfig = buildAWSConfig(config, {service: 'batch', apiVersion: '2016-08-10'});
+    this.client = new BatchClient(awsConfig);
   }
 }
 

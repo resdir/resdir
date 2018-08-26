@@ -1,7 +1,8 @@
-import {pick} from 'lodash';
 import S3Client from 'aws-sdk/clients/s3';
 import {formatString} from '@resdir/console';
 import debugModule from 'debug';
+
+import buildAWSConfig from '../config';
 
 const debug = debugModule('resdir:aws-client:s3');
 
@@ -25,15 +26,9 @@ const S3_REGIONS = {
 };
 
 export class S3 {
-  constructor(config = {}) {
-    const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {
-      ...pick(config, keys),
-      ...pick(config.s3, keys),
-      apiVersion: '2006-03-01',
-      signatureVersion: 'v4'
-    };
-    this.client = new S3Client(config);
+  constructor(config) {
+    const awsConfig = buildAWSConfig(config, {service: 's3', apiVersion: '2006-03-01'});
+    this.client = new S3Client(awsConfig);
   }
 
   copyObject(params) {

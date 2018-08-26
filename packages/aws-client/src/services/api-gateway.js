@@ -1,19 +1,14 @@
-import {pick} from 'lodash';
 import APIGatewayClient from 'aws-sdk/clients/apigateway';
 import debugModule from 'debug';
+
+import buildAWSConfig from '../config';
 
 const debug = debugModule('resdir:aws-client:api-gateway');
 
 export class APIGateway {
-  constructor(config = {}) {
-    const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {
-      ...pick(config, keys),
-      ...pick(config.apiGateway, keys),
-      apiVersion: '2015-07-09',
-      signatureVersion: 'v4'
-    };
-    this.client = new APIGatewayClient(config);
+  constructor(config) {
+    const awsConfig = buildAWSConfig(config, {service: 'apiGateway', apiVersion: '2015-07-09'});
+    this.client = new APIGatewayClient(awsConfig);
   }
 
   createBasePathMapping(params) {

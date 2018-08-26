@@ -1,19 +1,14 @@
-import {pick} from 'lodash';
 import LambdaClient from 'aws-sdk/clients/lambda';
 import debugModule from 'debug';
+
+import buildAWSConfig from '../config';
 
 const debug = debugModule('resdir:aws-client:lambda');
 
 export class Lambda {
-  constructor(config = {}) {
-    const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {
-      ...pick(config, keys),
-      ...pick(config.lambda, keys),
-      apiVersion: '2015-03-31',
-      signatureVersion: 'v4'
-    };
-    this.client = new LambdaClient(config);
+  constructor(config) {
+    const awsConfig = buildAWSConfig(config, {service: 'lambda', apiVersion: '2015-03-31'});
+    this.client = new LambdaClient(awsConfig);
   }
 
   addPermission(params) {

@@ -1,19 +1,14 @@
-import {pick} from 'lodash';
 import CloudFrontClient from 'aws-sdk/clients/cloudfront';
 import debugModule from 'debug';
+
+import buildAWSConfig from '../config';
 
 const debug = debugModule('resdir:aws-client:cloud-front');
 
 export class CloudFront {
-  constructor(config = {}) {
-    const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {
-      ...pick(config, keys),
-      ...pick(config.cloudFront, keys),
-      apiVersion: '2017-03-25',
-      signatureVersion: 'v4'
-    };
-    this.client = new CloudFrontClient(config);
+  constructor(config) {
+    const awsConfig = buildAWSConfig(config, {service: 'cloudFront', apiVersion: '2017-03-25'});
+    this.client = new CloudFrontClient(awsConfig);
   }
 
   createDistribution(params) {

@@ -1,19 +1,14 @@
-import {pick} from 'lodash';
 import IAMClient from 'aws-sdk/clients/iam';
 import debugModule from 'debug';
+
+import buildAWSConfig from '../config';
 
 const debug = debugModule('resdir:aws-client:iam');
 
 export class IAM {
-  constructor(config = {}) {
-    const keys = ['accessKeyId', 'secretAccessKey', 'region'];
-    config = {
-      ...pick(config, keys),
-      ...pick(config.iam, keys),
-      apiVersion: '2010-05-08',
-      signatureVersion: 'v4'
-    };
-    this.client = new IAMClient(config);
+  constructor(config) {
+    const awsConfig = buildAWSConfig(config, {service: 'iam', apiVersion: '2010-05-08'});
+    this.client = new IAMClient(awsConfig);
   }
 
   createRole(params) {
