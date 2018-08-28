@@ -16,6 +16,11 @@ export class IAM {
     return this.client.createRole(params).promise();
   }
 
+  getAccessKeyLastUsed(params) {
+    debug('getAccessKeyLastUsed(%o)', params);
+    return this.client.getAccessKeyLastUsed(params).promise();
+  }
+
   getRole(params) {
     debug('getRole(%o)', params);
     return this.client.getRole(params).promise();
