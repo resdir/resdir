@@ -135,7 +135,10 @@ export async function fetch(url, options = {}) {
     const contentType = (result.headers['content-type'] || '').toLowerCase();
     if (
       options.json &&
-      (contentType === 'application/json' || contentType === 'application/json; charset=utf-8')
+      (contentType === 'application/json' ||
+        contentType === 'application/json; charset=utf-8' ||
+        (url.startsWith('https://registry.npmjs.org/') &&
+          contentType === 'application/octet-stream')) // Fix an npm registry issue
     ) {
       result.body = JSON.parse(result.body.toString());
     } else if (contentType === 'text/plain' || contentType === 'text/plain; charset=utf-8') {
