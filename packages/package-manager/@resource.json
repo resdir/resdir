@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/package-manager",
-  "version": "0.1.31",
+  "version": "0.1.32",
   "description": "Abstract Node package managers",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",
@@ -16,7 +16,7 @@
     "@resdir/console": "^0.1.0",
     "@resdir/error": "^0.1.0",
     "@resdir/file-manager": "^0.1.0",
-    "@resdir/http-client": "^0.2.0",
+    "@resdir/http-client": "^0.2.20",
     "@resdir/local-cache": "^0.1.0",
     "@resdir/process-manager": "^0.1.0",
     "supi": "^0.22.1"
