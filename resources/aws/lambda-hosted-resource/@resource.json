@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "aws/lambda-hosted-resource",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -22,7 +22,7 @@
     "lodash": "^4.17.4",
     "recursive-readdir": "^2.2.2",
     "@resdir/archive-manager": "^0.1.4",
-    "@resdir/aws-client": "^0.1.1",
+    "@resdir/aws-client": "^0.1.25",
     "@resdir/aws-helpers": "^0.1.0",
     "@resdir/console": "^0.1.16",
     "@resdir/error": "^0.1.0",
@@ -61,6 +61,10 @@
     },
     "aws": {
       "@description": "Your AWS configuration",
+      "profile": {
+        "@type": "string",
+        "@description": "Your AWS profile"
+      },
       "accessKeyId": {
         "@type": "string",
         "@description": "Your AWS access key ID"
