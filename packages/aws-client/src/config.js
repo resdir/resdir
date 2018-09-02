@@ -1,4 +1,3 @@
-import {pick} from 'lodash';
 import AWS from 'aws-sdk';
 
 export function buildAWSConfig(config = {}, {service, apiVersion, signatureVersion = 'v4'}) {
@@ -18,6 +17,17 @@ export function buildAWSConfig(config = {}, {service, apiVersion, signatureVersi
   };
 
   return awsConfig;
+}
+
+function pick(object = {}, keys) {
+  const result = {};
+  for (const key of keys) {
+    const value = object[key];
+    if (value !== undefined) {
+      result[key] = value;
+    }
+  }
+  return result;
 }
 
 export default buildAWSConfig;
