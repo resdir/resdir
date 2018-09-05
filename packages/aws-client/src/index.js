@@ -7,5 +7,6 @@ export * from './services/iam';
 export * from './services/lambda';
 export * from './services/route-53';
 export * from './services/s3';
+export * from './services/secrets-manager';
 export * from './services/ses';
 export * from './services/sqs';
