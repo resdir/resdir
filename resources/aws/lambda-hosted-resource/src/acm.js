@@ -66,6 +66,7 @@ export default () => ({
   getACMClient() {
     if (!this._acmClient) {
       this._acmClient = new ACM({
+        profile: this.aws.profile,
         accessKeyId: this.aws.accessKeyId,
         secretAccessKey: this.aws.secretAccessKey,
         region: this.getACMRegion()
