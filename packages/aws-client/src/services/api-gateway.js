@@ -76,6 +76,11 @@ export class APIGateway {
     return this.client.getStage(params).promise();
   }
 
+  getTags(params) {
+    debug('getTags(%o)', params);
+    return this.client.getTags(params).promise();
+  }
+
   putMethod(params) {
     debug('putMethod(%o)', params);
     return this.client.putMethod(params).promise();
@@ -94,6 +99,11 @@ export class APIGateway {
   putIntegrationResponse(params) {
     debug('putIntegrationResponse(%o)', params);
     return this.client.putIntegrationResponse(params).promise();
+  }
+
+  tagResource(params) {
+    debug('tagResource(%o)', params);
+    return this.client.tagResource(params).promise();
   }
 
   updateDomainName(params) {
