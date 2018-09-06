@@ -62,6 +62,10 @@ export default () => ({
           currentWebsiteConfiguration = pick(result, ['IndexDocument']);
         }
 
+        if (hasBeenCreated) {
+          await s3.waitFor('bucketExists', {Bucket: bucketName});
+        }
+
         if (!isEqual(currentWebsiteConfiguration, websiteConfiguration)) {
           if (!hasBeenCreated) {
             progress.setMessage('Updating S3 bucket...');
@@ -71,10 +75,6 @@ export default () => ({
             Bucket: bucketName,
             WebsiteConfiguration: websiteConfiguration
           });
-        }
-
-        if (hasBeenCreated) {
-          await s3.waitFor('bucketExists', {Bucket: bucketName});
         }
       },
       {
