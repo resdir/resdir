@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "aws/lambda-hosted-resource",
-  "version": "0.1.41",
+  "version": "0.1.42",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -38,6 +38,11 @@
     "deploy": {
       "@type": "method",
       "@description": "Deploy your resource to AWS Lambda"
+    },
+    "executionRole": {
+      "@type": "string",
+      "@description": "The name of the IAM role that Lambda assumes when it executes your resource",
+      "@isOptional": true
     },
     "memorySize": {
       "@description": "The maximum amount of memory, in MB, allocated to your resource",

@@ -3,10 +3,10 @@ import {IAM} from '@resdir/aws-client';
 import sleep from 'sleep-promise';
 import {createClientError} from '@resdir/error';
 
-const IAM_ROLE_NAME = 'aws-hosted-resource-lambda-role-v1';
-const IAM_POLICY_NAME = 'basic-lambda-policy';
+const DEFAULT_IAM_ROLE_NAME = 'aws-hosted-resource-lambda-role-v1';
+const DEFAULT_IAM_POLICY_NAME = 'basic-lambda-policy';
 
-const IAM_ASSUME_ROLE_POLICY_DOCUMENT = {
+const DEFAULT_IAM_ASSUME_ROLE_POLICY_DOCUMENT = {
   Version: '2012-10-17',
   Statement: [
     {
@@ -19,7 +19,7 @@ const IAM_ASSUME_ROLE_POLICY_DOCUMENT = {
   ]
 };
 
-const IAM_POLICY_DOCUMENT = {
+const DEFAULT_IAM_POLICY_DOCUMENT = {
   Version: '2012-10-17',
   Statement: [
     {
@@ -56,7 +56,7 @@ export default () => ({
     if (!this._iamLambdaRole) {
       const iam = this.getIAMClient();
       try {
-        const result = await iam.getRole({RoleName: IAM_ROLE_NAME});
+        const result = await iam.getRole({RoleName: this.getIAMRoleName()});
         this._iamLambdaRole = {arn: result.Role.Arn};
       } catch (err) {
         if (err.code !== 'NoSuchEntity') {
@@ -75,22 +75,32 @@ export default () => ({
   async createIAMLambdaRole() {
     const iam = this.getIAMClient();
 
-    const assumeRolePolicyDocument = JSON.stringify(IAM_ASSUME_ROLE_POLICY_DOCUMENT, undefined, 2);
-    const {Role: {Arn: arn}} = await iam.createRole({
-      RoleName: IAM_ROLE_NAME,
+    const assumeRolePolicyDocument = JSON.stringify(
+      DEFAULT_IAM_ASSUME_ROLE_POLICY_DOCUMENT,
+      undefined,
+      2
+    );
+    const {
+      Role: {Arn: arn}
+    } = await iam.createRole({
+      RoleName: this.getIAMRoleName(),
       AssumeRolePolicyDocument: assumeRolePolicyDocument
     });
 
-    const policyDocument = JSON.stringify(IAM_POLICY_DOCUMENT, undefined, 2);
+    const policyDocument = JSON.stringify(DEFAULT_IAM_POLICY_DOCUMENT, undefined, 2);
     await iam.putRolePolicy({
-      RoleName: IAM_ROLE_NAME,
-      PolicyName: IAM_POLICY_NAME,
+      RoleName: this.getIAMRoleName(),
+      PolicyName: DEFAULT_IAM_POLICY_NAME,
       PolicyDocument: policyDocument
     });
 
     await sleep(3000); // Wait 3 secs so AWS can replicate the role in all regions
 
     this._iamLambdaRole = {arn};
+  },
+
+  getIAMRoleName() {
+    return this.executionRole || DEFAULT_IAM_ROLE_NAME;
   },
 
   getIAMClient() {

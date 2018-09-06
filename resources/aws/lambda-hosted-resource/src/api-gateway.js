@@ -2,6 +2,7 @@ import {isEqual} from 'lodash';
 import {task, print, formatString} from '@resdir/console';
 import {APIGateway} from '@resdir/aws-client';
 import {createClientError} from '@resdir/error';
+import sleep from 'sleep-promise';
 
 const STAGE_NAME = 'main';
 
@@ -14,6 +15,8 @@ export default () => ({
           progress.setMessage('Creating API Gateway...');
           progress.setOutro('API Gateway created');
           await this.createAPIGateway();
+          await sleep(5000); // Have a short nap to make tagging actually works
+          await this.setAPIGatewayTags();
           await this.allowLambdaFunctionInvocationFromAPIGateway();
         } else {
           await this.checkAPIGatewayTags();
@@ -55,6 +58,8 @@ export default () => ({
   async createAPIGateway() {
     const apiGateway = this.getAPIGatewayClient();
 
+    const region = this.getAPIGatewayRegion();
+
     const {id: restApiId} = await apiGateway.createRestApi({
       name: this.getAPIGatewayName(),
       endpointConfiguration: {types: [this.getNormalizedEndpointType()]}
@@ -82,7 +87,6 @@ export default () => ({
       }
     });
 
-    const region = this.getAPIGatewayRegion();
     const lambdaFunction = await this.getLambdaFunction();
     await apiGateway.putIntegration({
       restApiId,
@@ -161,18 +165,34 @@ export default () => ({
       restApiId,
       deploymentId,
       stageName: STAGE_NAME,
-      tags: {'managed-by': this.MANAGER_IDENTIFIER}
+      tags: {'managed-by': this.MANAGER_IDENTIFIER} // This is actually not working (2018-09-06)
     });
 
     this._apiGateway = {id: restApiId};
   },
 
+  async setAPIGatewayTags() {
+    const apiGateway = this.getAPIGatewayClient();
+    const stageARN = await this.getAPIGatewayStageARN();
+    await apiGateway.tagResource({
+      resourceArn: stageARN,
+      tags: {'managed-by': this.MANAGER_IDENTIFIER}
+    });
+  },
+
   async checkAPIGatewayTags() {
-    const stage = await this.getAPIGatewayStage({throwIfNotFound: false});
-    const tags = stage && stage.tags;
+    const apiGateway = this.getAPIGatewayClient();
+    const stageARN = await this.getAPIGatewayStageARN();
+    const {tags} = await apiGateway.getTags({resourceArn: stageARN});
     if (!isEqual(tags, {'managed-by': this.MANAGER_IDENTIFIER})) {
       throw createClientError(`Can't manage an API Gateway not originally created by ${formatString(this.RESOURCE_ID)} (name: ${formatString(this.getAPIGatewayName())})`);
     }
+  },
+
+  async getAPIGatewayStageARN() {
+    const api = await this.getAPIGateway();
+    const region = this.getAPIGatewayRegion();
+    return `arn:aws:apigateway:${region}::/restapis/${api.id}/stages/${STAGE_NAME}`;
   },
 
   async checkAPIGatewayEndpointType() {
