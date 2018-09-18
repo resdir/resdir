@@ -1,0 +1,33 @@
+{
+  "@import": [
+    "resdir/resource#^0.1.0",
+    "1place/js-resource#^0.1.0"
+  ],
+  "id": "shell/bash",
+  "version": "0.1.0",
+  "isPublic": true,
+  "authors": [
+    "Manuel Vila <hi@mvila.me>"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/resdir/resdir.git",
+  "files": [
+    "./dist"
+  ],
+  "@export": {
+    "@name": "Bash",
+    "@description": "A wrapper for Bash",
+    "@implementation": "./dist/cjs",
+    "run": {
+      "@type": "method",
+      "@description": "Run a command with Bash",
+      "@input": {
+        "command": {
+          "@type": "string",
+          "@description": "The command to run",
+          "@position": 0
+        }
+      }
+    }
+  }
+}
