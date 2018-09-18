@@ -14,6 +14,7 @@ import cors from '@koa/cors';
 import send from 'koa-send';
 import createError from 'http-errors';
 import isDirectory from 'is-directory';
+import notifier from 'node-notifier';
 import sleep from 'sleep-promise';
 
 export default () => ({
@@ -84,12 +85,15 @@ export default () => ({
     return server;
   },
 
-  async start(_input, environment) {
+  async start({notify}, environment) {
     const server = this.createServer(environment);
     server.listen(this.port);
     printSuccess(
       `Test server started ${formatPunctuation(`(`)}${formatURL(`http://localhost:${this.port}`)}${formatPunctuation(`)`)}`,
       environment
     );
+    if (notify) {
+      notifier.notify({title: 'Test server started', message: `http://localhost:${this.port}`});
+    }
   }
 });

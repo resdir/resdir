@@ -16,6 +16,7 @@ import Koa from 'koa';
 import jsonError from 'koa-json-error';
 import cors from '@koa/cors';
 import body from 'koa-json-body';
+import notifier from 'node-notifier';
 import sleep from 'sleep-promise';
 
 const CACHE_RESOURCE = true;
@@ -104,7 +105,7 @@ export default Resource => ({
     return this._jsonRPCHandler;
   },
 
-  async start(_input, environment) {
+  async start({notify}, environment) {
     if (CACHE_RESOURCE) {
       process.env.RESOURCE_IS_CACHED = '1'; // TODO: Remove this ugliness
     }
@@ -114,5 +115,8 @@ export default Resource => ({
       `Test server started ${formatPunctuation(`(`)}${formatURL(`http://localhost:${this.port}`)}${formatPunctuation(`)`)}`,
       environment
     );
+    if (notify) {
+      notifier.notify({title: 'Test server started', message: `http://localhost:${this.port}`});
+    }
   }
 });
