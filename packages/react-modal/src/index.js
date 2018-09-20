@@ -193,6 +193,7 @@ class ModalComponent extends React.Component {
             display: 'flex',
             flexDirection: 'column',
             width: attrs.width || '512px',
+            minHeight: 0, // https://stackoverflow.com/questions/28636832/firefox-overflow-y-not-working-with-nested-flexbox/28639686#28639686
             maxHeight: attrs.maxHeight || undefined,
             padding: attrs.padding || '1.5rem',
             backgroundColor: t.backgroundColor,
