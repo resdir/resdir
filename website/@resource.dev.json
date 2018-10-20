@@ -23,8 +23,8 @@
         "destination": "./bundle.js",
         "replacements": {
           "${STAGE}": "development",
-          "${RESDIR_REGISTRY_SERVER}": "http://registry.dev.resdir.com",
-          "${RUN_WEBSITE_URL}": "http://dev.run.tools"
+          "${RESDIR_REGISTRY_SERVER}": "http://localhost:9011",
+          "${RUN_WEBSITE_URL}": "http://localhost:9016"
         }
       },
       "./images"
