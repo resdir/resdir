@@ -1,32 +1,30 @@
 import {resolve, join, relative, dirname} from 'path';
 import {existsSync, readdirSync} from 'fs';
 import {removeSync, ensureSymlinkSync} from 'fs-extra';
+import {compact} from 'lodash';
 import {load} from '@resdir/file-manager';
 import isDirectory from 'is-directory';
 import minimist from 'minimist';
 
 export function run() {
-  const argv = minimist(process.argv, {
-    string: ['directory'],
-    alias: {
-      directory: ['dir', 'd']
-    }
-  });
+  const argv = minimist(process.argv);
 
   let currentDirectory = process.cwd();
-  if (argv.directory) {
-    currentDirectory = resolve(currentDirectory, argv.directory);
+
+  const directory = argv._[2];
+  if (directory) {
+    currentDirectory = resolve(currentDirectory, directory);
   }
 
   const config = loadConfig(currentDirectory);
 
   const modulesDirectory = join(currentDirectory, 'node_modules');
   if (!existsSync(modulesDirectory)) {
-    throw new Error('\'node_modules\' directory not found in the current directory');
+    throw new Error('\'node_modules\' directory not found');
   }
 
   let packageNames;
-  const packageName = argv._[2];
+  const packageName = argv._[3];
   if (packageName) {
     packageNames = [packageName];
   } else {
@@ -52,7 +50,17 @@ function loadConfig(directory) {
   if (existsSync(file)) {
     const config = load(file);
     const configDirectory = dirname(file);
-    config.directories = config.directories.map(directory => resolve(configDirectory, directory));
+    config.directories = config.directories.map(directory => {
+      const resolvedDirectory = resolve(configDirectory, directory);
+      if (existsSync(resolvedDirectory)) {
+        return resolvedDirectory;
+      }
+      console.warn(
+        `[WARNING] A directory specified in the config file doesn't exist: ${directory}`
+      );
+      return undefined;
+    });
+    config.directories = compact(config.directories);
     return config;
   }
 
