@@ -108,7 +108,7 @@ export class Modal {
 
   emitChange() {
     if (!this._changeListener) {
-      throw new Error(`Modal hasn't any registered listeners`);
+      throw new Error('Modal hasn\'t any registered listeners');
     }
     this._changeListener();
   }
@@ -222,17 +222,19 @@ class ModalComponent extends React.Component {
             children = [];
 
             if (attrs.title) {
-              children.push(<h3
-                key="title"
-                style={[
-                  s.regular,
-                  s.secondaryTextColor,
-                  s.minimumLineHeight,
-                  {marginTop: '-0.25rem', marginBottom: '1.5rem'}
-                ]}
-              >
-                {attrs.title}
-              </h3>);
+              children.push(
+                <h3
+                  key="title"
+                  style={[
+                    s.regular,
+                    s.secondaryTextColor,
+                    s.minimumLineHeight,
+                    {marginTop: '-0.25rem', marginBottom: '1.5rem'}
+                  ]}
+                >
+                  {attrs.title}
+                </h3>
+              );
             }
 
             if (attrs.message) {
@@ -263,16 +265,18 @@ class ModalComponent extends React.Component {
                 }
                 buttons.push(<Button {...props}>{button.title}</Button>);
               }
-              children.push(<div
-                key="buttons"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'row-reverse',
-                  marginTop: '1.5rem'
-                }}
-              >
-                {buttons}
-              </div>);
+              children.push(
+                <div
+                  key="buttons"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row-reverse',
+                    marginTop: '1.5rem'
+                  }}
+                >
+                  {buttons}
+                </div>
+              );
             }
           }
 

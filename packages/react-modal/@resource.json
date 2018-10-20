@@ -1,13 +1,14 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/react-modal",
-  "version": "0.1.11",
+  "version": "0.1.12",
   "description": "Modal dialog component for React (using Radium and Radium Starter)",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",
   "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "lodash": "^4.17.5",
+    "prop-types": "^15.6.2",
     "radium-starter": {
       "version": "^0.11.4",
       "type": "development"
