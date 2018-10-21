@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource#^0.1.0",
   "id": "js/npm-dependencies",
-  "version": "0.1.62",
+  "version": "0.1.63",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -23,7 +23,7 @@
         "@resdir/error": "^0.1.0",
         "@resdir/file-manager": "^0.1.0",
         "@resdir/gitignore-manager": "^0.1.0",
-        "@resdir/package-manager": "^0.1.30",
+        "@resdir/package-manager": "^0.1.32",
         "@resdir/version-range": "^0.1.0"
       }
     },
