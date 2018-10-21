@@ -8,7 +8,7 @@ export default () => ({
     const verboseEnvironment = await environment.$extend({'@verbose': true});
     await task(
       async () => {
-        environment = await environment.$extend({'@debug': true});
+        const debugEnvironment = await environment.$extend({'@debug': true});
 
         const directory = this.$getCurrentDirectory();
 
@@ -32,7 +32,7 @@ export default () => ({
           args.push('--testPathPattern=' + testPathPattern);
         }
         try {
-          await execute(command, args, {directory, commandName: 'jest'}, environment);
+          await execute(command, args, {directory, commandName: 'jest'}, debugEnvironment);
         } catch (err) {
           throw createClientError('Resource test failed');
         }

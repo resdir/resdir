@@ -45,8 +45,8 @@ export default Resource => ({
 
         const definition = {};
         if (specifier) {
-          specifier = await this._pinResource(specifier);
-          definition['@import'] = specifier;
+          const pinnedSpecifier = await this._pinResource(specifier);
+          definition['@import'] = pinnedSpecifier;
         }
         if (type) {
           definition['@type'] = type;
@@ -88,8 +88,8 @@ export default Resource => ({
       async () => {
         const definition = {};
         if (specifier) {
-          specifier = await this._pinResource(specifier);
-          definition['@import'] = specifier;
+          const pinnedSpecifier = await this._pinResource(specifier);
+          definition['@import'] = pinnedSpecifier;
         }
         if (type) {
           definition['@type'] = type;
@@ -206,13 +206,17 @@ export default Resource => ({
           const output = resource.$getOutput();
           child = output && output.$findChild(key);
           if (!child) {
-            throw createClientError(`No method input or output attribute found with this key: ${formatCode(key)}`);
+            throw createClientError(
+              `No method input or output attribute found with this key: ${formatCode(key)}`
+            );
           }
         }
       } else {
         child = resource.$findChild(key, {includeNativeChildren: true});
         if (!child) {
-          throw createClientError(`No attribute, subresource or method found with this key: ${formatCode(key)}`);
+          throw createClientError(
+            `No attribute, subresource or method found with this key: ${formatCode(key)}`
+          );
         }
         child = await child.$resolveGetter({parent: resource});
       }
@@ -441,27 +445,33 @@ export default Resource => ({
       if (section.attributes.length) {
         emptyLine();
         printText('Attributes:', {width: null, indentation});
-        print(formatTable(section.attributes, {
-          allData,
-          columnGap: 2,
-          margins: {left: indentation + 2}
-        }));
+        print(
+          formatTable(section.attributes, {
+            allData,
+            columnGap: 2,
+            margins: {left: indentation + 2}
+          })
+        );
       }
 
       if (section.subresources.length) {
         emptyLine();
         printText('Subresources:', {width: null, indentation});
-        print(formatTable(section.subresources, {
-          allData,
-          columnGap: 2,
-          margins: {left: indentation + 2}
-        }));
+        print(
+          formatTable(section.subresources, {
+            allData,
+            columnGap: 2,
+            margins: {left: indentation + 2}
+          })
+        );
       }
 
       if (section.methods.length) {
         emptyLine();
         printText('Methods:', {width: null, indentation});
-        print(formatTable(section.methods, {allData, columnGap: 2, margins: {left: indentation + 2}}));
+        print(
+          formatTable(section.methods, {allData, columnGap: 2, margins: {left: indentation + 2}})
+        );
       }
     }
   },
