@@ -4,7 +4,9 @@ import {validateEmailAddress, validateEmailDomain, isDisposableEmail} from './';
   console.log('=== validateEmailAddress ===\n');
 
   function validateAddress(email) {
-    console.log(`${JSON.stringify(email)}: ${validateEmailAddress(email, {throwIfInvalid: false})}`);
+    console.log(
+      `${JSON.stringify(email)}: ${validateEmailAddress(email, {throwIfInvalid: false})}`
+    );
   }
 
   validateAddress('steve@apple.com');

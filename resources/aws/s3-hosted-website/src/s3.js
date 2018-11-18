@@ -43,14 +43,24 @@ export default () => ({
           !hasBeenCreated &&
           !tags.some(tag => isEqual(tag, {Key: 'managed-by', Value: this.MANAGER_IDENTIFIER}))
         ) {
-          throw createClientError(`Can't use a S3 bucket not originally created by ${formatString(this.RESOURCE_ID)} (bucketName: ${formatString(bucketName)})`);
+          throw createClientError(
+            `Can't use a S3 bucket not originally created by ${formatString(
+              this.RESOURCE_ID
+            )} (bucketName: ${formatString(bucketName)})`
+          );
         }
 
         if (!hasBeenCreated) {
           const result = await s3.getBucketLocation({Bucket: bucketName});
           const locationConstraint = result.LocationConstraint || 'us-east-1';
           if (locationConstraint !== region) {
-            throw createClientError(`Sorry, it is currently not possible to change the region of the S3 bucket associated to your website. Please remove the bucket (${formatString(bucketName)}) manually or set the region to its initial value (${formatString(locationConstraint)}).`);
+            throw createClientError(
+              `Sorry, it is currently not possible to change the region of the S3 bucket associated to your website. Please remove the bucket (${formatString(
+                bucketName
+              )}) manually or set the region to its initial value (${formatString(
+                locationConstraint
+              )}).`
+            );
           }
         }
 

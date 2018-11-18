@@ -73,7 +73,9 @@ export default Resource => ({
     }
 
     if (!version) {
-      throw createClientError(`Can't publish a resource without a ${formatCode('version')} property`);
+      throw createClientError(
+        `Can't publish a resource without a ${formatCode('version')} property`
+      );
     }
 
     const specifier = stringifyResourceSpecifier({identifier, versionRange: version});
@@ -87,11 +89,13 @@ export default Resource => ({
 
     const compressedDefinition = gzipSync(JSON.stringify(definition));
     const definitionKey = keyPrefix + generateSecret() + '.json.gz';
-    uploads.push(this._uploadToS3({
-      bucket: bucketName,
-      key: definitionKey,
-      body: compressedDefinition
-    }));
+    uploads.push(
+      this._uploadToS3({
+        bucket: bucketName,
+        key: definitionKey,
+        body: compressedDefinition
+      })
+    );
 
     const directory = dirname(file);
     const files = await this._getFiles(definition, directory);
@@ -99,11 +103,13 @@ export default Resource => ({
       // TODO: Instead of a buffer, use a stream to zip and upload files
       const compressedFiles = await zip(directory, files);
       const filesKey = keyPrefix + generateSecret() + '.zip';
-      uploads.push(this._uploadToS3({
-        bucket: bucketName,
-        key: filesKey,
-        body: compressedFiles
-      }));
+      uploads.push(
+        this._uploadToS3({
+          bucket: bucketName,
+          key: filesKey,
+          body: compressedFiles
+        })
+      );
     }
 
     const [temporaryDefinitionURL, temporaryFilesURL] = await Promise.all(uploads);
@@ -159,7 +165,9 @@ export default Resource => ({
       const resolvedFile = resolve(directory, file);
 
       if (!existsSync(resolvedFile)) {
-        throw createClientError(`File ${formatPath(file)} specified in ${formatCode('files')} property doesn't exist`);
+        throw createClientError(
+          `File ${formatPath(file)} specified in ${formatCode('files')} property doesn't exist`
+        );
       }
 
       if (isDirectory.sync(resolvedFile)) {

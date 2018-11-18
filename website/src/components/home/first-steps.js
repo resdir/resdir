@@ -68,7 +68,8 @@ export class FirstSteps extends React.Component {
                 <span style={numberStyle}>③</span> Enjoy{' '}
                 <a href={constants.RUN_WEBSITE_URL + '/docs'} style={s.primaryLink}>
                   resources
-                </a>! 😊
+                </a>
+                ! 😊
               </p>
             </div>
           );

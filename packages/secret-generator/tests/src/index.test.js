@@ -53,7 +53,7 @@ describe('@resdir/secret-generator', () => {
     expect(chars).toHaveLength(CHARACTERS.length);
 
     for (const char of chars) {
-      const distribution = counters[char] * CHARACTERS.length / (COUNT * LENGTH);
+      const distribution = (counters[char] * CHARACTERS.length) / (COUNT * LENGTH);
       expect(distribution).toBeCloseTo(1, 1);
     }
   });

@@ -57,7 +57,7 @@ export default () => ({
       }
 
       const file = resolve(directory, page);
-      if (!await pathExists(file)) {
+      if (!(await pathExists(file))) {
         throw createClientError(`Entry page not found: ${file}`);
       }
 
@@ -94,7 +94,7 @@ export default () => ({
         const relativeURL = url.slice(1);
 
         const scriptFile = resolve(directory, relativeURL);
-        if (!await pathExists(scriptFile)) {
+        if (!(await pathExists(scriptFile))) {
           throw createClientError(`Script file not found: ${scriptFile}`);
         }
 

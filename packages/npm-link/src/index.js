@@ -20,7 +20,7 @@ export function run() {
 
   const modulesDirectory = join(currentDirectory, 'node_modules');
   if (!existsSync(modulesDirectory)) {
-    throw new Error('\'node_modules\' directory not found');
+    throw new Error("'node_modules' directory not found");
   }
 
   let packageNames;

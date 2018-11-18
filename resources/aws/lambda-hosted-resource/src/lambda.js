@@ -122,7 +122,11 @@ export default () => ({
   async checkLambdaFunctionTags() {
     const lambdaFunction = await this.getLambdaFunction();
     if (!isEqual(lambdaFunction.tags, {'managed-by': this.MANAGER_IDENTIFIER})) {
-      throw createClientError(`Can't update a Lambda function not originally created by ${formatString(this.RESOURCE_ID)} (functionName: ${formatString(this.getLambdaFunctionName())})`);
+      throw createClientError(
+        `Can't update a Lambda function not originally created by ${formatString(
+          this.RESOURCE_ID
+        )} (functionName: ${formatString(this.getLambdaFunctionName())})`
+      );
     }
   },
 
@@ -265,7 +269,9 @@ export default () => ({
       const resolvedFile = resolve(directory, file);
 
       if (!existsSync(resolvedFile)) {
-        throw createClientError(`File ${formatPath(file)} specified in ${formatCode('files')} property doesn't exist`);
+        throw createClientError(
+          `File ${formatPath(file)} specified in ${formatCode('files')} property doesn't exist`
+        );
       }
 
       if (isDirectory.sync(resolvedFile)) {

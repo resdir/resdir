@@ -15,7 +15,9 @@ export function parseResourceIdentifier(identifier, {throwIfMissing = true} = {}
     return undefined;
   }
   if (!parsedIdentifier.namespace) {
-    throw createClientError(`Namespace is missing in resource identifier '${formatString(identifier)}'`);
+    throw createClientError(
+      `Namespace is missing in resource identifier '${formatString(identifier)}'`
+    );
   }
   return parsedIdentifier;
 }

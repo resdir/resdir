@@ -25,14 +25,16 @@ export default Resource => ({
   createServer(environment) {
     const server = new Koa();
 
-    server.use(jsonError(err => {
-      const status = isClientError(err) ? 400 : 500;
-      const expose = isClientError(err) || isServerError(err);
-      const name = expose ? err.name : 'InternalServerError';
-      const message = expose ? err.message : 'The server encountered an error';
-      const code = expose ? err.code : undefined;
-      return {name, message, code, status};
-    }));
+    server.use(
+      jsonError(err => {
+        const status = isClientError(err) ? 400 : 500;
+        const expose = isClientError(err) || isServerError(err);
+        const name = expose ? err.name : 'InternalServerError';
+        const message = expose ? err.message : 'The server encountered an error';
+        const code = expose ? err.code : undefined;
+        return {name, message, code, status};
+      })
+    );
 
     server.use(cors({maxAge: 300})); // 5 minutes
 
@@ -112,7 +114,9 @@ export default Resource => ({
     const server = this.createServer(environment);
     server.listen(this.port);
     printSuccess(
-      `Test server started ${formatPunctuation(`(`)}${formatURL(`http://localhost:${this.port}`)}${formatPunctuation(`)`)}`,
+      `Test server started ${formatPunctuation(`(`)}${formatURL(
+        `http://localhost:${this.port}`
+      )}${formatPunctuation(`)`)}`,
       environment
     );
     if (notify) {

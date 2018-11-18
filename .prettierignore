@@ -1,0 +1,11 @@
+node_modules*
+dist
+builds
+vendor
+@resource*.json
+_old
+_drafts
+_private
+packages/common-english-words/src/data.js
+packages/common-tags/src/data.js
+packages/top-level-domains/src/data.js

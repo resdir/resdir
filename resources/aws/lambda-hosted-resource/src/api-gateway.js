@@ -38,7 +38,9 @@ export default () => ({
       const limit = 500;
       const {items} = await apiGateway.getRestApis({limit});
       if (items.length === limit) {
-        throw createClientError(`Whoa, you have a lot of API Gateways! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`);
+        throw createClientError(
+          `Whoa, you have a lot of API Gateways! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`
+        );
       }
 
       const name = this.getAPIGatewayName();
@@ -185,7 +187,11 @@ export default () => ({
     const stageARN = await this.getAPIGatewayStageARN();
     const {tags} = await apiGateway.getTags({resourceArn: stageARN});
     if (!isEqual(tags, {'managed-by': this.MANAGER_IDENTIFIER})) {
-      throw createClientError(`Can't manage an API Gateway not originally created by ${formatString(this.RESOURCE_ID)} (name: ${formatString(this.getAPIGatewayName())})`);
+      throw createClientError(
+        `Can't manage an API Gateway not originally created by ${formatString(
+          this.RESOURCE_ID
+        )} (name: ${formatString(this.getAPIGatewayName())})`
+      );
     }
   },
 
@@ -198,7 +204,9 @@ export default () => ({
   async checkAPIGatewayEndpointType() {
     const api = await this.getAPIGateway();
     if (api.endpointType !== this.getNormalizedEndpointType()) {
-      throw createClientError('Sorry, it is currently not possible to change the endpoint type once the resource has been deployed.');
+      throw createClientError(
+        'Sorry, it is currently not possible to change the endpoint type once the resource has been deployed.'
+      );
     }
   },
 
@@ -258,9 +266,11 @@ export default () => ({
     );
 
     if (hasBeenCreated && this.getNormalizedEndpointType() !== 'REGIONAL') {
-      print(`Your domain name (${
-        this.domainName
-      }) has been configured, but since you use an edge-optimized endpoint, you have to wait (up to 40 minutes) for the deployment of the CloudFront distribution.`);
+      print(
+        `Your domain name (${
+          this.domainName
+        }) has been configured, but since you use an edge-optimized endpoint, you have to wait (up to 40 minutes) for the deployment of the CloudFront distribution.`
+      );
     }
   },
 

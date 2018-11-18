@@ -288,7 +288,7 @@ function decrement(version) {
     minor = MAXIMUM_NUMBER;
     patch = MAXIMUM_NUMBER;
   } else {
-    throw createClientError('Can\'t decrement a version equal to 0.0.0');
+    throw createClientError("Can't decrement a version equal to 0.0.0");
   }
   return `${major}.${minor}.${patch}`;
 }

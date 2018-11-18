@@ -97,7 +97,11 @@ export default () => ({
 
     const pkg = await fetchNPMRegistry(this.name, {throwIfNotFound: false});
     if (pkg && this.version in pkg.versions) {
-      throw createClientError(`Can't publish over the previously published version ${formatString(this.version)}. Before publishing, use ${formatCode('version bump')} to increment the version number.`);
+      throw createClientError(
+        `Can't publish over the previously published version ${formatString(
+          this.version
+        )}. Before publishing, use ${formatCode('version bump')} to increment the version number.`
+      );
     }
 
     const directory = this.$getCurrentDirectory();

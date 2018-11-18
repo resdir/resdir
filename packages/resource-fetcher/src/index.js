@@ -44,10 +44,10 @@ Data are stored on disk as follow:
 export class ResourceFetcher {
   constructor({registryServer, clientDirectory}) {
     if (!registryServer) {
-      throw new Error('\'registryServer\' argument is missing');
+      throw new Error("'registryServer' argument is missing");
     }
     if (!clientDirectory) {
-      throw new Error('\'clientDirectory\' argument is missing');
+      throw new Error("'clientDirectory' argument is missing");
     }
     this.registryServer = registryServer;
     this.resourceCacheDirectory = join(

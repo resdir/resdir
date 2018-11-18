@@ -108,7 +108,7 @@ export class Modal {
 
   emitChange() {
     if (!this._changeListener) {
-      throw new Error('Modal hasn\'t any registered listeners');
+      throw new Error("Modal hasn't any registered listeners");
     }
     this._changeListener();
   }

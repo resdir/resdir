@@ -117,7 +117,9 @@ export async function publishPackage(directory, {access} = {}, environment) {
 export async function getCurrentDependencyVersion(directory, name, {throwIfNotFound = true}) {
   const version = await _getCurrentDependencyVersion(directory, name);
   if (!version && throwIfNotFound) {
-    throw createClientError(`Dependency ${formatString(name)} not found (directory: ${formatPath(directory)})`);
+    throw createClientError(
+      `Dependency ${formatString(name)} not found (directory: ${formatPath(directory)})`
+    );
   }
   return version;
 }
@@ -225,11 +227,11 @@ async function buildPNPMInstallOptions(
   _environment
 ) {
   if (!directory) {
-    throw new Error('\'directory\' is missing');
+    throw new Error("'directory' is missing");
   }
 
   if (!clientDirectory) {
-    throw new Error('\'clientDirectory\' is missing');
+    throw new Error("'clientDirectory' is missing");
   }
 
   const storePath = await resolvePNPMStorePath(directory, join(clientDirectory, 'pnpm-store'));

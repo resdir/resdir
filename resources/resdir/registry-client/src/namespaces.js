@@ -21,7 +21,11 @@ export default () => ({
     if (isAvailable) {
       print(`The namespace ${formatString(namespace)} is available.`);
     } else {
-      print(`The namespace ${formatString(namespace)} is not available (reason: ${formatString(reason)}, info: ${formatValue(info, {multiline: false})}).`);
+      print(
+        `The namespace ${formatString(namespace)} is not available (reason: ${formatString(
+          reason
+        )}, info: ${formatValue(info, {multiline: false})}).`
+      );
     }
   }
 });

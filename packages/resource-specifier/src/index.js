@@ -4,11 +4,11 @@ import VersionRange from '@resdir/version-range';
 
 export function parseResourceSpecifier(specifier) {
   if (specifier === undefined) {
-    throw new Error('\'specifier\' argument is missing');
+    throw new Error("'specifier' argument is missing");
   }
 
   if (typeof specifier !== 'string') {
-    throw new Error('\'specifier\' argument must be a string');
+    throw new Error("'specifier' argument must be a string");
   }
 
   if (specifier.startsWith('.') || isAbsolute(specifier) || specifier.match(/^https?:\/\//i)) {
@@ -41,7 +41,7 @@ export function stringifyResourceSpecifier({identifier, versionRange, location})
   }
 
   if (!identifier) {
-    throw new Error('\'identifier\' argument is missing');
+    throw new Error("'identifier' argument is missing");
   }
 
   let specifier = identifier;

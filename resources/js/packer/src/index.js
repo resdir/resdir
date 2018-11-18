@@ -94,7 +94,7 @@ export default () => ({
   async _completeReinstallDependencies(_environment) {
     const directory = this.$getCurrentDirectory();
 
-    if (!await pathExists(join(directory, 'node_modules.original'))) {
+    if (!(await pathExists(join(directory, 'node_modules.original')))) {
       return;
     }
 

@@ -16,20 +16,30 @@ export default () => ({
     }
 
     if (this.indexPage.startsWith('/') || this.indexPage.startsWith('.')) {
-      throw createClientError(`${formatCode('indexPage')} can't start with ${formatString('/')} or ${formatString('.')}`);
+      throw createClientError(
+        `${formatCode('indexPage')} can't start with ${formatString('/')} or ${formatString('.')}`
+      );
     }
 
     for (const {errorCode, responseCode, responsePage} of this.customErrors || []) {
       if (!errorCode) {
-        throw createClientError(`${formatCode('errorCode')} is missing in ${formatCode('customErrors')} attribute`);
+        throw createClientError(
+          `${formatCode('errorCode')} is missing in ${formatCode('customErrors')} attribute`
+        );
       }
 
       if (responseCode && !responsePage) {
-        throw createClientError(`${formatCode('responsePage')} is missing in ${formatCode('customErrors')} attribute`);
+        throw createClientError(
+          `${formatCode('responsePage')} is missing in ${formatCode('customErrors')} attribute`
+        );
       }
 
       if (responsePage && (responsePage.startsWith('/') || responsePage.startsWith('.'))) {
-        throw createClientError(`${formatCode('responsePage')} in ${formatCode('customErrors')} attribute can't start with ${formatString('/')} or ${formatString('.')}`);
+        throw createClientError(
+          `${formatCode('responsePage')} in ${formatCode(
+            'customErrors'
+          )} attribute can't start with ${formatString('/')} or ${formatString('.')}`
+        );
       }
     }
   }

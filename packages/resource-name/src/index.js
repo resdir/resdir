@@ -25,14 +25,18 @@ function validate(name, {attributeName}) {
   if (name.length < MIN_LENGTH) {
     return {
       isValid: false,
-      errorMessage: `${formatCode(attributeName)} attribute is too short (minimum characters is ${formatNumber(MIN_LENGTH)})`
+      errorMessage: `${formatCode(
+        attributeName
+      )} attribute is too short (minimum characters is ${formatNumber(MIN_LENGTH)})`
     };
   }
 
   if (name.length > MAX_LENGTH) {
     return {
       isValid: false,
-      errorMessage: `${formatCode(attributeName)} attribute is too long (maximum characters is ${formatNumber(MAX_LENGTH)})`
+      errorMessage: `${formatCode(
+        attributeName
+      )} attribute is too long (maximum characters is ${formatNumber(MAX_LENGTH)})`
     };
   }
 

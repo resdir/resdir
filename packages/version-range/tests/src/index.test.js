@@ -19,7 +19,7 @@ describe('VersionRange', () => {
     expect(() => new VersionRange('!1.2.7')).not.toThrow();
   });
 
-  test('\'EXACT\' range', () => {
+  test("'EXACT' range", () => {
     const range = new VersionRange('1.2.3');
     expect(range.type).toBe('EXACT');
     expect(range.toString()).toBe('1.2.3');
@@ -33,7 +33,7 @@ describe('VersionRange', () => {
     expect(() => range.getInclusiveEnd()).toThrow();
   });
 
-  test('\'ANY\' range', () => {
+  test("'ANY' range", () => {
     const range = new VersionRange();
     expect(range.type).toBe('ANY');
     expect(range.toString()).toBe('');
@@ -46,7 +46,7 @@ describe('VersionRange', () => {
     expect(() => range.getInclusiveEnd()).toThrow();
   });
 
-  test('\'TILDE\' range', () => {
+  test("'TILDE' range", () => {
     const range = new VersionRange('~1.2.3');
     expect(range.type).toBe('TILDE');
     expect(range.toString()).toBe('~1.2.3');
@@ -87,7 +87,7 @@ describe('VersionRange', () => {
     expect(range3.getInclusiveEnd()).toBe('1.999999999.999999999');
   });
 
-  test('\'CARET\' range', () => {
+  test("'CARET' range", () => {
     const range = new VersionRange('^1.2.3');
     expect(range.type).toBe('CARET');
     expect(range.toString()).toBe('^1.2.3');
@@ -117,7 +117,7 @@ describe('VersionRange', () => {
     expect(range2.getInclusiveEnd()).toBe('0.5.999999999');
   });
 
-  test('\'BEFORE\' range', () => {
+  test("'BEFORE' range", () => {
     const range = new VersionRange('<2.0.0');
     expect(range.type).toBe('BEFORE');
     expect(range.toString()).toBe('<2.0.0');
@@ -150,7 +150,7 @@ describe('VersionRange', () => {
     expect(() => new VersionRange('<0.0.0').simplify()).toThrow();
   });
 
-  test('\'AFTER\' range', () => {
+  test("'AFTER' range", () => {
     const range = new VersionRange('>2.0.0');
     expect(range.type).toBe('AFTER');
     expect(range.toString()).toBe('>2.0.0');
@@ -177,7 +177,7 @@ describe('VersionRange', () => {
     expect(() => range2.getInclusiveEnd()).toThrow();
   });
 
-  test('\'BETWEEN\' range', () => {
+  test("'BETWEEN' range", () => {
     const range = new VersionRange('>=2.0.0,<3.0.0');
     expect(range.type).toBe('BETWEEN');
     expect(range.toString()).toBe('>=2.0.0,<3.0.0');

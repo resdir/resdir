@@ -24,7 +24,9 @@ export default () => ({
 
     printSuccess(`GitHub connection page opened in your browser`);
     emptyLine();
-    printText(`If the GitHub connection page doesn't open automatically, please copy/paste the following URL in your browser:`);
+    printText(
+      `If the GitHub connection page doesn't open automatically, please copy/paste the following URL in your browser:`
+    );
     emptyLine();
     print(formatURL(gitHubAccountConnectionURL));
 

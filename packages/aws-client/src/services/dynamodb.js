@@ -58,11 +58,11 @@ export class DynamoDB {
 
   async forEach(params, fn) {
     if (!params) {
-      throw new Error('\'params\' argument is missing');
+      throw new Error("'params' argument is missing");
     }
 
     if (!fn) {
-      throw new Error('\'fn\' argument is missing');
+      throw new Error("'fn' argument is missing");
     }
 
     debug('forEach(%o)', params);
@@ -85,11 +85,11 @@ export class DynamoDB {
 
   async forAll(params, fn) {
     if (!params) {
-      throw new Error('\'params\' argument is missing');
+      throw new Error("'params' argument is missing");
     }
 
     if (!fn) {
-      throw new Error('\'fn\' argument is missing');
+      throw new Error("'fn' argument is missing");
     }
 
     debug('forAll(%o)', params);

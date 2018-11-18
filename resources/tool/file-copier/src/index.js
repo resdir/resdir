@@ -40,10 +40,14 @@ export default () => ({
         entry = {source: entry};
       }
       if (!isPlainObject(entry)) {
-        throw createClientError(`${formatCode('files')} entries must be a string or a plain object`);
+        throw createClientError(
+          `${formatCode('files')} entries must be a string or a plain object`
+        );
       }
       if (entry.source === undefined) {
-        throw createClientError(`${formatCode('source')} is missing in a ${formatCode('files')} entry`);
+        throw createClientError(
+          `${formatCode('source')} is missing in a ${formatCode('files')} entry`
+        );
       }
       if (entry.destination === undefined) {
         entry = {...entry, destination: entry.source};
@@ -52,19 +56,25 @@ export default () => ({
         entry = {...entry, replacements: {}};
       }
       if (!isPlainObject(entry.replacements)) {
-        throw createClientError(`${formatCode('replacements')} in ${formatCode('files')} must be plain object`);
+        throw createClientError(
+          `${formatCode('replacements')} in ${formatCode('files')} must be plain object`
+        );
       }
 
       const source = resolve(sourceDirectory, entry.source);
       const destination = resolve(destinationDirectory, entry.destination);
 
-      if (!await pathExists(source)) {
+      if (!(await pathExists(source))) {
         throw createClientError(`There is nothing at the following path: ${source}`);
       }
 
       if (isDirectory.sync(source)) {
         if (!isEmpty(entry.replacements)) {
-          throw createClientError(`Sorry, the ${formatCode('replacements')} attribute only works with file sources (directory are not supported yet)`);
+          throw createClientError(
+            `Sorry, the ${formatCode(
+              'replacements'
+            )} attribute only works with file sources (directory are not supported yet)`
+          );
         }
         await copy(source, destination);
       } else {
@@ -79,7 +89,11 @@ export default () => ({
     const sourceDirectory = this._getSourceDirectory();
     const destinationDirectory = this._getDestinationDirectory();
     if (sourceDirectory === destinationDirectory) {
-      throw createClientError(`${formatCode('sourceDirectory')} and ${formatCode('destinationDirectory')} cannot be identical`);
+      throw createClientError(
+        `${formatCode('sourceDirectory')} and ${formatCode(
+          'destinationDirectory'
+        )} cannot be identical`
+      );
     }
     await emptyDir(destinationDirectory);
   },

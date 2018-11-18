@@ -17,7 +17,11 @@ export default Resource => ({
 
     if (!throwIfAlreadyExists) {
       if (major || minor || patch) {
-        throw createClientError(`Can't disable ${formatCode('throwIfAlreadyExists')} with ${formatCode('major')} or ${formatCode('minor')} or ${formatCode('patch')} options`);
+        throw createClientError(
+          `Can't disable ${formatCode('throwIfAlreadyExists')} with ${formatCode(
+            'major'
+          )} or ${formatCode('minor')} or ${formatCode('patch')} options`
+        );
       }
       const specifier = stringifyResourceSpecifier({
         identifier: this.id,
@@ -76,7 +80,7 @@ export default Resource => ({
   async _completeReinstallDependencies(_environment) {
     const directory = this.$getCurrentDirectory();
 
-    if (!await pathExists(join(directory, 'node_modules.original'))) {
+    if (!(await pathExists(join(directory, 'node_modules.original')))) {
       return;
     }
 

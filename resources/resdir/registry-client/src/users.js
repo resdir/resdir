@@ -6,7 +6,7 @@ export default () => ({
     const server = await root.getRegistryServer();
 
     if (!namespace) {
-      throw new Error('\'namespace\' argument is missing');
+      throw new Error("'namespace' argument is missing");
     }
 
     const {user} = await task(

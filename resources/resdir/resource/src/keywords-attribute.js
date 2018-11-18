@@ -53,21 +53,27 @@ function validateKeyword(keyword) {
   if (keyword.length < MIN_KEYWORD_LENGTH) {
     return {
       isValid: false,
-      error: `The keyword ${formatString(keyword)} is too short (minimum characters is ${formatNumber(MIN_KEYWORD_LENGTH)})`
+      error: `The keyword ${formatString(
+        keyword
+      )} is too short (minimum characters is ${formatNumber(MIN_KEYWORD_LENGTH)})`
     };
   }
 
   if (keyword.length > MAX_KEYWORD_LENGTH) {
     return {
       isValid: false,
-      error: `The keyword ${formatString(keyword)} is too long (maximum characters is ${formatNumber(MAX_KEYWORD_LENGTH)})`
+      error: `The keyword ${formatString(
+        keyword
+      )} is too long (maximum characters is ${formatNumber(MAX_KEYWORD_LENGTH)})`
     };
   }
 
   if (/[^a-z0-9-]/.test(keyword)) {
     return {
       isValid: false,
-      error: `The keyword ${formatString(keyword)} is invalid (only lowercase letters, numbers and dashes are allowed)`
+      error: `The keyword ${formatString(
+        keyword
+      )} is invalid (only lowercase letters, numbers and dashes are allowed)`
     };
   }
 
@@ -81,7 +87,9 @@ function validateKeyword(keyword) {
   if (keyword.includes('--')) {
     return {
       isValid: false,
-      error: `The keyword ${formatString(keyword)} is invalid (cannot include two successive dashes)`
+      error: `The keyword ${formatString(
+        keyword
+      )} is invalid (cannot include two successive dashes)`
     };
   }
 

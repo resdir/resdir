@@ -89,7 +89,9 @@ export default () => ({
     const server = this.createServer(environment);
     server.listen(this.port);
     printSuccess(
-      `Test server started ${formatPunctuation(`(`)}${formatURL(`http://localhost:${this.port}`)}${formatPunctuation(`)`)}`,
+      `Test server started ${formatPunctuation(`(`)}${formatURL(
+        `http://localhost:${this.port}`
+      )}${formatPunctuation(`)`)}`,
       environment
     );
     if (notify) {

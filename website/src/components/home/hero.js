@@ -42,7 +42,8 @@ export class Hero extends React.Component {
                 For now, Resdir is only accessible through{' '}
                 <a href={constants.RUN_WEBSITE_URL} style={{...s.primaryLink}}>
                   Run
-                </a>'s&nbsp;command line interface.
+                </a>
+                's&nbsp;command line interface.
               </h3>
               <FirstSteps />
             </div>

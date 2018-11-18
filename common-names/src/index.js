@@ -13,7 +13,7 @@ export default () => ({
 
   async isCommonName({name}, _environment) {
     if (!name) {
-      throw createClientError('\'name\' argument is missing');
+      throw createClientError("'name' argument is missing");
     }
 
     const bigCompany = bigCompanies.find(company => company.shortNames.includes(name));

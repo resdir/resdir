@@ -28,7 +28,7 @@ const GIT_IGNORE = ['/node_modules'];
 export default () => ({
   async add({specifiers, production, development, peer, optional, optimizeDiskSpace}, environment) {
     if (!specifiers) {
-      throw new Error('\'specifiers\' argument is missing');
+      throw new Error("'specifiers' argument is missing");
     }
 
     let type;
@@ -63,7 +63,7 @@ export default () => ({
 
   async remove({names, optimizeDiskSpace}, environment) {
     if (!names) {
-      throw new Error('\'names\' argument is missing');
+      throw new Error("'names' argument is missing");
     }
 
     for (const name of names) {
@@ -136,7 +136,7 @@ export default () => ({
   async upgrade({names, optimizeDiskSpace}, environment) {
     if (names) {
       for (const name of names) {
-        if (!await this.includes({name}, environment)) {
+        if (!(await this.includes({name}, environment))) {
           throw createClientError(`No such dependency: ${formatString(name)}`);
         }
       }
@@ -184,7 +184,9 @@ export default () => ({
     print('The following upgrades are available:');
     emptyLine();
     for (const {name, currentVersion, latestVersion, gitHubURL} of outdatedDependencies) {
-      let line = `- ${formatString(name, {addQuotes: false})}${formatPunctuation(':')} ${currentVersion} ${formatPunctuation('=>')} ${formatBold(latestVersion)}`;
+      let line = `- ${formatString(name, {addQuotes: false})}${formatPunctuation(
+        ':'
+      )} ${currentVersion} ${formatPunctuation('=>')} ${formatBold(latestVersion)}`;
       if (gitHubURL) {
         line += ` ${formatPunctuation('(')}${formatURL(gitHubURL)}${formatPunctuation(')')}`;
       }
@@ -192,7 +194,11 @@ export default () => ({
     }
 
     emptyLine();
-    printText(`Some of these upgrades may contain ${formatDanger('breaking changes')}, you should check the changelogs before upgrading.`);
+    printText(
+      `Some of these upgrades may contain ${formatDanger(
+        'breaking changes'
+      )}, you should check the changelogs before upgrading.`
+    );
     emptyLine();
     const ready = await confirm(`Ready to upgrade?`, {default: true});
     emptyLine();

@@ -42,10 +42,10 @@ export class LocalCache {
 
   _getFile(key) {
     if (typeof key !== 'string') {
-      throw new Error('\'key\' argument must be a string');
+      throw new Error("'key' argument must be a string");
     }
     if (!key) {
-      throw new Error('\'key\' argument is empty');
+      throw new Error("'key' argument is empty");
     }
     return join(this._getDirectory(), strictUriEncode(key));
   }

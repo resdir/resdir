@@ -10,7 +10,7 @@ const SUB_ARGUMENTS_KEY = '@@SUB_ARGUMENTS';
 
 export function parseExpression(expression) {
   if (typeof expression !== 'string') {
-    throw new Error('\'expression\' must be a string');
+    throw new Error("'expression' must be a string");
   }
 
   // TODO: Replace 'shell-quote' with something more suitable
@@ -53,7 +53,9 @@ function findSubexpressions(expression, {isSubexpression} = {}) {
 
     if (op === ')' || part === '}') {
       if (!isSubexpression) {
-        throw createClientError(`Unexpected ${formatCode(op || part)} found while parsing an expression`);
+        throw createClientError(
+          `Unexpected ${formatCode(op || part)} found while parsing an expression`
+        );
       }
       return result;
     }
@@ -62,7 +64,11 @@ function findSubexpressions(expression, {isSubexpression} = {}) {
   }
 
   if (isSubexpression) {
-    throw createClientError(`Expected ${formatCode(')')} (or ${formatCode('}')}) couldn't be found while parsing an expression`);
+    throw createClientError(
+      `Expected ${formatCode(')')} (or ${formatCode(
+        '}'
+      )}) couldn't be found while parsing an expression`
+    );
   }
 
   return result;

@@ -44,7 +44,9 @@ export default () => ({
         await this.checkCloudFrontDistributionTags(distribution, environment);
 
         if (!distribution.Enabled) {
-          throw createClientError(`The CloudFront distribution is disabled (ARN: ${formatString(distribution.ARN)})`);
+          throw createClientError(
+            `The CloudFront distribution is disabled (ARN: ${formatString(distribution.ARN)})`
+          );
         }
 
         if (await this.doesCloudFrontDistributionNeedUpdate(distribution)) {
@@ -282,9 +284,14 @@ export default () => ({
         const result = await cloudFront.listTagsForResource({Resource: distribution.ARN});
         if (
           !result.Tags.Items.some(tag =>
-            isEqual(tag, {Key: 'managed-by', Value: this.MANAGER_IDENTIFIER}))
+            isEqual(tag, {Key: 'managed-by', Value: this.MANAGER_IDENTIFIER})
+          )
         ) {
-          throw createClientError(`Can't use a CloudFront distribution not originally created by ${formatString(this.RESOURCE_ID)} (ARN: ${formatString(distribution.ARN)})`);
+          throw createClientError(
+            `Can't use a CloudFront distribution not originally created by ${formatString(
+              this.RESOURCE_ID
+            )} (ARN: ${formatString(distribution.ARN)})`
+          );
         }
       },
       {
@@ -366,7 +373,9 @@ async function findCloudFrontDistribution(cloudFront, domainName, environment) {
       }
 
       if (result.DistributionList.IsTruncated) {
-        throw createClientError(`Whoa, you have a lot of CloudFront distributions! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`);
+        throw createClientError(
+          `Whoa, you have a lot of CloudFront distributions! Unfortunately, this tool can't list them all. Please post an issue on Resdir's GitHub if this is a problem for you.`
+        );
       }
 
       progress.setOutro('CloudFront distribution not found');
@@ -394,7 +403,9 @@ async function waitUntilCloudFrontDistributionIsDeployed(cloudFront, distributio
           return;
         }
       } while (totalSleepTime <= maxSleepTime);
-      throw createClientError(`CloudFront deployment uncompleted after ${totalSleepTime / 1000} seconds`);
+      throw createClientError(
+        `CloudFront deployment uncompleted after ${totalSleepTime / 1000} seconds`
+      );
     },
     {
       intro: `Waiting for CloudFront deployment (be very patient, it can take up to 40 minutes)...`,
@@ -426,7 +437,9 @@ async function waitUntilCloudFrontInvalidationIsCompleted(
           return;
         }
       } while (totalSleepTime <= maxSleepTime);
-      throw createClientError(`CloudFront invalidation uncompleted after ${totalSleepTime / 1000} seconds`);
+      throw createClientError(
+        `CloudFront invalidation uncompleted after ${totalSleepTime / 1000} seconds`
+      );
     },
     {
       intro: `Waiting for CloudFront invalidation completion...`,

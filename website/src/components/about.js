@@ -28,7 +28,8 @@ export class About extends React.Component {
                   come up with the idea of{' '}
                   <a href={constants.RUN_WEBSITE_URL + '/docs/introduction/what-is-a-resource'}>
                     resources
-                  </a>. It was so exciting that he put aside his initial plan to make this resource
+                  </a>
+                  . It was so exciting that he put aside his initial plan to make this resource
                   concept a reality. That is how Resdir was born.
                 </p>
               </div>

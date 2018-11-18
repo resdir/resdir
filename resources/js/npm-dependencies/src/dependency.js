@@ -12,7 +12,7 @@ const DEFAULT_TYPE = 'production';
 export class Dependency {
   constructor(definition, {type} = {}) {
     if (definition === undefined) {
-      throw new Error('\'definition\' argument is missing');
+      throw new Error("'definition' argument is missing");
     }
 
     if (typeof definition === 'string') {
@@ -58,7 +58,11 @@ export class Dependency {
       }
       const name = pkg.name;
       if (!name) {
-        throw new Error(`Invalid ${formatPath('package.json')} file at ${formatPath(location)}: ${formatCode('name')} property is undefined`);
+        throw new Error(
+          `Invalid ${formatPath('package.json')} file at ${formatPath(location)}: ${formatCode(
+            'name'
+          )} property is undefined`
+        );
       }
       location = 'file:' + location;
       return {name, location};

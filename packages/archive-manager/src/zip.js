@@ -20,7 +20,11 @@ export function zip(rootDirectory, files) {
 
       const metadataPath = relative(rootDirectory, realPath);
       if (metadataPath.startsWith('..')) {
-        throw new Error(`Cannot zip a file (${formatPath(file)}) located outside of the root directory (${formatPath(rootDirectory)})`);
+        throw new Error(
+          `Cannot zip a file (${formatPath(
+            file
+          )}) located outside of the root directory (${formatPath(rootDirectory)})`
+        );
       }
 
       zipFile.addFile(realPath, metadataPath);

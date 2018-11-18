@@ -12,7 +12,9 @@ export default () => ({
     const user = await this.get(environment);
 
     emptyLine();
-    const okay = await confirm(`Are you sure you want to delete your account (${formatString(user.email)})?`);
+    const okay = await confirm(
+      `Are you sure you want to delete your account (${formatString(user.email)})?`
+    );
     emptyLine();
 
     if (!okay) {

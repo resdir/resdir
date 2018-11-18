@@ -65,7 +65,11 @@ export default () => ({
       const relativeFile = relative(srcDirectory, srcFile);
       if (relativeFile.startsWith('..')) {
         if (!environment['@quiet']) {
-          console.warn(`Cannot build a file (${formatPath(srcFile)}) located outside of the source directory (${formatPath(srcDirectory)})`);
+          console.warn(
+            `Cannot build a file (${formatPath(
+              srcFile
+            )}) located outside of the source directory (${formatPath(srcDirectory)})`
+          );
         }
         continue;
       }
@@ -124,7 +128,9 @@ export default () => ({
     const {atime, mtime, mode} = statSync(srcFile);
 
     if (!(this.format === 'cjs' || this.format === 'esm')) {
-      throw createClientError(`Invalid ${formatCode('format')} value (${formatString(this.format)})`);
+      throw createClientError(
+        `Invalid ${formatCode('format')} value (${formatString(this.format)})`
+      );
     }
 
     const plugins = [

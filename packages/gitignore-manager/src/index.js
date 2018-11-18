@@ -15,7 +15,9 @@ export class GitIgnore {
     }
     const file = this.getFile();
     if (existsSync(file)) {
-      this._entries = readFileSync(file, 'utf8').trim().split('\n');
+      this._entries = readFileSync(file, 'utf8')
+        .trim()
+        .split('\n');
     } else {
       this._entries = [];
     }

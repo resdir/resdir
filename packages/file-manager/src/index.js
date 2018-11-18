@@ -7,7 +7,7 @@ import {createClientError} from '@resdir/error';
 
 export function load(file, {throwIfNotFound = true, parse = true} = {}) {
   if (typeof file !== 'string') {
-    throw new TypeError('\'file\' must be a string');
+    throw new TypeError("'file' must be a string");
   }
 
   let data;
@@ -46,7 +46,7 @@ export function load(file, {throwIfNotFound = true, parse = true} = {}) {
 
 export function save(file, data, {stringify = true} = {}) {
   if (typeof file !== 'string') {
-    throw new TypeError('\'file\' must be a string');
+    throw new TypeError("'file' must be a string");
   }
 
   if (stringify) {

@@ -37,7 +37,7 @@ export class ConnectGitHubAccount extends React.Component {
     const registryServer = await getRegistryServer();
     const {gitHubStartSignInURL} = await registryServer.continueConnectGitHubAccount({token});
     if (!gitHubStartSignInURL) {
-      throw new Error('\'gitHubStartSignInURL\' is missing');
+      throw new Error("'gitHubStartSignInURL' is missing");
     }
 
     window.location = gitHubStartSignInURL;

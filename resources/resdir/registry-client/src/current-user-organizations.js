@@ -22,7 +22,7 @@ export default () => ({
 
     if (organizations.length === 0) {
       emptyLine();
-      print('You don\'t belong to any organization.');
+      print("You don't belong to any organization.");
       return;
     }
 

@@ -32,7 +32,9 @@ export function findProperty(source, key, aliases = []) {
   for (const keyOrAlias of [key, ...aliases]) {
     if (keyOrAlias && keyOrAlias in source) {
       if (foundKey) {
-        throw createClientError(`Can't have both ${formatCode(foundKey)} and ${formatCode(keyOrAlias)}`);
+        throw createClientError(
+          `Can't have both ${formatCode(foundKey)} and ${formatCode(keyOrAlias)}`
+        );
       }
       foundKey = keyOrAlias;
       result = {foundKey, value: source[keyOrAlias]};
@@ -58,7 +60,9 @@ export async function catchError(promise) {
 export function avoidCommonMistakes(obj, mistakes) {
   for (const [wrong, correct] of entries(mistakes)) {
     if (wrong in obj) {
-      throw createClientError(`Wrong property key: ${formatCode(wrong)}. Did you mean ${formatCode(correct)}?`);
+      throw createClientError(
+        `Wrong property key: ${formatCode(wrong)}. Did you mean ${formatCode(correct)}?`
+      );
     }
   }
 }

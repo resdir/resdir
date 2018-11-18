@@ -39,7 +39,7 @@ export default () => ({
   async _completeReinstallDependencies(_environment) {
     const directory = this.$getCurrentDirectory();
 
-    if (!await pathExists(join(directory, 'node_modules.original'))) {
+    if (!(await pathExists(join(directory, 'node_modules.original')))) {
       return;
     }
 
@@ -64,7 +64,9 @@ export default () => ({
         definition.methods.push(key);
       } else {
         printWarning(
-          `Attribute ${formatCode(key)} cannot be exported (only simple value attibutes and methods are currrently supported)`,
+          `Attribute ${formatCode(
+            key
+          )} cannot be exported (only simple value attibutes and methods are currrently supported)`,
           environment
         );
       }

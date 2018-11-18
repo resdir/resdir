@@ -40,7 +40,9 @@ export default () => ({
         const quietEnvironment = environment.$extend({'@quiet': true});
         const cloudFrontDomainName = await this.getCloudFrontDomainName(quietEnvironment);
         emptyLine();
-        printText(`Your website is fully deployed, but since the name servers associated with your domain name don't seem to be managed by Route 53, you need to configure them manually by adding a CNAME record pointing to the CloudFront domain name:`);
+        printText(
+          `Your website is fully deployed, but since the name servers associated with your domain name don't seem to be managed by Route 53, you need to configure them manually by adding a CNAME record pointing to the CloudFront domain name:`
+        );
         emptyLine();
         print(`   ${formatDim('Name:')} ${formatString(this.domainName)}`);
         print(`   ${formatDim('Type:')} ${formatString('CNAME')}`);

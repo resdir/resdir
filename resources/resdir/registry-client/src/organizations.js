@@ -9,7 +9,9 @@ export default () => ({
 
     while (!namespace) {
       emptyLine();
-      namespace = await prompt(`Choose a namespace for your organization: ${formatExample('twitter')}`);
+      namespace = await prompt(
+        `Choose a namespace for your organization: ${formatExample('twitter')}`
+      );
       emptyLine();
     }
 
@@ -53,7 +55,9 @@ export default () => ({
     const organization = await this.getByNamespace(namespace);
 
     emptyLine();
-    const okay = await confirm(`Are you sure you want to delete ${formatString(namespace)} organization?`);
+    const okay = await confirm(
+      `Are you sure you want to delete ${formatString(namespace)} organization?`
+    );
     emptyLine();
 
     if (!okay) {
@@ -85,7 +89,7 @@ export default () => ({
 
   async getByNamespace(namespace, environment) {
     if (!namespace) {
-      throw new Error('\'namespace\' argument is missing');
+      throw new Error("'namespace' argument is missing");
     }
 
     const root = this.$getRoot();

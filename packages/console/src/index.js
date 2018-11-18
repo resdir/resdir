@@ -238,7 +238,7 @@ export function formatString(string, {addQuotes = true} = {}) {
   }
   string = String(string);
   if (addQuotes) {
-    string = '\'' + string + '\'';
+    string = "'" + string + "'";
   }
   return yellow(string);
 }
@@ -329,7 +329,7 @@ export function formatPath(path = './', {addQuotes = true, baseDirectory, relati
   }
 
   if (addQuotes) {
-    path = '\'' + path + '\'';
+    path = "'" + path + "'";
   }
 
   return yellow(path);
@@ -337,7 +337,7 @@ export function formatPath(path = './', {addQuotes = true, baseDirectory, relati
 
 export function formatKey(key, {addQuotes} = {}) {
   if (typeof key !== 'string') {
-    throw new TypeError('\'key\' argument should be a string');
+    throw new TypeError("'key' argument should be a string");
   }
 
   if (addQuotes === undefined) {
@@ -347,7 +347,7 @@ export function formatKey(key, {addQuotes} = {}) {
   }
 
   if (addQuotes) {
-    key = '\'' + key + '\'';
+    key = "'" + key + "'";
   }
 
   return cyan(key);
@@ -652,7 +652,7 @@ class SubAnimatedTaskView extends AbstractTaskView {
 
 export async function task(fn, {intro, outro}, environment = {}) {
   if (typeof fn !== 'function') {
-    throw new TypeError('\'fn\' must be a function');
+    throw new TypeError("'fn' must be a function");
   }
 
   const stack = global.resdirConsoleTaskStack;
@@ -705,7 +705,7 @@ function resumeCurrentTasks() {
 
 export function adjustToWindowWidth(text, {leftMargin = 0, rightMargin = 0} = {}) {
   if (typeof text !== 'string') {
-    throw new TypeError('\'text\' must be a string');
+    throw new TypeError("'text' must be a string");
   }
 
   if (!windowSize) {

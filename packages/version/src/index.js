@@ -18,7 +18,7 @@ export class Version {
     if (version instanceof this) {
       return version;
     }
-    throw new Error('Invalid \'version\' argument');
+    throw new Error("Invalid 'version' argument");
   }
 
   bump(part = 'patch') {
@@ -69,11 +69,11 @@ export class Version {
 
   static fromArray(array) {
     if (!Array.isArray(array)) {
-      throw new Error('\'array\' argument must be an array');
+      throw new Error("'array' argument must be an array");
     }
 
     if (array.length < 3) {
-      throw new Error('\'array\' argument is invalid');
+      throw new Error("'array' argument is invalid");
     }
 
     const [major, minor, patch, ...prerelease] = array;

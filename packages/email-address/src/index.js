@@ -28,7 +28,7 @@ export async function validateEmailDomain(email, {throwIfInvalid = true} = {}) {
     return false;
   }
 
-  if (!await validateEmailHostname(email)) {
+  if (!(await validateEmailHostname(email))) {
     if (throwIfInvalid) {
       throw createClientError(`Email domain is invalid (${formatString(email)})`);
     }
