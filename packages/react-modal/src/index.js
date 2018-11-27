@@ -253,7 +253,11 @@ class ModalComponent extends React.Component {
           }
 
           if (attrs.render) {
-            children.push(attrs.render({close: attrs._onClose}));
+            children.push(
+              <React.Fragment key="render">
+                {attrs.render({close: attrs._onClose})}
+              </React.Fragment>
+            );
           }
 
           if (attrs.buttons && attrs.buttons.length) {
