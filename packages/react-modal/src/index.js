@@ -60,7 +60,7 @@ export class Modal {
     return await this.open(attributes);
   }
 
-  async alert(message, options = {}) {
+  async dialogAlert(attributes = {}, options = {}) {
     const okButton = {
       title: this.getOKButtonTitle(),
       value: true,
@@ -68,15 +68,18 @@ export class Modal {
     };
     Object.assign(okButton, options.okButton);
 
-    const attributes = {
+    return await this.dialog({
       title: options.title,
-      message,
-      buttons: [okButton]
-    };
-    return await this.dialog(attributes);
+      buttons: [okButton],
+      ...attributes
+    });
   }
 
-  async confirm(message, options = {}) {
+  async alert(message, options = {}) {
+    return await this.dialogAlert({message}, options);
+  }
+
+  async dialogConfirm(attributes = {}, options = {}) {
     const okButton = {
       title: this.getOKButtonTitle(),
       value: true,
@@ -90,12 +93,15 @@ export class Modal {
     };
     Object.assign(cancelButton, options.cancelButton);
 
-    const attributes = {
+    return await this.dialog({
       title: options.title,
-      message,
-      buttons: [okButton, cancelButton]
-    };
-    return await this.dialog(attributes);
+      buttons: [okButton, cancelButton],
+      ...attributes
+    });
+  }
+
+  async confirm(message, options = {}) {
+    return await this.dialogConfirm({message}, options);
   }
 
   registerChangeListener(listener) {
@@ -214,70 +220,68 @@ class ModalComponent extends React.Component {
             setTimeout(() => this.forceUpdate(), 50);
           }
 
-          let children;
+          const children = [];
 
-          if (attrs.render) {
-            children = attrs.render({close: attrs._onClose});
-          } else {
-            children = [];
+          if (attrs.title) {
+            children.push(
+              <h3
+                key="title"
+                style={[
+                  s.regular,
+                  s.secondaryTextColor,
+                  s.minimumLineHeight,
+                  {marginTop: '-0.25rem', marginBottom: '1.5rem'}
+                ]}
+              >
+                {attrs.title}
+              </h3>
+            );
+          }
 
-            if (attrs.title) {
-              children.push(
-                <h3
-                  key="title"
-                  style={[
-                    s.regular,
-                    s.secondaryTextColor,
-                    s.minimumLineHeight,
-                    {marginTop: '-0.25rem', marginBottom: '1.5rem'}
-                  ]}
-                >
-                  {attrs.title}
-                </h3>
-              );
-            }
-
-            if (attrs.message) {
-              let element;
-              if (Object.prototype.hasOwnProperty.call(attrs.message, '__html')) {
-                element = <div key="message" dangerouslySetInnerHTML={attrs.message} />; // eslint-disable-line react/no-danger
-              } else {
-                element = (
-                  <div key="message" style={{whiteSpace: 'pre-line'}}>
-                    {attrs.message}
-                  </div>
-                );
-              }
-              children.push(element);
-            }
-
-            if (attrs.buttons && attrs.buttons.length) {
-              const buttons = [];
-              for (let i = 0; i < attrs.buttons.length; i++) {
-                const button = attrs.buttons[i];
-                const props = {key: i};
-                if (button.default) {
-                  props.rsPrimary = true;
-                }
-                props.onClick = () => attrs._onClose(button.value);
-                if (i > 0) {
-                  props.style = {marginRight: '.75rem'};
-                }
-                buttons.push(<Button {...props}>{button.title}</Button>);
-              }
-              children.push(
-                <div
-                  key="buttons"
-                  style={{
-                    display: 'flex',
-                    flexDirection: 'row-reverse',
-                    marginTop: '1.5rem'
-                  }}
-                >
-                  {buttons}
+          if (attrs.message) {
+            let element;
+            if (Object.prototype.hasOwnProperty.call(attrs.message, '__html')) {
+              element = <div key="message" dangerouslySetInnerHTML={attrs.message} />; // eslint-disable-line react/no-danger
+            } else {
+              element = (
+                <div key="message" style={{whiteSpace: 'pre-line'}}>
+                  {attrs.message}
                 </div>
               );
             }
+            children.push(element);
+          }
+
+          if (attrs.render) {
+            children.push(attrs.render({close: attrs._onClose}));
+          }
+
+          if (attrs.buttons && attrs.buttons.length) {
+            const buttons = [];
+            for (let i = 0; i < attrs.buttons.length; i++) {
+              const button = attrs.buttons[i];
+              const props = {key: i};
+              if (button.default) {
+                props.rsPrimary = true;
+              }
+              props.onClick = () => attrs._onClose(button.value);
+              if (i > 0) {
+                props.style = {marginRight: '.75rem'};
+              }
+              buttons.push(<Button {...props}>{button.title}</Button>);
+            }
+            children.push(
+              <div
+                key="buttons"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row-reverse',
+                  marginTop: '1.5rem'
+                }}
+              >
+                {buttons}
+              </div>
+            );
           }
 
           return (
