@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/npm-package",
-  "version": "0.1.51",
+  "version": "0.1.52",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -20,7 +20,7 @@
     "@resdir/console": "^0.1.0",
     "@resdir/error": "^0.1.0",
     "@resdir/gitignore-manager": "^0.1.0",
-    "@resdir/package-manager": "^0.1.32",
+    "@resdir/package-manager": "^0.1.33",
     "@resdir/version": "^0.1.1"
   },
   "@unpublishable": {

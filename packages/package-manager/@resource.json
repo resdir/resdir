@@ -1,24 +1,24 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/package-manager",
-  "version": "0.1.32",
+  "version": "0.1.33",
   "description": "Abstract Node package managers",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",
   "repository": "https://github.com/resdir/resdir.git",
   "dependencies": {
     "lodash": "^4.17.4",
-    "package-store": "^0.22.1",
-    "@pnpm/default-fetcher": "^1.0.0",
-    "@pnpm/default-resolver": "^2.0.0",
-    "@pnpm/logger": "^2.1.0",
-    "@pnpm/store-path": "^1.0.3",
+    "@pnpm/package-store": "3.1.0",
+    "@pnpm/default-fetcher": "3.0.0-0",
+    "@pnpm/default-resolver": "3.0.0-0",
+    "@pnpm/logger": "2.1.0",
+    "@pnpm/store-path": "1.0.4",
     "@resdir/console": "^0.1.0",
     "@resdir/error": "^0.1.0",
     "@resdir/file-manager": "^0.1.0",
     "@resdir/http-client": "^0.2.20",
     "@resdir/local-cache": "^0.1.0",
     "@resdir/process-manager": "^0.1.0",
-    "supi": "^0.22.1"
+    "supi": "0.30.0-2"
   }
 }

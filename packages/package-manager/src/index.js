@@ -10,7 +10,7 @@ import LocalCache from '@resdir/local-cache';
 import resolvePNPMStorePath from '@pnpm/store-path';
 import createPNPMFetcher from '@pnpm/default-fetcher';
 import createPNPMResolver from '@pnpm/default-resolver';
-import createPNPMStore from 'package-store';
+import createPNPMStore from '@pnpm/package-store';
 import {install as pnpmInstall} from 'supi';
 
 const NPM_REGISTRY_URL = 'https://registry.npmjs.org';
