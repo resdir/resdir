@@ -5,6 +5,7 @@ import {
   task,
   confirm,
   formatString,
+  formatPath,
   formatBold,
   formatPunctuation,
   formatURL,
@@ -114,7 +115,10 @@ export default () => ({
       },
       {
         intro: `Installing dependencies...`,
-        outro: `Dependencies installed`
+        outro: `Dependencies installed (${formatPath(this._getResourceDirectory(), {
+          baseDirectory: './',
+          relativize: true
+        })})`
       },
       environment
     );
@@ -142,7 +146,7 @@ export default () => ({
       }
     }
 
-    const directory = this.$getParent().$getCurrentDirectory();
+    const directory = this._getResourceDirectory();
 
     const outdatedDependencies = [];
 
@@ -225,7 +229,7 @@ export default () => ({
   },
 
   async _installDependencies({updateMode, optimizeDiskSpace} = {}, environment) {
-    const packageDirectory = this.$getParent().$getCurrentDirectory();
+    const packageDirectory = this._getResourceDirectory();
     let packageFileCreated;
     try {
       const {status} = await this._updatePackageFile(packageDirectory);
@@ -279,7 +283,7 @@ export default () => ({
   async updatePackageFile(_args, environment) {
     await task(
       async () => {
-        const directory = this.$getParent().$getCurrentDirectory();
+        const directory = this._getResourceDirectory();
         await this._updatePackageFile(directory);
       },
       {intro: `Updating package file...`, outro: `Package file updated`},
@@ -306,6 +310,10 @@ export default () => ({
       optionalDependencies: await getDependencies('optional'),
       devDependencies: await getDependencies('development')
     });
+  },
+
+  _getResourceDirectory() {
+    return this.$getParent().$getCurrentDirectory();
   },
 
   _getDependencies() {

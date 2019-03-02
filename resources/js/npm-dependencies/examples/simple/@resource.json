@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@import": "..",
+    "@import": "../..",
     "@value": {
       "@resdir/information": "^0.1.9"
     }

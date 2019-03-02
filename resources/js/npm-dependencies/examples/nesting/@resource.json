@@ -1,0 +1,11 @@
+{
+  "level1": {
+    "@include": "./level1"
+  },
+  "dependencies": {
+    "@import": "../..",
+    "@value": {
+      "@resdir/information": "^0.1.9"
+    }
+  }
+}

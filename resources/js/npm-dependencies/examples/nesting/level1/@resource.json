@@ -1,0 +1,11 @@
+{
+  "level2": {
+    "@include": "./level2"
+  },
+  "dependencies": {
+    "@import": "../../..",
+    "@value": {
+      "lodash": "^4.17.10"
+    }
+  }
+}
