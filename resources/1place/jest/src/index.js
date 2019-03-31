@@ -23,7 +23,8 @@ export default () => ({
           roots,
           // setupFiles: [require.resolve('regenerator-runtime/runtime')],
           testEnvironment: this.testEnvironment,
-          transform: {}
+          transform: {},
+          verbose: true
         };
 
         const command = require.resolve('jest/bin/jest.js');

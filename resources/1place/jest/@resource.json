@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "1place/jest",
-  "version": "0.1.43",
+  "version": "0.1.44",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -15,7 +15,7 @@
     "./dist"
   ],
   "dependencies": {
-    "jest": "^23.1.0",
+    "jest": "^24.5.0",
     "@resdir/console": "^0.1.0",
     "@resdir/error": "^0.1.0",
     "@resdir/process-manager": "^0.1.0"
