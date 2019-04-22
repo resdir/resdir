@@ -1,6 +1,5 @@
 {
   "tests": {
-    "@import": "../..",
-    "@directory": "./tests"
+    "@include": "./tests"
   }
 }
