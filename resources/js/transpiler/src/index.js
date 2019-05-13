@@ -11,6 +11,7 @@ import {createClientError} from '@resdir/error';
 const babelPresetEnv = require.resolve('@babel/preset-env');
 const babelPresetReact = require.resolve('@babel/preset-react');
 const babelPluginClassProperties = require.resolve('@babel/plugin-proposal-class-properties');
+const babelPluginPrivateMethods = require.resolve('@babel/plugin-proposal-private-methods');
 const babelPluginClasses = require.resolve('@babel/plugin-transform-classes');
 const babelPluginDecorators = require.resolve('@babel/plugin-proposal-decorators');
 const babelPluginOptionalChaining = require.resolve('@babel/plugin-proposal-optional-chaining');
@@ -136,6 +137,7 @@ export default () => ({
     const plugins = [
       [babelPluginDecorators, {legacy: true}],
       [babelPluginClassProperties, {loose: true}],
+      [babelPluginPrivateMethods, {loose: true}],
       babelPluginOptionalChaining,
       babelPluginLodash
     ];

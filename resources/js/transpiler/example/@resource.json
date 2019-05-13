@@ -8,7 +8,7 @@
     "@import": "..",
     "source": "./src",
     "destination": "./dist",
-    "format": "esm",
+    "format": "cjs",
     "generateInlineSourceMaps": false,
     "transpilationOccurred": {
       "@type": "method",
@@ -20,6 +20,7 @@
     "@import": "..",
     "source": "./src/index.js",
     "destination": "./dist/index.js",
+    "format": "cjs",
     "generateInlineSourceMaps": false,
     "transpilationOccurred": {
       "@type": "method",
