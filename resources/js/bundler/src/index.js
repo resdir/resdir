@@ -10,8 +10,7 @@ import json from 'rollup-plugin-json';
 import globals from 'rollup-plugin-node-globals';
 import replace from 'rollup-plugin-replace';
 import builtins from 'rollup-plugin-node-builtins';
-import {uglify} from 'rollup-plugin-uglify';
-import {minify} from 'uglify-es';
+import {terser} from 'rollup-plugin-terser';
 import bytes from 'bytes';
 
 const GIT_IGNORE = ['/node_modules.*'];
@@ -78,23 +77,26 @@ export default () => ({
 
           const browser = !(this.target === 'node' || this.target === 'aws-lambda');
 
-          const plugins = [
-            nodeResolve({browser, preferBuiltins: !browser, extensions: ['.js', '.json']}),
-            commonjs({ignore: ['spawn-sync']}), // TODO: remove the `ignore: ['spawn-sync']`
-            json()
-          ];
+          const plugins = [];
+
+          if (this.replacements) {
+            plugins.push(replace({values: {...this.replacements}, delimiters: ['', '']}));
+          }
 
           if (browser) {
-            plugins.push(globals());
             plugins.push(builtins());
           }
 
-          if (this.replacements) {
-            plugins.unshift(replace({values: {...this.replacements}, delimiters: ['', '']}));
+          plugins.push(nodeResolve({browser, preferBuiltins: !browser}));
+          plugins.push(commonjs({ignore: ['spawn-sync']})); // TODO: remove the `ignore: ['spawn-sync']`
+          plugins.push(json());
+
+          if (browser) {
+            plugins.push(globals());
           }
 
           if (this.minify) {
-            plugins.push(uglify({keep_fnames: true}, minify)); // eslint-disable-line camelcase
+            plugins.push(terser({keep_fnames: true})); // eslint-disable-line camelcase
           }
 
           const external = [];
@@ -154,7 +156,12 @@ export default () => ({
           if (format === 'esm') {
             format = 'es';
           }
-          const result = await bundle.generate({format, name: this.name, globals: this.globals});
+          let result = await bundle.generate({format, name: this.name, globals: this.globals});
+          if (result.output.length === 1) {
+            result = result.output[0];
+          } else {
+            throw new Error(`Rollup generated zero or more than one outputs`);
+          }
 
           const isDifferent = !(await isFileEqual(outputFile, result.code));
           if (isDifferent) {

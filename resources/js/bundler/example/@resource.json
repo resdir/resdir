@@ -9,6 +9,7 @@
     "output": "./dist/bundle.js",
     "target": "node",
     "format": "cjs",
+    "minify": false,
     "fileWatcher": {
       "@import": "tool/file-watcher#^0.1.0",
       "files": [
