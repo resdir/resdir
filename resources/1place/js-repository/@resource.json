@@ -1,0 +1,38 @@
+{
+  "@import": "resdir/resource#^0.1.0",
+  "id": "1place/js-repository",
+  "version": "0.1.1",
+  "isPublic": true,
+  "@export": {
+    "_jsRepositoryInstall": {
+      "@type": "method",
+      "@isHidden": true,
+      "@run": "(@import shell/bash) run \"git config core.hooksPath .githooks\"",
+      "@listen": "@install"
+    },
+    "_jsRepositoryLint": {
+      "@type": "method",
+      "@isHidden": true,
+      "@run": [
+        "(@import shell/bash) run \"./node_modules/.bin/eslint .\"",
+        "(@import shell/bash) run \"./node_modules/.bin/prettier-eslint-check '**/*.js'\""
+      ],
+      "@listen": "@lint"
+    },
+    "_jsRepositoryDependencies": {
+      "@comment": "TODO: Remove 'indent-string' dependency (https://github.com/prettier/prettier-eslint-cli/issues/169)",
+      "@import": "js/npm-dependencies#^0.1.0",
+      "@isHidden": true,
+      "@value": {
+        "babel-eslint": "~10.0.2",
+        "eslint": "~6.1.0",
+        "eslint-config-xo": "~0.26.0",
+        "eslint-plugin-react": "~7.14.3",
+        "prettier": "~1.18.2",
+        "prettier-eslint-check": "^1.0.3",
+        "prettier-eslint-cli": "^5.0.0",
+        "indent-string": "^4.0.0"
+      }
+    }
+  }
+}
