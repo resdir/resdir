@@ -56,8 +56,13 @@ export async function fetch(url, options = {}) {
     }
     result = await options.cache.read(url, 'utf8');
     if (result) {
-      result = JSON.parse(result);
-      if (result.body) {
+      try {
+        result = JSON.parse(result);
+      } catch {
+        console.warn(`An error occurred while parsing the following JSON: ${result}`);
+        result = undefined;
+      }
+      if (result && result.body) {
         result.body = Buffer.from(result.body, 'base64');
       }
     }
