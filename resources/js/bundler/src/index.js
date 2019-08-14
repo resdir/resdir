@@ -1,5 +1,14 @@
 import {join, resolve, isAbsolute} from 'path';
-import {readFile, outputFile as writeFile, ensureDir, pathExists, rename, stat} from 'fs-extra';
+import {tmpdir} from 'os';
+import {
+  readFile,
+  outputFile as writeFile,
+  remove,
+  ensureDir,
+  pathExists,
+  rename,
+  stat
+} from 'fs-extra';
 import {task, print, formatCode, formatDim} from '@resdir/console';
 import GitIgnore from '@resdir/gitignore-manager';
 import {createClientError} from '@resdir/error';
@@ -87,8 +96,14 @@ export default () => ({
             plugins.push(builtins());
           }
 
-          plugins.push(nodeResolve({browser, preferBuiltins: !browser}));
+          const mainFields = ['module', 'main'];
+          if (browser) {
+            mainFields.unshift('browser');
+          }
+          plugins.push(nodeResolve({mainFields, preferBuiltins: !browser}));
+
           plugins.push(commonjs({ignore: ['spawn-sync']})); // TODO: remove the `ignore: ['spawn-sync']`
+
           plugins.push(json());
 
           if (browser) {
@@ -152,26 +167,43 @@ export default () => ({
 
           const bundle = await rollup(rollupConfig);
 
+          let result;
+
+          const temporaryFile = generateTemporaryFile();
+
           let format = this.format;
           if (format === 'esm') {
             format = 'es';
           }
-          let result = await bundle.generate({format, name: this.name, globals: this.globals});
-          if (result.output.length === 1) {
-            result = result.output[0];
-          } else {
-            throw new Error(`Rollup generated zero or more than one outputs`);
+
+          const outputOptions = {
+            file: temporaryFile,
+            format,
+            name: this.name,
+            globals: this.globals
+          };
+
+          if (this.generateInlineSourceMaps) {
+            outputOptions.sourcemap = 'inline';
+            outputOptions.sourcemapFile = outputFile;
           }
 
-          const isDifferent = !(await isFileEqual(outputFile, result.code));
+          try {
+            await bundle.write(outputOptions);
+            result = await readFile(temporaryFile, 'utf8');
+          } finally {
+            await remove(temporaryFile);
+          }
+
+          const isDifferent = !(await isFileEqual(outputFile, result));
           if (isDifferent) {
-            await writeFile(outputFile, result.code);
+            await writeFile(outputFile, result);
           }
 
           const elapsedTime = Date.now() - startingTime;
 
           const message = isDifferent ? 'Bundle generated' : 'Bundle unmodified';
-          const size = Buffer.byteLength(result.code, 'utf8');
+          const size = Buffer.byteLength(result, 'utf8');
           const info = `(${bytes(size)}, ${elapsedTime}ms)`;
           progress.setOutro(`${message} ${formatDim(info)}`);
         } finally {
@@ -248,6 +280,15 @@ export default () => ({
     }
   }
 });
+
+function generateTemporaryFile() {
+  return join(
+    tmpdir(),
+    Math.random()
+      .toString()
+      .slice(2)
+  );
+}
 
 async function isFileEqual(file, content) {
   if (!(await pathExists(file))) {

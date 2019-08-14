@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/bundler",
-  "version": "0.1.37",
+  "version": "0.1.39",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -89,6 +89,10 @@
     },
     "minify": {
       "@description": "Minify the generated bundle (using 'uglify-es')",
+      "@default": false
+    },
+    "generateInlineSourceMaps": {
+      "@description": "Generate inline sourcemaps",
       "@default": false
     },
     "run": {
