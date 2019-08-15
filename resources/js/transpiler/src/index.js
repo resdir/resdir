@@ -163,10 +163,16 @@ export default () => ({
       transformOptions.sourceMaps = 'inline';
     }
 
-    const {code: transpiledCode} = transform(code, {
-      ...transformOptions,
-      sourceFileName: srcFile
-    });
+    let transpiledCode;
+    try {
+      ({code: transpiledCode} = transform(code, {
+        ...transformOptions,
+        sourceFileName: srcFile
+      }));
+    } catch (error) {
+      console.error(`An error occurred while transpiling a file (${formatPath(srcFile)})`);
+      throw error;
+    }
 
     await outputFile(destFile, transpiledCode);
     utimesSync(destFile, atime, mtime);
