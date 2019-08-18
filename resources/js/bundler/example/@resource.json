@@ -1,6 +1,7 @@
 {
   "@import": "js/resource#^0.1.0",
   "dependencies": {
+    "debug": "^4.1.1",
     "sleep-promise": "^2.0.0"
   },
   "bundler": {
@@ -12,6 +13,9 @@
     },
     "transpile": true,
     "format": "cjs",
+    "ignoreCommonJSModules": [
+      "supports-color"
+    ],
     "minify": false,
     "generateInlineSourceMaps": true,
     "fileWatcher": {

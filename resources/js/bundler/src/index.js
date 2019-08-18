@@ -140,7 +140,11 @@ export default () => ({
             plugins.push(babel(babelOptions));
           }
 
-          plugins.push(commonjs({ignore: ['spawn-sync']})); // TODO: remove the `ignore: ['spawn-sync']`
+          plugins.push(
+            commonjs({
+              ...(this.ignoreCommonJSModules && {ignore: this.ignoreCommonJSModules})
+            })
+          );
 
           plugins.push(json());
 

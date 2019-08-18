@@ -1,5 +1,8 @@
 import {format} from 'util';
 import sleep from 'sleep-promise';
+import debugModule from 'debug';
+
+const debug = debugModule('js-bundler-example');
 
 class Base {
   async formatGreeting(target = 'Universe') {
@@ -22,7 +25,9 @@ export function Hello() {
 }
 
 (async () => {
+  debug('Starting example...');
   const person = new Person();
   const greeting = await person.formatGreeting();
   console.log(greeting);
+  debug('Example ended');
 })().catch(err => console.error(err));
