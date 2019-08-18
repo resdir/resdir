@@ -129,7 +129,7 @@ export default () => ({
             const babelOptions = {
               presets: babelPresets,
               plugins: babelPlugins,
-              exclude: 'node_modules/**',
+              exclude: '**/node_modules/**',
               babelrc: false
             };
 
