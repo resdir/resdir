@@ -16,11 +16,19 @@ import {rollup} from 'rollup';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import json from 'rollup-plugin-json';
+import babel from 'rollup-plugin-babel';
 import globals from 'rollup-plugin-node-globals';
 import replace from 'rollup-plugin-replace';
 import builtins from 'rollup-plugin-node-builtins';
 import {terser} from 'rollup-plugin-terser';
 import bytes from 'bytes';
+
+const babelPresetEnv = require.resolve('@babel/preset-env');
+const babelPresetReact = require.resolve('@babel/preset-react');
+const babelPluginClassProperties = require.resolve('@babel/plugin-proposal-class-properties');
+const babelPluginPrivateMethods = require.resolve('@babel/plugin-proposal-private-methods');
+const babelPluginDecorators = require.resolve('@babel/plugin-proposal-decorators');
+const babelPluginOptionalChaining = require.resolve('@babel/plugin-proposal-optional-chaining');
 
 const GIT_IGNORE = ['/node_modules.*'];
 
@@ -84,7 +92,10 @@ export default () => ({
           const output = this.output.replace('${format}', this.format); // eslint-disable-line no-template-curly-in-string
           const outputFile = resolve(directory, output);
 
-          const browser = !(this.target === 'node' || this.target === 'aws-lambda');
+          // v0.1.x:
+          // const browser = !(this.target === 'node' || this.target === 'aws-lambda');
+
+          const browser = !this.targets.node;
 
           const plugins = [];
 
@@ -101,6 +112,33 @@ export default () => ({
             mainFields.unshift('browser');
           }
           plugins.push(nodeResolve({mainFields, preferBuiltins: !browser}));
+
+          if (this.transpile) {
+            const babelPresets = [
+              [babelPresetEnv, {targets: this.targets, loose: true, modules: false}],
+              [babelPresetReact]
+            ];
+
+            const babelPlugins = [
+              [babelPluginDecorators, {legacy: true}],
+              [babelPluginClassProperties, {loose: true}],
+              [babelPluginPrivateMethods, {loose: true}],
+              babelPluginOptionalChaining
+            ];
+
+            const babelOptions = {
+              presets: babelPresets,
+              plugins: babelPlugins,
+              exclude: 'node_modules/**',
+              babelrc: false
+            };
+
+            if (this.generateInlineSourceMaps) {
+              babelOptions.sourceMaps = 'inline';
+            }
+
+            plugins.push(babel(babelOptions));
+          }
 
           plugins.push(commonjs({ignore: ['spawn-sync']})); // TODO: remove the `ignore: ['spawn-sync']`
 
@@ -124,9 +162,10 @@ export default () => ({
             external.push(...Object.keys(this.globals));
           }
 
-          if (this.target === 'aws-lambda') {
-            external.push(id => id === 'aws-sdk' || id.startsWith('aws-sdk/'));
-          }
+          // v0.1.x:
+          // if (this.target === 'aws-lambda') {
+          //   external.push(id => id === 'aws-sdk' || id.startsWith('aws-sdk/'));
+          // }
 
           const actualExternal = id => {
             for (const ext of external) {

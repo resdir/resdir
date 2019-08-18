@@ -17,6 +17,10 @@ export class Person extends Base {
   }
 }
 
+export function Hello() {
+  return <h1>Hello</h1>;
+}
+
 (async () => {
   const person = new Person();
   const greeting = await person.formatGreeting();

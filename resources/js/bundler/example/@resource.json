@@ -7,7 +7,10 @@
     "@import": "..",
     "entry": "./src/index.js",
     "output": "./dist/bundle.js",
-    "target": "node",
+    "targets": {
+      "node": "6.10"
+    },
+    "transpile": true,
     "format": "cjs",
     "minify": false,
     "generateInlineSourceMaps": true,
