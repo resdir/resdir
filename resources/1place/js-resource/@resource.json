@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource#^0.1.0",
   "id": "1place/js-resource",
-  "version": "0.1.9",
+  "version": "0.2.1",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -13,12 +13,12 @@
     "@name": "1Place's JavaScript Resource",
     "@description": "1Place's starting point for resources implemented in JavaScript",
     "transpiler": {
-      "@import": "js/transpiler#^0.1.0",
+      "@import": "js/transpiler#^0.2.0",
+      "targets": {
+        "node": "10.15"
+      },
       "run": {
-        "@listen": [
-          "@build",
-          "@fileModified"
-        ]
+        "@listen": "@build"
       }
     }
   }
