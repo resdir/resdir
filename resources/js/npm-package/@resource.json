@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/npm-package",
-  "version": "0.1.52",
+  "version": "0.1.53",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -79,6 +79,10 @@
           }
         }
       }
+    },
+    "private": {
+      "@type": "boolean",
+      "@description": "Specify whether your package is private or not"
     },
     "description": {
       "@type": "string",

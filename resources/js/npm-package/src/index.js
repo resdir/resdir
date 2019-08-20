@@ -49,6 +49,7 @@ export default () => ({
     updatePackageFile(directory, {
       name: this.name,
       version: this.version,
+      private: this.private,
       description: this.description,
       keywords: this.keywords,
       homepage: this.homepage,
