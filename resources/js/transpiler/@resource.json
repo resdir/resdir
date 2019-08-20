@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "js/transpiler",
-  "version": "0.1.24",
+  "version": "0.2.1",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -16,7 +16,6 @@
   ],
   "dependencies": {
     "@babel/core": "^7.4.4",
-    "babel-plugin-lodash": "^3.3.4",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/plugin-proposal-optional-chaining": "^7.2.0",
@@ -85,7 +84,8 @@
     },
     "transformJSX": {
       "@description": "Enable JSX support (using @babel/preset-react)",
-      "@default": false
+      "@isHidden": true,
+      "@default": true
     },
     "jsxPragma": {
       "@type": "string",

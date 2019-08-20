@@ -15,7 +15,6 @@ const babelPluginPrivateMethods = require.resolve('@babel/plugin-proposal-privat
 const babelPluginClasses = require.resolve('@babel/plugin-transform-classes');
 const babelPluginDecorators = require.resolve('@babel/plugin-proposal-decorators');
 const babelPluginOptionalChaining = require.resolve('@babel/plugin-proposal-optional-chaining');
-const babelPluginLodash = require.resolve('babel-plugin-lodash');
 
 export default () => ({
   async run({files}, environment) {
@@ -138,8 +137,7 @@ export default () => ({
       [babelPluginDecorators, {legacy: true}],
       [babelPluginClassProperties, {loose: true}],
       [babelPluginPrivateMethods, {loose: true}],
-      babelPluginOptionalChaining,
-      babelPluginLodash
+      babelPluginOptionalChaining
     ];
 
     if (this.transformClasses) {
