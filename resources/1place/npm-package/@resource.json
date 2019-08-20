@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource#^0.1.0",
   "id": "1place/npm-package",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -19,7 +19,7 @@
     "module": "./dist/node/esm",
     "browser": "./dist/browser/esm",
     "cjsTranspiler": {
-      "@import": "js/transpiler#^0.1.0",
+      "@import": "js/transpiler#^0.2.0",
       "destination": "./dist/node/cjs",
       "targets": {
         "node": "10.15"
@@ -33,7 +33,7 @@
       }
     },
     "esmTranspiler": {
-      "@import": "js/transpiler#^0.1.0",
+      "@import": "js/transpiler#^0.2.0",
       "destination": "./dist/node/esm",
       "targets": {
         "node": "10.15"
@@ -48,7 +48,7 @@
     },
     "browserTranspiler": {
       "@comment": "Browsers supporting ES6 (https://caniuse.com/#feat=es6)",
-      "@import": "js/transpiler#^0.1.0",
+      "@import": "js/transpiler#^0.2.0",
       "destination": "./dist/browser/esm",
       "targets": {
         "chrome": "51",
