@@ -71,7 +71,8 @@ export default () => ({
             formatValue({query, source}, {multiline: false}) +
             formatBold(formatCode(`)`, {addBackticks: false}))
         );
-        const result = await layer.receiveQuery(query, {source});
+        const forkedLayer = layer.fork();
+        const result = await forkedLayer.receiveQuery(query, {source});
         ctx.body = result;
         print(formatBold('← ') + formatValue(result, {multiline: false}));
       } else {
