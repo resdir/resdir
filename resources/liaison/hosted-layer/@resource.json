@@ -3,7 +3,7 @@
     "resdir/resource#^0.1.0",
     "1place/js-resource#^0.1.0"
   ],
-  "id": "layr/hosted-layer",
+  "id": "liaison/hosted-layer",
   "version": "0.1.2",
   "isPublic": true,
   "authors": [
@@ -26,7 +26,7 @@
   },
   "@export": {
     "@name": "Hosted Layer",
-    "@description": "Base resource for actual hosted layer implementations (e.g., layr/lambda-hosted-layer)",
+    "@description": "Base resource for actual hosted layer implementations (e.g., liaison/lambda-hosted-layer)",
     "@implementation": "./dist/cjs",
     "domainName": {
       "@type": "string",

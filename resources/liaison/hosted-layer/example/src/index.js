@@ -1,5 +1,5 @@
-import {Model} from '@layr/model';
-import {Layer, expose} from '@layr/layer';
+import {Model} from '@liaison/model';
+import {Layer, expose} from '@liaison/layer';
 
 // time curl -v -X GET http://localhost:6789
 

@@ -3,7 +3,7 @@
     "resdir/resource#^0.1.0",
     "1place/js-resource#^0.1.0"
   ],
-  "id": "layr/lambda-hosted-layer",
+  "id": "liaison/lambda-hosted-layer",
   "version": "0.1.1",
   "isPublic": true,
   "authors": [
@@ -16,7 +16,7 @@
   ],
   "dependencies": {},
   "@export": {
-    "@import": "layr/hosted-layer#^0.1.0",
+    "@import": "liaison/hosted-layer#^0.1.0",
     "@name": "AWS Lambda Hosted Layer",
     "@description": "Host layers on AWS using Lambda, API Gateway, Route 53 and ACM",
     "@implementation": "./dist/cjs",
