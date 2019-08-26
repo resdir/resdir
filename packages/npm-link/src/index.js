@@ -1,6 +1,6 @@
 import {resolve, join, relative, dirname} from 'path';
 import {existsSync, readdirSync} from 'fs';
-import {removeSync, ensureSymlinkSync} from 'fs-extra';
+import {ensureDirSync, removeSync, ensureSymlinkSync} from 'fs-extra';
 import {compact} from 'lodash';
 import {load} from '@resdir/file-manager';
 import isDirectory from 'is-directory';
@@ -9,19 +9,13 @@ import minimist from 'minimist';
 export function run() {
   const argv = minimist(process.argv);
 
-  let currentDirectory = process.cwd();
+  const directory = argv._[2] || './';
 
-  const directory = argv._[2];
-  if (directory) {
-    currentDirectory = resolve(currentDirectory, directory);
-  }
+  const currentDirectory = resolve(process.cwd(), directory);
 
   const config = loadConfig(currentDirectory);
 
   const modulesDirectory = join(currentDirectory, 'node_modules');
-  if (!existsSync(modulesDirectory)) {
-    throw new Error("'node_modules' directory not found");
-  }
 
   let packageNames;
   const packageName = argv._[3];
@@ -37,11 +31,12 @@ export function run() {
       continue;
     }
 
+    ensureDirSync(modulesDirectory);
     const linkFile = join(modulesDirectory, packageName);
     removeSync(linkFile);
     ensureSymlinkSync(relative(dirname(linkFile), packageDirectory), linkFile);
 
-    console.log(`'${packageName}' linked`);
+    console.log(`${directory}: '${packageName}' linked`);
   }
 }
 

@@ -1,7 +1,7 @@
 {
   "@import": "1place/npm-package#^0.1.0",
   "name": "@resdir/npm-link",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "'npm link' easier",
   "author": "Manuel Vila <hi@mvila.me>",
   "license": "MIT",
