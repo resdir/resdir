@@ -140,9 +140,11 @@ export default () => ({
             plugins.push(babel(babelOptions));
           }
 
+          console.log(this.commonJSNamedExports);
           plugins.push(
             commonjs({
-              ...(this.ignoreCommonJSModules && {ignore: this.ignoreCommonJSModules})
+              ...(this.ignoreCommonJSModules && {ignore: this.ignoreCommonJSModules}),
+              ...(this.commonJSNamedExports && {namedExports: this.commonJSNamedExports})
             })
           );
 
