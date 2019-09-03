@@ -58,6 +58,13 @@ export default () => ({
         await sleep(this.delay);
       }
 
+      if (this.errorRate) {
+        const threshold = this.errorRate / 100;
+        if (Math.random() < threshold) {
+          throw new Error('A simulated error occurred while handling a request');
+        }
+      }
+
       if (ctx.method === 'GET') {
         print(formatBold('→ ') + formatBold(formatCode('introspect()', {addBackticks: false})));
         const result = layer.introspect();

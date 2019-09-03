@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "liaison/hosted-layer",
-  "version": "0.1.2",
+  "version": "0.1.4",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -83,6 +83,10 @@
       },
       "delay": {
         "@description": "Delay (in millisecond) before responding (helps to simulate slow network)",
+        "@default": 0
+      },
+      "errorRate": {
+        "@description": "Rate (in percentage) of error in handling requests (helps to simulate unreliable network)",
         "@default": 0
       },
       "start": {
