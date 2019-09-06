@@ -3,6 +3,7 @@ import {
   print,
   printSuccess,
   formatBold,
+  formatDanger,
   formatCode,
   formatValue,
   formatPunctuation,
@@ -71,17 +72,23 @@ export default () => ({
         ctx.body = result;
         print(formatBold('← ') + formatValue(result, {multiline: false}));
       } else if (ctx.method === 'POST') {
-        const {query, source} = ctx.request.body;
+        const {query, source, environment} = ctx.request.body;
         print(
           formatBold('→ ') +
             formatBold(formatCode(`invoke(`, {addBackticks: false})) +
-            formatValue({query, source}, {multiline: false}) +
+            formatValue({query, source, environment}, {multiline: false}) +
             formatBold(formatCode(`)`, {addBackticks: false}))
         );
         const forkedLayer = layer.fork();
-        const result = await forkedLayer.receiveQuery(query, {source});
-        ctx.body = result;
-        print(formatBold('← ') + formatValue(result, {multiline: false}));
+        try {
+          const result = await forkedLayer.receiveQuery(query, {environment, source});
+          ctx.body = {result};
+          print(formatBold('← ') + formatValue(result, {multiline: false}));
+        } catch (err) {
+          const error = {message: err.message};
+          ctx.body = {error};
+          print(formatDanger(formatBold('← [ERROR] ') + formatValue(error, {multiline: false})));
+        }
       } else {
         throw new Error('Invalid HTTP request');
       }
