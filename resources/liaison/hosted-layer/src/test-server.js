@@ -55,17 +55,6 @@ export default () => ({
     server.use(bodyParser({enableTypes: ['json'], jsonLimit: '8mb'}));
 
     server.use(async ctx => {
-      if (this.delay) {
-        await sleep(this.delay);
-      }
-
-      if (this.errorRate) {
-        const threshold = this.errorRate / 100;
-        if (Math.random() < threshold) {
-          throw new Error('A simulated error occurred while handling a request');
-        }
-      }
-
       if (ctx.method === 'GET') {
         print(formatBold('→ ') + formatBold(formatCode('introspect()', {addBackticks: false})));
         const result = layer.introspect();
@@ -73,20 +62,40 @@ export default () => ({
         print(formatBold('← ') + formatValue(result, {multiline: false}));
       } else if (ctx.method === 'POST') {
         const {query, source, environment} = ctx.request.body;
+
         print(
           formatBold('→ ') +
             formatBold(formatCode(`invoke(`, {addBackticks: false})) +
             formatValue({query, source, environment}, {multiline: false}) +
             formatBold(formatCode(`)`, {addBackticks: false}))
         );
+
         const forkedLayer = layer.fork();
+
         try {
+          if (this.delay) {
+            await sleep(this.delay);
+          }
+
+          if (this.errorRate) {
+            const threshold = this.errorRate / 100;
+            if (Math.random() < threshold) {
+              throw new Error('A simulated error occurred while handling a request');
+            }
+          }
+
           const result = await forkedLayer.receiveQuery(query, {environment, source});
+
           ctx.body = {result};
+
           print(formatBold('← ') + formatValue(result, {multiline: false}));
         } catch (err) {
+          console.error(err);
+
           const error = {message: err.message};
+
           ctx.body = {error};
+
           print(formatDanger(formatBold('← [ERROR] ') + formatValue(error, {multiline: false})));
         }
       } else {
