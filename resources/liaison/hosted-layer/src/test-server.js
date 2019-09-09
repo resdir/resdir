@@ -61,12 +61,12 @@ export default () => ({
         ctx.body = result;
         print(formatBold('← ') + formatValue(result, {multiline: false}));
       } else if (ctx.method === 'POST') {
-        const {query, source, environment} = ctx.request.body;
+        const {query, items, source} = ctx.request.body;
 
         print(
           formatBold('→ ') +
             formatBold(formatCode(`invoke(`, {addBackticks: false})) +
-            formatValue({query, source, environment}, {multiline: false}) +
+            formatValue({query, items, source}, {multiline: false}) +
             formatBold(formatCode(`)`, {addBackticks: false}))
         );
 
@@ -84,7 +84,7 @@ export default () => ({
             }
           }
 
-          const result = await forkedLayer.receiveQuery(query, {environment, source});
+          const result = await forkedLayer.receiveQuery({query, items, source});
 
           ctx.body = {result};
 
