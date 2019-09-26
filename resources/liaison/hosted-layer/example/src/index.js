@@ -5,11 +5,12 @@ import {Layer, expose} from '@liaison/layer';
 
 // time curl -v -X POST -H "Content-Type: application/json" -d '{"query": {"Clock=>": {"getTime=>result": true}}, "source": "frontend"}' http://localhost:6789
 
-@expose()
-export class Clock extends Model {
-  @expose() static getTime() {
-    return new Date();
+export default async function createLayer() {
+  class Clock extends Model {
+    @expose() static getTime() {
+      return new Date();
+    }
   }
-}
 
-export default new Layer({Clock});
+  return new Layer({Clock});
+}

@@ -18,9 +18,9 @@ import sleep from 'sleep-promise';
 
 export default () => ({
   async start({notify}, environment) {
-    const layer = this.getLayer();
+    const layerCreator = this.getLayerCreator();
 
-    const server = this.createServer(layer, environment);
+    const server = this.createServer(layerCreator, environment);
 
     server.listen(this.port, () => {
       // TODO: Handle errors
@@ -36,18 +36,18 @@ export default () => ({
     });
   },
 
-  getLayer() {
+  getLayerCreator() {
     const parentResource = this.$getParent();
     const main = resolve(parentResource.$getCurrentDirectory(), parentResource.main);
-    let layer = require(main);
-    if (layer.default) {
+    let layerCreator = require(main);
+    if (layerCreator.default) {
       // ES Module
-      layer = layer.default;
+      layerCreator = layerCreator.default;
     }
-    return layer;
+    return layerCreator;
   },
 
-  createServer(layer, _environment) {
+  createServer(createLayer, _environment) {
     const server = new Koa();
 
     server.use(jsonError());
@@ -55,51 +55,57 @@ export default () => ({
     server.use(bodyParser({enableTypes: ['json'], jsonLimit: '8mb'}));
 
     server.use(async ctx => {
-      if (ctx.method === 'GET') {
-        print(formatBold('→ ') + formatBold(formatCode('introspect()', {addBackticks: false})));
-        const result = layer.introspect();
-        ctx.body = result;
-        print(formatBold('← ') + formatValue(result, {multiline: false}));
-      } else if (ctx.method === 'POST') {
-        const {query, items, source} = ctx.request.body;
+      const layer = await createLayer();
+      await layer.open();
 
-        print(
-          formatBold('→ ') +
-            formatBold(formatCode(`invoke(`, {addBackticks: false})) +
-            formatValue({query, items, source}, {multiline: false}) +
-            formatBold(formatCode(`)`, {addBackticks: false}))
-        );
-
-        const forkedLayer = layer.fork();
-
-        try {
-          if (this.delay) {
-            await sleep(this.delay);
-          }
-
-          if (this.errorRate) {
-            const threshold = this.errorRate / 100;
-            if (Math.random() < threshold) {
-              throw new Error('A simulated error occurred while handling a request');
-            }
-          }
-
-          const result = await forkedLayer.receiveQuery({query, items, source});
-
-          ctx.body = {result};
-
+      try {
+        if (ctx.method === 'GET') {
+          print(formatBold('→ ') + formatBold(formatCode('introspect()', {addBackticks: false})));
+          const result = layer.introspect();
+          ctx.body = result;
           print(formatBold('← ') + formatValue(result, {multiline: false}));
-        } catch (err) {
-          console.error(err);
+        } else if (ctx.method === 'POST') {
+          const {query, items, source} = ctx.request.body;
 
-          const error = {message: err.message};
+          print(
+            formatBold('→ ') +
+              formatBold(formatCode(`invoke(`, {addBackticks: false})) +
+              formatValue({query, items, source}, {multiline: false}) +
+              formatBold(formatCode(`)`, {addBackticks: false}))
+          );
 
-          ctx.body = {error};
+          try {
+            if (this.delay) {
+              await sleep(this.delay);
+            }
 
-          print(formatDanger(formatBold('← [ERROR] ') + formatValue(error, {multiline: false})));
+            if (this.errorRate) {
+              const threshold = this.errorRate / 100;
+              // eslint-disable-next-line max-depth
+              if (Math.random() < threshold) {
+                throw new Error('A simulated error occurred while handling a request');
+              }
+            }
+
+            const result = await layer.receiveQuery({query, items, source});
+
+            ctx.body = {result};
+
+            print(formatBold('← ') + formatValue(result, {multiline: false}));
+          } catch (err) {
+            console.error(err);
+
+            const error = {message: err.message};
+
+            ctx.body = {error};
+
+            print(formatDanger(formatBold('← [ERROR] ') + formatValue(error, {multiline: false})));
+          }
+        } else {
+          throw new Error('Invalid HTTP request');
         }
-      } else {
-        throw new Error('Invalid HTTP request');
+      } finally {
+        await layer.close();
       }
     });
 
