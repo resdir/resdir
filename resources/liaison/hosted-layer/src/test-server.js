@@ -1,4 +1,5 @@
 import {resolve} from 'path';
+import util from 'util';
 import {
   print,
   printSuccess,
@@ -15,6 +16,8 @@ import cors from '@koa/cors';
 import bodyParser from 'koa-bodyparser';
 import notifier from 'node-notifier';
 import sleep from 'sleep-promise';
+
+Object.assign(util.inspect.defaultOptions, {depth: 10, colors: true, breakLength: 100});
 
 export default () => ({
   async start({notify}, environment) {
