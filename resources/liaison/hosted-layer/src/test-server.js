@@ -17,6 +17,7 @@ import bodyParser from 'koa-bodyparser';
 import notifier from 'node-notifier';
 import sleep from 'sleep-promise';
 
+Error.stackTraceLimit = 30;
 Object.assign(util.inspect.defaultOptions, {depth: 10, colors: true, breakLength: 100});
 
 export default () => ({
@@ -59,56 +60,51 @@ export default () => ({
 
     server.use(async ctx => {
       const layer = await createLayer();
-      await layer.open();
 
-      try {
-        if (ctx.method === 'GET') {
-          print(formatBold('→ ') + formatBold(formatCode('introspect()', {addBackticks: false})));
-          const result = layer.introspect();
-          ctx.body = result;
-          print(formatBold('← ') + formatValue(result, {multiline: false}));
-        } else if (ctx.method === 'POST') {
-          const {query, items, source} = ctx.request.body;
+      if (ctx.method === 'GET') {
+        print(formatBold('→ ') + formatBold(formatCode('introspect()', {addBackticks: false})));
+        const result = layer.introspect();
+        ctx.body = result;
+        print(formatBold('← ') + formatValue(result, {multiline: false}));
+      } else if (ctx.method === 'POST') {
+        const {query, items, source} = ctx.request.body;
 
-          print(
-            formatBold('→ ') +
-              formatBold(formatCode(`invoke(`, {addBackticks: false})) +
-              formatValue({query, items, source}, {multiline: false}) +
-              formatBold(formatCode(`)`, {addBackticks: false}))
-          );
+        print(
+          formatBold('→ ') +
+            formatBold(formatCode(`invoke(`, {addBackticks: false})) +
+            formatValue({query, items, source}, {multiline: false}) +
+            formatBold(formatCode(`)`, {addBackticks: false}))
+        );
 
-          try {
-            if (this.delay) {
-              await sleep(this.delay);
-            }
-
-            if (this.errorRate) {
-              const threshold = this.errorRate / 100;
-              // eslint-disable-next-line max-depth
-              if (Math.random() < threshold) {
-                throw new Error('A simulated error occurred while handling a request');
-              }
-            }
-
-            const result = await layer.receiveQuery({query, items, source});
-
-            ctx.body = {result};
-
-            print(formatBold('← ') + formatValue(result, {multiline: false}));
-          } catch (err) {
-            console.error(err);
-
-            const error = {message: err.message};
-
-            ctx.body = {error};
-
-            print(formatDanger(formatBold('← [ERROR] ') + formatValue(error, {multiline: false})));
+        try {
+          if (this.delay) {
+            await sleep(this.delay);
           }
-        } else {
-          throw new Error('Invalid HTTP request');
+
+          if (this.errorRate) {
+            const threshold = this.errorRate / 100;
+            // eslint-disable-next-line max-depth
+            if (Math.random() < threshold) {
+              throw new Error('A simulated error occurred while handling a request');
+            }
+          }
+
+          const result = await layer.receiveQuery({query, items, source});
+
+          ctx.body = {result};
+
+          print(formatBold('← ') + formatValue(result, {multiline: false}));
+        } catch (err) {
+          console.error(err);
+
+          const error = {message: err.message};
+
+          ctx.body = {error};
+
+          print(formatDanger(formatBold('← [ERROR] ') + formatValue(error, {multiline: false})));
         }
-      } finally {
-        await layer.close();
+      } else {
+        throw new Error('Invalid HTTP request');
       }
     });
 
