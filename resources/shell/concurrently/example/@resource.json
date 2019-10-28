@@ -1,0 +1,8 @@
+{
+  "@import": "../",
+  "commands": [
+    "sleep 3 && echo Yo!",
+    "run @version",
+    "run @console print 'Hey!'"
+  ]
+}
