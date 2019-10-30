@@ -86,6 +86,10 @@ export async function fetch(url, options = {}) {
       finalOptions.body = body;
     }
 
+    if (options.credentials) {
+      finalOptions.credentials = options.credentials;
+    }
+
     if (options.authorization) {
       headers.Authorization = options.authorization;
     }
