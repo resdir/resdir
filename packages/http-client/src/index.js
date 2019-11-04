@@ -116,8 +116,13 @@ export async function fetch(url, options = {}) {
 
     if (process.browser) {
       result.headers = {};
-      for (const key of response.headers.keys()) {
-        result.headers[key.toLowerCase()] = response.headers.get(key);
+      if (typeof response.headers.keys === 'function') {
+        for (const key of response.headers.keys()) {
+          result.headers[key.toLowerCase()] = response.headers.get(key);
+        }
+      } else {
+        // Fallback for Edge < 16 that doesn't support headers.keys()
+        result.headers['content-type'] = response.headers.get('content-type');
       }
     } else {
       // TODO: Use a standard way to get headers
