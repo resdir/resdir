@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource#^0.1.0",
   "id": "1place/js-repository",
-  "version": "0.1.5",
+  "version": "0.1.9",
   "isPublic": true,
   "@export": {
     "_jsRepositoryInstall": {
@@ -15,7 +15,7 @@
       "@isHidden": true,
       "@run": [
         "(@import shell/bash) run \"./node_modules/.bin/eslint .\"",
-        "(@import shell/bash) run \"./node_modules/.bin/prettier-eslint-check '**/*.js'\""
+        "(@import shell/bash) run \"./node_modules/.bin/prettier --check '**/*.js'\""
       ],
       "@listen": "@lint"
     },
@@ -24,13 +24,10 @@
       "@import": "js/npm-dependencies#^0.1.0",
       "@isHidden": true,
       "@value": {
-        "@1place/eslint-config-1place": "~0.1.4",
-        "eslint": "~5.16.0",
-        "eslint-plugin-react": "~7.14.3",
-        "prettier": "~1.18.2",
-        "prettier-eslint-check": "^1.0.3",
-        "prettier-eslint-cli": "^5.0.0",
-        "indent-string": "^4.0.0"
+        "@1place/eslint-config-1place": "~0.1.9",
+        "eslint": "~6.8.0",
+        "eslint-plugin-react": "~7.17.0",
+        "prettier": "~1.19.1"
       }
     }
   }
