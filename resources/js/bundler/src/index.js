@@ -28,7 +28,6 @@ const babelPresetReact = require.resolve('@babel/preset-react');
 const babelPluginClassProperties = require.resolve('@babel/plugin-proposal-class-properties');
 const babelPluginPrivateMethods = require.resolve('@babel/plugin-proposal-private-methods');
 const babelPluginDecorators = require.resolve('@babel/plugin-proposal-decorators');
-const babelPluginOptionalChaining = require.resolve('@babel/plugin-proposal-optional-chaining');
 
 const GIT_IGNORE = ['/node_modules.*'];
 
@@ -122,8 +121,7 @@ export default () => ({
             const babelPlugins = [
               [babelPluginDecorators, {legacy: true}],
               [babelPluginClassProperties, {loose: true}],
-              [babelPluginPrivateMethods, {loose: true}],
-              babelPluginOptionalChaining
+              [babelPluginPrivateMethods, {loose: true}]
             ];
 
             const babelOptions = {
@@ -140,7 +138,6 @@ export default () => ({
             plugins.push(babel(babelOptions));
           }
 
-          console.log(this.commonJSNamedExports);
           plugins.push(
             commonjs({
               ...(this.ignoreCommonJSModules && {ignore: this.ignoreCommonJSModules}),
