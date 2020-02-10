@@ -20,7 +20,6 @@
       "@listen": "@lint"
     },
     "_jsRepositoryDependencies": {
-      "@comment": "TODO: Remove 'indent-string' dependency (https://github.com/prettier/prettier-eslint-cli/issues/169)",
       "@import": "js/npm-dependencies#^0.1.0",
       "@isHidden": true,
       "@value": {

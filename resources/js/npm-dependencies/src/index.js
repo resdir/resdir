@@ -15,7 +15,6 @@ import {
 import {createClientError} from '@resdir/error';
 import {
   updatePackageFile,
-  removePackageFile,
   installPackage,
   updateDependencies,
   getCurrentDependencyVersion
@@ -230,24 +229,12 @@ export default () => ({
 
   async _installDependencies({updateMode, optimizeDiskSpace} = {}, environment) {
     const packageDirectory = this._getResourceDirectory();
-    let packageFileCreated;
-    try {
-      const {status} = await this._updatePackageFile(packageDirectory);
-      packageFileCreated = status === 'CREATED';
-      const clientDirectory = this.$getClientDirectory();
-      if (updateMode) {
-        await updateDependencies(
-          packageDirectory,
-          {optimizeDiskSpace, clientDirectory},
-          environment
-        );
-      } else {
-        await installPackage(packageDirectory, {optimizeDiskSpace, clientDirectory}, environment);
-      }
-    } finally {
-      if (packageFileCreated) {
-        removePackageFile(packageDirectory);
-      }
+    await this._updatePackageFile(packageDirectory);
+    const clientDirectory = this.$getClientDirectory();
+    if (updateMode) {
+      await updateDependencies(packageDirectory, {optimizeDiskSpace, clientDirectory}, environment);
+    } else {
+      await installPackage(packageDirectory, {optimizeDiskSpace, clientDirectory}, environment);
     }
   },
 
