@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource#^0.1.0",
   "id": "1place/js-repository",
-  "version": "0.1.14",
+  "version": "0.1.15",
   "isPublic": true,
   "@export": {
     "_jsRepositoryInstall": {
@@ -9,6 +9,12 @@
       "@isHidden": true,
       "@run": "(@import shell/bash) run \"git config core.hooksPath .githooks\"",
       "@listen": "@install"
+    },
+    "_jsRepositoryLink": {
+      "@import": "1place/npm-linker#^0.1.0",
+      "run": {
+        "@listen": "@link"
+      }
     },
     "_jsRepositoryLint": {
       "@type": "method",

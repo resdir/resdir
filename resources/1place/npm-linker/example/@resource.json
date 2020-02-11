@@ -1,0 +1,12 @@
+{
+  "@import": "../",
+  "dependencies": {
+    "@import": "js/npm-dependencies#^0.1.0",
+    "@value": {
+      "possibly-many": "^0.1.4"
+    }
+  },
+  "run": {
+    "@listen": "@link"
+  }
+}

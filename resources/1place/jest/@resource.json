@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "1place/jest",
-  "version": "0.1.45",
+  "version": "0.1.46",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -24,7 +24,7 @@
     "generateInlineSourceMaps": true
   },
   "@export": {
-    "@import": "1place/js-resource#^0.1.0",
+    "@import": "1place/js-resource#^0.2.0",
     "@name": "1Place's Jest",
     "@description": "Test suite runner (using Jest)",
     "@implementation": "./dist/cjs",
