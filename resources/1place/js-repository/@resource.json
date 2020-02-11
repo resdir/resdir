@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource#^0.1.0",
   "id": "1place/js-repository",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "isPublic": true,
   "@export": {
     "_jsRepositoryInstall": {
@@ -23,7 +23,7 @@
       "@import": "js/npm-dependencies#^0.1.0",
       "@isHidden": true,
       "@value": {
-        "@1place/eslint-config-1place": "~0.1.13",
+        "@1place/eslint-config-1place": "~0.1.14",
         "eslint": "~6.8.0",
         "eslint-plugin-react": "~7.17.0",
         "prettier": "~1.19.1"
