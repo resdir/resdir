@@ -4,7 +4,7 @@
     "1place/js-resource#^0.1.0"
   ],
   "id": "1place/jest",
-  "version": "0.1.46",
+  "version": "0.1.47",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -29,7 +29,13 @@
     "@description": "Test suite runner (using Jest)",
     "@implementation": "./dist/cjs",
     "transpiler": {
-      "generateInlineSourceMaps": true
+      "generateInlineSourceMaps": true,
+      "run": {
+        "@listen": [
+          "@build",
+          "@fileModified"
+        ]
+      }
     },
     "roots": {
       "@type": "array",
