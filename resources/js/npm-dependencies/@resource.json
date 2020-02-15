@@ -1,7 +1,7 @@
 {
   "@import": "resdir/resource#^0.1.0",
   "id": "js/npm-dependencies",
-  "version": "0.1.66",
+  "version": "0.1.67",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"
@@ -210,7 +210,11 @@
     },
     "updatePackageFile": {
       "@type": "method",
-      "@isHidden": true
+      "@isHidden": true,
+      "@listen": [
+        "@build",
+        "@saved"
+      ]
     },
     "onCreated": {
       "@type": "method",

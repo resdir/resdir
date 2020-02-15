@@ -1,7 +1,7 @@
 import {join} from 'path';
 import {outputFileSync, pathExistsSync} from 'fs-extra';
 import {updatePackageFile, publishPackage, fetchNPMRegistry} from '@resdir/package-manager';
-import {task, prompt, formatString, formatCode} from '@resdir/console';
+import {task, prompt, formatString, formatCode, formatPath} from '@resdir/console';
 import GitIgnore from '@resdir/gitignore-manager';
 import {createClientError} from '@resdir/error';
 
@@ -12,13 +12,19 @@ const GIT_IGNORE = ['.DS_STORE', '/*.log', '/package.json'];
 
 export default () => ({
   async updatePackageFile(_args, environment) {
+    const formattedDirectory = formatPath(this.$getCurrentDirectory(), {
+      baseDirectory: './',
+      relativize: true
+    });
+
     await task(
       async () => {
         this._updatePackageFile();
-        const quietEnvironment = await environment.$extend({'@quiet': true});
-        await this.$getChild('dependencies').updatePackageFile(undefined, quietEnvironment);
       },
-      {intro: `Updating package file...`, outro: `Package file updated`},
+      {
+        intro: `Updating package attributes in package file (${formattedDirectory})...`,
+        outro: `Package attributes in package file updated (${formattedDirectory})`
+      },
       environment
     );
   },

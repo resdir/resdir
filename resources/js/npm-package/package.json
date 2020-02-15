@@ -1,0 +1,20 @@
+{
+  "dependencies": {
+    "fs-extra": "^6.0.1",
+    "lodash": "^4.17.4",
+    "@resdir/console": "^0.1.0",
+    "@resdir/error": "^0.1.0",
+    "@resdir/gitignore-manager": "^0.1.0",
+    "@resdir/package-manager": "^0.1.33",
+    "@resdir/version": "^0.1.1"
+  },
+  "@managed": {
+    "warning": "This file contains properties managed by a Resource. You should not modify them directly or use a command such as `npm install <name>`.",
+    "properties": [
+      "dependencies",
+      "peerDependencies",
+      "optionalDependencies",
+      "devDependencies"
+    ]
+  }
+}

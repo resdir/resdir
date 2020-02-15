@@ -108,29 +108,36 @@ export default () => ({
   },
 
   async install({optimizeDiskSpace}, environment) {
+    const formattedDirectory = formatPath(this._getResourceDirectory(), {
+      baseDirectory: './',
+      relativize: true
+    });
+
     await task(
       async () => {
         await this._installDependencies({optimizeDiskSpace}, environment);
       },
       {
-        intro: `Installing dependencies...`,
-        outro: `Dependencies installed (${formatPath(this._getResourceDirectory(), {
-          baseDirectory: './',
-          relativize: true
-        })})`
+        intro: `Installing dependencies (${formattedDirectory})...`,
+        outro: `Dependencies installed (${formattedDirectory})`
       },
       environment
     );
   },
 
   async update({optimizeDiskSpace}, environment) {
+    const formattedDirectory = formatPath(this._getResourceDirectory(), {
+      baseDirectory: './',
+      relativize: true
+    });
+
     await task(
       async () => {
         await this._installDependencies({updateMode: true, optimizeDiskSpace}, environment);
       },
       {
-        intro: `Updating dependencies...`,
-        outro: `Dependencies updated`
+        intro: `Updating dependencies (${formattedDirectory})...`,
+        outro: `Dependencies updated (${formattedDirectory})`
       },
       environment
     );
@@ -268,12 +275,17 @@ export default () => ({
   },
 
   async updatePackageFile(_args, environment) {
+    const directory = this._getResourceDirectory();
+    const formattedDirectory = formatPath(directory, {baseDirectory: './', relativize: true});
+
     await task(
       async () => {
-        const directory = this._getResourceDirectory();
         await this._updatePackageFile(directory);
       },
-      {intro: `Updating package file...`, outro: `Package file updated`},
+      {
+        intro: `Updating dependencies in package file (${formattedDirectory})...`,
+        outro: `Dependencies in package file updated (${formattedDirectory})`
+      },
       environment
     );
   },
