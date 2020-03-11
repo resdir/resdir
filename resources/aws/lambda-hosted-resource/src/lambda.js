@@ -13,6 +13,8 @@ import readDirectory from 'recursive-readdir';
 import tempy from 'tempy';
 import hasha from 'hasha';
 
+const AWS_LAMBDA_NODE_RUNTIME = 'nodejs12.x';
+
 export default () => ({
   async createOrUpdateLambdaFunction({iamLambdaRoleHasJustBeenCreated}, environment) {
     await task(
@@ -60,6 +62,7 @@ export default () => ({
         const config = result.Configuration;
         this._lambdaFunction = {
           arn: config.FunctionArn,
+          runtime: config.Runtime,
           memorySize: config.MemorySize,
           timeout: config.Timeout,
           reservedConcurrentExecutions:
@@ -93,7 +96,7 @@ export default () => ({
         const lambdaFunction = await lambda.createFunction({
           FunctionName: this.getLambdaFunctionName(),
           Handler: 'handler.handler',
-          Runtime: 'nodejs8.10',
+          Runtime: AWS_LAMBDA_NODE_RUNTIME,
           Role: role.arn,
           MemorySize: this.memorySize,
           Timeout: this.timeout,
@@ -142,6 +145,10 @@ export default () => ({
   async checkIfLambdaFunctionConfigurationHasChanged() {
     const lambdaFunction = await this.getLambdaFunction();
 
+    if (lambdaFunction.runtime !== AWS_LAMBDA_NODE_RUNTIME) {
+      return true;
+    }
+
     if (lambdaFunction.memorySize !== this.memorySize) {
       return true;
     }
@@ -165,6 +172,7 @@ export default () => ({
     const lambda = this.getLambdaClient();
     await lambda.updateFunctionConfiguration({
       FunctionName: this.getLambdaFunctionName(),
+      Runtime: AWS_LAMBDA_NODE_RUNTIME,
       MemorySize: this.memorySize,
       Timeout: this.timeout,
       Environment: {Variables: this.environment || {}}
