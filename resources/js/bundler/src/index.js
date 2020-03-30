@@ -19,6 +19,7 @@ import json from '@rollup/plugin-json';
 import babel from 'rollup-plugin-babel';
 import globals from 'rollup-plugin-node-globals';
 import replace from '@rollup/plugin-replace';
+import strip from '@rollup/plugin-strip';
 import builtins from 'rollup-plugin-node-builtins';
 import {terser} from 'rollup-plugin-terser';
 import bytes from 'bytes';
@@ -149,6 +150,10 @@ export default () => ({
 
           if (browser) {
             plugins.push(globals());
+          }
+
+          if (this.removeFunctionCalls) {
+            plugins.push(strip({functions: this.removeFunctionCalls}));
           }
 
           if (this.minify) {

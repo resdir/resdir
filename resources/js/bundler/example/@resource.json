@@ -13,6 +13,7 @@
     },
     "transpile": true,
     "format": "cjs",
+    "removeFunctionCalls": ["debug"],
     "ignoreCommonJSModules": [
       "supports-color"
     ],
