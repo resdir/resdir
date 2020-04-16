@@ -91,7 +91,7 @@ export function printText(text, options, environment) {
 }
 
 export function printError(error, environment) {
-  const debug = (environment && environment['@debug']) || process.env.DEBUG;
+  const debug = (environment && environment['@debug']) || process.env.DEBUG?.startsWith('resdir');
 
   if (!debug && (isClientError(error) || isServerError(error) || isRemoteError(error))) {
     _print({message: error.message, output: 'error'}, environment);
@@ -519,12 +519,12 @@ export function getProgressSymbol() {
 
 export function getProgressSpinner() {
   // Source: https://github.com/sindresorhus/cli-spinners
-  return emojisAreSupported() ?
-    {interval: 140, frames: ['🚶', '🏃']} :
-    {
-      interval: 80,
-      frames: ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'].map(char => yellow(char))
-    };
+  return emojisAreSupported()
+    ? {interval: 140, frames: ['🚶', '🏃']}
+    : {
+        interval: 80,
+        frames: ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'].map(char => yellow(char))
+      };
 }
 
 // let _emojisAreSupported;
@@ -665,7 +665,11 @@ export async function task(fn, {intro, outro}, environment = {}) {
     if (ViewClass.name === 'AnimatedTaskView') {
       ViewClass = SubAnimatedTaskView;
     }
-  } else if (environment['@verbose'] || environment['@debug'] || process.env.DEBUG) {
+  } else if (
+    environment['@verbose'] ||
+    environment['@debug'] ||
+    process.env.DEBUG?.startsWith('resdir')
+  ) {
     ViewClass = VerboseTaskView;
   } else {
     ViewClass = AnimatedTaskView;
