@@ -4,7 +4,7 @@
     "1place/js-resource#^0.2.2"
   ],
   "id": "js/bundler",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "isPublic": true,
   "authors": [
     "Manuel Vila <hi@mvila.me>"

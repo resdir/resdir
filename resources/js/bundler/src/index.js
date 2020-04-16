@@ -204,7 +204,7 @@ export default () => ({
               if (warning.code === 'UNUSED_EXTERNAL_IMPORT') {
                 return;
               }
-              if (process.env.DEBUG || environment['@debug']) {
+              if (environment['@debug'] || process.env.DEBUG?.startsWith('resdir')) {
                 console.dir(warning, {depth: null, colors: true});
               } else {
                 print(warning.toString());
